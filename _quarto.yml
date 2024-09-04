@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "EAB770: Applied Statistical Methods for Categorical Data"
+  navbar: 
+    logo: "UNLV-186.jpg"
+  sidebar:
+    contents:
+      - href: index.qmd
+        text: Home
+      - href: Chapter1.qmd
+        text: Chapter 1
+      - href: Chapter2.qmd
+        text: "Chapter 2: 2x2 tables"
+
+format:
+  html:
+    theme: 
+      light: cerulean
+      dark: darkly
+    css: styles.css
+    toc: true
+    
+
+
+

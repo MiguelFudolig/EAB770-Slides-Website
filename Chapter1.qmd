@@ -1,0 +1,311 @@
+---
+title: "EAB 770 - Chapter 1"
+author: "Miguel Fudolig"
+format:
+  revealjs:
+    theme: simple
+    scrollable: true
+    footer: "EAB 770 - Chapter 1"
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    slide-number: true
+    menu: true
+---
+
+# Chapter 1: Introduction
+
+## Outline
+
+-   Syllabus Discussion
+-   Accessing SAS OnDemand for Academics
+-   Why are we here?
+-   Preliminary Materials
+
+## Syllabus
+
+-   The syllabus can be accessed through
+    -   Canvas
+    -   <https://madfudolig.quarto.pub/eab-770-applied-statistical-methods-for-categorical-data/>
+
+## Programming Language
+
+-   We will primarily use SAS for this course.
+    -   You can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.
+
+## Accessing SAS On Demand for Academics
+
+-   Create a SAS Profile that will be used to register for SAS OnDemand for Academics. To register, visit <https://www.sas.com> and fill out the form to *Create profile*.
+    -   Use your UNLV email for faster verification.
+-   Create your account for SAS OnDemand for Academics. To register, visit <https://welcome.oda.sas.com> sign in with your SAS Profile and complete the steps to *Register for an account*.
+
+# Why are we here?
+
+Why bother learning categorical data analysis?
+
+# Review Questions
+
+## Review Questions
+
+-   Define the following terms:
+    -   p-value
+    -   confidence level in confidence intervals
+    -   Odds
+    -   Relative Risk
+
+## Review Questions
+
+-   Define the following terms:
+    -   p-value
+        -   The probability of recording a test statistic as extreme or more extreme as the obtained statistic *assuming the null hypothesis is true.*
+    -   Confidence level in confidence intervals
+        -   The **long-run proportion** of confidence intervals that theoretically contain the true parameter value.
+    -   Odds
+        -   The ratio of the success and failure probabilities.
+        -   $\frac{p_{success}}{p_{failure}}$
+    -   Relative Risk
+        -   The ratio of success probabilities of two different groups.
+        -   $p_1/p_2$
+
+# Categorical Data
+
+## Categorical Data
+
+Categorical data is present everywhere!
+
+-   Demographics
+-   Opinions
+-   Ratings
+-   Locations
+
+## Types of Categorical Response Variables
+
+-   Dichotomous
+-   Yes/No
+-   Ordinal
+    -   More than two possible outcomes with inherent ordering
+-   Nominal
+    -   More than two possible outcomes without inherent ordering
+-   Discrete Counts
+    -   Numerical outcomes consisting of counting numbers.
+-   Grouped Survival Times
+    -   Number of patients who fail/survive during a specific time interval.
+    -   The interval of failure/survival (time-to-event) is categorical.
+
+## Sampling Frameworks
+
+-   Historical data
+    -   Observational data, usually secondary data
+    -   No randomization
+    -   Example: Public data sets.
+-   Experimental Data
+    -   Studies that involve random assignment of treatments to different subjects.
+    -   Random assignment/allocation
+    -   Example: Randomized Controlled Trials
+-   Sample Survey Studies
+    -   Randomly sampled from a larger study population
+    -   Random selection
+
+## Effect of Randomization
+
+-   Randomization affects conclusions of generalization and causation.
+-   Historical data
+    -   No randomization: hard to generalize unless the data was randomly sampled from a predetermined population
+-   Experimental Data
+    -   Random assignment: balances effects of confounding variables
+-   Sample Survey Studies
+    -   Random sampling: representative sample provides good coverage of the larger population
+
+## Randomization
+
+Randomization can be done per subject or a cluster of subject.
+
+-   Strata (survey studies) or blocks (experiments)
+-   Examples
+    -   Stratified random samples
+    -   Randomized block designs
+    -   Multi-level experimental designs
+
+## SAS Procedures and Data
+
+-   There are multiple ways to import data into SAS
+    -   DATA step
+    -   PROC IMPORT step
+    -   SAS OnDemand can import data from CSV files.
+-   `FREQ`
+    -   Contingency tables ($2\times 2$, $s \times r$)
+    -   Chi-squared tests
+-   `LOGISTIC`
+    -   Logistic Regression
+-   `GENMOD`
+    -   Generalized Estimating Equations
+-   Other procedures include `GLM` and `CATMOD`.
+
+## SAS in Class
+
+-   Sample code will be provided, but there will be examples where we work the code out together as a class.
+-   Class computers have SAS installed in them.
+    -   You can save files on your Y drive (assigned to your ACE ID) to access files on other computers.
+    -   SAS can also be accessed through SAS OnDemand Academics.
+        -   Needs internet connection
+
+## SAS Examples
+
+-   Download Chapter1.sas from Canvas.
+
+## SAS Example
+
+::: columns
+::: {.column style="width:50%; font-size: 125%"}
+``` {code-line-numbers="1-3"}
+data respire;
+length treat $7. outcome $1. ;
+input treat $ outcome $ count; 
+datalines; 
+placebo f 16
+placebo u 48
+test f 40
+test u 20
+;
+```
+:::
+
+::: {.column style="width:50%; font-size: 75%"}
+-   ALL lines should be ended with a semi-colon **;**
+-   `data` statement is followed by the data set name.
+- `length` specifies the number of characters included in each **character**.
+-   `input` names all variables included in the data set
+    -   The `$` after the variable tells SAS that these variables are categorical variables.
+-   `datalines;` tells SAS that you are about to add new data points.
+    -   Each row represents a data point in this data table.
+    -   End with a separate **;**
+:::
+:::
+
+## SAS Example: Contingency Table
+
+::: columns
+::: {.column style="width:50%; font-size: 125%"}
+
+
+```
+proc freq data=respire; 
+weight count; 
+tables treat*outcome;
+run;
+```
+
+:::
+
+::: {.column style="width:50%; font-size: 75%"}
+-   `proc freq` calls the `FREQ` procedure in SAS.
+  - Not defining `data=respire` means SAS will automatically use the most recently run data set.
+- `weight` tells SAS the number of counts for each count
+- `tables` creates the contingency table with row, column, and total percentages.
+- `run;` tells SAS to run the code. **This is important!**
+:::
+:::
+
+## SAS Example: One Observation per Row
+
+::: columns
+::: {.column style="width:50%; font-size: 100%"}
+
+
+```
+data severe;
+input treat $ outcome $ @@; 
+datalines;
+placebo f placebo f placebo f
+placebo f placebo f
+placebo u placebo u placebo u
+placebo u placebo u placebo u
+placebo u placebo u placebo u
+placebo u
+test f test f test f
+test f test f test f
+test f test f
+test u test u test u 
+test u test u test u
+test u test u test u
+test u test u test u
+test u test u test u
+test u test u test u
+test u test u
+;
+```
+
+:::
+
+::: {.column style="width:50%; font-size: 75%"}
+- This is an example of a data set where one row corresponds to one observational unit.
+- The `@@` sign means that the data lines contain multiple observations. `@@` basically means new line after two entries written in the `datalines` statement.
+:::
+:::
+
+## SAS Example: Contingency Table
+
+::: columns
+::: {.column style="width:50%; font-size: 100%"}
+
+
+```
+proc freq data=severe;
+tables treat*outcome / nocol nopct;
+run;
+```
+
+:::
+
+::: {.column style="width:50%; font-size: 75%"}
+- The `weight` statement is not needed in the `FREQ` procedure when the data does not consist of aggregate counts.
+- `nocol` suppresses the column percentages in the output
+- `nopct` suppresses the total percentages in the output
+- `norow` suppresses the row percentages in the output 
+:::
+:::
+
+# Exercise
+
+## SAS Exercise
+
+::: columns
+::: {.column style="width:40%; font-size: 75%"}
+Suppose a survey asking freshmen and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.
+
+Enter the data in SAS using the data step and generate the contingency tables. Name the data set `enjoy`.
+:::
+
+::: {.column style="width:60%; font-size: 50%"}
+|           | Strongly Agree | Agree | Neutral | Disagree | Strongly Disagree |
+|:---------:|:--------------:|:-----:|:-------:|:--------:|:-----------------:|
+| Sophomore |       24       |  43   |   12    |    25    |        12         |
+|  Seniors  |       19       |  37   |   24    |    32    |        21         |
+:::
+:::
+
+## SAS Exercise
+
+There are many ways to code the `data` step. Here's one way to do it!
+
+```
+data enjoy;
+length year $9. response $2.;
+input year $ response $ count @@;
+datalines;
+sophomore SA 24 sophomore A 43
+sophomore N 12
+sophomore D 25 sophomore SD 12
+senior SA 19 senior A 37
+senior N 24
+senior D 32 senior SD 21
+;
+
+proc freq order=data data=enjoy;
+weight count;
+tables year*response;
+run;
+```
+
+
+
+
