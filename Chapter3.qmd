@@ -12,6 +12,7 @@ format:
     menu: true
     embed-resources: true
     self-contained-math: true
+    code-annotations: select
 ---
 
 ```{r}
@@ -158,9 +159,11 @@ rural high f 7 rural high u 53
 ;
 proc freq order=data data=stress;
 weight count;
-tables region*stress*outcome / all chisq cmh (mf) nocol nopct; *CMH includes the mantel-haenszel statistics. MF gives the mantel-fleiss condition;
+tables region*stress*outcome / all chisq cmh (mf) nocol nopct; # <1>
 run;
 ```
+
+1. `CMH` includes the Mantel-Haenszel statistics. `MF` gives the Mantel-Fleiss condition;
 
 ### R Code
 
@@ -414,10 +417,14 @@ male >=0.1 no 6
 ;
 proc freq data=ca ;
 weight count;
-tables sex*disease / nocol nopct chisq measures;
-tables sex*ECG*disease / nocol nopct cmh measures;
+tables sex*disease / nocol nopct chisq measures; # <1>
+tables sex*ECG*disease / nocol nopct cmh measures; # <2>
 run;
 ```
+
+1. Testing for an association between sex and disease status
+2. Using sex as a stratification variable/strata. `measures` includes common odds ratio plots.
+
 
 ### Answer{.smaller}
 
@@ -466,11 +473,13 @@ satellite home good 1 satellite home not 3
 
 proc freq order=data;
 weight count;
-tables location*program*outcome /cmh(mf);
-exact comor eqor; 
+tables location*program*outcome /cmh(mf); # <1>
+exact comor eqor; # <2>
 run;
 ```
 
+1. `MF` should be enclosed in parentheses
+2. `eqor`: Zelen's test, `comor`: exact confidence interval for the common odds ratio.
 
 ### Answer
 
