@@ -13,11 +13,13 @@ website:
         text: Chapter 1
       - href: Chapter2.qmd
         text: "Chapter 2: 2x2 tables"
+      - href: Chapter3.qmd
+        text: "Chapter 3: Sets of 2x2 tables"
 
 format:
   html:
     theme: 
-      light: cerulean
+      light: cosmo
       dark: darkly
     css: styles.css
     toc: true

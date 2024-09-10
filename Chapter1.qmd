@@ -3,7 +3,7 @@ title: "EAB 770 - Chapter 1"
 author: "Miguel Fudolig"
 format:
   revealjs:
-    theme: simple
+    theme: solarized
     scrollable: true
     footer: "EAB 770 - Chapter 1"
     code-block-bg: true
