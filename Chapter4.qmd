@@ -186,4 +186,21 @@ $Q_S$ = 12.86, p=0.0003. We have strong evidence to conclude that the active tre
 
 :::
 
+## Example
+
+A survey was administered to students at a US-based university who are habitual smokers to determine the likelihood of using a mobile app to help them quit smoking. Is there sufficient evidence to conclude that heavy smokers are less likely to use a mobile app compared to light smokers?
+
+```{r}
+#| echo: false
+#| warning: false
+library(gridExtra)
+dat  <- expand.grid(Smokers=c("Heavy","Light"),
+                    Response = c("Very Unlikely","Unlikely","Likely","Very Likely")
+                  ) |> 
+mutate(count = c(36,38,75,59,56,64,17,23))
+
+xtabs(count ~  Smokers+Response  ,data=dat) -> dat_cc
+dat_cc
+```
+
 
