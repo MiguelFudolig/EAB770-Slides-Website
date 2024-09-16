@@ -1,0 +1,189 @@
+---
+title: "EAB 770 - Chapter 4"
+author: "Miguel Fudolig"
+format:
+  revealjs:
+    theme: solarized
+    scrollable: true
+    footer: "EAB 770 - Chapter 3"
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    slide-number: true
+    menu: true
+    embed-resources: true
+    self-contained-math: true
+    code-annotations: true
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| output: false
+
+library(tidyverse)
+```
+
+# \$ 2 \times r\$ and $s \times 2$ tables
+
+## Outline
+
+-   $2 \times r$ table
+-   Sets of $2 \times r$ tables
+-   $s \times 2$ table
+-   Sets of $s \times 2$ tables
+    -   Relationships between Sets of Tables
+    -   Exact Analysis of Association ($s \times 2$) tables)
+
+# what if there are more than two outcomes?
+
+## Multiple Categorical Outcomes
+
+-   Likert Scale (Strongly Disagree, Disagree, Neutral, Agree, Strongly Agree)
+-   Part of a whole (None, Some, All)
+-   We would need more than two columns in our contingency table to account for these other outcomes.
+    -   Variables can be forced to be “binary”, but some important information can be lost.
+-   If there are $r$ outcome levels and $2$ levels of the exploratory variable, we use a $2 \times r$ contingency table.
+    -   Focus on outcomes being ordinally scaled.
+
+## $2\times r$ table
+
+::: columns
+::: {.column style="width:40%; font-size: 75%"}
+Let $A_j$ be the $j^{th}$ outcome level.
+
+-   Since $A_J$ is ordinal, then $A_1 < A_2 < A_3 <... A_r$.
+    -   The $\leq$ can replace $<$ as long as at least one is a strict inequality
+
+To account for ordinality, we assign a set of scores $\mathbf{a}$ reflecting the relationship between response levels.
+
+$$
+\mathbf{a} = \{a_1, a_2, a_3,... a_r\} : a_1 < a_2 < ...< a_r
+$$
+:::
+
+::: {.column style="width:60%"}
+![](img/2xr_C4.png)
+:::
+:::
+
+## Row Mean Scores
+
+We can define a group mean for $X_1$, denoted by $\bar{f}_1$.
+
+$$
+\bar{f}_1 = \sum_{j=1}^r \frac{a_j n_{1j}}{n_{1+}}
+$$
+
+The random variable $\bar{f}_1$ approximately has a normal distribution when the central limit theorem is imposed.
+
+-   High row sum
+
+We refer to these scores as **Row Mean Scores**
+
+## 2 \times r table: Null hypothesis
+
+Null hypothesis $H_0$: There is no association between the row (X) and column (A) variables.
+
+Under the null hypothesis:
+
+-   The expected value of the mean can be calculated as:
+
+$$
+\mu_a =  \sum_{j=1}^r \frac{a_j n_{+j}}{n}
+$$
+
+## Mean Score Statistic
+
+We can define a mean score statistic, $Q_S$, given by
+
+$$
+Q_S = \frac{(\bar{f}_1 - \mu_1)^2}{V}
+$$
+
+::: callout-note
+-   $V$ is the variance of $\bar{f}_1$ under the null hypothesis.
+-   $Q_S$ follows a chi-square distribution with one degree of freedom.
+:::
+
+## Mean Score Statistic
+
+-   Targets alternative hypothesis of mean shifts to the hypothesis of no association
+    -   Uses fewer degrees of freedom compared to Pearson chi-square
+
+::: callout-note
+Pearson chi-square requires $(r-1)$ degrees of freedom compared to 1 degree of freedom for $Q_S$
+:::
+
+-   The mean score statistic can also be used to determine the tendency of one group having better scores compared to the other.
+-   The $Q_S$ sample size condition is less stringent:
+
+::: callout-note
+Choose one or more cutpoints \$ j = (2,3,...(r-1))\$, add the first through $j^{th}$ columns together and add the $(j-1)^{th}$ through $r^{th}$ columns together. If both of these sums are 5 or greater for at least one cutpoint in each row, then the sample size is adequate.
+:::
+
+## $2 \times r$ analysis: SAS {.smaller}
+
+-   Data should be encoded in increasing order of the outcome variable.
+-   The `FREQ` procedure will give us the mean score statistic:
+    -   **ORDER=DATA should be included in the code with the `PROC FREQ` statement. (See sample code)**
+-   Can be obtained using the `cmh` option or `chisq` option in the `tables` statement
+    -   $Q_S$: Mantel-Haesnzel Chi-square statistic in the SAS output
+    -   `CMH`: “*Row Mean Scores Differ*” statistic.
+      - The CMH values would now display different values unlike the $2 \times 2$ tables.
+
+## Example {.smaller}
+
+The data shown in the table comes from a randomized, double-blind clinical trial investigating a new treatment for rheumatoid arthritis. Investigators compared the new treatment with a placebo; the response measured was whether there was no, some, or marked improvement in the symptoms of rheumatoid arthritis when the active treatment was administered.
+
+- Is there sufficient evidence to conclude that the active treatment group has higher improvement compared to the placebo group?
+
+![](img/arthritis_C4.png)
+
+## Example
+
+The data shown in the table comes from a randomized, double-blind clinical trial investigating a new treatment for rheumatoid arthritis. Investigators compared the new treatment with a placebo; the response measured was whether there was no, some, or marked improvement in the symptoms of rheumatoid arthritis when the active treatment was administered.
+
+- Is there sufficient evidence to conclude that the active treatment group has higher improvement compared to the placebo group?
+
+::: {.panel-tabset}
+
+### SAS Code
+
+```{.r}
+data arth;
+input treat $ response $ count @@;
+datalines;
+active none 13 active some 7 active marked 21
+placebo none 29 placebo some 7 placebo marked 7
+;
+proc freq data=arth order=data;
+weight count;
+tables treat*response / cmh chisq nocol nopct;
+run;
+```
+
+### R Code
+
+```{r}
+library(vcdExtra)
+dat  <- expand.grid(Treat=c("Active","Placebo"),
+                    Response = c("None","Some","Marked")
+                  ) |> 
+mutate(count = c(13,29,7,7,21,7))
+
+xtabs(count ~  Treat+Response  ,data=dat) -> dat_cc
+dat_cc
+
+CMHtest(dat_cc,
+        types="ALL",
+        overall=T)
+```
+### Answer
+
+$Q_S$ = 12.86, p=0.0003. We have strong evidence to conclude that the active treatment displayed higher improvement compared to the placebo group.
+
+- The active group has a higher proportion of marked + some improvement, which enables us to formulate the following conclusion.
+
+:::
+
+

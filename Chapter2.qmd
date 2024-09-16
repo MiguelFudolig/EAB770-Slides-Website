@@ -10,6 +10,7 @@ format:
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
+    code-annotations: true
 ---
 
 # Chapter 2: $2\times2$ tables
@@ -1034,7 +1035,7 @@ A pharmaceutical company developed a screening test that can be used to detect i
 library(tidyverse)
 dat <- expand.grid(Status=c("Disease Present","Disease Absent"),
                   Test = c("Positive","Negative")) |> 
-mutate(count = c(97,18,45,75))
+mutate(count = c(97,45,18,75))
 
 xtabs(count ~ .,data=dat) -> dat_cc
 dat_cc
@@ -1052,7 +1053,7 @@ A pharmaceutical company developed a screening test that can be used to detect i
 library(tidyverse)
 dat <- expand.grid(Status=c("Disease Present","Disease Absent"),
                   Test = c("Positive","Negative")) |> 
-mutate(count = c(97,18,45,75))
+mutate(count = c(97,45,18,75))
 
 xtabs(count ~ .,data=dat) -> dat_cc
 dat_cc
@@ -1194,8 +1195,8 @@ data imaging;
 input mri $ ult $ count;
 datalines;
 loc loc 4
-loc adv 3
-adv loc 6
+loc adv 6
+adv loc 3
 adv adv 3
 ;
 
@@ -1326,13 +1327,13 @@ The table shows the results of an international study of the effect of a rotavir
 data vaccine2;
 input Outcome $ Count @@;
 datalines;
-fail 3 success 58
+vaccine 3 placebo 58
 ;
 
 ods select BinomialCLs; *this statement filters the output.;
 
 
-proc freq data=vaccine2;
+proc freq order=data data=vaccine2; # <1>
 weight count;
 tables Outcome / binomial (exact); *calculates the exact confidence limits for the binomial proportion;
 ods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;
@@ -1350,6 +1351,9 @@ CI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;
 print r CI;
 quit;
 ```
+
+1. `order=data` is important so as to keep the proportions consistent.
+
 
 ### R Code
 
@@ -1430,13 +1434,12 @@ data accident;
 /*data only has the events. Person-Years are used later.*/
 input Outcome $ Count @@;
 datalines;
-night 25 day 20
+night 25 day 20 # <1>
 ;
 
 ods select BinomialCLs; *this statement filters the output.;
 
-/*Let's calculate the confidence limits of the binomial proportion*/
-proc freq data=accident;
+proc freq order=data data=accident;
 weight count;
 tables Outcome / binomial (exact) alpha=0.05; *calculates the exact confidence limits for the binomial proportion;
 ods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;
@@ -1454,6 +1457,8 @@ CI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;
 print r CI;
 quit;
 ```
+
+1. "Success" is an event happening during the night shift.
 
 ### R Code
 

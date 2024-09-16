@@ -12,7 +12,7 @@ format:
     menu: true
     embed-resources: true
     self-contained-math: true
-    code-annotations: select
+    code-annotations: true
 ---
 
 ```{r}

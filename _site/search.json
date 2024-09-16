@@ -514,7 +514,7 @@
     "href": "Chapter2.html#exercise-8",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nA pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.\n\nWhat is the sensitivity of the test?\nWhat is the specificity of the test?\n\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       97       45\n  Disease Absent        18       75",
+    "text": "Exercise\nA pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.\n\nWhat is the sensitivity of the test?\nWhat is the specificity of the test?\n\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       97       18\n  Disease Absent        45       75",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -524,7 +524,7 @@
     "href": "Chapter2.html#exercise-9",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nA pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.\n\nWhat is the sensitivity of the test? 0.8435 (0.76, 0.90)\nWhat is the specificity of the test? 0.6250 (0.53, 0.71)\n\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       97       45\n  Disease Absent        18       75\n\n\nSAS Code\ndata screening;\ninput disease $ outcome $ count @@;\ndatalines;\npresent + 97 present - 18\nabsent + 45 absent - 75\n;\nproc freq data=screening order=data;\nweight count;\ntables disease*outcome / riskdiff;\nrun;",
+    "text": "Exercise\nA pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.\n\nWhat is the sensitivity of the test? 0.8435 (0.76, 0.90)\nWhat is the specificity of the test? 0.6250 (0.53, 0.71)\n\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       97       18\n  Disease Absent        45       75\n\n\nSAS Code\ndata screening;\ninput disease $ outcome $ count @@;\ndatalines;\npresent + 97 present - 18\nabsent + 45 absent - 75\n;\nproc freq data=screening order=data;\nweight count;\ntables disease*outcome / riskdiff;\nrun;",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -584,7 +584,7 @@
     "href": "Chapter2.html#exercise-11",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nThe tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.\n\nUse the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (Hint: Small cell counts)\n\nUse exact p-value\n\\(p=0.5078\\). No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.\n\n\n\n\n           Ultrasound\nMRI         Localized Advanced\n  Localized         4        6\n  Advanced          3        3\n\n\nSAS Code\ndata imaging;\ninput mri $ ult $ count;\ndatalines;\nloc loc 4\nloc adv 3\nadv loc 6\nadv adv 3\n;\n\nproc freq order=data;\nweight count;\ntables mri*ult / agree;\nexact mcnem;\nrun;",
+    "text": "Exercise\nThe tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.\n\nUse the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (Hint: Small cell counts)\n\nUse exact p-value\n\\(p=0.5078\\). No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.\n\n\n\n\n           Ultrasound\nMRI         Localized Advanced\n  Localized         4        6\n  Advanced          3        3\n\n\nSAS Code\ndata imaging;\ninput mri $ ult $ count;\ndatalines;\nloc loc 4\nloc adv 6\nadv loc 3\nadv adv 3\n;\n\nproc freq order=data;\nweight count;\ntables mri*ult / agree;\nexact mcnem;\nrun;",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -674,7 +674,7 @@
     "href": "Chapter2.html#example-13",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\n\n\nThe table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.\n\nEstimate the IDR of hospitalization/emergency room visits between the two groups. IDR = 0.05\nCalculate the 95% CI. (0.01, 0.15)\n\n\n\n\n\n\nSAS CodeR Code\n\n\ndata vaccine2;\ninput Outcome $ Count @@;\ndatalines;\nfail 3 success 58\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\n\nproc freq data=vaccine2;\nweight count;\ntables Outcome / binomial (exact); *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 3, 7500, 58 , 7250 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n\n\nevents &lt;- c(3,58)\nperson_years &lt;- c(7500, 7250)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n0.05\n0.01002014\n0.1535468",
+    "text": "Example\n\n\nThe table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.\n\nEstimate the IDR of hospitalization/emergency room visits between the two groups. IDR = 0.05\nCalculate the 95% CI. (0.01, 0.15)\n\n\n\n\n\n\nSAS CodeR Code\n\n\ndata vaccine2;\ninput Outcome $ Count @@;\ndatalines;\nvaccine 3 placebo 58\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\n\n1proc freq order=data data=vaccine2;\nweight count;\ntables Outcome / binomial (exact); *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 3, 7500, 58 , 7250 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\norder=data is important so as to keep the proportions consistent.\n\n\n\n\n\nevents &lt;- c(3,58)\nperson_years &lt;- c(7500, 7250)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n0.05\n0.01002014\n0.1535468",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -694,7 +694,7 @@
     "href": "Chapter2.html#exercise-13",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\n\n\nThe table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.\n\nIDR: 1.37\n95% CI: (0.72,2.56)\n\n\n\n\n       Metric\nShift   Accidents Person-Hours\n  Night        25         1150\n  Day          20         1240\n\n\n\n\n\nSAS CodeR Code\n\n\ndata accident;\n/*data only has the events. Person-Years are used later.*/\ninput Outcome $ Count @@;\ndatalines;\nnight 25 day 20\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\n/*Let's calculate the confidence limits of the binomial proportion*/\nproc freq data=accident;\nweight count;\ntables Outcome / binomial (exact) alpha=0.05; *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 25 1150 20 1240 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n\n\nevents &lt;- c(25,20)\nperson_years &lt;- c(1150,1240)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n1.347826\n0.7187612\n2.559057",
+    "text": "Exercise\n\n\nThe table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.\n\nIDR: 1.37\n95% CI: (0.72,2.56)\n\n\n\n\n       Metric\nShift   Accidents Person-Hours\n  Night        25         1150\n  Day          20         1240\n\n\n\n\n\nSAS CodeR Code\n\n\ndata accident;\n/*data only has the events. Person-Years are used later.*/\ninput Outcome $ Count @@;\ndatalines;\n1night 25 day 20\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\nproc freq order=data data=accident;\nweight count;\ntables Outcome / binomial (exact) alpha=0.05; *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 25 1150 20 1240 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\n“Success” is an event happening during the night shift.\n\n\n\n\n\nevents &lt;- c(25,20)\nperson_years &lt;- c(1150,1240)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n1.347826\n0.7187612\n2.559057",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -1164,6 +1164,106 @@
     "text": "Exercise\nTable 3.8 shows the data from research done by a small company in initiating exercise programs (office/home) in their two locations in a nearby suburbs. After a year, participants and non-participants underwent a cardiovascular stress test to assess their fitness, and their result was recorded as good or not good depending on age-adjusted criteria. The exercise counselor was interested in whether type of program was associated with good test results.\n\nCalculate the common odds ratio \\(\\psi_{MH}\\) and the exact 95% confidence intervals.\nUse Zelen’s test to test if the odds ratio is uniform in both locations\n\n\nSAS CodeAnswer\n\n\ndata exercise;\ninput location $ program $ outcome $ count @@;\ndatalines;\ndowntown office good 12 downtown office not 5\ndowntown home good 3 downtown home not 5\nsatellite office good 6 satellite office not 1\nsatellite home good 1 satellite home not 3\n;\n\nproc freq order=data;\nweight count;\n1tables location*program*outcome /cmh(mf);\n2exact comor eqor;\nrun;\n\n1\n\nMF should be enclosed in parentheses\n\n2\n\neqor: Zelen’s test, comor: exact confidence interval for the common odds ratio.\n\n\n\n\n\nMantel-Fleiss criterion is not satisfied (MF=4.65), so be careful with using the asymptotic chi-square test for \\(Q_{MH}\\).\n\nThis motivates using exact methods in calculating effect sizes.\n\nCommon odds ratio was estimated to be 5.84 (EXACT 95% CI: 1.05, 33.3). There is sufficient evidence at the 0.05 significance level that the program type is associated with the quality of cardiovascular test results.\n\nThe Zelen’s test yielded \\(p=1\\), which means there is no evidence against homogeneity.\n\n\n\n\n\n\n\n\nEAB 770 - Chapter 3",
     "crumbs": [
       "Chapter 3: Sets of 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#outline",
+    "href": "Chapter4.html#outline",
+    "title": "EAB 770 - Chapter 4",
+    "section": "Outline",
+    "text": "Outline\n\n\\(2 \\times r\\) table\nSets of \\(2 \\times r\\) tables\n\\(s \\times 2\\) table\nSets of \\(s \\times 2\\) tables\n\nRelationships between Sets of Tables\nExact Analysis of Association (\\(s \\times 2\\)) tables)",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#multiple-categorical-outcomes",
+    "href": "Chapter4.html#multiple-categorical-outcomes",
+    "title": "EAB 770 - Chapter 4",
+    "section": "Multiple Categorical Outcomes",
+    "text": "Multiple Categorical Outcomes\n\nLikert Scale (Strongly Disagree, Disagree, Neutral, Agree, Strongly Agree)\nPart of a whole (None, Some, All)\nWe would need more than two columns in our contingency table to account for these other outcomes.\n\nVariables can be forced to be “binary”, but some important information can be lost.\n\nIf there are \\(r\\) outcome levels and \\(2\\) levels of the exploratory variable, we use a \\(2 \\times r\\) contingency table.\n\nFocus on outcomes being ordinally scaled.",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#times-r-table",
+    "href": "Chapter4.html#times-r-table",
+    "title": "EAB 770 - Chapter 4",
+    "section": "\\(2\\times r\\) table",
+    "text": "\\(2\\times r\\) table\n\n\nLet \\(A_j\\) be the \\(j^{th}\\) outcome level.\n\nSince \\(A_J\\) is ordinal, then \\(A_1 &lt; A_2 &lt; A_3 &lt;... A_r\\).\n\nThe \\(\\leq\\) can replace \\(&lt;\\) as long as at least one is a strict inequality\n\n\nTo account for ordinality, we assign a set of scores \\(\\mathbf{a}\\) reflecting the relationship between response levels.\n\\[\n\\mathbf{a} = \\{a_1, a_2, a_3,... a_r\\} : a_1 &lt; a_2 &lt; ...&lt; a_r\n\\]",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#row-mean-scores",
+    "href": "Chapter4.html#row-mean-scores",
+    "title": "EAB 770 - Chapter 4",
+    "section": "Row Mean Scores",
+    "text": "Row Mean Scores\nWe can define a group mean for \\(X_1\\), denoted by \\(\\bar{f}_1\\).\n\\[\n\\bar{f}_1 = \\sum_{j=1}^r \\frac{a_j n_{1j}}{n_{1+}}\n\\]\nThe random variable \\(\\bar{f}_1\\) approximately has a normal distribution when the central limit theorem is imposed.\n\nHigh row sum\n\nWe refer to these scores as Row Mean Scores",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#r-table-null-hypothesis",
+    "href": "Chapter4.html#r-table-null-hypothesis",
+    "title": "EAB 770 - Chapter 4",
+    "section": "2 r table: Null hypothesis",
+    "text": "2 r table: Null hypothesis\nNull hypothesis \\(H_0\\): There is no association between the row (X) and column (A) variables.\nUnder the null hypothesis:\n\nThe expected value of the mean can be calculated as:\n\n\\[\n\\mu_a =  \\sum_{j=1}^r \\frac{a_j n_{+j}}{n}\n\\]",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#mean-score-statistic",
+    "href": "Chapter4.html#mean-score-statistic",
+    "title": "EAB 770 - Chapter 4",
+    "section": "Mean Score Statistic",
+    "text": "Mean Score Statistic\nWe can define a mean score statistic, \\(Q_S\\), given by\n\\[\nQ_S = \\frac{(\\bar{f}_1 - \\mu_1)^2}{V}\n\\]\n\n\n\n\n\n\nNote\n\n\n\n\\(V\\) is the variance of \\(\\bar{f}_1\\) under the null hypothesis.\n\\(Q_S\\) follows a chi-square distribution with one degree of freedom.",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#mean-score-statistic-1",
+    "href": "Chapter4.html#mean-score-statistic-1",
+    "title": "EAB 770 - Chapter 4",
+    "section": "Mean Score Statistic",
+    "text": "Mean Score Statistic\n\nTargets alternative hypothesis of mean shifts to the hypothesis of no association\n\nUses fewer degrees of freedom compared to Pearson chi-square\n\n\n\n\n\n\n\n\nNote\n\n\nPearson chi-square requires \\((r-1)\\) degrees of freedom compared to 1 degree of freedom for \\(Q_S\\)\n\n\n\n\nThe mean score statistic can also be used to determine the tendency of one group having better scores compared to the other.\nThe \\(Q_S\\) sample size condition is less stringent:\n\n\n\n\n\n\n\nNote\n\n\nChoose one or more cutpoints $ j = (2,3,…(r-1))$, add the first through \\(j^{th}\\) columns together and add the \\((j-1)^{th}\\) through \\(r^{th}\\) columns together. If both of these sums are 5 or greater for at least one cutpoint in each row, then the sample size is adequate.",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#times-r-analysis-sas",
+    "href": "Chapter4.html#times-r-analysis-sas",
+    "title": "EAB 770 - Chapter 4",
+    "section": "\\(2 \\times r\\) analysis: SAS",
+    "text": "\\(2 \\times r\\) analysis: SAS\n\nData should be encoded in increasing order of the outcome variable.\nThe FREQ procedure will give us the mean score statistic:\n\nORDER=DATA should be included in the code with the PROC FREQ statement. (See sample code)\n\nCan be obtained using the cmh option or chisq option in the tables statement\n\n\\(Q_S\\): Mantel-Haesnzel Chi-square statistic in the SAS output\nCMH: “Row Mean Scores Differ” statistic.\nThe CMH values would now display different values unlike the \\(2 \\times 2\\) tables.",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#example",
+    "href": "Chapter4.html#example",
+    "title": "EAB 770 - Chapter 4",
+    "section": "Example",
+    "text": "Example\nThe data shown in the table comes from a randomized, double-blind clinical trial investigating a new treatment for rheumatoid arthritis. Investigators compared the new treatment with a placebo; the response measured was whether there was no, some, or marked improvement in the symptoms of rheumatoid arthritis when the active treatment was administered.\n\nIs there sufficient evidence to conclude that the active treatment group has higher improvement compared to the placebo group?",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter4.html#example-1",
+    "href": "Chapter4.html#example-1",
+    "title": "EAB 770 - Chapter 4",
+    "section": "Example",
+    "text": "Example\nThe data shown in the table comes from a randomized, double-blind clinical trial investigating a new treatment for rheumatoid arthritis. Investigators compared the new treatment with a placebo; the response measured was whether there was no, some, or marked improvement in the symptoms of rheumatoid arthritis when the active treatment was administered.\n\nIs there sufficient evidence to conclude that the active treatment group has higher improvement compared to the placebo group?\n\n\nSAS CodeR CodeAnswer\n\n\ndata arth;\ninput treat $ response $ count @@;\ndatalines;\nactive none 13 active some 7 active marked 21\nplacebo none 29 placebo some 7 placebo marked 7\n;\nproc freq data=arth order=data;\nweight count;\ntables treat*response / cmh chisq nocol nopct;\nrun;\n\n\n\n\n         Response\nTreat     None Some Marked\n  Active    13    7     21\n  Placebo   29    7      7\n\n\nCochran-Mantel-Haenszel Statistics for Treat by Response \n\n                 AltHypothesis  Chisq Df       Prob\ngeneral    General association 12.900  2 0.00158084\nrmeans  Row mean scores differ 12.859  1 0.00033586\ncmeans  Col mean scores differ 12.900  2 0.00158084\ncor        Nonzero correlation 12.859  1 0.00033586\n\n\n\n\n\\(Q_S\\) = 12.86, p=0.0003. We have strong evidence to conclude that the active treatment displayed higher improvement compared to the placebo group.\n\nThe active group has a higher proportion of marked + some improvement, which enables us to formulate the following conclusion.\n\n\n\n\n\n\n\nEAB 770 - Chapter 3",
+    "crumbs": [
+      "Chapter 4: 2xr and sx2 tables"
     ]
   }
 ]
