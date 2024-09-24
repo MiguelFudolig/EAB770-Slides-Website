@@ -1565,5 +1565,110 @@
     "crumbs": [
       "Chapter 4: 2xr and sx2 tables"
     ]
+  },
+  {
+    "objectID": "Chapter5.html#outline",
+    "href": "Chapter5.html#outline",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Outline",
+    "text": "Outline\n\nAssociation\n\nTest for General Association\nMean Score Test\nCorrelation Test\nExact Tests\n\nMeasures of Association\n\nOrdinal\nNominal\n\nObserver Agreement (inter-rater reliability)\nTest for Ordered Differences"
+  },
+  {
+    "objectID": "Chapter5.html#s-times-r-tables-1",
+    "href": "Chapter5.html#s-times-r-tables-1",
+    "title": "EAB 770 - Chapter 5",
+    "section": "\\(s \\times r\\) tables",
+    "text": "\\(s \\times r\\) tables\nWe have evolved the contingency table from a $2 \\(s \\times 2\\) r$.\nLet’s generalize the trends we’ve seen with the \\(s \\times r\\) table."
+  },
+  {
+    "objectID": "Chapter5.html#nominal-categorical-variables",
+    "href": "Chapter5.html#nominal-categorical-variables",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Nominal Categorical variables",
+    "text": "Nominal Categorical variables\n\n\nUnlike the \\(s \\times 2\\) table, the response variables can now have \\(r\\) levels and be strictly nominal."
+  },
+  {
+    "objectID": "Chapter5.html#general-association-statistic",
+    "href": "Chapter5.html#general-association-statistic",
+    "title": "EAB 770 - Chapter 5",
+    "section": "General Association Statistic",
+    "text": "General Association Statistic\n\nThe groups and the response variable categories can be nominally scaled.\n\n\\(H_0\\): there is no general association between the groups and response variables.\n\\(H_A\\): there is a general association between the two variables"
+  },
+  {
+    "objectID": "Chapter5.html#general-association-statistic-1",
+    "href": "Chapter5.html#general-association-statistic-1",
+    "title": "EAB 770 - Chapter 5",
+    "section": "General Association Statistic",
+    "text": "General Association Statistic\nThe randomization statistic based on Mantel-Haenszel statistics can be calculated from the Pearson chi-square statistic, \\(Q_P\\).\n\\[\nQ = \\left(\\frac{n-1}{n}\\right) Q_P\n\\] \\[\nQ_P = \\sum_{i=1}^s\\sum_{j=1}^r \\frac{(n_{ij}-m_{ij})^2}{m_{ij}}\n\\]\nwhen \\(n\\) is large, \\(Q \\approx Q_P\\). Like the Pearson chi-square, \\(Q\\) follows a chi-square distribution with \\((s-1)(r-1)\\) degrees of freedom."
+  },
+  {
+    "objectID": "Chapter5.html#mosaic-plot",
+    "href": "Chapter5.html#mosaic-plot",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Mosaic Plot",
+    "text": "Mosaic Plot\n\n\n\nA mosaic plot visualizes the proportion in each cell of the contingency table.\n\nHorizontal space is divided by sizes corresponding to the relative count of x-axis variable levels\nVertical space is divided up according to relative sizes of the y-axis variable levels."
+  },
+  {
+    "objectID": "Chapter5.html#general-association-sas",
+    "href": "Chapter5.html#general-association-sas",
+    "title": "EAB 770 - Chapter 5",
+    "section": "General Association: SAS",
+    "text": "General Association: SAS\n\nIn SAS, the Pearson chi-square statistic \\(Q_P\\) is the value referred to as ’Chi-square”\nNote that \\(Q\\) is NOT the Mantel-Haenszel statistic in the chisq output in SAS.\n\n\\(Q\\) is the “General Association” cell in the cmh output.\n\nWe can use the plots option in the tables statement to create a mosaic plot.\n\nproc freq;\nweight count;\n1tables a*b/cmh plots=mosaicplot;\nrun;\n\n1\n\ncmh calculates the general association Mantel-Haenszel statistic. plots=mosaicplot tells SAS to create a mosaic plot with \\(a\\) and \\(b\\)."
+  },
+  {
+    "objectID": "Chapter5.html#example",
+    "href": "Chapter5.html#example",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Example",
+    "text": "Example\n\n\nThe table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.\n\nWhat is the Pearson chi-square value?\nWhat is the randomization statistic?\nIs there sufficient evidence of an association between political party and neighborhood?"
+  },
+  {
+    "objectID": "Chapter5.html#example-1",
+    "href": "Chapter5.html#example-1",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Example",
+    "text": "Example\nThe table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.\n\nWhat is the Pearson chi-square value?\nWhat is the randomization statistic?\nIs there sufficient evidence of an association between political party and neighborhood?\n\n\nSAS CodeAnswer\n\n\ndata neighbor;\nlength party $ 11 neighborhood $ 10;\ninput party $ neighborhood $ count @@;\ndatalines;\ndemocrat longview 360 democrat bayside 221\ndemocrat sheffeld 140 democrat highland 160\nrepublican longview 316 republican bayside 208\nrepublican sheffeld 97 republican highland 106\nindependent longview 160 independent bayside 200\nindependent sheffeld 311 independent highland 291\n;\n\nproc freq data=neighbor;\nweight count;\ntables party*neighborhood /\n1plots=mosaicplot chisq cmh nocol nopct measures cl;\nrun;\n\n1\n\nIncluded both chisq and cmh to show discrepancy.\n\n\n\n\n\\(Q_P\\) = 273.92, \\(Q\\) = 273.81. The corresponding p-value \\(p&lt;0.001\\) suggests there is an association between party affiliation and neighborhood.\n\nNote that the Mantel-Haenszel statistic reported in the chisq output corresponds to the correlation statistic which doesn’t make sense in this case."
+  },
+  {
+    "objectID": "Chapter5.html#exercise",
+    "href": "Chapter5.html#exercise",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Exercise",
+    "text": "Exercise\n\n\nSecondary school teachers were randomly sampled from four school districts in Nevada and asked what marker color they used in grading students’ work.\n\nWhat is the Pearson chi-square statistic?\nWhat is the randomization statistic?\nGenerate a mosaic plot for this example. Can you see a trend between the colors and/or the counties?\nAt a significance level of 0.05, do we have sufficient evidence of a general association between the two variables?\n\n\nData set:\ndata color;\ninput county $ color $ count @@;\ndatalines;\ncl blu 22 cl red 57 cl green 12 cl blk 15\nca blu 12 ca red 30 ca green 6 ca blk 15\ndo blu 17 do red 34 do green 17 do blk 10\nwa blu 5 wa red 56 wa green 7 wa blk 9\n;\nrun;"
+  },
+  {
+    "objectID": "Chapter5.html#exercise-1",
+    "href": "Chapter5.html#exercise-1",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Exercise",
+    "text": "Exercise\nSecondary school teachers were randomly sampled from four school districts in Nevada and asked what marker color they used in grading students’ work.\n\nWhat is the Pearson chi-square statistic?\nWhat is the randomization statistic?\nGenerate a mosaic plot for this example. Can you see a trend between the colors and/or the counties?\nAt a significance level of 0.05, do we have sufficient evidence of a general association between the two variables?\n\n\nSAS CodeAnswer\n\n\n\ndata color;\ninput county $ color $ count @@;\ndatalines;\ncl blu 22 cl red 57 cl green 12 cl blk 15\nca blu 12 ca red 30 ca green 6 ca blk 15\ndo blu 17 do red 34 do green 17 do blk 10\nwa blu 5 wa red 56 wa green 7 wa blk 9\n;\nrun;\n\nproc freq data=color;\nweight count;\ntables county*color/\nplots=mosaicplot chisq cmh nocol nopct measures cl;\nrun;\n\n\n\\(Q_P\\)= 24.36, \\(Q\\) = 24.28, p = 0.004, which means there is strong evidence of an association between school district and marker color used for grading."
+  },
+  {
+    "objectID": "Chapter5.html#mean-score-tests",
+    "href": "Chapter5.html#mean-score-tests",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Mean Score Tests",
+    "text": "Mean Score Tests\n\nUsed when the column variable is ordinal.\nRow variable could be nominal\n\n\\(H_0\\): there is no difference in mean scores across the groups\n\\(H_a\\): at least one group has a different mean score compared to the others\n\nScores are calculated for each row\nRecall: 2xr tables"
+  },
+  {
+    "objectID": "Chapter5.html#mean-score-tests-1",
+    "href": "Chapter5.html#mean-score-tests-1",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Mean Score Tests",
+    "text": "Mean Score Tests\n\nThe mean score statistic \\(Q_S\\) can be used to test the difference between the mean scores.\n\nConsistent with the ANOVA approach\n\nRecall 2xr table: Sample size requirement\nSet a cutoff column, the totals to the left and right of this column should be greater than 5.\n\nRow totals should be greater than 20\n\nIncluded in the cmh table as “Row Mean Scores Differ”"
+  },
+  {
+    "objectID": "Chapter5.html#example-2",
+    "href": "Chapter5.html#example-2",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Example",
+    "text": "Example\n\n\nThe data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain\n\nIs the chi-square approximation valid for this case?\nWhat kind of scoring method is most appropriate for this data set?\nMake the appropriate conclusion based on the result of the mean score tests using a significance level \\(\\alpha=0.05\\)."
+  },
+  {
+    "objectID": "Chapter5.html#example-3",
+    "href": "Chapter5.html#example-3",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Example",
+    "text": "Example\nThe data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain\n\nIs the chi-square approximation valid for this case?\nWhat kind of scoring method is most appropriate for this data set?\nMake the appropriate conclusion based on the result of the mean score tests using a significance level \\(\\alpha=0.05\\).\n\n\nSAS CodeAnswer\n\n\ndata pain;\ninput treatment $ hours count @@;\ndatalines;\nplacebo 0 6 placebo 1 9 placebo 2 6 placebo 3 3 placebo 4 1\nstandard 0 1 standard 1 4 standard 2 6 standard 3 6 standard 4 8\ntest 0 2 test 1 5 test 2 6 test 3 8 test 4 6\n;\n\nproc freq data=pain order=data;\nweight count;\ntables treatment*hours/ cmh nocol nopct;\nrun;\n\n\n\nUse column 3 (Hours = 2) as cutoff. The use of the chi-square approximation is justified!\nThe integer scoring method is most appropriate.\n\\(Q_S\\) = 13.7, p=0.001. There is sufficient evidence to conclude that at least one treatment group is different compared to the others.\n\n\n\n\n\n\nEAB 770 - Chapter 5"
   }
 ]

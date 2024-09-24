@@ -17,6 +17,8 @@ website:
         text: "Chapter 3: Sets of 2x2 tables"
       - href: Chapter4.qmd
         text: "Chapter 4: 2xr and sx2 tables"
+      - href: Chapter5.qmd
+        text: "Chapter 5: sxr tables"
 
 format:
   html:
