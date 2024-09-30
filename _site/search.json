@@ -1670,5 +1670,138 @@
     "title": "EAB 770 - Chapter 5",
     "section": "Example",
     "text": "Example\nThe data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain\n\nIs the chi-square approximation valid for this case?\nWhat kind of scoring method is most appropriate for this data set?\nMake the appropriate conclusion based on the result of the mean score tests using a significance level \\(\\alpha=0.05\\).\n\n\nSAS CodeAnswer\n\n\ndata pain;\ninput treatment $ hours count @@;\ndatalines;\nplacebo 0 6 placebo 1 9 placebo 2 6 placebo 3 3 placebo 4 1\nstandard 0 1 standard 1 4 standard 2 6 standard 3 6 standard 4 8\ntest 0 2 test 1 5 test 2 6 test 3 8 test 4 6\n;\n\nproc freq data=pain order=data;\nweight count;\ntables treatment*hours/ cmh nocol nopct;\nrun;\n\n\n\nUse column 3 (Hours = 2) as cutoff. The use of the chi-square approximation is justified!\nThe integer scoring method is most appropriate.\n\\(Q_S\\) = 13.7, p=0.001. There is sufficient evidence to conclude that at least one treatment group is different compared to the others.\n\n\n\n\n\n\nEAB 770 - Chapter 5"
+  },
+  {
+    "objectID": "Chapter6.html#outline",
+    "href": "Chapter6.html#outline",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Outline",
+    "text": "Outline\n\nGeneral Mantel-Haenszel Method\nMantel-Haesnzel Applications\nRepeated Measures"
+  },
+  {
+    "objectID": "Chapter6.html#general-mantel-haenszel-method",
+    "href": "Chapter6.html#general-mantel-haenszel-method",
+    "title": "EAB 770 - Chapter 6",
+    "section": "General Mantel-Haenszel Method",
+    "text": "General Mantel-Haenszel Method\n\nRecall: 2x2, sx2, 2xr, sxr tables all use Mantel-Haenszel Statistics\n\nAble to account for ordinality unlike Pearson Chi-Square tests\nLess stringent sample size requirements\n\nMH statistics in sets of contingency tables removes the confounding influence of the stratification variable."
+  },
+  {
+    "objectID": "Chapter6.html#general-mantel-haenszel-method-1",
+    "href": "Chapter6.html#general-mantel-haenszel-method-1",
+    "title": "EAB 770 - Chapter 6",
+    "section": "General Mantel-Haenszel Method",
+    "text": "General Mantel-Haenszel Method\n\n\n\n\n\n\nNote\n\n\n\\(H_0\\): The response variable is distributed at random with respect to the groups defined by the row variables\n\n\n\nDepending on the nature of the row and column variables, the Mantel-Haenszel statistic has different forms:\n\n\\(Q_{GMH}\\): General Mantel-Haenszel statistic\n\\(Q_{SMH}\\): Mean Score Statistic\n\\(Q_{CSMH}\\): Correlation Statistic"
+  },
+  {
+    "objectID": "Chapter6.html#general-mantel-haenszel-method-2",
+    "href": "Chapter6.html#general-mantel-haenszel-method-2",
+    "title": "EAB 770 - Chapter 6",
+    "section": "General Mantel-Haenszel Method",
+    "text": "General Mantel-Haenszel Method\n\nExtended Mantel-Haenszel Statistics\n\n\n\n\n\n\n\n\n\n\nMH Statistic\nAlternative Hypothesis\nSAS Output Label\nDegrees of Freedom\nScale Requirements\nNonparametric Equivalents\n\n\n\n\n\\(Q_{GMH}\\)\nGeneral Association\nGeneral Association\n\\((s-1)(r-1)\\)\nNone\n\n\n\n\\(Q_{SMH}\\)\nMean score location shifts\nRow Means Scores Differ\n\\((s-1)\\)\nColumn Variable Ordinal\nKruskal-Wallis\n\n\n\\(Q_{CSMH}\\)\nLinear Association\nNonzero correlation\n\\(1\\)\nRow and Column Variable Ordinal\nSpearman Correlation"
+  },
+  {
+    "objectID": "Chapter6.html#example",
+    "href": "Chapter6.html#example",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Example",
+    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, controlling for hospital effects.\nSAS Data set\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;"
+  },
+  {
+    "objectID": "Chapter6.html#example-1",
+    "href": "Chapter6.html#example-1",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Example",
+    "text": "Example\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, controlling for hospital effects.\n\nSAS CodeAnswer\n\n\nproc freq data=operate order=data;\nweight wt;\n1tables hospital*trt*severity / cmh;\n2tables hospital*trt*severity / cmh scores=modridit;\nrun;\n\n1\n\nTable Scores\n\n2\n\nModridit scores\n\n\n\n\nBoth variables are ordinal, hence we can test for correlation using \\(Q_{CSMH}\\). Using modridit scores, we get \\(Q_{CSMH}=6.93\\), p=0.0085. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients."
+  },
+  {
+    "objectID": "Chapter6.html#exercise",
+    "href": "Chapter6.html#exercise",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Exercise",
+    "text": "Exercise\nThe following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.\ndata shoulder;\ninput area $ location $ size $ usage $ count @@;\ndatalines;\ncoast urban large no 174 coast urban large yes 69\ncoast urban medium no 134 coast urban medium yes 56\ncoast urban small no 150 coast urban small yes 54\ncoast rural large no 52 coast rural large yes 14\ncoast rural medium no 31 coast rural medium yes 14\ncoast rural small no 25 coast rural small yes 17\npiedmont urban large no 127 piedmont urban large yes 62\npiedmont urban medium no 94 piedmont urban medium yes 63\npiedmont urban small no 112 piedmont urban small yes 93\npiedmont rural large no 35 piedmont rural large yes 29\npiedmont rural medium no 32 piedmont rural medium yes 30\npiedmont rural small no 46 piedmont rural small yes 34\nmountain urban large no 111 mountain urban large yes 26\nmountain urban medium no 120 mountain urban medium yes 47\nmountain urban small no 145 mountain urban small yes 68\nmountain rural large no 62 mountain rural large yes 31\nmountain rural medium no 44 mountain rural medium yes 32\nmountain rural small no 85 mountain rural small yes 43\n;"
+  },
+  {
+    "objectID": "Chapter6.html#exercise-1",
+    "href": "Chapter6.html#exercise-1",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Exercise",
+    "text": "Exercise\nThe following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.\n\nSAS CodeAnswer\n\n\nproc freq data=shoulder order=data;\nweight count;\ntables area*location*size*usage / cmh scores=modridit;\n;\nrun;\n\n\nBoth variables are ordinal. We can use the extended correlation statistic \\(Q_{CSMH}\\). Using modridit scores, \\(Q_{CSMH}\\) =6.64, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated."
+  },
+  {
+    "objectID": "Chapter6.html#repeated-measures",
+    "href": "Chapter6.html#repeated-measures",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Repeated Measures",
+    "text": "Repeated Measures\n\nCommonly used in longitudinal studies\n\nCohort studies\n\nDental experiments: multiple teeth from each subject\nMantel-Haenszel statistics can be calculated to determine whether there is an association between a repeated measurement factor (usually time) and a response variable adjusting for an effect of subject.\n\nControlling for subject adjusts for the variability between subjects, which focuses the analysis to within-subject."
+  },
+  {
+    "objectID": "Chapter6.html#repeated-measures-1",
+    "href": "Chapter6.html#repeated-measures-1",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Repeated Measures",
+    "text": "Repeated Measures\n\nConsider an experiment with \\(n\\) subjects.\n\nThe treatment is applied to each subject.\nThe response is measured at \\(t\\) time points.\nCohort studies/ longitudinal RCT\n\nIn general, the repeated measures can come from multiple subjects. Responses can come from:\n\nSame location\nSame family/litter\nMatched pairs"
+  },
+  {
+    "objectID": "Chapter6.html#repeated-measures-2",
+    "href": "Chapter6.html#repeated-measures-2",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Repeated Measures",
+    "text": "Repeated Measures\nConsider a repeated measures design with \\(t\\) time points and a response variable with \\(C\\) levels.\n\n\n\n\n\n\n\nNote\n\n\nEach time point will have a measured response value. For a sample size \\(n\\), we will end up with \\(n\\) contingency tables with shape \\(t \\times C\\)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(n_{ijk} = 1\\) if response \\(k\\) is measured at time \\(j\\). Otherwise, \\(n_{ijk}=0\\)"
+  },
+  {
+    "objectID": "Chapter6.html#section",
+    "href": "Chapter6.html#section",
+    "title": "EAB 770 - Chapter 6",
+    "section": "",
+    "text": "EAB 770 - Chapter 4"
+  },
+  {
+    "objectID": "Chapter6.html#repeated-measures-hypotheses",
+    "href": "Chapter6.html#repeated-measures-hypotheses",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Repeated Measures: Hypotheses",
+    "text": "Repeated Measures: Hypotheses\n\nMantel-Haenszel statistics can be used to test the hypothesis of no association between time and response.\n\nAssumption: marginal totals per subject in response and time is fixed.\n\\(H_0\\): The response variable is distributed at random with respect to the time points\nThe null hypothesis is referred to as the hypothesis of interchangeability or marginal homogeneity.\n\nAs in previous chapters, \\(Q_{CSMH}\\), \\(Q_{SMH}\\), and \\(Q_{GMH}\\) pertain to different alternatives to no association."
+  },
+  {
+    "objectID": "Chapter6.html#repeated-measures-caution",
+    "href": "Chapter6.html#repeated-measures-caution",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Repeated Measures: Caution",
+    "text": "Repeated Measures: Caution\n\n\n\n\n\n\nWarning\n\n\nOdds ratio estimates and CI limits assumes independence between contingency table entries, which is broken in repeated measures data. Breslow-Day assumptions are also not satisfied.\nThe Breslow-Day statistic as well as the MH and logit estimates of the odds ratio should be taken with a grain of salt."
+  },
+  {
+    "objectID": "Chapter6.html#example-2",
+    "href": "Chapter6.html#example-2",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Example",
+    "text": "Example\nA running shoe company produces a new model of running shoe that includes a harder material for the insert that corrects for overpronation. However, the company is concerned that the material will induce heel tenderness as a result of some loss of cushioning on the strike of each step. It conducted a study on 87 runners who used the new shoe for a month. Researchers asked the participants whether they experienced occasional heel tenderness before and after they used the new shoe. Is there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?\nSAS Data\ndata pump;\ninput subject time $ response $ @@;\ndatalines;\n1 before no 1 after no 2 before no 2 after no\n3 before no 3 after no 4 before no 4 after no\n5 before no 5 after no 6 before no 6 after no\n7 before no 7 after no 8 before no 8 after no\n9 before no 9 after no 10 before no 10 after no\n11 before no 11 after no 12 before no 12 after no\n13 before no 13 after no 14 before no 14 after no\n15 before no 15 after no 16 before no 16 after no\n17 before no 17 after no 18 before no 18 after no\n19 before no 19 after no 20 before no 20 after no\n21 before no 21 after no 22 before no 22 after no\n23 before no 23 after no 24 before no 24 after no\n25 before no 25 after no 26 before no 26 after no\n27 before no 27 after no 28 before no 28 after no\n29 before no 29 after no 30 before no 30 after no\n31 before no 31 after no 32 before no 32 after no\n33 before no 33 after no 34 before no 34 after no\n35 before no 35 after no 36 before no 36 after no\n37 before no 37 after no 38 before no 38 after no\n39 before no 39 after no 40 before no 40 after no\n41 before no 41 after no 42 before no 42 after no\n43 before no 43 after no 44 before no 44 after no\n45 before no 45 after no 46 before no 46 after no\n47 before no 47 after no 48 before no 48 after no\n49 before no 49 after yes 50 before no 50 after yes\n51 before no 51 after yes 52 before no 52 after yes\n53 before no 53 after yes 54 before no 54 after yes\n55 before no 55 after yes 56 before no 56 after yes\n57 before no 57 after yes 58 before no 58 after yes\n59 before no 59 after yes 60 before no 60 after yes\n61 before no 61 after yes 62 before no 62 after yes\n63 before no 63 after yes 64 before yes 64 after no\n65 before yes 65 after no 66 before yes 66 after no\n67 before yes 67 after no 68 before yes 68 after no\n69 before yes 69 after yes 70 before yes 70 after yes\n71 before yes 71 after yes 72 before yes 72 after yes\n73 before yes 73 after yes 74 before yes 74 after yes\n75 before yes 75 after yes 76 before yes 76 after yes\n77 before yes 77 after yes 78 before yes 78 after yes\n79 before yes 79 after yes 80 before yes 80 after yes\n81 before yes 81 after yes 82 before yes 82 after yes\n83 before yes 83 after yes 84 before yes 84 after yes\n85 before yes 85 after yes 86 before yes 86 after yes\n87 before yes 87 after yes\n;"
+  },
+  {
+    "objectID": "Chapter6.html#example-3",
+    "href": "Chapter6.html#example-3",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Example",
+    "text": "Example\nIs there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?\n\nSAS CodeAnswerMcNemar’s test\n\n\n\ndata pump;\ninput subject time $ response $ @@;\ndatalines;\n1 before no 1 after no 2 before no 2 after no\n3 before no 3 after no 4 before no 4 after no\n5 before no 5 after no 6 before no 6 after no\n7 before no 7 after no 8 before no 8 after no\n9 before no 9 after no 10 before no 10 after no\n11 before no 11 after no 12 before no 12 after no\n13 before no 13 after no 14 before no 14 after no\n15 before no 15 after no 16 before no 16 after no\n17 before no 17 after no 18 before no 18 after no\n19 before no 19 after no 20 before no 20 after no\n21 before no 21 after no 22 before no 22 after no\n23 before no 23 after no 24 before no 24 after no\n25 before no 25 after no 26 before no 26 after no\n27 before no 27 after no 28 before no 28 after no\n29 before no 29 after no 30 before no 30 after no\n31 before no 31 after no 32 before no 32 after no\n33 before no 33 after no 34 before no 34 after no\n35 before no 35 after no 36 before no 36 after no\n37 before no 37 after no 38 before no 38 after no\n39 before no 39 after no 40 before no 40 after no\n41 before no 41 after no 42 before no 42 after no\n43 before no 43 after no 44 before no 44 after no\n45 before no 45 after no 46 before no 46 after no\n47 before no 47 after no 48 before no 48 after no\n49 before no 49 after yes 50 before no 50 after yes\n51 before no 51 after yes 52 before no 52 after yes\n53 before no 53 after yes 54 before no 54 after yes\n55 before no 55 after yes 56 before no 56 after yes\n57 before no 57 after yes 58 before no 58 after yes\n59 before no 59 after yes 60 before no 60 after yes\n61 before no 61 after yes 62 before no 62 after yes\n63 before no 63 after yes 64 before yes 64 after no\n65 before yes 65 after no 66 before yes 66 after no\n67 before yes 67 after no 68 before yes 68 after no\n69 before yes 69 after yes 70 before yes 70 after yes\n71 before yes 71 after yes 72 before yes 72 after yes\n73 before yes 73 after yes 74 before yes 74 after yes\n75 before yes 75 after yes 76 before yes 76 after yes\n77 before yes 77 after yes 78 before yes 78 after yes\n79 before yes 79 after yes 80 before yes 80 after yes\n81 before yes 81 after yes 82 before yes 82 after yes\n83 before yes 83 after yes 84 before yes 84 after yes\n85 before yes 85 after yes 86 before yes 86 after yes\n87 before yes 87 after yes\n;\n\n1proc freq data=pump order=data;\ntables subject*time*response/ noprint cmh; *noprint does not print the 87 contingency tables.;\nrun;\n\n1\n\nThere’s no weight statement because each line is an observational unit.\n\n\n\n\n\nWe can construct 2x2 tables for each runner and control for each subject. The resulting CMH tables will have the same results because of the shape of the contingency tables.\n\\(Q_{CSMH}\\)=5, p=0.03, which means there is strong evidence that there is a difference in heel tenderness before and after using the new shoe.\nAll extended Mantel-Haenszel statistic will yield the same result because the resulting contingency table for each subject is a 2x2 table.\n\n\n\ndata shoes;\ninput before $ after $ count;\ndatalines;\nyes yes 19\nyes no 5\nno yes 15\nno no 48\n;\n\nproc freq data=shoes order=data;\nweight count;\ntables before*after/agree;\nrun;\nThe McNemar’s test yields the same result as \\(Q_{CSMH}\\)."
+  },
+  {
+    "objectID": "Chapter6.html#exercise-2",
+    "href": "Chapter6.html#exercise-2",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Exercise",
+    "text": "Exercise\nThe DRUG2 dataset shows the data from a study in which 46 patients were each treated with three drugs (A, B, and C). The response to each drug was recorded as favorable (F) or unfavorable (U). Use the appropriate test to determine whether the three drugs have equal probabilities for favorable response.\n\nWhich Mantel-Haenszel statistic is the most appropriate for this example?\nAt a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?\n\nSAS Data\ndata drug;\ninput druga $ drugb $ drugc $ count;\ndatalines;\nF F F 6\nF F U 16\nF U F 2\nF U U 4\nU F F 2\nU F U 4\nU U F 6\nU U U 6\n;\nrun;\ndata drug2; set drug;\nkeep patient drug response;\nretain patient 0;\ndo i=1 to count;\npatient=patient+1;\ndrug='A'; response=druga; output;\ndrug='B'; response=drugb; output;\ndrug='C'; response=drugc; output;\nend;\nrun;"
+  },
+  {
+    "objectID": "Chapter6.html#exercise-3",
+    "href": "Chapter6.html#exercise-3",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Exercise",
+    "text": "Exercise\n\nWhich Mantel-Haenszel statistic is the most appropriate for this example?\nAt a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?\n\n\nSAS CodeAnswer\n\n\nproc freq data=drug2 order=data;\ntables patient*drug*response/cmh noprint;\nrun;\n\n\nThe most appropriate MH statistic to examine is “Row Means Differ”.\nThe statistic \\(Q_{SMH}=8.47\\) yields a p-value \\(p=0.0145\\). At a significance level of 0.01, there is marginally sufficient evidence that at least one drug has a different probability of a favorable response."
+  },
+  {
+    "objectID": "Chapter6.html#ordinal-response-with-missing-data",
+    "href": "Chapter6.html#ordinal-response-with-missing-data",
+    "title": "EAB 770 - Chapter 6",
+    "section": "Ordinal Response with Missing Data",
+    "text": "Ordinal Response with Missing Data\nExperiments using a repeated measures design tend to include plenty of missing data.\n\nMissing data decreases the power of the study.\n\nIncluding missing data in the analysis still gives a higher power than excluding incomplete cases in the analysis.\n\nTechniques to deal with missing data include:\n\nMultiple imputation\nOmission\nAdjusting ANOVA scores\n\n\n\n\n\nEAB 770 - Chapter 4"
   }
 ]
