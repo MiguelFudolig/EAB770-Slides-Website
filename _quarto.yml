@@ -19,6 +19,8 @@ website:
         text: "Chapter 4: 2xr and sx2 tables"
       - href: Chapter5.qmd
         text: "Chapter 5: sxr tables"
+      - href: Chapter6.qmd
+        text: "Chapter 6: sxr tables"
 
 format:
   html:

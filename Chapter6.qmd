@@ -42,7 +42,7 @@ Depending on the nature of the row and column variables, the Mantel-Haenszel sta
 -   $Q_{SMH}$: Mean Score Statistic
 -   $Q_{CSMH}$: Correlation Statistic
 
-## General Mantel-Haenszel Method
+## General Mantel-Haenszel Method {.smaller}
 
 | MH Statistic | Alternative Hypothesis     | SAS Output Label        | Degrees of Freedom | Scale Requirements              | Nonparametric Equivalents |
 |--------------|----------------------------|-------------------------|--------------------|---------------------------------|---------------------------|
