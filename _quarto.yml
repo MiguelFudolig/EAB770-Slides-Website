@@ -21,7 +21,7 @@ website:
         text: "Chapter 5: sxr tables"
       - href: Chapter6.qmd
         text: "Chapter 6: Sets of sxr tables"
-      - href: Chapter7.qmd
+      - href: Chapter8.qmd
         text: "Chapter 8: Logistic Regression"
 
 format:

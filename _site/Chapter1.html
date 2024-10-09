@@ -8,10 +8,10 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Miguel Fudolig">
-  <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 1</title>
+  <title>EAB770: Applied Statistical Methods for Categorical Data - EAB 770 - Chapter 1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -594,7 +594,8 @@ test u 20
 <li>End with a separate <strong>;</strong></li>
 </ul></li>
 </ul>
-</div></div>
+</div>
+</div>
 </section>
 <section id="sas-example-contingency-table" class="slide level2">
 <h2>SAS Example: Contingency Table</h2>
@@ -612,7 +613,8 @@ run;</code></pre>
 <li><code>tables</code> creates the contingency table with row, column, and total percentages.</li>
 <li><code>run;</code> tells SAS to run the code. <strong>This is important!</strong></li>
 </ul>
-</div></div>
+</div>
+</div>
 </section>
 <section id="sas-example-one-observation-per-row" class="slide level2">
 <h2>SAS Example: One Observation per Row</h2>
@@ -643,7 +645,8 @@ test u test u
 <li>This is an example of a data set where one row corresponds to one observational unit.</li>
 <li>The <code>@@</code> sign means that the data lines contain multiple observations. <code>@@</code> basically means new line after two entries written in the <code>datalines</code> statement.</li>
 </ul>
-</div></div>
+</div>
+</div>
 </section>
 <section id="sas-example-contingency-table-1" class="slide level2">
 <h2>SAS Example: Contingency Table</h2>
@@ -659,7 +662,8 @@ run;</code></pre>
 <li><code>nopct</code> suppresses the total percentages in the output</li>
 <li><code>norow</code> suppresses the row percentages in the output</li>
 </ul>
-</div></div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="exercise" class="title-slide slide level1 center">
@@ -673,7 +677,7 @@ run;</code></pre>
 <p>Suppose a survey asking freshmen and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.</p>
 <p>Enter the data in SAS using the data step and generate the contingency tables. Name the data set <code>enjoy</code>.</p>
 </div><div class="column" style="width:60%; font-size: 50%">
-<table class="caption-top">
+<table>
 <colgroup>
 <col style="width: 15%">
 <col style="width: 22%">
@@ -711,7 +715,8 @@ run;</code></pre>
 </tr>
 </tbody>
 </table>
-</div></div>
+</div>
+</div>
 </section>
 <section id="sas-exercise-1" class="slide level2">
 <h2>SAS Exercise</h2>
@@ -981,7 +986,18 @@ run;</code></pre>
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1013,29 +1029,7 @@ run;</code></pre>
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
@@ -1043,7 +1037,7 @@ run;</code></pre>
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

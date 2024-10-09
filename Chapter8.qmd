@@ -414,16 +414,16 @@ model y = x cat/scale=none aggregate;
 run;
 ```
 
-## Model parameterizations
+## Model parametrizations
 
 ::: callout-note
-**Effect parameterization** produces deviation from the _grand mean_. This is the default parameterization in the LOGISTIC procedure.
+**Effect parametrization** produces deviation from the _grand mean_. This is the default parametrization in the LOGISTIC procedure.
 
 - The reference level corresponds to $X=-1$.
 :::
 
 ::: callout-note
-**Reference cell parameterization** produces measureents based on reference level. This can be specified in the class statement as `param=ref` in the LOGISTIC procedure.
+**Reference cell parametrization** produces measureents based on reference level. This can be specified in the class statement as `param=ref` in the LOGISTIC procedure.
 
 - The reference level corresponds to $X=0$.
 :::
@@ -433,8 +433,8 @@ run;
 The data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.
 
 -   Perform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
-  -   Using effect parameterization
-  -   Using reference cell parameterization
+  -   Using effect parametrization
+  -   Using reference cell parametrization
 
 ![](img/sentencing_C8.png)
 
@@ -444,8 +444,8 @@ The data is based on a study on prison sentencing for persons convicted of a bur
 The data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.
 
 -   Perform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
-  -   Using effect parameterization
-  -   Using reference cell parameterization
+  -   Using effect parametrization
+  -   Using reference cell parametrization
   
 :::{.panel-tabset}
 ### SAS Code
@@ -479,14 +479,14 @@ run;
 
 ```
 
-1. Default: effect parameterization
-2. Reference cell parameterization used after `param=ref` is specified.
+1. Default: effect parametrization
+2. Reference cell parametrization used after `param=ref` is specified.
 
 ### Answer
 
-Effect parameterization: $logit (\theta_{ij}) = -1.48 - 0.30 * TYPE +0.17* PRIOR$
+Effect parametrization: $logit (\theta_{ij}) = -1.48 - 0.30 * TYPE +0.17* PRIOR$
 
-Reference Cell parameterization: $logit (\theta_{ij}) = -1.36- 0.59 * TYPE +0.35* PRIOR$
+Reference Cell parametrization: $logit (\theta_{ij}) = -1.36- 0.59 * TYPE +0.35* PRIOR$
 
 The odds of sending an offender to prison after committing other crimes is 0.55 times (95% CI: 0.38, 0.81) that when committing non-residential crimes. There is strong evidence against the null hypothesis of no difference.
 
@@ -497,12 +497,12 @@ The odds of sending an offender with some prior arrests are 1.42 times (95% CI: 
 
 ## Exercise
 
-Recall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parameterization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
+Recall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parametrization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
 
 
 ## Exercise
 
-Recall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parameterization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
+Recall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parametrization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
 
 :::{.panel-tabset}
 
@@ -525,9 +525,9 @@ run;
 
 ### Answer
 
-Effect parameterization: $logit (\theta_{ij}) = -1.12 - 0.47 * AGEGRP +0.42* CAFFEINE$
+Effect parametrization: $logit (\theta_{ij}) = -1.12 - 0.47 * AGEGRP +0.42* CAFFEINE$
 
-Reference Cell parameterization: $logit (\theta_{ij}) = -1.08- 0.91 * AGEGRP +0.84* CAFFEINE$
+Reference Cell parametrization: $logit (\theta_{ij}) = -1.08- 0.91 * AGEGRP +0.84* CAFFEINE$
 
 There is strong evidence of an effect of age (p<0.001). The odds of older adults reporting regular exercise is 0.39 (95% CI: 0.28, 0.56) times that of younger adults.
 
@@ -692,14 +692,14 @@ contrast A 2 1 1 ;
 
 ## Exercise
 
-Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypothesis and formulate the SAS contrast statements for both reference cell and effect parameterization.
+Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrization.
 
   - There is no difference between the first and third levels of A.
   - The mean effect of $A_1$ and $A_2$ is equal to the effect of $A_3$.
 
 ## Exercise
 
-Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypothesis and formulate the SAS contrast statements for both reference cell and effect parameterization.
+Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrization.
 
   - There is no effect difference between the first and third levels of A.
   - The mean effect of $A_1$ and $A_2$ is equal to the effect of $A_3$.
@@ -724,7 +724,7 @@ No effect difference between the first and third levels: $A_1-A_3 = 0 \to \beta_
 contrast A 1 0;
 ```
 
-Effect parameterization:
+Effect parametrization:
 Effect $A_1 = \alpha + \beta_1$
 Effect $A_3 = \alpha-\beta_1 - \beta_2$
 
@@ -747,7 +747,7 @@ No effect difference between the first and third levels: $(A_1+A_2)/2-A_3 = 0 \t
 contrast A 1 1;
 ```
 
-Effect parameterization:
+Effect parametrization:
 Effect $A_1 = \alpha + \beta_1$
 Effect $A_2 = \alpha + \beta_2$
 Effect $A_3 = \alpha-\beta_1 - \beta_2$
@@ -761,5 +761,186 @@ contrast A 1 1;
 :::
 
 
+## Exercise
+
+Consider a Factor A with three levels $(A_1,A_2,A_3)$ and Factor B with two levels $(B_1,B_2)$, with $A_3$ and $B_2$ as the reference level. Suppose $\theta$ is a probability of observing success for a dichotomous response variable $y$.
+
+  - Please write the saturated/interaction logistic model for $\theta$  
+
+Provide the corresponding null hypothesis and formulate the SAS contrast statements for both reference cell and effect parametrizations.
+
+  - "There is no interaction between A and B".
 
 
+
+## Exercise
+
+Consider a Factor A with three levels $(A_1,A_2,A_3)$ and Factor B with two levels $(B_1,B_2)$, with $A_3$ and $B_2$ as the reference level. Suppose $\theta$ is a probability of observing success for a dichotomous response variable $y$.
+
+  - Please write the saturated/interaction logistic model for $\theta$  
+
+$$
+logit [\theta] = \alpha + \beta_{A1}x_{A1} + \beta_{A2}x_{A2} + 
+\beta_{B1}x_{B1}  +  \beta_{A1B1}x_{A1}x_{B1} + \beta_{A2B1}x_{A2}x_{B1}
+$$
+
+Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrizations.
+
+  - "There is no interaction between A and B".
+    - The joint tests of the following hypotheses should be tested: $\beta_{A1B1} = 0$ and $\beta_{A2B1}=0$.
+
+```{.r}
+contrast A*B 1 0,
+        A*B 0 1;
+```
+
+
+## Implementing Qualitative Explanatory Variables in SAS
+
+- Use the `class` statement in `LOGISTIC` procedure to identify qualitative variables.
+- Interaction between Factors A and B are included in the model as $A*B$
+  - To include the saturated model of Factors A and B, you can write (response variable)=`A|B`.
+  - You can add more than two factors in these statements.
+  - Three-way interaction: `A*B*C`
+  - Saturated model for a three-factor model: `A|B|C`
+- If you wish to only include up to two-way interactions in a three-factor model: `A|B|C@2`
+- You can introduce contrasts in the `contrast` statement.
+- `effectplot` can be used to create interaction plots.
+- `oddsratio` calculates odds ratios and graphs of confidence limits for odds ratios.
+
+## Example
+
+The data set is from a cross-sectional prevalence study conducted to investigate textile worker complaints about respiratory symptoms experienced while working in the mills. Investigators were interested in whether occupational environment was related to prevalence of respiratory ailments associated with the disease byssinosis.
+
+- Use logistic regression to model the probability of complaining based on workplace condition, years of employment, and smoking history. Include only up to two-way interaction effects.
+- Is there evidence of any two-way interactions at a significance level of 0.10?
+- Generate an interaction plot for these cases.
+- Generate the main effects using contrast statements.
+
+:::{.panel-tabset}
+### Table
+
+![](img/byss_C8.png)
+### SAS Data Set
+```{.r}
+data byss;
+input work $ years $ smoke $ status $ count @@;
+datalines ;
+dusty <10 yes yes 30 dusty <10 yes no 203
+dusty <10 no yes 7 dusty <10 no no 119
+dusty >=10 yes yes 57 dusty >=10 yes no 161
+dusty >=10 no yes 11 dusty >=10 no no 81
+not <10 yes yes 14 not <10 yes no 1340
+not <10 no yes 12 not <10 no no 1004
+not >=10 yes yes 24 not >=10 yes no 1360
+not >=10 no yes 10 not >=10 no no 986
+;
+```
+:::
+
+##  Example
+
+The data set is from a cross-sectional prevalence study conducted to investigate textile worker complaints about respiratory symptoms experienced while working in the mills. Investigators were interested in whether occupational environment was related to prevalence of respiratory ailments associated with the disease byssinosis.
+
+- Use logistic regression to model the probability of complaining based on workplace condition, years of employment, and smoking history. Include only up to two-way interaction effects.
+- Is there evidence of any two-way interactions at a significance level of 0.10?
+- Generate an interaction plot for these cases.
+- Generate the main effects using contrast statements.
+
+:::{.panel-tabset}
+### SAS Code
+
+```{.r}
+proc logistic data=byss;
+freq count;
+class work years(ref=first) smoke(ref=first) /param=ref;
+model status(event=last) = work|years|smoke@2 /scale=none aggregate;
+effectplot interaction (x=work) / at(smoke=all years=all) link noobs;
+oddsratios work;
+contrast 'work' work 1;
+contrast 'years' years 1;
+contrast 'smoke' smoke 1;
+run;
+```
+
+
+### Answer
+
+$Work*Smoke$ (p = 0.07) is significant at the 0.10 level.
+:::
+
+## Exercise
+
+The following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.
+
+- Are we interested in main effects or interaction?
+- Is there a significant interaction effect?
+- Calculate the odds ratio between the different diagnoses of UTI.
+- Generate plots for the interaction and odds ratios.
+
+
+
+::: {.panel-tabset}
+### Table
+
+![](img/uti_C8.png)
+
+### SAS Data Set
+
+```{.r}
+data uti;
+input diagnosis : $13. treatment $ response $ count @@;
+datalines;
+complicated A cured 78 complicated A not 28
+complicated B cured 101 complicated B not 11
+complicated C cured 68 complicated C not 46
+uncomplicated A cured 40 uncomplicated A not 5
+uncomplicated B cured 54 uncomplicated B not 5
+uncomplicated C cured 34 uncomplicated C not 6
+;
+```
+:::
+
+## Exercise
+
+The following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.
+
+- Are we interested in main effects or interaction?
+- Is there a significant interaction effect?
+- Calculate the odds ratio between the different diagnoses of UTI.
+- Generate plots for the interaction and odds ratios.
+
+
+
+::: {.panel-tabset}
+### SAS Code
+
+```{.r}
+data uti;
+input diagnosis : $13. treatment $ response $ count @@;
+datalines;
+complicated A cured 78 complicated A not 28
+complicated B cured 101 complicated B not 11
+complicated C cured 68 complicated C not 46
+uncomplicated A cured 40 uncomplicated A not 5
+uncomplicated B cured 54 uncomplicated B not 5
+uncomplicated C cured 34 uncomplicated C not 6
+;
+
+proc logistic data=uti order=data;
+freq count;
+class diagnosis treatment /param=ref;
+model response(event='cured') = diagnosis|treatment /scale=none aggregate;
+effectplot interaction (x=treatment) / at(treatment=all) link noobs;
+oddsratios treatment;
+run;
+```
+
+### Answer
+
+We are more interested in the interaction effect.
+
+There is no significant interaction effect between diagnosis and treatment.
+
+![Odds Ratios](img/odds_C8.png)
+:::

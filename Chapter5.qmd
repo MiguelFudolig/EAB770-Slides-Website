@@ -915,7 +915,7 @@ run;
 ### Answer
 
 Simple $\kappa$: 0.21 (0.11,0.31)
-Fleiss-Cohen $\kappa$: 0.38 (0.28,0.48)
+Weighted $\kappa$: 0.38 (0.28,0.48)
 
 Since the weighted $\kappa$ is higher than the simple $\kappa$, we can infer that there were more disagreements closer to the diagonal. There is a slight to moderate agreement between the two neurologists.
 :::
@@ -999,7 +999,7 @@ run;
 ### Answer
 
 Simple $\kappa$: 0.47 (0.33,0.62)
-Fleiss-Cohen $\kappa$: 0.57 (0.44,0.70)
+Weighted $\kappa$: 0.57 (0.44,0.70)
 
 The exact p-value is p<0.001, which shows there is sufficient evidence of an agreement between the radiologists. Based on the simple and weighted kappa values, there is moderate agreement between the two radiologists.
 :::
