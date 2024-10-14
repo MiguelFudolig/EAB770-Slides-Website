@@ -875,7 +875,7 @@ The following data come from a study on urinary tract infections. Investigators 
 
 - Are we interested in main effects or interaction?
 - Is there a significant interaction effect?
-- Calculate the odds ratio between the different diagnoses of UTI.
+- Calculate the odds ratio between the diagnoses of UTI for different treatments.
 - Generate plots for the interaction and odds ratios.
 
 
@@ -907,7 +907,7 @@ The following data come from a study on urinary tract infections. Investigators 
 
 - Are we interested in main effects or interaction?
 - Is there a significant interaction effect?
-- Calculate the odds ratio between the different diagnoses of UTI.
+- Calculate the odds ratio between the diagnoses of UTI for different treatments.
 - Generate plots for the interaction and odds ratios.
 
 
@@ -932,7 +932,7 @@ freq count;
 class diagnosis treatment /param=ref;
 model response(event='cured') = diagnosis|treatment /scale=none aggregate;
 effectplot interaction (x=treatment) / at(treatment=all) link noobs;
-oddsratios treatment;
+oddsratios diagnosis;
 run;
 ```
 
@@ -944,3 +944,159 @@ There is no significant interaction effect between diagnosis and treatment.
 
 ![Odds Ratios](img/odds_C8.png)
 :::
+
+## Continuous and Ordinal Explanatory Variables
+
+- Sometimes, continuous explanatory variables are unique in the data set. The sample size requirements for the goodness-of-fit tests will not be satisfied.
+  - Income
+  - Age
+  - Years in University
+- There should be at least 5 observations for the rarer outcome per parameter in the full model.
+  - If there are 50 observations of the rarer outcome, then the maximum number of parameters supported is 10.
+
+:::callout-note
+Continuous variables should **NOT** be included in the class statement.
+:::
+
+## Model Selection: Logistic Regression
+
+- We can use the residual score statistic 𝑄$Q_{RS}$ to determine up to what extent does the residuals from the model are linearly associated with other potential explanatory variables.
+  - DF: difference in number of parameters between models
+
+- The `SELECTION=FORWARD` option should be included in the `MODEL` statement. The `LOGISTIC` procedure will then start from an intercept model and build it up to the most parsimonious model.
+  - The `INCLUDE` option tells SAS how many of the variables listed should always be included in the model.
+
+## Model Selection: Logistic Regression
+
+- SAS also provides the Hosmer and Lemeshow Goodness-of-Fit test that tests the adequacy for these data by including the `lackfit` option.
+  - Null hypothesis: The model is adequate, i.e., the residuals are explained by the model.
+- The UNITS option specifies at what increment of the continuous variable will SAS calculate the odds ratios.
+
+## Example
+
+The data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.
+
+  - What is the resulting logistic model?
+  - Calculate the odds ratio for patients that differ in age by 10 years.
+
+### SAS Data Set
+
+```{.r}
+
+data coronary;
+input sex ecg age ca @@ ;
+datalines;
+0 0 28 0 1 0 42 1 0 1 46 0 1 1 45 0
+0 0 34 0 1 0 44 1 0 1 48 1 1 1 45 1
+0 0 38 0 1 0 45 0 0 1 49 0 1 1 45 1
+0 0 41 1 1 0 46 0 0 1 49 0 1 1 46 1
+0 0 44 0 1 0 48 0 0 1 52 0 1 1 48 1
+0 0 45 1 1 0 50 0 0 1 53 1 1 1 57 1
+0 0 46 0 1 0 52 1 0 1 54 1 1 1 57 1
+0 0 47 0 1 0 52 1 0 1 55 0 1 1 59 1
+0 0 50 0 1 0 54 0 0 1 57 1 1 1 60 1
+0 0 51 0 1 0 55 0 0 2 46 1 1 1 63 1
+0 0 51 0 1 0 59 1 0 2 48 0 1 2 35 0
+0 0 53 0 1 0 59 1 0 2 57 1 1 2 37 1
+0 0 55 1 1 1 32 0 0 2 60 1 1 2 43 1
+0 0 59 0 1 1 37 0 1 0 30 0 1 2 47 1
+0 0 60 1 1 1 38 1 1 0 34 0 1 2 48 1
+0 1 32 1 1 1 38 1 1 0 36 1 1 2 49 0
+0 1 33 0 1 1 42 1 1 0 38 1 1 2 58 1
+0 1 35 0 1 1 43 0 1 0 39 0 1 2 59 1
+0 1 39 0 1 1 43 1 1 0 42 0 1 2 60 1
+0 1 40 0 1 1 44 1
+;
+```
+
+## Example
+
+The data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.
+
+:::{.panel-tabset}
+### SAS Code
+
+```{.r}
+proc logistic descending;
+model ca=sex ecg age ecg*ecg age*age
+sex*ecg sex*age ecg*age /selection=forward include=3 details lackfit; # <1>
+units age=10; # <2>
+run;
+```
+
+1. `include=3` indicates we are including the first three variables in the model. In this case, it's sex, ecg, and age.
+2. Looks at the odds ratio due to a 10-point difference in age.
+
+### Answer
+
+The logistic model is as follows:
+
+$$
+logit(\theta) = -5.64 + 1.35*Sex + 0.873*ECG +0.09*Age
+$$
+The odds of developing a coronary artery disease in patients older than 10 years is 2.5 times higher.
+:::
+
+## Exercise
+
+Chapter8-Corn.csv includes the data of 82 plants from a randomized controlled trial that tests the effect of a new formulation of pesticide as well as the effect of using cover crops in planting corn. The farmers are also interested if the yield (measured in kg) is associated to the plant discoloration. 
+
+- Use the forward selection approach to determine if an interaction term between cover crop and pesticide needs to be included in the model.
+- What is the resulting logistic model?
+- Calculate the odds ratio for corn plants that have a yield difference of 2 kg.
+
+## Exercise
+
+Chapter8-Corn.csv includes the data of 82 plants from a randomized controlled trial that tests the effect of a new formulation of pesticide as well as the effect of using cover crops in planting corn. The farmers are also interested if the yield (measured in kg) is associated to the plant discoloration. 
+
+:::{.panel-tabset}
+### SAS Code
+
+```{.r}
+proc logistic data=corn;
+class pesticide (ref="No") covercrop (ref="No");
+model Discolored(event="Yes") = pesticide covercrop yield pesticide*covercrop/selection=forward include=3 details lackfit;
+run;
+```
+
+### Answer
+
+There was no evidence to indicate that a pesticide*covercrop interaction needed to be included ($Q_{RS} = 0.08, p=0.78$). The Hosmer-Lemeshow goodness-of-fit test also provides no evidence against model adequacy ($\chi^2 = 6.9, p=0.55$). 
+
+The resulting logistic model is:
+
+$$
+logit(\theta) = 0.38 - 0.68*Pesticide - 1.10 * CoverCrop - 0.27*Yield
+$$
+The odds of discoloration decreases by 0.42 (1-0.58) times when the yield increases by 2 kg.
+:::
+
+# Model Diagnostics
+
+## Diagnostics
+
+-We are interested in how a model fits our data and the lack of fit.
+  - Lack of fit: Should we still consider other variables to include in the model?
+
+- Model fit: Pearson chi-square and deviance chi-square tests
+- Lack of fit: Pearson *residuals* and deviance *residuals*
+
+::: {.callout-note title = "Pearson vs. Deviance vs. Likelihood residuals"}
+- Pearson residuals look at the difference between the observed and expected occurrences in a group. A value of 2 is usually indicative of a lack of fit.
+Deviance residuals are the components that make up the deviance statistic
+Likelihood residuals: weighted average of standardized Pearson and Deviance residuals
+:::
+
+## Diagnostics
+
+- These residuals can be viewed in graphical form.
+
+:::callout-tip
+In SAS, we can view the residual plots by specifying `PLOTS=INFLUENCE` in the `PROC LOGISTIC` statement. `stdres` specifies plots for standardized residuals
+
+```{.r}
+proc logistic plots(label)=influence(unpack stdres);
+```
+:::
+
+

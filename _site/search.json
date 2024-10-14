@@ -2851,7 +2851,7 @@
     "href": "Chapter8.html#exercise-8",
     "title": "EAB 770 - Chapter 8",
     "section": "Exercise",
-    "text": "Exercise\nThe following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.\n\nAre we interested in main effects or interaction?\nIs there a significant interaction effect?\nCalculate the odds ratio between the different diagnoses of UTI.\nGenerate plots for the interaction and odds ratios.\n\n\nTableSAS Data Set\n\n\n\n\n\ndata uti;\ninput diagnosis : $13. treatment $ response $ count @@;\ndatalines;\ncomplicated A cured 78 complicated A not 28\ncomplicated B cured 101 complicated B not 11\ncomplicated C cured 68 complicated C not 46\nuncomplicated A cured 40 uncomplicated A not 5\nuncomplicated B cured 54 uncomplicated B not 5\nuncomplicated C cured 34 uncomplicated C not 6\n;",
+    "text": "Exercise\nThe following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.\n\nAre we interested in main effects or interaction?\nIs there a significant interaction effect?\nCalculate the odds ratio between the diagnoses of UTI for different treatments.\nGenerate plots for the interaction and odds ratios.\n\n\nTableSAS Data Set\n\n\n\n\n\ndata uti;\ninput diagnosis : $13. treatment $ response $ count @@;\ndatalines;\ncomplicated A cured 78 complicated A not 28\ncomplicated B cured 101 complicated B not 11\ncomplicated C cured 68 complicated C not 46\nuncomplicated A cured 40 uncomplicated A not 5\nuncomplicated B cured 54 uncomplicated B not 5\nuncomplicated C cured 34 uncomplicated C not 6\n;",
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
@@ -2861,7 +2861,97 @@
     "href": "Chapter8.html#exercise-9",
     "title": "EAB 770 - Chapter 8",
     "section": "Exercise",
-    "text": "Exercise\nThe following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.\n\nAre we interested in main effects or interaction?\nIs there a significant interaction effect?\nCalculate the odds ratio between the different diagnoses of UTI.\nGenerate plots for the interaction and odds ratios.\n\n\nSAS CodeAnswer\n\n\ndata uti;\ninput diagnosis : $13. treatment $ response $ count @@;\ndatalines;\ncomplicated A cured 78 complicated A not 28\ncomplicated B cured 101 complicated B not 11\ncomplicated C cured 68 complicated C not 46\nuncomplicated A cured 40 uncomplicated A not 5\nuncomplicated B cured 54 uncomplicated B not 5\nuncomplicated C cured 34 uncomplicated C not 6\n;\n\nproc logistic data=uti order=data;\nfreq count;\nclass diagnosis treatment /param=ref;\nmodel response(event='cured') = diagnosis|treatment /scale=none aggregate;\neffectplot interaction (x=treatment) / at(treatment=all) link noobs;\noddsratios treatment;\nrun;\n\n\nWe are more interested in the interaction effect.\nThere is no significant interaction effect between diagnosis and treatment.\n\n\n\nOdds Ratios\n\n\n\n\n\n\n\n\nEAB 770 - Chapter 4",
+    "text": "Exercise\nThe following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.\n\nAre we interested in main effects or interaction?\nIs there a significant interaction effect?\nCalculate the odds ratio between the diagnoses of UTI for different treatments.\nGenerate plots for the interaction and odds ratios.\n\n\nSAS CodeAnswer\n\n\ndata uti;\ninput diagnosis : $13. treatment $ response $ count @@;\ndatalines;\ncomplicated A cured 78 complicated A not 28\ncomplicated B cured 101 complicated B not 11\ncomplicated C cured 68 complicated C not 46\nuncomplicated A cured 40 uncomplicated A not 5\nuncomplicated B cured 54 uncomplicated B not 5\nuncomplicated C cured 34 uncomplicated C not 6\n;\n\nproc logistic data=uti order=data;\nfreq count;\nclass diagnosis treatment /param=ref;\nmodel response(event='cured') = diagnosis|treatment /scale=none aggregate;\neffectplot interaction (x=treatment) / at(treatment=all) link noobs;\noddsratios diagnosis;\nrun;\n\n\nWe are more interested in the interaction effect.\nThere is no significant interaction effect between diagnosis and treatment.\n\n\n\nOdds Ratios",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#continuous-and-ordinal-explanatory-variables",
+    "href": "Chapter8.html#continuous-and-ordinal-explanatory-variables",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Continuous and Ordinal Explanatory Variables",
+    "text": "Continuous and Ordinal Explanatory Variables\n\nSometimes, continuous explanatory variables are unique in the data set. The sample size requirements for the goodness-of-fit tests will not be satisfied.\n\nIncome\nAge\nYears in University\n\nThere should be at least 5 observations for the rarer outcome per parameter in the full model.\n\nIf there are 50 observations of the rarer outcome, then the maximum number of parameters supported is 10.\n\n\n\n\n\n\n\n\nNote\n\n\nContinuous variables should NOT be included in the class statement.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#model-selection-logistic-regression",
+    "href": "Chapter8.html#model-selection-logistic-regression",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Model Selection: Logistic Regression",
+    "text": "Model Selection: Logistic Regression\n\nWe can use the residual score statistic 𝑄\\(Q_{RS}\\) to determine up to what extent does the residuals from the model are linearly associated with other potential explanatory variables.\n\nDF: difference in number of parameters between models\n\nThe SELECTION=FORWARD option should be included in the MODEL statement. The LOGISTIC procedure will then start from an intercept model and build it up to the most parsimonious model.\n\nThe INCLUDE option tells SAS how many of the variables listed should always be included in the model.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#model-selection-logistic-regression-1",
+    "href": "Chapter8.html#model-selection-logistic-regression-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Model Selection: Logistic Regression",
+    "text": "Model Selection: Logistic Regression\n\nSAS also provides the Hosmer and Lemeshow Goodness-of-Fit test that tests the adequacy for these data by including the lackfit option.\n\nNull hypothesis: The model is adequate, i.e., the residuals are explained by the model.\n\nThe UNITS option specifies at what increment of the continuous variable will SAS calculate the odds ratios.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#example-7",
+    "href": "Chapter8.html#example-7",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Example",
+    "text": "Example\nThe data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.\n\nWhat is the resulting logistic model?\nCalculate the odds ratio for patients that differ in age by 10 years.\n\nSAS Data Set\n\ndata coronary;\ninput sex ecg age ca @@ ;\ndatalines;\n0 0 28 0 1 0 42 1 0 1 46 0 1 1 45 0\n0 0 34 0 1 0 44 1 0 1 48 1 1 1 45 1\n0 0 38 0 1 0 45 0 0 1 49 0 1 1 45 1\n0 0 41 1 1 0 46 0 0 1 49 0 1 1 46 1\n0 0 44 0 1 0 48 0 0 1 52 0 1 1 48 1\n0 0 45 1 1 0 50 0 0 1 53 1 1 1 57 1\n0 0 46 0 1 0 52 1 0 1 54 1 1 1 57 1\n0 0 47 0 1 0 52 1 0 1 55 0 1 1 59 1\n0 0 50 0 1 0 54 0 0 1 57 1 1 1 60 1\n0 0 51 0 1 0 55 0 0 2 46 1 1 1 63 1\n0 0 51 0 1 0 59 1 0 2 48 0 1 2 35 0\n0 0 53 0 1 0 59 1 0 2 57 1 1 2 37 1\n0 0 55 1 1 1 32 0 0 2 60 1 1 2 43 1\n0 0 59 0 1 1 37 0 1 0 30 0 1 2 47 1\n0 0 60 1 1 1 38 1 1 0 34 0 1 2 48 1\n0 1 32 1 1 1 38 1 1 0 36 1 1 2 49 0\n0 1 33 0 1 1 42 1 1 0 38 1 1 2 58 1\n0 1 35 0 1 1 43 0 1 0 39 0 1 2 59 1\n0 1 39 0 1 1 43 1 1 0 42 0 1 2 60 1\n0 1 40 0 1 1 44 1\n;",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#example-8",
+    "href": "Chapter8.html#example-8",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Example",
+    "text": "Example\nThe data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.\n\nSAS CodeAnswer\n\n\nproc logistic descending;\nmodel ca=sex ecg age ecg*ecg age*age\n1sex*ecg sex*age ecg*age /selection=forward include=3 details lackfit;\n2units age=10;\nrun;\n\n1\n\ninclude=3 indicates we are including the first three variables in the model. In this case, it’s sex, ecg, and age.\n\n2\n\nLooks at the odds ratio due to a 10-point difference in age.\n\n\n\n\nThe logistic model is as follows:\n\\[\nlogit(\\theta) = -5.64 + 1.35*Sex + 0.873*ECG +0.09*Age\n\\] The odds of developing a coronary artery disease in patients older than 10 years is 2.5 times higher.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#exercise-10",
+    "href": "Chapter8.html#exercise-10",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Exercise",
+    "text": "Exercise\nChapter8-Corn.csv includes the data of 82 plants from a randomized controlled trial that tests the effect of a new formulation of pesticide as well as the effect of using cover crops in planting corn. The farmers are also interested if the yield (measured in kg) is associated to the plant discoloration.\n\nUse the forward selection approach to determine if an interaction term between cover crop and pesticide needs to be included in the model.\nWhat is the resulting logistic model?\nCalculate the odds ratio for corn plants that have a yield difference of 2 kg.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#exercise-11",
+    "href": "Chapter8.html#exercise-11",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Exercise",
+    "text": "Exercise\nChapter8-Corn.csv includes the data of 82 plants from a randomized controlled trial that tests the effect of a new formulation of pesticide as well as the effect of using cover crops in planting corn. The farmers are also interested if the yield (measured in kg) is associated to the plant discoloration.\n\nSAS CodeAnswer\n\n\nproc logistic data=corn;\nclass pesticide (ref=\"No\") covercrop (ref=\"No\");\nmodel Discolored(event=\"Yes\") = pesticide covercrop yield pesticide*covercrop/selection=forward include=3 details lackfit;\nrun;\n\n\nThere was no evidence to indicate that a pesticide*covercrop interaction needed to be included (\\(Q_{RS} = 0.08, p=0.78\\)). The Hosmer-Lemeshow goodness-of-fit test also provides no evidence against model adequacy (\\(\\chi^2 = 6.9, p=0.55\\)).\nThe resulting logistic model is:\n\\[\nlogit(\\theta) = 0.38 - 0.68*Pesticide - 1.10 * CoverCrop - 0.27*Yield\n\\] The odds of discoloration decreases by 0.42 (1-0.58) times when the yield increases by 2 kg.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#diagnostics",
+    "href": "Chapter8.html#diagnostics",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Diagnostics",
+    "text": "Diagnostics\n-We are interested in how a model fits our data and the lack of fit. - Lack of fit: Should we still consider other variables to include in the model?\n\nModel fit: Pearson chi-square and deviance chi-square tests\nLack of fit: Pearson residuals and deviance residuals\n\n::: {.callout-note title = “Pearson vs. Deviance vs. Likelihood residuals”} - Pearson residuals look at the difference between the observed and expected occurrences in a group. A value of 2 is usually indicative of a lack of fit. Deviance residuals are the components that make up the deviance statistic Likelihood residuals: weighted average of standardized Pearson and Deviance residuals :::",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#diagnostics-1",
+    "href": "Chapter8.html#diagnostics-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Diagnostics",
+    "text": "Diagnostics\n\nThese residuals can be viewed in graphical form.\n\n\n\n\n\n\n\nTip\n\n\nIn SAS, we can view the residual plots by specifying PLOTS=INFLUENCE in the PROC LOGISTIC statement. stdres specifies plots for standardized residuals\nproc logistic plots(label)=influence(unpack stdres);\n\n\n\n\n\n\nEAB 770 - Chapter 4",
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
