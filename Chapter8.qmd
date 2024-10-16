@@ -210,7 +210,11 @@ Recall that the linear predictor can be written as:
 
 $$
 \eta_i = \alpha + \beta_1x_{i1} + \beta_2x_{i2} + ...
-$$ ::: callout-note $\alpha$ is the intercept of the linear model :::
+$$ 
+
+::: callout-note 
+$\alpha$ is the intercept of the linear model 
+:::
 
 ::: callout-note
 $\beta_k$ are the coefficients of the explanatory variables. These
@@ -617,6 +621,8 @@ Since there is no order in the levels of explanatory variables, we might be inte
 
 ## Contrasts: Estimable Effects
 
+Suppose we refer to $logit(\theta_{ij})$ as $\eta_{ij}$.
+
 ::: {.callout-note title="Estimable Effects"}
 Estimable effects are effects that can be expressed as the sum or difference of linear predictors $\eta_{ij}$.
 :::
@@ -631,7 +637,7 @@ Example: How did the difference in placebo and test treatments compare between H
 Suppose we have an explanatory variable/factor $A$ with three levels, which requires **two** different dummy variables. The regression model can be expressed as:
 
 $$
-logit \theta = \alpha + \beta_1 X_{a1} + \beta_2 X_{a2}
+logit (\theta) = \eta = \alpha + \beta_1 X_{a1} + \beta_2 X_{a2}
 $$
 
 To test for a main effect of $A$, we need to test the following null hypotheses simultaneously: $\beta_1=0$ and $\beta_2=0$. These could be done using **joint tests**.
@@ -652,7 +658,7 @@ Suppose we are interested in modeling the mortality rate of cardiothoracic surge
 
 
 $$
-logit \theta = \alpha + \beta_1X_{h1} + \beta_1X_{h2} + \beta_3X_{h3}
+\eta = \alpha + \beta_1X_{h1} + \beta_1X_{h2} + \beta_3X_{h3}
 $$
 
 Suppose we want to test for a difference in mortality between hospital 1 and hospital 4.
@@ -662,7 +668,10 @@ Suppose we want to test for a difference in mortality between hospital 1 and hos
 The effect due to Hospital 1 corresponds to the case $(X_{h1},X_{h2},X_{h3} = 1,0,0)$ yields a regression model given by: $\alpha + \beta_1$.
 Hospital 4 corresponds to the case $(X_{h1},X_{h2},X_{h3} = 0,0,0)$, which yields a regression model given by: $\alpha$.
 
-Then the difference between Hospital 1 and Hospital 4 can be calculated as $\alpha +\beta_1 - \alpha = \beta_1 $. The corresponding null hypothesis of no difference can the be written as $ 1* \beta_1 + 0*\beta_2 + 0*\beta_3 = 0$
+Then the difference between Hospital 1 and Hospital 4 can be calculated as 
+$$\alpha +\beta_1 - \alpha = \beta_1 $$. T
+he corresponding null hypothesis of no difference can the be written as
+$$ 1* \beta_1 + 0*\beta_2 + 0*\beta_3 = 0$$
 
 In SAS, we can code this as:
 
@@ -707,7 +716,7 @@ Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the referen
 The logit model can be expressed as:
 
 $$
-logit(\theta) = \alpha + \beta_1 X_1 + \beta_2 X_2
+\eta = \alpha + \beta_1 X_1 + \beta_2 X_2
 $$
 
 
@@ -780,7 +789,7 @@ Consider a Factor A with three levels $(A_1,A_2,A_3)$ and Factor B with two leve
   - Please write the saturated/interaction logistic model for $\theta$  
 
 $$
-logit [\theta] = \alpha + \beta_{A1}x_{A1} + \beta_{A2}x_{A2} + 
+\eta = \alpha + \beta_{A1}x_{A1} + \beta_{A2}x_{A2} + 
 \beta_{B1}x_{B1}  +  \beta_{A1B1}x_{A1}x_{B1} + \beta_{A2B1}x_{A2}x_{B1}
 $$
 
@@ -1081,10 +1090,11 @@ The odds of discoloration decreases by 0.42 (1-0.58) times when the yield increa
 - Model fit: Pearson chi-square and deviance chi-square tests
 - Lack of fit: Pearson *residuals* and deviance *residuals*
 
-::: {.callout-note title = "Pearson vs. Deviance vs. Likelihood residuals"}
+
+::: {.callout-note}
 - Pearson residuals look at the difference between the observed and expected occurrences in a group. A value of 2 is usually indicative of a lack of fit.
-Deviance residuals are the components that make up the deviance statistic
-Likelihood residuals: weighted average of standardized Pearson and Deviance residuals
+- Deviance residuals are the components that make up the deviance statistic
+- Likelihood residuals: weighted average of standardized Pearson and Deviance residuals
 :::
 
 ## Diagnostics
@@ -1099,4 +1109,286 @@ proc logistic plots(label)=influence(unpack stdres);
 ```
 :::
 
+## Example
+
+Consider a modified version of the UTI data set. Generate the standardized residual plot, likelihood residual plot, and the Pearson chi-square residual plot.
+
+```{.r}
+data uti2;
+input diagnosis : $13. treatment $ response trials;
+datalines;
+complicated A 78 106
+complicated B 101 112
+complicated C 68 114
+uncomplicated A 40 45
+uncomplicated B 54 59
+uncomplicated C 34 40
+;
+```
+
+
+## Example
+
+Consider a modified version of the UTI data set. Generate the standardized residual plot, likelihood residual plot, and the Pearson chi-square residual plot.
+
+:::{.panel-tabset}
+### SAS Code
+
+```{.r }
+proc logistic data=uti2 
+plots(label)=influence(unpack stdres); #<1>
+class diagnosis treatment / param=ref;
+model response/trials = diagnosis treatment; # <2>
+run;
+```
+
+1. `plots=influence` yield all residual plots. `stdres` generates the standardized residual plot.
+2. The model can also be expressed in terms of # of success/sample size;
+
+### Answer
+
+Residuals did not exceed 2, which indicate good fit.
+:::
+
+## Alternative Estimation Methods
+
+- We have been using maximum likelihood (ML) estimation to estimate values of $\beta$, which leads to odds ratio estimates.
+  - What if there are no successes or failures in your data? (Complete separation)
+  - What if there is a small number of successes in the data?
+  - What if the sample size is small?
+- These conditions might yield non-converging solutions
+  - Infinite odds ratios
+  - Nonsensical odds ratio estimates
+
+## Complete Separation
+
+![Complete Separation: One level includes all successes or all failures.](img/complete_C8.png)
+
+::: callout-note
+If nearly all the observations have a probability of 1 of being allocated to the correct response
+group, then the data configuration may be one of **quasi-complete separation**.
+:::
+
+## Dealing with non-convergence
+
+- Exact tests
+  - Non-convergence due to small cell counts
+  - Quasi-complete separation
+
+::: callout-tip
+The `EXACT` statement calculates the exact p-values for each variable/factor. Adding a `joint` option performs joint tests for the variables included. We use the results of the joint _probability_ tests as its results are analogous to the Fisher's exact test.
+:::
+
+::: callout-warning
+The output of the exact statement typically yields a one-sided p-value for median unbiased estimates and one-sided confidence intervals. To get a two-sided 95% confidence interval, we can use a one-sided 97.5% confidence interval by specifying `alpha = 0.025`.
+:::
+
+- Firth’s penalized likelihood
+  - Complete separation/quasi-complete separation when there are continuous explanatory variables 
+  - Applies a penalty in the likelihood function.
+
+
+::: callout-tip
+Adding the `FIRTH` option to the model statement tells SAS to use the Firth penalized likelihood.
+`CLPARM=PL` uses the likelihood profile consistent with the Firth penalized likelihood method.
+:::
+
+## Example
+
+Consider the following data set:
+
+  - Does this display complete separation, quasi-complete separation, or neither?
+  - Calculate exact p-values for the effect of treatments A and B as well as the joint tests.
+  - Calculate exact estimates for the odds ratio.
+
+```{.r}
+data preclinical;
+input treatA $ treatB $ response $ count @@;
+datalines;
+no no yes 0 no no no 0
+yes no yes 8 yes no no 0
+no yes yes 0 no yes no 2
+yes yes yes 21 yes yes no 6
+;
+```
+
+## Example
+
+Consider the following data set:
+
+  - Does this display complete separation, quasi-complete separation, or neither?
+  - Calculate exact p-values for the effect of treatments A and B as well as the joint tests.
+  - Calculate exact estimates for the odds ratio.
+
+
+:::{.panel-tabset}
+### SAS Code
+
+```{.r}
+proc logistic data=preclinical;
+freq count;
+class treatA (ref="no") treatB (ref="no") /param=ref ;
+model response (event="yes") = treatA treatB ;
+exact treatA treatB /joint estimate=both alpha=0.025;
+run;
+```
+
+### Answer
+
+The data shows quasi-complete separation. 
+
+The odds of a successful response is for those who received Treatment A is 7.06 (CI: 0.52, $\infinity$) times that of those who did not receive Treatment A. The exact p-value is 0.07.
+
+The odds of a successful response is for those who received Treatment B is 0.35 (CI: 0, 2.85) times that of those who did not receive Treatment B.The exact p-value is 0.18.
+:::
+
+
+## Example: Complete Separation
+
+Consider the following data set:
+
+  - Does this display complete separation, quasi-complete separation, or neither?
+  - Calculate exact p-values for the effect of treatments A and B as well as the joint tests.
+  - Calculate estimates for the odds ratio from the Firth penalized likelihood approach.
+
+```{.r}
+data complete;
+input gender region count response @@;
+datalines;
+0 0 0 1 0 0 5 0
+0 1 1 1 0 1 0 0
+1 0 0 1 1 0 175 0
+1 1 53 1 1 1 0 0
+;
+```
+
+
+## Example: Complete Separation
+
+Consider the following data set:
+
+  - Does this display complete separation, quasi-complete separation, or neither?
+  - Calculate exact p-values for the effect of treatments A and B as well as the joint tests.
+  - Calculate estimates for the odds ratio from the Firth penalized likelihood approach.
+
+::: {.panel-tabset}
+
+### SAS Code
+```{.r}
+proc logistic data=complete;
+freq count;
+model response = gender region / firth clparm=pl;
+exact gender region/estimate=both;
+run;
+```
+
+### Answer
+
+Based on the exact tests, there appears to be no effect of gender (p=0.5). However, there is an effect of region.
+
+There is complete separation in region. We can use the penalized likelihood approach to calculate odds ratio estimates. The estimated odds ratio between region=1 and region = 0 is 10.5 (95% CI: 7.55, 16.26).
+
+:::
+
+# The `GENMOD` procedure
+
+## The `GENMOD` procedure
+
+- The `GENMOD` procedure uses generalized estimating equations in performing logistic regression when the responses are correlated.
+  - Similar syntax as the `LOGISTIC` procedure.
+
+- Reference levels are included in the estimates, but are automatically zeroed out by the `GENMOD` procedure.
+  - You can set the reference levels by applying the `ref` option to each variable in the class statement.
+
+### Sample Code
+
+```{.r}
+proc genmod;
+freq count;
+class A B;
+model response = A B A*B/link=logit dist=binomial type3 aggregate; # <1>
+estimate '[NAME OF CONTRAST]' A 1 -1/exp cl; # <2>
+run;
+```
+
+1. We need to specify the link function and the distribution as `GENMOD` can be used to model other distributions like Poisson. `type3` invokes the Type III tests of fixed effects, which looks at partial testing of each effect.
+2. `GENMOD` does not output odds ratio by default. Hence, we use the `estimate` statement. The `estimate` statement follows the `contrast` statement, but since it calculates effect sizes, fractions cannot be eliminated by multiplying a factor unlike contrast statements.
+
+
+## Example
+
+Consider the UTI example. Perform a logistic regression analysis using PROC GENMOD.
+
+## Example 
+
+Consider the UTI example. Perform a logistic regression analysis using PROC GENMOD.
+
+### SAS Code
+
+```{.r}
+proc genmod data=uti;
+freq count;
+class diagnosis treatment;
+model response = diagnosis treatment /link=logit dist=binomial type3 aggregate;
+contrast 'treatment' treatment 1 0 -1 ,
+					 treatment 0 1 -1; # <1>
+contrast 'A-B' treatment 1 -1 0;
+contrast 'A-C' treatment 1 0 -1;
+estimate 'odds ratio of diagnosis' diagnosis 1 -1/exp;
+run;
+```
+
+1. This contrast should yield the same values as that of the Type 3 test for treatment.
+
+## Exercise
+
+Consider the Byssinosis example. Perform a logistic regression analysis by applying an interaction model that includes up to two-way interactions in PROC GENMOD.
+
+- Test for the main effect of workplace condition using contrasts. Compare the chi-square and p-values obtained through the Type 3 tests.
+- Test for the interaction of years of employment and smoking for dusty workplace conditions.
+- Calculate the odds ratio of developing byssinosis between the two work conditions.
+
+### SAS Data Set
+```{.r}
+data byss;
+input work $ years $ smoke $ status $ count @@;
+datalines ;
+dusty <10 yes yes 30 dusty <10 yes no 203
+dusty <10 no yes 7 dusty <10 no no 119
+dusty >=10 yes yes 57 dusty >=10 yes no 161
+dusty >=10 no yes 11 dusty >=10 no no 81
+not <10 yes yes 14 not <10 yes no 1340
+not <10 no yes 12 not <10 no no 1004
+not >=10 yes yes 24 not >=10 yes no 1360
+not >=10 no yes 10 not >=10 no no 986
+;
+```
+
+## Exercise
+
+Consider the Byssinosis example. Perform a logistic regression analysis by applying an interaction model that includes up to two-way interactions in PROC GENMOD.
+
+:::{.panel-tabset}
+### SAS Code
+```{.r}
+proc genmod data=byss;
+freq count;
+class work years smoke;
+model status(event='yes') = work years smoke work*years work*smoke years*smoke /link=logit dist=binomial type3 aggregate;
+contrast 'work' work 1 -1; * same as the Type 3 Tests;
+contrast 'interaction' work*years 1 -1 -1 1;
+estimate 'OR for work' work 1 -1/e exp;
+run; 
+```
+
+### Answer
+
+The workplace effect has a $\chi^2$ = 114.10, p<.0001. There is sufficient evidence of a workplace main effect.
+
+The interaction term between years of work and smoking yielded a $\chi^2= 0.91$, p=0.34. There is insufficient evidence of a workplace main effect.
+
+The estimated odds of developing byssinosis for dusty work places is 11.6 (95% CI: 7.96, 17.03) times that of non-dusty places 
+
+
+:::
 
