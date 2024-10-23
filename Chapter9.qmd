@@ -1,0 +1,148 @@
+---
+title: "EAB 770 - Chapter 9"
+author: "Miguel Fudolig"
+format:
+  revealjs:
+    theme: solarized
+    scrollable: true
+    smaller: true
+    footer: "EAB 770 - Chapter 4"
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    slide-number: true
+    menu: true
+    embed-resources: true
+    self-contained-math: true
+    code-annotations: true
+---
+
+# Logistic Regression - Polytomous Response
+
+## Outline
+
+- Ordinal Response
+  - Proportional Odds Model
+  - Multiple Qualitative Explanatory Variables
+  - Partial Proportional Odds Model
+- Nominal Response
+  - Generalized Logits Model
+  - Exact Methods: Generalized Logits Model
+  
+
+## Polytomous Variables?
+
+Recall Chapter 8: dichotomous response variables can be analyzed using logistic regression.
+
+
+::: callout-note
+What if the response variable has more than two levels?
+:::
+
+## Polytomous variables
+
+- Polytomous variables are usually described by the [multinomial distribution](https://online.stat.psu.edu/stat504/book/export/html/667)
+
+::: callout-tip
+Unlike the binomial distribution where we only need one probability of success, more than one probability of success is needed to be defined in multinomial distributions.
+:::
+
+## Cumulative probabilities
+
+Consider $\pi_{hij}$ as the probability of success of the $h^{th}$ strata and $i^{th}$ explanatory variables and the $j^{th}$ level of the response variable. We can define $\theta_{hij}$ such that:
+
+$$
+\theta_{hiJ} = \sum_{j=1}^{J} \pi_{hij}
+$$
+
+::: callout-note
+If $J=1$, then $\theta_{hi1} = \pi_{hi1}$. If $J=2$, then $\theta_{hi2} = \pi_{hi1} + \pi_{hi2}$. $\theta_{hiJ}$ is the _cumulative probability_ of the response levels from $j=1$ to $j=J$.
+:::
+
+::: callout-note
+If there are $J+1$ levels, then $\pi_{J+1}$ = 1-\theta_{hiJ}$.
+:::
+
+## Cumulative logits
+
+Cumulative logits can be defined based on the cumulative probabilities $\theta_{hij}$. For a specific level $k$ out of $K$ levels,
+
+$$
+logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \log\left(\frac{\sum_{j=1}^k\theta_{hij}}{1-\sum_{j=1}^k\theta_{hij}}\right) = \log\left(\frac{\sum_{j=1}^k\theta_{hij}}{\sum_{j=k+1}^K\theta_{hij}}\right)
+$$
+
+## Cumulative logits
+
+Suppose we define a linear predictor $\eta_{hij}$ such that
+
+$$
+\eta_{hij} = logit(\theta_{hij}) = \alpha_j + \mathbf{x'_{hi}\beta_k}
+$$
+
+where $x'_{hi}\beta_k$ represents the matrix product of the explanatory/strata variables $x_{hi}$ and the coefficients for each response level $\beta_k$.
+
+## Proportional Odds Assumption
+
+::: callout-note 
+## Proportional Odds
+
+The proportional odds assumption applies the following condition for a response variable with $K$ total variable levels:
+
+$$
+\mathbf{\beta_1} = \mathbf{\beta_2} = \mathbf{\beta_3} = ... = \mathbf{\beta_{K}} = \mathbf{\beta}
+$$
+:::
+
+Key assumption: the effect of the explanatory variables should not be disproportionate across all levels.
+
+## Proportional Odds
+
+A consequence of the proportional odds assumption is that the difference between the levels of the explanatory variables are the same across different response levels.
+
+::: callout-note
+## Example
+
+Consider comparing the $m^{th}$ and $n^{th}$ level of the explanatory variable in the $h^{th}$ strata for the first and second level of the response variable.
+
+$$
+\eta_{hm1}-\eta_{hn1} = (\mathbf{x'_{hm} - x'_{hn}})\mathbf{\beta_1} = (\mathbf{x'_{hm} - x'_{hn}})\mathbf{\beta} 
+$$
+
+$$
+\eta_{hm2}-\eta_{hn2} = (\mathbf{x'_{hm} - x'_{hn}})\mathbf{\beta_2} = (\mathbf{x'_{hm} - x'_{hn}})\mathbf{\beta} 
+$$
+These are the same across all levels of the response variable. The difference between $\eta$ correspond to the log odds, hence the odds ratios between explanatory variables are the same across all response levels.
+:::
+
+
+## Proportional Odds
+
+Another consequence of the proportional odds assumption is that the difference between the response levels does not depend on the strata or explanatory variables.
+
+::: callout-note
+## Example
+
+Consider comparing the first and second level of the response variable.
+
+$$
+\eta_{hm1}-\eta_{hm2} = \alpha _ 1 - \alpha _2 +  (\mathbf{x'_{hm}\beta - x'_{hm}}\beta) = \alpha_1-\alpha_2
+$$
+
+:::
+
+## Solving for Individual Probabilities
+
+Individual probabilities can be calculated by taking the differences between cumulative logits.
+
+$$
+\pi_1 = \pi_1; \pi_2 = \theta_2-\theta_1; \pi_{k} = \theta_{k+1}-\theta_{k}
+$$
+
+## Proportional Odds Model in SAS
+
+- We can use the `LOGISTIC`, `GENMOD`, and `GLIMMIX` procedures to fit the proportional odds model.
+- Dealing with ordinal variables means we need to specify order of the data.
+- We can use the ESTIMATE and CONTRAST statements to determine and test the odds ratios between response levels, explanatory variable levels, and strata.
+  - `ESTIMATE: EXP` option to get the estimated odds ratio, `ILINK` option to get the estimated cumulative probability $\theta$.
+  - CL option is used to get the confidence limits for odds ratio or estimated probabilities.
+
+

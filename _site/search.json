@@ -3095,5 +3095,61 @@
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
+  },
+  {
+    "objectID": "Chapter9.html#outline",
+    "href": "Chapter9.html#outline",
+    "title": "EAB 770 - Chapter 9",
+    "section": "Outline",
+    "text": "Outline\n\nOrdinal Response\n\nProportional Odds Model\nMultiple Qualitative Explanatory Variables\nPartial Proportional Odds Model\n\nNominal Response\n\nGeneralized Logits Model\nExact Methods: Generalized Logits Model"
+  },
+  {
+    "objectID": "Chapter9.html#polytomous-variables",
+    "href": "Chapter9.html#polytomous-variables",
+    "title": "EAB 770 - Chapter 9",
+    "section": "Polytomous Variables?",
+    "text": "Polytomous Variables?\nRecall Chapter 8: dichotomous response variables can be analyzed using logistic regression.\n\n\n\n\n\n\nNote\n\n\nWhat if the response variable has more than two levels?"
+  },
+  {
+    "objectID": "Chapter9.html#polytomous-variables-1",
+    "href": "Chapter9.html#polytomous-variables-1",
+    "title": "EAB 770 - Chapter 9",
+    "section": "Polytomous variables",
+    "text": "Polytomous variables\n\nPolytomous variables are usually described by the multinomial distribution\n\n\n\n\n\n\n\nTip\n\n\nUnlike the binomial distribution where we only need one probability of success, more than one probability of success is needed to be defined in multinomial distributions."
+  },
+  {
+    "objectID": "Chapter9.html#cumulative-probabilities",
+    "href": "Chapter9.html#cumulative-probabilities",
+    "title": "EAB 770 - Chapter 9",
+    "section": "Cumulative probabilities",
+    "text": "Cumulative probabilities\nConsider \\(\\pi_{hij}\\) as the probability of success of the \\(h^{th}\\) strata and \\(i^{th}\\) explanatory variables and the \\(j^{th}\\) level of the response variable. We can define \\(\\theta_{hij}\\) such that:\n\\[\n\\theta_{hiJ} = \\sum_{j=1}^{J} \\pi_{hij}\n\\]\n\n\n\n\n\n\nNote\n\n\nIf \\(J=1\\), then \\(\\theta_{hi1} = \\pi_{hi1}\\). If \\(J=2\\), then \\(\\theta_{hi2} = \\pi_{hi1} + \\pi_{hi2}\\). \\(\\theta_{hiJ}\\) is the cumulative probability of the response levels from \\(j=1\\) to \\(j=J\\).\n\n\n\n\n\n\n\n\n\nNote\n\n\nIf there are \\(J+1\\) levels, then \\(\\pi_{J+1}\\) = 1-_{hiJ}$."
+  },
+  {
+    "objectID": "Chapter9.html#cumulative-logits",
+    "href": "Chapter9.html#cumulative-logits",
+    "title": "EAB 770 - Chapter 9",
+    "section": "Cumulative logits",
+    "text": "Cumulative logits\nCumulative logits can be defined based on the cumulative probabilities \\(\\theta_{hij}\\). For a specific level \\(k\\) out of \\(K\\) levels,\n\\[\nlogit(\\theta_{hik}) = \\log\\left(\\frac{\\theta_{hik}}{1-\\theta_{hik}}\\right) = \\log\\left(\\frac{\\sum_{j=1}^k\\theta_{hij}}{1-\\sum_{j=1}^k\\theta_{hij}}\\right) = \\log\\left(\\frac{\\sum_{j=1}^k\\theta_{hij}}{\\sum_{j=k+1}^K\\theta_{hij}}\\right)\n\\]"
+  },
+  {
+    "objectID": "Chapter9.html#cumulative-logits-1",
+    "href": "Chapter9.html#cumulative-logits-1",
+    "title": "EAB 770 - Chapter 9",
+    "section": "Cumulative logits",
+    "text": "Cumulative logits\nSuppose we define a linear predictor \\(\\eta_{hij}\\) such that\n\\[\n\\eta_{hij} = logit(\\theta_{hij}) = \\alpha_j + \\mathbf{x'_{hi}\\beta_k}\n\\]\nwhere \\(x'_{hi}\\beta_k\\) represents the matrix product of the explanatory/strata variables \\(x_{hi}\\) and the coefficients for each response level \\(\\beta_k\\)."
+  },
+  {
+    "objectID": "Chapter9.html#proportional-odds-assumption",
+    "href": "Chapter9.html#proportional-odds-assumption",
+    "title": "EAB 770 - Chapter 9",
+    "section": "Proportional Odds Assumption",
+    "text": "Proportional Odds Assumption\n\n\n\n\n\n\nProportional Odds\n\n\nThe proportional odds assumption applies the following condition for a response variable with \\(K\\) total variable levels:\n\\[\n\\mathbf{\\beta_1} = \\mathbf{\\beta_2} = \\mathbf{\\beta_3} = ... = \\mathbf{\\beta_{K}} = \\mathbf{\\beta}\n\\]"
+  },
+  {
+    "objectID": "Chapter9.html#proportional-odds-1",
+    "href": "Chapter9.html#proportional-odds-1",
+    "title": "EAB 770 - Chapter 9",
+    "section": "Proportional Odds",
+    "text": "Proportional Odds\nA consequence of the proportional odds assumption is that the difference between the levels of the explanatory variables are the same across different response levels.\n\n\n\n\n\n\nExample\n\n\nConsider comparing the \\(m^{th}\\) and \\(n^{th}\\) level of the explanatory variable in the \\(h^{th}\\) strata for the first and second level of the response variable.\n\\[\n\\eta_{hm1}-\\eta_{hn1} = (\\mathbf{x'_{hm} - x'_{hn}})\\mathbf{\\beta_1} = (\\mathbf{x'_{hm} - x'_{hn}})\\mathbf{\\beta}\n\\]\n\\[\n\\eta_{hm2}-\\eta_{hn2} = (\\mathbf{x'_{hm} - x'_{hn}})\\mathbf{\\beta_2} = (\\mathbf{x'_{hm} - x'_{hn}})\\mathbf{\\beta}\n\\] These are the same across all levels of the response variable. The difference between \\(\\eta\\) correspond to the log odds, hence the odds ratios between explanatory variables are the same across all response levels.\n\n\n\n\n\n\nEAB 770 - Chapter 4"
   }
 ]

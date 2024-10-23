@@ -23,7 +23,8 @@ website:
         text: "Chapter 6: Sets of sxr tables"
       - href: Chapter8.qmd
         text: "Chapter 8: Logistic Regression"
-
+      - href: Chapter9.qmd
+        text: "Chapter 9: Polytomous Logistic Regression"
 format:
   html:
     theme: 
