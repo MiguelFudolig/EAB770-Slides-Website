@@ -7,7 +7,7 @@ format:
     theme: solarized
     scrollable: true
     smaller: true
-    footer: "EAB 770 - Chapter 4"
+    footer: "EAB 770 - Chapter 9"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
@@ -137,7 +137,7 @@ $$
 Individual probabilities can be calculated by taking the differences between cumulative logits.
 
 $$
-\pi_1 = \pi_1; \pi_2 = \theta_2-\theta_1; \pi_{k} = \theta_{k+1}-\theta_{k}
+\pi_1 = \theta_1; \pi_2 = \theta_2-\theta_1; \pi_{k} = \theta_{k}-\theta_{k-1}
 $$
 
 ## Proportional Odds Model in SAS
@@ -187,8 +187,8 @@ proc logistic data=arthritis order=data plots=effect(polybar x=treatment*sex); #
 freq count;
 class treatment sex / param=ref; 
 model improve = sex treatment sex*treatment/ selection=forward include=2 scale=none aggregate; #<2>
-estimate "odds between marked vs. some+no improvement for female in placebo group" sex 1 /exp cl category='marked';
-estimate "odds between marked+some vs. no improvement for female in placebo group" sex 1 /exp cl category='some';
+estimate "odds between marked vs. some+no improvement for female in placebo group" intercept 1 sex 1 /exp cl category='marked';
+estimate "odds between marked+some vs. no improvement for female in placebo group" intercept 1 sex 1 /exp cl category='some';
 estimate "probability of marked improvement for female in the placebo group" intercept 1 sex 1/ilink cl category='marked'; # <3>
 estimate "probability of marked improvement for female in the active trt group" intercept 1 sex 1 treatment 1/ilink cl category='marked';
 run;

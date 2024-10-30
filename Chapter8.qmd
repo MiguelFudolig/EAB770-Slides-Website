@@ -6,7 +6,7 @@ format:
     theme: solarized
     scrollable: true
     smaller: true
-    footer: "EAB 770 - Chapter 4"
+    footer: "EAB 770 - Chapter 8"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true

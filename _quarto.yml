@@ -25,6 +25,8 @@ website:
         text: "Chapter 8: Logistic Regression"
       - href: Chapter9.qmd
         text: "Chapter 9: Polytomous Logistic Regression"
+      - href: Chapter10.qmd
+        text: "Chapter 10: Conditional Logistic Regression"
 format:
   html:
     theme: 

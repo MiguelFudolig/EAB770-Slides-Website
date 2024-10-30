@@ -5,7 +5,7 @@ format:
   revealjs:
     theme: solarized
     scrollable: true
-    footer: "EAB 770 - Chapter 4"
+    footer: "EAB 770 - Chapter 6"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
