@@ -3595,5 +3595,158 @@
     "crumbs": [
       "Chapter 9: Polytomous Logistic Regression"
     ]
+  },
+  {
+    "objectID": "Chapter11.html#outline",
+    "href": "Chapter11.html#outline",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Outline",
+    "text": "Outline\n\nPoisson Regression\n\nWhen is it used for?\nOffset in Incidence Densities\nOverdispersion\nExact Methods\n\nGeneralized Linear Models"
+  },
+  {
+    "objectID": "Chapter11.html#poisson-regression-1",
+    "href": "Chapter11.html#poisson-regression-1",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Poisson Regression",
+    "text": "Poisson Regression\n\nRecall: We have discussed how to model different categorical responses\n\nMantel-Haenszel: associations between ordinal and nominal variables\nLogistic Regression: dichotomous and polytomous responses\n\nCounts are also a discrete variable\n\nTypically assumed to be a normal distribution, but its discreteness means it’s not a perfect fit to a continuous distribution like the normal distribution\n\nOften, we use the Poisson distribution. Sometimes, we use the negative binomial distribution."
+  },
+  {
+    "objectID": "Chapter11.html#poisson-regression-applications",
+    "href": "Chapter11.html#poisson-regression-applications",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Poisson Regression: Applications",
+    "text": "Poisson Regression: Applications\n\nExamples of counts include:\n\nColony counts in bacteria\nAccidents\nEquipment failures\nRare Disease Incidence"
+  },
+  {
+    "objectID": "Chapter11.html#generalized-linear-models",
+    "href": "Chapter11.html#generalized-linear-models",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Generalized Linear Models",
+    "text": "Generalized Linear Models\n\nGeneralized linear models (GLM) allows us to have non-Gaussian error distributions for a response variable.\n\nTypically used when the response variable is NOT Gaussian.\n\nGLMs utilize a link function (\\(\\eta\\)) to transform the response variable based on its assumed distribution.\n\nProportions: Logit link functions (Logistic regression)\nPoisson: Logarithmic function"
+  },
+  {
+    "objectID": "Chapter11.html#poisson-regression-glm",
+    "href": "Chapter11.html#poisson-regression-glm",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Poisson Regression: GLM",
+    "text": "Poisson Regression: GLM\nSuppose a response variable Y is distributed as Poisson and has expected value 𝜇 for a unit of time/space. We can write a Poisson regression model as a loglinear model such that:\n\\[\n\\eta = \\log \\mu = \\alpha + \\sum_i{\\beta_ix_i}\n\\] ::: callout-note The link function \\(\\eta\\) is logarithmic in nature, which means a 1-unit increase in \\(x_i\\) leads to an increase of \\(e^{\\beta_i}\\) in the response variable. :::"
+  },
+  {
+    "objectID": "Chapter11.html#offset",
+    "href": "Chapter11.html#offset",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Offset",
+    "text": "Offset\nSometimes, counts are measured for an interval of time (seconds, hours, weeks) or space (inches, kilometers, miles), which we designate as \\(N\\).\n\n\n\n\n\n\nPoisson Rates\n\n\nThe ratio \\(Y/N\\) can be interpreted as the rate of counts per unit time. Examples include:\n\nMonthly mortality rate\nYearly failure rate\nDaily hospitalization rate"
+  },
+  {
+    "objectID": "Chapter11.html#offset-glm",
+    "href": "Chapter11.html#offset-glm",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Offset: GLM",
+    "text": "Offset: GLM\nThe expected values of \\(Y/N\\) is \\(\\mu/N\\). The loglinear model can now be written as:\n::: callout-note \\[\n\\log \\mu/N = \\alpha + \\sum_i\\beta_ix_i \\to log \\mu = \\log N + \\alpha + \\sum_i\\beta_ix_i\n\\] \\(\\log N\\) is called the offset term.\n\n\n\n\n\n\nNote\n\n\nThe offset can be a function of the explanatory variables, such that \\(N = N(x_i)\\).\n\n\n\n\n\n\n\n\n\nIncidence Rate\n\n\nWe define an incidence rate \\(\\lambda (x_i)\\) is defined as:\n\\[\n\\lambda(x_i) = \\frac{\\mu(x_i)}{N(x_i)}\n\\]\nWe can rewrite the model as:\n\\[\n\\log \\lambda(x_i) = \\alpha + \\sum_i\\beta_ix_i\n\\]"
+  },
+  {
+    "objectID": "Chapter11.html#poisson-model",
+    "href": "Chapter11.html#poisson-model",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Poisson Model",
+    "text": "Poisson Model\nWe can specify the model using the following syntax:\n\\[\nY_i \\sim Poisson(\\lambda_i)\n\\]\n\\[\n\\log \\lambda(x_i) = \\alpha + \\sum_i\\beta_ix_i\n\\] ## Poisson Regression: SAS\nThe GENMOD, GLM, and GLIMMIX procedures can perform Poisson regression in SAS.\n\n\n\n\n\n\nGENMOD procedure\n\n\nThe GENMOD procedure has very similar syntax to the LOGISTIC procedure.\n\nSince GENMOD can handle other distributions, we need to specify the DIST option in the MODEL statement as DIST=POISSON.\nJoint tests can also be displayed by adding the TYPE3 option to the MODEL statement."
+  },
+  {
+    "objectID": "Chapter11.html#is-the-poisson-regression-appropriate",
+    "href": "Chapter11.html#is-the-poisson-regression-appropriate",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Is the Poisson Regression appropriate?",
+    "text": "Is the Poisson Regression appropriate?\n\n\n\n\n\n\nWarning\n\n\nThe criteria for assessing goodness of fit in Poisson regression is the Pearson \\(\\chi^2\\)/DF, where DF is the degrees of freedom. This value is included in the goodness of fit table in the “Scaled Pearson X2” row. The Value/DF should be close to 1.\n\n\n\n\n\n\nEAB 770 - Chapter 11"
+  },
+  {
+    "objectID": "Chapter12.html#outline",
+    "href": "Chapter12.html#outline",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Outline",
+    "text": "Outline\n\nPoisson Regression\n\nWhen is it used for?\nOffset in Incidence Densities\nOverdispersion\nExact Methods\n\nGeneralized Linear Models",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
+  },
+  {
+    "objectID": "Chapter12.html#poisson-regression-1",
+    "href": "Chapter12.html#poisson-regression-1",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Poisson Regression",
+    "text": "Poisson Regression\n\nRecall: We have discussed how to model different categorical responses\n\nMantel-Haenszel: associations between ordinal and nominal variables\nLogistic Regression: dichotomous and polytomous responses\n\nCounts are also a discrete variable\n\nTypically assumed to be a normal distribution, but its discreteness means it’s not a perfect fit to a continuous distribution like the normal distribution\n\nOften, we use the Poisson distribution. Sometimes, we use the negative binomial distribution.",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
+  },
+  {
+    "objectID": "Chapter12.html#poisson-regression-applications",
+    "href": "Chapter12.html#poisson-regression-applications",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Poisson Regression: Applications",
+    "text": "Poisson Regression: Applications\n\nExamples of counts include:\n\nColony counts in bacteria\nAccidents\nEquipment failures\nRare Disease Incidence",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
+  },
+  {
+    "objectID": "Chapter12.html#generalized-linear-models",
+    "href": "Chapter12.html#generalized-linear-models",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Generalized Linear Models",
+    "text": "Generalized Linear Models\n\nGeneralized linear models (GLM) allows us to have non-Gaussian error distributions for a response variable.\n\nTypically used when the response variable is NOT Gaussian.\n\nGLMs utilize a link function (\\(\\eta\\)) to transform the response variable based on its assumed distribution.\n\nProportions: Logit link functions (Logistic regression)\nPoisson: Logarithmic function",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
+  },
+  {
+    "objectID": "Chapter12.html#poisson-regression-glm",
+    "href": "Chapter12.html#poisson-regression-glm",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Poisson Regression: GLM",
+    "text": "Poisson Regression: GLM\nSuppose a response variable Y is distributed as Poisson and has expected value 𝜇 for a unit of time/space. We can write a Poisson regression model as a loglinear model such that:\n\\[\n\\eta = \\log \\mu = \\alpha + \\sum_i{\\beta_ix_i}\n\\] ::: callout-note The link function \\(\\eta\\) is logarithmic in nature, which means a 1-unit increase in \\(x_i\\) leads to an increase of \\(e^{\\beta_i}\\) in the response variable. :::",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
+  },
+  {
+    "objectID": "Chapter12.html#offset",
+    "href": "Chapter12.html#offset",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Offset",
+    "text": "Offset\nSometimes, counts are measured for an interval of time (seconds, hours, weeks) or space (inches, kilometers, miles), which we designate as \\(N\\).\n\n\n\n\n\n\nPoisson Rates\n\n\nThe ratio \\(Y/N\\) can be interpreted as the rate of counts per unit time. Examples include:\n\nMonthly mortality rate\nYearly failure rate\nDaily hospitalization rate",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
+  },
+  {
+    "objectID": "Chapter12.html#offset-glm",
+    "href": "Chapter12.html#offset-glm",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Offset: GLM",
+    "text": "Offset: GLM\nThe expected values of \\(Y/N\\) is \\(\\mu/N\\). The loglinear model can now be written as:\n::: callout-note \\[\n\\log \\mu/N = \\alpha + \\sum_i\\beta_ix_i \\to log \\mu = \\log N + \\alpha + \\sum_i\\beta_ix_i\n\\] \\(\\log N\\) is called the offset term.\n\n\n\n\n\n\nNote\n\n\nThe offset can be a function of the explanatory variables, such that \\(N = N(x_i)\\).\n\n\n\n\n\n\n\n\n\nIncidence Rate\n\n\nWe define an incidence rate \\(\\lambda (x_i)\\) is defined as:\n\\[\n\\lambda(x_i) = \\frac{\\mu(x_i)}{N(x_i)}\n\\]\nWe can rewrite the model as:\n\\[\n\\log \\lambda(x_i) = \\alpha + \\sum_i\\beta_ix_i\n\\]",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
+  },
+  {
+    "objectID": "Chapter12.html#poisson-model",
+    "href": "Chapter12.html#poisson-model",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Poisson Model",
+    "text": "Poisson Model\nWe can specify the model using the following syntax:\n\\[\nY_i \\sim Poisson(\\lambda_i)\n\\]\n\\[\n\\log \\lambda(x_i) = \\alpha + \\sum_i\\beta_ix_i\n\\] ## Poisson Regression: SAS\nThe GENMOD, GLM, and GLIMMIX procedures can perform Poisson regression in SAS.\n\n\n\n\n\n\nGENMOD procedure\n\n\nThe GENMOD procedure has very similar syntax to the LOGISTIC procedure.\n\nSince GENMOD can handle other distributions, we need to specify the DIST option in the MODEL statement as DIST=POISSON.\nJoint tests can also be displayed by adding the TYPE3 option to the MODEL statement.",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
+  },
+  {
+    "objectID": "Chapter12.html#is-the-poisson-regression-appropriate",
+    "href": "Chapter12.html#is-the-poisson-regression-appropriate",
+    "title": "EAB 770 - Chapter 12",
+    "section": "Is the Poisson Regression appropriate?",
+    "text": "Is the Poisson Regression appropriate?\n\n\n\n\n\n\nWarning\n\n\nThe criteria for assessing goodness of fit in Poisson regression is the Pearson \\(\\chi^2\\)/DF, where DF is the degrees of freedom. This value is included in the goodness of fit table in the “Scaled Pearson X2” row. The Value/DF should be close to 1.\n\n\n\n\n\n\nEAB 770 - Chapter 12",
+    "crumbs": [
+      "Chapter 12: Poisson Regression and Other Loglinear Models"
+    ]
   }
 ]

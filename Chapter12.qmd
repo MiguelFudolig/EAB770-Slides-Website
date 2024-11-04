@@ -1,0 +1,141 @@
+---
+title: "EAB 770 - Chapter 12"
+author: "Miguel Fudolig"
+engine: knitr
+format:
+  revealjs:
+    theme: solarized
+    scrollable: true
+    smaller: true
+    footer: "EAB 770 - Chapter 12"
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    slide-number: true
+    menu: true
+    embed-resources: true
+    self-contained-math: true
+    code-annotations: true
+---
+
+# Poisson Regression
+
+## Outline
+
+- Poisson Regression
+  - When is it used for?
+  - Offset in Incidence Densities
+  - Overdispersion
+  - Exact Methods
+- Generalized Linear Models
+
+## Poisson Regression
+
+- Recall: We have discussed how to model different categorical responses
+  - Mantel-Haenszel: associations between ordinal and nominal variables
+  - Logistic Regression: dichotomous and polytomous responses
+- Counts are also a discrete variable
+  - Typically assumed to be a normal distribution, but its discreteness means it’s not a perfect fit to a continuous distribution like the normal distribution
+- Often, we use the Poisson distribution. Sometimes, we use the negative binomial distribution. 
+
+## Poisson Regression: Applications
+
+- Examples of counts include:
+  - Colony counts in bacteria
+  - Accidents
+  - Equipment failures
+  - Rare Disease Incidence
+
+## Generalized Linear Models
+
+- Generalized linear models (GLM) allows us to have non-Gaussian error distributions for a response variable.
+  - Typically used when the response variable is **NOT** Gaussian.
+- GLMs utilize a link function ($\eta$) to transform the response variable based on its assumed distribution.
+  - Proportions: Logit link functions (Logistic regression)
+  - Poisson: Logarithmic function
+  
+## Poisson Regression: GLM
+
+Suppose a response variable Y is distributed as Poisson and has expected value 𝜇 for a unit of time/space. We can write a Poisson regression model as a loglinear model such that:
+
+$$
+\eta = \log \mu = \alpha + \sum_i{\beta_ix_i}
+$$
+::: callout-note
+The link function $\eta$ is logarithmic in nature, which means a 1-unit increase in $x_i$ leads to an increase of $e^{\beta_i}$ in the response variable.
+:::
+
+## Offset
+
+Sometimes, counts are measured for an interval of time (seconds, hours, weeks) or space (inches, kilometers, miles), which we designate as $N$.
+
+::: callout-note
+## Poisson Rates
+
+The ratio $Y/N$ can be interpreted as the rate of counts per unit time. Examples include:
+
+- Monthly mortality rate
+- Yearly failure rate
+- Daily hospitalization rate
+:::
+
+## Offset: GLM
+
+The expected values of $Y/N$ is $\mu/N$. The loglinear model can now be written as:
+
+::: callout-note
+$$
+\log \mu/N = \alpha + \sum_i\beta_ix_i \to log \mu = \log N + \alpha + \sum_i\beta_ix_i
+$$
+$\log N$ is called the offset term. 
+
+::: callout-note
+The offset can be a function of the explanatory variables, such that $N = N(x_i)$.
+:::
+
+::: callout-note
+## Incidence Rate
+
+We define an incidence rate $\lambda (x_i)$ is defined as:
+
+$$
+\lambda(x_i) = \frac{\mu(x_i)}{N(x_i)}
+$$
+
+We can rewrite the model as:
+
+$$
+\log \lambda(x_i) = \alpha + \sum_i\beta_ix_i
+$$
+:::
+
+## Poisson Model
+
+We can specify the model using the following syntax:
+
+$$
+Y_i \sim Poisson(\lambda_i)
+$$
+
+$$
+\log \lambda(x_i) = \alpha + \sum_i\beta_ix_i
+$$
+## Poisson Regression: SAS
+
+The `GENMOD`, `GLM`, and `GLIMMIX` procedures can perform Poisson regression in SAS.
+
+::: callout-tip
+## GENMOD procedure
+
+The `GENMOD` procedure has very similar syntax to the `LOGISTIC` procedure. 
+
+- Since `GENMOD` can handle other distributions, we need to specify the `DIST` option in the `MODEL` statement
+as `DIST=POISSON`.
+- Joint tests can also be displayed by adding the `TYPE3` option to the `MODEL` statement.
+:::
+
+## Is the Poisson Regression appropriate?
+
+::: callout-warning
+The criteria for assessing goodness of fit in Poisson regression is the Pearson $\chi^2$/DF, where DF is the degrees of freedom. This value is included in the goodness of fit table in the “Scaled Pearson X2” row. The Value/DF should be close to 1.
+
+:::
