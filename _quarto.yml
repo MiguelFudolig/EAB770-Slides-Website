@@ -29,6 +29,10 @@ website:
         text: "Chapter 10: Conditional Logistic Regression"
       - href: Chapter12.qmd
         text: "Chapter 12: Poisson Regression and Other Loglinear Models"
+      - href: Chapter14.qmd
+        text: "Chapter 14: Weighted Least Squares"
+      - href: Chapter 15.qmd
+        text: "Chapter 15: Generalized Estimating Equations"
 format:
   html:
     theme: 

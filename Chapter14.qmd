@@ -1,0 +1,304 @@
+---
+title: "EAB 770 - Chapter 14"
+author: "Miguel Fudolig"
+engine: knitr
+format:
+  revealjs:
+    theme: solarized
+    scrollable: true
+    smaller: true
+    footer: "EAB 770 - Chapter 14"
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    slide-number: true
+    menu: true
+    embed-resources: true
+    self-contained-math: true
+    code-annotations: true
+---
+
+# Weighted Least Squares
+
+## Outline
+
+- Weighted Least Squares
+  - Methodology and Framework
+- Modeling of Means
+- Survey Sample Data
+- Repeated Measures
+
+## Weighted Least Squares
+
+- Commonly used in modeling mean scores, proportions, and functions.
+  - General idea: Model the distribution of the response variable across levels of the explanatory variables.
+- In a contingency table:
+  - Categorical response: columns
+  - Explanatory variables: rows
+
+## Weighted Least Squares
+
+- We consider the rows of the contingency table to be simple random samples from the multinomial distribution.
+  - Groups are independent--- so table is distributed as product multinomial.
+- This assumption enables us to create an estimated covariance matrix for proportions in each row.
+
+## Parametrization
+
+We are interested in modeling the saturated model.
+
+::: callout-note
+## Saturated model
+
+There are as many parameters as there are response functions.
+:::
+
+::: callout-note
+## Response Functions
+
+Response functions are similar to link functions in previous chapters. These response functions could be `means`, `logits`, `cumulative logits` or `marginal` probabilities.
+:::
+
+## Weighted Least Squares in SAS
+
+- The `CATMOD` procedure is used to model categorical data using WLS.
+  - `WEIGHT` statement is similar to PROC FREQ.
+  - `RESPONSE` statement tells the `CATMOD` procedure what the response functions are.
+    - MEANS
+    - LOGITS
+    - CLOGITS: cumulative logit
+    - MARGINAL: marginal probabilities
+
+  - `MODEL` statement is similar to the  `LOGISTIC` and `GENMOD` syntax.
+    - `FREQ` option shows the frequencies of the underlying contingency table.
+    - `PROB` option shows the frequencies of the underlying contingency table.
+    - `DESIGN` option prints the response functions and model matrix.
+  - `POPULATION` statement defines the variables that define the population groups.
+
+## Example
+
+The data set COLDS shows the number of periods with colds in children. We want to test whether there is an effect of sex and residence on the mean number of periods with a cold.
+
+:::{.panel-tabset}
+### SAS Data Set
+
+```{.r}
+data colds;
+   input sex $ residence $ periods count @@;
+   datalines;  
+female rural 0 45 female rural 1 64  female rural 2 71
+female urban 0 80 female urban 1 104 female urban 2 116
+male rural   0 84 male   rural 1 124 male   rural 2 82
+male urban   0 106 male  urban 1 117 male   urban 2 87
+run;
+```
+
+### SAS Code
+
+```{.r}
+proc catmod data=colds;
+   population sex residence; 
+   weight count;
+   response means;
+   model periods = sex residence sex*residence/freq prob design;     
+   contrast "male vs. female in urban" sex 2 sex*residence -2; #<1>
+   contrast "male vs. female in urban" all_parms 0 2 0 -2; # <1>
+   contrast "female: rural vs urban" residence 2 sex*residence 2; # <1>
+run; 
+```
+
+1. The numbers are based on the design matrix outputted by `catmod`.
+
+### Answer
+
+There is no significant interaction between sex and residence (p=0.76). There is a significant effect of sex ($\chi^2$ = 11.57, p=0.007).
+:::
+
+
+## Exercise
+
+The data SELECTION_CONFIDENCE shows the self-reported confidence of working professionals in interpreting a bar chart provided to respondents. Use an interaction model to test whether educational attainment (graduate or non-graduate level) or STEM association (STEM degree or non-STEM) has an effect in the perception of confidence in assessing data visualization.
+
+- -1: Not confident, 0: neutral, 1: confident
+
+### SAS Data Set
+
+```{.r}
+data selection_confidence;
+input stem $ graduate $ confidence $ count @@;
+datalines;
+yes yes NC 28 yes yes N 30 yes yes C 43
+yes no NC 17 yes no N 25 yes no C 15
+no yes NC 30 no yes N 10 no yes C 17
+no no NC 8 no no N 10 no no C 38
+;
+```
+
+
+## Exercise
+
+The data SELECTION_CONFIDENCE shows the self-reported confidence of working professionals in interpreting a bar chart provided to respondents. Use an interaction model to test whether educational attainment (graduate or non-graduate level) or STEM association (STEM degree or non-STEM) has an effect in the perception of confidence in assessing data visualization.
+
+:::{.panel-tabset}
+### SAS Code
+
+```{.r}
+proc catmod data=selection_confidence order=data;
+population stem graduate;
+weight count;
+response -1 0 1; # <1>
+model confidence= stem graduate stem*graduate/freq prob design;
+contrast "graduate level: stem vs non-stem" all_parms 0 2 0 2;
+contrast "non-graduate: stem vs non-stem" all_parms 0 2 0 -2; 
+contrast "STEM: graduate degree vs. non-grad" all_parms 0 0 2 2; 
+contrast "non-STEM: graduate degree vs. non-grad" all_parms 0 0 2 -2; 
+run;
+
+```
+
+1. Alternatively,you can use `response means;`
+
+### Answer
+
+There is a significant interaction between STEM association and educational attainment ($\chi^2$ = 22.63,p<0.0001). There is no significant difference between STEM graduate and non-graduate degree holders ($\chi^2$= 2.03, p =0.16), but there is a significant difference between non-STEM graduate and  non-graduate degree holders ($\chi^2 = 25.26$, p<0.0001).
+
+:::
+
+## Weighted Least Squares: Repeated Measures
+
+The Weighted Least Squares can also be used when there are multiple response functions per group.
+
+::: callout-note
+If there is a category response variable with $c$ levels measured at $t$ time points, the cross-classification of possible outcomes results in $r=c^t$ response profiles.
+
+For marginal proportions, generalized logits, or cumulative logits, we have $c(t-1)$ profiles.
+
+For correlated mean scores for ordinal responses, we have $t$ correlated mean scores.
+:::
+
+
+::: callout-tip
+## SAS Implementation
+
+The REPEATED statement indicates that we are modeling repeated measures data.
+
+  - Can specify a specific model matrix
+  - Can specify a name for each repeated measurement factor
+  - Can specify type, number of levels, and labels for each level.
+  - The factors can be named anything as long as it is identical to another variable name in the model.
+:::
+
+## Weighted Least Squares: Repeated Measures
+
+
+Let's consider different cases:
+
+- One Population, Dichotomous Response
+- Two Populations, Polytomous Response
+- One Population Regression Analysis of Logits
+
+## Example
+
+The data set below includes data from 46 subjects who were treated with three Drugs (A, B, and C). The response to each drug was recorded as favorable or unfavorable. We want to test the hypothesis that the probability of a favorable response is the same for all three drugs.
+
+
+::: {.panel-tabset}
+### SAS Data Set
+```{.r}
+data drug;
+input druga $ drugb $ drugc $ count;
+datalines;
+F F F 6
+F F U 16
+F U F 2
+F U U 4
+U F F 2
+U F U 4
+U U F 6
+U U U 6
+;
+```
+
+### SAS Code
+
+```{.r}
+proc catmod data=drug;
+weight count;
+response marginals;
+model druga*drugb*drugc=_response_ / design oneway cov; *oneway displays the one-way frequency table, cov shows the covariance matrix;
+repeated drug 3 / _response_=drug;
+contrast 'A versus B' all_parms 0 1 -1;
+contrast 'A versus C' all_parms 0 2 1;
+run;
+```
+
+### Answer
+
+There is strong evidence of a drug effect ($\chi^2$ = 6.58, p=0.04). Upon further investigation, there is no significant difference between $A$ and $B$, but there is strong evidence of a difference between the rate of favorable response in drugs A and C ($\chi^2$= 5.79, p=0.02). 
+:::
+
+## Example
+
+The data includes the unaided distance vision data from 30-39 year-old employees of United Kingdom Royal Ordnance factories during the years 1943-1946. We are interested in determining whether the marginal vision grade distributions are the same in the right eye as in the left eye, whether the marginal probabilities for each score differ between females and males, and whether differences between right eye and left eye vision are the same for females and males.
+
+:::{.panel-tabset}
+### SAS Data Set
+
+```{.r}
+   data vision;
+      input gender $ right left count;
+      datalines;
+   F 1 1 1520
+   F 1 2  266
+   F 1 3  124
+   F 1 4   66
+   F 2 1  234
+   F 2 2 1512
+   F 2 3  432
+   F 2 4   78
+   F 3 1  117
+   F 3 2  362
+   F 3 3 1772
+   F 3 4  205
+   F 4 1   36
+   F 4 2   82
+   F 4 3  179
+   F 4 4  492
+   M 1 1  821
+   M 1 2  112
+   M 1 3   85
+   M 1 4   35
+   M 2 1  116
+   M 2 2  494
+   M 2 3  145
+   M 2 4   27
+   M 3 1   72
+   M 3 2  151
+   M 3 3  583
+   M 3 4   87
+   M 4 1   43
+   M 4 2   34
+   M 4 3  106
+   M 4 4  331
+   ;
+
+```
+
+### SAS Code
+
+```{.r}
+proc catmod data=vision;
+   weight count;
+   population gender;
+   response marginals;
+   model right*left=gender _response_(gender='F')
+                           _response_(gender='M') / design; *_response_(gender='F') means the response is nested within gender.;
+   repeated eye 2;
+contrast 'Interaction' all_parms 0 0 0 0 0 0 1 0 0 -1  0  0,
+                       all_parms 0 0 0 0 0 0 0 1 0  0 -1  0,
+                       all_parms 0 0 0 0 0 0 0 0 1  0  0 -1;
+run;
+```
+
+### Answer
+
+There is a significant nested effect of the eye location (right/left) in the vision of the female group ($\chi^2$ = 11.98, p=0.008), but not for males ($\chi^2$ = 3.68, p=0.30). The vision levels also differ between genders ($\chi^2$ = 142, p<0.001).
+:::
