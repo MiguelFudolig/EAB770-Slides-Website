@@ -177,6 +177,8 @@ There is a significant interaction between STEM association and educational atta
 The dataset WBEING shows the ordered categorical estimates and standard errors of the well-being index for a cross-classification based on sex and age. Use the WLS method to estimate a main effect model and test whether there is an effect of sex and age group on the well-being index scores.
 
 ::: {.panel-tabset}
+
+### SAS Data Set
 ```{.r}
 data wbeing(type=est);
    input   b1-b5   _type_ $  _name_ $  b6-b10 #2;

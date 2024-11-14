@@ -350,7 +350,7 @@ The Scaled Pearson $\chi^2$ is 0.8, which is slightly lower than 1. At this poin
 
 There is an overall effect of year ($\chi^2 = 15890, p < 0.0001). 
 
-When looking at multiple pairwise differences, it is important to adjust for multiplicity, hence we added `adjust=tukey`. After applying the Tukey-Kramer adjustment, we estimate that the patient assistance rate is 45% times higher than that in 2021 compared to 2022 (95% CI: 1.42, 1.48). Additionally, the patient assistance rate is 141% lower in 2022 compared to 2023.
+When looking at multiple pairwise differences, it is important to adjust for multiplicity, hence we added `adjust=tukey`. After applying the Tukey-Kramer adjustment, we estimate that the patient assistance rate is 45% times higher than that in 2021 compared to 2022 (95% CI: 1.42, 1.48). Additionally, the patient assistance rate is 141% higher in 2022 compared to 2023.
 
 :::
 
@@ -390,6 +390,43 @@ Biological processes tend to agree with negative binomial models more than Poiss
 The data set OVERDISPERSION shows count data from different locations and treatments. Suppose we want to test for a treatment effect.
 
 :::{.panel-tabset}
+### SAS Data Set
+
+```{.r}
+data overdispersion;
+ input location trt count;
+datalines;
+1 1 2
+1 2 3
+1 3 0
+1 4 2
+2 1 26
+2 2 14
+2 5 51
+2 6 16
+3 1 76
+3 3 44
+3 5 77
+3 7 3
+4 1 0
+4 4 3
+4 6 5
+4 7 12
+5 2 12
+5 3 13
+5 6 22
+5 7 1
+6 2 49
+6 4 54
+6 5 205
+6 7 23
+7 3 3
+7 4 4
+7 5 15
+7 6 3
+;
+
+```
 
 ### SAS Codes
 
