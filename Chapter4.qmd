@@ -5,7 +5,7 @@ format:
   revealjs:
     theme: solarized
     scrollable: true
-    footer: "EAB 770 - Chapter 4"
+    footer: "Chapter 4- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
@@ -13,6 +13,9 @@ format:
     embed-resources: true
     self-contained-math: true
     code-annotations: true
+
+  pdf: 
+    number-sections: true
 ---
 
 ```{r}

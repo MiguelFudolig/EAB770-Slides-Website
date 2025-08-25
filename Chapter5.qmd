@@ -5,14 +5,16 @@ format:
   revealjs:
     theme: solarized
     scrollable: true
-    footer: "EAB 770 - Chapter 5"
+    footer: "Chapter 5- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
     embed-resources: true
-    self-contained-math: true
     code-annotations: true
+    self-contained-math: true
+  pdf: 
+    number-sections: true
 ---
 
 ```{r}
@@ -41,15 +43,13 @@ library(vcdExtra)
 
 ## $s \times r$ tables
 
-We have evolved the contingency table from a \$2 \times 2 \to $s \times 2$ \to 2 \times r\$.
-
-Let's generalize the trends we've seen with the $s \times r$ table.
+We now evolve the contingency table from a $2 \times 2 \to  s  \times r$, where $s$ is the number of rows and $r$ is the number of columns.
 
 ## Nominal Categorical variables
 
 ::::: columns
 ::: {.column style="width:40%; font-size: 75%"}
-Unlike the $s \times 2$ table, the response variables can now have $r$ levels and be strictly nominal.
+The response variables can now have $r \geq 2$ levels and be strictly nominal.
 :::
 
 ::: {.column style="width:60%"}
@@ -69,11 +69,15 @@ The randomization statistic based on Mantel-Haenszel statistics can be calculate
 
 $$
 Q = \left(\frac{n-1}{n}\right) Q_P
-$$ $$
+$$ 
+
+$$
 Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 $$
 
-when $n$ is large, $Q \approx Q_P$. Like the Pearson chi-square, $Q$ follows a chi-square distribution with $(s-1)(r-1)$ degrees of freedom.
+::: callout-important
+When $n$ is large, $Q \approx Q_P$. Like the Pearson chi-square, $Q$ follows a chi-square distribution with $(s-1)(r-1)$ degrees of freedom.
+:::
 
 ## Mosaic Plot
 
@@ -164,7 +168,7 @@ run;
 
 $Q_P$ = 273.92, $Q$ = 273.81. The corresponding p-value $p<0.001$ suggests there is an association between party affiliation and neighborhood.
 
--   Note that the Mantel-Haenszel statistic reported in the `chisq` output corresponds to the correlation statistic which doesn't make sense in this case.
+-   Note that the Mantel-Haenszel statistic reported in the `chisq` output corresponds to the correlation statistic which doesn't make sense in this case (discussed later).
 :::
 
 ## Exercise
@@ -319,7 +323,7 @@ run;
 The table shows data from a study that investigates intent to breastfeed of women who are interested in having children. The women who participated in the study were asked if they intended to breastfeed your child up to 6 months after birth. The researchers want to know if there is an effect of the order of pregnancy on their intent to breastfeed.
 
 ``` r
-data preg; # <1>
+data preg;
 input pregnancy $  outcome $ score  count @@ ;
 datalines;
 npnc sd 1 8 npnc d 2 22 npnc n 3 24 npnc a 4 27 npnc sa 5 15
@@ -328,8 +332,17 @@ fp sd 1 18 fp d 2 8 fp n 3 22 fp a 4 23 fp sa 5 11
 pwc sd 1 35 pwc d 2 13 pwc n 3 10 pwc a 4 9 pwc sa 5 6
 ; 
 ```
-
-1.  npnc: not pregnant, no children; npc: not pregnant with children; fp: first pregnancy; pwc: pregnant with children; sd: strongly disagree;, d: disagree; n: neutral; a: agree; sa: strongly agree
+::: {.callout-note title="Variables"}
+- npnc: not pregnant, no children 
+- npc: not pregnant with children
+- fp: first pregnancy
+- pwc: pregnant with children
+- sd: strongly disagree
+- d: disagree
+- n: neutral
+- a: agree
+- sa: strongly agree
+:::
 
 ## Exercise
 
@@ -355,7 +368,7 @@ run;
 
 ### Answer
 
-$Q_S= 18.63$, p\<0.0001. There is sufficient evidence of an effect of pregnancy order on intent to breastfeed.
+$Q_S= 27.2$, p\<0.0001. There is sufficient evidence of an effect of pregnancy order on intent to breastfeed.
 :::
 
 ## Correlation Tests
@@ -372,7 +385,10 @@ $$ where $r_{ac}$ is the Pearson correlation coefficient.
 ## Correlation Tests
 
 ::: callout-note
-$Q_{CS}$ follows a chi-square distribution with 1 degree of freedom - Sample size requirement is the same as the sx2 tables. - Uses 1 degree of freedom regardless of the size of the contingency table
+$Q_{CS}$ follows a chi-square distribution with 1 degree of freedom 
+
+- Sample size requirement is the same as the sx2 tables. 
+- Uses 1 degree of freedom regardless of the size of the contingency table
 :::
 
 ## Correlation Tests: SAS
@@ -423,7 +439,7 @@ If modridit scores are used, $Q_{CS}=49.5$.
 A random sample of 400 college students are classified according to class status and drinking habits. Test the hypothesis that class status and drinking habits are not correlated to each other.
 
 ```{.r}
-data drink; # <1>
+data drink; 
 input habit $ status $ count @@;
 datalines;
 non fres 55 non soph 34 non jun 27 non sen 17
@@ -432,7 +448,9 @@ hea fres 29 hea soph 41 hea jun 33 hea sen 28
 ;
 ```
 
-1.  non: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior
+::: {.callout-note title="Variables"}
+non: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior
+::::
 
 ## Exercise
 
@@ -472,7 +490,8 @@ Table Scores: $Q_{CS}$ = 9.2, p=0.0024. There is sufficient evidence to support 
 ## Exact Tests
 
 -   Recall: Exact testing of sx2 tables
-    -   The correlation statistic is suitable when sample size requirements are not met, but we can't use the chi-square distribution. -Exact p-value is the sum of p-values associated with contingency tables where the test statistic is larger than the observed table.
+    -   The correlation statistic is suitable when sample size requirements are not met, but we can't use the chi-square distribution. 
+    -   Exact p-value is the sum of p-values associated with contingency tables where the test statistic is larger than the observed table.
 
 ## Exact Tests: SAS
 
@@ -530,10 +549,10 @@ A university professor wanted to test the general association between the most u
 
 |                       | Tiktok | Instagram | Snapchat | Other |
 |-----------------------|--------|-----------|----------|-------|
-| Private, in-state     | 3      | 2         | 3        | 0     |
-| Public, in-state      | 3      | 1         | 0        | 0     |
-| Private, out-of-state | 4      | 1         | 0        | 1     |
-| Public, out-of-state  | 1      | 0         | 0        | 1     |
+| Priv., in-state     | 3      | 2         | 3        | 0     |
+| Pub., in-state      | 3      | 1         | 0        | 0     |
+| Priv., out-of-state | 4      | 1         | 0        | 1     |
+| Pub., out-of-state  | 1      | 0         | 0        | 1     |
 
 ## Exercise
 
@@ -1017,9 +1036,11 @@ The exact p-value is p<0.001, which shows there is sufficient evidence of an agr
 ## Test for Ordered Differences {.smaller}
 
 The Jonckheere-Terpstra test is a nonparametric test that is based on sums of Mann-Whitney test statistics
+
   - Rank-based test
 
 This test detects whether there are differences in the trend of group effects.
+
   - Are the scores strictly increasing or decreasing?
 
 :::callout-note
@@ -1039,7 +1060,7 @@ Investigators conducted a randomized clinical trial in four hospitals, where pat
 - v + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)
 - gre: gastric resection (removal of 75% of gastric tissue)
 
-The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.
+The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is increasing as the amount of gastric tissue removed increased. Ignore hospital effects.
 
 ### SAS Code
 ```{.r}

@@ -5,12 +5,15 @@ format:
   revealjs:
     theme: solarized
     scrollable: true
-    footer: "EAB 770 - Chapter 2"
+    footer: "Chapter 2- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
     code-annotations: true
+    chalkboard: true
+  pdf: 
+    number-sections: true
 ---
 
 # Chapter 2: $2\times2$ tables
@@ -141,7 +144,7 @@ $$
 :::
 
 ::: {.column style="width:40%"}
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Chi-square_pdf.svg/321px-Chi-square_pdf.svg.png)
+![](img/Chi-square.png)
 :::
 :::
 

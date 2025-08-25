@@ -7,7 +7,7 @@ format:
     theme: solarized
     scrollable: true
     smaller: true
-    footer: "EAB 770 - Chapter 12"
+    footer: "Chapter 12- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true

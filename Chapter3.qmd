@@ -5,14 +5,16 @@ format:
   revealjs:
     theme: solarized
     scrollable: true
-    footer: "EAB 770 - Chapter 3"
+    footer: "Chapter 3- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
     embed-resources: true
-    self-contained-math: true
     code-annotations: true
+
+  pdf: 
+    number-sections: true
 ---
 
 ```{r}
@@ -64,7 +66,7 @@ Recall the Mantel-Haenszel Chi-Square statistic
 $$
 Q = (n_{11}-m_{11})^2/v_{11}
 $$
-where $m_11$ is the expected value of the $n_11$ and $v_11$ is the variance of $n_11$ based on the hypergeometric distribution assumption.
+where $m_{11}$ is the expected value of the $n_{11}$ and $v_{11}$ is the variance of $n_{11}$ based on the hypergeometric distribution assumption.
 
 - If there are $q$ $2\times 2$ tables, each table will have a value for $Q$.
 
@@ -461,7 +463,7 @@ Table 3.8 shows the data from research done by a small company in initiating exe
 :::{.panel-tabset}
 ### SAS Code
 
-```{.r code-line-numbers="14"}
+```{.r}
 data exercise;
 input location $ program $ outcome $ count @@;
 datalines;
