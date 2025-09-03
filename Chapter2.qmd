@@ -105,11 +105,13 @@ $m_{ij}$ is the expected value of the number of observations in row $i$ and colu
 
 ## Mantel-Haenszel Chi-square statistic {.smaller}
 
--   Another form of the Chi-square statistic is the Mantel-Haenszel chi-square statistic, $Q$.For $2\times 2$ contingency tables,
+-   Another form of the Chi-square statistic is the Mantel-Haenszel chi-square statistic, $Q$. For $2\times 2$ contingency tables,
 
 $$
 Q =  \frac{(n_{11}-m_{11})^2}{v_{11}}
-$$ $$
+$$ 
+
+$$
 m_{11} = n_{1+}n_{+1}/n; v_{11} = \frac{n_{1+}n_{2+}n_{+1}n_{+2}}{n^2(n-1)}
 $$
 
@@ -158,7 +160,8 @@ Rule of thumb: The expected value for each cell should be at least 5, i.e. $m_{i
 
 ## Hypothesis testing
 
-The null hypothesis of no association states that there is no association between row and column variables. - Assuming this is true and assumptions are satisfied, $Q$ and $Q_P$ follow a $\chi^2_1$ distribution for $2\times2$ tables.
+The null hypothesis of no association states that there is no association between row and column variables. 
+- Assuming this is true and assumptions are satisfied, $Q$ and $Q_P$ follow a $\chi^2_1$ distribution for $2\times2$ tables.
 
 ::: callout-note
 The p-values are given by $P(\chi^2 > Q_P)$ and $P(\chi^2 > Q)$ for Pearson and MH Chi-squares, respectively.
@@ -400,7 +403,11 @@ $$
 
 Null hypothesis $H_0$: there is no association between the row and column variables
 
--   One sided $H_a$: There is a positive/negative association between the row and column variables. OR One combination of the row and column variable levels is more favored compared to the others.
+-   One sided $H_a$: There is a positive/negative association between the row and column variables.
+
+OR 
+
+One combination of the row and column variable levels is more favored compared to the others.
 -   Two-sided $H_a$: there is an association between the row and column variables.
 
 ::: callout-note
@@ -441,7 +448,7 @@ dat_cc
 
 -   Under the alternative hypothesis: The test treatment is positively associated with the outcome. **p=0.0573**
 -   Under the alternative hypothesis: The test treatment is associated with the outcome. **p=0.1070**
--   At a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome? **At** $\alpha = 0.10$, we do not have sufficient evidence to conclude that treatment is associated with the outcomes in healing severe infections.
+-   At a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome? **At** $\alpha = 0.10$, **we do not have sufficient evidence to conclude that treatment is associated with the outcomes in healing severe infections.**
 
 ::: callout-note
 Be careful when selecting which one-sided alternative hypothesis to interpret from the results!
@@ -522,8 +529,8 @@ dat_cc
 ::: {.column style="width:40%; font-size: 65%"}
 At $\alpha=0.05$, do we have sufficient evidence to conclude that the lady can differentiate tea based on how they were poured?
 
--   can be analyzed through SAS or mathematically through the hypergeometric distribution
--   use one-sided alternative hypothesis because direction is implied in the problem. Thus we consider P($n_{11}$=3) + P($n_{11}$ = 4).
+-   The data can be analyzed through SAS or mathematically through the hypergeometric distribution
+-   Use one-sided alternative hypothesis because direction is implied in the problem. Thus we consider P($n_{11}$=3) + P($n_{11}$ = 4).
 -   P($n_{11}$=3) + P($n_{11}$ = 4) = 0.229+0.014 = 0.243
 :::
 
@@ -667,7 +674,7 @@ The contingency table shows the information from a randomized clinical trial tha
 -   Wald
 -   Corrected Wald
 -   Agresti-Caffo
--   Corrected Miettinen-Nurminen
+-   Miettinen-Nurminen
 :::
 
 ::: {.column style="width:50%; font-size: 125%"}
@@ -689,9 +696,10 @@ dat_cc
 ::: {.column style="width:50%; font-size: 65%"}
 The contingency table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder. Calculate the 95% confidence interval for the difference in proportion of favorable outcomes for both treatment groups.
 
--   Corrected Wald **0.2409-0.5924**
--   Agresti-Caffo **0.2456-0.5416**
--   Corrected Miettinen-Nurminen **0.2460-0.5427**
+-   Wald: **0.2570-0.6763**
+-   Corrected Wald: **0.2409-0.5924**
+-   Agresti-Caffo: **0.2456-0.5416**
+-   Miettinen-Nurminen **0.2460-0.5427**
 :::
 
 ::: {.column style="width:50%; font-size: 125%"}
@@ -721,7 +729,8 @@ placebo u 48
 
 proc freq data=respire order=data; 
 weight count; 
-tables treat*outcome/riskdiff(correct cl=(mn ac)) alpha=0.05; 
+tables treat*outcome/riskdiff(cl=(mn ac)) alpha=0.05; 
+tables treat*outcome/riskdiff(correct) alpha=0.05; 
 run;
 ```
 
@@ -1125,7 +1134,7 @@ dat_cc
 
 The table displays data collected by political science researchers who polled husbands and wives on whether they approved of one of their U.S. senators. The cell counts represent the number of pairs of husbands and wives who fit the configurations indicated by the row and column levels. Use the McNemar’s test to determine whether there is no difference in husband and wife approvals on the state senator.
 
-- exact p-value = 0.3018, which implies that there is no evidence of a difference between the senator approval ratings of the husbands and wives.
+- Exact p-value = 0.3018, which implies that there is no evidence of a difference between the senator approval ratings of the husbands and wives.
 
 ```{r}
 #| echo: false
@@ -1434,7 +1443,7 @@ dat_cc
 ### SAS Code
 ```{.r}
 data accident;
-/*data only has the events. Person-Years are used later.*/
+/*data only has the events. Person-Hours are used later.*/
 input Outcome $ Count @@;
 datalines;
 night 25 day 20 # <1>
@@ -1530,6 +1539,7 @@ run;
 ### RCode
 
 ```{r}
+#| echo: true
 power.prop.test(p1=0.4,p2=0.5,power=0.8)
 ```
 
