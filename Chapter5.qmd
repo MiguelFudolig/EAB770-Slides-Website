@@ -3,7 +3,7 @@ title: "EAB 770 - Chapter 5"
 author: "Miguel Fudolig"
 format:
   revealjs:
-    theme: solarized
+    theme: clean.scss
     scrollable: true
     footer: "Chapter 5- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
@@ -397,7 +397,7 @@ $Q_{CS}$ is the Mantel-Haenszel chi-square statistic displayed by the `chisq` ou
 
 -   `chisq` and `cmh` will both yield the correlation statistic.
 
-## Example {.smaller}
+## Example 
 
 A water treatment company is studying water additives and investigating how they affect clothes washing. The treatments studied were no treatment (plain water), the standard treatment, and a double dose of the standard treatment, called super. Washability was measured as low, medium, and high. The company claims that the dose of water treatment affects the washability of water. Do we have sufficient evidence to support this claim?
 
@@ -509,13 +509,13 @@ Exact tests are computationally intensive. More cells lead to more calculations,
 -   You can set the `MAXTIME` option in the exact statement to tell SAS to stop computations beyond a certain number of seconds.
 :::
 
-## Example {.smaller}
+## Example 
 
 A marketing research firm organized a focus group to consider issues of new car marketing. Members of the group included people who had purchased a car from a local dealer in the last month. Researchers were interested in whether there was an association between the type of car bought and how group members found out about the car in the media. Cars were classified as sedans, sporty, and utility. The types of media included television, magazines, newspapers, and radio.
 
 ![](img/car_C5.png)
 
-## Example {.smaller}
+## Example 
 
 A marketing research firm organized a focus group to consider issues of new car marketing. Members of the group included people who had purchased a car from a local dealer in the last month. Researchers were interested in whether there was an association between the type of car bought and how group members found out about the car in the media. Cars were classified as sedans, sporty, and utility. The types of media included television, magazines, newspapers, and radio.
 
@@ -638,7 +638,7 @@ $$
 where ASE is the asymptotic standard error reported in the `measures` output from the `freq` procedure.
   - The confidence interval can be calculated using the `cl` option in the `freq` procedure.
   
-## Exercise{.smaller}
+## Exercise
 
 Consider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.
 
@@ -652,7 +652,7 @@ Consider the water treatment example. Calculate the following measures of associ
 
 ![](img/wash_C5.png)
 
-## Exercise{.smaller}
+## Exercise
 
 Consider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.
 
@@ -685,7 +685,7 @@ run;
 
 :::
 
-## Exercise {.smaller}
+## Exercise 
 
 A random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.
 
@@ -707,7 +707,7 @@ hea fres 29 hea soph 41 hea jun 33 hea sen 28
 ```
 1.  non: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior
 
-## Exercise {.smaller}
+## Exercise 
 
 A random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.
 
@@ -742,7 +742,7 @@ run;
 
 :::
 
-## Nominal Variables {.smaller}
+## Nominal Variables 
 
 It is slightly tricky to define association between two nominal variables. There are two measures of association that could measure the strength of association between nominal variables.
 
@@ -787,7 +787,7 @@ The table contains data from a study concerning the distribution of party affili
 :::
 :::::
 
-## Exercise {.smaller}
+## Exercise 
 The table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.
 
 -   What are the appropriate measures of association to report?
@@ -883,7 +883,7 @@ where $\Pi_O$ is the probability that observers agreed based on the data, $\Pi_E
 - Exact testing can also be done by specifying `KAPPA` in the `EXACT` statement.
   - Small cell counts with multiple 0 cell counts.
 
-## Example {.smaller}
+## Example 
 
 - The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
   - Calculate the estimate and 95% confidence interval for the simple and weighted Kappa statistic.
@@ -905,7 +905,7 @@ datalines;
 ```
 
 
-## Example {.smaller}
+## Example 
 
 - The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
   - Calculate the estimate and 95% confidence interval for the simple and weighted Kappa statistic.
@@ -939,7 +939,7 @@ Weighted $\kappa$: 0.38 (0.28,0.48)
 Since the weighted $\kappa$ is higher than the simple $\kappa$, we can infer that there were more disagreements closer to the diagonal. There is a slight to moderate agreement between the two neurologists.
 :::
 
-## Exercise {.smaller}
+## Exercise 
 Two radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:
 
 0 ='Normal'; 1 ='Benign’ ; 2 ='Suspected'; 3 ='Cancer’
@@ -973,7 +973,7 @@ run;
 
 ```
 
-## Exercise {.smaller}
+## Exercise 
 Two radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:
 
 0 ='Normal'; 1 ='Benign’ ; 2 ='Suspected'; 3 ='Cancer’
@@ -1033,7 +1033,7 @@ The exact p-value is p<0.001, which shows there is sufficient evidence of an agr
 - What if we want to know if the mean scores are monotonously increasing or decreasing across levels of the row variable?
   - Example: Showing increasing prevalence of disease in specific environments.
 
-## Test for Ordered Differences {.smaller}
+## Test for Ordered Differences 
 
 The Jonckheere-Terpstra test is a nonparametric test that is based on sums of Mann-Whitney test statistics
 
@@ -1051,7 +1051,7 @@ The null hypothesis $H_0$ assumes that the distribution of ordered responses is 
 The Jonckheere-Terpstra test can be performed by adding the `JT` option to the `tables` statement. An exact implementation of the Jonckheere-Terpstra test can also be performed by adding the `JT` option to the `exact` statement.
 ::: 
 
-## Example {.smaller}
+## Example 
 
 Investigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:
 
@@ -1089,7 +1089,7 @@ datalines;
 
 
 
-## Example {.smaller}
+## Example 
 
 Investigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:
 

@@ -174,7 +174,7 @@
     "href": "Chapter8.html#the-main-effect-model",
     "title": "EAB 770 - Chapter 8",
     "section": "The Main Effect Model",
-    "text": "The Main Effect Model\nRecall that the linear predictor can be written as:\n\\[\n\\eta_i = \\alpha + \\beta_1x_{i1} + \\beta_2x_{i2} + ...\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\alpha\\) is the intercept of the linear model\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_k\\) are the coefficients of the explanatory variables. These coefficients will tell us the effect of predictor \\(x_ik\\).",
+    "text": "The Main Effect Model\nRecall that the linear predictor can be written as:\n\\[\n\\eta_i = \\alpha + \\beta_1x_{i1} + \\beta_2x_{i2} + ...\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\alpha\\) is the intercept of the linear model\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_k\\) are the coefficients of the explanatory variables. These coefficients will tell us the effect of predictor \\(x_{ik}\\).",
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
@@ -184,7 +184,7 @@
     "href": "Chapter8.html#the-main-effect-model-1",
     "title": "EAB 770 - Chapter 8",
     "section": "The Main Effect Model",
-    "text": "The Main Effect Model\n\nThe current form of the linear predictor assumes the explanatory variables are in quantitative form.\nWhen the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.\n\nThe case \\(x_{ik}=0\\) is called the reference level of the variables. When all \\(x_{ik}=0\\) the linear predictor collapses to the intercept \\(\\alpha\\).\n\n\n\n\n\n\n\n\nNote\n\n\nFor dummy dichotomous variables, odds ratios can be caluclated as an effect size of association.",
+    "text": "The Main Effect Model\n\nThe current form of the linear predictor assumes the explanatory variables are in quantitative form.\nWhen the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.\n\nThe case \\(x_{ik}=0\\) is called the reference level of the variables. When all \\(x_{ik}=0\\) the linear predictor collapses to the intercept \\(\\alpha\\).\n\n\n\n\n\n\n\n\nNote\n\n\nFor dummy dichotomous variables, odds ratios can be calculated as an effect size of association.",
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
@@ -244,7 +244,7 @@
     "href": "Chapter8.html#exercise",
     "title": "EAB 770 - Chapter 8",
     "section": "Exercise",
-    "text": "Exercise\nA simple random sample of individuals from different age groups were asked about their caffeine and exercise habits.\n\n\n\nAge Group\nCaffeine\nYes Exercise\nNo Exercise\n\n\nYoung Adult\nYes Caffeine\n121\n152\n\n\nYoung Adult\nNo Caffeine\n36\n97\n\n\nOlder Adult\nYes Caffeine\n44\n132\n\n\nOlder Adult\nNo Caffeine\n15\n130\n\n\n\n\nUse logistic regression to estimate the logistic model for the data. Use Young Adult and No caffeine as the reference levels.\nIs there a significant age group effect on exercise habits?\nIs there a significant effect of caffeine intake on exercise habits?\nCalculate and interpret the appropriate odds ratios for age group and caffeine intake.\nDoes the model fit the data well?",
+    "text": "Exercise\nA simple random sample of individuals from different age groups were asked about their caffeine and exercise habits.\n\nDataQuestions\n\n\n\n\n\nAge Group\nCaffeine\nYes Exercise\nNo Exercise\n\n\nYoung Adult\nYes Caffeine\n121\n152\n\n\nYoung Adult\nNo Caffeine\n36\n97\n\n\nOlder Adult\nYes Caffeine\n44\n132\n\n\nOlder Adult\nNo Caffeine\n15\n130\n\n\n\n\n\n\nUse logistic regression to estimate the logistic model for the data. Use Young Adult and No caffeine as the reference levels.\nIs there a significant age group effect on exercise habits?\nIs there a significant effect of caffeine intake on exercise habits?\nCalculate and interpret the appropriate odds ratios for age group and caffeine intake.\nDoes the model fit the data well?",
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
@@ -284,7 +284,7 @@
     "href": "Chapter8.html#example-2",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.\n\nPerform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.\nUsing effect parametrization\nUsing reference cell parametrization",
+    "text": "Example\nThe data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.\n\nDataQuestions\n\n\n\n\n\n\nPerform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.\nUsing effect parametrization\nUsing reference cell parametrization",
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
@@ -344,7 +344,7 @@
     "href": "Chapter8.html#interaction-models-1",
     "title": "EAB 770 - Chapter 8",
     "section": "Interaction models",
-    "text": "Interaction models\n\n\n\nInteraction tests are Wald chi-square tests with \\((a-1)(b-1)\\) degrees of freedom, where \\(a\\) is the number of levels of A and \\(b\\) is the number of levels of B.\nThe degrees of freedom is also equal to the number of coefficients that should be allotted to the interactions.\n\nInteractions can be visually recognized using interaction plots.",
+    "text": "Interaction models\n\nInteraction testsFigure\n\n\n\nInteraction tests are Wald chi-square tests with \\((a-1)(b-1)\\) degrees of freedom, where \\(a\\) is the number of levels of A and \\(b\\) is the number of levels of B.\nThe degrees of freedom is also equal to the number of coefficients that should be allotted to the interactions.\n\nInteractions can be visually recognized using interaction plots.",
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
@@ -604,7 +604,7 @@
     "href": "Chapter8.html#diagnostics",
     "title": "EAB 770 - Chapter 8",
     "section": "Diagnostics",
-    "text": "Diagnostics\n-We are interested in how a model fits our data and the lack of fit. - Lack of fit: Should we still consider other variables to include in the model?\n\nModel fit: Pearson chi-square and deviance chi-square tests\nLack of fit: Pearson residuals and deviance residuals\n\n\n\n\n\n\n\nNote\n\n\n\nPearson residuals look at the difference between the observed and expected occurrences in a group. A value of 2 is usually indicative of a lack of fit.\nDeviance residuals are the components that make up the deviance statistic\nLikelihood residuals: weighted average of standardized Pearson and Deviance residuals",
+    "text": "Diagnostics\n\nWe are interested in how a model fits our data and the lack of fit.\n\nLack of fit: Should we still consider other variables to include in the model?\n\nModel fit: Pearson chi-square and deviance chi-square tests\nLack of fit: Pearson residuals and deviance residuals\n\n\n\n\n\n\n\nNote\n\n\n\nPearson residuals look at the difference between the observed and expected occurrences in a group. A value of 2 is usually indicative of a lack of fit.\nDeviance residuals are the components that make up the deviance statistic\nLikelihood residuals: weighted average of standardized Pearson and Deviance residuals",
     "crumbs": [
       "Chapter 8: Logistic Regression"
     ]
@@ -2134,7 +2134,7 @@
     "href": "Chapter1.html#review-questions-1",
     "title": "EAB 770 - Chapter 1",
     "section": "Review Questions",
-    "text": "Review Questions\n\nDefine the following terms:\n\np-value\nconfidence level in confidence intervals\nOdds\nRelative Risk",
+    "text": "Review Questions\nDefine the following terms:\n\np-value\nconfidence level in confidence intervals\nOdds\nRelative Risk",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2144,7 +2144,7 @@
     "href": "Chapter1.html#review-questions-2",
     "title": "EAB 770 - Chapter 1",
     "section": "Review Questions",
-    "text": "Review Questions\n\nDefine the following terms:\n\np-value\n\nThe probability of recording a test statistic as extreme or more extreme as the obtained statistic assuming the null hypothesis is true.\n\nConfidence level in confidence intervals\n\nThe long-run proportion of confidence intervals that theoretically contain the true parameter value.\n\nOdds\n\nThe ratio of the success and failure probabilities.\n\\(\\frac{p_{success}}{p_{failure}}\\)\n\nRelative Risk\n\nThe ratio of success probabilities of two different groups.\n\\(p_1/p_2\\)",
+    "text": "Review Questions\nDefine the following terms:\n\np-value\n\nThe probability of recording a test statistic as extreme or more extreme as the obtained statistic assuming the null hypothesis is true.\n\nConfidence level in confidence intervals\n\nThe long-run proportion of confidence intervals that theoretically contain the true parameter value.\n\nOdds\n\nThe ratio of the success and failure probabilities.\n\\(\\frac{p_{success}}{p_{failure}}\\)\n\nRelative Risk\n\nThe ratio of success probabilities of two different groups.\n\\(p_1/p_2\\)",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2164,7 +2164,7 @@
     "href": "Chapter1.html#types-of-categorical-response-variables",
     "title": "EAB 770 - Chapter 1",
     "section": "Types of Categorical Response Variables",
-    "text": "Types of Categorical Response Variables\n\nDichotomous\nYes/No\nOrdinal\n\nMore than two possible outcomes with inherent ordering\n\nNominal\n\nMore than two possible outcomes without inherent ordering\n\nDiscrete Counts\n\nNumerical outcomes consisting of counting numbers.\n\nGrouped Survival Times\n\nNumber of patients who fail/survive during a specific time interval.\nThe interval of failure/survival (time-to-event) is categorical.",
+    "text": "Types of Categorical Response Variables\n\nDichotomous\n\nYes/No\n\nOrdinal\n\nMore than two possible outcomes with inherent ordering\n\nNominal\n\nMore than two possible outcomes without inherent ordering\n\nDiscrete Counts\n\nNumerical outcomes consisting of counting numbers.\n\nGrouped Survival Times\n\nNumber of patients who fail/survive during a specific time interval.\nThe interval of failure/survival (time-to-event) is categorical.",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2244,7 +2244,7 @@
     "href": "Chapter1.html#sas-example-contingency-table",
     "title": "EAB 770 - Chapter 1",
     "section": "SAS Example: Contingency Table",
-    "text": "SAS Example: Contingency Table\n\n\nproc freq data=respire; \nweight count; \ntables treat*outcome;\nrun;\n\n\nproc freq calls the FREQ procedure in SAS.\nNot defining data=respire means SAS will automatically use the most recently run data set.\nweight tells SAS the number of counts for each count\ntables creates the contingency table with row, column, and total percentages.\nrun; tells SAS to run the code. This is important!",
+    "text": "SAS Example: Contingency Table\n\n\nproc freq data=respire; \nweight count; \ntables treat*outcome;\nrun;\n\n\nproc freq calls the FREQ procedure in SAS.\n\nNot defining data=respire means SAS will automatically use the most recently run data set.\n\nweight tells SAS the number of counts for each count\ntables creates the contingency table with row, column, and total percentages.\nrun; tells SAS to run the code. This is important!",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2274,7 +2274,7 @@
     "href": "Chapter1.html#sas-exercise",
     "title": "EAB 770 - Chapter 1",
     "section": "SAS Exercise",
-    "text": "SAS Exercise\n\n\nSuppose a survey asking freshmen and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.\nEnter the data in SAS using the data step and generate the contingency tables. Name the data set enjoy.\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrongly Agree\nAgree\nNeutral\nDisagree\nStrongly Disagree\n\n\n\n\nSophomore\n24\n43\n12\n25\n12\n\n\nSeniors\n19\n37\n24\n32\n21",
+    "text": "SAS Exercise\n\n\nSuppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.\nEnter the data in SAS using the data step and generate the contingency tables. Name the data set enjoy.\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrongly Agree\nAgree\nNeutral\nDisagree\nStrongly Disagree\n\n\n\n\nSophomore\n24\n43\n12\n25\n12\n\n\nSeniors\n19\n37\n24\n32\n21",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2831,7 +2831,7 @@
     "href": "Chapter2.html#fishers-exact-test-hypotheses",
     "title": "EAB 770 - Chapter 2",
     "section": "Fisher’s Exact Test: Hypotheses",
-    "text": "Fisher’s Exact Test: Hypotheses\nNull hypothesis \\(H_0\\): there is no association between the row and column variables\n\nOne sided \\(H_a\\): There is a positive/negative association between the row and column variables.\n\nOR\nOne combination of the row and column variable levels is more favored compared to the others. - Two-sided \\(H_a\\): there is an association between the row and column variables.\n\n\n\n\n\n\nNote\n\n\nOnly add probabilities of outcomes that have lower probabilities than the observed value based on the hypergeometric distribution.",
+    "text": "Fisher’s Exact Test: Hypotheses\nNull hypothesis \\(H_0\\): there is no association between the row and column variables\n\nOne sided \\(H_a\\): There is a positive/negative association between the row and column variables. OR One combination of the row and column variable levels is more favored compared to the others.\nTwo-sided \\(H_a\\): there is an association between the row and column variables.\n\n\n\n\n\n\n\nNote\n\n\nOnly add probabilities of outcomes that have lower probabilities than the observed value based on the hypergeometric distribution.",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -2861,7 +2861,7 @@
     "href": "Chapter2.html#example-3",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\n\nUnder the alternative hypothesis: The test treatment is positively associated with the outcome. p=0.0573\nUnder the alternative hypothesis: The test treatment is associated with the outcome. p=0.1070\nAt a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome? At \\(\\alpha = 0.10\\), we do not have sufficient evidence to conclude that treatment is associated with the outcomes in healing severe infections.\n\n\n\n\n\n\n\nNote\n\n\nBe careful when selecting which one-sided alternative hypothesis to interpret from the results!\n\n\n\n\nSAS CodeManual Calculation through R\n\n\ndata severe;\ninput treat $ outcome $ count;\ndatalines;\nTest f 10\nTest u 2\nControl f 2\nControl u 4\n;\nproc freq order=data data=severe;\nweight count;\ntables treat*outcome / chisq nocol;\nrun;\n\n\n\nOne-sided hypothesis (+)\n\n\nc(`Prob_n11=10`=factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(10)*factorial(2)^2*factorial(4)),\n`Prob_n11=11` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*factorial(5)),\n`Prob_n11=12` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)))\n\n Prob_n11=10  Prob_n11=11  Prob_n11=12 \n0.0533290239 0.0038784745 0.0000538677 \n\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(10)*factorial(2)^2*factorial(4)) + #P($n_11$=10)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*factorial(5)) + # P($n_11$ = 11)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)) #P($n_11$ = 12)\n\n[1] 0.05726137\n\n\n\nTwo-sided hypothesis (needs to include values &lt; 10.)\n\n\nc(`Prob_n11=10`=factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(10)*factorial(2)^2*factorial(4)),\n`Prob_n11=11` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*factorial(5)),\n`Prob_n11=12` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)),\n`Prob_n11=9` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(9)*factorial(3)^2*factorial(3)),\n`Prob_n11=8` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(8)*factorial(4)^2*factorial(2)),\n`Prob_n11=7` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(7)*factorial(5)^2*factorial(1)),\n`Prob_n11=6` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(6)*factorial(6)^2*factorial(0)))\n\n Prob_n11=10  Prob_n11=11  Prob_n11=12   Prob_n11=9   Prob_n11=8   Prob_n11=7 \n0.0533290239 0.0038784745 0.0000538677 0.2370178841 0.3999676794 0.2559793148 \n  Prob_n11=6 \n0.0497737557 \n\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(10)*factorial(2)^2*factorial(4)) + #P($n_11$=10)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*factorial(5)) + # P($n_11$ = 11)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)) + #P($n_11$ = 12)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(6)*factorial(6)^2*factorial(0)) #P($n_11$ = 6)\n\n[1] 0.1070351",
+    "text": "Example\n\nSAS CodeManual Calculation through RAnswers\n\n\ndata severe;\ninput treat $ outcome $ count;\ndatalines;\nTest f 10\nTest u 2\nControl f 2\nControl u 4\n;\nproc freq order=data data=severe;\nweight count;\ntables treat*outcome / chisq nocol;\nrun;\n\n\n\nOne-sided hypothesis (+)\n\n\nc(`Prob_n11=10`=factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(10)*factorial(2)^2*factorial(4)),\n`Prob_n11=11` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*factorial(5)),\n`Prob_n11=12` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)))\n\n Prob_n11=10  Prob_n11=11  Prob_n11=12 \n0.0533290239 0.0038784745 0.0000538677 \n\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(10)*factorial(2)^2*factorial(4)) + #P($n_11$=10)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*factorial(5)) + # P($n_11$ = 11)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)) #P($n_11$ = 12)\n\n[1] 0.05726137\n\n\n\nTwo-sided hypothesis (needs to include values &lt; 10.)\n\n\nc(`Prob_n11=10`=factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(10)*factorial(2)^2*factorial(4)),\n`Prob_n11=11` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*factorial(5)),\n`Prob_n11=12` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)),\n`Prob_n11=9` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(9)*factorial(3)^2*factorial(3)),\n`Prob_n11=8` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(8)*factorial(4)^2*factorial(2)),\n`Prob_n11=7` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(7)*factorial(5)^2*factorial(1)),\n`Prob_n11=6` = factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(6)*factorial(6)^2*factorial(0)))\n\n Prob_n11=10  Prob_n11=11  Prob_n11=12   Prob_n11=9   Prob_n11=8   Prob_n11=7 \n0.0533290239 0.0038784745 0.0000538677 0.2370178841 0.3999676794 0.2559793148 \n  Prob_n11=6 \n0.0497737557 \n\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(10)*factorial(2)^2*factorial(4)) + #P($n_11$=10)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*factorial(5)) + # P($n_11$ = 11)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)) + #P($n_11$ = 12)\nfactorial(12)^2*factorial(6)^2/(factorial(18)*factorial(6)*factorial(6)^2*factorial(0)) #P($n_11$ = 6)\n\n[1] 0.1070351\n\n\n\n\n\nUnder the alternative hypothesis: The test treatment is positively associated with the outcome. p=0.0573\nUnder the alternative hypothesis: The test treatment is associated with the outcome. p=0.1070\nAt a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome? At \\(\\alpha = 0.10\\), we do not have sufficient evidence to conclude that treatment is associated with the outcomes in healing severe infections.\n\n\n\n\n\n\n\nNote\n\n\nBe careful when selecting which one-sided alternative hypothesis to interpret from the results!",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -2891,7 +2891,7 @@
     "href": "Chapter2.html#difference-in-proportions-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Difference in Proportions",
-    "text": "Difference in Proportions\n\nWe are often interested in comparing two independent populations\n\nCategorical response: proportions\n\nRecall from Intro to Stats course: Difference of two proportions\n\nConfidence interval using the standard normal distribution\nZ-test to test for a significant difference in proportions of two populations",
+    "text": "Difference in Proportions\n\nWe are often interested in comparing two independent populations\nCategorical response: proportions\nRecall from Intro to Stats course: Difference of two proportions\nConfidence interval using the standard normal distribution\nZ-test to test for a significant difference in proportions of two populations",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -3201,7 +3201,7 @@
     "href": "Chapter2.html#exercise-11",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nThe tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.\n\nUse the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (Hint: Small cell counts)\n\nUse exact p-value\n\\(p=0.5078\\). No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.\n\n\n\n\n           Ultrasound\nMRI         Localized Advanced\n  Localized         4        6\n  Advanced          3        3\n\n\nSAS Code\ndata imaging;\ninput mri $ ult $ count;\ndatalines;\nloc loc 4\nloc adv 6\nadv loc 3\nadv adv 3\n;\n\nproc freq order=data;\nweight count;\ntables mri*ult / agree;\nexact mcnem;\nrun;",
+    "text": "Exercise\nThe tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.\n\n\n           Ultrasound\nMRI         Localized Advanced\n  Localized         4        6\n  Advanced          3        3\n\n\n\nAnswerSAS Code\n\n\n\nUse the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (Hint: Small cell counts)\n\nUse exact p-value\n\\(p=0.5078\\). No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.\n\n\n\n\ndata imaging;\ninput mri $ ult $ count;\ndatalines;\nloc loc 4\nloc adv 6\nadv loc 3\nadv adv 3\n;\n\nproc freq order=data;\nweight count;\ntables mri*ult / agree;\nexact mcnem;\nrun;",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -3211,7 +3211,7 @@
     "href": "Chapter2.html#incidence-densities-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Incidence Densities",
-    "text": "Incidence Densities\n\nCounts of subjects who responded within a duration of exposure to an event.\nPoisson distribution – counts\nExamples:\n\nBacteria colony count\nDisease incidence\nAccidents\nVaccine failure\n\nCommon measure of duration of exposure/ time-at-risk: person-time",
+    "text": "Incidence Densities\n\nCounts of subjects who responded within a duration of exposure to an event.\nPoisson distribution: counts\nExamples:\n\nBacteria colony count\nDisease incidence\nAccidents\nVaccine failure\n\nCommon measure of duration of exposure/ time-at-risk: person-time",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]
@@ -3241,7 +3241,7 @@
     "href": "Chapter2.html#incidence-density-ratios-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Incidence Density Ratios",
-    "text": "Incidence Density Ratios\nThe IDR can be estimated using conditional binomial distributions assuming \\(n_v\\) and \\(n_p\\) are independent Poisson processes.\n\\[\nP(n_v|n_v+n_p) \\sim Binomial\\left(N=n_v + n_p, p = \\frac{\\lambda_vN_v}{\\lambda_vN_v+\\lambda_pN_p}\\right)\n\\]",
+    "text": "Incidence Density Ratios\nThe IDR can be estimated using conditional binomial distributions assuming \\(n_v\\) and \\(n_p\\) are independent Poisson processes.\n\\[\nP(n_v|n_v+n_p) \\sim Bin\\left(N=n_v + n_p, p = \\frac{\\lambda_vN_v}{\\lambda_vN_v+\\lambda_pN_p}\\right)\n\\]",
     "crumbs": [
       "Chapter 2: 2x2 tables"
     ]

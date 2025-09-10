@@ -3,7 +3,7 @@ title: "EAB 770 - Chapter 3"
 author: "Miguel Fudolig"
 format:
   revealjs:
-    theme: solarized
+    theme: clean.scss
     scrollable: true
     footer: "Chapter 3- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
@@ -41,7 +41,7 @@ library(tidyverse)
 ## Sets of $2\times2$ tables
 
 ::: columns
-::: {.column style="width:40%; font-size: 75%"}
+::: {.column style="width:40%; font-size: 85%"}
 - Consider a multi-location RCT
   - Different locations will have different contingency tables
   - We want to consolidate **all** data and account for the location effect in testing for the association between the treatment and outcome.
@@ -112,7 +112,7 @@ For $2 \times 2$ tables, the scores and degrees of freedom do not differ for the
 ## Example
 
 ::: columns
-::: {.column style="width:40%; font-size: 75%"}
+::: {.column style="width:40%; font-size: 85%"}
 The table shows the results of a study about how general daily stress affects one’s opinion on a proposed new health policy. Participants were sampled from urban and rural areas.
 
 - Is there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level.
@@ -197,7 +197,7 @@ $\chi^2 = 23.05$, $df=1$, $p < 0.0001$. There is strong evidence that the stress
 ## Example
 
 ::: columns
-::: {.column style="width:40%; font-size: 75%"}
+::: {.column style="width:40%; font-size: 85%"}
 The table shows the results of an RCT for a test treatment designed for respiratory infections. Is there a significant association between the treatment and the outcome after controlling for the center?
 
 - Is the Mantel-Fleiss criterion satisfied?
@@ -388,7 +388,7 @@ run;
 
 
 ::: columns
-::: {.column style="width:50%; font-size: 75%"}
+::: {.column style="width:50%; font-size: 85%"}
 The table shows  the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios.
 
 :::
@@ -440,7 +440,7 @@ run;
 ## Exercise 
 
 ::: columns
-::: {.column style="width:50%; font-size: 75%"}
+::: {.column style="width:50%; font-size: 85%"}
 Table 3.8 shows the data from research done by a small company in initiating exercise programs (office/home) in their two locations in a nearby suburbs. After a year, participants and non-participants underwent a cardiovascular stress test to assess their fitness, and their result was recorded as good or not good depending on age-adjusted criteria. The exercise counselor was interested in whether type of program was associated with good test results.
 
 - Calculate the common odds ratio $\psi_{MH}$ and the **exact** 95% confidence intervals.

@@ -3,9 +3,8 @@ title: "EAB 770 - Chapter 8"
 author: "Miguel Fudolig"
 format:
   revealjs:
-    theme: solarized
+    theme: clean.scss
     scrollable: true
-    smaller: true
     footer: "Chapter 8 - [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
@@ -218,7 +217,7 @@ $\alpha$ is the intercept of the linear model
 
 ::: callout-note
 $\beta_k$ are the coefficients of the explanatory variables. These
-coefficients will tell us the effect of predictor $x_ik$.
+coefficients will tell us the effect of predictor $x_{ik}$.
 :::
 
 ## The Main Effect Model
@@ -232,7 +231,7 @@ coefficients will tell us the effect of predictor $x_ik$.
         the intercept $\alpha$.
 
 ::: callout-note
-For dummy dichotomous variables, odds ratios can be caluclated as an
+For dummy dichotomous variables, odds ratios can be calculated as an
 effect size of association.
 :::
 
@@ -283,7 +282,7 @@ Use logistic regression methods to obtain odds ratio estimates and
 create a logistic regression model to estimate the probability of
 developing CA disease based on sex and ECG segment depression.
 
-![](img/coronary_C3.png)
+![](img/coronary_C3.png){height="200px"}
 
 ### Data Set
 
@@ -346,6 +345,10 @@ patients with lower segment depression in their ECG.
 A simple random sample of individuals from different age groups were
 asked about their caffeine and exercise habits.
 
+::: panel-tabset
+
+### Data
+
 |             |              |              |             |
 |-------------|--------------|--------------|-------------|
 | Age Group   | Caffeine     | Yes Exercise | No Exercise |
@@ -353,6 +356,8 @@ asked about their caffeine and exercise habits.
 | Young Adult | No Caffeine  | 36           | 97          |
 | Older Adult | Yes Caffeine | 44           | 132         |
 | Older Adult | No Caffeine  | 15           | 130         |
+
+### Questions 
 
 -   Use logistic regression to estimate the logistic model for the data.
     Use Young Adult and No caffeine as the reference levels.
@@ -362,6 +367,7 @@ asked about their caffeine and exercise habits.
     and caffeine intake.
 -   Does the model fit the data well?
 
+:::
 
 ## Exercise
 
@@ -436,11 +442,19 @@ run;
 
 The data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.
 
+::: panel-tabset
+
+### Data
+
+![](img/sentencing_C8.png){height="200px"}
+
+### Questions
+
 -   Perform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
   -   Using effect parametrization
   -   Using reference cell parametrization
 
-![](img/sentencing_C8.png)
+:::
 
 
 ## Example
@@ -560,16 +574,17 @@ Interaction terms should be tested first ($x_1x_2$). If the interaction is not s
 
 ## Interaction models
 
-::: columns
-::: {.column style="width:70%; font-size: 75%"}
+::: panel-tabset
+
+### Interaction tests
 - Interaction tests are Wald chi-square tests with $(a-1)(b-1)$ degrees of freedom, where $a$ is the number of levels of A and $b$ is the number of levels of B.
 - The degrees of freedom is also equal to the number of coefficients that should be allotted to the interactions.
   - Interactions can be visually recognized using interaction plots.
   
-:::
-::: {.column style="width:30%; font-size: 100%"}
+### Figure 
+
 ![](img/interaction_C8.png)
-:::
+
 :::
 
 ## Non-Dichotomous Explanatory Variables
@@ -1084,7 +1099,8 @@ The odds of discoloration decreases by 0.42 (1-0.58) times when the yield increa
 
 ## Diagnostics
 
--We are interested in how a model fits our data and the lack of fit.
+- We are interested in how a model fits our data and the lack of fit.
+
   - Lack of fit: Should we still consider other variables to include in the model?
 
 - Model fit: Pearson chi-square and deviance chi-square tests

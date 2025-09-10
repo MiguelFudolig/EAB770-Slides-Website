@@ -3,7 +3,7 @@ title: "EAB 770 - Chapter 1"
 author: "Miguel Fudolig"
 format:
   revealjs:
-    theme: solarized
+    theme: clean.scss
     scrollable: true
     footer: "Chapter 1 - [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
@@ -19,27 +19,29 @@ format:
 
 ## Outline
 
--   Syllabus Discussion
--   Accessing SAS OnDemand for Academics
--   Why are we here?
--   Preliminary Materials
+- Syllabus Discussion
+- Accessing SAS OnDemand for Academics
+- Why are we here?
+- Preliminary Materials
 
 ## Syllabus
 
--   The syllabus can be accessed through
-    -   Canvas
-    -   <https://madfudolig.quarto.pub/eab-770-applied-statistical-methods-for-categorical-data/>
+- The syllabus can be accessed through
+    - Canvas
+    - <https://madfudolig.quarto.pub/eab-770-applied-statistical-methods-for-categorical-data/>
 
 ## Programming Language
 
--   We will primarily use SAS for this course.
-    -   You can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.
+- We will primarily use SAS for this course.
+    - You can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.
 
 ## Accessing SAS On Demand for Academics
 
--   Create a SAS Profile that will be used to register for SAS OnDemand for Academics. To register, visit <https://www.sas.com> and fill out the form to *Create profile*.
-    -   Use your UNLV email for faster verification.
--   Create your account for SAS OnDemand for Academics. To register, visit <https://welcome.oda.sas.com> sign in with your SAS Profile and complete the steps to *Register for an account*.
+- Create a SAS Profile that will be used to register for SAS OnDemand for Academics. To register, visit <https://www.sas.com> and fill out the form to *Create profile*.
+
+  - Use your UNLV email for faster verification.
+  
+- Create your account for SAS OnDemand for Academics. To register, visit <https://welcome.oda.sas.com> sign in with your SAS Profile and complete the steps to *Register for an account*.
 
 # Why are we here?
 
@@ -49,25 +51,39 @@ Why bother learning categorical data analysis?
 
 ## Review Questions
 
--   Define the following terms:
-    -   p-value
-    -   confidence level in confidence intervals
-    -   Odds
-    -   Relative Risk
+Define the following terms:
+
+- p-value
+    
+- confidence level in confidence intervals
+    
+- Odds
+    
+- Relative Risk
 
 ## Review Questions
 
--   Define the following terms:
-    -   p-value
-        -   The probability of recording a test statistic as extreme or more extreme as the obtained statistic *assuming the null hypothesis is true.*
-    -   Confidence level in confidence intervals
-        -   The **long-run proportion** of confidence intervals that theoretically contain the true parameter value.
-    -   Odds
-        -   The ratio of the success and failure probabilities.
-        -   $\frac{p_{success}}{p_{failure}}$
-    -   Relative Risk
-        -   The ratio of success probabilities of two different groups.
-        -   $p_1/p_2$
+Define the following terms:
+
+- p-value
+    
+  - The probability of recording a test statistic as extreme or more extreme as the obtained statistic *assuming the null hypothesis is true.*
+        
+- Confidence level in confidence intervals
+    
+  - The **long-run proportion** of confidence intervals that theoretically contain the true parameter value.
+        
+- Odds
+    
+  - The ratio of the success and failure probabilities.
+        
+  - $\frac{p_{success}}{p_{failure}}$
+        
+- Relative Risk
+    
+  - The ratio of success probabilities of two different groups.
+        
+  - $p_1/p_2$
 
 # Categorical Data
 
@@ -75,85 +91,94 @@ Why bother learning categorical data analysis?
 
 Categorical data is present everywhere!
 
--   Demographics
--   Opinions
--   Ratings
--   Locations
+- Demographics
+- Opinions
+- Ratings
+- Locations
 
 ## Types of Categorical Response Variables
 
--   Dichotomous
--   Yes/No
--   Ordinal
-    -   More than two possible outcomes with inherent ordering
--   Nominal
-    -   More than two possible outcomes without inherent ordering
--   Discrete Counts
-    -   Numerical outcomes consisting of counting numbers.
--   Grouped Survival Times
-    -   Number of patients who fail/survive during a specific time interval.
-    -   The interval of failure/survival (time-to-event) is categorical.
+- Dichotomous
+
+  - Yes/No
+  
+- Ordinal
+
+  - More than two possible outcomes with inherent ordering
+  
+- Nominal
+
+  - More than two possible outcomes without inherent ordering
+  
+- Discrete Counts
+
+  - Numerical outcomes consisting of counting numbers.
+  
+- Grouped Survival Times
+
+  - Number of patients who fail/survive during a specific time interval.
+  - The interval of failure/survival (time-to-event) is categorical.
 
 ## Sampling Frameworks
 
--   Historical data
-    -   Observational data, usually secondary data
-    -   No randomization
-    -   Example: Public data sets.
--   Experimental Data
-    -   Studies that involve random assignment of treatments to different subjects.
-    -   Random assignment/allocation
-    -   Example: Randomized Controlled Trials
--   Sample Survey Studies
-    -   Randomly sampled from a larger study population
-    -   Random selection
+- Historical data
+    - Observational data, usually secondary data
+    - No randomization
+    - Example: Public data sets.
+- Experimental Data
+    - Studies that involve random assignment of treatments to different subjects.
+    - Random assignment/allocation
+    - Example: Randomized Controlled Trials
+- Sample Survey Studies
+    - Randomly sampled from a larger study population
+    - Random selection
 
 ## Effect of Randomization
 
--   Randomization affects conclusions of generalization and causation.
--   Historical data
-    -   No randomization: hard to generalize unless the data was randomly sampled from a predetermined population
--   Experimental Data
-    -   Random assignment: balances effects of confounding variables
--   Sample Survey Studies
-    -   Random sampling: representative sample provides good coverage of the larger population
+- Randomization affects conclusions of generalization and causation.
+- Historical data
+    - No randomization: hard to generalize unless the data was randomly sampled from a predetermined population
+- Experimental Data
+    - Random assignment: balances effects of confounding variables
+- Sample Survey Studies
+    - Random sampling: representative sample provides good coverage of the larger population
 
 ## Randomization
 
 Randomization can be done per subject or a cluster of subject.
 
--   Strata (survey studies) or blocks (experiments)
--   Examples
-    -   Stratified random samples
-    -   Randomized block designs
-    -   Multi-level experimental designs
+- Strata (survey studies) or blocks (experiments)
+- Examples
+    - Stratified random samples
+    - Randomized block designs
+    - Multi-level experimental designs
 
 ## SAS Procedures and Data
 
--   There are multiple ways to import data into SAS
-    -   DATA step
-    -   PROC IMPORT step
-    -   SAS OnDemand can import data from CSV files.
--   `FREQ`
-    -   Contingency tables ($2\times 2$, $s \times r$)
-    -   Chi-squared tests
--   `LOGISTIC`
-    -   Logistic Regression
--   `GENMOD`
-    -   Generalized Estimating Equations
--   Other procedures include `GLM` and `CATMOD`.
+- There are multiple ways to import data into SAS
+    - DATA step
+    - PROC IMPORT step
+    - SAS OnDemand can import data from CSV files.
+- `FREQ`
+    - Contingency tables ($2\times 2$, $s \times r$)
+    - Chi-squared tests
+- `LOGISTIC`
+    - Logistic Regression
+- `GENMOD`
+    - Generalized Estimating Equations
+- Other procedures include `GLM` and `CATMOD`.
 
 ## SAS in Class
 
--   Sample code will be provided, but there will be examples where we work the code out together as a class.
--   Class computers have SAS installed in them.
-    -   You can save files on your Y drive (assigned to your ACE ID) to access files on other computers.
-    -   SAS can also be accessed through SAS OnDemand Academics.
-        -   Needs internet connection
+- Sample code will be provided, but there will be examples where we work the code out together as a class.
+- Class computers have SAS installed in them.
+    - You can save files on your Y drive (assigned to your ACE ID) to access files on other computers.
+    - SAS can also be accessed through SAS OnDemand Academics.
+        - Needs internet connection
 
 ## SAS Examples
 
--   Download Chapter1.sas from Canvas.
+- Download Chapter1.sas from Canvas.
 
 ## SAS Example
 
@@ -173,14 +198,14 @@ test u 20
 :::
 
 ::: {.column style="width:50%; font-size: 75%"}
--   ALL lines should be ended with a semi-colon **;**
--   `data` statement is followed by the data set name.
+- ALL lines should be ended with a semi-colon **;**
+- `data` statement is followed by the data set name.
 - `length` specifies the number of characters included in each **character**.
--   `input` names all variables included in the data set
-    -   The `$` after the variable tells SAS that these variables are categorical variables.
--   `datalines;` tells SAS that you are about to add new data points.
-    -   Each row represents a data point in this data table.
-    -   End with a separate **;**
+- `input` names all variables included in the data set
+    - The `$` after the variable tells SAS that these variables are categorical variables.
+- `datalines;` tells SAS that you are about to add new data points.
+    - Each row represents a data point in this data table.
+    - End with a separate **;**
 :::
 :::
 
@@ -200,7 +225,7 @@ run;
 :::
 
 ::: {.column style="width:50%; font-size: 75%"}
--   `proc freq` calls the `FREQ` procedure in SAS.
+- `proc freq` calls the `FREQ` procedure in SAS.
   - Not defining `data=respire` means SAS will automatically use the most recently run data set.
 - `weight` tells SAS the number of counts for each count
 - `tables` creates the contingency table with row, column, and total percentages.
@@ -273,7 +298,7 @@ run;
 
 ::: columns
 ::: {.column style="width:40%; font-size: 75%"}
-Suppose a survey asking freshmen and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.
+Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.
 
 Enter the data in SAS using the data step and generate the contingency tables. Name the data set `enjoy`.
 :::

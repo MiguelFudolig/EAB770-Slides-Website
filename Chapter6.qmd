@@ -3,9 +3,9 @@ title: "EAB 770 - Chapter 6"
 author: "Miguel Fudolig"
 format:
   revealjs:
-    theme: solarized
+    theme: clean.scss
     scrollable: true
-    footer: "Chapter 6- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
+    footer: "EAB 770 - Chapter 6"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
@@ -13,9 +13,6 @@ format:
     embed-resources: true
     self-contained-math: true
     code-annotations: true
-
-  pdf: 
-    number-sections: true
 ---
 
 # Sets of $s \times r$ tables
@@ -55,7 +52,7 @@ Depending on the nature of the row and column variables, the Mantel-Haenszel sta
 
 : Extended Mantel-Haenszel Statistics
 
-## Example {.smaller}
+## Example
 
 Investigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:
 
@@ -113,7 +110,7 @@ run;
 Both variables are ordinal, hence we can test for correlation using $Q_{CSMH}$. Using modridit scores, we get $Q_{CSMH}=6.93$, p=0.0085. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.
 :::
 
-## Exercise {.smaller}
+## Exercise 
 
 The following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.
 

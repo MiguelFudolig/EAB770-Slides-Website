@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d58ca6e55452da357bd4996cb6e3aa10.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-5225a0b03738627c8390147651eb7bbf.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -177,11 +177,11 @@ Miguel Fudolig
 <section id="accessing-sas-on-demand-for-academics" class="slide level2">
 <h2>Accessing SAS On Demand for Academics</h2>
 <ul>
-<li>Create a SAS Profile that will be used to register for SAS OnDemand for Academics. To register, visit <a href="https://www.sas.com" class="uri">https://www.sas.com</a> and fill out the form to <em>Create profile</em>.
+<li><p>Create a SAS Profile that will be used to register for SAS OnDemand for Academics. To register, visit <a href="https://www.sas.com" class="uri">https://www.sas.com</a> and fill out the form to <em>Create profile</em>.</p>
 <ul>
 <li>Use your UNLV email for faster verification.</li>
 </ul></li>
-<li>Create your account for SAS OnDemand for Academics. To register, visit <a href="https://welcome.oda.sas.com" class="uri">https://welcome.oda.sas.com</a> sign in with your SAS Profile and complete the steps to <em>Register for an account</em>.</li>
+<li><p>Create your account for SAS OnDemand for Academics. To register, visit <a href="https://welcome.oda.sas.com" class="uri">https://welcome.oda.sas.com</a> sign in with your SAS Profile and complete the steps to <em>Register for an account</em>.</p></li>
 </ul>
 </section></section>
 <section id="why-are-we-here" class="title-slide slide level1 center">
@@ -196,39 +196,35 @@ Miguel Fudolig
 </section>
 <section id="review-questions-1" class="slide level2">
 <h2>Review Questions</h2>
+<p>Define the following terms:</p>
 <ul>
-<li>Define the following terms:
-<ul>
-<li>p-value</li>
-<li>confidence level in confidence intervals</li>
-<li>Odds</li>
-<li>Relative Risk</li>
-</ul></li>
+<li><p>p-value</p></li>
+<li><p>confidence level in confidence intervals</p></li>
+<li><p>Odds</p></li>
+<li><p>Relative Risk</p></li>
 </ul>
 </section>
 <section id="review-questions-2" class="slide level2">
 <h2>Review Questions</h2>
+<p>Define the following terms:</p>
 <ul>
-<li>Define the following terms:
-<ul>
-<li>p-value
+<li><p>p-value</p>
 <ul>
 <li>The probability of recording a test statistic as extreme or more extreme as the obtained statistic <em>assuming the null hypothesis is true.</em></li>
 </ul></li>
-<li>Confidence level in confidence intervals
+<li><p>Confidence level in confidence intervals</p>
 <ul>
 <li>The <strong>long-run proportion</strong> of confidence intervals that theoretically contain the true parameter value.</li>
 </ul></li>
-<li>Odds
+<li><p>Odds</p>
 <ul>
-<li>The ratio of the success and failure probabilities.</li>
-<li><span class="math inline">\(\frac{p_{success}}{p_{failure}}\)</span></li>
+<li><p>The ratio of the success and failure probabilities.</p></li>
+<li><p><span class="math inline">\(\frac{p_{success}}{p_{failure}}\)</span></p></li>
 </ul></li>
-<li>Relative Risk
+<li><p>Relative Risk</p>
 <ul>
-<li>The ratio of success probabilities of two different groups.</li>
-<li><span class="math inline">\(p_1/p_2\)</span></li>
-</ul></li>
+<li><p>The ratio of success probabilities of two different groups.</p></li>
+<li><p><span class="math inline">\(p_1/p_2\)</span></p></li>
 </ul></li>
 </ul>
 </section></section>
@@ -250,21 +246,23 @@ Miguel Fudolig
 <section id="types-of-categorical-response-variables" class="slide level2">
 <h2>Types of Categorical Response Variables</h2>
 <ul>
-<li>Dichotomous</li>
+<li><p>Dichotomous</p>
+<ul>
 <li>Yes/No</li>
-<li>Ordinal
+</ul></li>
+<li><p>Ordinal</p>
 <ul>
 <li>More than two possible outcomes with inherent ordering</li>
 </ul></li>
-<li>Nominal
+<li><p>Nominal</p>
 <ul>
 <li>More than two possible outcomes without inherent ordering</li>
 </ul></li>
-<li>Discrete Counts
+<li><p>Discrete Counts</p>
 <ul>
 <li>Numerical outcomes consisting of counting numbers.</li>
 </ul></li>
-<li>Grouped Survival Times
+<li><p>Grouped Survival Times</p>
 <ul>
 <li>Number of patients who fail/survive during a specific time interval.</li>
 <li>The interval of failure/survival (time-to-event) is categorical.</li>
@@ -409,8 +407,10 @@ tables treat*outcome;
 run;</code></pre>
 </div><div class="column" style="width:50%; font-size: 75%">
 <ul>
-<li><code>proc freq</code> calls the <code>FREQ</code> procedure in SAS.</li>
+<li><code>proc freq</code> calls the <code>FREQ</code> procedure in SAS.
+<ul>
 <li>Not defining <code>data=respire</code> means SAS will automatically use the most recently run data set.</li>
+</ul></li>
 <li><code>weight</code> tells SAS the number of counts for each count</li>
 <li><code>tables</code> creates the contingency table with row, column, and total percentages.</li>
 <li><code>run;</code> tells SAS to run the code. <strong>This is important!</strong></li>
@@ -473,7 +473,7 @@ run;</code></pre>
 <h2>SAS Exercise</h2>
 <div class="columns">
 <div class="column" style="width:40%; font-size: 75%">
-<p>Suppose a survey asking freshmen and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.</p>
+<p>Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.</p>
 <p>Enter the data in SAS using the data step and generate the contingency tables. Name the data set <code>enjoy</code>.</p>
 </div><div class="column" style="width:60%; font-size: 50%">
 <table class="caption-top">

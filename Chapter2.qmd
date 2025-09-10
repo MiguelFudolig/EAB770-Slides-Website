@@ -3,7 +3,7 @@ title: "EAB 770 - Chapter 2"
 author: "Miguel Fudolig"
 format:
   revealjs:
-    theme: solarized
+    theme: clean.scss
     scrollable: true
     footer: "Chapter 2- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
@@ -70,7 +70,7 @@ library(tidyverse)
 The indices of contingency tables denote the row and column of each number.
 
 ::: columns
-::: {.column style="width:40%; font-size: 65%"}
+::: {.column style="width:40%; font-size: 85%"}
 -   $n_{xy}$ denotes the number at row $x$ and column $y$
 -   Seeing a (+) sign indicates that it is a marginal sum.
     -   $n_{x+}$ denotes the sum of all columns in row $x$.
@@ -136,7 +136,7 @@ $$
 ## Chi-square distribution
 
 ::: columns
-::: {.column style="width:60%; font-size: 65%"}
+::: {.column style="width:60%; font-size: 85%"}
 -   The chi-square distribution, $\chi_k^2$, is defined by the number of degrees of freedom 𝑘, where 𝑘≥1.
 -   Properties include:
     -   The value of $\chi^2$ can only assume non-negative values.
@@ -189,7 +189,7 @@ run;
 ## Example
 
 ::: columns
-::: {.column style="width:60%; font-size: 65%"}
+::: {.column style="width:60%; font-size: 85%"}
 The table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder.
 
 -   What is the Pearson chi-square value?
@@ -213,7 +213,7 @@ xtabs(count ~ .,data=dat)
 ## Example
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 The table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder.
 
 -   What is the Pearson chi-square value? **21.7**
@@ -289,7 +289,7 @@ CMH_CC$table |> as.data.frame()|> gt::gt(rownames_to_stub = T)
 ## Exercise
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 Suppose we wish to determine if the frequency of falls is related to wheelchair use for Polio survivors. The data is shown in the table.
 
 -   Write the SAS code to enter the data and analyze using the FREQ procedure.
@@ -314,7 +314,7 @@ dat_cc
 ## Exercise
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 Suppose we wish to determine if the frequency of falls is related to wheelchair use for Polio survivors. The data is shown in the table.
 
 -   Write the SAS code to enter the data and analyze using the FREQ procedure.
@@ -403,11 +403,8 @@ $$
 
 Null hypothesis $H_0$: there is no association between the row and column variables
 
--   One sided $H_a$: There is a positive/negative association between the row and column variables.
+-   One sided $H_a$: There is a positive/negative association between the row and column variables. OR One combination of the row and column variable levels is more favored compared to the others.
 
-OR 
-
-One combination of the row and column variable levels is more favored compared to the others.
 -   Two-sided $H_a$: there is an association between the row and column variables.
 
 ::: callout-note
@@ -446,15 +443,8 @@ dat_cc
 
 ## Example
 
--   Under the alternative hypothesis: The test treatment is positively associated with the outcome. **p=0.0573**
--   Under the alternative hypothesis: The test treatment is associated with the outcome. **p=0.1070**
--   At a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome? **At** $\alpha = 0.10$, **we do not have sufficient evidence to conclude that treatment is associated with the outcomes in healing severe infections.**
-
-::: callout-note
-Be careful when selecting which one-sided alternative hypothesis to interpret from the results!
-:::
-
 ::: panel-tabset
+
 ### SAS Code
 
 ``` r
@@ -508,6 +498,17 @@ factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(11)*factorial(1)^2*facto
 factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(12)*factorial(0)^2*factorial(6)) + #P($n_11$ = 12)
 factorial(12)^2*factorial(6)^2/(factorial(18)*factorial(6)*factorial(6)^2*factorial(0)) #P($n_11$ = 6)
 ```
+
+### Answers
+
+-   Under the alternative hypothesis: The test treatment is positively associated with the outcome. **p=0.0573**
+-   Under the alternative hypothesis: The test treatment is associated with the outcome. **p=0.1070**
+-   At a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome? **At** $\alpha = 0.10$, **we do not have sufficient evidence to conclude that treatment is associated with the outcomes in healing severe infections.**
+
+::: callout-note
+Be careful when selecting which one-sided alternative hypothesis to interpret from the results!
+:::
+
 :::
 
 ## Exercise
@@ -526,7 +527,7 @@ dat_cc
 ## Exercise
 
 ::: columns
-::: {.column style="width:40%; font-size: 65%"}
+::: {.column style="width:40%; font-size: 85%"}
 At $\alpha=0.05$, do we have sufficient evidence to conclude that the lady can differentiate tea based on how they were poured?
 
 -   The data can be analyzed through SAS or mathematically through the hypergeometric distribution
@@ -575,18 +576,18 @@ factorial(4)^4/(factorial(8)*factorial(4)^2) # P($n_11$ = 4)
 
 -   We are often interested in comparing two independent populations
 
-    -   Categorical response: proportions
+  -   Categorical response: proportions
 
 -   Recall from Intro to Stats course: Difference of two proportions
 
-    -   Confidence interval using the standard normal distribution
+  -   Confidence interval using the standard normal distribution
 
-    -   Z-test to test for a significant difference in proportions of two populations
+  -   Z-test to test for a significant difference in proportions of two populations
 
 ## Difference in Proportions: Estimation
 
 ::: columns
-::: {.column style="width:40%; font-size: 65%"}
+::: {.column style="width:40%; font-size: 85%"}
 -   Independence of the two populations (Groups 1 and 2) mean that we have two independent binomial distributions.
 -   Estimating the difference of the two proportions involves calculating the confidence intervals.
 -   There are different methods to calculate the confidence interval for the difference in proportion.
@@ -668,7 +669,7 @@ run;
 ## Example
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 The contingency table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder. Calculate the 95% confidence interval for the difference in proportion of favorable outcomes for both treatment groups.
 
 -   Wald
@@ -693,7 +694,7 @@ dat_cc
 ## Example
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 The contingency table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder. Calculate the 95% confidence interval for the difference in proportion of favorable outcomes for both treatment groups.
 
 -   Wald: **0.2570-0.6763**
@@ -737,7 +738,7 @@ run;
 ## Exercise
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 One of the most famous and largest clinical trials ever performed was in 1954. The data obtained from this RCT is shown in the contingency table. Calculate the *90%* confidence interval for the difference in proportion of polio-free children between the vaccine and placebo group.
 
 -   Corrected Wald
@@ -753,7 +754,7 @@ One of the most famous and largest clinical trials ever performed was in 1954. T
 ## Exercise
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 One of the most famous and largest clinical trials ever performed was in 1954. The data obtained from this RCT is shown in the contingency table. Calculate the *90%* confidence interval for the difference in proportion of polio-free children between the vaccine and placebo group.
 
 -   Corrected Wald **(0.0003,0.0005)**
@@ -1186,10 +1187,6 @@ dat_cc
 
 The tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.
 
--   Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (*Hint: Small cell counts*)
-    -   Use exact p-value
-    -   $p=0.5078$. No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.
-
 ```{r}
 #| echo: false
 dat <- expand.grid(MRI=c("Localized","Advanced"),
@@ -1199,6 +1196,15 @@ mutate(count = c(4,3,6,3))
 xtabs(count ~ .,data=dat) -> dat_cc
 dat_cc
 ```
+
+::: panel-tabset
+
+### Answer 
+-   Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (*Hint: Small cell counts*)
+    -   Use exact p-value
+    -   $p=0.5078$. No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.
+
+
 
 ### SAS Code
 
@@ -1218,13 +1224,14 @@ tables mri*ult / agree;
 exact mcnem;
 run;
 ```
+:::
 
 # Incidence Densities
 
 ## Incidence Densities {.smaller}
 
 -   Counts of subjects who responded within a duration of exposure to an event.
--   Poisson distribution – counts
+-   Poisson distribution: counts
 -   Examples:
     -   Bacteria colony count
     -   Disease incidence
@@ -1232,7 +1239,7 @@ run;
     -   Vaccine failure
 -   Common measure of duration of exposure/ time-at-risk: person-time
 
-## Poisson Distribution {.smaller}
+## Poisson Distribution 
 
 Recall that the Poisson distribution is described by the following density function:
 
@@ -1249,7 +1256,7 @@ where $\lambda$ is the expected number of events at a given unit of time.
 ## Incidence Density Ratios
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 - The table shows the number of infections (events) and person years for participants of an RCT.
   - $n_v$ and $n_p$ are Poisson random variables with respective incidence densities equal to $\lambda_v$ and $\lambda_p$
 - If $\lambda_v$ is the incidence density for the vaccine group, then the expected number of events is $\lambda_v N_v$.
@@ -1269,7 +1276,7 @@ where $\lambda$ is the expected number of events at a given unit of time.
 The IDR can be estimated using conditional binomial distributions assuming $n_v$ and $n_p$ are independent Poisson processes.
 
 $$
-P(n_v|n_v+n_p) \sim Binomial\left(N=n_v + n_p, p = \frac{\lambda_vN_v}{\lambda_vN_v+\lambda_pN_p}\right)
+P(n_v|n_v+n_p) \sim Bin\left(N=n_v + n_p, p = \frac{\lambda_vN_v}{\lambda_vN_v+\lambda_pN_p}\right)
 $$
 
 ## Incidence Density Ratios: Confidence Interval
@@ -1304,7 +1311,7 @@ $$
 ## Example
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 95%"}
 The table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.
 
 - Estimate the IDR of hospitalization/emergency room visits between the two groups.
@@ -1320,7 +1327,7 @@ The table shows the results of an international study of the effect of a rotavir
 ## Example
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 95%"}
 The table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.
 
 - Estimate the IDR of hospitalization/emergency room visits between the two groups. **IDR = 0.05**
@@ -1392,7 +1399,7 @@ data.frame(IDR = p_est[1]/(1-p_est[1])*mult,
 
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 The table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.
 
 
@@ -1416,7 +1423,7 @@ dat_cc
 
 
 ::: columns
-::: {.column style="width:50%; font-size: 65%"}
+::: {.column style="width:50%; font-size: 85%"}
 The table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.
 
 - IDR: 1.37 
