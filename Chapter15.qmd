@@ -4,7 +4,7 @@ author: "Miguel Fudolig"
 engine: knitr
 format:
   revealjs:
-    theme: solarized
+    theme: clean.scss
     scrollable: true
     smaller: true
     footer: "Chapter 15- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"

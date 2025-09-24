@@ -4,9 +4,8 @@ author: "Miguel Fudolig"
 engine: knitr
 format:
   revealjs:
-    theme: solarized
+    theme: clean.scss
     scrollable: true
-    smaller: true
     footer: "Chapter 9- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
@@ -15,6 +14,8 @@ format:
     embed-resources: true
     self-contained-math: true
     code-annotations: true
+  pdf: 
+    number-sections: true
 ---
 
 # Logistic Regression - Polytomous Response
@@ -152,13 +153,17 @@ $$
 
 Male and female subjects received an active or placebo treatment for their arthritis pain, and the subsequent extent of improvement was recorded as marked, some, or none.
 
+::: panel-tabset
+
+### Questions
 - Write the correct form of the linear predictor.
 - Use the proportional odds model to determine whether there is an effect of sex and treatment.
 - List the odds ratio estimates, 95% confidence intervals, and corresponding interpretations. 
 - Estimate the probability of marked improvement for females in the active group.
 
-
-![](img/arthritis_C9.png)
+### Data
+![](img/arthritis_C9.png){width=200%}
+:::
 
 
 ## Example 
@@ -319,10 +324,15 @@ where $x'_{hi}$ includes the explanatory variables with unequal slopes $\beta_k$
 
 The table contains data from a study by a bicycling clothing manufacturer who wanted to assess their test glove. It was designed to combat the hand problems experienced by cyclists dealing with carpal tunnel syndrome. Cyclists wore either the company’s standard gel glove or the new test glove for a week’s worth of their standard rides. Then they reported whether they experienced major, moderate, or no relief from their usual symptoms (numbness and nerve pain) on the bike.
 
+::: panel-tabset
+
+### Questions
 - Assume an unequal slopes, main effect model and test for the equality of slopes for glove and gender.
 - Perform logistic regression and interpret the results.
 
-![](img/cycling_C9.png)
+### Data
+![](img/cycling_C9.png){width=200%}
+:::
 
 ## Example
 
@@ -447,7 +457,14 @@ SAS does not know whether your response variable is ordinal or nominal. The gene
 
 ## Example
 
-Schoolchildren in experimental learning settings were surveyed to determine which learning style they preferred. Investigators were interested in whether response was associated with school and their program, which was either a standard school day or also included after-hours care. Use logistic regression to test for program and school effects and calculate the relevant odds ratios.
+Schoolchildren in experimental learning settings were surveyed to determine which learning style they preferred. Investigators were interested in whether response was associated with school and their program, which was either a standard school day or also included after-hours care. 
+
+
+::: panel-tabset
+
+### Question
+
+Use logistic regression to test for program and school effects and calculate the relevant odds ratios.
 
 ### SAS Data Set
 
@@ -468,6 +485,7 @@ weight count;
 tables school*program*style/ nocol norow nopct;
 run;
 ```
+:::
 
 ## Example
 
@@ -476,11 +494,15 @@ Schoolchildren in experimental learning settings were surveyed to determine whic
 :::{.panel-tabset}
 ### SAS Code
 
+```{.r}
 proc logistic data=school order=data;
 freq count;
 class school (ref=first) program (ref=last) / param=ref;
 model style= program school school*program / link=glogit selection=forward include=2 scale=none aggregate;
 run;
+```
+
+
 
 ### Answer
 
@@ -497,9 +519,12 @@ The odds of preferring team-based learning for those assigned to after-hours car
 
 The data set “firecracker” shows data of injuries due to firecrackers from three community health centers in rural Philippines. The age groups were coded as A: <25 years of age, B: ≥25 years of age. Use a generalized logit main effect model to determine whether there is a significant effect of age and clinic in the occurrence of face and finger injury compared to other parts of the body.
 
-- Use the estimate statement to test and estimate the odds ratio between clinics 1 and 2 for fingers vs. other injury and face vs. other injury.
+::: panel-tabset
 
+### Question
+Use the estimate statement to test and estimate the odds ratio between clinics 1 and 2 for fingers vs. other injury and face vs. other injury.
 
+### Data
 ```{.r}
 data firecracker;
 input clinic $ agegroup $ injury $ count;
@@ -526,6 +551,7 @@ datalines;
 run;
 
 ```
+:::
 
 ## Exercise
 
@@ -546,7 +572,7 @@ run;
 
 ### Answer
 
-There is a significant effect of clinic ($\chi^2 = 11.9, p=0.02$), but no evidence of an age effect ($\chi^2 = 0.02, p=0.99).
+There is a significant effect of clinic ($\chi^2 = 11.9, p=0.02$), but no evidence of an age effect ($\chi^2 = 0.02, p=0.99$).
 
 The odds of receiving patients with face injuries in clinic 1 is 4.08 (1.37-12.2) times that of clinic 2. Meanwhile, the odds of receiving patients with finger injuries in clinic 1 is 1.25 (0.49-3.16) times that of clinic 2.
 
@@ -625,3 +651,4 @@ The odds of males preferring bands is 4.1 (0.49-59.55) times than that of female
 
 The odds of an adult preferring bands is 5.08 (0.60-53.2) times that of seniors. However, the odds of an adult preferring freeweights is 12.47 (2.7-84.0) times that of seniors.
 
+:::

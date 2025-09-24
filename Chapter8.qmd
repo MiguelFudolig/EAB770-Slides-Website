@@ -13,6 +13,8 @@ format:
     embed-resources: true
     self-contained-math: true
     code-annotations: true
+  pdf: 
+    number-sections: true
 editor: 
   markdown: 
     wrap: 72
@@ -1253,7 +1255,7 @@ run;
 
 The data shows quasi-complete separation. 
 
-The odds of a successful response is for those who received Treatment A is 7.06 (CI: 0.52, $\infinity$) times that of those who did not receive Treatment A. The exact p-value is 0.07.
+The odds of a successful response is for those who received Treatment A is 7.06 (CI: 0.52, $\infty$) times that of those who did not receive Treatment A. The exact p-value is 0.07.
 
 The odds of a successful response is for those who received Treatment B is 0.35 (CI: 0, 2.85) times that of those who did not receive Treatment B.The exact p-value is 0.18.
 :::

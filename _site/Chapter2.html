@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 2</title>
@@ -29,8 +29,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -41,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -94,7 +95,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-5225a0b03738627c8390147651eb7bbf.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -536,23 +537,23 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
 <span id="cb8-3"><a></a>CMH_CC<span class="sc">$</span>table <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()<span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>(<span class="at">rownames_to_stub =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="lwjmnhobpv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lwjmnhobpv table {
+<div id="cmttzrcmnx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cmttzrcmnx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lwjmnhobpv thead, #lwjmnhobpv tbody, #lwjmnhobpv tfoot, #lwjmnhobpv tr, #lwjmnhobpv td, #lwjmnhobpv th {
+#cmttzrcmnx thead, #cmttzrcmnx tbody, #cmttzrcmnx tfoot, #cmttzrcmnx tr, #cmttzrcmnx td, #cmttzrcmnx th {
   border-style: none;
 }
 
-#lwjmnhobpv p {
+#cmttzrcmnx p {
   margin: 0;
   padding: 0;
 }
 
-#lwjmnhobpv .gt_table {
+#cmttzrcmnx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -578,12 +579,12 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_caption {
+#cmttzrcmnx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lwjmnhobpv .gt_title {
+#cmttzrcmnx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -595,7 +596,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-bottom-width: 0;
 }
 
-#lwjmnhobpv .gt_subtitle {
+#cmttzrcmnx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -607,7 +608,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-top-width: 0;
 }
 
-#lwjmnhobpv .gt_heading {
+#cmttzrcmnx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -619,13 +620,13 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_bottom_border {
+#cmttzrcmnx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_col_headings {
+#cmttzrcmnx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -640,7 +641,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_col_heading {
+#cmttzrcmnx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -660,7 +661,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   overflow-x: hidden;
 }
 
-#lwjmnhobpv .gt_column_spanner_outer {
+#cmttzrcmnx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -672,15 +673,15 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   padding-right: 4px;
 }
 
-#lwjmnhobpv .gt_column_spanner_outer:first-child {
+#cmttzrcmnx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lwjmnhobpv .gt_column_spanner_outer:last-child {
+#cmttzrcmnx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lwjmnhobpv .gt_column_spanner {
+#cmttzrcmnx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -692,11 +693,11 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   width: 100%;
 }
 
-#lwjmnhobpv .gt_spanner_row {
+#cmttzrcmnx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lwjmnhobpv .gt_group_heading {
+#cmttzrcmnx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -722,7 +723,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   text-align: left;
 }
 
-#lwjmnhobpv .gt_empty_group_heading {
+#cmttzrcmnx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -737,15 +738,15 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   vertical-align: middle;
 }
 
-#lwjmnhobpv .gt_from_md > :first-child {
+#cmttzrcmnx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lwjmnhobpv .gt_from_md > :last-child {
+#cmttzrcmnx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lwjmnhobpv .gt_row {
+#cmttzrcmnx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -764,7 +765,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   overflow-x: hidden;
 }
 
-#lwjmnhobpv .gt_stub {
+#cmttzrcmnx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -777,7 +778,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   padding-right: 5px;
 }
 
-#lwjmnhobpv .gt_stub_row_group {
+#cmttzrcmnx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -791,15 +792,15 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   vertical-align: top;
 }
 
-#lwjmnhobpv .gt_row_group_first td {
+#cmttzrcmnx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lwjmnhobpv .gt_row_group_first th {
+#cmttzrcmnx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lwjmnhobpv .gt_summary_row {
+#cmttzrcmnx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -809,16 +810,16 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   padding-right: 5px;
 }
 
-#lwjmnhobpv .gt_first_summary_row {
+#cmttzrcmnx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_first_summary_row.thick {
+#cmttzrcmnx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lwjmnhobpv .gt_last_summary_row {
+#cmttzrcmnx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -828,7 +829,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_grand_summary_row {
+#cmttzrcmnx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -838,7 +839,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   padding-right: 5px;
 }
 
-#lwjmnhobpv .gt_first_grand_summary_row {
+#cmttzrcmnx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -848,7 +849,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_last_grand_summary_row_top {
+#cmttzrcmnx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -858,11 +859,11 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_striped {
+#cmttzrcmnx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lwjmnhobpv .gt_table_body {
+#cmttzrcmnx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -871,7 +872,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_footnotes {
+#cmttzrcmnx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -885,7 +886,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_footnote {
+#cmttzrcmnx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -894,7 +895,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   padding-right: 5px;
 }
 
-#lwjmnhobpv .gt_sourcenotes {
+#cmttzrcmnx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -908,7 +909,7 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lwjmnhobpv .gt_sourcenote {
+#cmttzrcmnx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -916,72 +917,72 @@ X-squared = 21.709, df = 1, p-value = 3.174e-06</code></pre>
   padding-right: 5px;
 }
 
-#lwjmnhobpv .gt_left {
+#cmttzrcmnx .gt_left {
   text-align: left;
 }
 
-#lwjmnhobpv .gt_center {
+#cmttzrcmnx .gt_center {
   text-align: center;
 }
 
-#lwjmnhobpv .gt_right {
+#cmttzrcmnx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lwjmnhobpv .gt_font_normal {
+#cmttzrcmnx .gt_font_normal {
   font-weight: normal;
 }
 
-#lwjmnhobpv .gt_font_bold {
+#cmttzrcmnx .gt_font_bold {
   font-weight: bold;
 }
 
-#lwjmnhobpv .gt_font_italic {
+#cmttzrcmnx .gt_font_italic {
   font-style: italic;
 }
 
-#lwjmnhobpv .gt_super {
+#cmttzrcmnx .gt_super {
   font-size: 65%;
 }
 
-#lwjmnhobpv .gt_footnote_marks {
+#cmttzrcmnx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lwjmnhobpv .gt_asterisk {
+#cmttzrcmnx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lwjmnhobpv .gt_indent_1 {
+#cmttzrcmnx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lwjmnhobpv .gt_indent_2 {
+#cmttzrcmnx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lwjmnhobpv .gt_indent_3 {
+#cmttzrcmnx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lwjmnhobpv .gt_indent_4 {
+#cmttzrcmnx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lwjmnhobpv .gt_indent_5 {
+#cmttzrcmnx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lwjmnhobpv .katex-display {
+#cmttzrcmnx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lwjmnhobpv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cmttzrcmnx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1112,23 +1113,23 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
 <span id="cb13-3"><a></a>CMH_CC<span class="sc">$</span>table <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()<span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>(<span class="at">rownames_to_stub =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="ivgsxqtbgn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ivgsxqtbgn table {
+<div id="cfibjycuwo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cfibjycuwo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ivgsxqtbgn thead, #ivgsxqtbgn tbody, #ivgsxqtbgn tfoot, #ivgsxqtbgn tr, #ivgsxqtbgn td, #ivgsxqtbgn th {
+#cfibjycuwo thead, #cfibjycuwo tbody, #cfibjycuwo tfoot, #cfibjycuwo tr, #cfibjycuwo td, #cfibjycuwo th {
   border-style: none;
 }
 
-#ivgsxqtbgn p {
+#cfibjycuwo p {
   margin: 0;
   padding: 0;
 }
 
-#ivgsxqtbgn .gt_table {
+#cfibjycuwo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1154,12 +1155,12 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_caption {
+#cfibjycuwo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ivgsxqtbgn .gt_title {
+#cfibjycuwo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1171,7 +1172,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-bottom-width: 0;
 }
 
-#ivgsxqtbgn .gt_subtitle {
+#cfibjycuwo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1183,7 +1184,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-top-width: 0;
 }
 
-#ivgsxqtbgn .gt_heading {
+#cfibjycuwo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1195,13 +1196,13 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_bottom_border {
+#cfibjycuwo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_col_headings {
+#cfibjycuwo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1216,7 +1217,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_col_heading {
+#cfibjycuwo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1236,7 +1237,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   overflow-x: hidden;
 }
 
-#ivgsxqtbgn .gt_column_spanner_outer {
+#cfibjycuwo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1248,15 +1249,15 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   padding-right: 4px;
 }
 
-#ivgsxqtbgn .gt_column_spanner_outer:first-child {
+#cfibjycuwo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ivgsxqtbgn .gt_column_spanner_outer:last-child {
+#cfibjycuwo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ivgsxqtbgn .gt_column_spanner {
+#cfibjycuwo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1268,11 +1269,11 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   width: 100%;
 }
 
-#ivgsxqtbgn .gt_spanner_row {
+#cfibjycuwo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ivgsxqtbgn .gt_group_heading {
+#cfibjycuwo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1298,7 +1299,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   text-align: left;
 }
 
-#ivgsxqtbgn .gt_empty_group_heading {
+#cfibjycuwo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1313,15 +1314,15 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   vertical-align: middle;
 }
 
-#ivgsxqtbgn .gt_from_md > :first-child {
+#cfibjycuwo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ivgsxqtbgn .gt_from_md > :last-child {
+#cfibjycuwo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ivgsxqtbgn .gt_row {
+#cfibjycuwo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1340,7 +1341,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   overflow-x: hidden;
 }
 
-#ivgsxqtbgn .gt_stub {
+#cfibjycuwo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1353,7 +1354,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   padding-right: 5px;
 }
 
-#ivgsxqtbgn .gt_stub_row_group {
+#cfibjycuwo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1367,15 +1368,15 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   vertical-align: top;
 }
 
-#ivgsxqtbgn .gt_row_group_first td {
+#cfibjycuwo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ivgsxqtbgn .gt_row_group_first th {
+#cfibjycuwo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ivgsxqtbgn .gt_summary_row {
+#cfibjycuwo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1385,16 +1386,16 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   padding-right: 5px;
 }
 
-#ivgsxqtbgn .gt_first_summary_row {
+#cfibjycuwo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_first_summary_row.thick {
+#cfibjycuwo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ivgsxqtbgn .gt_last_summary_row {
+#cfibjycuwo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1404,7 +1405,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_grand_summary_row {
+#cfibjycuwo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1414,7 +1415,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   padding-right: 5px;
 }
 
-#ivgsxqtbgn .gt_first_grand_summary_row {
+#cfibjycuwo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1424,7 +1425,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_last_grand_summary_row_top {
+#cfibjycuwo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1434,11 +1435,11 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_striped {
+#cfibjycuwo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ivgsxqtbgn .gt_table_body {
+#cfibjycuwo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1447,7 +1448,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_footnotes {
+#cfibjycuwo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1461,7 +1462,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_footnote {
+#cfibjycuwo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1470,7 +1471,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   padding-right: 5px;
 }
 
-#ivgsxqtbgn .gt_sourcenotes {
+#cfibjycuwo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1484,7 +1485,7 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ivgsxqtbgn .gt_sourcenote {
+#cfibjycuwo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1492,72 +1493,72 @@ X-squared = 0.078299, df = 1, p-value = 0.7796</code></pre>
   padding-right: 5px;
 }
 
-#ivgsxqtbgn .gt_left {
+#cfibjycuwo .gt_left {
   text-align: left;
 }
 
-#ivgsxqtbgn .gt_center {
+#cfibjycuwo .gt_center {
   text-align: center;
 }
 
-#ivgsxqtbgn .gt_right {
+#cfibjycuwo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ivgsxqtbgn .gt_font_normal {
+#cfibjycuwo .gt_font_normal {
   font-weight: normal;
 }
 
-#ivgsxqtbgn .gt_font_bold {
+#cfibjycuwo .gt_font_bold {
   font-weight: bold;
 }
 
-#ivgsxqtbgn .gt_font_italic {
+#cfibjycuwo .gt_font_italic {
   font-style: italic;
 }
 
-#ivgsxqtbgn .gt_super {
+#cfibjycuwo .gt_super {
   font-size: 65%;
 }
 
-#ivgsxqtbgn .gt_footnote_marks {
+#cfibjycuwo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ivgsxqtbgn .gt_asterisk {
+#cfibjycuwo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ivgsxqtbgn .gt_indent_1 {
+#cfibjycuwo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ivgsxqtbgn .gt_indent_2 {
+#cfibjycuwo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ivgsxqtbgn .gt_indent_3 {
+#cfibjycuwo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ivgsxqtbgn .gt_indent_4 {
+#cfibjycuwo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ivgsxqtbgn .gt_indent_5 {
+#cfibjycuwo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ivgsxqtbgn .katex-display {
+#cfibjycuwo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ivgsxqtbgn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cfibjycuwo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2703,23 +2704,23 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
 <span id="cb60-10"><a></a>           <span class="at">IDR_lower =</span> p_est[<span class="dv">2</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">2</span>])<span class="sc">*</span>mult,</span>
 <span id="cb60-11"><a></a>          <span class="at">IDR_higher =</span> p_est[<span class="dv">3</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">3</span>])<span class="sc">*</span>mult) <span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="ltyoxrrznc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ltyoxrrznc table {
+<div id="xzlwjoeehh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xzlwjoeehh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ltyoxrrznc thead, #ltyoxrrznc tbody, #ltyoxrrznc tfoot, #ltyoxrrznc tr, #ltyoxrrznc td, #ltyoxrrznc th {
+#xzlwjoeehh thead, #xzlwjoeehh tbody, #xzlwjoeehh tfoot, #xzlwjoeehh tr, #xzlwjoeehh td, #xzlwjoeehh th {
   border-style: none;
 }
 
-#ltyoxrrznc p {
+#xzlwjoeehh p {
   margin: 0;
   padding: 0;
 }
 
-#ltyoxrrznc .gt_table {
+#xzlwjoeehh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2745,12 +2746,12 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-left-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_caption {
+#xzlwjoeehh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ltyoxrrznc .gt_title {
+#xzlwjoeehh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2762,7 +2763,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-bottom-width: 0;
 }
 
-#ltyoxrrznc .gt_subtitle {
+#xzlwjoeehh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2774,7 +2775,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-top-width: 0;
 }
 
-#ltyoxrrznc .gt_heading {
+#xzlwjoeehh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2786,13 +2787,13 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-right-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_bottom_border {
+#xzlwjoeehh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_col_headings {
+#xzlwjoeehh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2807,7 +2808,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-right-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_col_heading {
+#xzlwjoeehh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2827,7 +2828,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   overflow-x: hidden;
 }
 
-#ltyoxrrznc .gt_column_spanner_outer {
+#xzlwjoeehh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2839,15 +2840,15 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   padding-right: 4px;
 }
 
-#ltyoxrrznc .gt_column_spanner_outer:first-child {
+#xzlwjoeehh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ltyoxrrznc .gt_column_spanner_outer:last-child {
+#xzlwjoeehh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ltyoxrrznc .gt_column_spanner {
+#xzlwjoeehh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2859,11 +2860,11 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   width: 100%;
 }
 
-#ltyoxrrznc .gt_spanner_row {
+#xzlwjoeehh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ltyoxrrznc .gt_group_heading {
+#xzlwjoeehh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2889,7 +2890,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   text-align: left;
 }
 
-#ltyoxrrznc .gt_empty_group_heading {
+#xzlwjoeehh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2904,15 +2905,15 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   vertical-align: middle;
 }
 
-#ltyoxrrznc .gt_from_md > :first-child {
+#xzlwjoeehh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ltyoxrrznc .gt_from_md > :last-child {
+#xzlwjoeehh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ltyoxrrznc .gt_row {
+#xzlwjoeehh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2931,7 +2932,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   overflow-x: hidden;
 }
 
-#ltyoxrrznc .gt_stub {
+#xzlwjoeehh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2944,7 +2945,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   padding-right: 5px;
 }
 
-#ltyoxrrznc .gt_stub_row_group {
+#xzlwjoeehh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2958,15 +2959,15 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   vertical-align: top;
 }
 
-#ltyoxrrznc .gt_row_group_first td {
+#xzlwjoeehh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ltyoxrrznc .gt_row_group_first th {
+#xzlwjoeehh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ltyoxrrznc .gt_summary_row {
+#xzlwjoeehh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2976,16 +2977,16 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   padding-right: 5px;
 }
 
-#ltyoxrrznc .gt_first_summary_row {
+#xzlwjoeehh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_first_summary_row.thick {
+#xzlwjoeehh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ltyoxrrznc .gt_last_summary_row {
+#xzlwjoeehh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2995,7 +2996,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-bottom-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_grand_summary_row {
+#xzlwjoeehh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3005,7 +3006,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   padding-right: 5px;
 }
 
-#ltyoxrrznc .gt_first_grand_summary_row {
+#xzlwjoeehh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3015,7 +3016,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-top-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_last_grand_summary_row_top {
+#xzlwjoeehh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3025,11 +3026,11 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-bottom-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_striped {
+#xzlwjoeehh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ltyoxrrznc .gt_table_body {
+#xzlwjoeehh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3038,7 +3039,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-bottom-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_footnotes {
+#xzlwjoeehh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3052,7 +3053,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-right-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_footnote {
+#xzlwjoeehh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3061,7 +3062,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   padding-right: 5px;
 }
 
-#ltyoxrrznc .gt_sourcenotes {
+#xzlwjoeehh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3075,7 +3076,7 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   border-right-color: #D3D3D3;
 }
 
-#ltyoxrrznc .gt_sourcenote {
+#xzlwjoeehh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3083,72 +3084,72 @@ IDR = \frac{p}{1-p}\left(N_p/N_v\right)
   padding-right: 5px;
 }
 
-#ltyoxrrznc .gt_left {
+#xzlwjoeehh .gt_left {
   text-align: left;
 }
 
-#ltyoxrrznc .gt_center {
+#xzlwjoeehh .gt_center {
   text-align: center;
 }
 
-#ltyoxrrznc .gt_right {
+#xzlwjoeehh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ltyoxrrznc .gt_font_normal {
+#xzlwjoeehh .gt_font_normal {
   font-weight: normal;
 }
 
-#ltyoxrrznc .gt_font_bold {
+#xzlwjoeehh .gt_font_bold {
   font-weight: bold;
 }
 
-#ltyoxrrznc .gt_font_italic {
+#xzlwjoeehh .gt_font_italic {
   font-style: italic;
 }
 
-#ltyoxrrznc .gt_super {
+#xzlwjoeehh .gt_super {
   font-size: 65%;
 }
 
-#ltyoxrrznc .gt_footnote_marks {
+#xzlwjoeehh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ltyoxrrznc .gt_asterisk {
+#xzlwjoeehh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ltyoxrrznc .gt_indent_1 {
+#xzlwjoeehh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ltyoxrrznc .gt_indent_2 {
+#xzlwjoeehh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ltyoxrrznc .gt_indent_3 {
+#xzlwjoeehh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ltyoxrrznc .gt_indent_4 {
+#xzlwjoeehh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ltyoxrrznc .gt_indent_5 {
+#xzlwjoeehh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ltyoxrrznc .katex-display {
+#xzlwjoeehh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ltyoxrrznc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xzlwjoeehh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3263,23 +3264,23 @@ Shift   Accidents Person-Hours
 <span id="cb63-10"><a></a>           <span class="at">IDR_lower =</span> p_est[<span class="dv">2</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">2</span>])<span class="sc">*</span>mult,</span>
 <span id="cb63-11"><a></a>          <span class="at">IDR_higher =</span> p_est[<span class="dv">3</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">3</span>])<span class="sc">*</span>mult) <span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="twhydnrfct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#twhydnrfct table {
+<div id="gxkpitrwjg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gxkpitrwjg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#twhydnrfct thead, #twhydnrfct tbody, #twhydnrfct tfoot, #twhydnrfct tr, #twhydnrfct td, #twhydnrfct th {
+#gxkpitrwjg thead, #gxkpitrwjg tbody, #gxkpitrwjg tfoot, #gxkpitrwjg tr, #gxkpitrwjg td, #gxkpitrwjg th {
   border-style: none;
 }
 
-#twhydnrfct p {
+#gxkpitrwjg p {
   margin: 0;
   padding: 0;
 }
 
-#twhydnrfct .gt_table {
+#gxkpitrwjg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3305,12 +3306,12 @@ Shift   Accidents Person-Hours
   border-left-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_caption {
+#gxkpitrwjg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#twhydnrfct .gt_title {
+#gxkpitrwjg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3322,7 +3323,7 @@ Shift   Accidents Person-Hours
   border-bottom-width: 0;
 }
 
-#twhydnrfct .gt_subtitle {
+#gxkpitrwjg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3334,7 +3335,7 @@ Shift   Accidents Person-Hours
   border-top-width: 0;
 }
 
-#twhydnrfct .gt_heading {
+#gxkpitrwjg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3346,13 +3347,13 @@ Shift   Accidents Person-Hours
   border-right-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_bottom_border {
+#gxkpitrwjg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_col_headings {
+#gxkpitrwjg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3367,7 +3368,7 @@ Shift   Accidents Person-Hours
   border-right-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_col_heading {
+#gxkpitrwjg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3387,7 +3388,7 @@ Shift   Accidents Person-Hours
   overflow-x: hidden;
 }
 
-#twhydnrfct .gt_column_spanner_outer {
+#gxkpitrwjg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3399,15 +3400,15 @@ Shift   Accidents Person-Hours
   padding-right: 4px;
 }
 
-#twhydnrfct .gt_column_spanner_outer:first-child {
+#gxkpitrwjg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#twhydnrfct .gt_column_spanner_outer:last-child {
+#gxkpitrwjg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#twhydnrfct .gt_column_spanner {
+#gxkpitrwjg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3419,11 +3420,11 @@ Shift   Accidents Person-Hours
   width: 100%;
 }
 
-#twhydnrfct .gt_spanner_row {
+#gxkpitrwjg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#twhydnrfct .gt_group_heading {
+#gxkpitrwjg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3449,7 +3450,7 @@ Shift   Accidents Person-Hours
   text-align: left;
 }
 
-#twhydnrfct .gt_empty_group_heading {
+#gxkpitrwjg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3464,15 +3465,15 @@ Shift   Accidents Person-Hours
   vertical-align: middle;
 }
 
-#twhydnrfct .gt_from_md > :first-child {
+#gxkpitrwjg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#twhydnrfct .gt_from_md > :last-child {
+#gxkpitrwjg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#twhydnrfct .gt_row {
+#gxkpitrwjg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3491,7 +3492,7 @@ Shift   Accidents Person-Hours
   overflow-x: hidden;
 }
 
-#twhydnrfct .gt_stub {
+#gxkpitrwjg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3504,7 +3505,7 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#twhydnrfct .gt_stub_row_group {
+#gxkpitrwjg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3518,15 +3519,15 @@ Shift   Accidents Person-Hours
   vertical-align: top;
 }
 
-#twhydnrfct .gt_row_group_first td {
+#gxkpitrwjg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#twhydnrfct .gt_row_group_first th {
+#gxkpitrwjg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#twhydnrfct .gt_summary_row {
+#gxkpitrwjg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3536,16 +3537,16 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#twhydnrfct .gt_first_summary_row {
+#gxkpitrwjg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_first_summary_row.thick {
+#gxkpitrwjg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#twhydnrfct .gt_last_summary_row {
+#gxkpitrwjg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3555,7 +3556,7 @@ Shift   Accidents Person-Hours
   border-bottom-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_grand_summary_row {
+#gxkpitrwjg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3565,7 +3566,7 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#twhydnrfct .gt_first_grand_summary_row {
+#gxkpitrwjg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3575,7 +3576,7 @@ Shift   Accidents Person-Hours
   border-top-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_last_grand_summary_row_top {
+#gxkpitrwjg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3585,11 +3586,11 @@ Shift   Accidents Person-Hours
   border-bottom-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_striped {
+#gxkpitrwjg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#twhydnrfct .gt_table_body {
+#gxkpitrwjg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3598,7 +3599,7 @@ Shift   Accidents Person-Hours
   border-bottom-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_footnotes {
+#gxkpitrwjg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3612,7 +3613,7 @@ Shift   Accidents Person-Hours
   border-right-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_footnote {
+#gxkpitrwjg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3621,7 +3622,7 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#twhydnrfct .gt_sourcenotes {
+#gxkpitrwjg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3635,7 +3636,7 @@ Shift   Accidents Person-Hours
   border-right-color: #D3D3D3;
 }
 
-#twhydnrfct .gt_sourcenote {
+#gxkpitrwjg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3643,72 +3644,72 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#twhydnrfct .gt_left {
+#gxkpitrwjg .gt_left {
   text-align: left;
 }
 
-#twhydnrfct .gt_center {
+#gxkpitrwjg .gt_center {
   text-align: center;
 }
 
-#twhydnrfct .gt_right {
+#gxkpitrwjg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#twhydnrfct .gt_font_normal {
+#gxkpitrwjg .gt_font_normal {
   font-weight: normal;
 }
 
-#twhydnrfct .gt_font_bold {
+#gxkpitrwjg .gt_font_bold {
   font-weight: bold;
 }
 
-#twhydnrfct .gt_font_italic {
+#gxkpitrwjg .gt_font_italic {
   font-style: italic;
 }
 
-#twhydnrfct .gt_super {
+#gxkpitrwjg .gt_super {
   font-size: 65%;
 }
 
-#twhydnrfct .gt_footnote_marks {
+#gxkpitrwjg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#twhydnrfct .gt_asterisk {
+#gxkpitrwjg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#twhydnrfct .gt_indent_1 {
+#gxkpitrwjg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#twhydnrfct .gt_indent_2 {
+#gxkpitrwjg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#twhydnrfct .gt_indent_3 {
+#gxkpitrwjg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#twhydnrfct .gt_indent_4 {
+#gxkpitrwjg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#twhydnrfct .gt_indent_5 {
+#gxkpitrwjg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#twhydnrfct .katex-display {
+#gxkpitrwjg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#twhydnrfct div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gxkpitrwjg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4110,303 +4111,285 @@ NOTE: n is number in *each* group</code></pre>
     
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
         });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-        }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
+          return false;
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
         });
-      }
-          let selectedAnnoteEl;
-          const selectorForAnnotation = ( cell, annotation) => {
-            let cellAttr = 'data-code-cell="' + cell + '"';
-            let lineAttr = 'data-code-annotation="' +  annotation + '"';
-            const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-            return selector;
-          }
-          const selectCodeLines = (annoteEl) => {
-            const doc = window.document;
-            const targetCell = annoteEl.getAttribute("data-target-cell");
-            const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-            const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-            const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-            const lineIds = lines.map((line) => {
-              return targetCell + "-" + line;
-            })
-            let top = null;
-            let height = null;
-            let parent = null;
-            if (lineIds.length > 0) {
-                //compute the position of the single el (top and bottom and make a div)
-                const el = window.document.getElementById(lineIds[0]);
-                top = el.offsetTop;
-                height = el.offsetHeight;
-                parent = el.parentElement.parentElement;
-              if (lineIds.length > 1) {
-                const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-                const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-                height = bottom - top;
-              }
-              if (top !== null && height !== null && parent !== null) {
-                // cook up a div (if necessary) and position it 
-                let div = window.document.getElementById("code-annotation-line-highlight");
-                if (div === null) {
-                  div = window.document.createElement("div");
-                  div.setAttribute("id", "code-annotation-line-highlight");
-                  div.style.position = 'absolute';
-                  parent.appendChild(div);
-                }
-                div.style.top = top - 2 + "px";
-                div.style.height = height + 4 + "px";
-                div.style.left = 0;
-                let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-                if (gutterDiv === null) {
-                  gutterDiv = window.document.createElement("div");
-                  gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                  gutterDiv.style.position = 'absolute';
-                  const codeCell = window.document.getElementById(targetCell);
-                  const gutter = codeCell.querySelector('.code-annotation-gutter');
-                  gutter.appendChild(gutterDiv);
-                }
-                gutterDiv.style.top = top - 2 + "px";
-                gutterDiv.style.height = height + 4 + "px";
-              }
-              selectedAnnoteEl = annoteEl;
-            }
-          };
-          const unselectCodeLines = () => {
-            const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-            elementsIds.forEach((elId) => {
-              const div = window.document.getElementById(elId);
-              if (div) {
-                div.remove();
-              }
-            });
-            selectedAnnoteEl = undefined;
-          };
-            // Handle positioning of the toggle
-        window.addEventListener(
-          "resize",
-          throttle(() => {
-            elRect = undefined;
-            if (selectedAnnoteEl) {
-              selectCodeLines(selectedAnnoteEl);
-            }
-          }, 10)
-        );
-        function throttle(fn, ms) {
-        let throttle = false;
-        let timer;
-          return (...args) => {
-            if(!throttle) { // first call gets through
-                fn.apply(this, args);
-                throttle = true;
-            } else { // all the others get throttled
-                if(timer) clearTimeout(timer); // cancel #2
-                timer = setTimeout(() => {
-                  fn.apply(this, args);
-                  timer = throttle = false;
-                }, ms);
-            }
-          };
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
         }
-          // Attach click handler to the DT
-          const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-          for (const annoteDlNode of annoteDls) {
-            annoteDlNode.addEventListener('click', (event) => {
-              const clickedEl = event.target;
-              if (clickedEl !== selectedAnnoteEl) {
-                unselectCodeLines();
-                const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-                if (activeEl) {
-                  activeEl.classList.remove('code-annotation-active');
-                }
-                selectCodeLines(clickedEl);
-                clickedEl.classList.add('code-annotation-active');
-              } else {
-                // Unselect the line
-                unselectCodeLines();
-                clickedEl.classList.remove('code-annotation-active');
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
               }
-            });
+            }
           }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        } else {
-          return undefined;
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+            let selectedAnnoteEl;
+            const selectorForAnnotation = ( cell, annotation) => {
+              let cellAttr = 'data-code-cell="' + cell + '"';
+              let lineAttr = 'data-code-annotation="' +  annotation + '"';
+              const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+              return selector;
+            }
+            const selectCodeLines = (annoteEl) => {
+              const doc = window.document;
+              const targetCell = annoteEl.getAttribute("data-target-cell");
+              const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+              const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+              const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+              const lineIds = lines.map((line) => {
+                return targetCell + "-" + line;
+              })
+              let top = null;
+              let height = null;
+              let parent = null;
+              if (lineIds.length > 0) {
+                  //compute the position of the single el (top and bottom and make a div)
+                  const el = window.document.getElementById(lineIds[0]);
+                  top = el.offsetTop;
+                  height = el.offsetHeight;
+                  parent = el.parentElement.parentElement;
+                if (lineIds.length > 1) {
+                  const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                  const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                  height = bottom - top;
+                }
+                if (top !== null && height !== null && parent !== null) {
+                  // cook up a div (if necessary) and position it 
+                  let div = window.document.getElementById("code-annotation-line-highlight");
+                  if (div === null) {
+                    div = window.document.createElement("div");
+                    div.setAttribute("id", "code-annotation-line-highlight");
+                    div.style.position = 'absolute';
+                    parent.appendChild(div);
+                  }
+                  div.style.top = top - 2 + "px";
+                  div.style.height = height + 4 + "px";
+                  div.style.left = 0;
+                  let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                  if (gutterDiv === null) {
+                    gutterDiv = window.document.createElement("div");
+                    gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                    gutterDiv.style.position = 'absolute';
+                    const codeCell = window.document.getElementById(targetCell);
+                    const gutter = codeCell.querySelector('.code-annotation-gutter');
+                    gutter.appendChild(gutterDiv);
+                  }
+                  gutterDiv.style.top = top - 2 + "px";
+                  gutterDiv.style.height = height + 4 + "px";
+                }
+                selectedAnnoteEl = annoteEl;
+              }
+            };
+            const unselectCodeLines = () => {
+              const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+              elementsIds.forEach((elId) => {
+                const div = window.document.getElementById(elId);
+                if (div) {
+                  div.remove();
+                }
+              });
+              selectedAnnoteEl = undefined;
+            };
+              // Handle positioning of the toggle
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              elRect = undefined;
+              if (selectedAnnoteEl) {
+                selectCodeLines(selectedAnnoteEl);
+              }
+            }, 10)
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
+                  fn.apply(this, args);
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
+            // Attach click handler to the DT
+            const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+            for (const annoteDlNode of annoteDls) {
+              annoteDlNode.addEventListener('click', (event) => {
+                const clickedEl = event.target;
+                if (clickedEl !== selectedAnnoteEl) {
+                  unselectCodeLines();
+                  const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+                  if (activeEl) {
+                    activeEl.classList.remove('code-annotation-active');
+                  }
+                  selectCodeLines(clickedEl);
+                  clickedEl.classList.add('code-annotation-active');
+                } else {
+                  // Unselect the line
+                  unselectCodeLines();
+                  clickedEl.classList.remove('code-annotation-active');
+                }
+              });
+            }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
