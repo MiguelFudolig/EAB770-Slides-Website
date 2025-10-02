@@ -354,7 +354,7 @@ asked about their caffeine and exercise habits.
 |             |              |              |             |
 |-------------|--------------|--------------|-------------|
 | Age Group   | Caffeine     | Yes Exercise | No Exercise |
-| Young Adult | Yes Caffeine | 121          | 152         |
+| Young Adult | Yes Caffeine | 121          | 158         |
 | Young Adult | No Caffeine  | 36           | 97          |
 | Older Adult | Yes Caffeine | 44           | 132         |
 | Older Adult | No Caffeine  | 15           | 130         |
@@ -547,7 +547,7 @@ run;
 
 Effect parametrization: $logit (\theta_{ij}) = -1.12 - 0.47 * AGEGRP +0.42* CAFFEINE$
 
-Reference Cell parametrization: $logit (\theta_{ij}) = -1.08- 0.91 * AGEGRP +0.84* CAFFEINE$
+Reference Cell parametrization: $logit (\theta_{ij}) = -1.08- 0.93 * AGEGRP +0.84* CAFFEINE$
 
 There is strong evidence of an effect of age (p<0.001). The odds of older adults reporting regular exercise is 0.39 (95% CI: 0.28, 0.56) times that of younger adults.
 
