@@ -10,10 +10,8 @@ format:
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
-    embed-resources: true
-    self-contained-math: true
     code-annotations: true
-
+    chalkboard: true
   pdf: 
     number-sections: true
 ---
