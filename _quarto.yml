@@ -1,6 +1,7 @@
 project:
   type: website
-
+execute: 
+  freeze: auto
 website:
   title: "EAB770: Applied Statistical Methods for Categorical Data"
   navbar: 

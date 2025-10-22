@@ -1,0 +1,17 @@
+{
+  "hash": "ca643812e96da4ed61e4e1e0c7e97389",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"EAB 770 - Chapter 11\"\nauthor: \"Miguel Fudolig\"\nengine: knitr\nformat:\n  revealjs:\n    theme: clean.scss\n    scrollable: true\n    footer: \"Chapter 10- [Back to home](https://madfudolig.quarto.pub/eab770slides/)\"\n    code-block-bg: true\n    code-block-border-left: \"#31BAE9\"\n    slide-number: true\n    menu: true\n    code-annotations: true\n    chalkboard: true\n  pdf: \n    number-sections: true\n---\n\n# Categorized Time-to-Event Data\n\n## Outline\n\n-   Categorical Time-to-Event Data\n-   Life Table Estimation\n-   Mantel-Cox methods\n-   Piecewise Exponential Methods\n\n## Time-to-Event Data\n\nTime-to-event data are generated from time to treatment/exposure until some event as their outcome.\n\n::: callout-note\nSometimes, you can only determine the interval of time during which an event occurs. Examples include evaluating animals every four hours after exposure to bacteria and examining patients every half a year for the recurrence of their medical condition.\n\nData from these studies are referred to as *grouped survival data* or *categorized survival data*.\n:::\n\n## Withdrawals\n\nWithdrawals are instances when subjects leave the study before the study ends.\n\n::: callout-note\nWithdrawals are assumed to be independent of the condition being studied and that multiple withdrawals occur uniformly throughout the interval. After each interval between successive evaluations, the number of withdrawals are also measured.\n:::\n\n::: callout-important\nThe survival status of subjects who withdrew is unknown, hence the data ends up being *censored*.\n:::\n\n# Life Table Estimation: Survival Rates\n\n## Survival Rates\n\nWe are often interested in estimating the survival rates for each method. The survival rate can be expressed as\n\n$$\nS(y) = 1-F(y) = P(Y \\geq y)\n$$\n\nwhere $Y$ is the random variable that denotes the continuous lifetime of a subject and $F(y)$ is the cumulative distribution function.\n\n::: callout-note\nThe cumulative distribution function is commonly chosen to be the Weibull distribution, but there are other functions that people can use.\n:::\n\n## Life Table\n\nThe life table or actuarial method calculates the survival rates by determining the number of subjects at risk for each time interval. The number of subjects with no recurrence for each interval can be counted when the following is known:\n\n-   Number of withdrawals\n-   Number of recurrences\n-   Number of subjects who survived with no recurrence\n\n## Life Table\n\nEach treatment group will have a life table with the following format:\n\n|          |           |        |             |         |\n|----------|-----------|--------|-------------|---------|\n| Interval | No Events | Events | Withdrawals | At Risk |\n\n\n",
+    "supporting": [
+      "Chapter13_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}

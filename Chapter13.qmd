@@ -79,3 +79,5 @@ Each treatment group will have a life table with the following format:
 |          |           |        |             |         |
 |----------|-----------|--------|-------------|---------|
 | Interval | No Events | Events | Withdrawals | At Risk |
+
+
