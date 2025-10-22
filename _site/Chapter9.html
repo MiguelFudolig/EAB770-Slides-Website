@@ -306,7 +306,7 @@ Miguel Fudolig
 <h2>Cumulative logits</h2>
 <p>Cumulative logits can be defined based on the cumulative probabilities <span class="math inline">\(\theta_{hij}\)</span>. For a specific level <span class="math inline">\(k\)</span> out of <span class="math inline">\(K\)</span> levels,</p>
 <p><span class="math display">\[
-logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \log\left(\frac{\sum_{j=1}^k\theta_{hij}}{1-\sum_{j=1}^k\theta_{hij}}\right) = \log\left(\frac{\sum_{j=1}^k\theta_{hij}}{\sum_{j=k+1}^K\theta_{hij}}\right)
+logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \log\left(\frac{\sum_{j=1}^k\pi_{hij}}{1-\sum_{j=1}^k\pi_{hij}}\right) = \log\left(\frac{\sum_{j=1}^k\pi_{hij}}{\sum_{j=k+1}^K\pi_{hij}}\right)
 \]</span></p>
 </section>
 <section id="cumulative-logits-1" class="slide level2">
@@ -1321,7 +1321,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

@@ -29,6 +29,8 @@ website:
         text: "Chapter 10: Conditional Logistic Regression"
       - href: Chapter12.qmd
         text: "Chapter 12: Poisson Regression and Other Loglinear Models"
+      - href: Chapter13.qmd
+        text: "Chapter 13: Categorized Time-to-Event Data"
       - href: Chapter14.qmd
         text: "Chapter 14: Weighted Least Squares"
       - href: Chapter15.qmd

@@ -1145,10 +1145,12 @@ logit (\theta) = \eta = \alpha + \beta_1 X_{a1} + \beta_2 X_{a2}
 <li>Generate the main effects using contrast statements.</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Table</a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Table</a></li><li><a href="#tabset-10-2">SAS Data Set</a></li></ul>
 <div class="tab-content">
 <div id="tabset-10-1">
-<p><img data-src="img/byss_C8.png"> ### SAS Data Set</p>
+<p><img data-src="img/byss_C8.png"></p>
+</div>
+<div id="tabset-10-2">
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>data byss;</span>
 <span id="cb13-2"><a></a>input work <span class="sc">$</span> years <span class="sc">$</span> smoke <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb13-3"><a></a>datalines ;</span>
@@ -1168,16 +1170,18 @@ logit (\theta) = \eta = \alpha + \beta_1 X_{a1} + \beta_2 X_{a2}
 <section id="example-6" class="slide level2">
 <h2>Example</h2>
 <p>The data set is from a cross-sectional prevalence study conducted to investigate textile worker complaints about respiratory symptoms experienced while working in the mills. Investigators were interested in whether occupational environment was related to prevalence of respiratory ailments associated with the disease byssinosis.</p>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Questions</a></li><li><a href="#tabset-11-2">SAS Code</a></li><li><a href="#tabset-11-3">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
 <ul>
 <li>Use logistic regression to model the probability of complaining based on workplace condition, years of employment, and smoking history. Include only up to two-way interaction effects.</li>
 <li>Is there evidence of any two-way interactions at a significance level of 0.10?</li>
 <li>Generate an interaction plot for these cases.</li>
 <li>Generate the main effects using contrast statements.</li>
 </ul>
-<div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">Answer</a></li></ul>
-<div class="tab-content">
-<div id="tabset-11-1">
+</div>
+<div id="tabset-11-2">
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>proc logistic data<span class="ot">=</span>byss;</span>
 <span id="cb14-2"><a></a>freq count;</span>
 <span id="cb14-3"><a></a>class work <span class="fu">years</span>(<span class="at">ref=</span>first) <span class="fu">smoke</span>(<span class="at">ref=</span>first) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
@@ -1189,7 +1193,7 @@ logit (\theta) = \eta = \alpha + \beta_1 X_{a1} + \beta_2 X_{a2}
 <span id="cb14-9"><a></a>contrast <span class="st">'smoke'</span> smoke <span class="dv">1</span>;</span>
 <span id="cb14-10"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tabset-11-2">
+<div id="tabset-11-3">
 <p><span class="math inline">\(Work*Smoke\)</span> (p = 0.07) is significant at the 0.10 level.</p>
 </div>
 </div>
@@ -1328,7 +1332,7 @@ logit (\theta) = \eta = \alpha + \beta_1 X_{a1} + \beta_2 X_{a2}
 <li>What is the resulting logistic model?</li>
 <li>Calculate the odds ratio for patients that differ in age by 10 years.</li>
 </ul>
-<h3 id="sas-data-set-1">SAS Data Set</h3>
+<h3 id="sas-data-set-2">SAS Data Set</h3>
 <div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a></span>
 <span id="cb17-2"><a></a>data coronary;</span>
 <span id="cb17-3"><a></a>input sex ecg age ca <span class="sc">@</span><span class="er">@</span> ;</span>
@@ -1757,7 +1761,7 @@ logit(\theta) = 0.38 - 0.68*Pesticide - 1.10 * CoverCrop - 0.27*Yield
 <li>Test for the interaction of years of employment and smoking for dusty workplace conditions.</li>
 <li>Calculate the odds ratio of developing byssinosis between the two work conditions.</li>
 </ul>
-<h3 id="sas-data-set-2">SAS Data Set</h3>
+<h3 id="sas-data-set-3">SAS Data Set</h3>
 <div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>data byss;</span>
 <span id="cb25-2"><a></a>input work <span class="sc">$</span> years <span class="sc">$</span> smoke <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb25-3"><a></a>datalines ;</span>

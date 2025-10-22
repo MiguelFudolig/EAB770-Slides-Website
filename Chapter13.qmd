@@ -1,0 +1,81 @@
+---
+title: "EAB 770 - Chapter 11"
+author: "Miguel Fudolig"
+engine: knitr
+format:
+  revealjs:
+    theme: clean.scss
+    scrollable: true
+    footer: "Chapter 10- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    slide-number: true
+    menu: true
+    code-annotations: true
+    chalkboard: true
+  pdf: 
+    number-sections: true
+---
+
+# Categorized Time-to-Event Data
+
+## Outline
+
+-   Categorical Time-to-Event Data
+-   Life Table Estimation
+-   Mantel-Cox methods
+-   Piecewise Exponential Methods
+
+## Time-to-Event Data
+
+Time-to-event data are generated from time to treatment/exposure until some event as their outcome.
+
+::: callout-note
+Sometimes, you can only determine the interval of time during which an event occurs. Examples include evaluating animals every four hours after exposure to bacteria and examining patients every half a year for the recurrence of their medical condition.
+
+Data from these studies are referred to as *grouped survival data* or *categorized survival data*.
+:::
+
+## Withdrawals
+
+Withdrawals are instances when subjects leave the study before the study ends.
+
+::: callout-note
+Withdrawals are assumed to be independent of the condition being studied and that multiple withdrawals occur uniformly throughout the interval. After each interval between successive evaluations, the number of withdrawals are also measured.
+:::
+
+::: callout-important
+The survival status of subjects who withdrew is unknown, hence the data ends up being *censored*.
+:::
+
+# Life Table Estimation: Survival Rates
+
+## Survival Rates
+
+We are often interested in estimating the survival rates for each method. The survival rate can be expressed as
+
+$$
+S(y) = 1-F(y) = P(Y \geq y)
+$$
+
+where $Y$ is the random variable that denotes the continuous lifetime of a subject and $F(y)$ is the cumulative distribution function.
+
+::: callout-note
+The cumulative distribution function is commonly chosen to be the Weibull distribution, but there are other functions that people can use.
+:::
+
+## Life Table
+
+The life table or actuarial method calculates the survival rates by determining the number of subjects at risk for each time interval. The number of subjects with no recurrence for each interval can be counted when the following is known:
+
+-   Number of withdrawals
+-   Number of recurrences
+-   Number of subjects who survived with no recurrence
+
+## Life Table
+
+Each treatment group will have a life table with the following format:
+
+|          |           |        |             |         |
+|----------|-----------|--------|-------------|---------|
+| Interval | No Events | Events | Withdrawals | At Risk |

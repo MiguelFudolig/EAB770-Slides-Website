@@ -846,6 +846,7 @@ The data set is from a cross-sectional prevalence study conducted to investigate
 ### Table
 
 ![](img/byss_C8.png)
+
 ### SAS Data Set
 ```{.r}
 data byss;
@@ -867,12 +868,16 @@ not >=10 no yes 10 not >=10 no no 986
 
 The data set is from a cross-sectional prevalence study conducted to investigate textile worker complaints about respiratory symptoms experienced while working in the mills. Investigators were interested in whether occupational environment was related to prevalence of respiratory ailments associated with the disease byssinosis.
 
+:::{.panel-tabset}
+
+### Questions
+
 - Use logistic regression to model the probability of complaining based on workplace condition, years of employment, and smoking history. Include only up to two-way interaction effects.
 - Is there evidence of any two-way interactions at a significance level of 0.10?
 - Generate an interaction plot for these cases.
 - Generate the main effects using contrast statements.
 
-:::{.panel-tabset}
+
 ### SAS Code
 
 ```{.r}
