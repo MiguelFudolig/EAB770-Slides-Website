@@ -64,6 +64,20 @@ where $Y$ is the random variable that denotes the continuous lifetime of a subje
 The cumulative distribution function is commonly chosen to be the Weibull distribution, but there are other functions that people can use.
 :::
 
+## Hazard Function
+
+The hazard function, $h(y)$ is related to the survival rate through the following equation:
+
+$$
+S(y) = \exp \left(-\int_0^y h(t) dt\right) = \exp [-H(y)]
+$$
+
+where $H(y)$ is the cumulative hazard function.
+
+::: callout-note
+$H(y)$ is the negative logarithm of the survival probability.
+:::
+
 ## Life Table
 
 The life table or actuarial method calculates the survival rates by determining the number of subjects at risk for each time interval. The number of subjects with no recurrence for each interval can be counted when the following is known:
@@ -81,3 +95,385 @@ Each treatment group will have a life table with the following format:
 | Interval | No Events | Events | Withdrawals | At Risk |
 
 
+::: callout-note
+
+While the Kaplan-Meier method is preferable in most cases, the life table method can be used for large data sets and grouped survival data.
+:::
+
+## Life Table Estimation
+
+::: callout-note
+Define $n_{ijk}$ to be the number of patients in the $i^{th}$ group with the $j^{th}$ status for the $k^{th}$ time interval. $j=0$ corresponds to no recurrence, $j=1,2$ corresponds to those with recurrence and those withdrawn during the interval, respectively. The interval can take the following values: $k=1,2,...,t$
+:::
+
+The number of patients in the $i^{th}$ group who have no recurrence at the $k^{th}$ interval can be expressed as:
+
+$$
+n_{i0k} = n_{i0t} + \sum_{j=1}^2 \sum_{g=k+1}^t n_{ijg}
+$$
+
+The first term includes those who have no recurrence at time $t$, while the second term accounts for those with recurrence and withdrawn from $k+1$ to $t$ interval. 
+
+## Survival Probability
+
+The life table estimates for the probability of surviving at least $k$ intervals are computed as:
+
+$$
+G_{ik} = \prod_{g=1}^k \frac{n_{i0g} + 0.5n_{i2g}}{n_{i0g} + 0.5n_{i2g} + n_{i1g}} = \prod_{g=1}^k p_{ig}
+$$
+
+::: panel-tabset
+
+### Notes
+::: callout-important
+$p_{ig}$ corresponds to the estimated conditional probability for surviving the $g^{th}$ interval given that survival of all preceding intervals has occurred.
+
+The term $0.5n_{i2g}$ accounts for the assumptions that the withdrawals are uniform throughout the interval and that withdrawals are not to have the event at the time of withdrawal.
+:::
+
+### Standard Error
+
+The corresponding standard error of $G_{ik}$ is:
+
+$$
+se(G_{ik}) = G_{ik} \sqrt{\sum_{g=1}^k \left[\frac{(1-p_{ig})}{n_{i0g} + 0.5 n_{i2g}}\right]}
+$$
+
+:::
+
+
+## SAS Implementation
+
+The `LIFETEST` procedure provides life table analysis for categorized time-to-event data.
+
+::: callout-note
+`LIFETEST` calculates survival estimates according to the Kaplan-Meier method by default, so the life table needs to be specified using the `method=lt` option in the `proc lifetest` statement.
+:::
+
+Shown below is the sample code:
+
+```{.r}
+proc lifetest data=data method=lt plots=(s,ls) intervals=0 to k by 1;
+freq count;
+strata treatment;
+time interval*censor(1);
+run;
+```
+
+## Comparison across strata
+
+Survival curves are commonly compared across strata (treatment). SAS provides three different tests to test for a difference between the curves across the strata. This is found in the "Test of Equality over Strata" table
+
+
+::: panel-tabset
+### Log-Rank
+
+The **Log-Rank** test is a nonparametric tests that require no assumption for the event time distribution. This test is more powerful when the two groups have similar rates of early events, with one having more long-term survivors than the other.
+
+
+### Wilcoxon
+
+The **Wilcoxon** test is also a non-parametric test that is more powerful when one group has a tendency to have fewer early events and longer survival times.
+
+### LR
+
+The **Likelihood Ratio** (-2LogLR) test is a parametric test that works best under the assumption that the time distribution is exponential. The LR test is best if there is a linear trend through the origin, indicating consistency with exponential event times.
+
+### Modified Peto-Peto Test
+
+The Modified Peto-Peto Test can be used when survival curves cross. This test is a variation of the log-rank test that assumes weights that detect earlier event differences. This can be specified in the `STRATA` statement using `test=modpeto`.
+:::
+
+
+## Example
+
+Investigators were interested in comparing an active and control treatment to prevent the recurrence of a medical condition that had been healed. They applied a diagnostic procedure at the end of the first, second, and third years to determine whether there was a recurrence. Use the life table method to test if there is a difference in survival curves between the active and control treatments.
+
+::: panel-tabset
+### SAS Data Set
+
+The variable `INTERVAL` takes the value 0, 1, 2, or 3, corresponding to the following intervals: <1 Year, 1-2 Year, 2-3 Years, >3 Years (no recurrence at the end of the study). and the variable `CENSOR` takes the value 1 for censored subjects and 0 otherwise. The variable `TREATMENT` reflects whether the subjects received the active treatment or acted as controls, and the variable `COUNT` contains the frequency counts.
+
+```{.r}
+data medical;
+input interval treatment $ censor count @@;
+datalines;
+0 control 1 9 0 control 0 15
+1 control 1 7 1 control 0 13
+2 control 1 6 2 control 0 7
+3 control 1 17
+0 active 1 9 0 active 0 12
+1 active 1 3 1 active 0 7
+2 active 1 4 2 active 0 10
+3 active 1 45
+;
+```
+
+
+
+### SAS Code
+
+```{.r}
+proc lifetest data=medical method=lt plots=(s,ls) intervals=0 to 3 by 1;
+freq count;
+strata treatment/test=(logrank lr modpeto wilcoxon);
+time interval*censor(1);
+run;
+```
+
+### Answer
+
+Based on the survival curves, the log-rank test might be preferred ($\chi^2$ = 5.88, p=0.015). At a significance level of 0.05, there is sufficient evidence of a difference between the survival curves between the two treatments.
+
+
+
+
+:::
+
+## Exercise
+
+A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the life table method to test if there is a difference in survival curves between the active and control treatments.
+
+::: panel-tabset
+### SAS Data Set
+
+The variable `INTERVAL` takes the value 0, 1, 2, corresponding to the following intervals: <6 months, 6-12 months, >12 months (no occurrence at the end of the study). and the variable `CENSOR` takes the value 1 for censored subjects and 0 otherwise. The variable `PROFILE` reflects whether the subjects are part of the group that presented with mental health sequelae (MH) and those that did not (NoMH), and the variable `COUNT` contains the frequency counts.
+
+```{.r}
+data mTBI;
+input interval profile $ censor count @@;
+datalines;
+0 NoMH 1 1 0 NoMH 0 17
+1 NoMH 1 6 1 NoMH 0 9
+2 NoMH 1 20 
+0 MH 1 8 0 MH 0 15
+1 MH 1 2 1 MH 0 7
+2 MH 1 10 
+;
+```
+
+### SAS Code
+
+```{.r}
+proc lifetest data=mTBI method=lt plots=(s,ls)
+intervals=0 to 2 by 1;
+freq count;
+strata profile/test=(logrank lr modpeto wilcoxon);
+time interval*censor(1);
+run;
+```
+
+### Answer
+
+There is insufficient evidence of a difference between the survival curves of the two groups based on the modified Peto-Peto test ($\chi^2$ = 0.5012, p=0.48) and the Wilcoxon test ($\chi^2$ = 0.4339, p=0.51) .
+
+
+:::
+
+## Mantel-Cox Test
+
+The Mantel-Cox test tests the null hypothesis that the survival rates are the same across the groups. The Mantel-Haenszel methodology was extended to survival data by formatting the frequencies as a set of 2x2 life tables and using the Mantel-Haenszel computations for these sets of tables.
+
+::: callout-important
+
+The treatment/groups define the rows, recurrence status define the columns, and intervals are the strata, under the assumption that the time interval results are uncorrelated. Withdrawals are grouped with the no recurrence group or eliminated entirely.
+:::
+
+::: callout-note
+
+The Mantel-Cox test for grouped data is equivalent to the log-rank test for comparing survival curves for ungrouped data.
+:::
+
+
+## Example
+
+Investigators were interested in comparing an active and control treatment to prevent the recurrence of a medical condition that had been healed. They applied a diagnostic procedure at the end of the first, second, and third years to determine whether there was a recurrence. Use the Mantel-Cox method to test if there is a difference in survival rates between the active and control treatments.
+
+::: panel-tabset
+### SAS Data Set
+
+The data set excludes censored data.
+
+```{.r}
+data medical_mc;
+input time $ treatment $ status $ count @@;
+datalines;
+0-1 control recur 15 0-1 control not 50
+0-1 active recur 12 0-1 active not 69
+1-2 control recur 13 1-2 control not 30
+1-2 active recur 7 1-2 active not 59
+2-3 control recur 7 2-3 control not 17
+2-3 active recur 10 2-3 active not 45
+;
+```
+
+### SAS Code
+
+```{.r}
+proc freq data=medical_mc order=data;
+weight count;
+tables time*treatment*status / cmh;
+run;
+```
+
+### Answer
+
+The Cochran-Mantel-Haenszel test shows sufficient evidence of a treatment effect on survival rates (Q=8.03,p=0.0046).
+
+::: callout-note
+If the withdrawals were grouped with no recurrences, the results will be identical to the log-rank test in the previous example
+:::
+
+:::
+
+## Exercise
+
+A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the Mantel-Cox method to test if there is a difference in survival rates between the the two profiles.
+
+::: panel-tabset
+### SAS Data Set
+
+```{.r}
+data mTBI_mc;
+input time $ profile $ status $ count @@;
+datalines;
+0-6 NoMH recur 17 0-6 NoMH not 35
+0-6 MH recur 15 0-6 MH not 19
+6-12 NoMH recur 9 6-12 NoMH not 20
+6-12 MH recur 7 6-12 MH not 10
+;
+```
+
+### SAS Code
+
+```{.r}
+proc freq data=mTBI_mc order=data;
+weight count;
+tables time*profile*status / cmh;
+run;
+```
+
+### Answer
+
+There is insufficient evidence of a difference between the survival rates of the two groups based on the Mantel-Cox test ($Q$ = 1.6072, p=0.20). 
+
+:::
+
+## Piecewise Exponential Models
+
+Grouped survival data can be analyzed by providing a description of the pattern of event rates.
+
+::: callout-note
+The piecewise exponential model assumes that withdrawals are uniformly distributed during the time intervals in which they occur and unrelated to treatment failures. The within-interval probabilities of treatment failures are also assumed to be small and have independent exponential distributions.
+:::
+
+## Piecewise Exponential Likelihood
+
+The piecewise exponential likelihood can be written as:
+
+$$
+\Phi_{PE} = \prod_i \prod_k \lambda_{ik}^{n_i1k} \left[\exp (-\lambda_{ik}N_{ik})\right]
+$$
+
+where $n_{i1k}$ is the number of failures of group $i$ during the interval $k$, $N_{ik}$ is the person-months of exposure, and $\lambda_{ik}$ is the hazard parameter.
+
+::: callout-important
+The piecewise exponential model assumes independent exponential distributions with hazard parameters $\lambda_{ik}$ for the respective time periods.
+:::
+
+## Piecewise Exponential Likelihood
+
+$N_{ik}$ is computed as 
+
+$$
+N_{ik} = a_k(n_{i0k} + 0.5n_{i1k} + 0.5n_{i2k})
+$$
+
+where $a_k$ is the length of the interval $k$. The conditional Poisson distribution of the number of failures/deaths conditioned on the exposure level also follows a Poisson likelihood.
+
+::: callout-note
+Since the likelihoods are proportional, whatever maximizes the conditional likelihood also maximizes the piecewise exponential likelihood.
+:::
+
+## Hazard Parameter
+
+We can specify a model for the hazard parameter $\lambda_{ik}$ such that
+
+$$
+\log \lambda_{ik} = \alpha + \eta_k + \beta_1X_{1i} + \beta_2 X_{2i} +...
+$$
+
+::: callout-note
+This is similar to the proportional hazards model.
+:::
+
+## SAS Implementation
+
+Both `LOGISTIC` and `GENMOD` can implement the piecewise exponential model analyses.
+
+::: callout-important
+The `GENMOD` procedure uses the Poisson likelihood to estimate failure rates, while `LOGISTIC` uses the response `failure/trials`.
+:::
+
+## Example
+
+The data includes information pertaining to the experience of patients undergoing treatment for duodenal ulcers. types of surgeries was randomly assigned: vagotomy and drainage or antrectomy (VDA), or vagotomy and hemigastrectomy (VH). The patients were evaluated at 6 months, 24 months, and 60 months. Use the piecewise exponential model to test for a treatment effect and if there is a difference in failure rates in time.
+
+::: panel-tabset
+
+### SAS Data Set
+
+```{.r}
+data vda;
+input treatment $ time $ failure months;
+nmonths=log(months);
+datalines;
+vda _0-6 23 3894
+vda 7-24 32 10872
+vda 25-60 45 18720
+vh _0-6 9 2016
+vh 7-24 5 5724
+vh 25-60 10 10440
+;
+```
+
+### `GENMOD`
+
+```{.r}
+proc genmod data=vda;
+class treatment time;
+model failure = time treatment
+/ dist=poisson link=log offset=nmonths;
+estimate "failure rate 25-60 VH" int 1 time 1 0 0 treatment 0 1/exp;
+estimate "failure rate 25-60 VDA" int 1 time 1 0 0 treatment 1 0/exp;
+run;
+```
+
+### `LOGISTIC`
+
+```{.r}
+data vda;
+input treatment time $ failure months;
+smonths=100000*months;
+datalines;
+1 _0-6 23 3894
+1 7-24 32 10872
+1 25-60 45 18720
+0 _0-6 9 2016
+0 7-24 5 5724
+0 25-60 10 10440
+;
+
+proc logistic;
+class time/param=ref;
+model failure/smonths = time treatment time*treatment /
+scale=none include=2 selection=forward;
+run;
+```
+
+### Results
+
+From the `GENMOD` results, the failure rates for the VDA treatment decreases across time. ($\beta$ = -0.88,-1.04; p = <0.0001, 0.0002) The failure rate is higher for VDA compared to VH ($\beta$=0.8071, p=0.006) 
+
+The failure rates can be estimated using the `estimate` statement.The failure rate of VDA at 25-60 months is 0.0024 (0.0018,0.0031), while VH has a failure rate of 0.0010 (0.0007,0.0016).
+:::

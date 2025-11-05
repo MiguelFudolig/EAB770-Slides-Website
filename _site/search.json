@@ -1860,6 +1860,16 @@
     ]
   },
   {
+    "objectID": "Chapter13.html#hazard-function",
+    "href": "Chapter13.html#hazard-function",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Hazard Function",
+    "text": "Hazard Function\nThe hazard function, \\(h(y)\\) is related to the survival rate through the following equation:\n\\[\nS(y) = \\exp \\left(-\\int_0^y h(t) dt\\right) = \\exp [-H(y)]\n\\]\nwhere \\(H(y)\\) is the cumulative hazard function.\n\n\n\n\n\n\nNote\n\n\n\\(H(y)\\) is the negative logarithm of the survival probability.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
     "objectID": "Chapter13.html#life-table",
     "href": "Chapter13.html#life-table",
     "title": "EAB 770 - Chapter 11",
@@ -1874,7 +1884,157 @@
     "href": "Chapter13.html#life-table-1",
     "title": "EAB 770 - Chapter 11",
     "section": "Life Table",
-    "text": "Life Table\nEach treatment group will have a life table with the following format:\n\n\n\nInterval\nNo Events\nEvents\nWithdrawals\nAt Risk",
+    "text": "Life Table\nEach treatment group will have a life table with the following format:\n\n\n\nInterval\nNo Events\nEvents\nWithdrawals\nAt Risk\n\n\n\n\n\n\n\n\n\nNote\n\n\nWhile the Kaplan-Meier method is preferable in most cases, the life table method can be used for large data sets and grouped survival data.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#life-table-estimation",
+    "href": "Chapter13.html#life-table-estimation",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Life Table Estimation",
+    "text": "Life Table Estimation\n\n\n\n\n\n\nNote\n\n\nDefine \\(n_{ijk}\\) to be the number of patients in the \\(i^{th}\\) group with the \\(j^{th}\\) status for the \\(k^{th}\\) time interval. \\(j=0\\) corresponds to no recurrence, \\(j=1,2\\) corresponds to those with recurrence and those withdrawn during the interval, respectively. The interval can take the following values: \\(k=1,2,...,t\\)\n\n\n\nThe number of patients in the \\(i^{th}\\) group who have no recurrence at the \\(k^{th}\\) interval can be expressed as:\n\\[\nn_{i0k} = n_{i0t} + \\sum_{j=1}^2 \\sum_{g=k+1}^t n_{ijg}\n\\]\nThe first term includes those who have no recurrence at time \\(t\\), while the second term accounts for those with recurrence and withdrawn from \\(k+1\\) to \\(t\\) interval.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#survival-probability",
+    "href": "Chapter13.html#survival-probability",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Survival Probability",
+    "text": "Survival Probability\nThe life table estimates for the probability of surviving at least \\(k\\) intervals are computed as:\n\\[\nG_{ik} = \\prod_{g=1}^k \\frac{n_{i0g} + 0.5n_{i2g}}{n_{i0g} + 0.5n_{i2g} + n_{i1g}} = \\prod_{g=1}^k p_{ig}\n\\]\n\nNotesStandard Error\n\n\n\n\n\n\n\n\nImportant\n\n\n\\(p_{ig}\\) corresponds to the estimated conditional probability for surviving the \\(g^{th}\\) interval given that survival of all preceding intervals has occurred.\nThe term \\(0.5n_{i2g}\\) accounts for the assumptions that the withdrawals are uniform throughout the interval and that withdrawals are not to have the event at the time of withdrawal.\n\n\n\n\n\nThe corresponding standard error of \\(G_{ik}\\) is:\n\\[\nse(G_{ik}) = G_{ik} \\sqrt{\\sum_{g=1}^k \\left[\\frac{(1-p_{ig})}{n_{i0g} + 0.5 n_{i2g}}\\right]}\n\\]",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#sas-implementation",
+    "href": "Chapter13.html#sas-implementation",
+    "title": "EAB 770 - Chapter 11",
+    "section": "SAS Implementation",
+    "text": "SAS Implementation\nThe LIFETEST procedure provides life table analysis for categorized time-to-event data.\n\n\n\n\n\n\nNote\n\n\nLIFETEST calculates survival estimates according to the Kaplan-Meier method by default, so the life table needs to be specified using the method=lt option in the proc lifetest statement.\n\n\n\nShown below is the sample code:\nproc lifetest data=data method=lt plots=(s,ls) intervals=0 to k by 1;\nfreq count;\nstrata treatment;\ntime interval*censor(1);\nrun;",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#comparison-across-strata",
+    "href": "Chapter13.html#comparison-across-strata",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Comparison across strata",
+    "text": "Comparison across strata\nSurvival curves are commonly compared across strata (treatment). SAS provides three different tests to test for a difference between the curves across the strata. This is found in the “Test of Equality over Strata” table\n\nLog-RankWilcoxonLRModified Peto-Peto Test\n\n\nThe Log-Rank test is a nonparametric tests that require no assumption for the event time distribution. This test is more powerful when the two groups have similar rates of early events, with one having more long-term survivors than the other.\n\n\nThe Wilcoxon test is also a non-parametric test that is more powerful when one group has a tendency to have fewer early events and longer survival times.\n\n\nThe Likelihood Ratio (-2LogLR) test is a parametric test that works best under the assumption that the time distribution is exponential. The LR test is best if there is a linear trend through the origin, indicating consistency with exponential event times.\n\n\nThe Modified Peto-Peto Test can be used when survival curves cross. This test is a variation of the log-rank test that assumes weights that detect earlier event differences. This can be specified in the STRATA statement using test=modpeto.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#example",
+    "href": "Chapter13.html#example",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Example",
+    "text": "Example\nInvestigators were interested in comparing an active and control treatment to prevent the recurrence of a medical condition that had been healed. They applied a diagnostic procedure at the end of the first, second, and third years to determine whether there was a recurrence. Use the life table method to test if there is a difference in survival curves between the active and control treatments.\n\nSAS Data SetSAS CodeAnswer\n\n\nThe variable INTERVAL takes the value 0, 1, 2, or 3, corresponding to the following intervals: &lt;1 Year, 1-2 Year, 2-3 Years, &gt;3 Years (no recurrence at the end of the study). and the variable CENSOR takes the value 1 for censored subjects and 0 otherwise. The variable TREATMENT reflects whether the subjects received the active treatment or acted as controls, and the variable COUNT contains the frequency counts.\ndata medical;\ninput interval treatment $ censor count @@;\ndatalines;\n0 control 1 9 0 control 0 15\n1 control 1 7 1 control 0 13\n2 control 1 6 2 control 0 7\n3 control 1 17\n0 active 1 9 0 active 0 12\n1 active 1 3 1 active 0 7\n2 active 1 4 2 active 0 10\n3 active 1 45\n;\n\n\nproc lifetest data=medical method=lt plots=(s,ls) intervals=0 to 3 by 1;\nfreq count;\nstrata treatment/test=(logrank lr modpeto wilcoxon);\ntime interval*censor(1);\nrun;\n\n\nBased on the survival curves, the log-rank test might be preferred (\\(\\chi^2\\) = 5.88, p=0.015). At a significance level of 0.05, there is sufficient evidence of a difference between the survival curves between the two treatments.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#exercise",
+    "href": "Chapter13.html#exercise",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Exercise",
+    "text": "Exercise\nA study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the life table method to test if there is a difference in survival curves between the active and control treatments.\n\nSAS Data SetSAS CodeAnswer\n\n\nThe variable INTERVAL takes the value 0, 1, 2, corresponding to the following intervals: &lt;6 months, 6-12 months, &gt;12 months (no occurrence at the end of the study). and the variable CENSOR takes the value 1 for censored subjects and 0 otherwise. The variable PROFILE reflects whether the subjects are part of the group that presented with mental health sequelae (MH) and those that did not (NoMH), and the variable COUNT contains the frequency counts.\ndata mTBI;\ninput interval profile $ censor count @@;\ndatalines;\n0 NoMH 1 1 0 NoMH 0 17\n1 NoMH 1 6 1 NoMH 0 9\n2 NoMH 1 20 \n0 MH 1 8 0 MH 0 15\n1 MH 1 2 1 MH 0 7\n2 MH 1 10 \n;\n\n\nproc lifetest data=mTBI method=lt plots=(s,ls)\nintervals=0 to 2 by 1;\nfreq count;\nstrata profile/test=(logrank lr modpeto wilcoxon);\ntime interval*censor(1);\nrun;\n\n\nThere is insufficient evidence of a difference between the survival curves of the two groups based on the modified Peto-Peto test (\\(\\chi^2\\) = 0.5012, p=0.48) and the Wilcoxon test (\\(\\chi^2\\) = 0.4339, p=0.51) .",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#mantel-cox-test",
+    "href": "Chapter13.html#mantel-cox-test",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Mantel-Cox Test",
+    "text": "Mantel-Cox Test\nThe Mantel-Cox test tests the null hypothesis that the survival rates are the same across the groups. The Mantel-Haenszel methodology was extended to survival data by formatting the frequencies as a set of 2x2 life tables and using the Mantel-Haenszel computations for these sets of tables.\n\n\n\n\n\n\nImportant\n\n\nThe treatment/groups define the rows, recurrence status define the columns, and intervals are the strata, under the assumption that the time interval results are uncorrelated. Withdrawals are grouped with the no recurrence group or eliminated entirely.\n\n\n\n\n\n\n\n\n\nNote\n\n\nThe Mantel-Cox test for grouped data is equivalent to the log-rank test for comparing survival curves for ungrouped data.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#example-1",
+    "href": "Chapter13.html#example-1",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Example",
+    "text": "Example\nInvestigators were interested in comparing an active and control treatment to prevent the recurrence of a medical condition that had been healed. They applied a diagnostic procedure at the end of the first, second, and third years to determine whether there was a recurrence. Use the Mantel-Cox method to test if there is a difference in survival rates between the active and control treatments.\n\nSAS Data SetSAS CodeAnswer\n\n\nThe data set excludes censored data.\ndata medical_mc;\ninput time $ treatment $ status $ count @@;\ndatalines;\n0-1 control recur 15 0-1 control not 50\n0-1 active recur 12 0-1 active not 69\n1-2 control recur 13 1-2 control not 30\n1-2 active recur 7 1-2 active not 59\n2-3 control recur 7 2-3 control not 17\n2-3 active recur 10 2-3 active not 45\n;\n\n\nproc freq data=medical_mc order=data;\nweight count;\ntables time*treatment*status / cmh;\nrun;\n\n\nThe Cochran-Mantel-Haenszel test shows sufficient evidence of a treatment effect on survival rates (Q=8.03,p=0.0046).\n\n\n\n\n\n\nNote\n\n\nIf the withdrawals were grouped with no recurrences, the results will be identical to the log-rank test in the previous example",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#exercise-1",
+    "href": "Chapter13.html#exercise-1",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Exercise",
+    "text": "Exercise\nA study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the Mantel-Cox method to test if there is a difference in survival rates between the the two profiles.\n\nSAS Data SetSAS CodeAnswer\n\n\ndata mTBI_mc;\ninput time $ profile $ status $ count @@;\ndatalines;\n0-6 NoMH recur 17 0-6 NoMH not 35\n0-6 MH recur 15 0-6 MH not 19\n6-12 NoMH recur 9 6-12 NoMH not 20\n6-12 MH recur 7 6-12 MH not 10\n;\n\n\nproc freq data=mTBI_mc order=data;\nweight count;\ntables time*profile*status / cmh;\nrun;\n\n\nThere is insufficient evidence of a difference between the survival rates of the two groups based on the Mantel-Cox test (\\(Q\\) = 1.6072, p=0.20).",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#piecewise-exponential-models",
+    "href": "Chapter13.html#piecewise-exponential-models",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Piecewise Exponential Models",
+    "text": "Piecewise Exponential Models\nGrouped survival data can be analyzed by providing a description of the pattern of event rates.\n\n\n\n\n\n\nNote\n\n\nThe piecewise exponential model assumes that withdrawals are uniformly distributed during the time intervals in which they occur and unrelated to treatment failures. The within-interval probabilities of treatment failures are also assumed to be small and have independent exponential distributions.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#piecewise-exponential-likelihood",
+    "href": "Chapter13.html#piecewise-exponential-likelihood",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Piecewise Exponential Likelihood",
+    "text": "Piecewise Exponential Likelihood\nThe piecewise exponential likelihood can be written as:\n\\[\n\\Phi_{PE} = \\prod_i \\prod_k \\lambda_{ik}^{n_i1k} \\left[\\exp (-\\lambda_{ik}N_{ik})\\right]\n\\]\nwhere \\(n_{i1k}\\) is the number of failures of group \\(i\\) during the interval \\(k\\), \\(N_{ik}\\) is the person-months of exposure, and \\(\\lambda_{ik}\\) is the hazard parameter.\n\n\n\n\n\n\nImportant\n\n\nThe piecewise exponential model assumes independent exponential distributions with hazard parameters \\(\\lambda_{ik}\\) for the respective time periods.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#piecewise-exponential-likelihood-1",
+    "href": "Chapter13.html#piecewise-exponential-likelihood-1",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Piecewise Exponential Likelihood",
+    "text": "Piecewise Exponential Likelihood\n\\(N_{ik}\\) is computed as\n\\[\nN_{ik} = a_k(n_{i0k} + 0.5n_{i1k} + 0.5n_{i2k})\n\\]\nwhere \\(a_k\\) is the length of the interval \\(k\\). The conditional Poisson distribution of the number of failures/deaths conditioned on the exposure level also follows a Poisson likelihood.\n\n\n\n\n\n\nNote\n\n\nSince the likelihoods are proportional, whatever maximizes the conditional likelihood also maximizes the piecewise exponential likelihood.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#hazard-parameter",
+    "href": "Chapter13.html#hazard-parameter",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Hazard Parameter",
+    "text": "Hazard Parameter\nWe can specify a model for the hazard parameter \\(\\lambda_{ik}\\) such that\n\\[\n\\log \\lambda_{ik} = \\alpha + \\eta_k + \\beta_1X_{1i} + \\beta_2 X_{2i} +...\n\\]\n\n\n\n\n\n\nNote\n\n\nThis is similar to the proportional hazards model.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#sas-implementation-1",
+    "href": "Chapter13.html#sas-implementation-1",
+    "title": "EAB 770 - Chapter 11",
+    "section": "SAS Implementation",
+    "text": "SAS Implementation\nBoth LOGISTIC and GENMOD can implement the piecewise exponential model analyses.\n\n\n\n\n\n\nImportant\n\n\nThe GENMOD procedure uses the Poisson likelihood to estimate failure rates, while LOGISTIC uses the response failure/trials.",
+    "crumbs": [
+      "Chapter 13: Categorized Time-to-Event Data"
+    ]
+  },
+  {
+    "objectID": "Chapter13.html#example-2",
+    "href": "Chapter13.html#example-2",
+    "title": "EAB 770 - Chapter 11",
+    "section": "Example",
+    "text": "Example\nThe data includes information pertaining to the experience of patients undergoing treatment for duodenal ulcers. types of surgeries was randomly assigned: vagotomy and drainage or antrectomy (VDA), or vagotomy and hemigastrectomy (VH). The patients were evaluated at 6 months, 24 months, and 60 months. Use the piecewise exponential model to test for a treatment effect and if there is a difference in failure rates in time.\n\nSAS Data SetGENMODLOGISTICResults\n\n\ndata vda;\ninput treatment $ time $ failure months;\nnmonths=log(months);\ndatalines;\nvda _0-6 23 3894\nvda 7-24 32 10872\nvda 25-60 45 18720\nvh _0-6 9 2016\nvh 7-24 5 5724\nvh 25-60 10 10440\n;\n\n\nproc genmod data=vda;\nclass treatment time;\nmodel failure = time treatment\n/ dist=poisson link=log offset=nmonths;\nestimate \"failure rate 25-60 VH\" int 1 time 1 0 0 treatment 0 1/exp;\nestimate \"failure rate 25-60 VDA\" int 1 time 1 0 0 treatment 1 0/exp;\nrun;\n\n\ndata vda;\ninput treatment time $ failure months;\nsmonths=100000*months;\ndatalines;\n1 _0-6 23 3894\n1 7-24 32 10872\n1 25-60 45 18720\n0 _0-6 9 2016\n0 7-24 5 5724\n0 25-60 10 10440\n;\n\nproc logistic;\nclass time/param=ref;\nmodel failure/smonths = time treatment time*treatment /\nscale=none include=2 selection=forward;\nrun;\n\n\nFrom the GENMOD results, the failure rates for the VDA treatment decreases across time. (\\(\\beta\\) = -0.88,-1.04; p = &lt;0.0001, 0.0002) The failure rate is higher for VDA compared to VH (\\(\\beta\\)=0.8071, p=0.006)\nThe failure rates can be estimated using the estimate statement.The failure rate of VDA at 25-60 months is 0.0024 (0.0018,0.0031), while VH has a failure rate of 0.0010 (0.0007,0.0016).",
     "crumbs": [
       "Chapter 13: Categorized Time-to-Event Data"
     ]
