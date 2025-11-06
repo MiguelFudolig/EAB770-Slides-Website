@@ -232,7 +232,7 @@ Based on the survival curves, the log-rank test might be preferred ($\chi^2$ = 5
 
 ## Exercise
 
-A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the life table method to test if there is a difference in survival curves between the active and control treatments.
+A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the life table method to test if there is a difference between the survival curves of the two profiles.
 
 ::: panel-tabset
 ### SAS Data Set
@@ -473,7 +473,7 @@ run;
 
 ### Results
 
-From the `GENMOD` results, the failure rates for the VDA treatment decreases across time. ($\beta$ = -0.88,-1.04; p = <0.0001, 0.0002) The failure rate is higher for VDA compared to VH ($\beta$=0.8071, p=0.006) 
+From the `GENMOD` results, the failure rates for the VDA treatment decreases across time. ($\beta$ = -0.88,-1.04; p = <0.0001, 0.0002) The failure rate is higher for VDA compared to VH ($\beta$=0.8071, p=0.004) 
 
 The failure rates can be estimated using the `estimate` statement.The failure rate of VDA at 25-60 months is 0.0024 (0.0018,0.0031), while VH has a failure rate of 0.0010 (0.0007,0.0016).
 :::
