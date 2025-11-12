@@ -6,7 +6,6 @@ format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    smaller: true
     footer: "Chapter 14- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
@@ -35,38 +34,62 @@ format:
 - In a contingency table:
   - Categorical response: columns
   - Explanatory variables: rows
+  
+![](img/wls_C14.png)
+
+::: callout-note
+Each row is also referred to as subpopulations.
+:::
 
 ## Weighted Least Squares
 
-- We consider the rows of the contingency table to be simple random samples from the multinomial distribution.
-  - Groups are independent--- so table is distributed as product multinomial.
-- This assumption enables us to create an estimated covariance matrix for proportions in each row.
 
-## Parametrization
 
-We are interested in modeling the saturated model.
+
+## Weighted Least Squares Framework
+
+The proportion of subjects in each group who have each response is written as
+
+$$
+p_{ij} = n_{ij}/n_{i+}
+$$
+We consider the rows of the contingency table to be simple random samples from the multinomial distribution.
 
 ::: callout-note
-## Saturated model
-
-There are as many parameters as there are response functions.
+Groups are assumed to be independent, so the contingency table is distributed as product multinomial. This assumption enables us to create an estimated covariance matrix for proportions in each row.
 :::
 
-::: callout-note
+
 ## Response Functions
-
 Response functions are similar to link functions in previous chapters. These response functions could be `means`, `logits`, `cumulative logits` or `marginal` probabilities.
+
+::: callout-note
+The weighted least squares can model the following:
+
+- Estimated proportions $p_{ij}$
+- Mean scores, which are simple linear functions of the proportions (weighted means)
+- Transformations such as logits, cumulative logits, or marginal probabilities, kappa statistic, etc.
 :::
+
+
+## Saturated Model
+
+We are interested in modeling the saturated model where there are as many parameters as there are response functions.
+
+::: callout-note
+If groups have sufficient sample size, then the variation among the response functions can be investigated by fitting linear regression models with weighted least squares.
+:::
+
 
 ## Weighted Least Squares in SAS
 
 - The `CATMOD` procedure is used to model categorical data using WLS.
   - `WEIGHT` statement is similar to PROC FREQ.
   - `RESPONSE` statement tells the `CATMOD` procedure what the response functions are.
-    - MEANS
-    - LOGITS
-    - CLOGITS: cumulative logit
-    - MARGINAL: marginal probabilities
+    - `MEANS`
+    - `LOGITS`
+    - `CLOGITS`: cumulative logit
+    - `MARGINAL`: marginal probabilities
 
   - `MODEL` statement is similar to the  `LOGISTIC` and `GENMOD` syntax.
     - `FREQ` option shows the frequencies of the underlying contingency table.
@@ -114,11 +137,16 @@ There is no significant interaction between sex and residence (p=0.76). There is
 :::
 
 
-## Exercise
+
+
+## Example
 
 The data SELECTION_CONFIDENCE shows the self-reported confidence of working professionals in interpreting a bar chart provided to respondents. Use an interaction model to test whether educational attainment (graduate or non-graduate level) or STEM association (STEM degree or non-STEM) has an effect in the perception of confidence in assessing data visualization.
 
 - -1: Not confident, 0: neutral, 1: confident
+
+
+:::{.panel-tabset}
 
 ### SAS Data Set
 
@@ -132,13 +160,6 @@ no yes NC 30 no yes N 10 no yes C 17
 no no NC 8 no no N 10 no no C 38
 ;
 ```
-
-
-## Exercise
-
-The data SELECTION_CONFIDENCE shows the self-reported confidence of working professionals in interpreting a bar chart provided to respondents. Use an interaction model to test whether educational attainment (graduate or non-graduate level) or STEM association (STEM degree or non-STEM) has an effect in the perception of confidence in assessing data visualization.
-
-:::{.panel-tabset}
 ### SAS Code
 
 ```{.r}
@@ -175,7 +196,7 @@ There is a significant interaction between STEM association and educational atta
 
 ## Example
 
-The dataset WBEING shows the ordered categorical estimates and standard errors of the well-being index for a cross-classification based on sex and age. Use the WLS method to estimate a main effect model and test whether there is an effect of sex and age group on the well-being index scores.
+The dataset WBEING shows the ordered categorical estimates, covariance matrix, and standard errors of the well-being index for a cross-classification based on sex and age. Use the WLS method to estimate a main effect model and test whether there is an effect of sex and age group on the well-being index scores.
 
 ::: {.panel-tabset}
 

@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 15</title>
@@ -29,8 +29,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -41,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -94,7 +95,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-5225a0b03738627c8390147651eb7bbf.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -374,7 +375,9 @@ Miguel Fudolig
 </div>
 <div class="callout-content">
 <p>You can use the QIC to compare the fit of different working correlation structures on the data set.</p>
-<p>-Lower QIC, better fit.</p>
+<ul>
+<li>Lower QIC, better fit.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -399,6 +402,7 @@ H_0: C\beta = 0
 </div>
 <div class="callout-content">
 <p>The GEEs reduce to GLM estimating equations for cross-sectional data.</p>
+<p>The GEES also are the maximum likelihood score equations for a multivariate Gaussian data when the unstructured correlation matrix is specified.</p>
 </div>
 </div>
 </div>
@@ -1156,6 +1160,155 @@ H_0: C\beta = 0
 </div>
 </div>
 </div>
+</section>
+<section id="gee-overdispersion" class="slide level2">
+<h2>GEE: Overdispersion</h2>
+<p>GEEs can be used to handle overdispersion.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The generalized estimating equations estimates variance between subjects instead of including a model-based variance.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3" class="slide level2">
+<h2>Example</h2>
+<p>Researchers studying the incidence of lower respiratory illness in infants took repeated observations of infants over one year. They studied 284 children and examined them every two weeks. Explanatory variables evaluated included passive smoking (one or more smokers in the household), socioeconomic status, and crowding. One outcome of interest was the total number of times, or counts, of lower respiratory infection recorded for the year.</p>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Data Set</a></li><li><a href="#tabset-11-2">Naive Model</a></li><li><a href="#tabset-11-3">GEE-Overdispersion</a></li><li><a href="#tabset-11-4">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
+<p>The variable COUNT is the total number of infections that year, and the variable RISK is the number of weeks during that year for which the child is considered at risk (when a lower respiratory infection is ongoing, the child is not considered to be at risk for a new one). The variable CROWDING is an indicator variable for whether crowded conditions occur in the household, and SES is an indicator variable for whether the family’s socioeconomic status was considered low (0), medium (1), or high (2). The variable RACE is an indicator variable for whether the child was white (1) or not (0), and the variable PASSIVE is an indicator variable for whether the child was exposed to cigarette smoking. Finally, the AGEGROUP variable takes the values 1, 2, and 3 for under four, four to six, or more than six months.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>data lri;</span>
+<span id="cb13-2"><a></a>   input id count risk passive crowding ses agegroup race <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb13-3"><a></a>   logrisk <span class="ot">=</span><span class="fu">log</span>(risk<span class="sc">/</span><span class="dv">52</span>);</span>
+<span id="cb13-4"><a></a>   datalines;  </span>
+<span id="cb13-5"><a></a> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">96</span> <span class="dv">1</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>   <span class="dv">191</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> </span>
+<span id="cb13-6"><a></a> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">97</span> <span class="dv">1</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>   <span class="dv">192</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-7"><a></a> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">98</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>   <span class="dv">193</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-8"><a></a> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">36</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">99</span> <span class="dv">0</span> <span class="dv">34</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>   <span class="dv">194</span> <span class="dv">1</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-9"><a></a> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">100</span> <span class="dv">1</span>  <span class="dv">3</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">1</span>  <span class="dv">195</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-10"><a></a> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">101</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">196</span> <span class="dv">1</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-11"><a></a> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">102</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">197</span> <span class="dv">1</span> <span class="dv">27</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-12"><a></a> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">103</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">198</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-13"><a></a> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">104</span> <span class="dv">1</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">199</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-14"><a></a><span class="dv">10</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">105</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">200</span> <span class="dv">3</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-15"><a></a><span class="dv">11</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">106</span> <span class="dv">1</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">201</span> <span class="dv">4</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-16"><a></a><span class="dv">12</span> <span class="dv">2</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">107</span> <span class="dv">0</span> <span class="dv">28</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">202</span> <span class="dv">0</span> <span class="dv">14</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span>  </span>
+<span id="cb13-17"><a></a><span class="dv">13</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">108</span> <span class="dv">3</span> <span class="dv">33</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">203</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-18"><a></a><span class="dv">14</span> <span class="dv">0</span> <span class="dv">12</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">109</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">204</span> <span class="dv">0</span>  <span class="dv">4</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span>  </span>
+<span id="cb13-19"><a></a><span class="dv">15</span> <span class="dv">0</span>  <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">110</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">205</span> <span class="dv">1</span> <span class="dv">27</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-20"><a></a><span class="dv">16</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">111</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">206</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-21"><a></a><span class="dv">17</span> <span class="dv">2</span> <span class="dv">39</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">112</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">207</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-22"><a></a><span class="dv">18</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">113</span> <span class="dv">2</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">208</span> <span class="dv">0</span> <span class="dv">34</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-23"><a></a><span class="dv">19</span> <span class="dv">2</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">114</span> <span class="dv">1</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">209</span> <span class="dv">1</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-24"><a></a><span class="dv">20</span> <span class="dv">0</span> <span class="dv">31</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">115</span> <span class="dv">5</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">210</span> <span class="dv">0</span>  <span class="dv">6</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span>  </span>
+<span id="cb13-25"><a></a><span class="dv">21</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">116</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">211</span> <span class="dv">1</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-26"><a></a><span class="dv">22</span> <span class="dv">1</span> <span class="dv">29</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">117</span> <span class="dv">0</span>  <span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span>  <span class="dv">212</span> <span class="dv">2</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-27"><a></a><span class="dv">23</span> <span class="dv">1</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">118</span> <span class="dv">2</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">213</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-28"><a></a><span class="dv">24</span> <span class="dv">3</span> <span class="dv">20</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">119</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">214</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-29"><a></a><span class="dv">25</span> <span class="dv">1</span> <span class="dv">23</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">120</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">215</span> <span class="dv">1</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-30"><a></a><span class="dv">26</span> <span class="dv">1</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">121</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">216</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-31"><a></a><span class="dv">27</span> <span class="dv">0</span> <span class="dv">49</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">122</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">217</span> <span class="dv">0</span> <span class="dv">33</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-32"><a></a><span class="dv">28</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">123</span> <span class="dv">1</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">218</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-33"><a></a><span class="dv">29</span> <span class="dv">3</span> <span class="dv">44</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">124</span> <span class="dv">1</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">219</span> <span class="dv">1</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-34"><a></a><span class="dv">30</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">125</span> <span class="dv">2</span> <span class="dv">29</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">220</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-35"><a></a><span class="dv">31</span> <span class="dv">2</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">126</span> <span class="dv">3</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">221</span> <span class="dv">1</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-36"><a></a><span class="dv">32</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">127</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">222</span> <span class="dv">0</span> <span class="dv">33</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-37"><a></a><span class="dv">33</span> <span class="dv">1</span> <span class="dv">46</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">128</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">223</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-38"><a></a><span class="dv">34</span> <span class="dv">0</span>  <span class="dv">5</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">129</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">224</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-39"><a></a><span class="dv">35</span> <span class="dv">1</span> <span class="dv">29</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">130</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">225</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-40"><a></a><span class="dv">36</span> <span class="dv">0</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">131</span> <span class="dv">1</span> <span class="dv">32</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">226</span> <span class="dv">0</span> <span class="dv">28</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-41"><a></a><span class="dv">37</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">132</span> <span class="dv">0</span> <span class="dv">46</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">227</span> <span class="dv">0</span> <span class="dv">47</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-42"><a></a><span class="dv">38</span> <span class="dv">1</span> <span class="dv">22</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">133</span> <span class="dv">4</span> <span class="dv">39</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">228</span> <span class="dv">0</span> <span class="dv">18</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-43"><a></a><span class="dv">39</span> <span class="dv">0</span> <span class="dv">47</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">134</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">229</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-44"><a></a><span class="dv">40</span> <span class="dv">1</span> <span class="dv">46</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">135</span> <span class="dv">0</span> <span class="dv">51</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">230</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-45"><a></a><span class="dv">41</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">136</span> <span class="dv">1</span> <span class="dv">39</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">231</span> <span class="dv">1</span> <span class="dv">17</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span>  </span>
+<span id="cb13-46"><a></a><span class="dv">42</span> <span class="dv">1</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">137</span> <span class="dv">1</span> <span class="dv">34</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">232</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-47"><a></a><span class="dv">43</span> <span class="dv">0</span> <span class="dv">33</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">138</span> <span class="dv">1</span> <span class="dv">14</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">233</span> <span class="dv">0</span> <span class="dv">29</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-48"><a></a><span class="dv">44</span> <span class="dv">0</span> <span class="dv">34</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">139</span> <span class="dv">2</span> <span class="dv">15</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">234</span> <span class="dv">1</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-49"><a></a><span class="dv">45</span> <span class="dv">3</span> <span class="dv">32</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">140</span> <span class="dv">1</span> <span class="dv">34</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">235</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-50"><a></a><span class="dv">46</span> <span class="dv">3</span> <span class="dv">22</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">141</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">236</span> <span class="dv">1</span> <span class="dv">22</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-51"><a></a><span class="dv">47</span> <span class="dv">1</span>  <span class="dv">6</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">142</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">237</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-52"><a></a><span class="dv">48</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">143</span> <span class="dv">3</span> <span class="dv">34</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">238</span> <span class="dv">0</span> <span class="dv">34</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-53"><a></a><span class="dv">49</span> <span class="dv">1</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">144</span> <span class="dv">0</span> <span class="dv">48</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">239</span> <span class="dv">6</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-54"><a></a><span class="dv">50</span> <span class="dv">2</span> <span class="dv">36</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">145</span> <span class="dv">4</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">240</span> <span class="dv">0</span> <span class="dv">25</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-55"><a></a><span class="dv">51</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">146</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">241</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-56"><a></a><span class="dv">52</span> <span class="dv">0</span> <span class="dv">24</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">147</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">242</span> <span class="dv">1</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-57"><a></a><span class="dv">53</span> <span class="dv">0</span> <span class="dv">25</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">148</span> <span class="dv">0</span> <span class="dv">34</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">243</span> <span class="dv">1</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-58"><a></a><span class="dv">54</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">149</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">244</span> <span class="dv">0</span> <span class="dv">23</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-59"><a></a><span class="dv">55</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">150</span> <span class="dv">1</span> <span class="dv">31</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">245</span> <span class="dv">4</span> <span class="dv">30</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-60"><a></a><span class="dv">56</span> <span class="dv">2</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">151</span> <span class="dv">0</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">246</span> <span class="dv">1</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-61"><a></a><span class="dv">57</span> <span class="dv">3</span> <span class="dv">28</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">152</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">247</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-62"><a></a><span class="dv">58</span> <span class="dv">1</span> <span class="dv">22</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">153</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">248</span> <span class="dv">0</span> <span class="dv">46</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-63"><a></a><span class="dv">59</span> <span class="dv">1</span> <span class="dv">11</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">154</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">249</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-64"><a></a><span class="dv">60</span> <span class="dv">3</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">155</span> <span class="dv">0</span>  <span class="dv">8</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span>  <span class="dv">250</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-65"><a></a><span class="dv">61</span> <span class="dv">0</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">156</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">251</span> <span class="dv">0</span> <span class="dv">10</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span>  </span>
+<span id="cb13-66"><a></a><span class="dv">62</span> <span class="dv">0</span> <span class="dv">11</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">157</span> <span class="dv">1</span> <span class="dv">45</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">252</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-67"><a></a><span class="dv">63</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">158</span> <span class="dv">0</span>  <span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">0</span>  <span class="dv">253</span> <span class="dv">0</span> <span class="dv">32</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-68"><a></a><span class="dv">64</span> <span class="dv">0</span>  <span class="dv">9</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">159</span> <span class="dv">1</span> <span class="dv">36</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">254</span> <span class="dv">0</span> <span class="dv">46</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-69"><a></a><span class="dv">65</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">160</span> <span class="dv">3</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">255</span> <span class="dv">5</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-70"><a></a><span class="dv">66</span> <span class="dv">0</span> <span class="dv">29</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">161</span> <span class="dv">0</span> <span class="dv">15</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">256</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-71"><a></a><span class="dv">67</span> <span class="dv">0</span> <span class="dv">27</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">162</span> <span class="dv">1</span> <span class="dv">27</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">257</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-72"><a></a><span class="dv">68</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">163</span> <span class="dv">2</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">258</span> <span class="dv">2</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-73"><a></a><span class="dv">69</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">164</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">259</span> <span class="dv">0</span> <span class="dv">34</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-74"><a></a><span class="dv">70</span> <span class="dv">2</span> <span class="dv">13</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">165</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">260</span> <span class="dv">1</span> <span class="dv">30</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-75"><a></a><span class="dv">71</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">166</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">261</span> <span class="dv">1</span> <span class="dv">27</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-76"><a></a><span class="dv">72</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">167</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">262</span> <span class="dv">0</span> <span class="dv">48</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-77"><a></a><span class="dv">73</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">168</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">263</span> <span class="dv">1</span>  <span class="dv">6</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">1</span>  </span>
+<span id="cb13-78"><a></a><span class="dv">74</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">169</span> <span class="dv">0</span> <span class="dv">34</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">264</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-79"><a></a><span class="dv">75</span> <span class="dv">0</span> <span class="dv">45</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">170</span> <span class="dv">2</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">265</span> <span class="dv">0</span> <span class="dv">29</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-80"><a></a><span class="dv">76</span> <span class="dv">4</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">171</span> <span class="dv">2</span> <span class="dv">30</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">266</span> <span class="dv">1</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-81"><a></a><span class="dv">77</span> <span class="dv">1</span> <span class="dv">42</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">172</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">267</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-82"><a></a><span class="dv">78</span> <span class="dv">1</span> <span class="dv">42</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">173</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">268</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-83"><a></a><span class="dv">79</span> <span class="dv">6</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">174</span> <span class="dv">2</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">269</span> <span class="dv">1</span> <span class="dv">23</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-84"><a></a><span class="dv">80</span> <span class="dv">2</span> <span class="dv">23</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">175</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">270</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-85"><a></a><span class="dv">81</span> <span class="dv">1</span> <span class="dv">32</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">176</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">271</span> <span class="dv">0</span>  <span class="dv">5</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span>  </span>
+<span id="cb13-86"><a></a><span class="dv">82</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">177</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">272</span> <span class="dv">0</span> <span class="dv">25</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-87"><a></a><span class="dv">83</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">178</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">273</span> <span class="dv">0</span> <span class="dv">25</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-88"><a></a><span class="dv">84</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">179</span> <span class="dv">2</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">274</span> <span class="dv">1</span> <span class="dv">28</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-89"><a></a><span class="dv">85</span> <span class="dv">1</span> <span class="dv">30</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">180</span> <span class="dv">1</span> <span class="dv">43</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">275</span> <span class="dv">0</span>  <span class="dv">7</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">1</span>  </span>
+<span id="cb13-90"><a></a><span class="dv">86</span> <span class="dv">2</span> <span class="dv">47</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">181</span> <span class="dv">2</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">276</span> <span class="dv">0</span> <span class="dv">32</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-91"><a></a><span class="dv">87</span> <span class="dv">1</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">182</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">277</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-92"><a></a><span class="dv">88</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">183</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">278</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-93"><a></a><span class="dv">89</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">184</span> <span class="dv">3</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">279</span> <span class="dv">2</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-94"><a></a><span class="dv">90</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">185</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">280</span> <span class="dv">0</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-95"><a></a><span class="dv">91</span> <span class="dv">0</span> <span class="dv">32</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">186</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">281</span> <span class="dv">0</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-96"><a></a><span class="dv">92</span> <span class="dv">1</span>  <span class="dv">3</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">187</span> <span class="dv">0</span> <span class="dv">42</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">282</span> <span class="dv">1</span> <span class="dv">32</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">0</span>  </span>
+<span id="cb13-97"><a></a><span class="dv">93</span> <span class="dv">0</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">188</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">283</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-98"><a></a><span class="dv">94</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">189</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">284</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
+<span id="cb13-99"><a></a><span class="dv">95</span> <span class="dv">3</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">190</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> </span>
+<span id="cb13-100"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-11-2">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>proc genmod data<span class="ot">=</span>lri;</span>
+<span id="cb14-2"><a></a>class ses id race agegroup;</span>
+<span id="cb14-3"><a></a>model count <span class="ot">=</span> passive crowding ses race agegroup<span class="sc">/</span></span>
+<span id="cb14-4"><a></a>dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>logrisk type3;</span>
+<span id="cb14-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The results show that there is overdispersion.</p>
+</div>
+<div id="tabset-11-3">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>proc genmod data<span class="ot">=</span>lri;</span>
+<span id="cb15-2"><a></a>class id ses race agegroup;</span>
+<span id="cb15-3"><a></a>model count <span class="ot">=</span> passive crowding ses race agegroup <span class="sc">/</span></span>
+<span id="cb15-4"><a></a>dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>logrisk type3;</span>
+<span id="cb15-5"><a></a>repeated subject<span class="ot">=</span>id <span class="sc">/</span> type<span class="ot">=</span>ind;</span>
+<span id="cb15-6"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Including the <code>repeated</code> accounts for the variability between subjects that is not accounted for the Poisson model.</p>
+</div>
+<div id="tabset-11-4">
+<p>There is sufficient evidence of an association between the occurrence of passive smoking (<span class="math inline">\(\chi^2\)</span>=3.90, p=0.048) and crowding (<span class="math inline">\(\chi^2\)</span> = 4.72, p=0.0299). There is no sufficient evidence of any association between SES (<span class="math inline">\(\chi^2\)</span> = 2.11, p=0.35), race (<span class="math inline">\(\chi^2\)</span> = 0.42, p=0.52), and age group (<span class="math inline">\(\chi^2\)</span> = 2.79, p=0.25)</p>
+</div>
+</div>
+</div>
 
 
 </section></section>
@@ -1197,7 +1350,7 @@ H_0: C\beta = 0
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,
@@ -1453,303 +1606,285 @@ H_0: C\beta = 0
     
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
         });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-        }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
+          return false;
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
         });
-      }
-          let selectedAnnoteEl;
-          const selectorForAnnotation = ( cell, annotation) => {
-            let cellAttr = 'data-code-cell="' + cell + '"';
-            let lineAttr = 'data-code-annotation="' +  annotation + '"';
-            const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-            return selector;
-          }
-          const selectCodeLines = (annoteEl) => {
-            const doc = window.document;
-            const targetCell = annoteEl.getAttribute("data-target-cell");
-            const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-            const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-            const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-            const lineIds = lines.map((line) => {
-              return targetCell + "-" + line;
-            })
-            let top = null;
-            let height = null;
-            let parent = null;
-            if (lineIds.length > 0) {
-                //compute the position of the single el (top and bottom and make a div)
-                const el = window.document.getElementById(lineIds[0]);
-                top = el.offsetTop;
-                height = el.offsetHeight;
-                parent = el.parentElement.parentElement;
-              if (lineIds.length > 1) {
-                const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-                const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-                height = bottom - top;
-              }
-              if (top !== null && height !== null && parent !== null) {
-                // cook up a div (if necessary) and position it 
-                let div = window.document.getElementById("code-annotation-line-highlight");
-                if (div === null) {
-                  div = window.document.createElement("div");
-                  div.setAttribute("id", "code-annotation-line-highlight");
-                  div.style.position = 'absolute';
-                  parent.appendChild(div);
-                }
-                div.style.top = top - 2 + "px";
-                div.style.height = height + 4 + "px";
-                div.style.left = 0;
-                let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-                if (gutterDiv === null) {
-                  gutterDiv = window.document.createElement("div");
-                  gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                  gutterDiv.style.position = 'absolute';
-                  const codeCell = window.document.getElementById(targetCell);
-                  const gutter = codeCell.querySelector('.code-annotation-gutter');
-                  gutter.appendChild(gutterDiv);
-                }
-                gutterDiv.style.top = top - 2 + "px";
-                gutterDiv.style.height = height + 4 + "px";
-              }
-              selectedAnnoteEl = annoteEl;
-            }
-          };
-          const unselectCodeLines = () => {
-            const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-            elementsIds.forEach((elId) => {
-              const div = window.document.getElementById(elId);
-              if (div) {
-                div.remove();
-              }
-            });
-            selectedAnnoteEl = undefined;
-          };
-            // Handle positioning of the toggle
-        window.addEventListener(
-          "resize",
-          throttle(() => {
-            elRect = undefined;
-            if (selectedAnnoteEl) {
-              selectCodeLines(selectedAnnoteEl);
-            }
-          }, 10)
-        );
-        function throttle(fn, ms) {
-        let throttle = false;
-        let timer;
-          return (...args) => {
-            if(!throttle) { // first call gets through
-                fn.apply(this, args);
-                throttle = true;
-            } else { // all the others get throttled
-                if(timer) clearTimeout(timer); // cancel #2
-                timer = setTimeout(() => {
-                  fn.apply(this, args);
-                  timer = throttle = false;
-                }, ms);
-            }
-          };
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
         }
-          // Attach click handler to the DT
-          const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-          for (const annoteDlNode of annoteDls) {
-            annoteDlNode.addEventListener('click', (event) => {
-              const clickedEl = event.target;
-              if (clickedEl !== selectedAnnoteEl) {
-                unselectCodeLines();
-                const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-                if (activeEl) {
-                  activeEl.classList.remove('code-annotation-active');
-                }
-                selectCodeLines(clickedEl);
-                clickedEl.classList.add('code-annotation-active');
-              } else {
-                // Unselect the line
-                unselectCodeLines();
-                clickedEl.classList.remove('code-annotation-active');
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
               }
-            });
+            }
           }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        } else {
-          return undefined;
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+            let selectedAnnoteEl;
+            const selectorForAnnotation = ( cell, annotation) => {
+              let cellAttr = 'data-code-cell="' + cell + '"';
+              let lineAttr = 'data-code-annotation="' +  annotation + '"';
+              const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+              return selector;
+            }
+            const selectCodeLines = (annoteEl) => {
+              const doc = window.document;
+              const targetCell = annoteEl.getAttribute("data-target-cell");
+              const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+              const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+              const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+              const lineIds = lines.map((line) => {
+                return targetCell + "-" + line;
+              })
+              let top = null;
+              let height = null;
+              let parent = null;
+              if (lineIds.length > 0) {
+                  //compute the position of the single el (top and bottom and make a div)
+                  const el = window.document.getElementById(lineIds[0]);
+                  top = el.offsetTop;
+                  height = el.offsetHeight;
+                  parent = el.parentElement.parentElement;
+                if (lineIds.length > 1) {
+                  const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                  const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                  height = bottom - top;
+                }
+                if (top !== null && height !== null && parent !== null) {
+                  // cook up a div (if necessary) and position it 
+                  let div = window.document.getElementById("code-annotation-line-highlight");
+                  if (div === null) {
+                    div = window.document.createElement("div");
+                    div.setAttribute("id", "code-annotation-line-highlight");
+                    div.style.position = 'absolute';
+                    parent.appendChild(div);
+                  }
+                  div.style.top = top - 2 + "px";
+                  div.style.height = height + 4 + "px";
+                  div.style.left = 0;
+                  let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                  if (gutterDiv === null) {
+                    gutterDiv = window.document.createElement("div");
+                    gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                    gutterDiv.style.position = 'absolute';
+                    const codeCell = window.document.getElementById(targetCell);
+                    const gutter = codeCell.querySelector('.code-annotation-gutter');
+                    gutter.appendChild(gutterDiv);
+                  }
+                  gutterDiv.style.top = top - 2 + "px";
+                  gutterDiv.style.height = height + 4 + "px";
+                }
+                selectedAnnoteEl = annoteEl;
+              }
+            };
+            const unselectCodeLines = () => {
+              const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+              elementsIds.forEach((elId) => {
+                const div = window.document.getElementById(elId);
+                if (div) {
+                  div.remove();
+                }
+              });
+              selectedAnnoteEl = undefined;
+            };
+              // Handle positioning of the toggle
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              elRect = undefined;
+              if (selectedAnnoteEl) {
+                selectCodeLines(selectedAnnoteEl);
+              }
+            }, 10)
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
+                  fn.apply(this, args);
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
+            // Attach click handler to the DT
+            const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+            for (const annoteDlNode of annoteDls) {
+              annoteDlNode.addEventListener('click', (event) => {
+                const clickedEl = event.target;
+                if (clickedEl !== selectedAnnoteEl) {
+                  unselectCodeLines();
+                  const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+                  if (activeEl) {
+                    activeEl.classList.remove('code-annotation-active');
+                  }
+                  selectCodeLines(clickedEl);
+                  clickedEl.classList.add('code-annotation-active');
+                } else {
+                  // Unselect the line
+                  unselectCodeLines();
+                  clickedEl.classList.remove('code-annotation-active');
+                }
+              });
+            }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
