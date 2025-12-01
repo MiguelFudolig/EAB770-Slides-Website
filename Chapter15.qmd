@@ -425,7 +425,7 @@ run;
 ```{.r}
 proc genmod data=fracture2; 
    class id treatment center year;
-   model fractures = center treatment age year  / 
+   model fractures = center treatment age year  treatment*year/ 
                      dist=poisson type3 offset=lmonths;
   repeated subject=id(center) / type=exch corrw; 
   estimate "fracture rate increase" treatment 1 -1/exp;
@@ -887,157 +887,157 @@ The carryover effect is not significant ($\chi^2$ = 1.08, p=0.58). Running the a
 
 :::
 
-## GEE: Overdispersion
+<!-- ## GEE: Overdispersion -->
 
-GEEs can be used to handle overdispersion. 
+<!-- GEEs can be used to handle overdispersion.  -->
 
-::: callout-note
-The generalized estimating equations estimates variance between subjects instead of including a model-based variance. 
-:::
+<!-- ::: callout-note -->
+<!-- The generalized estimating equations estimates variance between subjects instead of including a model-based variance.  -->
+<!-- ::: -->
 
-## Example
+<!-- ## Example -->
 
-Researchers studying the incidence of lower respiratory illness in infants took repeated observations
-of infants over one year. They studied 284 children and examined them every two weeks.
-Explanatory variables evaluated included passive smoking (one or more smokers in the household),
-socioeconomic status, and crowding. One outcome of interest was the total number of times, or counts, of lower respiratory infection recorded for the year.
+<!-- Researchers studying the incidence of lower respiratory illness in infants took repeated observations -->
+<!-- of infants over one year. They studied 284 children and examined them every two weeks. -->
+<!-- Explanatory variables evaluated included passive smoking (one or more smokers in the household), -->
+<!-- socioeconomic status, and crowding. One outcome of interest was the total number of times, or counts, of lower respiratory infection recorded for the year. -->
 
-::: panel-tabset
-### SAS Data Set
+<!-- ::: panel-tabset -->
+<!-- ### SAS Data Set -->
 
-The variable COUNT is the total number of infections that year, and the variable RISK is the number of weeks during that year for which the child is considered at risk (when a lower respiratory infection is ongoing,
-the child is not considered to be at risk for a new one). The variable CROWDING is an indicator variable for whether crowded conditions occur in the household, and SES is an indicator variable for whether the family’s socioeconomic status was considered low (0), medium (1), or high (2). The variable RACE is an indicator variable for whether the child was white (1) or not (0), and the variable PASSIVE is an indicator variable for whether the child was exposed to cigarette smoking. Finally, the AGEGROUP variable takes the values 1, 2, and 3 for under four, four to six, or more
-than six months.
+<!-- The variable COUNT is the total number of infections that year, and the variable RISK is the number of weeks during that year for which the child is considered at risk (when a lower respiratory infection is ongoing, -->
+<!-- the child is not considered to be at risk for a new one). The variable CROWDING is an indicator variable for whether crowded conditions occur in the household, and SES is an indicator variable for whether the family’s socioeconomic status was considered low (0), medium (1), or high (2). The variable RACE is an indicator variable for whether the child was white (1) or not (0), and the variable PASSIVE is an indicator variable for whether the child was exposed to cigarette smoking. Finally, the AGEGROUP variable takes the values 1, 2, and 3 for under four, four to six, or more -->
+<!-- than six months. -->
 
-```{.r}
-data lri;
-   input id count risk passive crowding ses agegroup race @@;
-   logrisk =log(risk/52);
-   datalines;  
- 1 0 42 1 0 2 2 0 96 1 41 1 0 1 2 0   191 0 44 1 0 0 2 0 
- 2 0 43 1 0 0 2 0 97 1 26 1 1 2 2 0   192 0 45 0 0 0 2 1  
- 3 0 41 1 0 1 2 0 98 0 36 0 0 0 2 0   193 0 42 0 0 0 2 0  
- 4 1 36 0 1 0 2 0 99 0 34 0 0 0 2 0   194 1 31 0 0 0 2 1  
- 5 1 31 0 0 0 2 0 100 1  3 1 1 2 3 1  195 0 35 0 0 0 2 0  
- 6 0 43 1 0 0 2 0 101 0 45 1 0 0 2 0  196 1 35 1 0 0 2 0  
- 7 0 45 0 0 0 2 0 102 0 38 0 0 1 2 0  197 1 27 1 0 1 2 0  
- 8 0 42 0 0 0 2 1 103 0 41 1 1 1 2 1  198 1 33 0 0 0 2 0  
- 9 0 45 0 0 0 2 1 104 1 37 0 1 0 2 0  199 0 39 1 0 1 2 0  
-10 0 35 1 1 0 2 0 105 0 40 0 0 0 2 0  200 3 40 0 1 2 2 0  
-11 0 43 0 0 0 2 0 106 1 35 1 0 0 2 0  201 4 26 1 0 1 2 0  
-12 2 38 0 0 0 2 0 107 0 28 0 1 2 2 0  202 0 14 1 1 1 1 1  
-13 0 41 0 0 0 2 0 108 3 33 0 1 2 2 0  203 0 39 0 1 1 2 0  
-14 0 12 1 1 0 1 0 109 0 38 0 0 0 2 0  204 0  4 1 1 1 3 0  
-15 0  6 0 0 0 3 0 110 0 42 1 1 2 2 1  205 1 27 1 1 1 2 1  
-16 0 43 0 0 0 2 0 111 0 40 1 1 2 2 0  206 0 36 1 0 0 2 1  
-17 2 39 1 0 1 2 0 112 0 38 0 0 0 2 0  207 0 30 1 0 2 2 1  
-18 0 43 0 1 0 2 0 113 2 37 0 1 1 2 0  208 0 34 0 1 0 2 0  
-19 2 37 0 0 0 2 1 114 1 42 0 1 0 2 0  209 1 40 1 1 1 2 0  
-20 0 31 1 1 1 2 0 115 5 37 1 1 1 2 1  210 0  6 1 0 1 1 1  
-21 0 45 0 1 0 2 0 116 0 38 0 0 0 2 0  211 1 40 1 1 1 2 0  
-22 1 29 1 1 1 2 1 117 0  4 0 0 0 3 0  212 2 43 0 1 0 2 0  
-23 1 35 1 1 1 2 0 118 2 37 1 1 1 2 0  213 0 36 1 1 1 2 0  
-24 3 20 1 1 2 2 0 119 0 39 1 0 1 2 0  214 0 35 1 1 1 2 1  
-25 1 23 1 1 1 2 0 120 0 42 1 1 0 2 0  215 1 35 1 1 2 2 0  
-26 1 37 1 0 0 2 0 121 0 40 1 0 0 2 0  216 0 43 1 0 1 2 0  
-27 0 49 0 0 0 2 0 122 0 36 1 0 0 2 0  217 0 33 1 1 2 2 0  
-28 0 35 0 0 0 2 0 123 1 42 0 1 1 2 0  218 0 36 0 1 1 2 1  
-29 3 44 1 1 1 2 0 124 1 39 0 0 0 2 0  219 1 41 0 0 0 2 0  
-30 0 37 1 0 0 2 0 125 2 29 0 0 0 2 0  220 0 41 1 1 0 2 1  
-31 2 39 0 1 1 2 0 126 3 37 1 1 2 2 1  221 1 42 0 0 0 2 1  
-32 0 41 0 0 0 2 0 127 0 40 1 0 0 2 0  222 0 33 0 1 2 2 1  
-33 1 46 1 1 2 2 0 128 0 40 0 0 0 2 0  223 0 40 1 1 2 2 0  
-34 0  5 1 1 2 3 1 129 0 39 0 0 0 2 0  224 0 40 1 1 1 2 1  
-35 1 29 0 0 0 2 0 130 0 40 1 0 1 2 0  225 0 40 0 0 2 2 0  
-36 0 31 0 1 0 2 0 131 1 32 0 0 0 2 0  226 0 28 1 0 1 2 0  
-37 0 22 1 1 2 2 0 132 0 46 1 0 1 2 0  227 0 47 0 0 0 2 1  
-38 1 22 1 1 2 2 1 133 4 39 1 1 0 2 0  228 0 18 1 1 2 2 1  
-39 0 47 0 0 0 2 0 134 0 37 0 0 0 2 0  229 0 45 1 0 0 2 0  
-40 1 46 1 1 1 2 1 135 0 51 0 0 1 2 0  230 0 35 0 0 0 2 0  
-41 0 37 0 0 0 2 0 136 1 39 1 1 0 2 0  231 1 17 1 0 1 1 1  
-42 1 39 0 0 0 2 0 137 1 34 1 1 0 2 0  232 0 40 0 0 0 2 0  
-43 0 33 0 1 1 2 1 138 1 14 0 1 0 1 0  233 0 29 1 1 2 2 0  
-44 0 34 1 0 1 2 0 139 2 15 1 0 0 2 0  234 1 35 1 1 1 2 0  
-45 3 32 1 1 1 2 0 140 1 34 1 1 0 2 1  235 0 40 0 0 2 2 0  
-46 3 22 0 0 0 2 0 141 0 43 0 1 0 2 0  236 1 22 1 1 1 2 0  
-47 1  6 1 0 2 3 0 142 1 33 0 0 0 2 0  237 0 42 0 0 0 2 0  
-48 0 38 0 0 0 2 0 143 3 34 1 0 0 2 1  238 0 34 1 1 1 2 1  
-49 1 43 0 1 0 2 0 144 0 48 0 0 0 2 0  239 6 38 1 0 1 2 0  
-50 2 36 0 1 0 2 0 145 4 26 1 1 0 2 0  240 0 25 0 0 1 2 1  
-51 0 43 0 0 0 2 0 146 0 30 0 1 2 2 1  241 0 39 0 1 0 2 0  
-52 0 24 1 0 0 2 0 147 0 41 1 1 1 2 0  242 1 35 0 1 2 2 1  
-53 0 25 1 0 1 2 1 148 0 34 0 1 1 2 0  243 1 36 1 1 1 2 1  
-54 0 41 0 0 0 2 0 149 0 43 0 1 0 2 0  244 0 23 1 0 0 2 0  
-55 0 43 0 0 0 2 0 150 1 31 1 0 1 2 0  245 4 30 1 1 1 2 0  
-56 2 31 0 1 1 2 0 151 0 26 1 0 1 2 0  246 1 41 1 1 1 2 1  
-57 3 28 1 1 1 2 0 152 0 37 0 0 0 2 0  247 0 37 0 1 1 2 0  
-58 1 22 0 0 1 2 1 153 0 44 0 0 0 2 0  248 0 46 1 1 0 2 0  
-59 1 11 1 1 1 1 0 154 0 40 1 0 0 2 0  249 0 45 1 1 0 2 1  
-60 3 41 0 1 1 2 0 155 0  8 1 1 1 3 1  250 1 38 1 1 1 2 0  
-61 0 31 0 0 1 2 0 156 0 40 1 1 1 2 1  251 0 10 1 1 1 1 0  
-62 0 11 0 0 1 1 1 157 1 45 0 0 0 2 0  252 0 30 1 1 2 2 0  
-63 0 44 0 1 0 2 0 158 0  4 0 0 2 3 0  253 0 32 0 1 2 2 0  
-64 0  9 1 0 0 3 1 159 1 36 0 1 0 2 0  254 0 46 1 0 0 2 0  
-65 0 36 1 1 1 2 0 160 3 37 1 1 1 2 0  255 5 35 1 1 2 2 1  
-66 0 29 1 0 0 2 0 161 0 15 1 0 0 1 0  256 0 44 0 0 0 2 0  
-67 0 27 0 1 0 2 1 162 1 27 1 0 1 2 1  257 0 41 0 1 1 2 0  
-68 0 36 0 1 0 2 0 163 2 31 0 1 0 2 0  258 2 36 1 0 1 2 0  
-69 1 33 1 0 0 2 0 164 0 42 0 0 0 2 0  259 0 34 1 1 1 2 1  
-70 2 13 1 1 2 1 1 165 0 42 1 0 0 2 0  260 1 30 0 1 0 2 1  
-71 0 38 0 0 0 2 0 166 1 38 0 0 0 2 0  261 1 27 1 0 0 2 0  
-72 0 41 0 0 0 2 1 167 0 44 1 0 0 2 0  262 0 48 1 0 0 2 0  
-73 0 41 1 0 2 2 0 168 0 45 0 0 0 2 0  263 1  6 0 1 2 3 1  
-74 0 35 0 0 1 2 0 169 0 34 0 1 0 2 0  264 0 38 1 1 0 2 1  
-75 0 45 0 0 0 2 0 170 2 41 0 0 0 2 0  265 0 29 1 1 1 2 1  
-76 4 38 1 0 2 2 1 171 2 30 1 1 1 2 0  266 1 43 0 1 2 2 1  
-77 1 42 1 0 0 2 1 172 0 44 0 0 0 2 0  267 0 43 0 1 0 2 0  
-78 1 42 1 1 2 2 1 173 0 40 1 0 0 2 0  268 0 37 1 0 2 2 0  
-79 6 36 1 1 0 2 0 174 2 31 0 0 0 2 0  269 1 23 1 1 0 2 1  
-80 2 23 1 1 1 2 1 175 0 41 1 0 0 2 0  270 0 44 0 0 1 2 0  
-81 1 32 0 0 1 2 0 176 0 41 0 0 0 2 0  271 0  5 0 1 1 3 1  
-82 0 41 0 1 0 2 0 177 0 39 1 0 0 2 0  272 0 25 1 0 2 2 0  
-83 0 50 0 0 0 2 0 178 0 40 1 0 0 2 0  273 0 25 1 0 1 2 0  
-84 0 42 1 1 1 2 1 179 2 35 1 0 2 2 0  274 1 28 1 1 1 2 1  
-85 1 30 0 0 0 2 0 180 1 43 1 0 0 2 0  275 0  7 0 1 0 3 1  
-86 2 47 0 1 0 2 0 181 2 39 0 0 0 2 0  276 0 32 0 0 0 2 0  
-87 1 35 1 1 2 2 0 182 0 35 1 1 0 2 0  277 0 41 0 0 0 2 0  
-88 1 38 1 0 1 2 1 183 0 37 0 0 0 2 0  278 1 33 1 1 2 2 1  
-89 1 38 1 1 1 2 1 184 3 37 0 0 0 2 0  279 2 36 1 1 2 2 0  
-90 1 38 1 1 1 2 1 185 0 43 0 0 0 2 0  280 0 31 0 0 0 2 0  
-91 0 32 1 1 1 2 0 186 0 42 0 0 0 2 0  281 0 18 0 0 0 2 0  
-92 1  3 1 0 1 3 1 187 0 42 0 0 0 2 0  282 1 32 1 0 2 2 0  
-93 0 26 1 0 0 2 1 188 0 38 0 0 0 2 0  283 0 22 1 1 2 2 1  
-94 0 35 1 0 0 2 0 189 0 36 1 0 0 2 0  284 0 35 0 0 0 2 1  
-95 3 37 1 0 0 2 0 190 0 39 0 1 0 2 0 
-;
-```
+<!-- ```{.r} -->
+<!-- data lri; -->
+<!--    input id count risk passive crowding ses agegroup race @@; -->
+<!--    logrisk =log(risk/52); -->
+<!--    datalines;   -->
+<!--  1 0 42 1 0 2 2 0 96 1 41 1 0 1 2 0   191 0 44 1 0 0 2 0  -->
+<!--  2 0 43 1 0 0 2 0 97 1 26 1 1 2 2 0   192 0 45 0 0 0 2 1   -->
+<!--  3 0 41 1 0 1 2 0 98 0 36 0 0 0 2 0   193 0 42 0 0 0 2 0   -->
+<!--  4 1 36 0 1 0 2 0 99 0 34 0 0 0 2 0   194 1 31 0 0 0 2 1   -->
+<!--  5 1 31 0 0 0 2 0 100 1  3 1 1 2 3 1  195 0 35 0 0 0 2 0   -->
+<!--  6 0 43 1 0 0 2 0 101 0 45 1 0 0 2 0  196 1 35 1 0 0 2 0   -->
+<!--  7 0 45 0 0 0 2 0 102 0 38 0 0 1 2 0  197 1 27 1 0 1 2 0   -->
+<!--  8 0 42 0 0 0 2 1 103 0 41 1 1 1 2 1  198 1 33 0 0 0 2 0   -->
+<!--  9 0 45 0 0 0 2 1 104 1 37 0 1 0 2 0  199 0 39 1 0 1 2 0   -->
+<!-- 10 0 35 1 1 0 2 0 105 0 40 0 0 0 2 0  200 3 40 0 1 2 2 0   -->
+<!-- 11 0 43 0 0 0 2 0 106 1 35 1 0 0 2 0  201 4 26 1 0 1 2 0   -->
+<!-- 12 2 38 0 0 0 2 0 107 0 28 0 1 2 2 0  202 0 14 1 1 1 1 1   -->
+<!-- 13 0 41 0 0 0 2 0 108 3 33 0 1 2 2 0  203 0 39 0 1 1 2 0   -->
+<!-- 14 0 12 1 1 0 1 0 109 0 38 0 0 0 2 0  204 0  4 1 1 1 3 0   -->
+<!-- 15 0  6 0 0 0 3 0 110 0 42 1 1 2 2 1  205 1 27 1 1 1 2 1   -->
+<!-- 16 0 43 0 0 0 2 0 111 0 40 1 1 2 2 0  206 0 36 1 0 0 2 1   -->
+<!-- 17 2 39 1 0 1 2 0 112 0 38 0 0 0 2 0  207 0 30 1 0 2 2 1   -->
+<!-- 18 0 43 0 1 0 2 0 113 2 37 0 1 1 2 0  208 0 34 0 1 0 2 0   -->
+<!-- 19 2 37 0 0 0 2 1 114 1 42 0 1 0 2 0  209 1 40 1 1 1 2 0   -->
+<!-- 20 0 31 1 1 1 2 0 115 5 37 1 1 1 2 1  210 0  6 1 0 1 1 1   -->
+<!-- 21 0 45 0 1 0 2 0 116 0 38 0 0 0 2 0  211 1 40 1 1 1 2 0   -->
+<!-- 22 1 29 1 1 1 2 1 117 0  4 0 0 0 3 0  212 2 43 0 1 0 2 0   -->
+<!-- 23 1 35 1 1 1 2 0 118 2 37 1 1 1 2 0  213 0 36 1 1 1 2 0   -->
+<!-- 24 3 20 1 1 2 2 0 119 0 39 1 0 1 2 0  214 0 35 1 1 1 2 1   -->
+<!-- 25 1 23 1 1 1 2 0 120 0 42 1 1 0 2 0  215 1 35 1 1 2 2 0   -->
+<!-- 26 1 37 1 0 0 2 0 121 0 40 1 0 0 2 0  216 0 43 1 0 1 2 0   -->
+<!-- 27 0 49 0 0 0 2 0 122 0 36 1 0 0 2 0  217 0 33 1 1 2 2 0   -->
+<!-- 28 0 35 0 0 0 2 0 123 1 42 0 1 1 2 0  218 0 36 0 1 1 2 1   -->
+<!-- 29 3 44 1 1 1 2 0 124 1 39 0 0 0 2 0  219 1 41 0 0 0 2 0   -->
+<!-- 30 0 37 1 0 0 2 0 125 2 29 0 0 0 2 0  220 0 41 1 1 0 2 1   -->
+<!-- 31 2 39 0 1 1 2 0 126 3 37 1 1 2 2 1  221 1 42 0 0 0 2 1   -->
+<!-- 32 0 41 0 0 0 2 0 127 0 40 1 0 0 2 0  222 0 33 0 1 2 2 1   -->
+<!-- 33 1 46 1 1 2 2 0 128 0 40 0 0 0 2 0  223 0 40 1 1 2 2 0   -->
+<!-- 34 0  5 1 1 2 3 1 129 0 39 0 0 0 2 0  224 0 40 1 1 1 2 1   -->
+<!-- 35 1 29 0 0 0 2 0 130 0 40 1 0 1 2 0  225 0 40 0 0 2 2 0   -->
+<!-- 36 0 31 0 1 0 2 0 131 1 32 0 0 0 2 0  226 0 28 1 0 1 2 0   -->
+<!-- 37 0 22 1 1 2 2 0 132 0 46 1 0 1 2 0  227 0 47 0 0 0 2 1   -->
+<!-- 38 1 22 1 1 2 2 1 133 4 39 1 1 0 2 0  228 0 18 1 1 2 2 1   -->
+<!-- 39 0 47 0 0 0 2 0 134 0 37 0 0 0 2 0  229 0 45 1 0 0 2 0   -->
+<!-- 40 1 46 1 1 1 2 1 135 0 51 0 0 1 2 0  230 0 35 0 0 0 2 0   -->
+<!-- 41 0 37 0 0 0 2 0 136 1 39 1 1 0 2 0  231 1 17 1 0 1 1 1   -->
+<!-- 42 1 39 0 0 0 2 0 137 1 34 1 1 0 2 0  232 0 40 0 0 0 2 0   -->
+<!-- 43 0 33 0 1 1 2 1 138 1 14 0 1 0 1 0  233 0 29 1 1 2 2 0   -->
+<!-- 44 0 34 1 0 1 2 0 139 2 15 1 0 0 2 0  234 1 35 1 1 1 2 0   -->
+<!-- 45 3 32 1 1 1 2 0 140 1 34 1 1 0 2 1  235 0 40 0 0 2 2 0   -->
+<!-- 46 3 22 0 0 0 2 0 141 0 43 0 1 0 2 0  236 1 22 1 1 1 2 0   -->
+<!-- 47 1  6 1 0 2 3 0 142 1 33 0 0 0 2 0  237 0 42 0 0 0 2 0   -->
+<!-- 48 0 38 0 0 0 2 0 143 3 34 1 0 0 2 1  238 0 34 1 1 1 2 1   -->
+<!-- 49 1 43 0 1 0 2 0 144 0 48 0 0 0 2 0  239 6 38 1 0 1 2 0   -->
+<!-- 50 2 36 0 1 0 2 0 145 4 26 1 1 0 2 0  240 0 25 0 0 1 2 1   -->
+<!-- 51 0 43 0 0 0 2 0 146 0 30 0 1 2 2 1  241 0 39 0 1 0 2 0   -->
+<!-- 52 0 24 1 0 0 2 0 147 0 41 1 1 1 2 0  242 1 35 0 1 2 2 1   -->
+<!-- 53 0 25 1 0 1 2 1 148 0 34 0 1 1 2 0  243 1 36 1 1 1 2 1   -->
+<!-- 54 0 41 0 0 0 2 0 149 0 43 0 1 0 2 0  244 0 23 1 0 0 2 0   -->
+<!-- 55 0 43 0 0 0 2 0 150 1 31 1 0 1 2 0  245 4 30 1 1 1 2 0   -->
+<!-- 56 2 31 0 1 1 2 0 151 0 26 1 0 1 2 0  246 1 41 1 1 1 2 1   -->
+<!-- 57 3 28 1 1 1 2 0 152 0 37 0 0 0 2 0  247 0 37 0 1 1 2 0   -->
+<!-- 58 1 22 0 0 1 2 1 153 0 44 0 0 0 2 0  248 0 46 1 1 0 2 0   -->
+<!-- 59 1 11 1 1 1 1 0 154 0 40 1 0 0 2 0  249 0 45 1 1 0 2 1   -->
+<!-- 60 3 41 0 1 1 2 0 155 0  8 1 1 1 3 1  250 1 38 1 1 1 2 0   -->
+<!-- 61 0 31 0 0 1 2 0 156 0 40 1 1 1 2 1  251 0 10 1 1 1 1 0   -->
+<!-- 62 0 11 0 0 1 1 1 157 1 45 0 0 0 2 0  252 0 30 1 1 2 2 0   -->
+<!-- 63 0 44 0 1 0 2 0 158 0  4 0 0 2 3 0  253 0 32 0 1 2 2 0   -->
+<!-- 64 0  9 1 0 0 3 1 159 1 36 0 1 0 2 0  254 0 46 1 0 0 2 0   -->
+<!-- 65 0 36 1 1 1 2 0 160 3 37 1 1 1 2 0  255 5 35 1 1 2 2 1   -->
+<!-- 66 0 29 1 0 0 2 0 161 0 15 1 0 0 1 0  256 0 44 0 0 0 2 0   -->
+<!-- 67 0 27 0 1 0 2 1 162 1 27 1 0 1 2 1  257 0 41 0 1 1 2 0   -->
+<!-- 68 0 36 0 1 0 2 0 163 2 31 0 1 0 2 0  258 2 36 1 0 1 2 0   -->
+<!-- 69 1 33 1 0 0 2 0 164 0 42 0 0 0 2 0  259 0 34 1 1 1 2 1   -->
+<!-- 70 2 13 1 1 2 1 1 165 0 42 1 0 0 2 0  260 1 30 0 1 0 2 1   -->
+<!-- 71 0 38 0 0 0 2 0 166 1 38 0 0 0 2 0  261 1 27 1 0 0 2 0   -->
+<!-- 72 0 41 0 0 0 2 1 167 0 44 1 0 0 2 0  262 0 48 1 0 0 2 0   -->
+<!-- 73 0 41 1 0 2 2 0 168 0 45 0 0 0 2 0  263 1  6 0 1 2 3 1   -->
+<!-- 74 0 35 0 0 1 2 0 169 0 34 0 1 0 2 0  264 0 38 1 1 0 2 1   -->
+<!-- 75 0 45 0 0 0 2 0 170 2 41 0 0 0 2 0  265 0 29 1 1 1 2 1   -->
+<!-- 76 4 38 1 0 2 2 1 171 2 30 1 1 1 2 0  266 1 43 0 1 2 2 1   -->
+<!-- 77 1 42 1 0 0 2 1 172 0 44 0 0 0 2 0  267 0 43 0 1 0 2 0   -->
+<!-- 78 1 42 1 1 2 2 1 173 0 40 1 0 0 2 0  268 0 37 1 0 2 2 0   -->
+<!-- 79 6 36 1 1 0 2 0 174 2 31 0 0 0 2 0  269 1 23 1 1 0 2 1   -->
+<!-- 80 2 23 1 1 1 2 1 175 0 41 1 0 0 2 0  270 0 44 0 0 1 2 0   -->
+<!-- 81 1 32 0 0 1 2 0 176 0 41 0 0 0 2 0  271 0  5 0 1 1 3 1   -->
+<!-- 82 0 41 0 1 0 2 0 177 0 39 1 0 0 2 0  272 0 25 1 0 2 2 0   -->
+<!-- 83 0 50 0 0 0 2 0 178 0 40 1 0 0 2 0  273 0 25 1 0 1 2 0   -->
+<!-- 84 0 42 1 1 1 2 1 179 2 35 1 0 2 2 0  274 1 28 1 1 1 2 1   -->
+<!-- 85 1 30 0 0 0 2 0 180 1 43 1 0 0 2 0  275 0  7 0 1 0 3 1   -->
+<!-- 86 2 47 0 1 0 2 0 181 2 39 0 0 0 2 0  276 0 32 0 0 0 2 0   -->
+<!-- 87 1 35 1 1 2 2 0 182 0 35 1 1 0 2 0  277 0 41 0 0 0 2 0   -->
+<!-- 88 1 38 1 0 1 2 1 183 0 37 0 0 0 2 0  278 1 33 1 1 2 2 1   -->
+<!-- 89 1 38 1 1 1 2 1 184 3 37 0 0 0 2 0  279 2 36 1 1 2 2 0   -->
+<!-- 90 1 38 1 1 1 2 1 185 0 43 0 0 0 2 0  280 0 31 0 0 0 2 0   -->
+<!-- 91 0 32 1 1 1 2 0 186 0 42 0 0 0 2 0  281 0 18 0 0 0 2 0   -->
+<!-- 92 1  3 1 0 1 3 1 187 0 42 0 0 0 2 0  282 1 32 1 0 2 2 0   -->
+<!-- 93 0 26 1 0 0 2 1 188 0 38 0 0 0 2 0  283 0 22 1 1 2 2 1   -->
+<!-- 94 0 35 1 0 0 2 0 189 0 36 1 0 0 2 0  284 0 35 0 0 0 2 1   -->
+<!-- 95 3 37 1 0 0 2 0 190 0 39 0 1 0 2 0  -->
+<!-- ; -->
+<!-- ``` -->
 
-### Naive Model
+<!-- ### Naive Model -->
 
-```{.r}
-proc genmod data=lri;
-class ses id race agegroup;
-model count = passive crowding ses race agegroup/
-dist=poisson link=log offset=logrisk type3;
-run;
-```
+<!-- ```{.r} -->
+<!-- proc genmod data=lri; -->
+<!-- class ses id race agegroup; -->
+<!-- model count = passive crowding ses race agegroup/ -->
+<!-- dist=poisson link=log offset=logrisk type3; -->
+<!-- run; -->
+<!-- ``` -->
 
-The results show that there is overdispersion.
+<!-- The results show that there is overdispersion. -->
 
-### GEE-Overdispersion
+<!-- ### GEE-Overdispersion -->
 
-```{.r}
-proc genmod data=lri;
-class id ses race agegroup;
-model count = passive crowding ses race agegroup /
-dist=poisson link=log offset=logrisk type3;
-repeated subject=id / type=ind;
-run;
-```
+<!-- ```{.r} -->
+<!-- proc genmod data=lri; -->
+<!-- class id ses race agegroup; -->
+<!-- model count = passive crowding ses race agegroup / -->
+<!-- dist=poisson link=log offset=logrisk type3; -->
+<!-- repeated subject=id / type=ind; -->
+<!-- run; -->
+<!-- ``` -->
 
-Including the `repeated` accounts for the variability between subjects that is not accounted for the Poisson model.
+<!-- Including the `repeated` accounts for the variability between subjects that is not accounted for the Poisson model. -->
 
-### Answer
+<!-- ### Answer -->
 
-There is sufficient evidence of an association between the occurrence of passive smoking ($\chi^2$=3.90, p=0.048) and crowding ($\chi^2$ = 4.72, p=0.0299). There is no sufficient evidence of any association between SES ($\chi^2$ = 2.11, p=0.35), race ($\chi^2$ = 0.42, p=0.52), and age group ($\chi^2$ = 2.79, p=0.25)
-:::
+<!-- There is sufficient evidence of an association between the occurrence of passive smoking ($\chi^2$=3.90, p=0.048) and crowding ($\chi^2$ = 4.72, p=0.0299). There is no sufficient evidence of any association between SES ($\chi^2$ = 2.11, p=0.35), race ($\chi^2$ = 0.42, p=0.52), and age group ($\chi^2$ = 2.79, p=0.25) -->
+<!-- ::: -->
