@@ -28,12 +28,13 @@ format:
 
 - The syllabus can be accessed through
     - Canvas
-    - <https://madfudolig.quarto.pub/eab-770-applied-statistical-methods-for-categorical-data/>
+    - <https://miguelfudolig-eab-770-syllabus.share.connect.posit.cloud>
 
 ## Programming Language
 
-- We will primarily use SAS for this course.
+- We will primarily use R and SAS for this course.
     - You can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.
+    - You can download the most recent versions of `R` and `RStudio` if you prefer to take the course in `R`. You can access a quick tutorial on how to install these [here](https://rstudio-education.github.io/hopr/starting.html).
 
 ## Accessing SAS On Demand for Academics
 
@@ -43,47 +44,11 @@ format:
   
 - Create your account for SAS OnDemand for Academics. To register, visit <https://welcome.oda.sas.com> sign in with your SAS Profile and complete the steps to *Register for an account*.
 
+
 # Why are we here?
 
 Why bother learning categorical data analysis?
 
-# Review Questions
-
-## Review Questions
-
-Define the following terms:
-
-- p-value
-    
-- confidence level in confidence intervals
-    
-- Odds
-    
-- Relative Risk
-
-## Review Questions
-
-Define the following terms:
-
-- p-value
-    
-  - The probability of recording a test statistic as extreme or more extreme as the obtained statistic *assuming the null hypothesis is true.*
-        
-- Confidence level in confidence intervals
-    
-  - The **long-run proportion** of confidence intervals that theoretically contain the true parameter value.
-        
-- Odds
-    
-  - The ratio of the success and failure probabilities.
-        
-  - $\frac{p_{success}}{p_{failure}}$
-        
-- Relative Risk
-    
-  - The ratio of success probabilities of two different groups.
-        
-  - $p_1/p_2$
 
 # Categorical Data
 
