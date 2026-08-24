@@ -11,6 +11,8 @@ format:
     slide-number: true
     menu: true
     chalkboard: true
+    engine: knitr
+    echo: true
   pdf: 
     number-sections: true
 ---
@@ -20,7 +22,7 @@ format:
 ## Outline
 
 - Syllabus Discussion
-- Accessing SAS OnDemand for Academics
+- Accessing `SAS` OnDemand for Academics
 - Why are we here?
 - Preliminary Materials
 
@@ -32,17 +34,17 @@ format:
 
 ## Programming Language
 
-- We will primarily use R and SAS for this course.
-    - You can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.
+- We will primarily use R and `SAS` for this course.
+    - You can access `SAS` through `SAS` On Demand for Academics. This will be free and accessible when you have internet connection.
     - You can download the most recent versions of `R` and `RStudio` if you prefer to take the course in `R`. You can access a quick tutorial on how to install these [here](https://rstudio-education.github.io/hopr/starting.html).
 
-## Accessing SAS On Demand for Academics
+## Accessing `SAS` On Demand for Academics
 
-- Create a SAS Profile that will be used to register for SAS OnDemand for Academics. To register, visit <https://www.sas.com> and fill out the form to *Create profile*.
+- Create a `SAS` Profile that will be used to register for `SAS` OnDemand for Academics. To register, visit <https://www.sas.com> and fill out the form to *Create profile*.
 
   - Use your UNLV email for faster verification.
-  
-- Create your account for SAS OnDemand for Academics. To register, visit <https://welcome.oda.sas.com> sign in with your SAS Profile and complete the steps to *Register for an account*.
+
+- Create your account for `SAS` OnDemand for Academics. To register, visit <https://welcome.oda.sas.com> sign in with your `SAS` Profile and complete the steps to *Register for an account*.
 
 
 # Why are we here?
@@ -66,19 +68,19 @@ Categorical data is present everywhere!
 - Dichotomous
 
   - Yes/No
-  
+
 - Ordinal
 
   - More than two possible outcomes with inherent ordering
-  
+
 - Nominal
 
   - More than two possible outcomes without inherent ordering
-  
+
 - Discrete Counts
 
   - Numerical outcomes consisting of counting numbers.
-  
+
 - Grouped Survival Times
 
   - Number of patients who fail/survive during a specific time interval.
@@ -118,12 +120,12 @@ Randomization can be done per subject or a cluster of subject.
     - Randomized block designs
     - Multi-level experimental designs
 
-## SAS Procedures and Data
+## `SAS` Procedures and Data
 
-- There are multiple ways to import data into SAS
+- There are multiple ways to import data into `SAS`
     - DATA step
     - PROC IMPORT step
-    - SAS OnDemand can import data from CSV files.
+    - `SAS` OnDemand can import data from CSV files.
 - `FREQ`
     - Contingency tables ($2\times 2$, $s \times r$)
     - Chi-squared tests
@@ -133,27 +135,38 @@ Randomization can be done per subject or a cluster of subject.
     - Generalized Estimating Equations
 - Other procedures include `GLM` and `CATMOD`.
 
-## SAS in Class
+## `SAS` in Class
 
 - Sample code will be provided, but there will be examples where we work the code out together as a class.
-- Class computers have SAS installed in them.
+- Class computers have `SAS` installed in them.
     - You can save files on your Y drive (assigned to your ACE ID) to access files on other computers.
-    - SAS can also be accessed through SAS OnDemand Academics.
+    - `SAS` can also be accessed through `SAS` OnDemand Academics.
         - Needs internet connection
 
-## SAS Examples
+## `SAS` Examples
 
 - Download Chapter1.sas from Canvas.
 
-## SAS Example
+## `SAS` Example
 
-::: columns
-::: {.column style="width:50%; font-size: 125%"}
-``` {code-line-numbers="1-3"}
+::: panel-tabset
+
+### Coding Rules
+- ALL lines should be ended with a semi-colon **;**
+- `data` statement is followed by the data set name.
+- `length` specifies the number of characters included in each **character**.
+- `input` names all variables included in the data set
+    - The `$` after the variable tells `SAS` that these variables are categorical variables.
+- `datalines;` tells `SAS` that you are about to add new data points.
+    - Each row represents a data point in this data table.
+    - End with a separate **;**
+
+### Example
+```
 data respire;
 length treat $7. outcome $1. ;
-input treat $ outcome $ count; 
-datalines; 
+input treat $ outcome $ count;
+datalines;
 placebo f 16
 placebo u 48
 test f 40
@@ -162,27 +175,18 @@ test u 20
 ```
 :::
 
-::: {.column style="width:50%; font-size: 75%"}
-- ALL lines should be ended with a semi-colon **;**
-- `data` statement is followed by the data set name.
-- `length` specifies the number of characters included in each **character**.
-- `input` names all variables included in the data set
-    - The `$` after the variable tells SAS that these variables are categorical variables.
-- `datalines;` tells SAS that you are about to add new data points.
-    - Each row represents a data point in this data table.
-    - End with a separate **;**
-:::
-:::
 
-## SAS Example: Contingency Table
+
+
+## `SAS` Example: Contingency Table
 
 ::: columns
 ::: {.column style="width:50%; font-size: 125%"}
 
 
 ```
-proc freq data=respire; 
-weight count; 
+proc freq data=respire;
+weight count;
 tables treat*outcome;
 run;
 ```
@@ -190,15 +194,15 @@ run;
 :::
 
 ::: {.column style="width:50%; font-size: 75%"}
-- `proc freq` calls the `FREQ` procedure in SAS.
-  - Not defining `data=respire` means SAS will automatically use the most recently run data set.
-- `weight` tells SAS the number of counts for each count
+- `proc freq` calls the `FREQ` procedure in `SAS`.
+  - Not defining `data=respire` means `SAS` will automatically use the most recently run data set.
+- `weight` tells `SAS` the number of counts for each count
 - `tables` creates the contingency table with row, column, and total percentages.
-- `run;` tells SAS to run the code. **This is important!**
+- `run;` tells `SAS` to run the code. **This is important!**
 :::
 :::
 
-## SAS Example: One Observation per Row
+## `SAS` Example: One Observation per Row
 
 ::: columns
 ::: {.column style="width:50%; font-size: 100%"}
@@ -206,7 +210,7 @@ run;
 
 ```
 data severe;
-input treat $ outcome $ @@; 
+input treat $ outcome $ @@;
 datalines;
 placebo f placebo f placebo f
 placebo f placebo f
@@ -217,7 +221,7 @@ placebo u
 test f test f test f
 test f test f test f
 test f test f
-test u test u test u 
+test u test u test u
 test u test u test u
 test u test u test u
 test u test u test u
@@ -235,7 +239,7 @@ test u test u
 :::
 :::
 
-## SAS Example: Contingency Table
+## `SAS` Example: Contingency Table
 
 ::: columns
 ::: {.column style="width:50%; font-size: 100%"}
@@ -253,30 +257,112 @@ run;
 - The `weight` statement is not needed in the `FREQ` procedure when the data does not consist of aggregate counts.
 - `nocol` suppresses the column percentages in the output
 - `nopct` suppresses the total percentages in the output
-- `norow` suppresses the row percentages in the output 
+- `norow` suppresses the row percentages in the output
 :::
 :::
 
-# Exercise
+# `R`
 
-## SAS Exercise
+## Importing files
 
-::: columns
-::: {.column style="width:40%; font-size: 75%"}
-Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.
+There are multiple ways to import files into `R`. The most common data set format is the `.csv` file. You can import CSV files using the `read.csv(filename)` function.
 
-Enter the data in SAS using the data step and generate the contingency tables. Name the data set `enjoy`.
+First, download the file `SleepHealthData.csv` from Canvas in the same folder as your R source code.
+
+```{r}
+#| execute: false
+getwd() # save your data in this folder
+adverse <- read.csv("adverse.csv") # or use a specific path to your folder
+adverse
+```
+
+## Data Frames
+
+
+
+Data frames are rectangular spreadsheets. Data are typically imported as data frames.
+
+::: callout-note
+Rows correspond to observations and the columns correspond to variables.
 :::
 
-::: {.column style="width:60%; font-size: 50%"}
+Example:
+```{r}
+head(mtcars)
+
+sample_data  <- data.frame(ID = c(1,2,3), Name = c("Alice","Bob","Charlie"))
+sample_data
+```
+
+## `R` packages
+
+`R` packages extend the functionality of `R` by providing additional functions, data, and documentation. These packages are written by `R` users around the world and can be downloaded for free!
+
+::: callout-note
+Think of `R` as a new phone. `R` packages are apps that you can download to use your phone in many different ways.
+:::
+
+## Installing and Loading `R` Packages
+
+Like apps on a phone, `R` packages also need to be installed. These packages can be installed by running the following code snippet `install.packages("PackageName")`. For example, to install the package `tidyverse` used for data manipulation and cleaning, you can run the following code:
+
+```{.r}
+install.packages("tidyverse")
+```
+
+To load this package in `R`, you can use the following syntax:
+
+```{r}
+library(tidyverse)
+```
+
+::: callout-important
+You must have an active internet connection to install `R` packages to your device.
+:::
+
+## Contingency Tables
+
+To create your own contingency table, you can use the `data.frame()` and `xtabs()` functions.
+
+```{r}
+count_data <- data.frame(Row = c("A","A","B","B"),
+                         Column = c("X","Y","X","Y"),
+                         Count = c(2,4,6,8))
+
+xtabs(Count~Row+Column,data=count_data)
+```
+
+
+##  Exercise
+
+
+Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.
+
+Enter the data in `SAS` using the data step and generate the contingency tables. Name the data set `enjoy`.
+
 |           | Strongly Agree | Agree | Neutral | Disagree | Strongly Disagree |
 |:---------:|:--------------:|:-----:|:-------:|:--------:|:-----------------:|
 | Sophomore |       24       |  43   |   12    |    25    |        12         |
 |  Seniors  |       19       |  37   |   24    |    32    |        21         |
-:::
-:::
 
-## SAS Exercise
+
+
+::: panel-tabset
+### `R` Code
+
+```{r}
+enjoy <- data.frame(year = c(rep(c("Sophomore","Seniors"),each=5)),
+                    response = c(rep(c("SA","A","N","D","SD"),by=5)),
+                    count = c(24,43,12,25,12,19,37,24,32,21))
+
+xtabs(count~year+response,data=enjoy)
+```
+
+
+### `SAS` Code
+
+
+
 
 There are many ways to code the `data` step. Here's one way to do it!
 
@@ -299,6 +385,6 @@ tables year*response;
 run;
 ```
 
-
+:::
 
 

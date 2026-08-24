@@ -2251,7 +2251,7 @@
     "href": "Chapter1.html#syllabus",
     "title": "EAB 770 - Chapter 1",
     "section": "Syllabus",
-    "text": "Syllabus\n\nThe syllabus can be accessed through\n\nCanvas\nhttps://madfudolig.quarto.pub/eab-770-applied-statistical-methods-for-categorical-data/",
+    "text": "Syllabus\n\nThe syllabus can be accessed through\n\nCanvas\nhttps://miguelfudolig-eab-770-syllabus.share.connect.posit.cloud",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2261,7 +2261,7 @@
     "href": "Chapter1.html#programming-language",
     "title": "EAB 770 - Chapter 1",
     "section": "Programming Language",
-    "text": "Programming Language\n\nWe will primarily use SAS for this course.\n\nYou can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.",
+    "text": "Programming Language\n\nWe will primarily use R and SAS for this course.\n\nYou can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.\nYou can download the most recent versions of R and RStudio if you prefer to take the course in R. You can access a quick tutorial on how to install these here.",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2381,7 +2381,7 @@
     "href": "Chapter1.html#sas-example",
     "title": "EAB 770 - Chapter 1",
     "section": "SAS Example",
-    "text": "SAS Example\n\n\ndata respire;\nlength treat $7. outcome $1. ;\ninput treat $ outcome $ count; \ndatalines; \nplacebo f 16\nplacebo u 48\ntest f 40\ntest u 20\n;\n\n\nALL lines should be ended with a semi-colon ;\ndata statement is followed by the data set name.\nlength specifies the number of characters included in each character.\ninput names all variables included in the data set\n\nThe $ after the variable tells SAS that these variables are categorical variables.\n\ndatalines; tells SAS that you are about to add new data points.\n\nEach row represents a data point in this data table.\nEnd with a separate ;",
+    "text": "SAS Example\n\nCoding RulesExample\n\n\n\nALL lines should be ended with a semi-colon ;\ndata statement is followed by the data set name.\nlength specifies the number of characters included in each character.\ninput names all variables included in the data set\n\nThe $ after the variable tells SAS that these variables are categorical variables.\n\ndatalines; tells SAS that you are about to add new data points.\n\nEach row represents a data point in this data table.\nEnd with a separate ;\n\n\n\n\ndata respire;\nlength treat $7. outcome $1. ;\ninput treat $ outcome $ count;\ndatalines;\nplacebo f 16\nplacebo u 48\ntest f 40\ntest u 20\n;",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2391,7 +2391,7 @@
     "href": "Chapter1.html#sas-example-contingency-table",
     "title": "EAB 770 - Chapter 1",
     "section": "SAS Example: Contingency Table",
-    "text": "SAS Example: Contingency Table\n\n\nproc freq data=respire; \nweight count; \ntables treat*outcome;\nrun;\n\n\nproc freq calls the FREQ procedure in SAS.\n\nNot defining data=respire means SAS will automatically use the most recently run data set.\n\nweight tells SAS the number of counts for each count\ntables creates the contingency table with row, column, and total percentages.\nrun; tells SAS to run the code. This is important!",
+    "text": "SAS Example: Contingency Table\n\n\nproc freq data=respire;\nweight count;\ntables treat*outcome;\nrun;\n\n\nproc freq calls the FREQ procedure in SAS.\n\nNot defining data=respire means SAS will automatically use the most recently run data set.\n\nweight tells SAS the number of counts for each count\ntables creates the contingency table with row, column, and total percentages.\nrun; tells SAS to run the code. This is important!",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2401,7 +2401,7 @@
     "href": "Chapter1.html#sas-example-one-observation-per-row",
     "title": "EAB 770 - Chapter 1",
     "section": "SAS Example: One Observation per Row",
-    "text": "SAS Example: One Observation per Row\n\n\ndata severe;\ninput treat $ outcome $ @@; \ndatalines;\nplacebo f placebo f placebo f\nplacebo f placebo f\nplacebo u placebo u placebo u\nplacebo u placebo u placebo u\nplacebo u placebo u placebo u\nplacebo u\ntest f test f test f\ntest f test f test f\ntest f test f\ntest u test u test u \ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u\n;\n\n\nThis is an example of a data set where one row corresponds to one observational unit.\nThe @@ sign means that the data lines contain multiple observations. @@ basically means new line after two entries written in the datalines statement.",
+    "text": "SAS Example: One Observation per Row\n\n\ndata severe;\ninput treat $ outcome $ @@;\ndatalines;\nplacebo f placebo f placebo f\nplacebo f placebo f\nplacebo u placebo u placebo u\nplacebo u placebo u placebo u\nplacebo u placebo u placebo u\nplacebo u\ntest f test f test f\ntest f test f test f\ntest f test f\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u\n;\n\n\nThis is an example of a data set where one row corresponds to one observational unit.\nThe @@ sign means that the data lines contain multiple observations. @@ basically means new line after two entries written in the datalines statement.",
     "crumbs": [
       "Chapter 1"
     ]
@@ -2421,7 +2421,7 @@
     "href": "Chapter1.html#sas-exercise",
     "title": "EAB 770 - Chapter 1",
     "section": "SAS Exercise",
-    "text": "SAS Exercise\n\n\nSuppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.\nEnter the data in SAS using the data step and generate the contingency tables. Name the data set enjoy.\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrongly Agree\nAgree\nNeutral\nDisagree\nStrongly Disagree\n\n\n\n\nSophomore\n24\n43\n12\n25\n12\n\n\nSeniors\n19\n37\n24\n32\n21",
+    "text": "SAS Exercise\n\n\nSuppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.\nEnter the data in SAS using the data step and generate the contingency tables. Name the data set enjoy.\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrongly Agree\nAgree\nNeutral\nDisagree\nStrongly Disagree\n\n\n\n\nSophomore\n24\n43\n12\n25\n12\n\n\nSeniors\n19\n37\n24\n32\n21",
     "crumbs": [
       "Chapter 1"
     ]
@@ -4514,6 +4514,76 @@
     "text": "Example\nThe following data come from a study in which a physical therapy practice experimented with different treatment modalities in a strengthening program. The therapists rotated patients through three programs for maintenance after basic strength had been attained. The strengthening programs included free weights, resistance bands, and weight machines. The therapists are interested in whether gender and age affect choice of strengthening programs.\n\n\n\n\n\n\nWarning\n\n\nSmall cell counts means we need to use exact methods.\n\n\n\n\nSAS CodeAnswer\n\n\nproc logistic data=pt;\ntitle \"asymptotic\";\nfreq count;\nclass gender(ref='females') age(ref='senior') / param=ref;\nmodel therapy(ref='machines') = gender age / link=glogit scale=none aggregate;\nrun;\n\nproc logistic data=pt;\ntitle \"exact\";\nfreq count;\nclass gender(ref='females') age(ref='senior') / param=ref;\nmodel therapy(ref='machines') = gender age / link=glogit scale=none aggregate;\nexact gender age/joint estimate=both;\nrun;\n\n\nThere is a marginal effect of gender ($ p=0.099\\(), but there is a significant effect of age (\\)^2 = 12.2, p=0.003$).\nThe odds of males preferring bands is 4.1 (0.49-59.55) times than that of females. Additionally, the odds of males preferring freeweights is 4.49 (0.93-30.2) times than that of females.\nThe odds of an adult preferring bands is 5.08 (0.60-53.2) times that of seniors. However, the odds of an adult preferring freeweights is 12.47 (2.7-84.0) times that of seniors.",
     "crumbs": [
       "Chapter 9: Polytomous Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#importing-files",
+    "href": "Chapter1.html#importing-files",
+    "title": "EAB 770 - Chapter 1",
+    "section": "Importing files",
+    "text": "Importing files\nThere are multiple ways to import files into R. The most common data set format is the .csv file. You can import CSV files using the read.csv(filename) function.\nFirst, download the file SleepHealthData.csv from Canvas in the same folder as your R source code.\n\ngetwd() # save your data in this folder\n\n[1] \"C:/Users/migsf/OneDrive/Documents/GitHub/EAB770-Slides-Website\"\n\nadverse &lt;- read.csv(\"adverse.csv\") # or use a specific path to your folder\nadverse\n\n   Clinic Treatment Count\n1       1         a     6\n2       2         a     4\n3       3         a     7\n4       1         b    14\n5       2         b    11\n6       3         b    17\n7       1         c     6\n8       2         c    14\n9       3         c     8\n10      1         d    15\n11      2         d     5\n12      3         d    13",
+    "crumbs": [
+      "Chapter 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#data-frames",
+    "href": "Chapter1.html#data-frames",
+    "title": "EAB 770 - Chapter 1",
+    "section": "Data Frames",
+    "text": "Data Frames\nData frames are rectangular spreadsheets. Data are typically imported as data frames.\n\n\n\n\n\n\nNote\n\n\nRows correspond to observations and the columns correspond to variables.\n\n\n\nExample:\n\nhead(mtcars)\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\nsample_data  &lt;- data.frame(ID = c(1,2,3), Name = c(\"Alice\",\"Bob\",\"Charlie\"))\nsample_data\n\n  ID    Name\n1  1   Alice\n2  2     Bob\n3  3 Charlie",
+    "crumbs": [
+      "Chapter 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#r-packages",
+    "href": "Chapter1.html#r-packages",
+    "title": "EAB 770 - Chapter 1",
+    "section": "R packages",
+    "text": "R packages\nR packages extend the functionality of R by providing additional functions, data, and documentation. These packages are written by R users around the world and can be downloaded for free!\n\n\n\n\n\n\nNote\n\n\nThink of R as a new phone. R packages are apps that you can download to use your phone in many different ways.",
+    "crumbs": [
+      "Chapter 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#installing-and-loading-r-packages",
+    "href": "Chapter1.html#installing-and-loading-r-packages",
+    "title": "EAB 770 - Chapter 1",
+    "section": "Installing and Loading R Packages",
+    "text": "Installing and Loading R Packages\nLike apps on a phone, R packages also need to be installed. These packages can be installed by running the following code snippet install.packages(\"PackageName\"). For example, to install the package tidyverse used for data manipulation and cleaning, you can run the following code:\ninstall.packages(\"tidyverse\")\nTo load this package in R, you can use the following syntax:\n\nlibrary(tidyverse)\n\n\n\n\n\n\n\nImportant\n\n\nYou must have an active internet connection to install R packages to your device.",
+    "crumbs": [
+      "Chapter 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#contingency-tables",
+    "href": "Chapter1.html#contingency-tables",
+    "title": "EAB 770 - Chapter 1",
+    "section": "Contingency Tables",
+    "text": "Contingency Tables\nTo create your own contingency table, you can use the data.frame() and xtabs() functions.\n\ncount_data &lt;- data.frame(Row = c(\"A\",\"A\",\"B\",\"B\"),\n                         Column = c(\"X\",\"Y\",\"X\",\"Y\"),\n                         Count = c(2,4,6,8))\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 4\n  B 6 8",
+    "crumbs": [
+      "Chapter 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#exercise-1",
+    "href": "Chapter1.html#exercise-1",
+    "title": "EAB 770 - Chapter 1",
+    "section": "Exercise",
+    "text": "Exercise\n\nR CodeSASCode\n\n\n\n\n           response\nyear         A  D  N SA SD\n  Seniors   37 32 24 19 21\n  Sophomore 43 25 12 24 12\n\n\n\n\nThere are many ways to code the data step. Here’s one way to do it!\ndata enjoy;\nlength year $9. response $2.;\ninput year $ response $ count @@;\ndatalines;\nsophomore SA 24 sophomore A 43\nsophomore N 12\nsophomore D 25 sophomore SD 12\nsenior SA 19 senior A 37\nsenior N 24\nsenior D 32 senior SD 21\n;\n\nproc freq order=data data=enjoy;\nweight count;\ntables year*response;\nrun;",
+    "crumbs": [
+      "Chapter 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#exercise",
+    "href": "Chapter1.html#exercise",
+    "title": "EAB 770 - Chapter 1",
+    "section": "Exercise",
+    "text": "Exercise\nSuppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.\nEnter the data in SAS using the data step and generate the contingency tables. Name the data set enjoy.\n\n\n\n\n\n\n\n\n\n\n\n\nStrongly Agree\nAgree\nNeutral\nDisagree\nStrongly Disagree\n\n\n\n\nSophomore\n24\n43\n12\n25\n12\n\n\nSeniors\n19\n37\n24\n32\n21\n\n\n\n\nR CodeSAS Code\n\n\n\nenjoy &lt;- data.frame(year = c(rep(c(\"Sophomore\",\"Seniors\"),each=5)),\n                    response = c(rep(c(\"SA\",\"A\",\"N\",\"D\",\"SD\"),by=5)),\n                    count = c(24,43,12,25,12,19,37,24,32,21))\n\nxtabs(count~year+response,data=enjoy)\n\n           response\nyear         A  D  N SA SD\n  Seniors   37 32 24 19 21\n  Sophomore 43 25 12 24 12\n\n\n\n\nThere are many ways to code the data step. Here’s one way to do it!\ndata enjoy;\nlength year $9. response $2.;\ninput year $ response $ count @@;\ndatalines;\nsophomore SA 24 sophomore A 43\nsophomore N 12\nsophomore D 25 sophomore SD 12\nsenior SA 19 senior A 37\nsenior N 24\nsenior D 32 senior SD 21\n;\n\nproc freq order=data data=enjoy;\nweight count;\ntables year*response;\nrun;",
+    "crumbs": [
+      "Chapter 1"
     ]
   }
 ]

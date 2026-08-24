@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 1</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -28,8 +31,74 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-b2736e9fcda83c748fd63b6e579550ef.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -150,7 +219,7 @@ Miguel Fudolig
 <h2>Outline</h2>
 <ul>
 <li>Syllabus Discussion</li>
-<li>Accessing SAS OnDemand for Academics</li>
+<li>Accessing <code>SAS</code> OnDemand for Academics</li>
 <li>Why are we here?</li>
 <li>Preliminary Materials</li>
 </ul>
@@ -161,27 +230,28 @@ Miguel Fudolig
 <li>The syllabus can be accessed through
 <ul>
 <li>Canvas</li>
-<li><a href="https://madfudolig.quarto.pub/eab-770-applied-statistical-methods-for-categorical-data/" class="uri">https://madfudolig.quarto.pub/eab-770-applied-statistical-methods-for-categorical-data/</a></li>
+<li><a href="https://miguelfudolig-eab-770-syllabus.share.connect.posit.cloud" class="uri">https://miguelfudolig-eab-770-syllabus.share.connect.posit.cloud</a></li>
 </ul></li>
 </ul>
 </section>
 <section id="programming-language" class="slide level2">
 <h2>Programming Language</h2>
 <ul>
-<li>We will primarily use SAS for this course.
+<li>We will primarily use R and <code>SAS</code> for this course.
 <ul>
-<li>You can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.</li>
+<li>You can access <code>SAS</code> through <code>SAS</code> On Demand for Academics. This will be free and accessible when you have internet connection.</li>
+<li>You can download the most recent versions of <code>R</code> and <code>RStudio</code> if you prefer to take the course in <code>R</code>. You can access a quick tutorial on how to install these <a href="https://rstudio-education.github.io/hopr/starting.html">here</a>.</li>
 </ul></li>
 </ul>
 </section>
 <section id="accessing-sas-on-demand-for-academics" class="slide level2">
-<h2>Accessing SAS On Demand for Academics</h2>
+<h2>Accessing <code>SAS</code> On Demand for Academics</h2>
 <ul>
-<li><p>Create a SAS Profile that will be used to register for SAS OnDemand for Academics. To register, visit <a href="https://www.sas.com" class="uri">https://www.sas.com</a> and fill out the form to <em>Create profile</em>.</p>
+<li><p>Create a <code>SAS</code> Profile that will be used to register for <code>SAS</code> OnDemand for Academics. To register, visit <a href="https://www.sas.com" class="uri">https://www.sas.com</a> and fill out the form to <em>Create profile</em>.</p>
 <ul>
 <li>Use your UNLV email for faster verification.</li>
 </ul></li>
-<li><p>Create your account for SAS OnDemand for Academics. To register, visit <a href="https://welcome.oda.sas.com" class="uri">https://welcome.oda.sas.com</a> sign in with your SAS Profile and complete the steps to <em>Register for an account</em>.</p></li>
+<li><p>Create your account for <code>SAS</code> OnDemand for Academics. To register, visit <a href="https://welcome.oda.sas.com" class="uri">https://welcome.oda.sas.com</a> sign in with your <code>SAS</code> Profile and complete the steps to <em>Register for an account</em>.</p></li>
 </ul>
 </section></section>
 <section id="why-are-we-here" class="title-slide slide level1 center">
@@ -189,45 +259,6 @@ Miguel Fudolig
 <p>Why bother learning categorical data analysis?</p>
 </section>
 
-<section>
-<section id="review-questions" class="title-slide slide level1 center">
-<h1>Review Questions</h1>
-
-</section>
-<section id="review-questions-1" class="slide level2">
-<h2>Review Questions</h2>
-<p>Define the following terms:</p>
-<ul>
-<li><p>p-value</p></li>
-<li><p>confidence level in confidence intervals</p></li>
-<li><p>Odds</p></li>
-<li><p>Relative Risk</p></li>
-</ul>
-</section>
-<section id="review-questions-2" class="slide level2">
-<h2>Review Questions</h2>
-<p>Define the following terms:</p>
-<ul>
-<li><p>p-value</p>
-<ul>
-<li>The probability of recording a test statistic as extreme or more extreme as the obtained statistic <em>assuming the null hypothesis is true.</em></li>
-</ul></li>
-<li><p>Confidence level in confidence intervals</p>
-<ul>
-<li>The <strong>long-run proportion</strong> of confidence intervals that theoretically contain the true parameter value.</li>
-</ul></li>
-<li><p>Odds</p>
-<ul>
-<li><p>The ratio of the success and failure probabilities.</p></li>
-<li><p><span class="math inline">\(\frac{p_{success}}{p_{failure}}\)</span></p></li>
-</ul></li>
-<li><p>Relative Risk</p>
-<ul>
-<li><p>The ratio of success probabilities of two different groups.</p></li>
-<li><p><span class="math inline">\(p_1/p_2\)</span></p></li>
-</ul></li>
-</ul>
-</section></section>
 <section>
 <section id="categorical-data" class="title-slide slide level1 center">
 <h1>Categorical Data</h1>
@@ -323,13 +354,13 @@ Miguel Fudolig
 </ul>
 </section>
 <section id="sas-procedures-and-data" class="slide level2">
-<h2>SAS Procedures and Data</h2>
+<h2><code>SAS</code> Procedures and Data</h2>
 <ul>
-<li>There are multiple ways to import data into SAS
+<li>There are multiple ways to import data into <code>SAS</code>
 <ul>
 <li>DATA step</li>
 <li>PROC IMPORT step</li>
-<li>SAS OnDemand can import data from CSV files.</li>
+<li><code>SAS</code> OnDemand can import data from CSV files.</li>
 </ul></li>
 <li><code>FREQ</code>
 <ul>
@@ -348,13 +379,13 @@ Miguel Fudolig
 </ul>
 </section>
 <section id="sas-in-class" class="slide level2">
-<h2>SAS in Class</h2>
+<h2><code>SAS</code> in Class</h2>
 <ul>
 <li>Sample code will be provided, but there will be examples where we work the code out together as a class.</li>
-<li>Class computers have SAS installed in them.
+<li>Class computers have <code>SAS</code> installed in them.
 <ul>
 <li>You can save files on your Y drive (assigned to your ACE ID) to access files on other computers.</li>
-<li>SAS can also be accessed through SAS OnDemand Academics.
+<li><code>SAS</code> can also be accessed through <code>SAS</code> OnDemand Academics.
 <ul>
 <li>Needs internet connection</li>
 </ul></li>
@@ -362,67 +393,72 @@ Miguel Fudolig
 </ul>
 </section>
 <section id="sas-examples" class="slide level2">
-<h2>SAS Examples</h2>
+<h2><code>SAS</code> Examples</h2>
 <ul>
 <li>Download Chapter1.sas from Canvas.</li>
 </ul>
 </section>
 <section id="sas-example" class="slide level2">
-<h2>SAS Example</h2>
-<div class="columns">
-<div class="column" style="width:50%; font-size: 125%">
-<pre data-code-line-numbers="1-3"><code>data respire;
-length treat $7. outcome $1. ;
-input treat $ outcome $ count; 
-datalines; 
-placebo f 16
-placebo u 48
-test f 40
-test u 20
-;</code></pre>
-</div><div class="column" style="width:50%; font-size: 75%">
+<h2><code>SAS</code> Example</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Coding Rules</a></li><li><a href="#tabset-1-2">Example</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
 <ul>
 <li>ALL lines should be ended with a semi-colon <strong>;</strong></li>
 <li><code>data</code> statement is followed by the data set name.</li>
 <li><code>length</code> specifies the number of characters included in each <strong>character</strong>.</li>
 <li><code>input</code> names all variables included in the data set
 <ul>
-<li>The <code>$</code> after the variable tells SAS that these variables are categorical variables.</li>
+<li>The <code>$</code> after the variable tells <code>SAS</code> that these variables are categorical variables.</li>
 </ul></li>
-<li><code>datalines;</code> tells SAS that you are about to add new data points.
+<li><code>datalines;</code> tells <code>SAS</code> that you are about to add new data points.
 <ul>
 <li>Each row represents a data point in this data table.</li>
 <li>End with a separate <strong>;</strong></li>
 </ul></li>
 </ul>
-</div></div>
+</div>
+<div id="tabset-1-2">
+<pre><code>data respire;
+length treat $7. outcome $1. ;
+input treat $ outcome $ count;
+datalines;
+placebo f 16
+placebo u 48
+test f 40
+test u 20
+;</code></pre>
+</div>
+</div>
+</div>
 </section>
 <section id="sas-example-contingency-table" class="slide level2">
-<h2>SAS Example: Contingency Table</h2>
+<h2><code>SAS</code> Example: Contingency Table</h2>
 <div class="columns">
 <div class="column" style="width:50%; font-size: 125%">
-<pre><code>proc freq data=respire; 
-weight count; 
+<pre><code>proc freq data=respire;
+weight count;
 tables treat*outcome;
 run;</code></pre>
 </div><div class="column" style="width:50%; font-size: 75%">
 <ul>
-<li><code>proc freq</code> calls the <code>FREQ</code> procedure in SAS.
+<li><code>proc freq</code> calls the <code>FREQ</code> procedure in <code>SAS</code>.
 <ul>
-<li>Not defining <code>data=respire</code> means SAS will automatically use the most recently run data set.</li>
+<li>Not defining <code>data=respire</code> means <code>SAS</code> will automatically use the most recently run data set.</li>
 </ul></li>
-<li><code>weight</code> tells SAS the number of counts for each count</li>
+<li><code>weight</code> tells <code>SAS</code> the number of counts for each count</li>
 <li><code>tables</code> creates the contingency table with row, column, and total percentages.</li>
-<li><code>run;</code> tells SAS to run the code. <strong>This is important!</strong></li>
+<li><code>run;</code> tells <code>SAS</code> to run the code. <strong>This is important!</strong></li>
 </ul>
 </div></div>
 </section>
 <section id="sas-example-one-observation-per-row" class="slide level2">
-<h2>SAS Example: One Observation per Row</h2>
+<h2><code>SAS</code> Example: One Observation per Row</h2>
 <div class="columns">
 <div class="column" style="width:50%; font-size: 100%">
 <pre><code>data severe;
-input treat $ outcome $ @@; 
+input treat $ outcome $ @@;
 datalines;
 placebo f placebo f placebo f
 placebo f placebo f
@@ -433,7 +469,7 @@ placebo u
 test f test f test f
 test f test f test f
 test f test f
-test u test u test u 
+test u test u test u
 test u test u test u
 test u test u test u
 test u test u test u
@@ -449,7 +485,7 @@ test u test u
 </div></div>
 </section>
 <section id="sas-example-contingency-table-1" class="slide level2">
-<h2>SAS Example: Contingency Table</h2>
+<h2><code>SAS</code> Example: Contingency Table</h2>
 <div class="columns">
 <div class="column" style="width:50%; font-size: 100%">
 <pre><code>proc freq data=severe;
@@ -465,17 +501,136 @@ run;</code></pre>
 </div></div>
 </section></section>
 <section>
-<section id="exercise" class="title-slide slide level1 center">
-<h1>Exercise</h1>
+<section id="r" class="title-slide slide level1 center">
+<h1><code>R</code></h1>
 
 </section>
-<section id="sas-exercise" class="slide level2">
-<h2>SAS Exercise</h2>
-<div class="columns">
-<div class="column" style="width:40%; font-size: 75%">
-<p>Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes in AY 2023-2024.” yielded the following results.</p>
-<p>Enter the data in SAS using the data step and generate the contingency tables. Name the data set <code>enjoy</code>.</p>
-</div><div class="column" style="width:60%; font-size: 50%">
+<section id="importing-files" class="slide level2">
+<h2>Importing files</h2>
+<p>There are multiple ways to import files into <code>R</code>. The most common data set format is the <code>.csv</code> file. You can import CSV files using the <code>read.csv(filename)</code> function.</p>
+<p>First, download the file <code>SleepHealthData.csv</code> from Canvas in the same folder as your R source code.</p>
+<div class="cell" data-execute="false">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">getwd</span>() <span class="co"># save your data in this folder</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C:/Users/migsf/OneDrive/Documents/GitHub/EAB770-Slides-Website"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>adverse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"adverse.csv"</span>) <span class="co"># or use a specific path to your folder</span></span>
+<span id="cb7-2"><a></a>adverse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Clinic Treatment Count
+1       1         a     6
+2       2         a     4
+3       3         a     7
+4       1         b    14
+5       2         b    11
+6       3         b    17
+7       1         c     6
+8       2         c    14
+9       3         c     8
+10      1         d    15
+11      2         d     5
+12      3         d    13</code></pre>
+</div>
+</div>
+</section>
+<section id="data-frames" class="slide level2">
+<h2>Data Frames</h2>
+<p>Data frames are rectangular spreadsheets. Data are typically imported as data frames.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Rows correspond to observations and the columns correspond to variables.</p>
+</div>
+</div>
+</div>
+<p>Example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">head</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>sample_data  <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>,<span class="st">"Bob"</span>,<span class="st">"Charlie"</span>))</span>
+<span id="cb11-2"><a></a>sample_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID    Name
+1  1   Alice
+2  2     Bob
+3  3 Charlie</code></pre>
+</div>
+</div>
+</section>
+<section id="r-packages" class="slide level2">
+<h2><code>R</code> packages</h2>
+<p><code>R</code> packages extend the functionality of <code>R</code> by providing additional functions, data, and documentation. These packages are written by <code>R</code> users around the world and can be downloaded for free!</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Think of <code>R</code> as a new phone. <code>R</code> packages are apps that you can download to use your phone in many different ways.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="installing-and-loading-r-packages" class="slide level2">
+<h2>Installing and Loading <code>R</code> Packages</h2>
+<p>Like apps on a phone, <code>R</code> packages also need to be installed. These packages can be installed by running the following code snippet <code>install.packages("PackageName")</code>. For example, to install the package <code>tidyverse</code> used for data manipulation and cleaning, you can run the following code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To load this package in <code>R</code>, you can use the following syntax:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>You must have an active internet connection to install <code>R</code> packages to your device.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="contingency-tables" class="slide level2">
+<h2>Contingency Tables</h2>
+<p>To create your own contingency table, you can use the <code>data.frame()</code> and <code>xtabs()</code> functions.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>count_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Row =</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span>),</span>
+<span id="cb15-2"><a></a>                         <span class="at">Column =</span> <span class="fu">c</span>(<span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"X"</span>,<span class="st">"Y"</span>),</span>
+<span id="cb15-3"><a></a>                         <span class="at">Count =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>))</span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a><span class="fu">xtabs</span>(Count<span class="sc">~</span>Row<span class="sc">+</span>Column,<span class="at">data=</span>count_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Column
+Row X Y
+  A 2 4
+  B 6 8</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
+<p>Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.</p>
+<p>Enter the data in <code>SAS</code> using the data step and generate the contingency tables. Name the data set <code>enjoy</code>.</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 15%">
@@ -514,10 +669,25 @@ run;</code></pre>
 </tr>
 </tbody>
 </table>
-</div></div>
-</section>
-<section id="sas-exercise-1" class="slide level2">
-<h2>SAS Exercise</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1"><code>R</code> Code</a></li><li><a href="#tabset-2-2"><code>SAS</code> Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>enjoy <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Sophomore"</span>,<span class="st">"Seniors"</span>),<span class="at">each=</span><span class="dv">5</span>)),</span>
+<span id="cb17-2"><a></a>                    <span class="at">response =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"SA"</span>,<span class="st">"A"</span>,<span class="st">"N"</span>,<span class="st">"D"</span>,<span class="st">"SD"</span>),<span class="at">by=</span><span class="dv">5</span>)),</span>
+<span id="cb17-3"><a></a>                    <span class="at">count =</span> <span class="fu">c</span>(<span class="dv">24</span>,<span class="dv">43</span>,<span class="dv">12</span>,<span class="dv">25</span>,<span class="dv">12</span>,<span class="dv">19</span>,<span class="dv">37</span>,<span class="dv">24</span>,<span class="dv">32</span>,<span class="dv">21</span>))</span>
+<span id="cb17-4"><a></a></span>
+<span id="cb17-5"><a></a><span class="fu">xtabs</span>(count<span class="sc">~</span>year<span class="sc">+</span>response,<span class="at">data=</span>enjoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           response
+year         A  D  N SA SD
+  Seniors   37 32 24 19 21
+  Sophomore 43 25 12 24 12</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
 <p>There are many ways to code the <code>data</code> step. Here’s one way to do it!</p>
 <pre><code>data enjoy;
 length year $9. response $2.;
@@ -535,6 +705,9 @@ proc freq order=data data=enjoy;
 weight count;
 tables year*response;
 run;</code></pre>
+</div>
+</div>
+</div>
 
 
 </section></section>
@@ -729,7 +902,7 @@ run;</code></pre>
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -755,6 +928,82 @@ run;</code></pre>
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
@@ -803,13 +1052,14 @@ run;</code></pre>
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -824,7 +1074,7 @@ run;</code></pre>
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
