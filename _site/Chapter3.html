@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 3</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -95,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d7d389961a246b163ae1cd8b562da1b6.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -345,7 +348,7 @@ Q_{MH} =    \frac{\left[\sum_{j=1}^q n_{j11} - \sum_{j=1}^q m_{j11}\right]^2}{\s
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Code</a></li><li><a href="#tabset-1-2">R Code</a></li><li><a href="#tabset-1-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="sourceCode" id="annotated-cell-2" data-code-line-numbers="11,12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a>data stress;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2" data-code-line-numbers="11,12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a>data stress;</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>input region <span class="sc">$</span> stress <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a>datalines;</span>
 <span id="annotated-cell-2-4"><a href="#annotated-cell-2-4"></a>urban low f <span class="dv">48</span> urban low u <span class="dv">12</span></span>
@@ -356,7 +359,7 @@ Q_{MH} =    \frac{\left[\sum_{j=1}^q n_{j11} - \sum_{j=1}^q m_{j11}\right]^2}{\s
 <span id="annotated-cell-2-9"><a href="#annotated-cell-2-9"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>stress;</span>
 <span id="annotated-cell-2-10"><a href="#annotated-cell-2-10"></a>weight count;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-11" class="code-annotation-target"><a href="#annotated-cell-2-11"></a>tables region<span class="sc">*</span>stress<span class="sc">*</span>outcome <span class="sc">/</span> all chisq <span class="fu">cmh</span> (mf) nocol nopct;</span>
-<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
@@ -368,7 +371,7 @@ Q_{MH} =    \frac{\left[\sum_{j=1}^q n_{j11} - \sum_{j=1}^q m_{j11}\right]^2}{\s
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(vcdExtra)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(vcdExtra)</span>
 <span id="cb1-2"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Favorable"</span>,<span class="st">"Unfavorable"</span>),</span>
 <span id="cb1-3"><a></a>                    <span class="at">Residence=</span><span class="fu">c</span>(<span class="st">"Urban"</span>,<span class="st">"Rural"</span>),</span>
 <span id="cb1-4"><a></a>                    <span class="at">Stress =</span> <span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"High"</span>)</span>
@@ -380,7 +383,7 @@ Q_{MH} =    \frac{\left[\sum_{j=1}^q n_{j11} - \sum_{j=1}^q m_{j11}\right]^2}{\s
 <span id="cb1-10"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
 <span id="cb1-11"><a></a>        <span class="at">strata=</span><span class="st">"Residence"</span>,</span>
 <span id="cb1-12"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<span id="cb1-13"><a></a>        <span class="at">overall=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Residence:Urban`
@@ -461,7 +464,7 @@ Treatment Yes No
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">R Code</a></li><li><a href="#tabset-2-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a></span>
 <span id="cb4-2"><a></a>data resp;</span>
 <span id="cb4-3"><a></a>length treatment <span class="sc">$</span><span class="fl">7.</span>;</span>
 <span id="cb4-4"><a></a>input treatment <span class="sc">$</span> improvement <span class="sc">$</span> center <span class="sc">$</span> count;</span>
@@ -480,20 +483,20 @@ Treatment Yes No
 <span id="cb4-17"><a></a>proc freq data<span class="ot">=</span>resp order<span class="ot">=</span>data;</span>
 <span id="cb4-18"><a></a>weight count;</span>
 <span id="cb4-19"><a></a>tables center<span class="sc">*</span>treatment<span class="sc">*</span>improvement <span class="sc">/</span> <span class="fu">cmh</span> (MF) nocol norow nopct;</span>
-<span id="cb4-20"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-20"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Improvement =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>),</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Improvement =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>),</span>
 <span id="cb5-2"><a></a>                    <span class="at">Center=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
 <span id="cb5-3"><a></a>                    <span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">"Test"</span>,<span class="st">"Placebo"</span>)</span>
 <span id="cb5-4"><a></a>                  ) <span class="sc">|&gt;</span> </span>
 <span id="cb5-5"><a></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">16</span>,<span class="dv">37</span>,<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">31</span>,<span class="dv">24</span>,<span class="dv">21</span>))</span>
 <span id="cb5-6"><a></a></span>
 <span id="cb5-7"><a></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  Treatment<span class="sc">+</span>Improvement <span class="sc">+</span> Center, <span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
-<span id="cb5-8"><a></a>dat_cc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-8"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , Center = 1
@@ -512,10 +515,10 @@ Treatment Yes No
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
 <span id="cb7-2"><a></a>        <span class="at">strata=</span><span class="st">"Center"</span>,</span>
 <span id="cb7-3"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<span id="cb7-4"><a></a>        <span class="at">overall=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Center:1`
@@ -678,10 +681,10 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
 <li>The <code>comor</code> and <code>eqor</code> options in the <code>exact</code> statement yield the exact common odds ratio and the Zelen’s test results, respectively.</li>
 </ul>
 <p>Sample SAS code:</p>
-<div class="sourceCode" id="cb9" data-code-line-numbers="2,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>proc freq;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-code-line-numbers="2,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>proc freq;</span>
 <span id="cb9-2"><a></a>tables a<span class="sc">*</span>b<span class="sc">*</span>c<span class="sc">/</span>cmh measures;</span>
 <span id="cb9-3"><a></a>exact comor eqor;</span>
-<span id="cb9-4"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-4" class="slide level2">
 <h2>Example</h2>
@@ -699,7 +702,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="sourceCode" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a>data ca;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a>data ca;</span>
 <span id="annotated-cell-11-2"><a href="#annotated-cell-11-2"></a>input sex <span class="sc">$</span> ECG <span class="sc">$</span> disease <span class="sc">$</span> count;</span>
 <span id="annotated-cell-11-3"><a href="#annotated-cell-11-3"></a>datalines;</span>
 <span id="annotated-cell-11-4"><a href="#annotated-cell-11-4"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">4</span></span>
@@ -715,7 +718,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
 <span id="annotated-cell-11-14"><a href="#annotated-cell-11-14"></a>weight count;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-15" class="code-annotation-target"><a href="#annotated-cell-11-15"></a>tables sex<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct chisq measures;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-11-16" class="code-annotation-target"><a href="#annotated-cell-11-16"></a>tables sex<span class="sc">*</span>ECG<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct cmh measures;</span>
-<span id="annotated-cell-11-17"><a href="#annotated-cell-11-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-11-17"><a href="#annotated-cell-11-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
@@ -762,7 +765,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>data exercise;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>data exercise;</span>
 <span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>input location <span class="sc">$</span> program <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a>datalines;</span>
 <span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>downtown office good <span class="dv">12</span> downtown office not <span class="dv">5</span></span>
@@ -775,7 +778,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
 <span id="annotated-cell-12-11"><a href="#annotated-cell-12-11"></a>weight count;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-12" class="code-annotation-target"><a href="#annotated-cell-12-12"></a>tables location<span class="sc">*</span>program<span class="sc">*</span>outcome <span class="sc">/</span><span class="fu">cmh</span>(mf);</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-13" class="code-annotation-target"><a href="#annotated-cell-12-13"></a>exact comor eqor;</span>
-<span id="annotated-cell-12-14"><a href="#annotated-cell-12-14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-12-14"><a href="#annotated-cell-12-14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
@@ -995,7 +998,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1145,13 +1148,14 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -1166,7 +1170,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

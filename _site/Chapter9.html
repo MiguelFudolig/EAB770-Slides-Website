@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 9</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -95,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d7d389961a246b163ae1cd8b562da1b6.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -426,17 +429,17 @@ logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \lo
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Data Set</a></li><li><a href="#tabset-2-2">SAS Code</a></li><li><a href="#tabset-2-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data arthritis;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data arthritis;</span>
 <span id="cb1-2"><a></a>input sex <span class="sc">$</span> treatment <span class="sc">$</span> improve <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb1-3"><a></a>datalines;</span>
 <span id="cb1-4"><a></a>female active marked <span class="dv">16</span> female active some <span class="dv">5</span> female active none <span class="dv">6</span></span>
 <span id="cb1-5"><a></a>female placebo marked <span class="dv">6</span> female placebo some <span class="dv">7</span> female placebo none <span class="dv">19</span></span>
 <span id="cb1-6"><a></a>male active marked <span class="dv">5</span> male active some <span class="dv">2</span> male active none <span class="dv">7</span></span>
 <span id="cb1-7"><a></a>male placebo marked <span class="dv">1</span> male placebo some <span class="dv">0</span> male placebo none <span class="dv">10</span></span>
-<span id="cb1-8"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
-<div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a>proc logistic data<span class="ot">=</span>arthritis order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>treatment<span class="sc">*</span>sex);</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a>proc logistic data<span class="ot">=</span>arthritis order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>treatment<span class="sc">*</span>sex);</span>
 <span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>freq count;</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a>class treatment sex <span class="sc">/</span> param<span class="ot">=</span>ref; </span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>model improve <span class="ot">=</span> sex treatment sex<span class="sc">*</span>treatment<span class="sc">/</span> selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
@@ -444,7 +447,7 @@ logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \lo
 <span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>estimate <span class="st">"odds between marked+some vs. no improvement for female in placebo group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span> <span class="sc">/</span>exp cl category<span class="ot">=</span><span class="st">'some'</span>;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-7" class="code-annotation-target"><a href="#annotated-cell-3-7"></a>estimate <span class="st">"probability of marked improvement for female in the placebo group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'marked'</span>;</span>
 <span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a>estimate <span class="st">"probability of marked improvement for female in the active trt group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span> treatment <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'marked'</span>;</span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
@@ -486,7 +489,7 @@ logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \lo
 </ul>
 </div>
 <div id="tabset-3-2">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>data respire;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>data respire;</span>
 <span id="cb2-2"><a></a>input air <span class="sc">$</span> exposure <span class="sc">$</span> smoking <span class="sc">$</span> level <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb2-3"><a></a>datalines;</span>
 <span id="cb2-4"><a></a>low no non <span class="dv">1</span> <span class="dv">158</span> low no non <span class="dv">2</span> <span class="dv">9</span></span>
@@ -513,7 +516,7 @@ logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \lo
 <span id="cb2-25"><a></a>high yes non <span class="dv">3</span> <span class="dv">6</span> high yes non <span class="dv">4</span> <span class="dv">1</span></span>
 <span id="cb2-26"><a></a>high yes ex <span class="dv">3</span> <span class="dv">4</span> high yes ex <span class="dv">4</span> <span class="dv">2</span></span>
 <span id="cb2-27"><a></a>high yes cur <span class="dv">3</span> <span class="dv">39</span> high yes cur <span class="dv">4</span> <span class="dv">51</span></span>
-<span id="cb2-28"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-28"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -525,14 +528,14 @@ logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \lo
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>proc logistic data<span class="ot">=</span>respire order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>air<span class="sc">*</span>exposure<span class="sc">*</span>smoking);; </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>proc logistic data<span class="ot">=</span>respire order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>air<span class="sc">*</span>exposure<span class="sc">*</span>smoking);; </span>
 <span id="cb3-2"><a></a>freq count;</span>
 <span id="cb3-3"><a></a>class air exposure smoking <span class="sc">/</span> param<span class="ot">=</span>reference;</span>
 <span id="cb3-4"><a></a>model level <span class="ot">=</span> air exposure smoking air<span class="sc">*</span>exposure exposure<span class="sc">*</span>smoking air<span class="sc">*</span>smoking air<span class="sc">*</span>exposure<span class="sc">*</span>smoking<span class="sc">/</span> selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">3</span> scale<span class="ot">=</span>none aggregate;</span>
 <span id="cb3-5"><a></a>estimate <span class="st">"odds between I+II+III vs. IV for current vs. ex smokers"</span> smoking <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span>exp cl category<span class="ot">=</span><span class="st">"3"</span>;</span>
 <span id="cb3-6"><a></a>estimate <span class="st">"probability of at most III level for ex smoker, high air pollution, job exposure"</span> intercept <span class="dv">1</span> air <span class="dv">1</span> smoking <span class="dv">0</span> <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'3'</span>;</span>
 <span id="cb3-7"><a></a>estimate <span class="st">"probability of at most II level for ex smoker, high air pollution, job exposure"</span> intercept <span class="dv">1</span> air <span class="dv">1</span> smoking <span class="dv">0</span> <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'2'</span>; </span>
-<span id="cb3-8"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2">
 <p>There is no evidence of an air pollution effect (<span class="math inline">\(\chi^2 = 0.18, p=0.68\)</span>). Exposure (<span class="math inline">\(\chi^2 = 82.1, p=&lt;0.001\)</span>) and smoking history (<span class="math inline">\(\chi^2 = 209.9, p&lt;0.001\)</span>) are significant.</p>
@@ -602,7 +605,7 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="sourceCode" id="annotated-cell-6"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1"></a>proc logistic order<span class="ot">=</span>data data<span class="ot">=</span>wrist;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-6"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1"></a>proc logistic order<span class="ot">=</span>data data<span class="ot">=</span>wrist;</span>
 <span id="annotated-cell-6-2"><a href="#annotated-cell-6-2"></a>freq count;</span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3"></a>class glove gender <span class="sc">/</span> param<span class="ot">=</span>reference order<span class="ot">=</span>data;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-4" class="code-annotation-target"><a href="#annotated-cell-6-4"></a>model relief<span class="ot">=</span> glove gender <span class="sc">/</span> scale<span class="ot">=</span>none aggregate unequalslopes;</span>
@@ -614,7 +617,7 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 <span id="annotated-cell-6-10"><a href="#annotated-cell-6-10"></a>freq count;</span>
 <span id="annotated-cell-6-11"><a href="#annotated-cell-6-11"></a>class glove gender <span class="sc">/</span> param<span class="ot">=</span>reference order<span class="ot">=</span>data;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-6-12" class="code-annotation-target"><a href="#annotated-cell-6-12"></a>model relief<span class="ot">=</span> glove gender <span class="sc">/</span> scale<span class="ot">=</span>none aggregate unequalslopes<span class="ot">=</span>glove;</span>
-<span id="annotated-cell-6-13"><a href="#annotated-cell-6-13"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-6-13"><a href="#annotated-cell-6-13"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
@@ -651,13 +654,13 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 <ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc logistic data<span class="ot">=</span>arthritis order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>treatment<span class="sc">*</span>sex);; </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc logistic data<span class="ot">=</span>arthritis order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>treatment<span class="sc">*</span>sex);; </span>
 <span id="cb4-2"><a></a>freq count;</span>
 <span id="cb4-3"><a></a>class treatment sex <span class="sc">/</span> param<span class="ot">=</span>reference;</span>
 <span id="cb4-4"><a></a>model improve <span class="ot">=</span> sex treatment <span class="sc">/</span> unequalslopes scale<span class="ot">=</span>none aggregate;</span>
 <span id="cb4-5"><a></a>equal_sex<span class="sc">:</span> test sexfemale_marked<span class="ot">=</span>sexfemale_some;</span>
 <span id="cb4-6"><a></a>equal_treatment<span class="sc">:</span> test treatmentactive_marked<span class="ot">=</span>treatmentactive_some;</span>
-<span id="cb4-7"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2">
 <p>We suppose the slopes are unequal, then test whether there is evidence against the null hypothesis of equal slopes using <code>test</code>.</p>
@@ -767,7 +770,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <p>Use logistic regression to test for program and school effects and calculate the relevant odds ratios.</p>
 </div>
 <div id="tabset-8-2">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data school;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data school;</span>
 <span id="cb5-2"><a></a>input school program <span class="sc">$</span> style <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb5-3"><a></a>datalines;</span>
 <span id="cb5-4"><a></a><span class="dv">1</span> regular self <span class="dv">10</span> <span class="dv">1</span> regular team <span class="dv">17</span> <span class="dv">1</span> regular class <span class="dv">26</span></span>
@@ -781,7 +784,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <span id="cb5-12"><a></a>proc freq data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
 <span id="cb5-13"><a></a>weight count;</span>
 <span id="cb5-14"><a></a>tables school<span class="sc">*</span>program<span class="sc">*</span>style<span class="sc">/</span> nocol norow nopct;</span>
-<span id="cb5-15"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-15"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -793,11 +796,11 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">SAS Code</a></li><li><a href="#tabset-9-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>proc logistic data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>proc logistic data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
 <span id="cb6-2"><a></a>freq count;</span>
 <span id="cb6-3"><a></a>class <span class="fu">school</span> (<span class="at">ref=</span>first) <span class="fu">program</span> (<span class="at">ref=</span>last) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
 <span id="cb6-4"><a></a>model style<span class="ot">=</span> program school school<span class="sc">*</span>program <span class="sc">/</span> link<span class="ot">=</span>glogit selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
-<span id="cb6-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-9-2">
 <p>There is sufficient evidence of a program (<span class="math inline">\(\chi^2 = 10.9, p=0.004\)</span>) and school (<span class="math inline">\(\chi^2=14.8, p=0.005\)</span>).</p>
@@ -817,7 +820,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <p>Use the estimate statement to test and estimate the odds ratio between clinics 1 and 2 for fingers vs.&nbsp;other injury and face vs.&nbsp;other injury.</p>
 </div>
 <div id="tabset-10-2">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data firecracker;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data firecracker;</span>
 <span id="cb7-2"><a></a>input clinic <span class="sc">$</span> agegroup <span class="sc">$</span> injury <span class="sc">$</span> count;</span>
 <span id="cb7-3"><a></a>datalines;</span>
 <span id="cb7-4"><a></a><span class="dv">1</span> A Fingers <span class="dv">25</span></span>
@@ -839,7 +842,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <span id="cb7-20"><a></a><span class="dv">3</span> B Face <span class="dv">7</span></span>
 <span id="cb7-21"><a></a><span class="dv">3</span> B Other <span class="dv">5</span></span>
 <span id="cb7-22"><a></a>;</span>
-<span id="cb7-23"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-23"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -851,13 +854,13 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-11-1">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc logistic data<span class="ot">=</span>firecracker order<span class="ot">=</span>data;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc logistic data<span class="ot">=</span>firecracker order<span class="ot">=</span>data;</span>
 <span id="cb8-2"><a></a>freq count;</span>
 <span id="cb8-3"><a></a>class clinic agegroup;</span>
 <span id="cb8-4"><a></a>model injury<span class="ot">=</span> clinic agegroup clinic<span class="sc">*</span>agegroup<span class="sc">/</span>link<span class="ot">=</span>glogit selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
 <span id="cb8-5"><a></a>estimate <span class="st">"clinic 1 vs clinic 2 - face"</span> clinic <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp cl category<span class="ot">=</span><span class="st">"Face"</span>;</span>
 <span id="cb8-6"><a></a>estimate <span class="st">"clinic 1 vs clinic 2 - fingers"</span> clinic <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp cl category<span class="ot">=</span><span class="st">"Fingers"</span>;</span>
-<span id="cb8-7"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-11-2">
 <p>There is a significant effect of clinic (<span class="math inline">\(\chi^2 = 11.9, p=0.02\)</span>), but no evidence of an age effect (<span class="math inline">\(\chi^2 = 0.02, p=0.99\)</span>).</p>
@@ -902,7 +905,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <h2>Example</h2>
 <p>The following data come from a study in which a physical therapy practice experimented with different treatment modalities in a strengthening program. The therapists rotated patients through three programs for maintenance after basic strength had been attained. The strengthening programs included free weights, resistance bands, and weight machines. The therapists are interested in whether gender and age affect choice of strengthening programs.</p>
 <h3 id="data-set-2">Data Set</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data pt;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data pt;</span>
 <span id="cb9-2"><a></a>format therapy <span class="sc">$</span><span class="fl">11.</span>;</span>
 <span id="cb9-3"><a></a>input gender <span class="sc">$</span> age <span class="sc">$</span> therapy <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb9-4"><a></a>datalines;</span>
@@ -912,7 +915,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <span id="cb9-8"><a></a>females adult machines <span class="dv">3</span> females senior machines <span class="dv">8</span></span>
 <span id="cb9-9"><a></a>females adult freeweights <span class="dv">9</span> females senior freeweights <span class="dv">0</span></span>
 <span id="cb9-10"><a></a>females adult bands <span class="dv">1</span> females senior bands <span class="dv">1</span></span>
-<span id="cb9-11"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-11"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-9" class="slide level2">
 <h2>Example</h2>
@@ -934,7 +937,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">SAS Code</a></li><li><a href="#tabset-12-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-12-1">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>proc logistic data<span class="ot">=</span>pt;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>proc logistic data<span class="ot">=</span>pt;</span>
 <span id="cb10-2"><a></a>title <span class="st">"asymptotic"</span>;</span>
 <span id="cb10-3"><a></a>freq count;</span>
 <span id="cb10-4"><a></a>class <span class="fu">gender</span>(<span class="at">ref=</span><span class="st">'females'</span>) <span class="fu">age</span>(<span class="at">ref=</span><span class="st">'senior'</span>) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
@@ -947,7 +950,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <span id="cb10-11"><a></a>class <span class="fu">gender</span>(<span class="at">ref=</span><span class="st">'females'</span>) <span class="fu">age</span>(<span class="at">ref=</span><span class="st">'senior'</span>) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
 <span id="cb10-12"><a></a>model <span class="fu">therapy</span>(<span class="at">ref=</span><span class="st">'machines'</span>) <span class="ot">=</span> gender age <span class="sc">/</span> link<span class="ot">=</span>glogit scale<span class="ot">=</span>none aggregate;</span>
 <span id="cb10-13"><a></a>exact gender age<span class="sc">/</span>joint estimate<span class="ot">=</span>both;</span>
-<span id="cb10-14"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-12-2">
 <p>There is a marginal effect of gender ($ p=0.099<span class="math inline">\(), but there is a significant effect of age (\)</span>^2 = 12.2, p=0.003$).</p>
@@ -1150,7 +1153,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1300,13 +1303,14 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -1321,7 +1325,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

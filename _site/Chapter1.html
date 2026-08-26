@@ -538,7 +538,7 @@ run;</code></pre>
 <div class="cell" data-execute="false">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">getwd</span>() <span class="co"># save your data in this folder</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "C:/Users/migsf/OneDrive/Documents/GitHub/EAB770-Slides-Website"</code></pre>
+<pre><code>[1] "C:/Users/fudolig/Documents/GitHub/EAB770-Slides-Website"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>adverse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"adverse.csv"</span>) <span class="co"># or use a specific path to your folder</span></span>
 <span id="cb7-2"><a></a>adverse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -801,7 +801,7 @@ run;</code></pre>
 <div class="callout-content">
 <p>Suppose there are <span class="math inline">\(N\)</span> balls in a bag and <span class="math inline">\(m\)</span> are green. If <span class="math inline">\(X\)</span> denotes the total number of green balls (success) desired and we have a total number of <span class="math inline">\(k\)</span> draws from the bag, then the probability of the random variable of the total number of successes to be equal to <span class="math inline">\(X\)</span> can be written as:</p>
 <p><span class="math display">\[
-P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}
+P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}; x\in \{0,1,...,m\}
 \]</span></p>
 <p>where <span class="math inline">\(C(a,b) = \frac{a!}{b!(a-b)!}\)</span> is the combination notation.</p>
 </div>
@@ -816,7 +816,7 @@ P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>As an example, the balls could be a pool of medical students. The green balls are international students. If we want to select a total of <span class="math inline">\(n\)</span> students from the pool of medical students, then the probability that we will select <span class="math inline">\(k\)</span> international students is given by the hypergeometric distribution.</p>
+<p>As an example, the balls could be a pool of medical students. The green balls are international students. If we want to select a total of <span class="math inline">\(n\)</span> students from the pool of medical students, then the probability that we will select <span class="math inline">\(x\)</span> international students is given by the hypergeometric distribution.</p>
 </div>
 </div>
 </div>
@@ -961,7 +961,7 @@ P(X=1) = m/N
 </div>
 <p>The probability of observing <span class="math inline">\(x\)</span> successes for a series of <span class="math inline">\(n\)</span> trials with a probability of success <span class="math inline">\(p\)</span> according to the binomial distribution can be written as:</p>
 <p><span class="math display">\[
-P(X=1) = C(n,x)p^x(1-p)^{(n-x)}
+P(X=1) = C(n,x)p^x(1-p)^{(n-x)}; x\in\{0,1,2,...,n\}
 \]</span></p>
 </section>
 <section id="properties-1" class="slide level2">
@@ -1072,9 +1072,269 @@ P(X=1) = C(n,x)p^x(1-p)^{(n-x)}
 </section>
 <section id="multinomial-distribution" class="slide level2">
 <h2>Multinomial Distribution</h2>
+<p>This distribution can be used to model random variables wih more than two possible outcomes. In a multinomial distribution, each trial results in one of <span class="math inline">\(I\)</span> outcomes, where <span class="math inline">\(I\)</span> is some fixed finite number and the probability of each possible outcome can be expressed by <span class="math inline">\(p_1,p_2,...p_I\)</span> such that the sum of all probabilities is <span class="math inline">\(\sum_{i=1}^i p_i = 1\)</span>.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Example</strong></p>
+</div>
+<div class="callout-content">
+<p>If students were classified as proficient or not proficient, the binomial distribution would be appropriate to use. However, if students were classified with more levels like basic, intermediate, and advanced proficiency, the multinomial distribution would need to be used.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="multinomial-distribution-pmf" class="slide level2">
+<h2>Multinomial Distribution: PMF</h2>
+<p>For <span class="math inline">\(n\)</span> trials with <span class="math inline">\(I\)</span> possible outcomes, where <span class="math inline">\(p_i\)</span> is the probability of the <span class="math inline">\(i^{th}\)</span> outcome, the joint probability that each possible outcome will have value <span class="math inline">\(x_i\)</span> is:</p>
+<p><span class="math display">\[
+P(X_1=x_1,X_2=x_2,...,X_I=x_I) = \frac{n!}{x_1!x_2!...x_I!}p_1^{x_1}p_2^{x_2}...p_I^{x_I}
+\]</span></p>
+<p>with the constraint that <span class="math inline">\(\sum_ix_i=n\)</span>.</p>
+</section>
+<section id="properties-2" class="slide level2">
+<h2>Properties</h2>
+<p>For the <span class="math inline">\(i^{th}\)</span> outcome, the mean can be expressed similar to the binomial distribution.</p>
+<p><span class="math display">\[
+\mu_i = np_i; \sigma^2 = np_i(1-p_i)
+\]</span></p>
+</section>
+<section id="multinomial-distribution-1" class="slide level2">
+<h2>Multinomial Distribution</h2>
+<p>The following functions can be used to determine the value of the PMF of the multinomial distribution</p>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1"><code>R</code></a></li><li><a href="#tabset-10-2"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(x1,x2,...,xI)</span>
+<span id="cb43-2"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(p1,p2,...,pI)</span>
+<span id="cb43-3"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-10-2">
+<p>There is no standalone <code>PDF</code> function in SAS.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>data multinom_prob;</span>
+<span id="cb44-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(n)<span class="sc">/</span>(<span class="fu">fact</span>(x1)<span class="sc">*</span><span class="fu">fact</span>(x2)<span class="sc">*</span><span class="fu">fact</span>(x3)<span class="sc">*</span>[...])<span class="sc">*</span>p1<span class="sc">**</span>x1<span class="sc">*</span>p2<span class="sc">**</span>x2<span class="sc">*</span>p3<span class="sc">**</span>x3<span class="sc">*</span>[...];</span>
+<span id="cb44-3"><a></a>;</span>
+<span id="cb44-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-4" class="slide level2">
+<h2>Example</h2>
+<p>Suppose exposure levels to secondhand smoke for a particular community was classified into three levels: “none”,“light”, and “heavy”. If the probability of having no exposure (none) is 0.05 and having light exposure is 0.37, what is the probability that out of 10 community members, 2 had no exposure, 5 had light exposure, and the rest had heavy exposure?</p>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Distribution</a></li><li><a href="#tabset-11-2"><code>R</code></a></li><li><a href="#tabset-11-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
+<p>Because there are three possible outcomes for exposure levels, we need to use the multinomial distribution. For this problem, <span class="math inline">\(n=10\)</span>, <span class="math inline">\(x_1=2,x_2=5,x_3=3\)</span>. The sum of the probabilities should be 1, so the probabilities are <span class="math inline">\(p_1=0.05,p_2=0.37,p_3=0.58\)</span>.</p>
+</div>
+<div id="tabset-11-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>n<span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb45-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb45-3"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.05</span>,<span class="fl">0.37</span>,<span class="fl">0.58</span>)</span>
+<span id="cb45-4"><a></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.008523798</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>data multinom_prob;</span>
+<span id="cb49-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(<span class="dv">10</span>)<span class="sc">/</span>(<span class="fu">fact</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">fact</span>(<span class="dv">5</span>)<span class="sc">*</span><span class="fu">fact</span>(<span class="dv">2</span>))<span class="sc">*</span><span class="fl">0.05</span><span class="sc">**</span><span class="dv">2</span><span class="sc">*</span><span class="fl">0.37</span><span class="sc">**</span><span class="dv">5</span><span class="sc">*</span><span class="fl">0.58</span><span class="sc">**</span><span class="dv">3</span>;</span>
+<span id="cb49-3"><a></a>;</span>
+<span id="cb49-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-5" class="slide level2">
+<h2>Example</h2>
+<p>Suppose that for a particular school district, the probability of having being a minimal reader is 0.12, the probability of being a basic reader is 0.23, and the probability of being a proficient reader is 0.65. If six students were selected at random, there will be two students from each category.</p>
+<div class="panel-tabset">
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Distribution</a></li><li><a href="#tabset-12-2"><code>R</code></a></li><li><a href="#tabset-12-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1">
+<p>Because there are three possible outcomes for reading level, we need to use the multinomial distribution. For this problem, <span class="math inline">\(n=6\)</span>, <span class="math inline">\(x_1=2,x_2=2,x_3=2\)</span>. The sum of the probabilities should be 1, which is satisfied by the probabilities. <span class="math inline">\(p_1=0.12,p_2=0.23,p_3=0.65\)</span>.</p>
+</div>
+<div id="tabset-12-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>n<span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb50-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb50-3"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.12</span>,<span class="fl">0.23</span>,<span class="fl">0.65</span>)</span>
+<span id="cb50-4"><a></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02896592</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-12-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>data multinom_prob;</span>
+<span id="cb54-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(n)<span class="sc">/</span>(<span class="fu">fact</span>(x1)<span class="sc">*</span><span class="fu">fact</span>(x2)<span class="sc">*</span><span class="fu">fact</span>(x3)<span class="sc">*</span>[...])<span class="sc">*</span>p1<span class="sc">**</span>x1<span class="sc">*</span>p2<span class="sc">**</span>x2<span class="sc">*</span>p3<span class="sc">**</span>x3<span class="sc">*</span>[...];</span>
+<span id="cb54-3"><a></a>;</span>
+<span id="cb54-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 </section>
 <section id="poisson-distribution" class="slide level2">
 <h2>Poisson Distribution</h2>
+<p>This distribution is often used to model count data that varies randomly over time.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>As the number of trials gets larger, the binomial distribution tends to converge to the Poisson distribution when <span class="math inline">\(p\)</span> is fixed. The binomial distribution assumes that the number of trials is fixed, while the Poisson distribution assumes the period of time in which the observations occur must be fixed.</p>
+</div>
+</div>
+</div>
+<p>If the expected/average number of successes expected to occur in a fixed interval of time is <span class="math inline">\(\lambda\)</span>, the probability of observing <span class="math inline">\(x\)</span> successes in that time interval can be written using the Poisson PMF:</p>
+<p><span class="math display">\[
+P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}; x\in\{0,1,2,...\}
+\]</span></p>
+</section>
+<section id="properties-3" class="slide level2">
+<h2>Properties</h2>
+<p>The mean and variance of the Poisson distribution are equal.</p>
+<p><span class="math display">\[
+\mu=\lambda;\sigma^2=\lambda
+\]</span></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>With real-world count data, the variance often exceeds the mean. We refer to this phenomenon as overdispersion.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>For sufficiently large <span class="math inline">\(\lambda\)</span>, the normal distribution can approximate the Poisson distribution.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="poisson-distribution-1" class="slide level2">
+<h2>Poisson Distribution</h2>
+<div class="panel-tabset">
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1"><code>R</code></a></li><li><a href="#tabset-13-2"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1">
+<p>The functions <code>dpois()</code> and <code>ppois()</code> can be used to generate the PMF and CDF of the Poisson distribution, respectively.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">dpois</span>(<span class="at">x=</span>x,<span class="at">lambda=</span>lambda)</span>
+<span id="cb55-2"><a></a><span class="fu">ppois</span>(<span class="at">q=</span>x,<span class="at">lambda =</span> lambda,<span class="at">lower.tail=</span><span class="cn">TRUE</span><span class="sc">/</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-13-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>data pois_prob;</span>
+<span id="cb56-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,x,lambda);</span>
+<span id="cb56-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'POISSON'</span>,x,lambda);</span>
+<span id="cb56-4"><a></a>;</span>
+<span id="cb56-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-6" class="slide level2">
+<h2>Example</h2>
+<p>Suppose that over the past month, the hourly average number of patients who use the restroom at the waiting room of a particular clinic is 4.2. What is the probability that there will be 2-3 patients using the restroom in the next hour?</p>
+<div class="panel-tabset">
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Distribution</a></li><li><a href="#tabset-14-2"><code>R</code></a></li><li><a href="#tabset-14-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1">
+<p>We can use the Poisson distribution to model the hourly count of patients using the restroom. The hourly average is 4.2, which serves as <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+<div id="tabset-14-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>lambda <span class="ot">&lt;-</span> <span class="fl">4.2</span></span>
+<span id="cb57-2"><a></a><span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">lambda=</span>lambda) <span class="sc">+</span> <span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">3</span>,<span class="at">lambda=</span>lambda) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3174264</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-14-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>data pois_prob;</span>
+<span id="cb59-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">2</span>,<span class="fl">4.2</span>) <span class="sc">+</span> <span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">3</span>,<span class="fl">4.2</span>) ;</span>
+<span id="cb59-3"><a></a>;</span>
+<span id="cb59-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3" class="slide level2">
+<h2>Exercise</h2>
+<div class="panel-tabset">
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Question</a></li><li><a href="#tabset-15-2"><code>R</code></a></li><li><a href="#tabset-15-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1">
+<p>Suppose that over the last 50 years the average number of suicide attempts that occurred at a particular correctional facility each year is approximately 2.5. What is the probability that there are:</p>
+<ul>
+<li>Exactly five suicide attempts at the facility in the next year.</li>
+<li>At least ten suicide attempts at the facility in the next year.</li>
+</ul>
+</div>
+<div id="tabset-15-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="co"># Exactly 5</span></span>
+<span id="cb60-2"><a></a>lambda<span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
+<span id="cb60-3"><a></a><span class="fu">dpois</span>(<span class="dv">5</span>,<span class="at">lambda=</span>lambda)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06680094</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="co"># At least 10 = 10 and higher</span></span>
+<span id="cb62-2"><a></a></span>
+<span id="cb62-3"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">ppois</span>(<span class="at">q=</span><span class="dv">9</span>,<span class="at">lambda=</span>lambda)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0002773521</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="fu">ppois</span>(<span class="at">q=</span><span class="dv">9</span>,<span class="at">lambda=</span>lambda,<span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0002773521</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-15-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>data pois_prob;</span>
+<span id="cb66-2"><a></a>p1<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">5</span>,<span class="fl">2.5</span>)  ;</span>
+<span id="cb66-3"><a></a>p2<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'POISSON'</span>,<span class="dv">9</span>,<span class="fl">2.5</span>)</span>
+<span id="cb66-4"><a></a>;</span>
+<span id="cb66-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 
 
 </section></section>

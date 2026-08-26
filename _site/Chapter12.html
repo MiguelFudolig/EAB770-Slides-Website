@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 12</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -95,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d7d389961a246b163ae1cd8b562da1b6.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -456,7 +459,7 @@ Y_i \sim Poisson(\lambda_i)
 <p><img data-src="img/salmonella_C12.png"></p>
 </div>
 <div id="tabset-1-2">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data salmonella;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data salmonella;</span>
 <span id="cb1-2"><a></a>input lab <span class="sc">$</span> counts <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb1-3"><a></a>datalines;</span>
 <span id="cb1-4"><a></a>A <span class="dv">63</span> A <span class="dv">64</span> A <span class="dv">65</span> A <span class="dv">68</span> A <span class="dv">69</span> A <span class="dv">70</span> A <span class="dv">72</span> A <span class="dv">73</span></span>
@@ -464,15 +467,15 @@ Y_i \sim Poisson(\lambda_i)
 <span id="cb1-6"><a></a>B <span class="dv">168</span> B <span class="dv">171</span> B <span class="dv">174</span> B <span class="dv">175</span> B <span class="dv">185</span> B <span class="dv">189</span> B <span class="dv">190</span></span>
 <span id="cb1-7"><a></a>B <span class="dv">191</span> B <span class="dv">195</span> B <span class="dv">197</span> B <span class="dv">198</span> B <span class="dv">198</span> B <span class="dv">203</span> B <span class="dv">205</span> B <span class="dv">205</span></span>
 <span id="cb1-8"><a></a>B <span class="dv">207</span> B <span class="dv">210</span> B <span class="dv">214</span> B <span class="dv">216</span> B <span class="dv">218</span></span>
-<span id="cb1-9"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-3">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc genmod data<span class="ot">=</span>salmonella;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc genmod data<span class="ot">=</span>salmonella;</span>
 <span id="cb2-2"><a></a>class lab; </span>
 <span id="cb2-3"><a></a>model counts <span class="ot">=</span> lab <span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log type3  ;</span>
 <span id="cb2-4"><a></a>lsmeans lab<span class="sc">/</span>diff<span class="ot">=</span>all ilink cl;</span>
 <span id="cb2-5"><a></a>estimate <span class="st">"incidence ratio lab A/lab B"</span> lab <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp alpha<span class="ot">=</span><span class="fl">0.05</span>  ;</span>
-<span id="cb2-6"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-4">
 <p>The scaled Pearson chi-square Value/DF = 1.11, which is close to 1. This supports the use of the Poisson distribution to modle the salmonella counts.</p>
@@ -500,7 +503,7 @@ Y_i \sim Poisson(\lambda_i)
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>proc genmod data<span class="ot">=</span>work.urgent ;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>proc genmod data<span class="ot">=</span>work.urgent ;</span>
 <span id="cb3-2"><a></a>class city medicaid; </span>
 <span id="cb3-3"><a></a>model queue <span class="ot">=</span> city<span class="sc">|</span>medicaid <span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log type3  ;</span>
 <span id="cb3-4"><a></a>lsmeans city<span class="sc">*</span>medicaid<span class="sc">/</span>ilink cl ;</span>
@@ -513,7 +516,7 @@ Y_i \sim Poisson(\lambda_i)
 <span id="cb3-11"><a></a>lsmeans city <span class="sc">/</span> diff<span class="ot">=</span>all ilink cl;</span>
 <span id="cb3-12"><a></a>lsmeans medicaid<span class="sc">/</span> diff<span class="ot">=</span>all exp cl;</span>
 <span id="cb3-13"><a></a>estimate <span class="st">"IRR between City A and B"</span> city <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span>;</span>
-<span id="cb3-14"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <p>The Value/DF of the Scaled Pearson <span class="math inline">\(\chi^2\)</span> (Interaction Model: 0.9105 ) is close to 1, which means the Poisson distribution assumption is appropriate. There is no evidence of an interaction between city and medicaid (<span class="math inline">\(\chi^2\)</span> = 0.61, p=0.43) at the 0.10 level.</p>
@@ -536,7 +539,7 @@ Y_i \sim Poisson(\lambda_i)
 <p><img data-src="img/melanoma_C12.png"></p>
 </div>
 <div id="tabset-3-2">
-<div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>data melanoma;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>data melanoma;</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>input age <span class="sc">$</span> region <span class="sc">$</span> cases total;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a>ltotal<span class="ot">=</span><span class="fu">log</span>(total); <span class="sc">*</span>calculates the logarithm of the total;</span>
 <span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>datalines;</span>
@@ -552,7 +555,7 @@ Y_i \sim Poisson(\lambda_i)
 <span id="annotated-cell-4-14"><a href="#annotated-cell-4-14"></a><span class="dv">65-74</span> north <span class="dv">63</span> <span class="dv">270908</span></span>
 <span id="annotated-cell-4-15"><a href="#annotated-cell-4-15"></a><span class="dv">75</span><span class="sc">+</span> north <span class="dv">80</span> <span class="dv">161850</span></span>
 <span id="annotated-cell-4-16"><a href="#annotated-cell-4-16"></a><span class="sc">&lt;</span><span class="dv">35</span> north <span class="dv">61</span> <span class="dv">2880262</span></span>
-<span id="annotated-cell-4-17"><a href="#annotated-cell-4-17"></a>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-4-17"><a href="#annotated-cell-4-17"></a>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
@@ -561,14 +564,14 @@ Y_i \sim Poisson(\lambda_i)
 </dl>
 </div>
 <div id="tabset-3-3">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc genmod data<span class="ot">=</span>melanoma;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc genmod data<span class="ot">=</span>melanoma;</span>
 <span id="cb4-2"><a></a>class <span class="fu">region</span> (<span class="at">ref=</span><span class="st">'north'</span>) <span class="fu">age</span> (<span class="at">ref=</span><span class="st">'&lt;35'</span>);</span>
 <span id="cb4-3"><a></a>model cases <span class="ot">=</span> age region </span>
 <span id="cb4-4"><a></a><span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>ltotal type3 cl ; <span class="sc">*</span>the offset should be <span class="cf">in</span> the LOGARITHMIC SCALE;</span>
 <span id="cb4-5"><a></a>estimate <span class="st">"75+ vs &lt;35"</span> age <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>exp;</span>
 <span id="cb4-6"><a></a>lsmeans age<span class="sc">/</span> ilink cl diff <span class="ot">=</span> all  adjust<span class="ot">=</span>tukey;</span>
 <span id="cb4-7"><a></a>lsmeans region <span class="sc">/</span>ilink cl diff <span class="ot">=</span> all ;</span>
-<span id="cb4-8"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-4">
 <p>Note that the Scaled Pearson Chi-Square is 1.24, which is slightly further away from 1 and should be examined more closely using methods we will discuss later in the chapter.</p>
@@ -593,14 +596,14 @@ Y_i \sim Poisson(\lambda_i)
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>proc genmod data<span class="ot">=</span>resident;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>proc genmod data<span class="ot">=</span>resident;</span>
 <span id="cb5-2"><a></a>class year;</span>
 <span id="cb5-3"><a></a>model counts <span class="ot">=</span> year</span>
 <span id="cb5-4"><a></a><span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>ltime type3 cl; <span class="sc">*</span>the offset should be <span class="cf">in</span> the LOGARITHMIC SCALE;</span>
 <span id="cb5-5"><a></a>lsmeans year<span class="sc">/</span> ilink cl diff<span class="ot">=</span>all adjust<span class="ot">=</span>tukey;</span>
 <span id="cb5-6"><a></a>estimate <span class="st">"2021 vs 2022"</span> year <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>; </span>
 <span id="cb5-7"><a></a>estimate <span class="st">"2022 vs 2023"</span> year <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> ;</span>
-<span id="cb5-8"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2">
 <p>The Scaled Pearson <span class="math inline">\(\chi^2\)</span> is 0.8, which is slightly lower than 1. At this point, we are only concerned if the Scaled Pearson X2 is above 1, so we can say that the Poisson distribution is appropriate to use.</p>
@@ -668,7 +671,7 @@ Y_i \sim Poisson(\lambda_i)
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Data Set</a></li><li><a href="#tabset-5-2">SAS Codes</a></li><li><a href="#tabset-5-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data overdispersion;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data overdispersion;</span>
 <span id="cb6-2"><a></a> input location trt count;</span>
 <span id="cb6-3"><a></a>datalines;</span>
 <span id="cb6-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span></span>
@@ -699,10 +702,10 @@ Y_i \sim Poisson(\lambda_i)
 <span id="cb6-29"><a></a><span class="dv">7</span> <span class="dv">4</span> <span class="dv">4</span></span>
 <span id="cb6-30"><a></a><span class="dv">7</span> <span class="dv">5</span> <span class="dv">15</span></span>
 <span id="cb6-31"><a></a><span class="dv">7</span> <span class="dv">6</span> <span class="dv">3</span></span>
-<span id="cb6-32"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-32"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-2">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a></span>
 <span id="cb7-2"><a></a><span class="sc">/</span><span class="er">*</span>Example of overdispersion<span class="sc">*</span><span class="er">/</span></span>
 <span id="cb7-3"><a></a>proc genmod data<span class="ot">=</span>overdispersion;</span>
 <span id="cb7-4"><a></a>class location trt;</span>
@@ -730,7 +733,7 @@ Y_i \sim Poisson(\lambda_i)
 <span id="cb7-26"><a></a>lsmeans location<span class="sc">/</span>ilink cl;</span>
 <span id="cb7-27"><a></a>estimate <span class="st">"trt 2 vs trt 6"</span> trt <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
 <span id="cb7-28"><a></a>run;</span>
-<span id="cb7-29"><a></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-29"><a></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-3">
 <p>In the Naive Poisson approach, the Scaled Pearson X2 Value/DF was 7.25, which is significantly higher than 1. We can choose to add <code>scale=Pearson</code> to include a scale factor, making the distribution a quasi-Poisson distribution. The Poisson and quasi-Poisson have the same Least Squares Means (LSMeans) estimates, but have different standard errors. Note that the scale introduces a scaling factor to the variance estimate, which affects the standard errors. For both models, there is a significant treatment effect ( Likelihood Ratio Chi-square test: p &lt; 0.0001)</p>
@@ -750,7 +753,7 @@ Y_i \sim Poisson(\lambda_i)
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc genmod data<span class="ot">=</span>adverse;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc genmod data<span class="ot">=</span>adverse;</span>
 <span id="cb8-2"><a></a>class clinic treatment;</span>
 <span id="cb8-3"><a></a>model count <span class="ot">=</span> clinic treatment<span class="sc">/</span> type3 dist<span class="ot">=</span>poisson;</span>
 <span id="cb8-4"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
@@ -766,7 +769,7 @@ Y_i \sim Poisson(\lambda_i)
 <span id="cb8-14"><a></a>class clinic treatment;</span>
 <span id="cb8-15"><a></a>model count <span class="ot">=</span> clinic treatment<span class="sc">/</span> type3 dist<span class="ot">=</span>nb;</span>
 <span id="cb8-16"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
-<span id="cb8-17"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-2">
 <p>After implementing the Naive Poisson model, the scaled Pearson X2 Value/DF is 1.65, which is a sign of overdispersion. Implementing the negative binomial led to convergence issues. The most viable option is setting the <code>scale=Pearson</code> to fix the scaled Pearson X2 Value/DF to 1.</p>
@@ -801,17 +804,17 @@ Y_i \sim Poisson(\lambda_i)
 <p><img data-src="img/rotavirus_C12.png"></p>
 </div>
 <div id="tabset-7-2">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data rotavirus;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data rotavirus;</span>
 <span id="cb9-2"><a></a>input region <span class="sc">$</span> treatment <span class="sc">$</span> counts years_risk <span class="sc">@</span><span class="er">@</span> ;</span>
 <span id="cb9-3"><a></a>log_risk<span class="ot">=</span><span class="fu">log</span>(years_risk);</span>
 <span id="cb9-4"><a></a>datalines;</span>
 <span id="cb9-5"><a></a>US Vaccine <span class="dv">3</span> <span class="dv">7500</span> US Placebo <span class="dv">58</span> <span class="dv">7250</span></span>
 <span id="cb9-6"><a></a>LA Vaccine <span class="dv">1</span> <span class="dv">1250</span> LA Placebo <span class="dv">10</span> <span class="dv">1250</span></span>
 <span id="cb9-7"><a></a>;</span>
-<span id="cb9-8"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-3">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="sc">/</span><span class="er">*</span>Not Exact<span class="sc">*</span><span class="er">/</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="sc">/</span><span class="er">*</span>Not Exact<span class="sc">*</span><span class="er">/</span></span>
 <span id="cb10-2"><a></a>proc genmod data<span class="ot">=</span>rotavirus;</span>
 <span id="cb10-3"><a></a>class region treatment;</span>
 <span id="cb10-4"><a></a>model counts <span class="ot">=</span> treatment region <span class="sc">/</span> dist<span class="ot">=</span>poisson offset<span class="ot">=</span> log_risk type3;</span>
@@ -827,7 +830,7 @@ Y_i \sim Poisson(\lambda_i)
 <span id="cb10-14"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
 <span id="cb10-15"><a></a>estimate <span class="st">'Placebo vs Vaccine'</span> treatment <span class="dv">1</span> <span class="sc">/</span>exp;</span>
 <span id="cb10-16"><a></a>exact treatment <span class="sc">/</span> estimate<span class="ot">=</span>odds cltype<span class="ot">=</span>exact;</span>
-<span id="cb10-17"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-4">
 <p>It would be advisable to use the exact incidence rate ratio confidence limits and p-values because of the low count of events in the vaccine group. The incidence rate in the placebo group was 17.5 <strong>Exact 95% CI: (6.53, 66.05)</strong> times that of the vaccine group.</p>
@@ -1013,7 +1016,7 @@ P(Y=y) = \begin{cases}
 <ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Data Set</a></li><li><a href="#tabset-8-2">SAS Code</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>data counts;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>data counts;</span>
 <span id="cb11-2"><a></a>   input ni <span class="sc">@</span><span class="er">@</span>; </span>
 <span id="cb11-3"><a></a>   site <span class="ot">=</span> _n_;</span>
 <span id="cb11-4"><a></a>   do sample_id<span class="ot">=</span><span class="dv">1</span> to ni;</span>
@@ -1039,14 +1042,14 @@ P(Y=y) = \begin{cases}
 <span id="cb11-24"><a></a> <span class="dv">13</span> <span class="dv">59</span> <span class="dv">0</span> <span class="dv">96</span> <span class="dv">2</span> <span class="dv">47</span> <span class="dv">1</span> <span class="dv">64</span> <span class="dv">0</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">69</span> <span class="dv">0</span> <span class="dv">78</span> <span class="dv">1</span> <span class="dv">47</span> <span class="dv">1</span> <span class="dv">86</span> <span class="dv">0</span> <span class="dv">88</span> <span class="dv">0</span> </span>
 <span id="cb11-25"><a></a> <span class="dv">12</span> <span class="dv">84</span> <span class="dv">6</span> <span class="dv">60</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">1</span> <span class="dv">92</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">4</span>  <span class="dv">6</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">3</span> <span class="dv">13</span> <span class="dv">2</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">51</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">4</span> <span class="dv">68</span> <span class="dv">0</span></span>
 <span id="cb11-26"><a></a> ;</span>
-<span id="cb11-27"><a></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-27"><a></a> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-8-2">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>proc genmod data<span class="ot">=</span>counts;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>proc genmod data<span class="ot">=</span>counts;</span>
 <span id="cb12-2"><a></a> model toxin_count <span class="ot">=</span>  exposure_level <span class="sc">/</span> dist<span class="ot">=</span>zip;</span>
 <span id="cb12-3"><a></a> zeromodel <span class="sc">/</span>link<span class="ot">=</span>logit;</span>
 <span id="cb12-4"><a></a> estimate <span class="st">' '</span> <span class="sc">@</span>zero int <span class="dv">1</span>;</span>
-<span id="cb12-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The analysis of the zero-inflated shows that there is weak evidence of zero-inflation in the data. There is evidence of association between toxin count and exposure level (log IRR = 0.008,p=0.0195).</p>
 </div>
 </div>
@@ -1245,7 +1248,7 @@ P(Y=y) = \begin{cases}
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1395,13 +1398,14 @@ P(Y=y) = \begin{cases}
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -1416,7 +1420,7 @@ P(Y=y) = \begin{cases}
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

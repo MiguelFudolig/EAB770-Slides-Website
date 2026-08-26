@@ -1,6 +1,5 @@
 ---
 title: "EAB 770 Slides"
-subtitle: "Fall 2024"
 author: "Miguel Fudolig"
 ---
 

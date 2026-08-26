@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 10</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -95,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d7d389961a246b163ae1cd8b562da1b6.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -380,7 +383,7 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Data Set</a></li><li><a href="#tabset-1-2">SAS Code</a></li><li><a href="#tabset-1-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data trial;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data trial;</span>
 <span id="cb1-2"><a></a>input center treatment <span class="sc">$</span> sex <span class="sc">$</span> age improve initial <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb1-3"><a></a>datalines;</span>
 <span id="cb1-4"><a></a><span class="dv">1</span> t f <span class="dv">27</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> p f <span class="dv">32</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">41</span> t f <span class="dv">13</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">41</span> p m <span class="dv">22</span> <span class="dv">0</span> <span class="dv">3</span></span>
@@ -423,15 +426,15 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <span id="cb1-41"><a></a><span class="dv">38</span> t f <span class="dv">23</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">38</span> p m <span class="dv">21</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">78</span> t m <span class="dv">31</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">78</span> p f <span class="dv">23</span> <span class="dv">1</span> <span class="dv">4</span></span>
 <span id="cb1-42"><a></a><span class="dv">39</span> t m <span class="dv">24</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">39</span> p m <span class="dv">30</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">79</span> t m <span class="dv">22</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">79</span> p m <span class="dv">19</span> <span class="dv">1</span> <span class="dv">4</span></span>
 <span id="cb1-43"><a></a><span class="dv">40</span> t m <span class="dv">57</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">40</span> p f <span class="dv">43</span> <span class="dv">1</span> <span class="dv">3</span></span>
-<span id="cb1-44"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-44"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2">
 <h4 id="without-covariates">Without Covariates</h4>
-<div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>proc logistic data<span class="ot">=</span>trial;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>proc logistic data<span class="ot">=</span>trial;</span>
 <span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>class <span class="fu">treatment</span>(<span class="at">ref=</span><span class="st">"p"</span>) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>strata center;</span>
 <span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a>model <span class="fu">improve</span>(<span class="at">event=</span><span class="st">"1"</span>)<span class="ot">=</span> treatment;</span>
-<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
@@ -439,12 +442,12 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 </dd>
 </dl>
 <h4 id="with-covariates">With Covariates</h4>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc logistic data<span class="ot">=</span>trial;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc logistic data<span class="ot">=</span>trial;</span>
 <span id="cb2-2"><a></a>class <span class="fu">sex</span> (<span class="at">ref=</span><span class="st">"f"</span>) <span class="fu">treatment</span>(<span class="at">ref=</span><span class="st">"p"</span>) <span class="fu">initial</span>(<span class="at">ref=</span><span class="st">"1"</span>) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
 <span id="cb2-3"><a></a>strata center;</span>
 <span id="cb2-4"><a></a>model <span class="fu">improve</span>(<span class="at">event=</span><span class="st">"1"</span>) <span class="ot">=</span> treatment initial sex age<span class="sc">/</span></span>
 <span id="cb2-5"><a></a>selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">1</span> details;</span>
-<span id="cb2-6"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-3">
 <p>After adding the covariates, only the initial skin condition rating was added to the model. There is a significant effect of initial skin condition (<span class="math inline">\(\chi^2\)</span> = 10.57, p=0.0143), and a marginal effect of treatment ($^2 $= 2.93, p=0.09). The odds of improvement in the treatment group is 1.87 (0.914, 3.82) times that of the placebo group. The odds of improvement for severe initial skin condition is 26.5 (2.4, 292) times that of mild initial skin condition.</p>
@@ -457,7 +460,7 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <h2>Exercise</h2>
 <p>The dataset CORRECT includes data from a study that asked pairs of individuals to interpret a visual infographic regarding health disparities arising from the COVID-19 pandemic. Each participant was asked about their occupations. The response variable was whether they correctly interpreted the infographic (1) or not (0). Implement a conditional logistic regression analysis to determine whether occupation affects the accuracy of interpretation of visual infographics.</p>
 <h3 id="sas-data-set-1">SAS Data Set</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data correct;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data correct;</span>
 <span id="cb3-2"><a></a>format occupation <span class="sc">$</span><span class="fl">10.</span>;</span>
 <span id="cb3-3"><a></a>input pair Occupation <span class="sc">$</span> Correct;</span>
 <span id="cb3-4"><a></a>datalines;</span>
@@ -561,7 +564,7 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <span id="cb3-102"><a></a><span class="dv">49</span> STEM <span class="dv">1</span></span>
 <span id="cb3-103"><a></a><span class="dv">50</span> Healthcare <span class="dv">0</span></span>
 <span id="cb3-104"><a></a><span class="dv">50</span> Healthcare <span class="dv">0</span></span>
-<span id="cb3-105"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-105"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
@@ -570,11 +573,11 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc logistic data<span class="ot">=</span>correct;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc logistic data<span class="ot">=</span>correct;</span>
 <span id="cb4-2"><a></a>strata pair;</span>
 <span id="cb4-3"><a></a>class <span class="fu">occupation</span>(<span class="at">ref=</span><span class="st">"Other"</span>)<span class="sc">/</span>param<span class="ot">=</span>ref;</span>
 <span id="cb4-4"><a></a>model <span class="fu">correct</span>(<span class="at">event=</span><span class="st">"1"</span>)<span class="ot">=</span>occupation<span class="sc">/</span>details;</span>
-<span id="cb4-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <p>There was no significant effect of occupation on the accuracy of interpretation of visual infographics.</p>
@@ -611,7 +614,7 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <p><img data-src="img/crossover_C10.png"></p>
 </div>
 <div id="tabset-3-2">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data <span class="fu">cross1</span> (<span class="at">drop=</span>count);</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data <span class="fu">cross1</span> (<span class="at">drop=</span>count);</span>
 <span id="cb5-2"><a></a>input age <span class="sc">$</span> sequence <span class="sc">$</span> time1 <span class="sc">$</span> time2 <span class="sc">$</span> count;</span>
 <span id="cb5-3"><a></a>do i<span class="ot">=</span><span class="dv">1</span> to count;</span>
 <span id="cb5-4"><a></a>output;</span>
@@ -656,16 +659,16 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <span id="cb5-43"><a></a><span class="cf">if</span> carry<span class="ot">=</span><span class="st">'P'</span> then carry<span class="ot">=</span><span class="st">'none'</span>;</span>
 <span id="cb5-44"><a></a>response <span class="ot">=</span>time2;</span>
 <span id="cb5-45"><a></a>output;</span>
-<span id="cb5-46"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-46"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-3">
-<div class="sourceCode" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>proc logistic data<span class="ot">=</span>cross2;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>proc logistic data<span class="ot">=</span>cross2;</span>
 <span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>class drug period age carry <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
 <span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a>strata subject;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-4" class="code-annotation-target"><a href="#annotated-cell-7-4"></a>model response <span class="ot">=</span> period drug period<span class="sc">*</span>age carry;</span>
 <span id="annotated-cell-7-5"><a href="#annotated-cell-7-5"></a>A_B<span class="sc">:</span> test drugA<span class="ot">=</span>drugB;</span>
 <span id="annotated-cell-7-6"><a href="#annotated-cell-7-6"></a>oddsratio drug;</span>
-<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
@@ -673,13 +676,13 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 </dd>
 </dl>
 <p>Since there is no significant carryover effect, we can remove it from the model.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>proc logistic data<span class="ot">=</span>cross2;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>proc logistic data<span class="ot">=</span>cross2;</span>
 <span id="cb6-2"><a></a>class drug period age carry <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
 <span id="cb6-3"><a></a>strata subject;</span>
 <span id="cb6-4"><a></a>model response <span class="ot">=</span> period drug period<span class="sc">*</span>age;</span>
 <span id="cb6-5"><a></a>A_B<span class="sc">:</span> test drugA<span class="ot">=</span>drugB;</span>
 <span id="cb6-6"><a></a>oddsratio drug;</span>
-<span id="cb6-7"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-4">
 <p>There is no significant carryover effect. At a significance level of 0.05, there is no significant interaction effect. There is a significant drug effect (<span class="math inline">\(\chi^2\)</span> = 18.7, p=0.001). The odds of a favorable response with drug A is 3.84 (2.02, 7.32) times that for the placebo and 2.95 (1.55, 5.59) times that for drug B.</p>
@@ -734,7 +737,7 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">SAS Code</a></li><li><a href="#tabset-4-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data endo;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data endo;</span>
 <span id="cb7-2"><a></a>   do ID<span class="ot">=</span><span class="dv">1</span> to <span class="dv">63</span>;</span>
 <span id="cb7-3"><a></a>      do Outcome <span class="ot">=</span> <span class="dv">1</span> to <span class="dv">0</span> by <span class="sc">-</span><span class="dv">1</span>;</span>
 <span id="cb7-4"><a></a>         input Gall Hyper <span class="sc">@</span><span class="er">@</span>;</span>
@@ -755,13 +758,13 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <span id="cb7-19"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
 <span id="cb7-20"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
 <span id="cb7-21"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb7-22"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-22"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc logistic data<span class="ot">=</span>endo;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc logistic data<span class="ot">=</span>endo;</span>
 <span id="cb8-2"><a></a>   strata ID;</span>
 <span id="cb8-3"><a></a>   model <span class="fu">outcome</span>(<span class="at">event=</span><span class="st">'1'</span>)<span class="ot">=</span>Gall hyper Gall<span class="sc">*</span>hyper<span class="sc">/</span>selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> details;</span>
-<span id="cb8-4"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-3">
 <p>There is marginal association between history of gallbladder disease (<span class="math inline">\(\chi^2\)</span> = 3.34, p=0.07) and endometrial cancer, but there is no evidence of an association between hypertension and endometrial cancer (<span class="math inline">\(\chi^2\)</span> = 0.85, p=0.36). The odds of developing endometrial cancer is 164% higher for those with gallbladder disease (OR: 2.64, 95% CI: 0.93, 7.5)</p>
@@ -787,7 +790,7 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Data Set</a></li><li><a href="#tabset-5-2">SAS Code</a></li><li><a href="#tabset-5-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data cardio;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data cardio;</span>
 <span id="cb9-2"><a></a>input animal treatment <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
 <span id="cb9-3"><a></a><span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'S'</span> then delete;</span>
 <span id="cb9-4"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'C'</span> then ordtreat<span class="ot">=</span><span class="dv">1</span>;</span>
@@ -808,14 +811,14 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 <span id="cb9-19"><a></a>data cardio;</span>
 <span id="cb9-20"><a></a>set cardio;</span>
 <span id="cb9-21"><a></a>drop treatment;</span>
-<span id="cb9-22"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-2">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>proc logistic data<span class="ot">=</span>cardio descending exactonly;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>proc logistic data<span class="ot">=</span>cardio descending exactonly;</span>
 <span id="cb10-2"><a></a>strata animal;</span>
 <span id="cb10-3"><a></a>model response <span class="ot">=</span> ordtreat;</span>
 <span id="cb10-4"><a></a>exact ordtreat <span class="sc">/</span> estimate<span class="ot">=</span>both;</span>
-<span id="cb10-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-3">
 <p>We treat the treatments as an ordinal variable with equal separation. Based on the exact analysis, there is a significant effect of treatment (p=0.0017). The odds of an adverse event becomes seven times higher with each unit change in treatment level.</p>
@@ -1016,7 +1019,7 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1166,13 +1169,14 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -1187,7 +1191,7 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

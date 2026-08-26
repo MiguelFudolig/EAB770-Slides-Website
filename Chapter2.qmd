@@ -12,6 +12,7 @@ format:
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
 ---
@@ -40,7 +41,7 @@ library(tidyverse)
 
 # Contingency Tables
 
-## Contingency Tables
+## 2x2 Contingency Tables
 
 ::: columns
 ::: {.column style="width:40%; font-size: 75%"}
@@ -59,24 +60,30 @@ library(tidyverse)
 
 ## Contingency Tables
 
--   Main Objective: Determine whether there is an association between the row and column variables.
-    -   Is the risk variable associated with the prevalence rate?
--   Recall: Intro to Statistics
-    -   Chi-square tests of homogeneity $H_0$: The two populations (rows) have the same distribution of the column variable
-    -   Chi-square tests of independence $H_0$: The row and column variables are independent of each other.
+We wish to determine whether there is an association between the row and column variables using the frequencies observed in each category.
+
+::: callout-note
+Is the risk variable associated with the prevalence rate?
+:::
+
+Recall: Intro to Statistics
+
+- Chi-square tests of homogeneity $H_0$: The two populations (rows) have the same distribution of the column variable
+- Chi-square tests of independence $H_0$: The row and column variables are independent of each other.
+    
+
 
 ## Contingency Tables: Convention
 
-The indices of contingency tables denote the row and column of each number.
+The indices of contingency tables denote the row and column of each number. For a total sample size of $n$,
 
 ::: columns
 ::: {.column style="width:40%; font-size: 85%"}
--   $n_{xy}$ denotes the number at row $x$ and column $y$
--   Seeing a (+) sign indicates that it is a marginal sum.
+-   $n_{xy}$ denotes the number at row $x$ and column $y$, also referred to as a joint frequency.
+-   Seeing a (+) sign indicates that it is a marginal sum, also referred to as marginal frequencies.
     -   $n_{x+}$ denotes the sum of all columns in row $x$.
     -   $n_{+y}$ denotes the sum of all rows in column $y$.
 -   The placement of the + sign denotes the margin in which it was summed.
--   $n$ is the total sample size.
 :::
 
 ::: {.column style="width:60%"}
@@ -84,23 +91,34 @@ The indices of contingency tables denote the row and column of each number.
 :::
 :::
 
+## Independence
+
+If the two categorical variables are independent of each other, they are not associated. 
+
+::: callout-note
+Independence also means that the joint probability $p_{ij}$ can be determined solely on the basis of the marginal probabilities. These can be estimated using sample data.
+:::
+
+
 # Chi-square Statistics
 
 ## Chi-square Statistics
 
--   The null hypothesis of no association between row and column variables imply that the totals are fixed.
--   The probabilities of realization of each cell is determined by the [hypergeometric distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution).
+The null hypothesis of no association (independence or homogeneity) between row and column variables imply that the totals are fixed. The probabilities of realization of each cell is determined by the hypergeometric distribution.
 
-## Chi-square Statistics
+## Pearson Chi-square Statistic
 
--   Recall: Pearson Chi-square statistics
+The Pearson Chi-square statistic can be written in terms of the joint frequency `n_ij` and the expected frequency `m_ij`.
 
 $$
 Q_P = \sum_{i=1}^2\sum_{j=1}^2 \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 $$
 
 ::: callout-note
-$m_{ij}$ is the expected value of the number of observations in row $i$ and column $j$, $n_{ij}$.
+$m_{ij}$ is the expected value of the number of observations in row $i$ and column $j$, $n_{ij}$. The expected frequency $m_{ij}$ can be calculated based on the null hypothesis assumption.
+
+- Independence: $p_{ij}=p_{i+}p_{+j} \to m_{ij} = \frac{n_{i+}n_{+j}}{n}$ 
+- Homogeneity: $p_{i+}=n_{i+}/n; p_{+j}=n_{+j}/n\to m_{ij} = \frac{n_{i+}n_{+j}}{n}$ 
 :::
 
 ## Mantel-Haenszel Chi-square statistic {.smaller}

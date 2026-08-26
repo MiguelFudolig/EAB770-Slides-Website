@@ -5,7 +5,7 @@ format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    footer: "Lecture 1 - [Back to home](https://miguelfudolig-eab770-syllabus.share.connect.posit.cloud)"
+    footer: "Lecture 1 - [Back to home](https://miguelfudolig-eab770-slides.share.connect.posit.cloud)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
@@ -436,14 +436,14 @@ This distribution can be used for discrete variables to determine the number of 
 Suppose there are $N$ balls in a bag and $m$ are green. If $X$ denotes the total number of green balls (success) desired and we have a total number of $k$ draws from the bag, then the probability of the random variable of the total number of successes to be equal to $X$ can be written as:
 
 $$
-P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}
+P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}; x\in \{0,1,...,m\}
 $$
 
 where $C(a,b) = \frac{a!}{b!(a-b)!}$ is the combination notation.
 :::
 
 ::: callout-note
-As an example, the balls could be a pool of medical students. The green balls are international students. If we want to select a total of $n$ students from the pool of medical students, then the probability that we will select $k$ international students is given by the hypergeometric distribution.
+As an example, the balls could be a pool of medical students. The green balls are international students. If we want to select a total of $n$ students from the pool of medical students, then the probability that we will select $x$ international students is given by the hypergeometric distribution.
 :::
 
 ## Properties
@@ -590,7 +590,7 @@ The binomial distribution assumes that the probability of success does not chang
 The probability of observing $x$ successes for a series of $n$ trials with a probability of success $p$ according to the binomial distribution can be written as:
 
 $$
-P(X=1) = C(n,x)p^x(1-p)^{(n-x)}
+P(X=1) = C(n,x)p^x(1-p)^{(n-x)}; x\in\{0,1,2,...,n\}
 $$
 
 ## Properties
@@ -696,4 +696,237 @@ run;
 
 ## Multinomial Distribution
 
+This distribution can be used to model random variables wih more than two possible outcomes. In a multinomial distribution, each trial results in one of $I$
+outcomes, where $I$ is some fixed finite number and the probability of each possible outcome can be expressed by $p_1,p_2,...p_I$ such that the sum of all probabilities is $\sum_{i=1}^i p_i = 1$.
+
+::: callout-note
+### Example
+
+If students were classified as proficient or not proficient, the binomial distribution would be appropriate to use. However, if students were classified with more levels like basic, intermediate, and advanced proficiency, the multinomial distribution would need to be used.
+:::
+
+## Multinomial Distribution: PMF
+For $n$ trials with $I$ possible outcomes, where $p_i$ is the probability of the $i^{th}$ outcome, the joint probability that each possible outcome will have value $x_i$ is:
+
+$$
+P(X_1=x_1,X_2=x_2,...,X_I=x_I) = \frac{n!}{x_1!x_2!...x_I!}p_1^{x_1}p_2^{x_2}...p_I^{x_I}
+$$
+
+with the constraint that $\sum_ix_i=n$.
+
+## Properties
+
+For the $i^{th}$ outcome, the mean can be expressed similar to the binomial distribution.
+
+$$
+\mu_i = np_i; \sigma^2 = np_i(1-p_i)
+$$
+
+## Multinomial Distribution
+
+The following functions can be used to determine the value of the PMF of the multinomial distribution
+
+::: panel-tabset
+
+### `R` 
+
+```{r}
+#| eval: false
+
+x <- c(x1,x2,...,xI)
+p <- c(p1,p2,...,pI)
+dmultinom(x=x,size=n,prob=p)
+```
+
+### `SAS`
+
+There is no standalone `PDF` function in SAS.
+
+```{.r}
+data multinom_prob;
+p=fact(n)/(fact(x1)*fact(x2)*fact(x3)*[...])*p1**x1*p2**x2*p3**x3*[...];
+;
+run;
+```
+
+:::
+
+## Example
+
+Suppose exposure levels to secondhand smoke for a particular community was classified into three levels: "none","light", and "heavy". If the probability of having no exposure (none) is 0.05 and having light exposure is 0.37, what is the probability that out of 10 community members, 2 had no exposure, 5 had light exposure, and the rest had heavy exposure?
+
+::: panel-tabset
+### Distribution
+Because there are three possible outcomes for exposure levels, we need to use the multinomial distribution. For this problem, $n=10$, $x_1=2,x_2=5,x_3=3$. The sum of the probabilities should be 1, so the probabilities are $p_1=0.05,p_2=0.37,p_3=0.58$.
+
+### `R`
+
+```{r}
+n<- 10
+x <- c(2,5,3)
+p <- c(0.05,0.37,0.58)
+sum(p)
+dmultinom(x=x,size=n,prob=p)
+```
+
+### `SAS`
+
+```{.r}
+data multinom_prob;
+p=fact(10)/(fact(3)*fact(5)*fact(2))*0.05**2*0.37**5*0.58**3;
+;
+run;
+```
+
+
+:::
+
+## Example
+
+Suppose that for a particular school district, the probability of having being a minimal reader is 0.12, the probability of being a basic reader is 0.23, and the probability of being a proficient reader is 0.65. If six students were selected at random, there will be two students from each category.
+
+::: panel-tabset
+### Distribution
+Because there are three possible outcomes for reading level, we need to use the multinomial distribution. For this problem, $n=6$, $x_1=2,x_2=2,x_3=2$. The sum of the probabilities should be 1, which is satisfied by the probabilities. $p_1=0.12,p_2=0.23,p_3=0.65$.
+
+### `R`
+
+```{r}
+n<- 6
+x <- c(2,2,2)
+p <- c(0.12,0.23,0.65)
+sum(p)
+dmultinom(x=x,size=n,prob=p)
+```
+
+### `SAS`
+
+```{.r}
+data multinom_prob;
+p=fact(n)/(fact(x1)*fact(x2)*fact(x3)*[...])*p1**x1*p2**x2*p3**x3*[...];
+;
+run;
+```
+
+
+:::
+
+
 ## Poisson Distribution
+
+This distribution is often used to model count data that varies randomly over time.
+
+::: callout-note
+As the number of trials gets larger, the binomial distribution tends to converge to the Poisson distribution when $p$ is fixed. The binomial distribution assumes that the number of trials is fixed, while the Poisson distribution assumes the period of time in which the observations occur must be fixed.
+:::
+
+If the expected/average number of successes expected to occur in a fixed interval of time is $\lambda$, the probability of observing $x$ successes in that time interval can be written using the Poisson PMF:
+
+$$
+P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}; x\in\{0,1,2,...\}
+$$
+
+## Properties
+
+The mean and variance of the Poisson distribution are equal.
+
+$$
+\mu=\lambda;\sigma^2=\lambda
+$$
+
+::: callout-tip
+With real-world count data, the variance often exceeds the mean. We refer to this phenomenon as overdispersion.
+:::
+
+::: callout-note
+For sufficiently large $\lambda$, the normal distribution can approximate the Poisson distribution.
+:::
+
+## Poisson Distribution
+
+::: panel-tabset
+### `R`
+
+The functions `dpois()` and `ppois()` can be used to generate the PMF and CDF of the Poisson distribution, respectively.
+
+```{r}
+#| eval: false
+
+dpois(x=x,lambda=lambda)
+ppois(q=x,lambda = lambda,lower.tail=TRUE/FALSE)
+```
+
+
+### `SAS`
+
+```{.r}
+data pois_prob;
+p=pdf('POISSON',x,lambda);
+c=cdf('POISSON',x,lambda);
+;
+run;
+```
+
+:::
+
+## Example
+
+Suppose that over the past month, the hourly average number of patients who use the restroom at the waiting room of a particular clinic is 4.2. What is the probability that there will be 2-3 patients using the restroom in the next hour?
+
+::: panel-tabset
+### Distribution
+We can use the Poisson distribution to model the hourly count of patients using the restroom. The hourly average is 4.2, which serves as $\lambda$.
+
+### `R`
+
+```{r}
+lambda <- 4.2
+dpois(x=2,lambda=lambda) + dpois(x=3,lambda=lambda) 
+```
+
+### `SAS`
+
+```{.r}
+data pois_prob;
+p=pdf('POISSON',2,4.2) + pdf('POISSON',3,4.2) ;
+;
+run;
+```
+
+
+:::
+
+## Exercise
+
+::: panel-tabset
+### Question
+Suppose that over the last 50 years the average number of suicide attempts that occurred at a particular correctional facility each year is approximately 2.5. What is the probability that there are:
+
+- Exactly five suicide attempts at the facility in the next year.
+- At least ten suicide attempts at the facility in the next year.
+
+### `R`
+
+```{r}
+# Exactly 5
+lambda<- 2.5
+dpois(5,lambda=lambda)
+
+# At least 10 = 10 and higher
+
+1-ppois(q=9,lambda=lambda)
+ppois(q=9,lambda=lambda,lower.tail = FALSE)
+```
+
+### `SAS`
+
+```{.r}
+data pois_prob;
+p1=pdf('POISSON',5,2.5)  ;
+p2=1-cdf('POISSON',9,2.5)
+;
+run;
+```
+
+
+:::

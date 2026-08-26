@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 6</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -95,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d7d389961a246b163ae1cd8b562da1b6.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -314,7 +317,7 @@ Miguel Fudolig
 </ul>
 <p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, <strong>controlling</strong> for hospital effects.</p>
 <h3 id="sas-data-set">SAS Data set</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data operate;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data operate;</span>
 <span id="cb1-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb1-3"><a></a>datalines;</span>
 <span id="cb1-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
@@ -333,7 +336,7 @@ Miguel Fudolig
 <span id="cb1-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
 <span id="cb1-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
 <span id="cb1-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
-<span id="cb1-20"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-20"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
@@ -342,11 +345,11 @@ Miguel Fudolig
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Code</a></li><li><a href="#tabset-1-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
 <span id="cb2-2"><a></a>weight wt;</span>
 <span id="cb2-3"><a></a>tables hospital<span class="sc">*</span>trt<span class="sc">*</span>severity <span class="sc">/</span> cmh; <span class="co"># &lt;1&gt;</span></span>
 <span id="cb2-4"><a></a>tables hospital<span class="sc">*</span>trt<span class="sc">*</span>severity <span class="sc">/</span> cmh scores<span class="ot">=</span>modridit; <span class="co"># &lt;2&gt;</span></span>
-<span id="cb2-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="1">
 <li>Table Scores</li>
 <li>Modridit scores</li>
@@ -361,7 +364,7 @@ Miguel Fudolig
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
 <p>The following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data shoulder;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data shoulder;</span>
 <span id="cb3-2"><a></a>input area <span class="sc">$</span> location <span class="sc">$</span> size <span class="sc">$</span> usage <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb3-3"><a></a>datalines;</span>
 <span id="cb3-4"><a></a>coast urban large no <span class="dv">174</span> coast urban large yes <span class="dv">69</span></span>
@@ -382,7 +385,7 @@ Miguel Fudolig
 <span id="cb3-19"><a></a>mountain rural large no <span class="dv">62</span> mountain rural large yes <span class="dv">31</span></span>
 <span id="cb3-20"><a></a>mountain rural medium no <span class="dv">44</span> mountain rural medium yes <span class="dv">32</span></span>
 <span id="cb3-21"><a></a>mountain rural small no <span class="dv">85</span> mountain rural small yes <span class="dv">43</span></span>
-<span id="cb3-22"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-22"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
@@ -391,11 +394,11 @@ Miguel Fudolig
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc freq data<span class="ot">=</span>shoulder order<span class="ot">=</span>data;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc freq data<span class="ot">=</span>shoulder order<span class="ot">=</span>data;</span>
 <span id="cb4-2"><a></a>weight count;</span>
 <span id="cb4-3"><a></a>tables area<span class="sc">*</span>location<span class="sc">*</span>size<span class="sc">*</span>usage <span class="sc">/</span> cmh scores<span class="ot">=</span>modridit;</span>
 <span id="cb4-4"><a></a>;</span>
-<span id="cb4-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <p>Both variables are ordinal. We can use the extended correlation statistic <span class="math inline">\(Q_{CSMH}\)</span>. Using modridit scores, <span class="math inline">\(Q_{CSMH}\)</span> =6.64, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated.</p>
@@ -499,7 +502,7 @@ Miguel Fudolig
 <h2>Example</h2>
 <p>A running shoe company produces a new model of running shoe that includes a harder material for the insert that corrects for overpronation. However, the company is concerned that the material will induce heel tenderness as a result of some loss of cushioning on the strike of each step. It conducted a study on 87 runners who used the new shoe for a month. Researchers asked the participants whether they experienced occasional heel tenderness before and after they used the new shoe. Is there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?</p>
 <h3 id="sas-data">SAS Data</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data pump;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data pump;</span>
 <span id="cb5-2"><a></a>input subject time <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
 <span id="cb5-3"><a></a>datalines;</span>
 <span id="cb5-4"><a></a><span class="dv">1</span> before no <span class="dv">1</span> after no <span class="dv">2</span> before no <span class="dv">2</span> after no</span>
@@ -546,7 +549,7 @@ Miguel Fudolig
 <span id="cb5-45"><a></a><span class="dv">83</span> before yes <span class="dv">83</span> after yes <span class="dv">84</span> before yes <span class="dv">84</span> after yes</span>
 <span id="cb5-46"><a></a><span class="dv">85</span> before yes <span class="dv">85</span> after yes <span class="dv">86</span> before yes <span class="dv">86</span> after yes</span>
 <span id="cb5-47"><a></a><span class="dv">87</span> before yes <span class="dv">87</span> after yes</span>
-<span id="cb5-48"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-48"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-3" class="slide level2 scrollable">
 <h2>Example</h2>
@@ -555,7 +558,7 @@ Miguel Fudolig
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Code</a></li><li><a href="#tabset-3-2">Answer</a></li><li><a href="#tabset-3-3">McNemar’s test</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a></span>
 <span id="cb6-2"><a></a>data pump;</span>
 <span id="cb6-3"><a></a>input subject time <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
 <span id="cb6-4"><a></a>datalines;</span>
@@ -607,7 +610,7 @@ Miguel Fudolig
 <span id="cb6-50"><a></a></span>
 <span id="cb6-51"><a></a>proc freq data<span class="ot">=</span>pump order<span class="ot">=</span>data; <span class="co">#&lt;1&gt;</span></span>
 <span id="cb6-52"><a></a>tables subject<span class="sc">*</span>time<span class="sc">*</span>response<span class="sc">/</span> noprint cmh; <span class="sc">*</span>noprint does not print the <span class="dv">87</span> contingency tables.;</span>
-<span id="cb6-53"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-53"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="1">
 <li>There’s no weight statement because each line is an observational unit.</li>
 </ol>
@@ -620,7 +623,7 @@ Miguel Fudolig
 </ul>
 </div>
 <div id="tabset-3-3">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data shoes;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data shoes;</span>
 <span id="cb7-2"><a></a>input before <span class="sc">$</span> after <span class="sc">$</span> count;</span>
 <span id="cb7-3"><a></a>datalines;</span>
 <span id="cb7-4"><a></a>yes yes <span class="dv">19</span></span>
@@ -632,7 +635,7 @@ Miguel Fudolig
 <span id="cb7-10"><a></a>proc freq data<span class="ot">=</span>shoes order<span class="ot">=</span>data;</span>
 <span id="cb7-11"><a></a>weight count;</span>
 <span id="cb7-12"><a></a>tables before<span class="sc">*</span>after<span class="sc">/</span>agree;</span>
-<span id="cb7-13"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-13"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The McNemar’s test yields the same result as <span class="math inline">\(Q_{CSMH}\)</span>.</p>
 </div>
 </div>
@@ -646,7 +649,7 @@ Miguel Fudolig
 <li>At a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?</li>
 </ul>
 <h3 id="sas-data-1">SAS Data</h3>
-<div class="sourceCode" id="cb8" data-code-line-numbers="14-23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data drug;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-code-line-numbers="14-23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data drug;</span>
 <span id="cb8-2"><a></a>input druga <span class="sc">$</span> drugb <span class="sc">$</span> drugc <span class="sc">$</span> count;</span>
 <span id="cb8-3"><a></a>datalines;</span>
 <span id="cb8-4"><a></a>F F F <span class="dv">6</span></span>
@@ -668,7 +671,7 @@ Miguel Fudolig
 <span id="cb8-20"><a></a>drug<span class="ot">=</span><span class="st">'B'</span>; response<span class="ot">=</span>drugb; output;</span>
 <span id="cb8-21"><a></a>drug<span class="ot">=</span><span class="st">'C'</span>; response<span class="ot">=</span>drugc; output;</span>
 <span id="cb8-22"><a></a>end;</span>
-<span id="cb8-23"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-23"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exercise-3" class="slide level2">
 <h2>Exercise</h2>
@@ -680,9 +683,9 @@ Miguel Fudolig
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>proc freq data<span class="ot">=</span>drug2 order<span class="ot">=</span>data;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>proc freq data<span class="ot">=</span>drug2 order<span class="ot">=</span>data;</span>
 <span id="cb9-2"><a></a>tables patient<span class="sc">*</span>drug<span class="sc">*</span>response<span class="sc">/</span>cmh noprint;</span>
-<span id="cb9-3"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2">
 <p>The most appropriate MH statistic to examine is “Row Means Differ”.</p>
@@ -900,7 +903,7 @@ Miguel Fudolig
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -974,13 +977,14 @@ Miguel Fudolig
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -995,7 +999,7 @@ Miguel Fudolig
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

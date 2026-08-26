@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 15</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -95,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d7d389961a246b163ae1cd8b562da1b6.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -478,7 +481,7 @@ H_0: C\beta = 0
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Data Set</a></li><li><a href="#tabset-3-2">SAS Code</a></li><li><a href="#tabset-3-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data children;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data children;</span>
 <span id="cb1-2"><a></a>   input id city<span class="sc">$</span> <span class="er">@@</span>;</span>
 <span id="cb1-3"><a></a>   do i<span class="ot">=</span><span class="dv">1</span> to <span class="dv">4</span>;</span>
 <span id="cb1-4"><a></a>      input age smoke symptom <span class="sc">@</span><span class="er">@</span>;</span>
@@ -510,16 +513,16 @@ H_0: C\beta = 0
 <span id="cb1-30"><a></a><span class="dv">23</span> steelcity  <span class="dv">8</span> <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">9</span> <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">10</span> <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">11</span> <span class="dv">0</span> <span class="dv">0</span></span>
 <span id="cb1-31"><a></a><span class="dv">24</span> greenhills <span class="dv">8</span> <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">9</span> <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">10</span> <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">11</span> <span class="dv">2</span> <span class="dv">1</span></span>
 <span id="cb1-32"><a></a><span class="dv">25</span> greenhills <span class="dv">8</span> <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">10</span> <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">11</span> <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb1-33"><a></a>; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-33"><a></a>; </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-2">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc genmod data<span class="ot">=</span>children descending;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc genmod data<span class="ot">=</span>children descending;</span>
 <span id="cb2-2"><a></a>   class id city;</span>
 <span id="cb2-3"><a></a>   model symptom <span class="ot">=</span> city age smoke  <span class="sc">/</span> </span>
 <span id="cb2-4"><a></a>                   link<span class="ot">=</span>logit dist<span class="ot">=</span>bin type3;</span>
 <span id="cb2-5"><a></a>   repeated subject<span class="ot">=</span>id <span class="sc">/</span> type<span class="ot">=</span>exch covb corrw ;</span>
 <span id="cb2-6"><a></a>   estimate <span class="st">'age'</span> age <span class="dv">1</span><span class="sc">/</span>exp;</span>
-<span id="cb2-7"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-3">
 <p>Age is the “time” factor. There is no effect of city (<span class="math inline">\(\chi^2\)</span> = 0.01. p=0.94) and there is moderate evidence of a smoking index effect (<span class="math inline">\(\chi^2\)</span> = 3.59. p=0.06). There is moderate evidence of an age effect (<span class="math inline">\(\chi^2\)</span> = 2.74. p=0.10), which means there is moderate evidence of changes in incidence of wheezing as age changes. The odds of wheezing is estimated to decrease by 27% when the child turns a year older.</p>
@@ -535,7 +538,7 @@ H_0: C\beta = 0
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Data Set</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data diagnos;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data diagnos;</span>
 <span id="cb3-2"><a></a>   input std1 <span class="sc">$</span> test1 <span class="sc">$</span> std2 <span class="sc">$</span> test2 <span class="sc">$</span> count;</span>
 <span id="cb3-3"><a></a>   do i<span class="ot">=</span><span class="dv">1</span> to count; </span>
 <span id="cb3-4"><a></a>    output;</span>
@@ -570,7 +573,7 @@ H_0: C\beta = 0
 <span id="cb3-33"><a></a>    response<span class="ot">=</span>std2; output; </span>
 <span id="cb3-34"><a></a>    time<span class="ot">=</span><span class="dv">2</span>; procedure<span class="ot">=</span><span class="st">'test'</span>;</span>
 <span id="cb3-35"><a></a>   response<span class="ot">=</span>test2; output;</span>
-<span id="cb3-36"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-36"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -582,13 +585,13 @@ H_0: C\beta = 0
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc genmod data<span class="ot">=</span>diagnos2 descending;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc genmod data<span class="ot">=</span>diagnos2 descending;</span>
 <span id="cb4-2"><a></a>   class procedure time subject;</span>
 <span id="cb4-3"><a></a>   model response <span class="ot">=</span> procedure time procedure<span class="sc">*</span>time  <span class="sc">/</span> </span>
 <span id="cb4-4"><a></a>                   link<span class="ot">=</span>logit dist<span class="ot">=</span>bin type3;</span>
 <span id="cb4-5"><a></a>   repeated subject<span class="ot">=</span>subject <span class="sc">/</span> type<span class="ot">=</span>exch covb corrw ;</span>
 <span id="cb4-6"><a></a>   lsmeans procedure<span class="sc">/</span>diff exp cl ilink;</span>
-<span id="cb4-7"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-2">
 <p>The correlation between time points is approximately 0.8.</p>
@@ -621,7 +624,7 @@ H_0: C\beta = 0
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Data Set</a></li><li><a href="#tabset-6-2">SAS Code</a></li><li><a href="#tabset-6-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data fracture; </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data fracture; </span>
 <span id="cb5-2"><a></a>    input ID age center <span class="sc">$</span> treatment <span class="sc">$</span> year1 year2 year3 <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb5-3"><a></a>    total<span class="ot">=</span>year1<span class="sc">+</span>year2<span class="sc">+</span>year3;</span>
 <span id="cb5-4"><a></a>    lmonths<span class="ot">=</span><span class="fu">log</span>(<span class="dv">12</span>); </span>
@@ -697,16 +700,16 @@ H_0: C\beta = 0
 <span id="cb5-74"><a></a>     <span class="cf">if</span> (<span class="at">ID=</span><span class="dv">29</span> or <span class="at">ID=</span><span class="dv">45</span> or <span class="at">ID=</span><span class="dv">55</span>) then lmonths<span class="ot">=</span><span class="fu">log</span>(<span class="dv">6</span>); end;</span>
 <span id="cb5-75"><a></a>   end; </span>
 <span id="cb5-76"><a></a>   year<span class="ot">=</span><span class="dv">3</span>; fractures<span class="ot">=</span>year3; output; </span>
-<span id="cb5-77"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-77"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-2">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>proc genmod data<span class="ot">=</span>fracture2; </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>proc genmod data<span class="ot">=</span>fracture2; </span>
 <span id="cb6-2"><a></a>   class id treatment center year;</span>
 <span id="cb6-3"><a></a>   model fractures <span class="ot">=</span> center treatment age year  treatment<span class="sc">*</span>year<span class="sc">/</span> </span>
 <span id="cb6-4"><a></a>                     dist<span class="ot">=</span>poisson type3 offset<span class="ot">=</span>lmonths;</span>
 <span id="cb6-5"><a></a>  repeated subject<span class="ot">=</span><span class="fu">id</span>(center) <span class="sc">/</span> type<span class="ot">=</span>exch corrw; </span>
 <span id="cb6-6"><a></a>  estimate <span class="st">"fracture rate increase"</span> treatment <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>exp;</span>
-<span id="cb6-7"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-3">
 <p>The correlation between time points is estimated to be 0.13.</p>
@@ -726,14 +729,14 @@ H_0: C\beta = 0
 <ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>proc genmod data<span class="ot">=</span>fracture2; </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>proc genmod data<span class="ot">=</span>fracture2; </span>
 <span id="cb7-2"><a></a>   class id treatment center year;</span>
 <span id="cb7-3"><a></a>   model fractures <span class="ot">=</span> center treatment age year treatment<span class="sc">*</span>year  <span class="sc">/</span> </span>
 <span id="cb7-4"><a></a>                     dist<span class="ot">=</span>poisson type3 offset<span class="ot">=</span>lmonths;</span>
 <span id="cb7-5"><a></a>  repeated subject<span class="ot">=</span><span class="fu">id</span>(center) <span class="sc">/</span> type<span class="ot">=</span>unstr corrw; </span>
 <span id="cb7-6"><a></a>  lsmeans treatment<span class="sc">/</span>diff exp cl ilink;</span>
 <span id="cb7-7"><a></a>  estimate <span class="st">"fracture rate increase"</span> treatment <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>exp;</span>
-<span id="cb7-8"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2">
 <p>Using the unstructured form, there is no significant interaction between treatment and time (<span class="math inline">\(\chi^2\)</span> = 3.13, p=0.21), which means the effect of the treatment does not change in time. There is a significant main effect of the treatment (<span class="math inline">\(\chi^2\)</span> = 4.60, p=0.03) and year (<span class="math inline">\(\chi^2\)</span> = 7.68, p=0.02), which implies significant between- and within-group differences. The fracture rate in the placebo group is expected to be 105% higher than that of the treatment group.</p>
@@ -769,7 +772,7 @@ H_0: C\beta = 0
 <ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">SAS Data Set</a></li><li><a href="#tabset-8-2">SAS Code</a></li><li><a href="#tabset-8-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data lri;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data lri;</span>
 <span id="cb8-2"><a></a>   input id count risk passive crowding ses agegroup race <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb8-3"><a></a>   logrisk <span class="ot">=</span><span class="fu">log</span>(risk<span class="sc">/</span><span class="dv">52</span>);</span>
 <span id="cb8-4"><a></a>   datalines;  </span>
@@ -868,10 +871,10 @@ H_0: C\beta = 0
 <span id="cb8-97"><a></a><span class="dv">93</span> <span class="dv">0</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">188</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">283</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
 <span id="cb8-98"><a></a><span class="dv">94</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">189</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span>  <span class="dv">284</span> <span class="dv">0</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>  </span>
 <span id="cb8-99"><a></a><span class="dv">95</span> <span class="dv">3</span> <span class="dv">37</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">190</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> </span>
-<span id="cb8-100"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-100"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-8-2">
-<div class="sourceCode" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a>proc genmod data<span class="ot">=</span>lri;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a>proc genmod data<span class="ot">=</span>lri;</span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>   class ses id race agegroup; </span>
 <span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>   model count <span class="ot">=</span> passive crowding ses race agegroup<span class="sc">/</span></span>
 <span id="annotated-cell-9-4"><a href="#annotated-cell-9-4"></a>                 dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>logrisk type3;</span>
@@ -888,7 +891,7 @@ H_0: C\beta = 0
 <span id="annotated-cell-9-15"><a href="#annotated-cell-9-15"></a>   model count <span class="ot">=</span> passive crowding ses race agegroup <span class="sc">/</span></span>
 <span id="annotated-cell-9-16"><a href="#annotated-cell-9-16"></a>                 dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>logrisk type3;</span>
 <span id="annotated-cell-9-17"><a href="#annotated-cell-9-17"></a>   repeated subject<span class="ot">=</span>id <span class="sc">/</span> type<span class="ot">=</span>ind;</span>
-<span id="annotated-cell-9-18"><a href="#annotated-cell-9-18"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-9-18"><a href="#annotated-cell-9-18"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
 <dd>
@@ -921,7 +924,7 @@ H_0: C\beta = 0
 <ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">SAS Data Set</a></li><li><a href="#tabset-9-2">SAS Code</a></li><li><a href="#tabset-9-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data resp;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data resp;</span>
 <span id="cb9-2"><a></a>   input center id treatment <span class="sc">$</span> sex <span class="sc">$</span> age baseline </span>
 <span id="cb9-3"><a></a>   visit1<span class="sc">-</span>visit4 <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb9-4"><a></a>   visit<span class="ot">=</span><span class="dv">1</span>;  outcome<span class="ot">=</span>visit1;  output;   </span>
@@ -985,10 +988,10 @@ H_0: C\beta = 0
 <span id="cb9-62"><a></a><span class="dv">1</span>   <span class="dv">1</span> P M  <span class="dv">46</span> <span class="dv">2</span>  <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span>  <span class="dv">2</span>  <span class="dv">31</span> P M  <span class="dv">52</span> <span class="dv">2</span>  <span class="dv">3</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">4</span>   </span>
 <span id="cb9-63"><a></a><span class="dv">1</span>  <span class="dv">46</span> P M  <span class="dv">49</span> <span class="dv">2</span>  <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span>  <span class="dv">2</span>  <span class="dv">42</span> P M  <span class="dv">66</span> <span class="dv">3</span>  <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span>   </span>
 <span id="cb9-64"><a></a><span class="dv">1</span>  <span class="dv">47</span> P M  <span class="dv">63</span> <span class="dv">2</span>  <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span>  </span>
-<span id="cb9-65"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-65"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-9-2">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>proc genmod data<span class="ot">=</span>resp descending;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>proc genmod data<span class="ot">=</span>resp descending;</span>
 <span id="cb10-2"><a></a>class id center sex treatment visit;</span>
 <span id="cb10-3"><a></a>model outcome <span class="ot">=</span> treatment sex center age baseline</span>
 <span id="cb10-4"><a></a>visit visit<span class="sc">*</span>treatment <span class="sc">/</span></span>
@@ -996,7 +999,7 @@ H_0: C\beta = 0
 <span id="cb10-6"><a></a>repeated subject<span class="ot">=</span>id<span class="sc">*</span>center <span class="sc">/</span> type<span class="ot">=</span>ind;</span>
 <span id="cb10-7"><a></a>lsmeans visit<span class="sc">*</span>treatment<span class="sc">/</span>ilink cl;</span>
 <span id="cb10-8"><a></a>slice visit<span class="sc">*</span>treatment<span class="sc">/</span>diff<span class="ot">=</span>all cl exp adjust<span class="ot">=</span>tukey;</span>
-<span id="cb10-9"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-9"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-9-3">
 <p>There is a significant interaction between treatment and visit (<span class="math inline">\(\chi^2\)</span> =10.47, p=0.02). There seems to be no difference between visits for the active treatment (<span class="math inline">\(\chi^2\)</span> = 5.4, p=0.15) and placebo treatment (<span class="math inline">\(\chi^2\)</span> = 5.8, p=0.12). However, there is a difference between active and placebo treatment at all visits. At visit 1, the odds of a higher score for active treatment is 108% higher than the placebo treatment (OR = 2.08, 95% CI: 1.11, 3.90). At visit 2, the odds ratio increases even more to 5.86 (2.81, 12.27). At visit 3, the odds ratio decreases slightly to 3.95 (1.84, 8.47).</p>
@@ -1015,7 +1018,7 @@ H_0: C\beta = 0
 <ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">SAS Data Set</a></li><li><a href="#tabset-10-2">SAS Code</a></li><li><a href="#tabset-10-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-10-1">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>data skincross;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>data skincross;</span>
 <span id="cb11-2"><a></a>    input subject gender <span class="sc">$</span> sequence <span class="sc">$</span> Time1 <span class="sc">$</span> Time2 <span class="sc">$</span> <span class="er">@@</span>;         </span>
 <span id="cb11-3"><a></a>    datalines;                 </span>
 <span id="cb11-4"><a></a>  <span class="dv">1</span>  m AB   Y   Y  <span class="dv">101</span> m   PA  Y   Y    <span class="dv">201</span> f  AP    Y   Y </span>
@@ -1132,10 +1135,10 @@ H_0: C\beta = 0
 <span id="cb11-115"><a></a>   <span class="cf">if</span> carry<span class="ot">=</span><span class="st">'P'</span> then carry<span class="ot">=</span><span class="st">'N'</span>; </span>
 <span id="cb11-116"><a></a>   response<span class="ot">=</span>Time2;</span>
 <span id="cb11-117"><a></a>   output;</span>
-<span id="cb11-118"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-118"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-10-2">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>proc genmod data<span class="ot">=</span>skincross2 descending; </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>proc genmod data<span class="ot">=</span>skincross2 descending; </span>
 <span id="cb12-2"><a></a>   class subject treatment period gender carry; </span>
 <span id="cb12-3"><a></a>   model response <span class="ot">=</span> treatment period gender carry </span>
 <span id="cb12-4"><a></a>                 gender<span class="sc">*</span>period <span class="sc">/</span>type3</span>
@@ -1153,7 +1156,7 @@ H_0: C\beta = 0
 <span id="cb12-16"><a></a>   estimate <span class="st">'OR:A-P'</span> treatment <span class="dv">1</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> exp; </span>
 <span id="cb12-17"><a></a>   estimate <span class="st">'OR:B-P'</span> treatment <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> exp; </span>
 <span id="cb12-18"><a></a>   lsmeans treatment<span class="sc">/</span>cl diff adjust<span class="ot">=</span>tukey ilink exp;</span>
-<span id="cb12-19"><a></a>run; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-19"><a></a>run; </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-10-3">
 <p>The carryover effect is not significant (<span class="math inline">\(\chi^2\)</span> = 1.08, p=0.58). Running the analysis without the carryover effect shows that there is strong evidence of an interaction between period and gender (<span class="math inline">\(\chi^2 = 3.93\)</span>,p=0.047). There is also a significant effect of the treatment. (<span class="math inline">\(\chi^2\)</span> = 40.02, p&lt;0.0001). Upon further inspection, we determine that treatment A and P are significantly different (OR: 2.97, 95% CI:1.78-4.97), A and B are significantly different (OR: 3.53, 95% CI: 2.17, 5.75), but B and P are not significantly different (OR: 1.19, 95% CI: 0.72, 1.96).</p>
@@ -1493,7 +1496,7 @@ H_0: C\beta = 0
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1643,13 +1646,14 @@ H_0: C\beta = 0
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -1664,7 +1668,7 @@ H_0: C\beta = 0
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

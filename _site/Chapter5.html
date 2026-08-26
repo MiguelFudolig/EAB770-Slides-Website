@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 5</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -95,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-12873a65cf666e61daa4b3cf91a98e13.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d7d389961a246b163ae1cd8b562da1b6.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -303,17 +306,17 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <section id="general-association-sas" class="slide level2">
 <h2>General Association: SAS</h2>
 <ul>
-<li>In SAS, the Pearson chi-square statistic <span class="math inline">\(Q_P\)</span> is the value referred to as ’Chi-square”</li>
+<li>In SAS, the Pearson chi-square statistic <span class="math inline">\(Q_P\)</span> is the value referred to as ‘Chi-square”</li>
 <li>Note that <span class="math inline">\(Q\)</span> is <strong>NOT</strong> the Mantel-Haenszel statistic in the <code>chisq</code> output in SAS.
 <ul>
 <li><span class="math inline">\(Q\)</span> is the “General Association” cell in the <code>cmh</code> output.</li>
 </ul></li>
 <li>We can use the <code>plots</code> option in the <code>tables</code> statement to create a mosaic plot.</li>
 </ul>
-<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a>proc freq;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a>proc freq;</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>weight count;</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3"></a>tables a<span class="sc">*</span>b<span class="sc">/</span>cmh plots<span class="ot">=</span>mosaicplot;</span>
-<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
@@ -347,7 +350,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Code</a></li><li><a href="#tabset-1-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="sourceCode" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a>data neighbor;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a>data neighbor;</span>
 <span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
 <span id="annotated-cell-8-3"><a href="#annotated-cell-8-3"></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="annotated-cell-8-4"><a href="#annotated-cell-8-4"></a>datalines;</span>
@@ -363,7 +366,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <span id="annotated-cell-8-14"><a href="#annotated-cell-8-14"></a>weight count;</span>
 <span id="annotated-cell-8-15"><a href="#annotated-cell-8-15"></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-16" class="code-annotation-target"><a href="#annotated-cell-8-16"></a>plots<span class="ot">=</span>mosaicplot chisq cmh nocol nopct;</span>
-<span id="annotated-cell-8-17"><a href="#annotated-cell-8-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-8-17"><a href="#annotated-cell-8-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
@@ -393,7 +396,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 </ul>
 </div><div class="column" style="width:60%">
 <p>Data set:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data color;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data color;</span>
 <span id="cb1-2"><a></a>input county <span class="sc">$</span> color <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb1-3"><a></a>datalines;</span>
 <span id="cb1-4"><a></a>cl blu <span class="dv">22</span> cl red <span class="dv">57</span> cl green <span class="dv">12</span> cl blk <span class="dv">15</span></span>
@@ -401,7 +404,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <span id="cb1-6"><a></a>do blu <span class="dv">17</span> do red <span class="dv">34</span> do green <span class="dv">17</span> do blk <span class="dv">10</span></span>
 <span id="cb1-7"><a></a>wa blu <span class="dv">5</span> wa red <span class="dv">56</span> wa green <span class="dv">7</span> wa blk <span class="dv">9</span></span>
 <span id="cb1-8"><a></a>;</span>
-<span id="cb1-9"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="exercise-1" class="slide level2">
@@ -417,7 +420,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a></span>
 <span id="cb2-2"><a></a>data color;</span>
 <span id="cb2-3"><a></a>input county <span class="sc">$</span> color <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb2-4"><a></a>datalines;</span>
@@ -432,7 +435,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <span id="cb2-13"><a></a>weight count;</span>
 <span id="cb2-14"><a></a>tables county<span class="sc">*</span>color<span class="sc">/</span></span>
 <span id="cb2-15"><a></a>plots<span class="ot">=</span>mosaicplot chisq cmh nocol nopct measures cl;</span>
-<span id="cb2-16"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-16"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <p><span class="math inline">\(Q_P\)</span>= 24.36, <span class="math inline">\(Q\)</span> = 24.28, p = 0.004, which means there is strong evidence of an association between school district and marker color used for grading.</p>
@@ -503,7 +506,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Code</a></li><li><a href="#tabset-3-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data pain;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data pain;</span>
 <span id="cb3-2"><a></a>input treatment <span class="sc">$</span> hours count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb3-3"><a></a>datalines;</span>
 <span id="cb3-4"><a></a>placebo <span class="dv">0</span> <span class="dv">6</span> placebo <span class="dv">1</span> <span class="dv">9</span> placebo <span class="dv">2</span> <span class="dv">6</span> placebo <span class="dv">3</span> <span class="dv">3</span> placebo <span class="dv">4</span> <span class="dv">1</span></span>
@@ -514,7 +517,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <span id="cb3-9"><a></a>proc freq data<span class="ot">=</span>pain order<span class="ot">=</span>data;</span>
 <span id="cb3-10"><a></a>weight count;</span>
 <span id="cb3-11"><a></a>tables treatment<span class="sc">*</span>hours<span class="sc">/</span> cmh nocol nopct;</span>
-<span id="cb3-12"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-2">
 <ul>
@@ -529,14 +532,14 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <section id="exercise-2" class="slide level2">
 <h2>Exercise</h2>
 <p>The table shows data from a study that investigates intent to breastfeed of women who are interested in having children. The women who participated in the study were asked if they intended to breastfeed your child up to 6 months after birth. The researchers want to know if there is an effect of the order of pregnancy on their intent to breastfeed.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>data preg;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>data preg;</span>
 <span id="cb4-2"><a></a>input pregnancy <span class="sc">$</span>  outcome <span class="sc">$</span> score  count <span class="sc">@</span><span class="er">@</span> ;</span>
 <span id="cb4-3"><a></a>datalines;</span>
 <span id="cb4-4"><a></a>npnc sd <span class="dv">1</span> <span class="dv">8</span> npnc d <span class="dv">2</span> <span class="dv">22</span> npnc n <span class="dv">3</span> <span class="dv">24</span> npnc a <span class="dv">4</span> <span class="dv">27</span> npnc sa <span class="dv">5</span> <span class="dv">15</span></span>
 <span id="cb4-5"><a></a>npc sd <span class="dv">1</span> <span class="dv">15</span> npc d <span class="dv">2</span> <span class="dv">23</span> npc n <span class="dv">3</span> <span class="dv">15</span> npc a <span class="dv">4</span> <span class="dv">19</span> npc sa <span class="dv">5</span> <span class="dv">9</span></span>
 <span id="cb4-6"><a></a>fp sd <span class="dv">1</span> <span class="dv">18</span> fp d <span class="dv">2</span> <span class="dv">8</span> fp n <span class="dv">3</span> <span class="dv">22</span> fp a <span class="dv">4</span> <span class="dv">23</span> fp sa <span class="dv">5</span> <span class="dv">11</span></span>
 <span id="cb4-7"><a></a>pwc sd <span class="dv">1</span> <span class="dv">35</span> pwc d <span class="dv">2</span> <span class="dv">13</span> pwc n <span class="dv">3</span> <span class="dv">10</span> pwc a <span class="dv">4</span> <span class="dv">9</span> pwc sa <span class="dv">5</span> <span class="dv">6</span></span>
-<span id="cb4-8"><a></a>; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a></a>; </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div title="Variables">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -570,7 +573,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>proc freq data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>proc freq data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
 <span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>weight count;</span>
 <span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a>tables pregnancy<span class="sc">*</span>outcome <span class="sc">/</span> cmh nocol nopct;</span>
 <span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>run;</span>
@@ -579,7 +582,7 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>freq count;</span>
 <span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>class pregnancy;</span>
 <span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a>var score;</span>
-<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
@@ -646,7 +649,7 @@ Q_{CS} = (n-1)r_{ac}^2
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data wash;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data wash;</span>
 <span id="cb5-2"><a></a>input treatment <span class="sc">$</span> washability <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb5-3"><a></a>datalines;</span>
 <span id="cb5-4"><a></a>water low <span class="dv">27</span> water medium <span class="dv">14</span> water high <span class="dv">5</span></span>
@@ -659,7 +662,7 @@ Q_{CS} = (n-1)r_{ac}^2
 <span id="cb5-11"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span> chisq cmh;</span>
 <span id="cb5-12"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span> scores<span class="ot">=</span>modridit cmh</span>
 <span id="cb5-13"><a></a>noprint nocol nopct;</span>
-<span id="cb5-14"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-2">
 <p><span class="math inline">\(Q_{CS}=50.6\)</span>, p&lt;0.0001. There is sufficient evidence to claim that the dose of water treatment is associated with the washability of the water.</p>
@@ -671,13 +674,13 @@ Q_{CS} = (n-1)r_{ac}^2
 <section id="exercise-4" class="slide level2">
 <h2>Exercise</h2>
 <p>A random sample of 400 college students are classified according to class status and drinking habits. Test the hypothesis that class status and drinking habits are not correlated to each other.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data drink; </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data drink; </span>
 <span id="cb6-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb6-3"><a></a>datalines;</span>
 <span id="cb6-4"><a></a>non fres <span class="dv">55</span> non soph <span class="dv">34</span> non jun <span class="dv">27</span> non sen <span class="dv">17</span></span>
 <span id="cb6-5"><a></a>mod fres <span class="dv">32</span> mod soph <span class="dv">29</span> mod jun <span class="dv">36</span> mod sen <span class="dv">39</span></span>
 <span id="cb6-6"><a></a>hea fres <span class="dv">29</span> hea soph <span class="dv">41</span> hea jun <span class="dv">33</span> hea sen <span class="dv">28</span></span>
-<span id="cb6-7"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div title="Variables">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -701,7 +704,7 @@ Q_{CS} = (n-1)r_{ac}^2
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data drink;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data drink;</span>
 <span id="cb7-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb7-3"><a></a>datalines;</span>
 <span id="cb7-4"><a></a>non f <span class="dv">55</span> non soph <span class="dv">34</span> non j <span class="dv">27</span> non sen <span class="dv">17</span></span>
@@ -712,7 +715,7 @@ Q_{CS} = (n-1)r_{ac}^2
 <span id="cb7-9"><a></a>proc freq data<span class="ot">=</span>drink order<span class="ot">=</span>data;</span>
 <span id="cb7-10"><a></a>weight count;</span>
 <span id="cb7-11"><a></a>tables habit<span class="sc">*</span>status<span class="sc">/</span>cmh chisq;</span>
-<span id="cb7-12"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-2">
 <p>Table Scores: <span class="math inline">\(Q_{CS}\)</span> = 9.2, p=0.0024. There is sufficient evidence to support the claim that class status and drinking habits are correlated to each other.</p>
@@ -785,7 +788,7 @@ Q_{CS} = (n-1)r_{ac}^2
 <ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data market;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data market;</span>
 <span id="cb8-2"><a></a>length AdSource <span class="sc">$</span> <span class="fl">9.</span> ;</span>
 <span id="cb8-3"><a></a>input car <span class="sc">$</span> AdSource <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb8-4"><a></a>datalines;</span>
@@ -797,7 +800,7 @@ Q_{CS} = (n-1)r_{ac}^2
 <span id="cb8-10"><a></a>weight count;</span>
 <span id="cb8-11"><a></a>table car<span class="sc">*</span>AdSource <span class="sc">/</span> norow nocol nopct;</span>
 <span id="cb8-12"><a></a>exact fisher pchi lrchi;</span>
-<span id="cb8-13"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-13"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2">
 <p>We need to use Fisher’s exact test because of the small sample size. The p-value was calculated to be 0.04, which is sufficient evidence to conclude that there is an association between car type and media.</p>
@@ -857,7 +860,7 @@ Q_{CS} = (n-1)r_{ac}^2
 <ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">SAS Code</a></li><li><a href="#tabset-8-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data sm;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data sm;</span>
 <span id="cb9-2"><a></a>input school <span class="sc">$</span> social <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb9-3"><a></a>datalines;</span>
 <span id="cb9-4"><a></a>Pr_IS t <span class="dv">3</span> Pr_IS i <span class="dv">2</span> Pr_IS s <span class="dv">3</span> Pr_IS o <span class="dv">0</span></span>
@@ -870,7 +873,7 @@ Q_{CS} = (n-1)r_{ac}^2
 <span id="cb9-11"><a></a>weight count;</span>
 <span id="cb9-12"><a></a>tables school<span class="sc">*</span>social;</span>
 <span id="cb9-13"><a></a>exact fisher pchi lrchi;</span>
-<span id="cb9-14"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-8-2">
 <p>The Fisher’s exact test yielded p=0.45, which means there is insufficient evidence to claim that social media habits are associated with the type of high school attended by the students.</p>
@@ -976,7 +979,7 @@ measure \pm 1.96*ASE
 <ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">SAS Code</a></li><li><a href="#tabset-9-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data wash;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data wash;</span>
 <span id="cb10-2"><a></a>input treatment <span class="sc">$</span> washability <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb10-3"><a></a>datalines;</span>
 <span id="cb10-4"><a></a>water low <span class="dv">27</span> water medium <span class="dv">14</span> water high <span class="dv">5</span></span>
@@ -986,7 +989,7 @@ measure \pm 1.96*ASE
 <span id="cb10-8"><a></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>wash;</span>
 <span id="cb10-9"><a></a>weight count;</span>
 <span id="cb10-10"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span>  measures cl;</span>
-<span id="cb10-11"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-11"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-9-2">
 <ul>
@@ -1012,13 +1015,13 @@ measure \pm 1.96*ASE
 <li>Stuart’s <span class="math inline">\(\tau_c\)</span></li>
 <li>Somers’ Delta</li>
 </ul>
-<div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a>data drink;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a>data drink;</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a>datalines;</span>
 <span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>non fres <span class="dv">55</span> non soph <span class="dv">34</span> non jun <span class="dv">27</span> non sen <span class="dv">17</span></span>
 <span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>mod fres <span class="dv">32</span> mod soph <span class="dv">29</span> mod jun <span class="dv">36</span> mod sen <span class="dv">39</span></span>
 <span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>hea fres <span class="dv">29</span> hea soph <span class="dv">41</span> hea jun <span class="dv">33</span> hea sen <span class="dv">28</span></span>
-<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
@@ -1033,7 +1036,7 @@ measure \pm 1.96*ASE
 <ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">SAS Code</a></li><li><a href="#tabset-10-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-10-1">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>data drink;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>data drink;</span>
 <span id="cb11-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb11-3"><a></a>datalines;</span>
 <span id="cb11-4"><a></a>non f <span class="dv">55</span> non soph <span class="dv">34</span> non j <span class="dv">27</span> non sen <span class="dv">17</span></span>
@@ -1044,7 +1047,7 @@ measure \pm 1.96*ASE
 <span id="cb11-9"><a></a>proc freq data<span class="ot">=</span>drink order<span class="ot">=</span>data;</span>
 <span id="cb11-10"><a></a>weight count;</span>
 <span id="cb11-11"><a></a>tables habit<span class="sc">*</span>status<span class="sc">/</span>measures cl;</span>
-<span id="cb11-12"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-10-2">
 <ul>
@@ -1122,7 +1125,7 @@ measure \pm 1.96*ASE
 <ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-11-1">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data neighbor;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data neighbor;</span>
 <span id="cb12-2"><a></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
 <span id="cb12-3"><a></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb12-4"><a></a>datalines;</span>
@@ -1138,7 +1141,7 @@ measure \pm 1.96*ASE
 <span id="cb12-14"><a></a>weight count;</span>
 <span id="cb12-15"><a></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
 <span id="cb12-16"><a></a>measures cl;</span>
-<span id="cb12-17"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-11-2">
 <p>You can choose to report the asymmetric <span class="math inline">\(\lambda\)</span>, symmetric <span class="math inline">\(\lambda\)</span>, asymmetric uncertainty coefficient, or the symmetric uncertainty coefficient.</p>
@@ -1251,14 +1254,14 @@ measure \pm 1.96*ASE
 </ul>
 
 <img data-src="img/neuro_C5.png" class="r-stretch"><h3 id="sas-code-11">SAS Code</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>data classify;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>data classify;</span>
 <span id="cb13-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb13-3"><a></a>datalines;</span>
 <span id="cb13-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
 <span id="cb13-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
 <span id="cb13-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
 <span id="cb13-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
-<span id="cb13-8"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-9" class="slide level2">
 <h2>Example</h2>
@@ -1273,7 +1276,7 @@ measure \pm 1.96*ASE
 <ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">SAS Code</a></li><li><a href="#tabset-12-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-12-1">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>data classify;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>data classify;</span>
 <span id="cb14-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb14-3"><a></a>datalines;</span>
 <span id="cb14-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
@@ -1286,7 +1289,7 @@ measure \pm 1.96*ASE
 <span id="cb14-11"><a></a>proc freq;</span>
 <span id="cb14-12"><a></a>weight count;</span>
 <span id="cb14-13"><a></a>tables no_rater<span class="sc">*</span>w_rater <span class="sc">/</span> agree norow nocol nopct;</span>
-<span id="cb14-14"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-12-2">
 <p>Simple <span class="math inline">\(\kappa\)</span>: 0.21 (0.11,0.31) Weighted <span class="math inline">\(\kappa\)</span>: 0.38 (0.28,0.48)</p>
@@ -1298,12 +1301,12 @@ measure \pm 1.96*ASE
 <section id="exercise-14" class="slide level2">
 <h2>Exercise</h2>
 <p>Two radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:</p>
-<p>0 =‘Normal’; 1 =‘Benign’ ; 2 =‘Suspected’; 3 =‘Cancer’</p>
+<p>0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’</p>
 <ul>
 <li>Calculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.</li>
 <li>Compare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a></span>
 <span id="cb15-2"><a></a>data radiology;</span>
 <span id="cb15-3"><a></a>input rater1 rater2 count;</span>
 <span id="cb15-4"><a></a>cards;</span>
@@ -1324,12 +1327,12 @@ measure \pm 1.96*ASE
 <span id="cb15-19"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
 <span id="cb15-20"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
 <span id="cb15-21"><a></a>;</span>
-<span id="cb15-22"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exercise-15" class="slide level2">
 <h2>Exercise</h2>
 <p>Two radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:</p>
-<p>0 =‘Normal’; 1 =‘Benign’ ; 2 =‘Suspected’; 3 =‘Cancer’</p>
+<p>0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’</p>
 <ul>
 <li>Calculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.</li>
 <li>Compare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.</li>
@@ -1338,7 +1341,7 @@ measure \pm 1.96*ASE
 <ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">SAS Code</a></li><li><a href="#tabset-13-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-13-1">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>data radiology;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>data radiology;</span>
 <span id="cb16-2"><a></a>input rater1 rater2 count;</span>
 <span id="cb16-3"><a></a>cards;</span>
 <span id="cb16-4"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
@@ -1365,7 +1368,7 @@ measure \pm 1.96*ASE
 <span id="cb16-25"><a></a>weight count;</span>
 <span id="cb16-26"><a></a>test kappa;</span>
 <span id="cb16-27"><a></a>exact kappa;</span>
-<span id="cb16-28"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-28"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-13-2">
 <p>Simple <span class="math inline">\(\kappa\)</span>: 0.47 (0.33,0.62) Weighted <span class="math inline">\(\kappa\)</span>: 0.57 (0.44,0.70)</p>
@@ -1441,7 +1444,7 @@ measure \pm 1.96*ASE
 </ul>
 <p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is increasing as the amount of gastric tissue removed increased. Ignore hospital effects.</p>
 <h3 id="sas-code-14">SAS Code</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>data operate;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>data operate;</span>
 <span id="cb17-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb17-3"><a></a>datalines;</span>
 <span id="cb17-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
@@ -1460,7 +1463,7 @@ measure \pm 1.96*ASE
 <span id="cb17-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
 <span id="cb17-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
 <span id="cb17-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
-<span id="cb17-20"><a></a>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-20"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-11" class="slide level2">
 <h2>Example</h2>
@@ -1476,7 +1479,7 @@ measure \pm 1.96*ASE
 <ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">SAS Code</a></li><li><a href="#tabset-14-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-14-1">
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>data operate;</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>data operate;</span>
 <span id="cb18-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb18-3"><a></a>datalines;</span>
 <span id="cb18-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
@@ -1500,7 +1503,7 @@ measure \pm 1.96*ASE
 <span id="cb18-22"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
 <span id="cb18-23"><a></a>weight wt;</span>
 <span id="cb18-24"><a></a>tables trt<span class="sc">*</span>severity <span class="sc">/</span>  jt;</span>
-<span id="cb18-25"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-25"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-14-2">
 <p>The JT statistic was estimated to be 35,697, corresponding to a one-sided p-value <span class="math inline">\(p=0.005\)</span>, which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.</p>
@@ -1701,7 +1704,7 @@ measure \pm 1.96*ASE
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1851,13 +1854,14 @@ measure \pm 1.96*ASE
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -1872,7 +1876,7 @@ measure \pm 1.96*ASE
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/madfudolig\.quarto\.pub\/eab770slides");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
