@@ -1,6 +1,5 @@
 - source: project
-  quarto-pub:
-    - id: 56d3b56f-4017-4641-9dd5-a5be6aa4eeab
-      url: https://madfudolig.quarto.pub/slides
-    - id: 6f6753b6-4b64-4332-807b-43c26d7a0781
-      url: https://madfudolig.quarto.pub/eab770slides
+  posit-connect-cloud:
+    - id: 01a03f4f-8c41-45ba-a8bd-3f615d0625d1
+      url: https://miguelfudolig-eab770-slides.share.connect.posit.cloud
+

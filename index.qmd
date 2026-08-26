@@ -4,4 +4,4 @@ subtitle: "Fall 2024"
 author: "Miguel Fudolig"
 ---
 
-This is a website containing all lecture slides for EAB 770. Everything is a work in progress. You can access the syllabus [here](https://madfudolig.quarto.pub/eab-770-applied-statistical-methods-for-categorical-data/).
+This is a website containing all lecture slides for EAB 770. Everything is a work in progress. You can access the syllabus [here](https://miguelfudolig-eab770-syllabus.share.connect.posit.cloud).

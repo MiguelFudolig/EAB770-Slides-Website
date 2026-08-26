@@ -1,11 +1,11 @@
 ---
-title: "EAB 770 - Chapter 1"
+title: "EAB 770 - Lecture 1"
 author: "Miguel Fudolig"
 format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    footer: "Chapter 1 - [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
+    footer: "Lecture 1 - [Back to home](https://miguelfudolig-eab770-syllabus.share.connect.posit.cloud)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
@@ -17,7 +17,7 @@ format:
     number-sections: true
 ---
 
-# Chapter 1: Introduction
+# Lecture 1: Introduction
 
 ## Outline
 
@@ -63,28 +63,45 @@ Categorical data is present everywhere!
 - Ratings
 - Locations
 
-## Types of Categorical Response Variables
+## Types of Categorical Variables
 
-- Dichotomous
+::: panel-tabset
 
-  - Yes/No
+### Dichotomous/Binary
 
-- Ordinal
+These variables can only have 0/1 values. Examples include: Heads/Tails; Alive/Dead; Selected/Not Selected
 
-  - More than two possible outcomes with inherent ordering
+### Nominal
 
-- Nominal
+These variables have more than two levels without inherent ordering. Examples include: Race; Religion; eye color.
 
-  - More than two possible outcomes without inherent ordering
 
-- Discrete Counts
+### Ordinal
 
-  - Numerical outcomes consisting of counting numbers.
+These variables have more than two levels without inherent ordering. Examples include: Class Rank, Likert Scale
 
-- Grouped Survival Times
 
-  - Number of patients who fail/survive during a specific time interval.
-  - The interval of failure/survival (time-to-event) is categorical.
+### Discrete Counts
+
+These variables consist of numerical outcomes consisting of counting numbers. Example include: Queue length, Number of hospitalizations
+
+### Grouped Survival Times
+
+This specialized variable counts the number of patients who fail/survive during a specific time interval. The interval of failure/survival (time-to-event) is categorical.
+
+:::
+
+
+## Independent and Dependent Variables
+
+::: callout-note
+Independent variables, sometimes referred to as predictor variables, are those that are experimentally manipulated or used to predict another variable.
+:::
+
+::: callout-note
+Dependent variables, sometimes referred to as response or outcome variables, is the variable of interest as an outcome or response. **In this class, we will focus on categorical dependent variables**.
+:::
+
 
 ## Sampling Frameworks
 
@@ -328,7 +345,7 @@ To create your own contingency table, you can use the `data.frame()` and `xtabs(
 count_data <- data.frame(Row = c("A","A","B","B"),
                          Column = c("X","Y","X","Y"),
                          Count = c(2,4,6,8))
-
+count_data
 xtabs(Count~Row+Column,data=count_data)
 ```
 
@@ -387,4 +404,296 @@ run;
 
 :::
 
+# Probability Distributions
 
+## Sampling Distributions
+
+Recall: Inferential statistics typically aims to determine how likely it is to have obtained a sample given certain assumptions about the population the sample was drawn.
+
+::: callout-note
+The sampling distribution typically depends on the properties of the underlying distribution of the random variable of interest from a population.
+:::
+
+::: callout-important
+Recall: Central Limit Theorem (CLT) can be sed for continuous variables. However, CLT might not work for some scenarios involving categorical response variables.
+:::
+
+## Probability Distributions for Categorical Variables
+
+Distributions appropriate to categorical data should be used for inferential statistics.
+
+- Hypergeometric Distribution
+- Bernoulli/Binomial Distribution
+- Multinomial Distribution
+- Poisson Distribution
+
+## Hypergeometric Distribution
+
+This distribution can be used for discrete variables to determine the number of “successes” in a sequence of $n$ draws from a finite population of size $M$ where sampling is conducted without replacement.
+
+::: callout-note
+### Hypergeometric Distribution
+Suppose there are $N$ balls in a bag and $m$ are green. If $X$ denotes the total number of green balls (success) desired and we have a total number of $k$ draws from the bag, then the probability of the random variable of the total number of successes to be equal to $X$ can be written as:
+
+$$
+P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}
+$$
+
+where $C(a,b) = \frac{a!}{b!(a-b)!}$ is the combination notation.
+:::
+
+::: callout-note
+As an example, the balls could be a pool of medical students. The green balls are international students. If we want to select a total of $n$ students from the pool of medical students, then the probability that we will select $k$ international students is given by the hypergeometric distribution.
+:::
+
+## Properties
+
+The mean $\mu$ and variance $\sigma^2$ of the hypergeometric distribution can be found using the following equations:
+
+$$
+\mu = \frac{nm}{N}; \sigma^2 = \frac{n(m/N)(1-m/N)(N-n)}{N-1}
+$$
+
+## Hypergeometric Distribution
+
+::: panel-tabset
+### `R`
+
+The probability mass function (PMF or $P(X=x)$) of the hypergeometric distribution is:
+```{r}
+#| eval: false
+dhyper(x=x,
+       m=m,
+       n=N-m,
+       k=k)
+```
+
+The cumulative distribution function (CDF or $P(X\leq x)$) of the hypergeometric distribution is:
+
+```{r}
+#| eval: false
+phyper(q=x,
+       m=m,
+       n=N-m,
+       k=k)
+```
+
+### `SAS`
+
+In a data step, we can use the `pdf()` function for ($P(X=x)$), while `cdf()` can be used for ($P(X\leq x)$)
+
+```{.r}
+data hypergeometric_prob;
+p=pdf('HYPER', x, N, m, k);
+c=cdf('HYPER', x, N, m, k);
+;
+run;
+```
+
+:::
+
+## Example
+
+Suppose the admissions committee at a medical college has 15 qualified applicants, 3 of which are international students, and can only admit 2 new students. What is the probability of admitting **at least one** international student if the admissions committee were to randomly select two new students from the 15 qualified applicants?
+
+::: panel-tabset
+### Distribution
+We need to use the hypergeometric distribution to get P(X$\geq$ 1) where N=15, m=3, k=2. Admitting at least one international student could mean $x=1$ or $x=2$.
+
+### `R`
+
+```{r}
+N <- 15
+m <- 3
+k <- 2
+
+dhyper(x=1,m=m,n=N-m,k=k) + dhyper(x=2,m=m,n=N-m,k=k)
+```
+
+or using complementarity, it could be 100% minus the probability of admitting no international student.
+
+```{r}
+N <- 15
+m <- 3
+k <- 2
+
+1-phyper(q=0,m=m,n=N-m,k=k)
+```
+
+
+### `SAS`
+
+```{.r}
+data hypergeometric_prob;
+p=pdf('HYPER', 1, 15, 3, 2)+pdf('HYPER', 2, 15, 3, 2);
+c=1-cdf('HYPER', 0, 15, 3, 2);
+;
+run;
+```
+
+Using complementarity, it could be 100% minus the probability of admitting no international student.
+
+:::
+
+## Exercise
+
+::: panel-tabset
+### Question
+
+Suppose there are one hundred classrooms in a school, twenty of which have defective audiovisual equipment. If five classrooms were randomly selected for use at a conference, what is the probability that there are NO classrooms with defective audiovisual equipment?
+
+### Distribution
+
+We need to use the hypergeometric distribution to get P(X=0) where N=100, m=20, k=5. 
+
+### `R`
+
+```{r}
+N <- 100
+m <- 20
+k <- 5
+
+dhyper(x=0,m=m,n=N-m,k=k) 
+```
+
+
+
+
+### `SAS`
+
+```{.r}
+data hypergeometric_prob;
+p=pdf('HYPER', 0,100,20,5);
+;
+run;
+```
+:::
+
+## Bernoulli Distribution
+
+This distribution can be used for binary variables, i.e. variables that can only take on two values (0/1). This distribution can be used to determine the probability of success if only one draw is made from a finite population. If there are $m$ successes in a total of $N$ possible outcomes, the probability of drawing a "success" in a single trial can be written as:
+
+$$
+P(X=1) = m/N
+$$
+
+It follows that the probability of failure is $P(X=0) = 1-m/N$.
+
+## Binomial Distribution
+
+This distribution can also be used for binary variables, however, the binomial distribution deals with more than one trial (denoted by $n$).
+
+::: callout-note
+The binomial distribution assumes that the probability of success does not change after every trial, i.e. sampling with replacement. Each trial is treated as independent of the others, unlike the hypergeometric distribution where sampling is conducted without replacement, effectively changing the probability of success after every draw.
+:::
+
+The probability of observing $x$ successes for a series of $n$ trials with a probability of success $p$ according to the binomial distribution can be written as:
+
+$$
+P(X=1) = C(n,x)p^x(1-p)^{(n-x)}
+$$
+
+## Properties
+
+The mean and variance of the binomial distribution can be expressed as:
+
+$$
+\mu = np; \sigma^2 = np(1-p)
+$$
+
+## Binomial Distribution
+
+::: panel-tabset
+### `R`
+
+The PMF can be obtained using the `dbinom` function, while the CDF can be obtained using the `pbinom` function.
+
+```{r}
+#| eval: false
+
+dbinom(x=x,size=n,prob=p)
+pbinom(q=x,size=n,prob=p,lower.tail=TRUE)
+```
+
+::: callout-note
+`lower.tail=FALSE` tells `R` that we are interested in $P(X>x)$ instead of $P(X\leq x)$
+:::
+
+### SAS
+
+In a data step, we can use the `pdf()` function for ($P(X=x)$), while `cdf()` can be used for ($P(X\leq x)$)
+
+```{.r}
+data binomial_prob;
+p=pdf('BINOMIAL', x,p, n);
+c=cdf('BINOMIAL', x, p, n);
+;
+run;
+```
+
+:::
+
+## Example
+
+Suppose that the probability of being proficient in mathematics at a particular school is 0.7. Three students are chosen at random from this school. What is the probability that all three are proficient in mathematics?
+
+::: panel-tabset
+### Distribution
+
+We need to use a binomial distribution with a probability of success $p=0.7$ out of a total sample size $n=3$. We need to solve for $P(X=3)$.
+
+### `R`
+
+```{r}
+p<- 0.7
+n<- 3
+
+dbinom(x=3,size=n,prob=p)
+```
+### `SAS`
+
+```{.r}
+data binomial_prob;
+p=pdf('BINOMIAL', 3,0.7,3);
+;
+run;
+```
+
+:::
+
+
+## Exercise
+
+Suppose that the survival probability of a new surgical procedure was 0.85. If a total of 200 patients went through the procedure independently, what is the probability that more than 190 of these patients survived the procedure?
+
+::: panel-tabset
+### Distribution
+
+We can consider the random variable to be those who survived the procedure. need to use a binomial distribution with a probability of success $p=0.85$ out of a total sample size $n=200$.  We need to solve for $P(X>190)$.
+
+### `R`
+
+```{r}
+p<- 0.85
+n<- 200
+
+1-pbinom(q=190,size=n,prob=p)
+#OR
+pbinom(q=190,size=n,prob=p,lower.tail=FALSE)
+```
+
+
+### `SAS`
+
+```{.r}
+data binomial_prob;
+p=1-cdf('BINOMIAL', 190,0.85,200);
+;
+run;
+```
+
+:::
+
+## Multinomial Distribution
+
+## Poisson Distribution

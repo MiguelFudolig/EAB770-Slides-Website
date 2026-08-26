@@ -1,0 +1,14 @@
+name: eab770-slides
+title: EAB770-Slides
+username: miguelfudolig
+account: miguelfudolig
+server: connect.posit.cloud
+hostUrl: https://api.connect.posit.cloud/v1
+appId: 01a03f4f-8c41-45ba-a8bd-3f615d0625d1
+bundleId:
+url: https://connect.posit.cloud/miguelfudolig/content/01a03f4f-8c41-45ba-a8bd-3f615d0625d1
+version: 1
+quarto_version: 1.9.38
+quarto_engines: knitr, markdown
+asMultiple: FALSE
+asStatic: FALSE

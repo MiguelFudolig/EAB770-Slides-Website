@@ -2239,41 +2239,41 @@
   {
     "objectID": "Chapter1.html#outline",
     "href": "Chapter1.html#outline",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Outline",
     "text": "Outline\n\nSyllabus Discussion\nAccessing SAS OnDemand for Academics\nWhy are we here?\nPreliminary Materials",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#syllabus",
     "href": "Chapter1.html#syllabus",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Syllabus",
     "text": "Syllabus\n\nThe syllabus can be accessed through\n\nCanvas\nhttps://miguelfudolig-eab-770-syllabus.share.connect.posit.cloud",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#programming-language",
     "href": "Chapter1.html#programming-language",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Programming Language",
     "text": "Programming Language\n\nWe will primarily use R and SAS for this course.\n\nYou can access SAS through SAS On Demand for Academics. This will be free and accessible when you have internet connection.\nYou can download the most recent versions of R and RStudio if you prefer to take the course in R. You can access a quick tutorial on how to install these here.",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#accessing-sas-on-demand-for-academics",
     "href": "Chapter1.html#accessing-sas-on-demand-for-academics",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Accessing SAS On Demand for Academics",
     "text": "Accessing SAS On Demand for Academics\n\nCreate a SAS Profile that will be used to register for SAS OnDemand for Academics. To register, visit https://www.sas.com and fill out the form to Create profile.\n\nUse your UNLV email for faster verification.\n\nCreate your account for SAS OnDemand for Academics. To register, visit https://welcome.oda.sas.com sign in with your SAS Profile and complete the steps to Register for an account.",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
@@ -2299,11 +2299,11 @@
   {
     "objectID": "Chapter1.html#categorical-data-1",
     "href": "Chapter1.html#categorical-data-1",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Categorical Data",
     "text": "Categorical Data\nCategorical data is present everywhere!\n\nDemographics\nOpinions\nRatings\nLocations",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
@@ -2319,101 +2319,101 @@
   {
     "objectID": "Chapter1.html#sampling-frameworks",
     "href": "Chapter1.html#sampling-frameworks",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Sampling Frameworks",
     "text": "Sampling Frameworks\n\nHistorical data\n\nObservational data, usually secondary data\nNo randomization\nExample: Public data sets.\n\nExperimental Data\n\nStudies that involve random assignment of treatments to different subjects.\nRandom assignment/allocation\nExample: Randomized Controlled Trials\n\nSample Survey Studies\n\nRandomly sampled from a larger study population\nRandom selection",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#effect-of-randomization",
     "href": "Chapter1.html#effect-of-randomization",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Effect of Randomization",
     "text": "Effect of Randomization\n\nRandomization affects conclusions of generalization and causation.\nHistorical data\n\nNo randomization: hard to generalize unless the data was randomly sampled from a predetermined population\n\nExperimental Data\n\nRandom assignment: balances effects of confounding variables\n\nSample Survey Studies\n\nRandom sampling: representative sample provides good coverage of the larger population",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#randomization",
     "href": "Chapter1.html#randomization",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Randomization",
     "text": "Randomization\nRandomization can be done per subject or a cluster of subject.\n\nStrata (survey studies) or blocks (experiments)\nExamples\n\nStratified random samples\nRandomized block designs\nMulti-level experimental designs",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#sas-procedures-and-data",
     "href": "Chapter1.html#sas-procedures-and-data",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "SAS Procedures and Data",
     "text": "SAS Procedures and Data\n\nThere are multiple ways to import data into SAS\n\nDATA step\nPROC IMPORT step\nSAS OnDemand can import data from CSV files.\n\nFREQ\n\nContingency tables (\\(2\\times 2\\), \\(s \\times r\\))\nChi-squared tests\n\nLOGISTIC\n\nLogistic Regression\n\nGENMOD\n\nGeneralized Estimating Equations\n\nOther procedures include GLM and CATMOD.",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#sas-in-class",
     "href": "Chapter1.html#sas-in-class",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "SAS in Class",
     "text": "SAS in Class\n\nSample code will be provided, but there will be examples where we work the code out together as a class.\nClass computers have SAS installed in them.\n\nYou can save files on your Y drive (assigned to your ACE ID) to access files on other computers.\nSAS can also be accessed through SAS OnDemand Academics.\n\nNeeds internet connection",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#sas-examples",
     "href": "Chapter1.html#sas-examples",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "SAS Examples",
     "text": "SAS Examples\n\nDownload Chapter1.sas from Canvas.",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#sas-example",
     "href": "Chapter1.html#sas-example",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "SAS Example",
     "text": "SAS Example\n\nCoding RulesExample\n\n\n\nALL lines should be ended with a semi-colon ;\ndata statement is followed by the data set name.\nlength specifies the number of characters included in each character.\ninput names all variables included in the data set\n\nThe $ after the variable tells SAS that these variables are categorical variables.\n\ndatalines; tells SAS that you are about to add new data points.\n\nEach row represents a data point in this data table.\nEnd with a separate ;\n\n\n\n\ndata respire;\nlength treat $7. outcome $1. ;\ninput treat $ outcome $ count;\ndatalines;\nplacebo f 16\nplacebo u 48\ntest f 40\ntest u 20\n;",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#sas-example-contingency-table",
     "href": "Chapter1.html#sas-example-contingency-table",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "SAS Example: Contingency Table",
     "text": "SAS Example: Contingency Table\n\n\nproc freq data=respire;\nweight count;\ntables treat*outcome;\nrun;\n\n\nproc freq calls the FREQ procedure in SAS.\n\nNot defining data=respire means SAS will automatically use the most recently run data set.\n\nweight tells SAS the number of counts for each count\ntables creates the contingency table with row, column, and total percentages.\nrun; tells SAS to run the code. This is important!",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#sas-example-one-observation-per-row",
     "href": "Chapter1.html#sas-example-one-observation-per-row",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "SAS Example: One Observation per Row",
     "text": "SAS Example: One Observation per Row\n\n\ndata severe;\ninput treat $ outcome $ @@;\ndatalines;\nplacebo f placebo f placebo f\nplacebo f placebo f\nplacebo u placebo u placebo u\nplacebo u placebo u placebo u\nplacebo u placebo u placebo u\nplacebo u\ntest f test f test f\ntest f test f test f\ntest f test f\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u\n;\n\n\nThis is an example of a data set where one row corresponds to one observational unit.\nThe @@ sign means that the data lines contain multiple observations. @@ basically means new line after two entries written in the datalines statement.",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#sas-example-contingency-table-1",
     "href": "Chapter1.html#sas-example-contingency-table-1",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "SAS Example: Contingency Table",
     "text": "SAS Example: Contingency Table\n\n\nproc freq data=severe;\ntables treat*outcome / nocol nopct;\nrun;\n\n\nThe weight statement is not needed in the FREQ procedure when the data does not consist of aggregate counts.\nnocol suppresses the column percentages in the output\nnopct suppresses the total percentages in the output\nnorow suppresses the row percentages in the output",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
@@ -4519,71 +4519,231 @@
   {
     "objectID": "Chapter1.html#importing-files",
     "href": "Chapter1.html#importing-files",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Importing files",
     "text": "Importing files\nThere are multiple ways to import files into R. The most common data set format is the .csv file. You can import CSV files using the read.csv(filename) function.\nFirst, download the file SleepHealthData.csv from Canvas in the same folder as your R source code.\n\ngetwd() # save your data in this folder\n\n[1] \"C:/Users/migsf/OneDrive/Documents/GitHub/EAB770-Slides-Website\"\n\nadverse &lt;- read.csv(\"adverse.csv\") # or use a specific path to your folder\nadverse\n\n   Clinic Treatment Count\n1       1         a     6\n2       2         a     4\n3       3         a     7\n4       1         b    14\n5       2         b    11\n6       3         b    17\n7       1         c     6\n8       2         c    14\n9       3         c     8\n10      1         d    15\n11      2         d     5\n12      3         d    13",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#data-frames",
     "href": "Chapter1.html#data-frames",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Data Frames",
     "text": "Data Frames\nData frames are rectangular spreadsheets. Data are typically imported as data frames.\n\n\n\n\n\n\nNote\n\n\nRows correspond to observations and the columns correspond to variables.\n\n\n\nExample:\n\nhead(mtcars)\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\nsample_data  &lt;- data.frame(ID = c(1,2,3), Name = c(\"Alice\",\"Bob\",\"Charlie\"))\nsample_data\n\n  ID    Name\n1  1   Alice\n2  2     Bob\n3  3 Charlie",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#r-packages",
     "href": "Chapter1.html#r-packages",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "R packages",
     "text": "R packages\nR packages extend the functionality of R by providing additional functions, data, and documentation. These packages are written by R users around the world and can be downloaded for free!\n\n\n\n\n\n\nNote\n\n\nThink of R as a new phone. R packages are apps that you can download to use your phone in many different ways.",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#installing-and-loading-r-packages",
     "href": "Chapter1.html#installing-and-loading-r-packages",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Installing and Loading R Packages",
     "text": "Installing and Loading R Packages\nLike apps on a phone, R packages also need to be installed. These packages can be installed by running the following code snippet install.packages(\"PackageName\"). For example, to install the package tidyverse used for data manipulation and cleaning, you can run the following code:\ninstall.packages(\"tidyverse\")\nTo load this package in R, you can use the following syntax:\n\nlibrary(tidyverse)\n\n\n\n\n\n\n\nImportant\n\n\nYou must have an active internet connection to install R packages to your device.",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#contingency-tables",
     "href": "Chapter1.html#contingency-tables",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Contingency Tables",
-    "text": "Contingency Tables\nTo create your own contingency table, you can use the data.frame() and xtabs() functions.\n\ncount_data &lt;- data.frame(Row = c(\"A\",\"A\",\"B\",\"B\"),\n                         Column = c(\"X\",\"Y\",\"X\",\"Y\"),\n                         Count = c(2,4,6,8))\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 4\n  B 6 8",
+    "text": "Contingency Tables\nTo create your own contingency table, you can use the data.frame() and xtabs() functions.\n\ncount_data &lt;- data.frame(Row = c(\"A\",\"A\",\"B\",\"B\"),\n                         Column = c(\"X\",\"Y\",\"X\",\"Y\"),\n                         Count = c(2,4,6,8))\ncount_data\n\n  Row Column Count\n1   A      X     2\n2   A      Y     4\n3   B      X     6\n4   B      Y     8\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 4\n  B 6 8",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#exercise-1",
     "href": "Chapter1.html#exercise-1",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Exercise",
-    "text": "Exercise\n\nR CodeSASCode\n\n\n\n\n           response\nyear         A  D  N SA SD\n  Seniors   37 32 24 19 21\n  Sophomore 43 25 12 24 12\n\n\n\n\nThere are many ways to code the data step. Here’s one way to do it!\ndata enjoy;\nlength year $9. response $2.;\ninput year $ response $ count @@;\ndatalines;\nsophomore SA 24 sophomore A 43\nsophomore N 12\nsophomore D 25 sophomore SD 12\nsenior SA 19 senior A 37\nsenior N 24\nsenior D 32 senior SD 21\n;\n\nproc freq order=data data=enjoy;\nweight count;\ntables year*response;\nrun;",
+    "text": "Exercise\n\nQuestionDistributionRSAS\n\n\nSuppose there are one hundred classrooms in a school, twenty of which have defective audiovisual equipment. If five classrooms were randomly selected for use at a conference, what is the probability that there are NO classrooms with defective audiovisual equipment?\n\n\nWe need to use the hypergeometric distribution to get P(X=0) where N=100, m=20, k=5.\n\n\n\nN &lt;- 100\nm &lt;- 20\nk &lt;- 5\n\ndhyper(x=0,m=m,n=N-m,k=k) \n\n[1] 0.3193094\n\n\n\n\ndata hypergeometric_prob;\np=pdf('HYPER', 0,100,20,5);\n;\nrun;",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
     ]
   },
   {
     "objectID": "Chapter1.html#exercise",
     "href": "Chapter1.html#exercise",
-    "title": "EAB 770 - Chapter 1",
+    "title": "EAB 770 - Lecture 1",
     "section": "Exercise",
     "text": "Exercise\nSuppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.\nEnter the data in SAS using the data step and generate the contingency tables. Name the data set enjoy.\n\n\n\n\n\n\n\n\n\n\n\n\nStrongly Agree\nAgree\nNeutral\nDisagree\nStrongly Disagree\n\n\n\n\nSophomore\n24\n43\n12\n25\n12\n\n\nSeniors\n19\n37\n24\n32\n21\n\n\n\n\nR CodeSAS Code\n\n\n\nenjoy &lt;- data.frame(year = c(rep(c(\"Sophomore\",\"Seniors\"),each=5)),\n                    response = c(rep(c(\"SA\",\"A\",\"N\",\"D\",\"SD\"),by=5)),\n                    count = c(24,43,12,25,12,19,37,24,32,21))\n\nxtabs(count~year+response,data=enjoy)\n\n           response\nyear         A  D  N SA SD\n  Seniors   37 32 24 19 21\n  Sophomore 43 25 12 24 12\n\n\n\n\nThere are many ways to code the data step. Here’s one way to do it!\ndata enjoy;\nlength year $9. response $2.;\ninput year $ response $ count @@;\ndatalines;\nsophomore SA 24 sophomore A 43\nsophomore N 12\nsophomore D 25 sophomore SD 12\nsenior SA 19 senior A 37\nsenior N 24\nsenior D 32 senior SD 21\n;\n\nproc freq order=data data=enjoy;\nweight count;\ntables year*response;\nrun;",
     "crumbs": [
-      "Chapter 1"
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#types-of-categorical-variables",
+    "href": "Chapter1.html#types-of-categorical-variables",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Types of Categorical Variables",
+    "text": "Types of Categorical Variables\n\nDichotomous/BinaryNominalOrdinalDiscrete CountsGrouped Survival Times\n\n\nThese variables can only have 0/1 values. Examples include: Heads/Tails; Alive/Dead; Selected/Not Selected\n\n\nThese variables have more than two levels without inherent ordering. Examples include: Race; Religion; eye color.\n\n\nThese variables have more than two levels without inherent ordering. Examples include: Class Rank, Likert Scale\n\n\nThese variables consist of numerical outcomes consisting of counting numbers. Example include: Queue length, Number of hospitalizations\n\n\nThis specialized variable counts the number of patients who fail/survive during a specific time interval. The interval of failure/survival (time-to-event) is categorical.",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#independent-and-dependent-variables",
+    "href": "Chapter1.html#independent-and-dependent-variables",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Independent and Dependent Variables",
+    "text": "Independent and Dependent Variables\n\n\n\n\n\n\nNote\n\n\nIndependent variables, sometimes referred to as predictor variables, are those that are experimentally manipulated or used to predict another variable.\n\n\n\n\n\n\n\n\n\nNote\n\n\nDependent variables, sometimes referred to as response or outcome variables, is the variable of interest as an outcome or response. In this class, we will focus on categorical dependent variables.",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#sampling-distributions",
+    "href": "Chapter1.html#sampling-distributions",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Sampling Distributions",
+    "text": "Sampling Distributions\nRecall: Inferential statistics typically aims to determine how likely it is to have obtained a sample given certain assumptions about the population the sample was drawn.\n\n\n\n\n\n\nNote\n\n\nThe sampling distribution typically depends on the properties of the underlying distribution of the random variable of interest from a population.\n\n\n\n\n\n\n\n\n\nImportant\n\n\nRecall: Central Limit Theorem (CLT) can be sed for continuous variables. However, CLT might not work for some scenarios involving categorical response variables.",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#probability-distributions-for-categorical-variables",
+    "href": "Chapter1.html#probability-distributions-for-categorical-variables",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Probability Distributions for Categorical Variables",
+    "text": "Probability Distributions for Categorical Variables\nDistributions appropriate to categorical data should be used for inferential statistics.\n\nHypergeometric Distribution\nBernoulli/Binomial Distribution\nMultinomial Distribution\nPoisson Distribution",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#hypergeometric-distribution",
+    "href": "Chapter1.html#hypergeometric-distribution",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Hypergeometric Distribution",
+    "text": "Hypergeometric Distribution\nThis distribution can be used for discrete variables to determine the number of “successes” in a sequence of \\(n\\) draws from a finite population of size \\(M\\) where sampling is conducted without replacement.\n\n\n\n\n\n\nHypergeometric Distribution\n\n\nSuppose there are \\(N\\) balls in a bag and \\(m\\) are green. If \\(X\\) denotes the total number of green balls (success) desired and we have a total number of \\(k\\) draws from the bag, then the probability of the random variable of the total number of successes to be equal to \\(X\\) can be written as:\n\\[\nP(X=x) = \\frac{C(m,x)C(N-m,k-x)}{C(N,k)}\n\\]\nwhere \\(C(a,b) = \\frac{a!}{b!(a-b)!}\\) is the combination notation.\n\n\n\n\n\n\n\n\n\nNote\n\n\nAs an example, the balls could be a pool of medical students. The green balls are international students. If we want to select a total of \\(n\\) students from the pool of medical students, then the probability that we will select \\(k\\) international students is given by the hypergeometric distribution.",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#hypergeometric-distribution-2",
+    "href": "Chapter1.html#hypergeometric-distribution-2",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Hypergeometric Distribution",
+    "text": "Hypergeometric Distribution\n\nRSAS\n\n\nThe probability mass function (PMF or \\(P(X=x)\\)) of the hypergeometric distribution is:\n\ndhyper(x=x,\n       m=m,\n       n=N-m,\n       k=k)\n\nThe cumulative distribution function (CDF or \\(P(X\\leq x)\\)) of the hypergeometric distribution is:\n\nphyper(q=x,\n       m=m,\n       n=N-m,\n       k=k)\n\n\n\nIn a data step, we can use the pdf() function for (\\(P(X=x)\\)), while cdf() can be used for (\\(P(X\\leq x)\\))\ndata hypergeometric_prob;\np=pdf('HYPER', x, N, m, k);\nc=cdf('HYPER', x, N, m, k);\n;\nrun;",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#example-1",
+    "href": "Chapter1.html#example-1",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Example",
+    "text": "Example\nSuppose the admissions committee at a medical college has 15 qualified applicants, 3 of which are international students, and can only admit 2 new students. What is the probability of admitting at least one international student if the admissions committee were to randomly select two new students from the 15 qualified applicants?\n\nDistributionRSAS\n\n\nWe need to use the hypergeometric distribution to get P(X\\(\\geq\\) 1) where N=15, m=3, k=2. Admitting at least one international student could mean \\(x=1\\) or \\(x=2\\).\n\n\n\nN &lt;- 15\nm &lt;- 3\nk &lt;- 2\n\ndhyper(x=1,m=m,n=N-m,k=k) + dhyper(x=2,m=m,n=N-m,k=k)\n\n[1] 0.3714286\n\n\nor using complementarity, it could be 100% minus the probability of admitting no international student.\n\nN &lt;- 15\nm &lt;- 3\nk &lt;- 2\n\n1-phyper(q=0,m=m,n=N-m,k=k)\n\n[1] 0.3714286\n\n\n\n\ndata hypergeometric_prob;\np=pdf('HYPER', 1, 15, 3, 2)+pdf('HYPER', 2, 15, 3, 2);\nc=1-cdf('HYPER', 0, 15, 3, 2);\n;\nrun;\nUsing complementarity, it could be 100% minus the probability of admitting no international student.",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#properties",
+    "href": "Chapter1.html#properties",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Properties",
+    "text": "Properties\nThe mean \\(\\mu\\) and variance \\(\\sigma^2\\) of the hypergeometric distribution can be found using the following equations:\n\\[\n\\mu = \\frac{nm}{N}; \\sigma^2 = \\frac{n(m/N)(1-m/N)(N-n)}{N-1}\n\\]",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#bernoulli-distribution",
+    "href": "Chapter1.html#bernoulli-distribution",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Bernoulli Distribution",
+    "text": "Bernoulli Distribution\nThis distribution can be used for binary variables, i.e. variables that can only take on two values (0/1). This distribution can be used to determine the probability of success if only one draw is made from a finite population. If there are \\(m\\) successes in a total of \\(N\\) possible outcomes, the probability of drawing a “success” in a single trial can be written as:\n\\[\nP(X=1) = m/N\n\\]\nIt follows that the probability of failure is \\(P(X=0) = 1-m/N\\).",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#binomial-distribution",
+    "href": "Chapter1.html#binomial-distribution",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Binomial Distribution",
+    "text": "Binomial Distribution\nThis distribution can also be used for binary variables, however, the binomial distribution deals with more than one trial (denoted by \\(n\\)).\n\n\n\n\n\n\nNote\n\n\nThe binomial distribution assumes that the probability of success does not change after every trial, i.e. sampling with replacement. Each trial is treated as independent of the others, unlike the hypergeometric distribution where sampling is conducted without replacement, effectively changing the probability of success after every draw.\n\n\n\nThe probability of observing \\(x\\) successes for a series of \\(n\\) trials with a probability of success \\(p\\) according to the binomial distribution can be written as:\n\\[\nP(X=1) = C(n,x)p^x(1-p)^{(n-x)}\n\\]",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#properties-1",
+    "href": "Chapter1.html#properties-1",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Properties",
+    "text": "Properties\nThe mean and variance of the binomial distribution can be expressed as:\n\\[\n\\mu = np; \\sigma^2 = np(1-p)\n\\]",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#binomial-distribution-1",
+    "href": "Chapter1.html#binomial-distribution-1",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Binomial Distribution",
+    "text": "Binomial Distribution\n\nRSAS\n\n\nThe PMF can be obtained using the dbinom function, while the CDF can be obtained using the pbinom function.\n\ndbinom(x=x,size=n,prob=p)\npbinom(q=x,size=n,prob=p,lower.tail=TRUE)\n\n\n\n\n\n\n\nNote\n\n\nlower.tail=FALSE tells R that we are interested in \\(P(X&gt;x)\\) instead of \\(P(X\\leq x)\\)\n\n\n\n\n\nIn a data step, we can use the pdf() function for (\\(P(X=x)\\)), while cdf() can be used for (\\(P(X\\leq x)\\))\ndata binomial_prob;\np=pdf('BINOMIAL', x,p, n);\nc=cdf('BINOMIAL', x, p, n);\n;\nrun;",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#example-2",
+    "href": "Chapter1.html#example-2",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Example",
+    "text": "Example\nSuppose that the probability of being proficient in mathematics at a particular school is 0.7. Three students are chosen at random from this school. What is the probability that all three are proficient in mathematics?\n\nDistributionRSAS\n\n\nWe need to use a binomial distribution with a probability of success \\(p=0.7\\) out of a total sample size \\(n=3\\). We need to solve for \\(P(X=3)\\).\n\n\n\np&lt;- 0.7\nn&lt;- 3\n\ndbinom(x=3,size=n,prob=p)\n\n[1] 0.343\n\n\n\n\ndata binomial_prob;\np=pdf('BINOMIAL', 3,0.7,3);\n;\nrun;",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#exercise-2",
+    "href": "Chapter1.html#exercise-2",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Exercise",
+    "text": "Exercise\nSuppose that the survival probability of a new surgical procedure was 0.85. If a total of 200 patients went through the procedure independently, what is the probability that more than 190 of these patients survived the procedure?\n\nDistributionRSAS\n\n\nWe can consider the random variable to be those who survived the procedure. need to use a binomial distribution with a probability of success \\(p=0.85\\) out of a total sample size \\(n=200\\). We need to solve for \\(P(X&gt;190)\\).\n\n\n\np&lt;- 0.85\nn&lt;- 200\n\n1-pbinom(q=190,size=n,prob=p)\n\n[1] 2.005539e-06\n\n#OR\npbinom(q=190,size=n,prob=p,lower.tail=FALSE)\n\n[1] 2.005539e-06\n\n\n\n\ndata binomial_prob;\np=1-cdf('BINOMIAL', 190,0.85,200);\n;\nrun;",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#multinomial-distribution",
+    "href": "Chapter1.html#multinomial-distribution",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Multinomial Distribution",
+    "text": "Multinomial Distribution",
+    "crumbs": [
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "Chapter1.html#poisson-distribution",
+    "href": "Chapter1.html#poisson-distribution",
+    "title": "EAB 770 - Lecture 1",
+    "section": "Poisson Distribution",
+    "text": "Poisson Distribution",
+    "crumbs": [
+      "Lecture 1"
     ]
   }
 ]

@@ -11,31 +11,31 @@ website:
       - href: index.qmd
         text: Home
       - href: Chapter1.qmd
-        text: Chapter 1
-      - href: Chapter2.qmd
-        text: "Chapter 2: 2x2 tables"
-      - href: Chapter3.qmd
-        text: "Chapter 3: Sets of 2x2 tables"
-      - href: Chapter4.qmd
-        text: "Chapter 4: 2xr and sx2 tables"
-      - href: Chapter5.qmd
-        text: "Chapter 5: sxr tables"
-      - href: Chapter6.qmd
-        text: "Chapter 6: Sets of sxr tables"
-      - href: Chapter8.qmd
-        text: "Chapter 8: Logistic Regression"
-      - href: Chapter9.qmd
-        text: "Chapter 9: Polytomous Logistic Regression"
-      - href: Chapter10.qmd
-        text: "Chapter 10: Conditional Logistic Regression"
-      - href: Chapter12.qmd
-        text: "Chapter 12: Poisson Regression and Other Loglinear Models"
-      - href: Chapter13.qmd
-        text: "Chapter 13: Categorized Time-to-Event Data"
-      - href: Chapter14.qmd
-        text: "Chapter 14: Weighted Least Squares"
-      - href: Chapter15.qmd
-        text: "Chapter 15: Generalized Estimating Equations"
+        text: Lecture 1
+      # - href: Chapter2.qmd
+      #   text: "Chapter 2: 2x2 tables"
+      # - href: Chapter3.qmd
+      #   text: "Chapter 3: Sets of 2x2 tables"
+      # - href: Chapter4.qmd
+      #   text: "Chapter 4: 2xr and sx2 tables"
+      # - href: Chapter5.qmd
+      #   text: "Chapter 5: sxr tables"
+      # - href: Chapter6.qmd
+      #   text: "Chapter 6: Sets of sxr tables"
+      # - href: Chapter8.qmd
+      #   text: "Chapter 8: Logistic Regression"
+      # - href: Chapter9.qmd
+      #   text: "Chapter 9: Polytomous Logistic Regression"
+      # - href: Chapter10.qmd
+      #   text: "Chapter 10: Conditional Logistic Regression"
+      # - href: Chapter12.qmd
+      #   text: "Chapter 12: Poisson Regression and Other Loglinear Models"
+      # - href: Chapter13.qmd
+      #   text: "Chapter 13: Categorized Time-to-Event Data"
+      # - href: Chapter14.qmd
+      #   text: "Chapter 14: Weighted Least Squares"
+      # - href: Chapter15.qmd
+      #   text: "Chapter 15: Generalized Estimating Equations"
 format:
   html:
     theme: 
