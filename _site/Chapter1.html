@@ -286,7 +286,7 @@ Miguel Fudolig
 <p>These variables have more than two levels without inherent ordering. Examples include: Race; Religion; eye color.</p>
 </div>
 <div id="tabset-1-3">
-<p>These variables have more than two levels without inherent ordering. Examples include: Class Rank, Likert Scale</p>
+<p>These variables have more than two levels with inherent ordering. Examples include: Class Rank, Likert Scale</p>
 </div>
 <div id="tabset-1-4">
 <p>These variables consist of numerical outcomes consisting of counting numbers. Example include: Queue length, Number of hospitalizations</p>
@@ -459,26 +459,6 @@ test u 20
 </div>
 </div>
 </section>
-<section id="sas-example-contingency-table" class="slide level2">
-<h2><code>SAS</code> Example: Contingency Table</h2>
-<div class="columns">
-<div class="column" style="width:50%; font-size: 125%">
-<pre><code>proc freq data=respire;
-weight count;
-tables treat*outcome;
-run;</code></pre>
-</div><div class="column" style="width:50%; font-size: 75%">
-<ul>
-<li><code>proc freq</code> calls the <code>FREQ</code> procedure in <code>SAS</code>.
-<ul>
-<li>Not defining <code>data=respire</code> means <code>SAS</code> will automatically use the most recently run data set.</li>
-</ul></li>
-<li><code>weight</code> tells <code>SAS</code> the number of counts for each count</li>
-<li><code>tables</code> creates the contingency table with row, column, and total percentages.</li>
-<li><code>run;</code> tells <code>SAS</code> to run the code. <strong>This is important!</strong></li>
-</ul>
-</div></div>
-</section>
 <section id="sas-example-one-observation-per-row" class="slide level2">
 <h2><code>SAS</code> Example: One Observation per Row</h2>
 <div class="columns">
@@ -509,22 +489,22 @@ test u test u
 <li>The <code>@@</code> sign means that the data lines contain multiple observations. <code>@@</code> basically means new line after two entries written in the <code>datalines</code> statement.</li>
 </ul>
 </div></div>
-</section>
-<section id="sas-example-contingency-table-1" class="slide level2">
-<h2><code>SAS</code> Example: Contingency Table</h2>
-<div class="columns">
-<div class="column" style="width:50%; font-size: 100%">
-<pre><code>proc freq data=severe;
-tables treat*outcome / nocol nopct;
-run;</code></pre>
-</div><div class="column" style="width:50%; font-size: 75%">
-<ul>
-<li>The <code>weight</code> statement is not needed in the <code>FREQ</code> procedure when the data does not consist of aggregate counts.</li>
-<li><code>nocol</code> suppresses the column percentages in the output</li>
-<li><code>nopct</code> suppresses the total percentages in the output</li>
-<li><code>norow</code> suppresses the row percentages in the output</li>
-</ul>
-</div></div>
+<!-- ## `SAS` Example: Contingency Table -->
+<!-- ::: columns -->
+<!-- ::: {.column style="width:50%; font-size: 100%"} -->
+<!-- ``` -->
+<!-- proc freq data=severe; -->
+<!-- tables treat*outcome / nocol nopct; -->
+<!-- run; -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- ::: {.column style="width:50%; font-size: 75%"} -->
+<!-- - The `weight` statement is not needed in the `FREQ` procedure when the data does not consist of aggregate counts. -->
+<!-- - `nocol` suppresses the column percentages in the output -->
+<!-- - `nopct` suppresses the total percentages in the output -->
+<!-- - `norow` suppresses the row percentages in the output -->
+<!-- ::: -->
+<!-- ::: -->
 </section></section>
 <section>
 <section id="r" class="title-slide slide level1 center">
@@ -535,28 +515,10 @@ run;</code></pre>
 <h2>Importing files</h2>
 <p>There are multiple ways to import files into <code>R</code>. The most common data set format is the <code>.csv</code> file. You can import CSV files using the <code>read.csv(filename)</code> function.</p>
 <p>First, download the file <code>SleepHealthData.csv</code> from Canvas in the same folder as your R source code.</p>
-<div class="cell" data-execute="false">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">getwd</span>() <span class="co"># save your data in this folder</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "C:/Users/fudolig/Documents/GitHub/EAB770-Slides-Website"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>adverse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"adverse.csv"</span>) <span class="co"># or use a specific path to your folder</span></span>
-<span id="cb7-2"><a></a>adverse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Clinic Treatment Count
-1       1         a     6
-2       2         a     4
-3       3         a     7
-4       1         b    14
-5       2         b    11
-6       3         b    17
-7       1         c     6
-8       2         c    14
-9       3         c     8
-10      1         d    15
-11      2         d     5
-12      3         d    13</code></pre>
-</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">getwd</span>() <span class="co"># save your data in this folder</span></span>
+<span id="cb3-2"><a></a>adverse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"adverse.csv"</span>) <span class="co"># or use a specific path to your folder</span></span>
+<span id="cb3-3"><a></a>adverse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="data-frames" class="slide level2">
@@ -577,7 +539,7 @@ run;</code></pre>
 </div>
 <p>Example:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">head</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">head</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
@@ -587,8 +549,8 @@ Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>sample_data  <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>,<span class="st">"Bob"</span>,<span class="st">"Charlie"</span>))</span>
-<span id="cb11-2"><a></a>sample_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>sample_data  <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>,<span class="st">"Bob"</span>,<span class="st">"Charlie"</span>))</span>
+<span id="cb6-2"><a></a>sample_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ID    Name
 1  1   Alice
@@ -617,10 +579,10 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <section id="installing-and-loading-r-packages" class="slide level2">
 <h2>Installing and Loading <code>R</code> Packages</h2>
 <p>Like apps on a phone, <code>R</code> packages also need to be installed. These packages can be installed by running the following code snippet <code>install.packages("PackageName")</code>. For example, to install the package <code>tidyverse</code> used for data manipulation and cleaning, you can run the following code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To load this package in <code>R</code>, you can use the following syntax:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -632,112 +594,6 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 <div class="callout-content">
 <p>You must have an active internet connection to install <code>R</code> packages to your device.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="contingency-tables" class="slide level2">
-<h2>Contingency Tables</h2>
-<p>To create your own contingency table, you can use the <code>data.frame()</code> and <code>xtabs()</code> functions.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>count_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Row =</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span>),</span>
-<span id="cb15-2"><a></a>                         <span class="at">Column =</span> <span class="fu">c</span>(<span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"X"</span>,<span class="st">"Y"</span>),</span>
-<span id="cb15-3"><a></a>                         <span class="at">Count =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>))</span>
-<span id="cb15-4"><a></a>count_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Row Column Count
-1   A      X     2
-2   A      Y     4
-3   B      X     6
-4   B      Y     8</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">xtabs</span>(Count<span class="sc">~</span>Row<span class="sc">+</span>Column,<span class="at">data=</span>count_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Column
-Row X Y
-  A 2 4
-  B 6 8</code></pre>
-</div>
-</div>
-</section>
-<section id="exercise" class="slide level2">
-<h2>Exercise</h2>
-<p>Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.</p>
-<p>Enter the data in <code>SAS</code> using the data step and generate the contingency tables. Name the data set <code>enjoy</code>.</p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 22%">
-<col style="width: 9%">
-<col style="width: 12%">
-<col style="width: 13%">
-<col style="width: 26%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;"></th>
-<th style="text-align: center;">Strongly Agree</th>
-<th style="text-align: center;">Agree</th>
-<th style="text-align: center;">Neutral</th>
-<th style="text-align: center;">Disagree</th>
-<th style="text-align: center;">Strongly Disagree</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Sophomore</td>
-<td style="text-align: center;">24</td>
-<td style="text-align: center;">43</td>
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">25</td>
-<td style="text-align: center;">12</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Seniors</td>
-<td style="text-align: center;">19</td>
-<td style="text-align: center;">37</td>
-<td style="text-align: center;">24</td>
-<td style="text-align: center;">32</td>
-<td style="text-align: center;">21</td>
-</tr>
-</tbody>
-</table>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1"><code>R</code> Code</a></li><li><a href="#tabset-3-2"><code>SAS</code> Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>enjoy <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Sophomore"</span>,<span class="st">"Seniors"</span>),<span class="at">each=</span><span class="dv">5</span>)),</span>
-<span id="cb19-2"><a></a>                    <span class="at">response =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"SA"</span>,<span class="st">"A"</span>,<span class="st">"N"</span>,<span class="st">"D"</span>,<span class="st">"SD"</span>),<span class="at">by=</span><span class="dv">5</span>)),</span>
-<span id="cb19-3"><a></a>                    <span class="at">count =</span> <span class="fu">c</span>(<span class="dv">24</span>,<span class="dv">43</span>,<span class="dv">12</span>,<span class="dv">25</span>,<span class="dv">12</span>,<span class="dv">19</span>,<span class="dv">37</span>,<span class="dv">24</span>,<span class="dv">32</span>,<span class="dv">21</span>))</span>
-<span id="cb19-4"><a></a></span>
-<span id="cb19-5"><a></a><span class="fu">xtabs</span>(count<span class="sc">~</span>year<span class="sc">+</span>response,<span class="at">data=</span>enjoy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>           response
-year         A  D  N SA SD
-  Seniors   37 32 24 19 21
-  Sophomore 43 25 12 24 12</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-3-2">
-<p>There are many ways to code the <code>data</code> step. Here’s one way to do it!</p>
-<pre><code>data enjoy;
-length year $9. response $2.;
-input year $ response $ count @@;
-datalines;
-sophomore SA 24 sophomore A 43
-sophomore N 12
-sophomore D 25 sophomore SD 12
-senior SA 19 senior A 37
-senior N 24
-senior D 32 senior SD 21
-;
-
-proc freq order=data data=enjoy;
-weight count;
-tables year*response;
-run;</code></pre>
 </div>
 </div>
 </div>
@@ -772,7 +628,7 @@ run;</code></pre>
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Recall: Central Limit Theorem (CLT) can be sed for continuous variables. However, CLT might not work for some scenarios involving categorical response variables.</p>
+<p>Recall: Central Limit Theorem (CLT) can be used for continuous variables. However, CLT might not work for some scenarios involving categorical response variables.</p>
 </div>
 </div>
 </div>
@@ -825,37 +681,37 @@ P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}; x\in \{0,1,...,m\}
 <h2>Properties</h2>
 <p>The mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> of the hypergeometric distribution can be found using the following equations:</p>
 <p><span class="math display">\[
-\mu = \frac{nm}{N}; \sigma^2 = \frac{n(m/N)(1-m/N)(N-n)}{N-1}
+\mu = \frac{km}{N}; \sigma^2 = \frac{k(m/N)(1-m/N)(N-k)}{N-1}
 \]</span></p>
 </section>
 <section id="hypergeometric-distribution-2" class="slide level2">
 <h2>Hypergeometric Distribution</h2>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1"><code>R</code></a></li><li><a href="#tabset-4-2"><code>SAS</code></a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1"><code>R</code></a></li><li><a href="#tabset-3-2"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-3-1">
 <p>The probability mass function (PMF or <span class="math inline">\(P(X=x)\)</span>) of the hypergeometric distribution is:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span>x,</span>
-<span id="cb22-2"><a></a>       <span class="at">m=</span>m,</span>
-<span id="cb22-3"><a></a>       <span class="at">n=</span>N<span class="sc">-</span>m,</span>
-<span id="cb22-4"><a></a>       <span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span>x,</span>
+<span id="cb10-2"><a></a>       <span class="at">m=</span>m,</span>
+<span id="cb10-3"><a></a>       <span class="at">n=</span>N<span class="sc">-</span>m,</span>
+<span id="cb10-4"><a></a>       <span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The cumulative distribution function (CDF or <span class="math inline">\(P(X\leq x)\)</span>) of the hypergeometric distribution is:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">phyper</span>(<span class="at">q=</span>x,</span>
-<span id="cb23-2"><a></a>       <span class="at">m=</span>m,</span>
-<span id="cb23-3"><a></a>       <span class="at">n=</span>N<span class="sc">-</span>m,</span>
-<span id="cb23-4"><a></a>       <span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">phyper</span>(<span class="at">q=</span>x,</span>
+<span id="cb11-2"><a></a>       <span class="at">m=</span>m,</span>
+<span id="cb11-3"><a></a>       <span class="at">n=</span>N<span class="sc">-</span>m,</span>
+<span id="cb11-4"><a></a>       <span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-3-2">
 <p>In a data step, we can use the <code>pdf()</code> function for (<span class="math inline">\(P(X=x)\)</span>), while <code>cdf()</code> can be used for (<span class="math inline">\(P(X\leq x)\)</span>)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>data hypergeometric_prob;</span>
-<span id="cb24-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, x, N, m, k);</span>
-<span id="cb24-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'HYPER'</span>, x, N, m, k);</span>
-<span id="cb24-4"><a></a>;</span>
-<span id="cb24-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data hypergeometric_prob;</span>
+<span id="cb12-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, x, N, m, k);</span>
+<span id="cb12-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'HYPER'</span>, x, N, m, k);</span>
+<span id="cb12-4"><a></a>;</span>
+<span id="cb12-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -864,73 +720,73 @@ P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}; x\in \{0,1,...,m\}
 <h2>Example</h2>
 <p>Suppose the admissions committee at a medical college has 15 qualified applicants, 3 of which are international students, and can only admit 2 new students. What is the probability of admitting <strong>at least one</strong> international student if the admissions committee were to randomly select two new students from the 15 qualified applicants?</p>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Distribution</a></li><li><a href="#tabset-5-2"><code>R</code></a></li><li><a href="#tabset-5-3"><code>SAS</code></a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Distribution</a></li><li><a href="#tabset-4-2"><code>R</code></a></li><li><a href="#tabset-4-3"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-4-1">
 <p>We need to use the hypergeometric distribution to get P(X<span class="math inline">\(\geq\)</span> 1) where N=15, m=3, k=2. Admitting at least one international student could mean <span class="math inline">\(x=1\)</span> or <span class="math inline">\(x=2\)</span>.</p>
 </div>
-<div id="tabset-5-2">
+<div id="tabset-4-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb25-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb25-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb25-4"><a></a></span>
-<span id="cb25-5"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">1</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k) <span class="sc">+</span> <span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb13-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb13-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb13-4"><a></a></span>
+<span id="cb13-5"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">1</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k) <span class="sc">+</span> <span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3714286</code></pre>
 </div>
 </div>
 <p>or using complementarity, it could be 100% minus the probability of admitting no international student.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb27-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb27-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb27-4"><a></a></span>
-<span id="cb27-5"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">phyper</span>(<span class="at">q=</span><span class="dv">0</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb15-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb15-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">phyper</span>(<span class="at">q=</span><span class="dv">0</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3714286</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-5-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>data hypergeometric_prob;</span>
-<span id="cb29-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">1</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>)<span class="sc">+</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>);</span>
-<span id="cb29-3"><a></a>c<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'HYPER'</span>, <span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>);</span>
-<span id="cb29-4"><a></a>;</span>
-<span id="cb29-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-4-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>data hypergeometric_prob;</span>
+<span id="cb17-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">1</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>)<span class="sc">+</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>);</span>
+<span id="cb17-3"><a></a>c<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'HYPER'</span>, <span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>);</span>
+<span id="cb17-4"><a></a>;</span>
+<span id="cb17-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Using complementarity, it could be 100% minus the probability of admitting no international student.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-1" class="slide level2">
+<section id="exercise" class="slide level2">
 <h2>Exercise</h2>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Question</a></li><li><a href="#tabset-6-2">Distribution</a></li><li><a href="#tabset-6-3"><code>R</code></a></li><li><a href="#tabset-6-4"><code>SAS</code></a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Question</a></li><li><a href="#tabset-5-2">Distribution</a></li><li><a href="#tabset-5-3"><code>R</code></a></li><li><a href="#tabset-5-4"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
+<div id="tabset-5-1">
 <p>Suppose there are one hundred classrooms in a school, twenty of which have defective audiovisual equipment. If five classrooms were randomly selected for use at a conference, what is the probability that there are NO classrooms with defective audiovisual equipment?</p>
 </div>
-<div id="tabset-6-2">
+<div id="tabset-5-2">
 <p>We need to use the hypergeometric distribution to get P(X=0) where N=100, m=20, k=5.</p>
 </div>
-<div id="tabset-6-3">
+<div id="tabset-5-3">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb30-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb30-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb30-4"><a></a></span>
-<span id="cb30-5"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb18-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb18-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3193094</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-6-4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>data hypergeometric_prob;</span>
-<span id="cb32-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">20</span>,<span class="dv">5</span>);</span>
-<span id="cb32-3"><a></a>;</span>
-<span id="cb32-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-5-4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>data hypergeometric_prob;</span>
+<span id="cb20-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">20</span>,<span class="dv">5</span>);</span>
+<span id="cb20-3"><a></a>;</span>
+<span id="cb20-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -974,13 +830,13 @@ P(X=1) = C(n,x)p^x(1-p)^{(n-x)}; x\in\{0,1,2,...,n\}
 <section id="binomial-distribution-1" class="slide level2">
 <h2>Binomial Distribution</h2>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1"><code>R</code></a></li><li><a href="#tabset-7-2">SAS</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1"><code>R</code></a></li><li><a href="#tabset-6-2">SAS</a></li></ul>
 <div class="tab-content">
-<div id="tabset-7-1">
+<div id="tabset-6-1">
 <p>The PMF can be obtained using the <code>dbinom</code> function, while the CDF can be obtained using the <code>pbinom</code> function.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">dbinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span>
-<span id="cb33-2"><a></a><span class="fu">pbinom</span>(<span class="at">q=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p,<span class="at">lower.tail=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">dbinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span>
+<span id="cb21-2"><a></a><span class="fu">pbinom</span>(<span class="at">q=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p,<span class="at">lower.tail=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -996,13 +852,13 @@ P(X=1) = C(n,x)p^x(1-p)^{(n-x)}; x\in\{0,1,2,...,n\}
 </div>
 </div>
 </div>
-<div id="tabset-7-2">
+<div id="tabset-6-2">
 <p>In a data step, we can use the <code>pdf()</code> function for (<span class="math inline">\(P(X=x)\)</span>), while <code>cdf()</code> can be used for (<span class="math inline">\(P(X\leq x)\)</span>)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>data binomial_prob;</span>
-<span id="cb34-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'BINOMIAL'</span>, x,p, n);</span>
-<span id="cb34-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'BINOMIAL'</span>, x, p, n);</span>
-<span id="cb34-4"><a></a>;</span>
-<span id="cb34-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>data binomial_prob;</span>
+<span id="cb22-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'BINOMIAL'</span>, x,p, n);</span>
+<span id="cb22-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'BINOMIAL'</span>, x, p, n);</span>
+<span id="cb22-4"><a></a>;</span>
+<span id="cb22-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1011,61 +867,61 @@ P(X=1) = C(n,x)p^x(1-p)^{(n-x)}; x\in\{0,1,2,...,n\}
 <h2>Example</h2>
 <p>Suppose that the probability of being proficient in mathematics at a particular school is 0.7. Three students are chosen at random from this school. What is the probability that all three are proficient in mathematics?</p>
 <div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Distribution</a></li><li><a href="#tabset-8-2"><code>R</code></a></li><li><a href="#tabset-8-3"><code>SAS</code></a></li></ul>
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Distribution</a></li><li><a href="#tabset-7-2"><code>R</code></a></li><li><a href="#tabset-7-3"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-8-1">
+<div id="tabset-7-1">
 <p>We need to use a binomial distribution with a probability of success <span class="math inline">\(p=0.7\)</span> out of a total sample size <span class="math inline">\(n=3\)</span>. We need to solve for <span class="math inline">\(P(X=3)\)</span>.</p>
 </div>
-<div id="tabset-8-2">
+<div id="tabset-7-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>p<span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
-<span id="cb35-2"><a></a>n<span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb35-3"><a></a></span>
-<span id="cb35-4"><a></a><span class="fu">dbinom</span>(<span class="at">x=</span><span class="dv">3</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>p<span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb23-2"><a></a>n<span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb23-3"><a></a></span>
+<span id="cb23-4"><a></a><span class="fu">dbinom</span>(<span class="at">x=</span><span class="dv">3</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.343</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-8-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>data binomial_prob;</span>
-<span id="cb37-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'BINOMIAL'</span>, <span class="dv">3</span>,<span class="fl">0.7</span>,<span class="dv">3</span>);</span>
-<span id="cb37-3"><a></a>;</span>
-<span id="cb37-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-7-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>data binomial_prob;</span>
+<span id="cb25-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'BINOMIAL'</span>, <span class="dv">3</span>,<span class="fl">0.7</span>,<span class="dv">3</span>);</span>
+<span id="cb25-3"><a></a>;</span>
+<span id="cb25-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-2" class="slide level2">
+<section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
 <p>Suppose that the survival probability of a new surgical procedure was 0.85. If a total of 200 patients went through the procedure independently, what is the probability that more than 190 of these patients survived the procedure?</p>
 <div class="panel-tabset">
-<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Distribution</a></li><li><a href="#tabset-9-2"><code>R</code></a></li><li><a href="#tabset-9-3"><code>SAS</code></a></li></ul>
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Distribution</a></li><li><a href="#tabset-8-2"><code>R</code></a></li><li><a href="#tabset-8-3"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-9-1">
+<div id="tabset-8-1">
 <p>We can consider the random variable to be those who survived the procedure. need to use a binomial distribution with a probability of success <span class="math inline">\(p=0.85\)</span> out of a total sample size <span class="math inline">\(n=200\)</span>. We need to solve for <span class="math inline">\(P(X&gt;190)\)</span>.</p>
 </div>
-<div id="tabset-9-2">
+<div id="tabset-8-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>p<span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
-<span id="cb38-2"><a></a>n<span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb38-3"><a></a></span>
-<span id="cb38-4"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pbinom</span>(<span class="at">q=</span><span class="dv">190</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>p<span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb26-2"><a></a>n<span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb26-3"><a></a></span>
+<span id="cb26-4"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pbinom</span>(<span class="at">q=</span><span class="dv">190</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.005539e-06</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="co">#OR</span></span>
-<span id="cb40-2"><a></a><span class="fu">pbinom</span>(<span class="at">q=</span><span class="dv">190</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co">#OR</span></span>
+<span id="cb28-2"><a></a><span class="fu">pbinom</span>(<span class="at">q=</span><span class="dv">190</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.005539e-06</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-9-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>data binomial_prob;</span>
-<span id="cb42-2"><a></a>p<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'BINOMIAL'</span>, <span class="dv">190</span>,<span class="fl">0.85</span>,<span class="dv">200</span>);</span>
-<span id="cb42-3"><a></a>;</span>
-<span id="cb42-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-8-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>data binomial_prob;</span>
+<span id="cb30-2"><a></a>p<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'BINOMIAL'</span>, <span class="dv">190</span>,<span class="fl">0.85</span>,<span class="dv">200</span>);</span>
+<span id="cb30-3"><a></a>;</span>
+<span id="cb30-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1106,21 +962,21 @@ P(X_1=x_1,X_2=x_2,...,X_I=x_I) = \frac{n!}{x_1!x_2!...x_I!}p_1^{x_1}p_2^{x_2}...
 <h2>Multinomial Distribution</h2>
 <p>The following functions can be used to determine the value of the PMF of the multinomial distribution</p>
 <div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1"><code>R</code></a></li><li><a href="#tabset-10-2"><code>SAS</code></a></li></ul>
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1"><code>R</code></a></li><li><a href="#tabset-9-2"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-10-1">
+<div id="tabset-9-1">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(x1,x2,...,xI)</span>
-<span id="cb43-2"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(p1,p2,...,pI)</span>
-<span id="cb43-3"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(x1,x2,...,xI)</span>
+<span id="cb31-2"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(p1,p2,...,pI)</span>
+<span id="cb31-3"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="tabset-10-2">
+<div id="tabset-9-2">
 <p>There is no standalone <code>PDF</code> function in SAS.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>data multinom_prob;</span>
-<span id="cb44-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(n)<span class="sc">/</span>(<span class="fu">fact</span>(x1)<span class="sc">*</span><span class="fu">fact</span>(x2)<span class="sc">*</span><span class="fu">fact</span>(x3)<span class="sc">*</span>[...])<span class="sc">*</span>p1<span class="sc">**</span>x1<span class="sc">*</span>p2<span class="sc">**</span>x2<span class="sc">*</span>p3<span class="sc">**</span>x3<span class="sc">*</span>[...];</span>
-<span id="cb44-3"><a></a>;</span>
-<span id="cb44-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>data multinom_prob;</span>
+<span id="cb32-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(n)<span class="sc">/</span>(<span class="fu">fact</span>(x1)<span class="sc">*</span><span class="fu">fact</span>(x2)<span class="sc">*</span><span class="fu">fact</span>(x3)<span class="sc">*</span>[...])<span class="sc">*</span>p1<span class="sc">**</span>x1<span class="sc">*</span>p2<span class="sc">**</span>x2<span class="sc">*</span>p3<span class="sc">**</span>x3<span class="sc">*</span>[...];</span>
+<span id="cb32-3"><a></a>;</span>
+<span id="cb32-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1129,31 +985,31 @@ P(X_1=x_1,X_2=x_2,...,X_I=x_I) = \frac{n!}{x_1!x_2!...x_I!}p_1^{x_1}p_2^{x_2}...
 <h2>Example</h2>
 <p>Suppose exposure levels to secondhand smoke for a particular community was classified into three levels: “none”,“light”, and “heavy”. If the probability of having no exposure (none) is 0.05 and having light exposure is 0.37, what is the probability that out of 10 community members, 2 had no exposure, 5 had light exposure, and the rest had heavy exposure?</p>
 <div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Distribution</a></li><li><a href="#tabset-11-2"><code>R</code></a></li><li><a href="#tabset-11-3"><code>SAS</code></a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Distribution</a></li><li><a href="#tabset-10-2"><code>R</code></a></li><li><a href="#tabset-10-3"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-11-1">
+<div id="tabset-10-1">
 <p>Because there are three possible outcomes for exposure levels, we need to use the multinomial distribution. For this problem, <span class="math inline">\(n=10\)</span>, <span class="math inline">\(x_1=2,x_2=5,x_3=3\)</span>. The sum of the probabilities should be 1, so the probabilities are <span class="math inline">\(p_1=0.05,p_2=0.37,p_3=0.58\)</span>.</p>
 </div>
-<div id="tabset-11-2">
+<div id="tabset-10-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>n<span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb45-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
-<span id="cb45-3"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.05</span>,<span class="fl">0.37</span>,<span class="fl">0.58</span>)</span>
-<span id="cb45-4"><a></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>n<span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb33-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb33-3"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.05</span>,<span class="fl">0.37</span>,<span class="fl">0.58</span>)</span>
+<span id="cb33-4"><a></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.008523798</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-11-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>data multinom_prob;</span>
-<span id="cb49-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(<span class="dv">10</span>)<span class="sc">/</span>(<span class="fu">fact</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">fact</span>(<span class="dv">5</span>)<span class="sc">*</span><span class="fu">fact</span>(<span class="dv">2</span>))<span class="sc">*</span><span class="fl">0.05</span><span class="sc">**</span><span class="dv">2</span><span class="sc">*</span><span class="fl">0.37</span><span class="sc">**</span><span class="dv">5</span><span class="sc">*</span><span class="fl">0.58</span><span class="sc">**</span><span class="dv">3</span>;</span>
-<span id="cb49-3"><a></a>;</span>
-<span id="cb49-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-10-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>data multinom_prob;</span>
+<span id="cb37-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(<span class="dv">10</span>)<span class="sc">/</span>(<span class="fu">fact</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">fact</span>(<span class="dv">5</span>)<span class="sc">*</span><span class="fu">fact</span>(<span class="dv">2</span>))<span class="sc">*</span><span class="fl">0.05</span><span class="sc">**</span><span class="dv">2</span><span class="sc">*</span><span class="fl">0.37</span><span class="sc">**</span><span class="dv">5</span><span class="sc">*</span><span class="fl">0.58</span><span class="sc">**</span><span class="dv">3</span>;</span>
+<span id="cb37-3"><a></a>;</span>
+<span id="cb37-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1162,31 +1018,31 @@ P(X_1=x_1,X_2=x_2,...,X_I=x_I) = \frac{n!}{x_1!x_2!...x_I!}p_1^{x_1}p_2^{x_2}...
 <h2>Example</h2>
 <p>Suppose that for a particular school district, the probability of having being a minimal reader is 0.12, the probability of being a basic reader is 0.23, and the probability of being a proficient reader is 0.65. If six students were selected at random, there will be two students from each category.</p>
 <div class="panel-tabset">
-<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Distribution</a></li><li><a href="#tabset-12-2"><code>R</code></a></li><li><a href="#tabset-12-3"><code>SAS</code></a></li></ul>
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Distribution</a></li><li><a href="#tabset-11-2"><code>R</code></a></li><li><a href="#tabset-11-3"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-12-1">
+<div id="tabset-11-1">
 <p>Because there are three possible outcomes for reading level, we need to use the multinomial distribution. For this problem, <span class="math inline">\(n=6\)</span>, <span class="math inline">\(x_1=2,x_2=2,x_3=2\)</span>. The sum of the probabilities should be 1, which is satisfied by the probabilities. <span class="math inline">\(p_1=0.12,p_2=0.23,p_3=0.65\)</span>.</p>
 </div>
-<div id="tabset-12-2">
+<div id="tabset-11-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>n<span class="ot">&lt;-</span> <span class="dv">6</span></span>
-<span id="cb50-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb50-3"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.12</span>,<span class="fl">0.23</span>,<span class="fl">0.65</span>)</span>
-<span id="cb50-4"><a></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>n<span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb38-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb38-3"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.12</span>,<span class="fl">0.23</span>,<span class="fl">0.65</span>)</span>
+<span id="cb38-4"><a></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02896592</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-12-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>data multinom_prob;</span>
-<span id="cb54-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(n)<span class="sc">/</span>(<span class="fu">fact</span>(x1)<span class="sc">*</span><span class="fu">fact</span>(x2)<span class="sc">*</span><span class="fu">fact</span>(x3)<span class="sc">*</span>[...])<span class="sc">*</span>p1<span class="sc">**</span>x1<span class="sc">*</span>p2<span class="sc">**</span>x2<span class="sc">*</span>p3<span class="sc">**</span>x3<span class="sc">*</span>[...];</span>
-<span id="cb54-3"><a></a>;</span>
-<span id="cb54-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-11-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>data multinom_prob;</span>
+<span id="cb42-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(n)<span class="sc">/</span>(<span class="fu">fact</span>(x1)<span class="sc">*</span><span class="fu">fact</span>(x2)<span class="sc">*</span><span class="fu">fact</span>(x3)<span class="sc">*</span>[...])<span class="sc">*</span>p1<span class="sc">**</span>x1<span class="sc">*</span>p2<span class="sc">**</span>x2<span class="sc">*</span>p3<span class="sc">**</span>x3<span class="sc">*</span>[...];</span>
+<span id="cb42-3"><a></a>;</span>
+<span id="cb42-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1248,21 +1104,21 @@ P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}; x\in\{0,1,2,...\}
 <section id="poisson-distribution-1" class="slide level2">
 <h2>Poisson Distribution</h2>
 <div class="panel-tabset">
-<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1"><code>R</code></a></li><li><a href="#tabset-13-2"><code>SAS</code></a></li></ul>
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1"><code>R</code></a></li><li><a href="#tabset-12-2"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-13-1">
+<div id="tabset-12-1">
 <p>The functions <code>dpois()</code> and <code>ppois()</code> can be used to generate the PMF and CDF of the Poisson distribution, respectively.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">dpois</span>(<span class="at">x=</span>x,<span class="at">lambda=</span>lambda)</span>
-<span id="cb55-2"><a></a><span class="fu">ppois</span>(<span class="at">q=</span>x,<span class="at">lambda =</span> lambda,<span class="at">lower.tail=</span><span class="cn">TRUE</span><span class="sc">/</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">dpois</span>(<span class="at">x=</span>x,<span class="at">lambda=</span>lambda)</span>
+<span id="cb43-2"><a></a><span class="fu">ppois</span>(<span class="at">q=</span>x,<span class="at">lambda =</span> lambda,<span class="at">lower.tail=</span><span class="cn">TRUE</span><span class="sc">/</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<div id="tabset-13-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>data pois_prob;</span>
-<span id="cb56-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,x,lambda);</span>
-<span id="cb56-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'POISSON'</span>,x,lambda);</span>
-<span id="cb56-4"><a></a>;</span>
-<span id="cb56-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-12-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>data pois_prob;</span>
+<span id="cb44-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,x,lambda);</span>
+<span id="cb44-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'POISSON'</span>,x,lambda);</span>
+<span id="cb44-4"><a></a>;</span>
+<span id="cb44-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1271,67 +1127,67 @@ P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}; x\in\{0,1,2,...\}
 <h2>Example</h2>
 <p>Suppose that over the past month, the hourly average number of patients who use the restroom at the waiting room of a particular clinic is 4.2. What is the probability that there will be 2-3 patients using the restroom in the next hour?</p>
 <div class="panel-tabset">
-<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Distribution</a></li><li><a href="#tabset-14-2"><code>R</code></a></li><li><a href="#tabset-14-3"><code>SAS</code></a></li></ul>
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Distribution</a></li><li><a href="#tabset-13-2"><code>R</code></a></li><li><a href="#tabset-13-3"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-14-1">
+<div id="tabset-13-1">
 <p>We can use the Poisson distribution to model the hourly count of patients using the restroom. The hourly average is 4.2, which serves as <span class="math inline">\(\lambda\)</span>.</p>
 </div>
-<div id="tabset-14-2">
+<div id="tabset-13-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>lambda <span class="ot">&lt;-</span> <span class="fl">4.2</span></span>
-<span id="cb57-2"><a></a><span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">lambda=</span>lambda) <span class="sc">+</span> <span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">3</span>,<span class="at">lambda=</span>lambda) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>lambda <span class="ot">&lt;-</span> <span class="fl">4.2</span></span>
+<span id="cb45-2"><a></a><span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">lambda=</span>lambda) <span class="sc">+</span> <span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">3</span>,<span class="at">lambda=</span>lambda) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3174264</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-14-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>data pois_prob;</span>
-<span id="cb59-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">2</span>,<span class="fl">4.2</span>) <span class="sc">+</span> <span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">3</span>,<span class="fl">4.2</span>) ;</span>
-<span id="cb59-3"><a></a>;</span>
-<span id="cb59-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-13-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>data pois_prob;</span>
+<span id="cb47-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">2</span>,<span class="fl">4.2</span>) <span class="sc">+</span> <span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">3</span>,<span class="fl">4.2</span>) ;</span>
+<span id="cb47-3"><a></a>;</span>
+<span id="cb47-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-3" class="slide level2">
+<section id="exercise-2" class="slide level2">
 <h2>Exercise</h2>
 <div class="panel-tabset">
-<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Question</a></li><li><a href="#tabset-15-2"><code>R</code></a></li><li><a href="#tabset-15-3"><code>SAS</code></a></li></ul>
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Question</a></li><li><a href="#tabset-14-2"><code>R</code></a></li><li><a href="#tabset-14-3"><code>SAS</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-15-1">
+<div id="tabset-14-1">
 <p>Suppose that over the last 50 years the average number of suicide attempts that occurred at a particular correctional facility each year is approximately 2.5. What is the probability that there are:</p>
 <ul>
 <li>Exactly five suicide attempts at the facility in the next year.</li>
 <li>At least ten suicide attempts at the facility in the next year.</li>
 </ul>
 </div>
-<div id="tabset-15-2">
+<div id="tabset-14-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="co"># Exactly 5</span></span>
-<span id="cb60-2"><a></a>lambda<span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
-<span id="cb60-3"><a></a><span class="fu">dpois</span>(<span class="dv">5</span>,<span class="at">lambda=</span>lambda)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="co"># Exactly 5</span></span>
+<span id="cb48-2"><a></a>lambda<span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
+<span id="cb48-3"><a></a><span class="fu">dpois</span>(<span class="dv">5</span>,<span class="at">lambda=</span>lambda)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.06680094</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="co"># At least 10 = 10 and higher</span></span>
-<span id="cb62-2"><a></a></span>
-<span id="cb62-3"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">ppois</span>(<span class="at">q=</span><span class="dv">9</span>,<span class="at">lambda=</span>lambda)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="co"># At least 10 = 10 and higher</span></span>
+<span id="cb50-2"><a></a></span>
+<span id="cb50-3"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">ppois</span>(<span class="at">q=</span><span class="dv">9</span>,<span class="at">lambda=</span>lambda)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0002773521</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="fu">ppois</span>(<span class="at">q=</span><span class="dv">9</span>,<span class="at">lambda=</span>lambda,<span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">ppois</span>(<span class="at">q=</span><span class="dv">9</span>,<span class="at">lambda=</span>lambda,<span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0002773521</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-15-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>data pois_prob;</span>
-<span id="cb66-2"><a></a>p1<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">5</span>,<span class="fl">2.5</span>)  ;</span>
-<span id="cb66-3"><a></a>p2<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'POISSON'</span>,<span class="dv">9</span>,<span class="fl">2.5</span>)</span>
-<span id="cb66-4"><a></a>;</span>
-<span id="cb66-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-14-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>data pois_prob;</span>
+<span id="cb54-2"><a></a>p1<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">5</span>,<span class="fl">2.5</span>)  ;</span>
+<span id="cb54-3"><a></a>p2<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'POISSON'</span>,<span class="dv">9</span>,<span class="fl">2.5</span>)</span>
+<span id="cb54-4"><a></a>;</span>
+<span id="cb54-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1341,7 +1197,7 @@ P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}; x\in\{0,1,2,...\}
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Lecture 1 - <a href="https://miguelfudolig-eab770-syllabus.share.connect.posit.cloud">Back to home</a></p>
+<p>Lecture 1 - <a href="https://miguelfudolig-eab770-slides.share.connect.posit.cloud">Back to home</a></p>
 </div>
 </div></div>
 

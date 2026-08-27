@@ -91,6 +91,109 @@ The indices of contingency tables denote the row and column of each number. For 
 :::
 :::
 
+## `SAS` Example: Contingency Table
+
+::: columns
+::: {.column style="width:50%; font-size: 125%"}
+
+
+```
+data respire;
+length treat $7. outcome $1. ;
+input treat $ outcome $ count;
+datalines;
+placebo f 16
+placebo u 48
+test f 40
+test u 20
+;
+run;
+
+proc freq data=respire;
+weight count;
+tables treat*outcome;
+run;
+```
+
+:::
+
+::: {.column style="width:50%; font-size: 75%"}
+- `proc freq` calls the `FREQ` procedure in `SAS`.
+  - Not defining `data=respire` means `SAS` will automatically use the most recently run data set.
+- `weight` tells `SAS` the number of counts for each count
+- `tables` creates the contingency table with row, column, and total percentages.
+- `run;` tells `SAS` to run the code. **This is important!**
+:::
+:::
+
+## Contingency Tables in `R`
+
+To create your own contingency table, you can use the `data.frame()` and `xtabs()` functions.
+
+```{r}
+count_data <- data.frame(Row = c("A","A","B","B"),
+                         Column = c("X","Y","X","Y"),
+                         Count = c(2,4,6,8))
+count_data
+xtabs(Count~Row+Column,data=count_data)
+```
+
+
+##  Exercise
+
+
+Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.
+
+Enter the data in `SAS` using the data step and generate the contingency tables. Name the data set `enjoy`.
+
+|           | Strongly Agree | Agree | Neutral | Disagree | Strongly Disagree |
+|:---------:|:--------------:|:-----:|:-------:|:--------:|:-----------------:|
+| Sophomore |       24       |  43   |   12    |    25    |        12         |
+|  Seniors  |       19       |  37   |   24    |    32    |        21         |
+
+
+
+::: panel-tabset
+### `R` Code
+
+```{r}
+enjoy <- data.frame(year = c(rep(c("Sophomore","Seniors"),each=5)),
+                    response = c(rep(c("SA","A","N","D","SD"),by=5)),
+                    count = c(24,43,12,25,12,19,37,24,32,21))
+
+xtabs(count~year+response,data=enjoy)
+```
+
+
+### `SAS` Code
+
+
+
+
+There are many ways to code the `data` step. Here's one way to do it!
+
+```
+data enjoy;
+length year $9. response $2.;
+input year $ response $ count @@;
+datalines;
+sophomore SA 24 sophomore A 43
+sophomore N 12
+sophomore D 25 sophomore SD 12
+senior SA 19 senior A 37
+senior N 24
+senior D 32 senior SD 21
+;
+
+proc freq order=data data=enjoy;
+weight count;
+tables year*response;
+run;
+```
+
+:::
+
+
 ## Independence
 
 If the two categorical variables are independent of each other, they are not associated. 
@@ -105,51 +208,6 @@ Independence also means that the joint probability $p_{ij}$ can be determined so
 ## Chi-square Statistics
 
 The null hypothesis of no association (independence or homogeneity) between row and column variables imply that the totals are fixed. The probabilities of realization of each cell is determined by the hypergeometric distribution.
-
-## Pearson Chi-square Statistic
-
-The Pearson Chi-square statistic can be written in terms of the joint frequency `n_ij` and the expected frequency `m_ij`.
-
-$$
-Q_P = \sum_{i=1}^2\sum_{j=1}^2 \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
-$$
-
-::: callout-note
-$m_{ij}$ is the expected value of the number of observations in row $i$ and column $j$, $n_{ij}$. The expected frequency $m_{ij}$ can be calculated based on the null hypothesis assumption.
-
-- Independence: $p_{ij}=p_{i+}p_{+j} \to m_{ij} = \frac{n_{i+}n_{+j}}{n}$ 
-- Homogeneity: $p_{i+}=n_{i+}/n; p_{+j}=n_{+j}/n\to m_{ij} = \frac{n_{i+}n_{+j}}{n}$ 
-:::
-
-## Mantel-Haenszel Chi-square statistic {.smaller}
-
--   Another form of the Chi-square statistic is the Mantel-Haenszel chi-square statistic, $Q$. For $2\times 2$ contingency tables,
-
-$$
-Q =  \frac{(n_{11}-m_{11})^2}{v_{11}}
-$$ 
-
-$$
-m_{11} = n_{1+}n_{+1}/n; v_{11} = \frac{n_{1+}n_{2+}n_{+1}n_{+2}}{n^2(n-1)}
-$$
-
-::: callout-note
-This statistic is based on the condition that all marginal totals are fixed and the probability distribution of random allocation of units to groups is given by the hypergeometric distribution.$m_{11}$ and $v_{11}$ are the mean and variance of the hypergeometric distribution based on the $2 \times 2$ table, respectively.
-:::
-
-::: callout-note
-$Q$ is also known as the randomization chi-square.
-:::
-
-## Pearson Chi-square vs. Mantel-Haenszel Chi-square
-
--   MH Chi-square is more powerful than Pearson Chi-square
--   MH Chi-square tests need less samples than Pearson Chi-square, in general.
--   MH Chi-square tests can control for confounding variables.
-
-$$
-Q_P = \frac{n}{n-1}Q
-$$
 
 ## Chi-square distribution
 
@@ -168,13 +226,58 @@ $$
 :::
 :::
 
-## Chi-square distribution
+## Pearson Chi-square Statistic
 
-For large $n$, both the MH/randomization chi-square and the Pearson chi-square approach a chi-square distribution with $1$ degree of freedom ($\chi^2_1$).
+The Pearson Chi-square statistic can be written in terms of the joint frequency `n_ij` and the expected frequency `m_ij`.
+
+$$
+Q_P = \sum_{i=1}^2\sum_{j=1}^2 \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
+$$
+
+::: callout-note
+$m_{ij}$ is the expected value of the number of observations in row $i$ and column $j$, $n_{ij}$. The expected frequency $m_{ij}$ can be calculated based on the null hypothesis assumption.
+
+- Independence: $p_{ij}=p_{i+}p_{+j} \to m_{ij} = \frac{n_{i+}n_{+j}}{n}$ 
+- Homogeneity: $p_{i+}=n_{i+}/n; p_{+j}=n_{+j}/n\to m_{ij} = \frac{n_{i+}n_{+j}}{n}$ 
+:::
+
+## Mantel-Haenszel Chi-square statistic {.smaller}
+
+Another form of the Chi-square statistic is the Mantel-Haenszel chi-square statistic, $Q$. For $2\times 2$ contingency tables,
+
+$$
+Q =  \frac{(n_{11}-m_{11})^2}{v_{11}}
+$$ 
+
+$$
+m_{11} = n_{1+}n_{+1}/n; v_{11} = \frac{n_{1+}n_{2+}n_{+1}n_{+2}}{n^2(n-1)}
+$$
+
+::: callout-note
+$Q$, also known as the randomization chi-square, is based on the condition that all marginal totals are fixed and the probability distribution of random allocation of units to groups is given by the hypergeometric distribution. $m_{11}$ and $v_{11}$ are the mean and variance of the hypergeometric distribution based on the $2 \times 2$ table, respectively.
+
+:::
+
+## Pearson Chi-square vs. Mantel-Haenszel Chi-square
+
+
+For large $n$, both the MH chi-square and the Pearson chi-square approach a chi-square distribution with $1$ degree of freedom ($\chi^2_1$). The relationship can also be approximated by the following relation:
+
+$$
+Q_P = \frac{n}{n-1}Q
+$$
 
 ::: callout-warning
 Rule of thumb: The expected value for each cell should be at least 5, i.e. $m_{ij} \geq 5$ for all $i,j$
 :::
+
+::: callout-tip
+Because the MH chi-square statistic comes from a hypergeometric distribution, the MH chi-square statistic can be used for small samples using exact calculations of p-values from the hypergeometric distribution. This is not possible with the Pearson chi-square.
+
+The MH chi-square statistic can also be extended for use in the presence of covariates/stratifying variables.
+:::
+
+
 
 ## Hypothesis testing
 
@@ -187,15 +290,15 @@ The p-values are given by $P(\chi^2 > Q_P)$ and $P(\chi^2 > Q)$ for Pearson and 
 
 ## Hypothesis Testing: SAS
 
-![](img/Freq.png)
+![](img/Freq_vcd.png)
 
-## FREQ procedure
+## `SAS`: FREQ procedure
 
 -   The `weight` statement tells SAS if there is an aggregated count variable present in the data set.
 -   The `tables` statement tells SAS to create a contingency table using the stated variables.
     -   Under tables, you can include the `cmh` or the `chisq` option to calculate the randomization and Pearson chi-square values.
 
-Below is a sample code.
+Shown below is a sample `SAS` code.
 
 ```         
 proc freq;
@@ -206,18 +309,10 @@ run;
 
 ## Example
 
-::: columns
-::: {.column style="width:60%; font-size: 85%"}
+
 The table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder.
 
--   What is the Pearson chi-square value?
--   What is the Mantel-Haenszel chi-square value?
--   Is there strong evidence of an association between treatment and outcome?
-:::
-
-::: {.column style="width:40%"}
 ```{r}
-#| echo: false
 library(tidyverse)
 dat <- expand.grid(Treatment=c("Placebo","Test"),
                   Outcome = c("Favorable","Unfavorable")) |> 
@@ -225,26 +320,15 @@ mutate(count = c(16,40,48,20))
 
 xtabs(count ~ .,data=dat) 
 ```
-:::
-:::
 
-## Example
+::: panel-tabset
 
-::: columns
-::: {.column style="width:50%; font-size: 85%"}
-The table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder.
+### Questions 
 
--   What is the Pearson chi-square value? **21.7**
-
--   What is the Mantel-Haenszel chi-square value? **21.53**
-
+-   What is the Pearson chi-square value?
+-   What is the Mantel-Haenszel chi-square value?
 -   Is there strong evidence of an association between treatment and outcome?
 
-    -   *p \< 0.0001*; There is strong evidence of an association between the test treatment and the outcome.
-:::
-
-::: {.column style="width:50%"}
-::: panel-tabset
 ### SAS Code
 
 ``` {.r code-line-numbers="3,11,13"}
@@ -288,7 +372,7 @@ dat <- expand.grid(Treatment=c("Placebo","Test"),
 mutate(count = c(16,40,48,20))
 
 xtabs(count ~ .,data=dat) 
-chisq.test(dat_cc, correct = F)
+chisq.test(dat_cc,correct=F)
 ```
 
 Randomization Chi-square
@@ -300,9 +384,19 @@ Randomization Chi-square
 CMH_CC <-vcdExtra::CMHtest(dat_cc) 
 CMH_CC$table |> as.data.frame()|> gt::gt(rownames_to_stub = T)
 ```
+
+### Answers
+
+-   What is the Pearson chi-square value? **21.7**
+
+-   What is the Mantel-Haenszel chi-square value? **21.53**
+
+-   Is there strong evidence of an association between treatment and outcome?
+
+    -   *p \< 0.0001*; There is strong evidence of an association between the test treatment and the outcome.
+
 :::
-:::
-:::
+
 
 ## Exercise
 

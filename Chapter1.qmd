@@ -15,6 +15,7 @@ format:
     echo: true
   pdf: 
     number-sections: true
+    toc: true
 ---
 
 # Lecture 1: Introduction
@@ -78,7 +79,7 @@ These variables have more than two levels without inherent ordering. Examples in
 
 ### Ordinal
 
-These variables have more than two levels without inherent ordering. Examples include: Class Rank, Likert Scale
+These variables have more than two levels with inherent ordering. Examples include: Class Rank, Likert Scale
 
 
 ### Discrete Counts
@@ -195,29 +196,7 @@ test u 20
 
 
 
-## `SAS` Example: Contingency Table
 
-::: columns
-::: {.column style="width:50%; font-size: 125%"}
-
-
-```
-proc freq data=respire;
-weight count;
-tables treat*outcome;
-run;
-```
-
-:::
-
-::: {.column style="width:50%; font-size: 75%"}
-- `proc freq` calls the `FREQ` procedure in `SAS`.
-  - Not defining `data=respire` means `SAS` will automatically use the most recently run data set.
-- `weight` tells `SAS` the number of counts for each count
-- `tables` creates the contingency table with row, column, and total percentages.
-- `run;` tells `SAS` to run the code. **This is important!**
-:::
-:::
 
 ## `SAS` Example: One Observation per Row
 
@@ -256,27 +235,27 @@ test u test u
 :::
 :::
 
-## `SAS` Example: Contingency Table
+<!-- ## `SAS` Example: Contingency Table -->
 
-::: columns
-::: {.column style="width:50%; font-size: 100%"}
+<!-- ::: columns -->
+<!-- ::: {.column style="width:50%; font-size: 100%"} -->
 
 
-```
-proc freq data=severe;
-tables treat*outcome / nocol nopct;
-run;
-```
+<!-- ``` -->
+<!-- proc freq data=severe; -->
+<!-- tables treat*outcome / nocol nopct; -->
+<!-- run; -->
+<!-- ``` -->
 
-:::
+<!-- ::: -->
 
-::: {.column style="width:50%; font-size: 75%"}
-- The `weight` statement is not needed in the `FREQ` procedure when the data does not consist of aggregate counts.
-- `nocol` suppresses the column percentages in the output
-- `nopct` suppresses the total percentages in the output
-- `norow` suppresses the row percentages in the output
-:::
-:::
+<!-- ::: {.column style="width:50%; font-size: 75%"} -->
+<!-- - The `weight` statement is not needed in the `FREQ` procedure when the data does not consist of aggregate counts. -->
+<!-- - `nocol` suppresses the column percentages in the output -->
+<!-- - `nopct` suppresses the total percentages in the output -->
+<!-- - `norow` suppresses the row percentages in the output -->
+<!-- ::: -->
+<!-- ::: -->
 
 # `R`
 
@@ -287,7 +266,7 @@ There are multiple ways to import files into `R`. The most common data set forma
 First, download the file `SleepHealthData.csv` from Canvas in the same folder as your R source code.
 
 ```{r}
-#| execute: false
+#| eval: false
 getwd() # save your data in this folder
 adverse <- read.csv("adverse.csv") # or use a specific path to your folder
 adverse
@@ -337,72 +316,7 @@ library(tidyverse)
 You must have an active internet connection to install `R` packages to your device.
 :::
 
-## Contingency Tables
 
-To create your own contingency table, you can use the `data.frame()` and `xtabs()` functions.
-
-```{r}
-count_data <- data.frame(Row = c("A","A","B","B"),
-                         Column = c("X","Y","X","Y"),
-                         Count = c(2,4,6,8))
-count_data
-xtabs(Count~Row+Column,data=count_data)
-```
-
-
-##  Exercise
-
-
-Suppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.
-
-Enter the data in `SAS` using the data step and generate the contingency tables. Name the data set `enjoy`.
-
-|           | Strongly Agree | Agree | Neutral | Disagree | Strongly Disagree |
-|:---------:|:--------------:|:-----:|:-------:|:--------:|:-----------------:|
-| Sophomore |       24       |  43   |   12    |    25    |        12         |
-|  Seniors  |       19       |  37   |   24    |    32    |        21         |
-
-
-
-::: panel-tabset
-### `R` Code
-
-```{r}
-enjoy <- data.frame(year = c(rep(c("Sophomore","Seniors"),each=5)),
-                    response = c(rep(c("SA","A","N","D","SD"),by=5)),
-                    count = c(24,43,12,25,12,19,37,24,32,21))
-
-xtabs(count~year+response,data=enjoy)
-```
-
-
-### `SAS` Code
-
-
-
-
-There are many ways to code the `data` step. Here's one way to do it!
-
-```
-data enjoy;
-length year $9. response $2.;
-input year $ response $ count @@;
-datalines;
-sophomore SA 24 sophomore A 43
-sophomore N 12
-sophomore D 25 sophomore SD 12
-senior SA 19 senior A 37
-senior N 24
-senior D 32 senior SD 21
-;
-
-proc freq order=data data=enjoy;
-weight count;
-tables year*response;
-run;
-```
-
-:::
 
 # Probability Distributions
 
@@ -415,7 +329,7 @@ The sampling distribution typically depends on the properties of the underlying 
 :::
 
 ::: callout-important
-Recall: Central Limit Theorem (CLT) can be sed for continuous variables. However, CLT might not work for some scenarios involving categorical response variables.
+Recall: Central Limit Theorem (CLT) can be used for continuous variables. However, CLT might not work for some scenarios involving categorical response variables.
 :::
 
 ## Probability Distributions for Categorical Variables
@@ -451,7 +365,7 @@ As an example, the balls could be a pool of medical students. The green balls ar
 The mean $\mu$ and variance $\sigma^2$ of the hypergeometric distribution can be found using the following equations:
 
 $$
-\mu = \frac{nm}{N}; \sigma^2 = \frac{n(m/N)(1-m/N)(N-n)}{N-1}
+\mu = \frac{km}{N}; \sigma^2 = \frac{k(m/N)(1-m/N)(N-k)}{N-1}
 $$
 
 ## Hypergeometric Distribution
