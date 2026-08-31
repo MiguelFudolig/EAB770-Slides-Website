@@ -263,7 +263,7 @@ test u test u
 
 There are multiple ways to import files into `R`. The most common data set format is the `.csv` file. You can import CSV files using the `read.csv(filename)` function.
 
-First, download the file `SleepHealthData.csv` from Canvas in the same folder as your R source code.
+First, download the file `adverse.csv` from Canvas in the same folder as your R source code.
 
 ```{r}
 #| eval: false
