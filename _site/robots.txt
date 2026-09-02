@@ -1,1 +1,1 @@
-Sitemap: https://madfudolig.quarto.pub/eab770slides/sitemap.xml
+Sitemap: https://MiguelFudolig.github.io/EAB770-Slides-Website/sitemap.xml

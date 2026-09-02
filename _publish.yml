@@ -1,5 +1,5 @@
 - source: project
   posit-connect-cloud:
     - id: "https://01a03ff6-384e-237c-0762-4db6678f77f8"
-      url: "https://01a03ff6-384e-237c-0762-4db6678f77f8.share.connect.posit.cloud"
+      url: "https://miguelfudolig-eab770-slides.share.connect.posit.cloud"
 

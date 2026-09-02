@@ -1050,7 +1050,7 @@ Treatment Favorable Unfavorable
 <span id="cb39-2"><a></a>                  <span class="at">Outcome =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Favorable"</span>,<span class="st">"Unfavorable"</span>),<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"Favorable"</span>,<span class="st">"Unfavorable"</span>))) </span>
 <span id="cb39-3"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>)</span>
 <span id="cb39-4"><a></a></span>
-<span id="cb39-5"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span> .,<span class="at">data=</span>dat) </span>
+<span id="cb39-5"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span> Treatment<span class="sc">+</span>Outcome,<span class="at">data=</span>dat) </span>
 <span id="cb39-6"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Outcome
@@ -1702,15 +1702,17 @@ RR = p_1/p_2 = \frac{(n_{11}/n_{1+})}{(n_{21}/n_{2+})}
 <p>The odds ratio and relative risk can be calculated using functions from the <code>epitools</code> package.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a><span class="fu">library</span>(epitools)</span>
-<span id="cb87-2"><a></a><span class="fu">oddsratio</span>(contingency_table,</span>
+<span id="cb87-2"><a></a>epitools<span class="sc">::</span><span class="fu">oddsratio</span>(contingency_table,</span>
 <span id="cb87-3"><a></a>          <span class="at">conf.level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb87-4"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"fisher"</span>,<span class="st">"wald"</span>)</span>
-<span id="cb87-5"><a></a>)</span>
-<span id="cb87-6"><a></a></span>
-<span id="cb87-7"><a></a><span class="fu">riskratio</span>(contingency_table,</span>
-<span id="cb87-8"><a></a>          <span class="at">conf.level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb87-9"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"fisher"</span>,<span class="st">"wald"</span>)</span>
-<span id="cb87-10"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb87-4"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"fisher"</span>,<span class="st">"wald"</span>),</span>
+<span id="cb87-5"><a></a>          <span class="at">rev=</span><span class="fu">c</span>(<span class="st">"rows"</span>,<span class="st">"columns"</span>,<span class="st">"both"</span>)</span>
+<span id="cb87-6"><a></a>)</span>
+<span id="cb87-7"><a></a></span>
+<span id="cb87-8"><a></a>epitools<span class="sc">::</span><span class="fu">riskratio</span>(contingency_table,</span>
+<span id="cb87-9"><a></a>          <span class="at">conf.level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb87-10"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"fisher"</span>,<span class="st">"wald"</span>),</span>
+<span id="cb87-11"><a></a>          <span class="at">rev=</span><span class="fu">c</span>(<span class="st">"rows"</span>,<span class="st">"columns"</span>,<span class="st">"both"</span>)</span>
+<span id="cb87-12"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -1725,25 +1727,35 @@ RR = p_1/p_2 = \frac{(n_{11}/n_{1+})}{(n_{21}/n_{2+})}
 </div>
 </div>
 </div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>The <code>rev</code> argument allows us to re-arrange the contingency table without defining factors to establish row and column <code>R</code>. The order of the columns for <code>oddsratio</code> and <code>riskratio</code> should follow this order:</p>
+<ul>
+<li>Rows (top to bottom): No exposure (risk absent), Exposure (risk present)</li>
+<li>Cols (left to right): Control (Outcome=0), Case (Outcome=1)</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="example-4" class="slide level2">
 <h2>Example</h2>
-<p>The contingency table shows data from a study on treatments for severe infections. Calculate the asymptotic and exact confidence limits for the odds ratio of favorable outcomes for test and control groups.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>         Outcome
-Treatment Favorable Unfavorable
-  Test           10           2
-  Control         2           4</code></pre>
-</div>
-</div>
-</section>
-<section id="example-5" class="slide level2">
-<h2>Example</h2>
 <p>The data set <code>severe_long.csv</code> includes data from a study on treatments for severe infections.</p>
+<div class="panel-tabset">
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Problem</a></li><li><a href="#tabset-8-2"><code>SAS</code> Code</a></li><li><a href="#tabset-8-3"><code>R</code> Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1">
+<p>Calculate the asymptotic and exact confidence limits for the odds ratio of favorable outcomes for test and control groups.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"severe_long.csv"</span>)</span>
-<span id="cb89-2"><a></a><span class="fu">head</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"severe_long.csv"</span>)</span>
+<span id="cb88-2"><a></a><span class="fu">head</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Treatment   Outcome
 1      Test Favorable
@@ -1754,19 +1766,13 @@ Treatment Favorable Unfavorable
 6      Test Favorable</code></pre>
 </div>
 </div>
-<div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Problem</a></li><li><a href="#tabset-8-2"><code>SAS</code> Code</a></li><li><a href="#tabset-8-3"><code>R</code> Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-8-1">
-<p>Calculate the asymptotic and exact confidence limits for the odds ratio of favorable outcomes for test and control groups.</p>
 </div>
 <div id="tabset-8-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a></a></span>
-<span id="cb91-2"><a></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>severe;</span>
-<span id="cb91-3"><a></a>weight count;</span>
-<span id="cb91-4"><a></a>tables treat<span class="sc">*</span>outcome <span class="sc">/</span> chisq nocol;</span>
-<span id="cb91-5"><a></a>exact or;</span>
-<span id="cb91-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Import <code>severe_long</code> as <code>work.severe_long</code> in <code>SAS</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>work.severe_long;</span>
+<span id="cb90-2"><a></a>tables treat<span class="sc">*</span>outcome;</span>
+<span id="cb90-3"><a></a>exact or;</span>
+<span id="cb90-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1788,41 +1794,45 @@ Treatment Favorable Unfavorable
 <p><strong>The two methods lead to different conclusions.</strong></p>
 </div>
 <div id="tabset-8-3">
+<p>Create the contingency table.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>Treatment<span class="sc">+</span>Outcome,<span class="at">data=</span>dat)</span>
-<span id="cb92-2"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>Treatment<span class="sc">+</span>Outcome,<span class="at">data=</span>dat)</span>
+<span id="cb91-2"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Outcome
 Treatment Favorable Unfavorable
   Control         2           4
   Test           10           2</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a></a><span class="fu">library</span>(epitools)</span>
-<span id="cb94-2"><a></a></span>
-<span id="cb94-3"><a></a><span class="fu">oddsratio</span>(dat_cc,</span>
-<span id="cb94-4"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"wald"</span>),</span>
-<span id="cb94-5"><a></a>          <span class="at">conf.level=</span><span class="fl">0.95</span>,</span>
-<span id="cb94-6"><a></a>          <span class="at">rev=</span><span class="st">"rows"</span> <span class="co">#Reverses the rows</span></span>
-<span id="cb94-7"><a></a>          )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Calculate the odds ratio and the confidence intervals.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a></a><span class="fu">library</span>(epitools)</span>
+<span id="cb93-2"><a></a></span>
+<span id="cb93-3"><a></a>epitools<span class="sc">::</span><span class="fu">oddsratio</span>(dat_cc,</span>
+<span id="cb93-4"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"wald"</span>),</span>
+<span id="cb93-5"><a></a>          <span class="at">conf.level=</span><span class="fl">0.95</span>,</span>
+<span id="cb93-6"><a></a>          <span class="at">rev=</span><span class="st">"columns"</span> <span class="co">#Reverses the columns</span></span>
+<span id="cb93-7"><a></a>          )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$data
          Outcome
-Treatment Favorable Unfavorable Total
-  Test           10           2    12
-  Control         2           4     6
-  Total          12           6    18
+Treatment Unfavorable Favorable Total
+  Control           4         2     6
+  Test              2        10    12
+  Total             6        12    18
 
 $measure
          odds ratio with 95% C.I.
 Treatment estimate    lower    upper
-  Test           1       NA       NA
-  Control       10 1.025636 97.50049
+  Control        1       NA       NA
+  Test          10 1.025636 97.50049
 
 $p.value
          two-sided
 Treatment midp.exact fisher.exact chi.square
-  Test            NA           NA         NA
-  Control 0.06119371    0.1070351 0.03389485
+  Control         NA           NA         NA
+  Test    0.06119371    0.1070351 0.03389485
 
 $correction
 [1] FALSE
@@ -1830,30 +1840,30 @@ $correction
 attr(,"method")
 [1] "Unconditional MLE &amp; normal approximation (Wald) CI"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a></a><span class="fu">oddsratio</span>(dat_cc,</span>
-<span id="cb96-2"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"fisher"</span>),</span>
-<span id="cb96-3"><a></a>          <span class="at">conf.level=</span><span class="fl">0.95</span>,</span>
-<span id="cb96-4"><a></a>          <span class="at">rev=</span><span class="st">"rows"</span> <span class="co">#Reverses the rows</span></span>
-<span id="cb96-5"><a></a>          )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a></a>epitools<span class="sc">::</span><span class="fu">oddsratio</span>(dat_cc,</span>
+<span id="cb95-2"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"fisher"</span>),</span>
+<span id="cb95-3"><a></a>          <span class="at">conf.level=</span><span class="fl">0.95</span>,</span>
+<span id="cb95-4"><a></a>          <span class="at">rev=</span><span class="st">"columns"</span> <span class="co">#Reverses the columns,</span></span>
+<span id="cb95-5"><a></a>          )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$data
          Outcome
-Treatment Favorable Unfavorable Total
-  Test           10           2    12
-  Control         2           4     6
-  Total          12           6    18
+Treatment Unfavorable Favorable Total
+  Control           4         2     6
+  Test              2        10    12
+  Total             6        12    18
 
 $measure
          odds ratio with 95% C.I.
 Treatment estimate     lower    upper
-  Test    1.000000        NA       NA
-  Control 8.457238 0.6896384 166.4345
+  Control 1.000000        NA       NA
+  Test    8.457238 0.6896384 166.4345
 
 $p.value
          two-sided
 Treatment midp.exact fisher.exact chi.square
-  Test            NA           NA         NA
-  Control 0.06119371    0.1070351 0.03389485
+  Control         NA           NA         NA
+  Test    0.06119371    0.1070351 0.03389485
 
 $correction
 [1] FALSE
@@ -1872,6 +1882,7 @@ attr(,"method")
 </div>
 <div class="callout-content">
 <p>We report the <strong>estimate</strong> of the odds ratio from the <code>"wald"</code> method, but use the <code>"fisher"</code> confidence interval as the exact confidence interval.</p>
+<p>We also use <code>epitools::oddsratio</code> to tell <code>R</code> that we are using the <code>oddsratio</code> function in <code>epitools</code> and not another package (<code>vcd</code> also has a package of the same name).</p>
 </div>
 </div>
 </div>
@@ -1882,59 +1893,83 @@ attr(,"method")
 <section id="exercise-4" class="slide level2">
 <h2>Exercise</h2>
 <p>Two groups having the same symptoms of respiratory illness were sampled. One group was treated with an experimental treatment and the other group was treated with a placebo. The participants were asked whether there was an overall treatment in overall respiration.</p>
-<ul>
-<li>Calculate the odds ratio of respiratory improvement between test and placebo groups.</li>
-<li>What is the relative risk of having respiratory improvement if we consider the treatment as a risk factor?</li>
-<li>Calculate the asymptotic 95% CI for each answer.</li>
-</ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>         Outcome
-Treatment Yes No
-  Test     29 16
-  Placebo  14 31</code></pre>
-</div>
-</div>
-</section>
-<section id="exercise-5" class="slide level2">
-<h2>Exercise</h2>
-<p>Two groups having the same symptoms of respiratory illness were sampled. One group was treated with an experimental treatment and the other group was treated with a placebo. The participants were asked whether there was an overall treatment in overall respiration.</p>
-<ul>
-<li>Calculate the odds ratio of respiratory improvement between test and placebo groups.<strong>4.01 (1.67,9.66)</strong></li>
-<li>What is the relative risk of having respiratory improvement if we consider the treatment as a risk factor? <strong>2.07 (1.27,3.37)</strong></li>
-<li>Calculate the asymptotic 95% CI for each answer.</li>
-</ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>         Outcome
-Treatment Yes No
-  Test     29 16
-  Placebo  14 31</code></pre>
-</div>
-</div>
 <div class="panel-tabset">
-<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">SAS Code</a></li><li><a href="#tabset-9-2">R Code</a></li></ul>
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Data</a></li><li><a href="#tabset-9-2">SAS Code</a></li><li><a href="#tabset-9-3">R Code</a></li><li><a href="#tabset-9-4">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a></a>data resp;</span>
-<span id="cb100-2"><a></a>input  Treatment <span class="sc">$</span> Outcome  <span class="sc">$</span> count;</span>
-<span id="cb100-3"><a></a>datalines;</span>
-<span id="cb100-4"><a></a>Test Yes <span class="dv">29</span></span>
-<span id="cb100-5"><a></a>Placebo Yes <span class="dv">14</span></span>
-<span id="cb100-6"><a></a>Test No <span class="dv">16</span></span>
-<span id="cb100-7"><a></a>Placebo No <span class="dv">31</span></span>
-<span id="cb100-8"><a></a>;</span>
-<span id="cb100-9"><a></a>proc freq data<span class="ot">=</span>resp order<span class="ot">=</span>data;</span>
-<span id="cb100-10"><a></a>weight count;</span>
-<span id="cb100-11"><a></a>tables treatment<span class="sc">*</span>outcome<span class="sc">/</span>measures;</span>
-<span id="cb100-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>         Outcome
+Treatment Yes No
+  Test     29 16
+  Placebo  14 31</code></pre>
+</div>
+</div>
 </div>
 <div id="tabset-9-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a></a>data resp;</span>
+<span id="cb98-2"><a></a>input  Treatment <span class="sc">$</span> Outcome  <span class="sc">$</span> count;</span>
+<span id="cb98-3"><a></a>datalines;</span>
+<span id="cb98-4"><a></a>Test Yes <span class="dv">29</span></span>
+<span id="cb98-5"><a></a>Placebo Yes <span class="dv">14</span></span>
+<span id="cb98-6"><a></a>Test No <span class="dv">16</span></span>
+<span id="cb98-7"><a></a>Placebo No <span class="dv">31</span></span>
+<span id="cb98-8"><a></a>;</span>
+<span id="cb98-9"><a></a>proc freq data<span class="ot">=</span>resp order<span class="ot">=</span>data;</span>
+<span id="cb98-10"><a></a>weight count;</span>
+<span id="cb98-11"><a></a>tables treatment<span class="sc">*</span>outcome<span class="sc">/</span>measures;</span>
+<span id="cb98-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-9-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Treatment=</span><span class="fu">c</span>(<span class="st">"Test"</span>,<span class="st">"Placebo"</span>),</span>
+<span id="cb99-2"><a></a>                  <span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>)) </span>
+<span id="cb99-3"><a></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">31</span>)</span>
+<span id="cb99-4"><a></a></span>
+<span id="cb99-5"><a></a>dat_cc<span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span> .,<span class="at">data=</span>dat) </span>
+<span id="cb99-6"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Outcome
+Treatment Yes No
+  Test     29 16
+  Placebo  14 31</code></pre>
+</div>
+</div>
 <p>Odds ratio</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a></a><span class="fu">library</span>(epitools)</span>
-<span id="cb101-2"><a></a>dat_cc <span class="sc">|&gt;</span> <span class="fu">oddsratio</span>(<span class="at">rev=</span><span class="fu">c</span>(<span class="st">"both"</span>), <span class="at">method=</span><span class="st">"wald"</span>,<span class="at">conf.level=</span><span class="fl">0.95</span>) <span class="ot">-&gt;</span> or</span>
-<span id="cb101-3"><a></a>or<span class="sc">$</span>measure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb101-2"><a></a>or <span class="ot">&lt;-</span> epitools<span class="sc">::</span><span class="fu">oddsratio</span>(dat_cc,</span>
+<span id="cb101-3"><a></a>                          <span class="at">method=</span><span class="st">"wald"</span>,</span>
+<span id="cb101-4"><a></a>                          <span class="at">conf.level=</span><span class="fl">0.95</span>,</span>
+<span id="cb101-5"><a></a>                          <span class="at">rev=</span><span class="st">"both"</span>)</span>
+<span id="cb101-6"><a></a>or</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$data
+         Outcome
+Treatment No Yes Total
+  Placebo 31  14    45
+  Test    16  29    45
+  Total   47  43    90
+
+$measure
+         odds ratio with 95% C.I.
+Treatment estimate    lower    upper
+  Placebo 1.000000       NA       NA
+  Test    4.013393 1.668039 9.656441
+
+$p.value
+         two-sided
+Treatment  midp.exact fisher.exact  chi.square
+  Placebo          NA           NA          NA
+  Test    0.001783016  0.002917802 0.001548669
+
+$correction
+[1] FALSE
+
+attr(,"method")
+[1] "Unconditional MLE &amp; normal approximation (Wald) CI"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a>or<span class="sc">$</span>measure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         odds ratio with 95% C.I.
 Treatment estimate    lower    upper
@@ -1944,8 +1979,37 @@ Treatment estimate    lower    upper
 </div>
 <p>Relative Risk</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a>dat_cc <span class="sc">|&gt;</span> <span class="fu">riskratio</span>(<span class="at">rev=</span><span class="fu">c</span>(<span class="st">"both"</span>),<span class="at">method=</span><span class="st">"wald"</span>)<span class="ot">-&gt;</span>rr</span>
-<span id="cb103-2"><a></a>rr<span class="sc">$</span>measure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a>rr <span class="ot">&lt;-</span> <span class="fu">riskratio</span>(dat_cc,</span>
+<span id="cb105-2"><a></a>                <span class="at">method=</span><span class="st">"wald"</span>,</span>
+<span id="cb105-3"><a></a>                <span class="at">rev=</span><span class="st">"both"</span>)</span>
+<span id="cb105-4"><a></a>rr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$data
+         Outcome
+Treatment No Yes Total
+  Placebo 31  14    45
+  Test    16  29    45
+  Total   47  43    90
+
+$measure
+         risk ratio with 95% C.I.
+Treatment estimate    lower    upper
+  Placebo 1.000000       NA       NA
+  Test    2.071429 1.274194 3.367474
+
+$p.value
+         two-sided
+Treatment  midp.exact fisher.exact  chi.square
+  Placebo          NA           NA          NA
+  Test    0.001783016  0.002917802 0.001548669
+
+$correction
+[1] FALSE
+
+attr(,"method")
+[1] "Unconditional MLE &amp; normal approximation (Wald) CI"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a></a>rr<span class="sc">$</span>measure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         risk ratio with 95% C.I.
 Treatment estimate    lower    upper
@@ -1953,6 +2017,12 @@ Treatment estimate    lower    upper
   Test    2.071429 1.274194 3.367474</code></pre>
 </div>
 </div>
+</div>
+<div id="tabset-9-4">
+<ul>
+<li>Calculate the odds ratio of respiratory improvement between test and placebo groups.<strong>4.01 (1.67-9.66)</strong></li>
+<li>What is the relative risk of having respiratory improvement if we consider the treatment as a risk factor? <strong>2.07 (1.27-3.37)</strong></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1965,12 +2035,18 @@ Treatment estimate    lower    upper
 <section id="sensitivity" class="slide level2">
 <h2>Sensitivity</h2>
 <p>True proportion of positive results that a test elicits when performed on subjects known to have the disease.</p>
-<p><span class="math display">\[Sens=TP/(TP+FN) = n_{11}/n_{1+}\]</span> Sensitivity is the conditional probability of a positive test given that the subject has the disease (<span class="math inline">\(P(PT|HD)\)</span>)</p>
+<p><span class="math display">\[
+Sens=TP/(TP+FN) = n_{11}/n_{1+}
+\]</span></p>
+<p>Sensitivity is the conditional probability of a positive test given that the subject has the disease (<span class="math inline">\(P(PT|HD)\)</span>)</p>
 </section>
 <section id="specificity" class="slide level2">
 <h2>Specificity</h2>
 <p>True proportion of negative results that a test elicits when performed on subjects known to be disease free.</p>
-<p><span class="math display">\[Sens=TN/(TN+FP) = n_{22}/n_{2+}\]</span> Specificity is the conditional probability of a negative test when the subject does not have the disease (<span class="math inline">\(P(NT|ND)\)</span>).</p>
+<p><span class="math display">\[
+Sens=TN/(TN+FP) = n_{22}/n_{2+}
+\]</span></p>
+<p>Specificity is the conditional probability of a negative test when the subject does not have the disease (<span class="math inline">\(P(NT|ND)\)</span>).</p>
 </section>
 <section id="sensitivity-and-specificity-sas" class="slide level2">
 <h2>Sensitivity and Specificity: SAS</h2>
@@ -1983,48 +2059,139 @@ Treatment estimate    lower    upper
 </ul></li>
 </ul>
 </section>
-<section id="example-6" class="slide level2">
-<h2>Example</h2>
-<p>The following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device.</p>
+<section id="sensitivity-and-specificity-r" class="slide level2">
+<h2>Sensitivity and Specificity: <code>R</code></h2>
+<p>The <code>epiR</code> package has the <code>epi.tests()</code> function that calculates sensitivity and specificity. For the following contingency table:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Outcome +</th>
+<th style="text-align: center;">Outcome -</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Test +</td>
+<td style="text-align: center;"><span class="math inline">\(n_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n_{12}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Test -</td>
+<td style="text-align: center;"><span class="math inline">\(n_{21}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n_{22}\)</span></td>
+</tr>
+</tbody>
+</table>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>                 Test
-Status            Positive Negative
-  Disease Present       52        8
-  Disease Absent        20      100</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a></a><span class="fu">install.packages</span>(<span class="st">"epiR"</span>)</span>
+<span id="cb109-2"><a></a><span class="fu">library</span>(epiR)</span>
+<span id="cb109-3"><a></a></span>
+<span id="cb109-4"><a></a><span class="fu">epi.tests</span>(contingency_table,</span>
+<span id="cb109-5"><a></a>          <span class="at">method=</span><span class="fu">c</span>(<span class="st">"exact"</span>,<span class="st">"wilson"</span>,<span class="st">"agresti"</span>,<span class="st">"clopper-pearson"</span>,<span class="st">"jeffreys"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The default method used to calculate confidence intervals for the sensitivity and specificity is the <code>exact</code> method.</p>
+</div>
 </div>
 </div>
 </section>
-<section id="example-7" class="slide level2">
+<section id="example-5" class="slide level2">
 <h2>Example</h2>
-<p>The following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device.</p>
+<p>The following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device with the corresponding exact 95% confidence interval.</p>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Data</a></li><li><a href="#tabset-10-2">SAS Code</a></li><li><a href="#tabset-10-3">R Code</a></li><li><a href="#tabset-10-4">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>          Status
+Test       Disease Present Disease Absent
+  Positive              52             20
+  Negative               8            100</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-10-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a></a>data screening;</span>
+<span id="cb111-2"><a></a>input disease <span class="sc">$</span> test <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb111-3"><a></a>datalines;</span>
+<span id="cb111-4"><a></a>present <span class="sc">+</span> <span class="dv">52</span> present <span class="sc">-</span> <span class="dv">8</span></span>
+<span id="cb111-5"><a></a>absent <span class="sc">+</span> <span class="dv">20</span> absent <span class="sc">-</span> <span class="dv">100</span></span>
+<span id="cb111-6"><a></a>;</span>
+<span id="cb111-7"><a></a>proc freq data<span class="ot">=</span>screening order<span class="ot">=</span>data;</span>
+<span id="cb111-8"><a></a>weight count;</span>
+<span id="cb111-9"><a></a>tables disease<span class="sc">*</span>test <span class="sc">/</span> riskdiff;</span>
+<span id="cb111-10"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-10-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Status=</span><span class="fu">c</span>(<span class="st">"Disease Present"</span>,<span class="st">"Disease Absent"</span>),</span>
+<span id="cb112-2"><a></a>                  <span class="at">Test =</span> <span class="fu">c</span>(<span class="st">"Positive"</span>,<span class="st">"Negative"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb112-3"><a></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">52</span>,<span class="dv">20</span>,<span class="dv">8</span>,<span class="dv">100</span>))</span>
+<span id="cb112-4"><a></a></span>
+<span id="cb112-5"><a></a><span class="fu">xtabs</span>(count <span class="sc">~</span> Test<span class="sc">+</span>Status,<span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
+<span id="cb112-6"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Status
+Test       Disease Present Disease Absent
+  Positive              52             20
+  Negative               8            100</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a></a><span class="fu">library</span>(epiR)</span>
+<span id="cb114-2"><a></a><span class="fu">epi.tests</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Outcome +    Outcome -      Total
+Test +           52           20         72
+Test -            8          100        108
+Total            60          120        180
+
+Point estimates and 95% CIs:
+--------------------------------------------------------------
+Apparent prevalence *                  0.40 (0.33, 0.48)
+True prevalence *                      0.33 (0.26, 0.41)
+Sensitivity *                          0.87 (0.75, 0.94)
+Specificity *                          0.83 (0.75, 0.90)
+Positive predictive value *            0.72 (0.60, 0.82)
+Negative predictive value *            0.93 (0.86, 0.97)
+Positive likelihood ratio              5.20 (3.44, 7.85)
+Negative likelihood ratio              0.16 (0.08, 0.31)
+False T+ proportion for true D- *      0.17 (0.10, 0.25)
+False T- proportion for true D+ *      0.13 (0.06, 0.25)
+False T+ proportion for T+ *           0.28 (0.18, 0.40)
+False T- proportion for T- *           0.07 (0.03, 0.14)
+Correctly classified proportion *      0.84 (0.78, 0.89)
+--------------------------------------------------------------
+* Exact CIs</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-10-4">
 <ul>
-<li>Sensitivity: 0.87 (0.75,0.94)</li>
-<li>Specificity: 0.83 (0.75,0.90)</li>
+<li><p>Sensitivity: 0.87 (0.75-0.94)</p></li>
+<li><p>Specificity: 0.83 (0.75-0.90)</p></li>
 </ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>                 Test
-Status            Positive Negative
-  Disease Present       52        8
-  Disease Absent        20      100</code></pre>
 </div>
 </div>
-<p>SAS Code</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a></a>data screening;</span>
-<span id="cb107-2"><a></a>input disease <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb107-3"><a></a>datalines;</span>
-<span id="cb107-4"><a></a>present <span class="sc">+</span> <span class="dv">52</span> present <span class="sc">-</span> <span class="dv">8</span></span>
-<span id="cb107-5"><a></a>absent <span class="sc">+</span> <span class="dv">20</span> absent <span class="sc">-</span> <span class="dv">100</span></span>
-<span id="cb107-6"><a></a>;</span>
-<span id="cb107-7"><a></a>proc freq data<span class="ot">=</span>screening order<span class="ot">=</span>data;</span>
-<span id="cb107-8"><a></a>weight count;</span>
-<span id="cb107-9"><a></a>tables disease<span class="sc">*</span>outcome <span class="sc">/</span> riskdiff;</span>
-<span id="cb107-10"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="exercise-6" class="slide level2">
+<section id="exercise-5" class="slide level2">
 <h2>Exercise</h2>
-<p>A pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.</p>
+<p>A pharmaceutical company developed a screening test that can be used to detect infection of the Lassa virus. The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.</p>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Question</a></li><li><a href="#tabset-11-2">R Code</a></li><li><a href="#tabset-11-3">SAS Code</a></li><li><a href="#tabset-11-4">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
 <ul>
 <li>What is the sensitivity of the test?</li>
 <li>What is the specificity of the test?</li>
@@ -2037,33 +2204,72 @@ Status            Positive Negative
   Disease Absent        45       75</code></pre>
 </div>
 </div>
-</section>
-<section id="exercise-7" class="slide level2">
-<h2>Exercise</h2>
-<p>A pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.</p>
-<ul>
-<li>What is the sensitivity of the test? <strong>0.8435 (0.76, 0.90)</strong></li>
-<li>What is the specificity of the test? <strong>0.6250 (0.53, 0.71)</strong></li>
-</ul>
+</div>
+<div id="tabset-11-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb117-2"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Status=</span><span class="fu">c</span>(<span class="st">"Disease Present"</span>,<span class="st">"Disease Absent"</span>),</span>
+<span id="cb117-3"><a></a>                  <span class="at">Test =</span> <span class="fu">c</span>(<span class="st">"Positive"</span>,<span class="st">"Negative"</span>)) </span>
+<span id="cb117-4"><a></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">97</span>,<span class="dv">45</span>,<span class="dv">18</span>,<span class="dv">75</span>)</span>
+<span id="cb117-5"><a></a></span>
+<span id="cb117-6"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span> Test<span class="sc">+</span>Status,<span class="at">data=</span>dat)</span>
+<span id="cb117-7"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                 Test
-Status            Positive Negative
-  Disease Present       97       18
-  Disease Absent        45       75</code></pre>
+<pre><code>          Status
+Test       Disease Present Disease Absent
+  Positive              97             45
+  Negative              18             75</code></pre>
 </div>
 </div>
-<h3 id="sas-code-9">SAS Code</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a></a>data screening;</span>
-<span id="cb110-2"><a></a>input disease <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb110-3"><a></a>datalines;</span>
-<span id="cb110-4"><a></a>present <span class="sc">+</span> <span class="dv">97</span> present <span class="sc">-</span> <span class="dv">18</span></span>
-<span id="cb110-5"><a></a>absent <span class="sc">+</span> <span class="dv">45</span> absent <span class="sc">-</span> <span class="dv">75</span></span>
-<span id="cb110-6"><a></a>;</span>
-<span id="cb110-7"><a></a>proc freq data<span class="ot">=</span>screening order<span class="ot">=</span>data;</span>
-<span id="cb110-8"><a></a>weight count;</span>
-<span id="cb110-9"><a></a>tables disease<span class="sc">*</span>outcome <span class="sc">/</span> riskdiff;</span>
-<span id="cb110-10"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a></a><span class="fu">library</span>(epiR)</span>
+<span id="cb119-2"><a></a><span class="fu">epi.tests</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Outcome +    Outcome -      Total
+Test +           97           45        142
+Test -           18           75         93
+Total           115          120        235
+
+Point estimates and 95% CIs:
+--------------------------------------------------------------
+Apparent prevalence *                  0.60 (0.54, 0.67)
+True prevalence *                      0.49 (0.42, 0.56)
+Sensitivity *                          0.84 (0.76, 0.90)
+Specificity *                          0.62 (0.53, 0.71)
+Positive predictive value *            0.68 (0.60, 0.76)
+Negative predictive value *            0.81 (0.71, 0.88)
+Positive likelihood ratio              2.25 (1.76, 2.87)
+Negative likelihood ratio              0.25 (0.16, 0.39)
+False T+ proportion for true D- *      0.38 (0.29, 0.47)
+False T- proportion for true D+ *      0.16 (0.10, 0.24)
+False T+ proportion for T+ *           0.32 (0.24, 0.40)
+False T- proportion for T- *           0.19 (0.12, 0.29)
+Correctly classified proportion *      0.73 (0.67, 0.79)
+--------------------------------------------------------------
+* Exact CIs</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a></a>data screening;</span>
+<span id="cb121-2"><a></a>input disease <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb121-3"><a></a>datalines;</span>
+<span id="cb121-4"><a></a>present <span class="sc">+</span> <span class="dv">97</span> present <span class="sc">-</span> <span class="dv">18</span></span>
+<span id="cb121-5"><a></a>absent <span class="sc">+</span> <span class="dv">45</span> absent <span class="sc">-</span> <span class="dv">75</span></span>
+<span id="cb121-6"><a></a>;</span>
+<span id="cb121-7"><a></a>proc freq data<span class="ot">=</span>screening order<span class="ot">=</span>data;</span>
+<span id="cb121-8"><a></a>weight count;</span>
+<span id="cb121-9"><a></a>tables disease<span class="sc">*</span>outcome <span class="sc">/</span> riskdiff;</span>
+<span id="cb121-10"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-11-4">
+<ul>
+<li><p>What is the sensitivity of the test? <strong>0.8435 (0.76, 0.90)</strong></p></li>
+<li><p>What is the specificity of the test? <strong>0.6250 (0.53, 0.71)</strong></p></li>
+</ul>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="mcnemars-test" class="title-slide slide level1 center">
@@ -2072,121 +2278,216 @@ Status            Positive Negative
 </section>
 <section id="mcnemars-test-1" class="slide level2">
 <h2>McNemar’s Test</h2>
-<ul>
-<li><p>When the 2x2 table provides information from matched pairs, the two responses are related to each other. Hence, independence cannot be assumed.</p></li>
-<li><p>Null hypothesis: The marginal probabilities of each outcome are the same.</p></li>
-<li><p>The test statistic for the McNemar’s test is <span class="math inline">\(Q_M\)</span> given by</p></li>
-</ul>
-<p><span class="math display">\[Q_M = (n_{12}-n_{21})^2/(n_{12}+n_{21})\]</span></p>
+<p>When the 2x2 table provides information from matched pairs, the two responses are related to each other. Hence, independence cannot be assumed.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Null Hypothesis</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(H_0\)</span>: The marginal probabilities of each outcome are the same.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Test Statistic</strong></p>
+</div>
+<div class="callout-content">
+<p>The test statistic for the McNemar’s test is <span class="math inline">\(Q_M\)</span> given by</p>
+<p><span class="math display">\[
+Q_M = (n_{12}-n_{21})^2/(n_{12}+n_{21})
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="mcnemars-test-sas" class="slide level2">
-<h2>McNemar’s Test: SAS</h2>
+<h2>McNemar’s Test: <code>SAS</code></h2>
 <ul>
 <li>The <code>agree</code> option in the <code>tables</code> statement can be used to perform the McNemar’s test.</li>
 <li>Exact p-values can be calculated using the <code>exact</code> statement.</li>
 </ul>
-<h3 id="sample-sas-code">Sample SAS Code</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a></a>proc freq;</span>
-<span id="cb111-2"><a></a>weight count;</span>
-<span id="cb111-3"><a></a>tables a<span class="sc">*</span>b<span class="sc">/</span>agree;</span>
-<span id="cb111-4"><a></a>exact mcnem;</span>
-<span id="cb111-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="sample-sas-code">Sample <code>SAS</code> Code</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a></a>proc freq;</span>
+<span id="cb122-2"><a></a>weight count;</span>
+<span id="cb122-3"><a></a>tables a<span class="sc">*</span>b<span class="sc">/</span>agree;</span>
+<span id="cb122-4"><a></a>exact mcnem;</span>
+<span id="cb122-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="example-8" class="slide level2">
+<section id="mcnemars-test-r" class="slide level2">
+<h2>McNemar’s Test: <code>R</code></h2>
+<p>The <code>mcnemar.test()</code> function can be used to perform the McNemar’s test.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a></a><span class="fu">mcnemar.test</span>(contingency_table) <span class="co"># no continuity correction</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The p-value calculated using this function adds the continuity correction by default.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example-6" class="slide level2">
 <h2>Example</h2>
 <p>The table displays data collected by political science researchers who polled husbands and wives on whether they approved of one of their U.S. senators. The cell counts represent the number of pairs of husbands and wives who fit the configurations indicated by the row and column levels. Use the McNemar’s test to determine whether there is no difference in husband and wife approvals on the state senator.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>       Wife
-Husband Yes No
-    Yes  20  5
-    No   10 10</code></pre>
-</div>
-</div>
-</section>
-<section id="example-9" class="slide level2">
-<h2>Example</h2>
-<p>The table displays data collected by political science researchers who polled husbands and wives on whether they approved of one of their U.S. senators. The cell counts represent the number of pairs of husbands and wives who fit the configurations indicated by the row and column levels. Use the McNemar’s test to determine whether there is no difference in husband and wife approvals on the state senator.</p>
-<ul>
-<li>Exact p-value = 0.3018, which implies that there is no evidence of a difference between the senator approval ratings of the husbands and wives.</li>
-</ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>       Wife
-Husband Yes No
-    Yes  20  5
-    No   10 10</code></pre>
-</div>
-</div>
-<h3 id="sas-code-10">SAS Code</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb114" data-code-line-numbers="12,13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a></a>data approval;</span>
-<span id="cb114-2"><a></a>input hus_resp <span class="sc">$</span> wif_resp <span class="sc">$</span> count;</span>
-<span id="cb114-3"><a></a>datalines;</span>
-<span id="cb114-4"><a></a>yes yes <span class="dv">20</span></span>
-<span id="cb114-5"><a></a>yes no <span class="dv">5</span></span>
-<span id="cb114-6"><a></a>no yes <span class="dv">10</span></span>
-<span id="cb114-7"><a></a>no no <span class="dv">10</span></span>
-<span id="cb114-8"><a></a>;</span>
-<span id="cb114-9"><a></a></span>
-<span id="cb114-10"><a></a>proc freq order<span class="ot">=</span>data;</span>
-<span id="cb114-11"><a></a>weight count;</span>
-<span id="cb114-12"><a></a>tables hus_resp<span class="sc">*</span>wif_resp <span class="sc">/</span> agree;</span>
-<span id="cb114-13"><a></a>exact mcnem;</span>
-<span id="cb114-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="exercise-8" class="slide level2">
-<h2>Exercise</h2>
-<p>The tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.</p>
-<ul>
-<li>Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (<em>Hint: Small cell counts</em>)</li>
-</ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>           Ultrasound
-MRI         Localized Advanced
-  Localized         4        6
-  Advanced          3        3</code></pre>
-</div>
-</div>
-</section>
-<section id="exercise-9" class="slide level2">
-<h2>Exercise</h2>
-<p>The tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>           Ultrasound
-MRI         Localized Advanced
-  Localized         4        6
-  Advanced          3        3</code></pre>
-</div>
-</div>
 <div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Answer</a></li><li><a href="#tabset-10-2">SAS Code</a></li></ul>
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Data</a></li><li><a href="#tabset-12-2">SAS Code</a></li><li><a href="#tabset-12-3">R Code</a></li><li><a href="#tabset-12-4">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-10-1">
-<ul>
-<li>Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (<em>Hint: Small cell counts</em>)
-<ul>
-<li>Use exact p-value</li>
-<li><span class="math inline">\(p=0.5078\)</span>. No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.</li>
-</ul></li>
-</ul>
+<div id="tabset-12-1">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       Wife
+Husband Yes No
+    Yes  20  5
+    No   10 10</code></pre>
 </div>
-<div id="tabset-10-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a></a>data imaging;</span>
-<span id="cb117-2"><a></a>input mri <span class="sc">$</span> ult <span class="sc">$</span> count;</span>
-<span id="cb117-3"><a></a>datalines;</span>
-<span id="cb117-4"><a></a>loc loc <span class="dv">4</span></span>
-<span id="cb117-5"><a></a>loc adv <span class="dv">6</span></span>
-<span id="cb117-6"><a></a>adv loc <span class="dv">3</span></span>
-<span id="cb117-7"><a></a>adv adv <span class="dv">3</span></span>
-<span id="cb117-8"><a></a>;</span>
-<span id="cb117-9"><a></a></span>
-<span id="cb117-10"><a></a>proc freq order<span class="ot">=</span>data;</span>
-<span id="cb117-11"><a></a>weight count;</span>
-<span id="cb117-12"><a></a>tables mri<span class="sc">*</span>ult <span class="sc">/</span> agree;</span>
-<span id="cb117-13"><a></a>exact mcnem;</span>
-<span id="cb117-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-12-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb125" data-code-line-numbers="12,13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a></a>data approval;</span>
+<span id="cb125-2"><a></a>input hus_resp <span class="sc">$</span> wif_resp <span class="sc">$</span> count;</span>
+<span id="cb125-3"><a></a>datalines;</span>
+<span id="cb125-4"><a></a>yes yes <span class="dv">20</span></span>
+<span id="cb125-5"><a></a>yes no <span class="dv">5</span></span>
+<span id="cb125-6"><a></a>no yes <span class="dv">10</span></span>
+<span id="cb125-7"><a></a>no no <span class="dv">10</span></span>
+<span id="cb125-8"><a></a>;</span>
+<span id="cb125-9"><a></a></span>
+<span id="cb125-10"><a></a>proc freq order<span class="ot">=</span>data;</span>
+<span id="cb125-11"><a></a>weight count;</span>
+<span id="cb125-12"><a></a>tables hus_resp<span class="sc">*</span>wif_resp <span class="sc">/</span> agree;</span>
+<span id="cb125-13"><a></a>exact mcnem;</span>
+<span id="cb125-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-12-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Husband=</span><span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>),</span>
+<span id="cb126-2"><a></a>                  <span class="at">Wife =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>))  </span>
+<span id="cb126-3"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">10</span>)</span>
+<span id="cb126-4"><a></a></span>
+<span id="cb126-5"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span> Husband<span class="sc">+</span>Wife,<span class="at">data=</span>dat) </span>
+<span id="cb126-6"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Wife
+Husband Yes No
+    Yes  20  5
+    No   10 10</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a></a><span class="fu">mcnemar.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    McNemar's Chi-squared test with continuity correction
+
+data:  dat_cc
+McNemar's chi-squared = 1.0667, df = 1, p-value = 0.3017</code></pre>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>If we want to recover the asymptotic p-value from <code>SAS</code>, we need to remove the continuity correction.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a></a><span class="fu">mcnemar.test</span>(dat_cc,<span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    McNemar's Chi-squared test
+
+data:  dat_cc
+McNemar's chi-squared = 1.6667, df = 1, p-value = 0.1967</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-12-4">
+<p>The exact/corrected p-value = 0.3018, which implies that there is no evidence of a difference between the senator approval ratings of the husbands and wives.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-6" class="slide level2">
+<h2>Exercise</h2>
+<p>The tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.</p>
+<div class="panel-tabset">
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Question</a></li><li><a href="#tabset-13-2">R Code</a></li><li><a href="#tabset-13-3">SAS Code</a></li><li><a href="#tabset-13-4">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1">
+<p>Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (<em>Hint: Small cell counts</em>)</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>           Ultrasound
+MRI         Localized Advanced
+  Localized         4        6
+  Advanced          3        3</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-13-2">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>           Ultrasound
+MRI         Localized Advanced
+  Localized         4        6
+  Advanced          3        3</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a></a><span class="fu">mcnemar.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    McNemar's Chi-squared test with continuity correction
+
+data:  dat_cc
+McNemar's chi-squared = 0.44444, df = 1, p-value = 0.505</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-13-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb136"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a></a>data imaging;</span>
+<span id="cb136-2"><a></a>input mri <span class="sc">$</span> ult <span class="sc">$</span> count;</span>
+<span id="cb136-3"><a></a>datalines;</span>
+<span id="cb136-4"><a></a>loc loc <span class="dv">4</span></span>
+<span id="cb136-5"><a></a>loc adv <span class="dv">6</span></span>
+<span id="cb136-6"><a></a>adv loc <span class="dv">3</span></span>
+<span id="cb136-7"><a></a>adv adv <span class="dv">3</span></span>
+<span id="cb136-8"><a></a>;</span>
+<span id="cb136-9"><a></a></span>
+<span id="cb136-10"><a></a>proc freq order<span class="ot">=</span>data;</span>
+<span id="cb136-11"><a></a>weight count;</span>
+<span id="cb136-12"><a></a>tables mri<span class="sc">*</span>ult <span class="sc">/</span> agree;</span>
+<span id="cb136-13"><a></a>exact mcnem;</span>
+<span id="cb136-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-13-4">
+<p>Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (<em>Hint: Small cell counts</em>)</p>
+<ul>
+<li><p>Use exact p-value</p></li>
+<li><p><span class="math inline">\(p=0.51\)</span>. No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.</p></li>
+</ul>
 </div>
 </div>
 </div>
@@ -2196,7 +2497,7 @@ MRI         Localized Advanced
 <h1>Incidence Densities</h1>
 
 </section>
-<section id="incidence-densities-1" class="slide level2 smaller">
+<section id="incidence-densities-1" class="slide level2">
 <h2>Incidence Densities</h2>
 <ul>
 <li>Counts of subjects who responded within a duration of exposure to an event.</li>
@@ -2259,109 +2560,104 @@ MRI         Localized Advanced
 <p><span class="math display">\[95\% CI: \left(\frac{p_L}{1-p_L}(N_p/N_v),\frac{p_U}{1-p_U}(N_p/N_v)\right)\]</span></p>
 </section>
 <section id="incidence-density-ratios-sas" class="slide level2">
-<h2>Incidence Density Ratios: SAS</h2>
+<h2>Incidence Density Ratios: <code>SAS</code></h2>
 <ul>
-<li>The <code>binomial</code> option in the <code>tables</code> statement produces the estimate and exact confidence limits for the binomial proportion <span class="math inline">\(p\)</span>, i.e.&nbsp;<span class="math inline">\(p_L\)</span> and <span class="math inline">\(p_U\)</span>.</li>
-<li>We use the estimate and exact confidence limits of <span class="math inline">\(p\)</span> in calculating the IDR.</li>
-<li>The <code>IML</code> procedure, which is the procedure used to perform mathematical equations, is used to calculate the IDR confidence limits.
+<li><p>The <code>binomial</code> option in the <code>tables</code> statement produces the estimate and exact confidence limits for the binomial proportion <span class="math inline">\(p\)</span>, i.e.&nbsp;<span class="math inline">\(p_L\)</span> and <span class="math inline">\(p_U\)</span>.</p></li>
+<li><p>We use the estimate and exact confidence limits of <span class="math inline">\(p\)</span> in calculating the IDR.</p></li>
+<li><p>The <code>IML</code> procedure, which is the procedure used to perform mathematical equations, is used to calculate the IDR confidence limits.</p>
 <ul>
 <li>Later on, we will use the <code>GENMOD</code> procedure to calculate exact confidence intervals for the IDR.</li>
 </ul></li>
 </ul>
 </section>
-<section id="example-10" class="slide level2">
+<section id="incidence-density-ratios-r" class="slide level2">
+<h2>Incidence Density Ratios: <code>R</code></h2>
+<p>The <code>epitools</code> package includes the <code>rateratio()</code> function that can calculate an approximation of the incidence density ratio.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a></a><span class="fu">rateratio</span>(contingency_table)</span>
+<span id="cb137-2"><a></a><span class="co">#OR</span></span>
+<span id="cb137-3"><a></a></span>
+<span id="cb137-4"><a></a><span class="fu">rateratio</span>(<span class="at">x=</span>events,<span class="at">y=</span>person_years)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="example-7" class="slide level2">
 <h2>Example</h2>
-<div class="columns">
-<div class="column" style="width:50%; font-size: 95%">
 <p>The table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.</p>
+<div class="panel-tabset">
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Questions</a></li><li><a href="#tabset-14-2">SAS Code</a></li><li><a href="#tabset-14-3">R Code</a></li><li><a href="#tabset-14-4">Answers</a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1">
 <ul>
 <li>Estimate the IDR of hospitalization/emergency room visits between the two groups.</li>
 <li>Calculate the 95% CI.</li>
 </ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="img/IDR.png"></p>
-</div></div>
-</section>
-<section id="example-11" class="slide level2">
-<h2>Example</h2>
-<div class="columns">
-<div class="column" style="width:50%; font-size: 95%">
-<p>The table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.</p>
-<ul>
-<li>Estimate the IDR of hospitalization/emergency room visits between the two groups. <strong>IDR = 0.05</strong></li>
-<li>Calculate the 95% CI. <strong>(0.01, 0.15)</strong></li>
-</ul>
-</div><div class="column" style="width:50%;">
 <p><img data-src="img/IDR2.png"></p>
-</div></div>
-<div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">R Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-11-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-118" data-code-line-numbers="12,13,16-27"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-118-1"><a href="#annotated-cell-118-1"></a>data vaccine2;</span>
-<span id="annotated-cell-118-2"><a href="#annotated-cell-118-2"></a>input Outcome <span class="sc">$</span> Count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-118-3"><a href="#annotated-cell-118-3"></a>datalines;</span>
-<span id="annotated-cell-118-4"><a href="#annotated-cell-118-4"></a>vaccine <span class="dv">3</span> placebo <span class="dv">58</span></span>
-<span id="annotated-cell-118-5"><a href="#annotated-cell-118-5"></a>;</span>
-<span id="annotated-cell-118-6"><a href="#annotated-cell-118-6"></a></span>
-<span id="annotated-cell-118-7"><a href="#annotated-cell-118-7"></a>ods select BinomialCLs; <span class="sc">*</span>this statement filters the output.;</span>
-<span id="annotated-cell-118-8"><a href="#annotated-cell-118-8"></a></span>
-<span id="annotated-cell-118-9"><a href="#annotated-cell-118-9"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-118" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-118-10" class="code-annotation-target"><a href="#annotated-cell-118-10"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>vaccine2;</span>
-<span id="annotated-cell-118-11"><a href="#annotated-cell-118-11"></a>weight count;</span>
-<span id="annotated-cell-118-12"><a href="#annotated-cell-118-12"></a>tables Outcome <span class="sc">/</span> <span class="fu">binomial</span> (exact); <span class="sc">*</span>calculates the exact confidence limits <span class="cf">for</span> the binomial proportion;</span>
-<span id="annotated-cell-118-13"><a href="#annotated-cell-118-13"></a>ods output BinomialCLs<span class="ot">=</span>BinomialCLs; <span class="sc">*</span>outputs a dataset that includes the binomial CLs.;</span>
-<span id="annotated-cell-118-14"><a href="#annotated-cell-118-14"></a>run;</span>
-<span id="annotated-cell-118-15"><a href="#annotated-cell-118-15"></a></span>
-<span id="annotated-cell-118-16"><a href="#annotated-cell-118-16"></a>proc iml ;</span>
-<span id="annotated-cell-118-17"><a href="#annotated-cell-118-17"></a>Use BinomialCLs var{LowerCL UpperCL};</span>
-<span id="annotated-cell-118-18"><a href="#annotated-cell-118-18"></a>read all into CL;</span>
-<span id="annotated-cell-118-19"><a href="#annotated-cell-118-19"></a>print CL;</span>
-<span id="annotated-cell-118-20"><a href="#annotated-cell-118-20"></a>q <span class="ot">=</span> { <span class="dv">3</span>, <span class="dv">7500</span>, <span class="dv">58</span> , <span class="dv">7250</span> }; <span class="sc">*</span>vector of numbers from the table;</span>
-<span id="annotated-cell-118-21"><a href="#annotated-cell-118-21"></a>C<span class="ot">=</span> q[<span class="dv">2</span>]<span class="sc">/</span>q[<span class="dv">4</span>]; <span class="sc">*</span>q[i] represents the ith number <span class="cf">in</span> the q vector defined above. C is the person<span class="sc">-</span>years ratio Nv<span class="sc">/</span>Np;</span>
-<span id="annotated-cell-118-22"><a href="#annotated-cell-118-22"></a>P<span class="ot">=</span> q[<span class="dv">1</span>]<span class="sc">/</span> (q[<span class="dv">1</span>] <span class="sc">+</span> q[<span class="dv">3</span>]); <span class="sc">*</span>estimate of the binomial distribution;</span>
-<span id="annotated-cell-118-23"><a href="#annotated-cell-118-23"></a>R<span class="ot">=</span> P<span class="sc">/</span> ((<span class="dv">1</span><span class="sc">-</span>P) <span class="sc">*</span>C) ; <span class="sc">*</span> IDR estimate;</span>
-<span id="annotated-cell-118-24"><a href="#annotated-cell-118-24"></a>CI<span class="ot">=</span> CL[<span class="dv">1</span>]<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>CL[<span class="dv">1</span>])<span class="sc">*</span>C) <span class="sc">||</span> CL[<span class="dv">2</span>]<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>CL[<span class="dv">2</span>])<span class="sc">*</span>C) ; <span class="sc">*</span>IDR CL;</span>
-<span id="annotated-cell-118-25"><a href="#annotated-cell-118-25"></a>print r CI;</span>
-<span id="annotated-cell-118-26"><a href="#annotated-cell-118-26"></a>quit;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-14-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-138" data-code-line-numbers="12,13,16-27"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-138-1"><a href="#annotated-cell-138-1"></a>data vaccine2;</span>
+<span id="annotated-cell-138-2"><a href="#annotated-cell-138-2"></a>input Outcome <span class="sc">$</span> Count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-138-3"><a href="#annotated-cell-138-3"></a>datalines;</span>
+<span id="annotated-cell-138-4"><a href="#annotated-cell-138-4"></a>vaccine <span class="dv">3</span> placebo <span class="dv">58</span></span>
+<span id="annotated-cell-138-5"><a href="#annotated-cell-138-5"></a>;</span>
+<span id="annotated-cell-138-6"><a href="#annotated-cell-138-6"></a></span>
+<span id="annotated-cell-138-7"><a href="#annotated-cell-138-7"></a>ods select BinomialCLs; <span class="sc">*</span>this statement filters the output.;</span>
+<span id="annotated-cell-138-8"><a href="#annotated-cell-138-8"></a></span>
+<span id="annotated-cell-138-9"><a href="#annotated-cell-138-9"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-138" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-138-10" class="code-annotation-target"><a href="#annotated-cell-138-10"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>vaccine2;</span>
+<span id="annotated-cell-138-11"><a href="#annotated-cell-138-11"></a>weight count;</span>
+<span id="annotated-cell-138-12"><a href="#annotated-cell-138-12"></a>tables Outcome <span class="sc">/</span> <span class="fu">binomial</span> (exact); <span class="sc">*</span>calculates the exact confidence limits <span class="cf">for</span> the binomial proportion;</span>
+<span id="annotated-cell-138-13"><a href="#annotated-cell-138-13"></a>ods output BinomialCLs<span class="ot">=</span>BinomialCLs; <span class="sc">*</span>outputs a dataset that includes the binomial CLs.;</span>
+<span id="annotated-cell-138-14"><a href="#annotated-cell-138-14"></a>run;</span>
+<span id="annotated-cell-138-15"><a href="#annotated-cell-138-15"></a></span>
+<span id="annotated-cell-138-16"><a href="#annotated-cell-138-16"></a>proc iml ;</span>
+<span id="annotated-cell-138-17"><a href="#annotated-cell-138-17"></a>Use BinomialCLs var{LowerCL UpperCL};</span>
+<span id="annotated-cell-138-18"><a href="#annotated-cell-138-18"></a>read all into CL;</span>
+<span id="annotated-cell-138-19"><a href="#annotated-cell-138-19"></a>print CL;</span>
+<span id="annotated-cell-138-20"><a href="#annotated-cell-138-20"></a>q <span class="ot">=</span> { <span class="dv">3</span>, <span class="dv">7500</span>, <span class="dv">58</span> , <span class="dv">7250</span> }; <span class="sc">*</span>vector of numbers from the table;</span>
+<span id="annotated-cell-138-21"><a href="#annotated-cell-138-21"></a>C<span class="ot">=</span> q[<span class="dv">2</span>]<span class="sc">/</span>q[<span class="dv">4</span>]; <span class="sc">*</span>q[i] represents the ith number <span class="cf">in</span> the q vector defined above. C is the person<span class="sc">-</span>years ratio Nv<span class="sc">/</span>Np;</span>
+<span id="annotated-cell-138-22"><a href="#annotated-cell-138-22"></a>P<span class="ot">=</span> q[<span class="dv">1</span>]<span class="sc">/</span> (q[<span class="dv">1</span>] <span class="sc">+</span> q[<span class="dv">3</span>]); <span class="sc">*</span>estimate of the binomial distribution;</span>
+<span id="annotated-cell-138-23"><a href="#annotated-cell-138-23"></a>R<span class="ot">=</span> P<span class="sc">/</span> ((<span class="dv">1</span><span class="sc">-</span>P) <span class="sc">*</span>C) ; <span class="sc">*</span> IDR estimate;</span>
+<span id="annotated-cell-138-24"><a href="#annotated-cell-138-24"></a>CI<span class="ot">=</span> CL[<span class="dv">1</span>]<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>CL[<span class="dv">1</span>])<span class="sc">*</span>C) <span class="sc">||</span> CL[<span class="dv">2</span>]<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>CL[<span class="dv">2</span>])<span class="sc">*</span>C) ; <span class="sc">*</span>IDR CL;</span>
+<span id="annotated-cell-138-25"><a href="#annotated-cell-138-25"></a>print r CI;</span>
+<span id="annotated-cell-138-26"><a href="#annotated-cell-138-26"></a>quit;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-118" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-138" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-118" data-code-lines="10" data-code-annotation="1"><code>order=data</code> is important so as to keep the proportions consistent.</span>
+<span data-code-cell="annotated-cell-138" data-code-lines="10" data-code-annotation="1"><code>order=data</code> is important so as to keep the proportions consistent.</span>
 </dd>
 </dl>
 </div>
-<div id="tabset-11-2">
+<div id="tabset-14-3">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a></a>events <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">58</span>)</span>
-<span id="cb118-2"><a></a>person_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7500</span>, <span class="dv">7250</span>)</span>
-<span id="cb118-3"><a></a></span>
-<span id="cb118-4"><a></a>mult <span class="ot">&lt;-</span> person_years[<span class="dv">2</span>]<span class="sc">/</span>person_years[<span class="dv">1</span>] <span class="co">#multiplier</span></span>
-<span id="cb118-5"><a></a>DescTools<span class="sc">::</span><span class="fu">BinomCI</span>(events[<span class="dv">1</span>],<span class="fu">sum</span>(events),<span class="at">method =</span> <span class="st">"clopper-pearson"</span>) <span class="ot">-&gt;</span> p_est</span>
-<span id="cb118-6"><a></a></span>
-<span id="cb118-7"><a></a></span>
-<span id="cb118-8"><a></a></span>
-<span id="cb118-9"><a></a><span class="fu">data.frame</span>(<span class="at">IDR =</span> p_est[<span class="dv">1</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">1</span>])<span class="sc">*</span>mult,</span>
-<span id="cb118-10"><a></a>           <span class="at">IDR_lower =</span> p_est[<span class="dv">2</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">2</span>])<span class="sc">*</span>mult,</span>
-<span id="cb118-11"><a></a>          <span class="at">IDR_higher =</span> p_est[<span class="dv">3</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">3</span>])<span class="sc">*</span>mult) <span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a></a>events <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">58</span>,<span class="dv">3</span>)</span>
+<span id="cb138-2"><a></a>person_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7250</span>,<span class="dv">7500</span>)</span>
+<span id="cb138-3"><a></a></span>
+<span id="cb138-4"><a></a>mult <span class="ot">&lt;-</span> person_years[<span class="dv">1</span>]<span class="sc">/</span>person_years[<span class="dv">2</span>] <span class="co">#multiplier</span></span>
+<span id="cb138-5"><a></a>DescTools<span class="sc">::</span><span class="fu">BinomCI</span>(events[<span class="dv">2</span>],<span class="fu">sum</span>(events),<span class="at">method =</span> <span class="st">"clopper-pearson"</span>) <span class="ot">-&gt;</span> p_est</span>
+<span id="cb138-6"><a></a></span>
+<span id="cb138-7"><a></a></span>
+<span id="cb138-8"><a></a></span>
+<span id="cb138-9"><a></a><span class="fu">data.frame</span>(<span class="at">IDR =</span> p_est[<span class="dv">1</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">1</span>])<span class="sc">*</span>mult,</span>
+<span id="cb138-10"><a></a>           <span class="at">IDR_lower =</span> p_est[<span class="dv">2</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">2</span>])<span class="sc">*</span>mult,</span>
+<span id="cb138-11"><a></a>          <span class="at">IDR_higher =</span> p_est[<span class="dv">3</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">3</span>])<span class="sc">*</span>mult) <span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="wqrzaiitik" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wqrzaiitik table {
+<div id="yvtlwabskr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yvtlwabskr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wqrzaiitik thead, #wqrzaiitik tbody, #wqrzaiitik tfoot, #wqrzaiitik tr, #wqrzaiitik td, #wqrzaiitik th {
+#yvtlwabskr thead, #yvtlwabskr tbody, #yvtlwabskr tfoot, #yvtlwabskr tr, #yvtlwabskr td, #yvtlwabskr th {
   border-style: none;
 }
 
-#wqrzaiitik p {
+#yvtlwabskr p {
   margin: 0;
   padding: 0;
 }
 
-#wqrzaiitik .gt_table {
+#yvtlwabskr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2387,12 +2683,12 @@ MRI         Localized Advanced
   border-left-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_caption {
+#yvtlwabskr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wqrzaiitik .gt_title {
+#yvtlwabskr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2404,7 +2700,7 @@ MRI         Localized Advanced
   border-bottom-width: 0;
 }
 
-#wqrzaiitik .gt_subtitle {
+#yvtlwabskr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2416,7 +2712,7 @@ MRI         Localized Advanced
   border-top-width: 0;
 }
 
-#wqrzaiitik .gt_heading {
+#yvtlwabskr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2428,13 +2724,13 @@ MRI         Localized Advanced
   border-right-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_bottom_border {
+#yvtlwabskr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_col_headings {
+#yvtlwabskr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2449,7 +2745,7 @@ MRI         Localized Advanced
   border-right-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_col_heading {
+#yvtlwabskr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2469,7 +2765,7 @@ MRI         Localized Advanced
   overflow-x: hidden;
 }
 
-#wqrzaiitik .gt_column_spanner_outer {
+#yvtlwabskr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2481,15 +2777,15 @@ MRI         Localized Advanced
   padding-right: 4px;
 }
 
-#wqrzaiitik .gt_column_spanner_outer:first-child {
+#yvtlwabskr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wqrzaiitik .gt_column_spanner_outer:last-child {
+#yvtlwabskr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wqrzaiitik .gt_column_spanner {
+#yvtlwabskr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2501,11 +2797,11 @@ MRI         Localized Advanced
   width: 100%;
 }
 
-#wqrzaiitik .gt_spanner_row {
+#yvtlwabskr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wqrzaiitik .gt_group_heading {
+#yvtlwabskr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2531,7 +2827,7 @@ MRI         Localized Advanced
   text-align: left;
 }
 
-#wqrzaiitik .gt_empty_group_heading {
+#yvtlwabskr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2546,15 +2842,15 @@ MRI         Localized Advanced
   vertical-align: middle;
 }
 
-#wqrzaiitik .gt_from_md > :first-child {
+#yvtlwabskr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wqrzaiitik .gt_from_md > :last-child {
+#yvtlwabskr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wqrzaiitik .gt_row {
+#yvtlwabskr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2573,7 +2869,7 @@ MRI         Localized Advanced
   overflow-x: hidden;
 }
 
-#wqrzaiitik .gt_stub {
+#yvtlwabskr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2586,7 +2882,7 @@ MRI         Localized Advanced
   padding-right: 5px;
 }
 
-#wqrzaiitik .gt_stub_row_group {
+#yvtlwabskr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2600,15 +2896,15 @@ MRI         Localized Advanced
   vertical-align: top;
 }
 
-#wqrzaiitik .gt_row_group_first td {
+#yvtlwabskr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wqrzaiitik .gt_row_group_first th {
+#yvtlwabskr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wqrzaiitik .gt_summary_row {
+#yvtlwabskr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2618,16 +2914,16 @@ MRI         Localized Advanced
   padding-right: 5px;
 }
 
-#wqrzaiitik .gt_first_summary_row {
+#yvtlwabskr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_first_summary_row.thick {
+#yvtlwabskr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wqrzaiitik .gt_last_summary_row {
+#yvtlwabskr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2637,7 +2933,7 @@ MRI         Localized Advanced
   border-bottom-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_grand_summary_row {
+#yvtlwabskr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2647,7 +2943,7 @@ MRI         Localized Advanced
   padding-right: 5px;
 }
 
-#wqrzaiitik .gt_first_grand_summary_row {
+#yvtlwabskr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2657,7 +2953,7 @@ MRI         Localized Advanced
   border-top-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_last_grand_summary_row_top {
+#yvtlwabskr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2667,11 +2963,11 @@ MRI         Localized Advanced
   border-bottom-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_striped {
+#yvtlwabskr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wqrzaiitik .gt_table_body {
+#yvtlwabskr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2680,7 +2976,7 @@ MRI         Localized Advanced
   border-bottom-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_footnotes {
+#yvtlwabskr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2694,7 +2990,7 @@ MRI         Localized Advanced
   border-right-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_footnote {
+#yvtlwabskr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2703,7 +2999,7 @@ MRI         Localized Advanced
   padding-right: 5px;
 }
 
-#wqrzaiitik .gt_sourcenotes {
+#yvtlwabskr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2717,7 +3013,7 @@ MRI         Localized Advanced
   border-right-color: #D3D3D3;
 }
 
-#wqrzaiitik .gt_sourcenote {
+#yvtlwabskr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2725,72 +3021,72 @@ MRI         Localized Advanced
   padding-right: 5px;
 }
 
-#wqrzaiitik .gt_left {
+#yvtlwabskr .gt_left {
   text-align: left;
 }
 
-#wqrzaiitik .gt_center {
+#yvtlwabskr .gt_center {
   text-align: center;
 }
 
-#wqrzaiitik .gt_right {
+#yvtlwabskr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wqrzaiitik .gt_font_normal {
+#yvtlwabskr .gt_font_normal {
   font-weight: normal;
 }
 
-#wqrzaiitik .gt_font_bold {
+#yvtlwabskr .gt_font_bold {
   font-weight: bold;
 }
 
-#wqrzaiitik .gt_font_italic {
+#yvtlwabskr .gt_font_italic {
   font-style: italic;
 }
 
-#wqrzaiitik .gt_super {
+#yvtlwabskr .gt_super {
   font-size: 65%;
 }
 
-#wqrzaiitik .gt_footnote_marks {
+#yvtlwabskr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wqrzaiitik .gt_asterisk {
+#yvtlwabskr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wqrzaiitik .gt_indent_1 {
+#yvtlwabskr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wqrzaiitik .gt_indent_2 {
+#yvtlwabskr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wqrzaiitik .gt_indent_3 {
+#yvtlwabskr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wqrzaiitik .gt_indent_4 {
+#yvtlwabskr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wqrzaiitik .gt_indent_5 {
+#yvtlwabskr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wqrzaiitik .katex-display {
+#yvtlwabskr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wqrzaiitik div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yvtlwabskr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2815,36 +3111,49 @@ MRI         Localized Advanced
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section id="exercise-10" class="slide level2">
-<h2>Exercise</h2>
-<div class="columns">
-<div class="column" style="width:50%; font-size: 85%">
-<p>The table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.</p>
-</div><div class="column" style="width:50%;">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb139"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a></a><span class="fu">rateratio</span>(<span class="at">x=</span>events,<span class="at">y=</span>person_years)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       Metric
-Shift   Accidents Person-Hours
-  Night        25         1150
-  Day          20         1240</code></pre>
+<pre><code>$data
+          Outcome
+Predictor  events person_years
+  Exposed1     58         7250
+  Exposed2      3         7500
+  Total        61        14750
+
+$measure
+          rate ratio with 95% C.I.
+Predictor    estimate      lower     upper
+  Exposed1 1.00000000         NA        NA
+  Exposed2 0.05253473 0.01239861 0.1418922
+
+$p.value
+          two-sided
+Predictor               midp.exact                  wald
+  Exposed1                      NA                    NA
+  Exposed2 0.000000000000006708884 0.0000000000007207568
+
+attr(,"method")
+[1] "Median unbiased estimate &amp; mid-p exact CI"</code></pre>
 </div>
 </div>
-</div></div>
-</section>
-<section id="exercise-11" class="slide level2">
-<h2>Exercise</h2>
-<div class="columns">
-<div class="column" style="width:50%; font-size: 85%">
-<p>The table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.</p>
+</div>
+<div id="tabset-14-4">
 <ul>
-<li>IDR: 1.37</li>
-<li>95% CI: (0.72,2.56)</li>
+<li>Estimate the IDR of hospitalization/emergency room visits between the two groups. <strong>IDR = 0.05</strong></li>
+<li>Calculate the 95% CI. <strong>(0.01-0.15)</strong> or with <code>riskratio</code>: (0.01-0.14)</li>
 </ul>
-</div><div class="column" style="width:50%;">
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-7" class="slide level2">
+<h2>Exercise</h2>
+<p>The table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.</p>
+<div class="panel-tabset">
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Data</a></li><li><a href="#tabset-15-2">SAS Code</a></li><li><a href="#tabset-15-3">R Code</a></li><li><a href="#tabset-15-4">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>       Metric
@@ -2853,75 +3162,72 @@ Shift   Accidents Person-Hours
   Day          20         1240</code></pre>
 </div>
 </div>
-</div></div>
-<div class="panel-tabset">
-<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">SAS Code</a></li><li><a href="#tabset-12-2">R Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-12-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-122"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-122-1"><a href="#annotated-cell-122-1"></a>data accident;</span>
-<span id="annotated-cell-122-2"><a href="#annotated-cell-122-2"></a><span class="sc">/</span><span class="er">*</span>data only has the events. Person<span class="sc">-</span>Hours are used later.<span class="sc">*</span><span class="er">/</span></span>
-<span id="annotated-cell-122-3"><a href="#annotated-cell-122-3"></a>input Outcome <span class="sc">$</span> Count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-122-4"><a href="#annotated-cell-122-4"></a>datalines;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-122" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-122-5" class="code-annotation-target"><a href="#annotated-cell-122-5"></a>night <span class="dv">25</span> day <span class="dv">20</span></span>
-<span id="annotated-cell-122-6"><a href="#annotated-cell-122-6"></a>;</span>
-<span id="annotated-cell-122-7"><a href="#annotated-cell-122-7"></a></span>
-<span id="annotated-cell-122-8"><a href="#annotated-cell-122-8"></a>ods select BinomialCLs; <span class="sc">*</span>this statement filters the output.;</span>
-<span id="annotated-cell-122-9"><a href="#annotated-cell-122-9"></a></span>
-<span id="annotated-cell-122-10"><a href="#annotated-cell-122-10"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>accident;</span>
-<span id="annotated-cell-122-11"><a href="#annotated-cell-122-11"></a>weight count;</span>
-<span id="annotated-cell-122-12"><a href="#annotated-cell-122-12"></a>tables Outcome <span class="sc">/</span> <span class="fu">binomial</span> (exact) alpha<span class="ot">=</span><span class="fl">0.05</span>; <span class="sc">*</span>calculates the exact confidence limits <span class="cf">for</span> the binomial proportion;</span>
-<span id="annotated-cell-122-13"><a href="#annotated-cell-122-13"></a>ods output BinomialCLs<span class="ot">=</span>BinomialCLs; <span class="sc">*</span>outputs a dataset that includes the binomial CLs.;</span>
-<span id="annotated-cell-122-14"><a href="#annotated-cell-122-14"></a>run;</span>
-<span id="annotated-cell-122-15"><a href="#annotated-cell-122-15"></a></span>
-<span id="annotated-cell-122-16"><a href="#annotated-cell-122-16"></a>proc iml ;</span>
-<span id="annotated-cell-122-17"><a href="#annotated-cell-122-17"></a>Use BinomialCLs var{LowerCL UpperCL};</span>
-<span id="annotated-cell-122-18"><a href="#annotated-cell-122-18"></a>read all into CL;</span>
-<span id="annotated-cell-122-19"><a href="#annotated-cell-122-19"></a>print CL;</span>
-<span id="annotated-cell-122-20"><a href="#annotated-cell-122-20"></a>q <span class="ot">=</span> { <span class="dv">25</span> <span class="dv">1150</span> <span class="dv">20</span> <span class="dv">1240</span> }; <span class="sc">*</span>vector of numbers from the table;</span>
-<span id="annotated-cell-122-21"><a href="#annotated-cell-122-21"></a>C<span class="ot">=</span> q[<span class="dv">2</span>]<span class="sc">/</span>q[<span class="dv">4</span>]; <span class="sc">*</span>q[i] represents the ith number <span class="cf">in</span> the q vector defined above. C is the person<span class="sc">-</span>years ratio Nv<span class="sc">/</span>Np;</span>
-<span id="annotated-cell-122-22"><a href="#annotated-cell-122-22"></a>P<span class="ot">=</span> q[<span class="dv">1</span>]<span class="sc">/</span> (q[<span class="dv">1</span>] <span class="sc">+</span> q[<span class="dv">3</span>]); <span class="sc">*</span>estimate of the binomial distribution;</span>
-<span id="annotated-cell-122-23"><a href="#annotated-cell-122-23"></a>R<span class="ot">=</span> P<span class="sc">/</span> ((<span class="dv">1</span><span class="sc">-</span>P) <span class="sc">*</span>C) ; <span class="sc">*</span> IDR estimate;</span>
-<span id="annotated-cell-122-24"><a href="#annotated-cell-122-24"></a>CI<span class="ot">=</span> CL[<span class="dv">1</span>]<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>CL[<span class="dv">1</span>])<span class="sc">*</span>C) <span class="sc">||</span> CL[<span class="dv">2</span>]<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>CL[<span class="dv">2</span>])<span class="sc">*</span>C) ; <span class="sc">*</span>IDR CL;</span>
-<span id="annotated-cell-122-25"><a href="#annotated-cell-122-25"></a>print r CI;</span>
-<span id="annotated-cell-122-26"><a href="#annotated-cell-122-26"></a>quit;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-15-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-143"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-143-1"><a href="#annotated-cell-143-1"></a>data accident;</span>
+<span id="annotated-cell-143-2"><a href="#annotated-cell-143-2"></a><span class="sc">/</span><span class="er">*</span>data only has the events. Person<span class="sc">-</span>Hours are used later.<span class="sc">*</span><span class="er">/</span></span>
+<span id="annotated-cell-143-3"><a href="#annotated-cell-143-3"></a>input Outcome <span class="sc">$</span> Count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-143-4"><a href="#annotated-cell-143-4"></a>datalines;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-143" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-143-5" class="code-annotation-target"><a href="#annotated-cell-143-5"></a>night <span class="dv">25</span> day <span class="dv">20</span></span>
+<span id="annotated-cell-143-6"><a href="#annotated-cell-143-6"></a>;</span>
+<span id="annotated-cell-143-7"><a href="#annotated-cell-143-7"></a></span>
+<span id="annotated-cell-143-8"><a href="#annotated-cell-143-8"></a>ods select BinomialCLs; <span class="sc">*</span>this statement filters the output.;</span>
+<span id="annotated-cell-143-9"><a href="#annotated-cell-143-9"></a></span>
+<span id="annotated-cell-143-10"><a href="#annotated-cell-143-10"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>accident;</span>
+<span id="annotated-cell-143-11"><a href="#annotated-cell-143-11"></a>weight count;</span>
+<span id="annotated-cell-143-12"><a href="#annotated-cell-143-12"></a>tables Outcome <span class="sc">/</span> <span class="fu">binomial</span> (exact) alpha<span class="ot">=</span><span class="fl">0.05</span>; <span class="sc">*</span>calculates the exact confidence limits <span class="cf">for</span> the binomial proportion;</span>
+<span id="annotated-cell-143-13"><a href="#annotated-cell-143-13"></a>ods output BinomialCLs<span class="ot">=</span>BinomialCLs; <span class="sc">*</span>outputs a dataset that includes the binomial CLs.;</span>
+<span id="annotated-cell-143-14"><a href="#annotated-cell-143-14"></a>run;</span>
+<span id="annotated-cell-143-15"><a href="#annotated-cell-143-15"></a></span>
+<span id="annotated-cell-143-16"><a href="#annotated-cell-143-16"></a>proc iml ;</span>
+<span id="annotated-cell-143-17"><a href="#annotated-cell-143-17"></a>Use BinomialCLs var{LowerCL UpperCL};</span>
+<span id="annotated-cell-143-18"><a href="#annotated-cell-143-18"></a>read all into CL;</span>
+<span id="annotated-cell-143-19"><a href="#annotated-cell-143-19"></a>print CL;</span>
+<span id="annotated-cell-143-20"><a href="#annotated-cell-143-20"></a>q <span class="ot">=</span> { <span class="dv">25</span> <span class="dv">1150</span> <span class="dv">20</span> <span class="dv">1240</span> }; <span class="sc">*</span>vector of numbers from the table;</span>
+<span id="annotated-cell-143-21"><a href="#annotated-cell-143-21"></a>C<span class="ot">=</span> q[<span class="dv">2</span>]<span class="sc">/</span>q[<span class="dv">4</span>]; <span class="sc">*</span>q[i] represents the ith number <span class="cf">in</span> the q vector defined above. C is the person<span class="sc">-</span>years ratio Nv<span class="sc">/</span>Np;</span>
+<span id="annotated-cell-143-22"><a href="#annotated-cell-143-22"></a>P<span class="ot">=</span> q[<span class="dv">1</span>]<span class="sc">/</span> (q[<span class="dv">1</span>] <span class="sc">+</span> q[<span class="dv">3</span>]); <span class="sc">*</span>estimate of the binomial distribution;</span>
+<span id="annotated-cell-143-23"><a href="#annotated-cell-143-23"></a>R<span class="ot">=</span> P<span class="sc">/</span> ((<span class="dv">1</span><span class="sc">-</span>P) <span class="sc">*</span>C) ; <span class="sc">*</span> IDR estimate;</span>
+<span id="annotated-cell-143-24"><a href="#annotated-cell-143-24"></a>CI<span class="ot">=</span> CL[<span class="dv">1</span>]<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>CL[<span class="dv">1</span>])<span class="sc">*</span>C) <span class="sc">||</span> CL[<span class="dv">2</span>]<span class="sc">/</span>((<span class="dv">1</span><span class="sc">-</span>CL[<span class="dv">2</span>])<span class="sc">*</span>C) ; <span class="sc">*</span>IDR CL;</span>
+<span id="annotated-cell-143-25"><a href="#annotated-cell-143-25"></a>print r CI;</span>
+<span id="annotated-cell-143-26"><a href="#annotated-cell-143-26"></a>quit;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-122" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-143" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-122" data-code-lines="5" data-code-annotation="1">“Success” is an event happening during the night shift.</span>
+<span data-code-cell="annotated-cell-143" data-code-lines="5" data-code-annotation="1">“Success” is an event happening during the night shift.</span>
 </dd>
 </dl>
 </div>
-<div id="tabset-12-2">
+<div id="tabset-15-3">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a></a>events <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">20</span>)</span>
-<span id="cb121-2"><a></a>person_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1150</span>,<span class="dv">1240</span>)</span>
-<span id="cb121-3"><a></a></span>
-<span id="cb121-4"><a></a>mult <span class="ot">&lt;-</span> person_years[<span class="dv">2</span>]<span class="sc">/</span>person_years[<span class="dv">1</span>] <span class="co">#multiplier</span></span>
-<span id="cb121-5"><a></a>DescTools<span class="sc">::</span><span class="fu">BinomCI</span>(events[<span class="dv">1</span>],<span class="fu">sum</span>(events),<span class="at">method =</span> <span class="st">"clopper-pearson"</span>) <span class="ot">-&gt;</span> p_est</span>
-<span id="cb121-6"><a></a></span>
-<span id="cb121-7"><a></a></span>
-<span id="cb121-8"><a></a></span>
-<span id="cb121-9"><a></a><span class="fu">data.frame</span>(<span class="at">IDR =</span> p_est[<span class="dv">1</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">1</span>])<span class="sc">*</span>mult,</span>
-<span id="cb121-10"><a></a>           <span class="at">IDR_lower =</span> p_est[<span class="dv">2</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">2</span>])<span class="sc">*</span>mult,</span>
-<span id="cb121-11"><a></a>          <span class="at">IDR_higher =</span> p_est[<span class="dv">3</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">3</span>])<span class="sc">*</span>mult) <span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb142"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a></a>events <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">25</span>)</span>
+<span id="cb142-2"><a></a>person_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1240</span>,<span class="dv">1150</span>)</span>
+<span id="cb142-3"><a></a></span>
+<span id="cb142-4"><a></a>mult <span class="ot">&lt;-</span> person_years[<span class="dv">1</span>]<span class="sc">/</span>person_years[<span class="dv">2</span>] <span class="co">#multiplier</span></span>
+<span id="cb142-5"><a></a>DescTools<span class="sc">::</span><span class="fu">BinomCI</span>(events[<span class="dv">2</span>],<span class="fu">sum</span>(events),<span class="at">method =</span> <span class="st">"clopper-pearson"</span>) <span class="ot">-&gt;</span> p_est</span>
+<span id="cb142-6"><a></a></span>
+<span id="cb142-7"><a></a></span>
+<span id="cb142-8"><a></a></span>
+<span id="cb142-9"><a></a><span class="fu">data.frame</span>(<span class="at">IDR =</span> p_est[<span class="dv">1</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">1</span>])<span class="sc">*</span>mult,</span>
+<span id="cb142-10"><a></a>           <span class="at">IDR_lower =</span> p_est[<span class="dv">2</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">2</span>])<span class="sc">*</span>mult,</span>
+<span id="cb142-11"><a></a>          <span class="at">IDR_higher =</span> p_est[<span class="dv">3</span>]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p_est[<span class="dv">3</span>])<span class="sc">*</span>mult) <span class="sc">|&gt;</span> gt<span class="sc">::</span><span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="zbvyrzjghl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zbvyrzjghl table {
+<div id="esnbewthky" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#esnbewthky table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zbvyrzjghl thead, #zbvyrzjghl tbody, #zbvyrzjghl tfoot, #zbvyrzjghl tr, #zbvyrzjghl td, #zbvyrzjghl th {
+#esnbewthky thead, #esnbewthky tbody, #esnbewthky tfoot, #esnbewthky tr, #esnbewthky td, #esnbewthky th {
   border-style: none;
 }
 
-#zbvyrzjghl p {
+#esnbewthky p {
   margin: 0;
   padding: 0;
 }
 
-#zbvyrzjghl .gt_table {
+#esnbewthky .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2947,12 +3253,12 @@ Shift   Accidents Person-Hours
   border-left-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_caption {
+#esnbewthky .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zbvyrzjghl .gt_title {
+#esnbewthky .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2964,7 +3270,7 @@ Shift   Accidents Person-Hours
   border-bottom-width: 0;
 }
 
-#zbvyrzjghl .gt_subtitle {
+#esnbewthky .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2976,7 +3282,7 @@ Shift   Accidents Person-Hours
   border-top-width: 0;
 }
 
-#zbvyrzjghl .gt_heading {
+#esnbewthky .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2988,13 +3294,13 @@ Shift   Accidents Person-Hours
   border-right-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_bottom_border {
+#esnbewthky .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_col_headings {
+#esnbewthky .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3009,7 +3315,7 @@ Shift   Accidents Person-Hours
   border-right-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_col_heading {
+#esnbewthky .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3029,7 +3335,7 @@ Shift   Accidents Person-Hours
   overflow-x: hidden;
 }
 
-#zbvyrzjghl .gt_column_spanner_outer {
+#esnbewthky .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3041,15 +3347,15 @@ Shift   Accidents Person-Hours
   padding-right: 4px;
 }
 
-#zbvyrzjghl .gt_column_spanner_outer:first-child {
+#esnbewthky .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zbvyrzjghl .gt_column_spanner_outer:last-child {
+#esnbewthky .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zbvyrzjghl .gt_column_spanner {
+#esnbewthky .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3061,11 +3367,11 @@ Shift   Accidents Person-Hours
   width: 100%;
 }
 
-#zbvyrzjghl .gt_spanner_row {
+#esnbewthky .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zbvyrzjghl .gt_group_heading {
+#esnbewthky .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3091,7 +3397,7 @@ Shift   Accidents Person-Hours
   text-align: left;
 }
 
-#zbvyrzjghl .gt_empty_group_heading {
+#esnbewthky .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3106,15 +3412,15 @@ Shift   Accidents Person-Hours
   vertical-align: middle;
 }
 
-#zbvyrzjghl .gt_from_md > :first-child {
+#esnbewthky .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zbvyrzjghl .gt_from_md > :last-child {
+#esnbewthky .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zbvyrzjghl .gt_row {
+#esnbewthky .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3133,7 +3439,7 @@ Shift   Accidents Person-Hours
   overflow-x: hidden;
 }
 
-#zbvyrzjghl .gt_stub {
+#esnbewthky .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3146,7 +3452,7 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#zbvyrzjghl .gt_stub_row_group {
+#esnbewthky .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3160,15 +3466,15 @@ Shift   Accidents Person-Hours
   vertical-align: top;
 }
 
-#zbvyrzjghl .gt_row_group_first td {
+#esnbewthky .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zbvyrzjghl .gt_row_group_first th {
+#esnbewthky .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zbvyrzjghl .gt_summary_row {
+#esnbewthky .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3178,16 +3484,16 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#zbvyrzjghl .gt_first_summary_row {
+#esnbewthky .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_first_summary_row.thick {
+#esnbewthky .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zbvyrzjghl .gt_last_summary_row {
+#esnbewthky .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3197,7 +3503,7 @@ Shift   Accidents Person-Hours
   border-bottom-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_grand_summary_row {
+#esnbewthky .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3207,7 +3513,7 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#zbvyrzjghl .gt_first_grand_summary_row {
+#esnbewthky .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3217,7 +3523,7 @@ Shift   Accidents Person-Hours
   border-top-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_last_grand_summary_row_top {
+#esnbewthky .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3227,11 +3533,11 @@ Shift   Accidents Person-Hours
   border-bottom-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_striped {
+#esnbewthky .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zbvyrzjghl .gt_table_body {
+#esnbewthky .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3240,7 +3546,7 @@ Shift   Accidents Person-Hours
   border-bottom-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_footnotes {
+#esnbewthky .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3254,7 +3560,7 @@ Shift   Accidents Person-Hours
   border-right-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_footnote {
+#esnbewthky .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3263,7 +3569,7 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#zbvyrzjghl .gt_sourcenotes {
+#esnbewthky .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3277,7 +3583,7 @@ Shift   Accidents Person-Hours
   border-right-color: #D3D3D3;
 }
 
-#zbvyrzjghl .gt_sourcenote {
+#esnbewthky .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3285,72 +3591,72 @@ Shift   Accidents Person-Hours
   padding-right: 5px;
 }
 
-#zbvyrzjghl .gt_left {
+#esnbewthky .gt_left {
   text-align: left;
 }
 
-#zbvyrzjghl .gt_center {
+#esnbewthky .gt_center {
   text-align: center;
 }
 
-#zbvyrzjghl .gt_right {
+#esnbewthky .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zbvyrzjghl .gt_font_normal {
+#esnbewthky .gt_font_normal {
   font-weight: normal;
 }
 
-#zbvyrzjghl .gt_font_bold {
+#esnbewthky .gt_font_bold {
   font-weight: bold;
 }
 
-#zbvyrzjghl .gt_font_italic {
+#esnbewthky .gt_font_italic {
   font-style: italic;
 }
 
-#zbvyrzjghl .gt_super {
+#esnbewthky .gt_super {
   font-size: 65%;
 }
 
-#zbvyrzjghl .gt_footnote_marks {
+#esnbewthky .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zbvyrzjghl .gt_asterisk {
+#esnbewthky .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zbvyrzjghl .gt_indent_1 {
+#esnbewthky .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zbvyrzjghl .gt_indent_2 {
+#esnbewthky .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zbvyrzjghl .gt_indent_3 {
+#esnbewthky .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zbvyrzjghl .gt_indent_4 {
+#esnbewthky .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zbvyrzjghl .gt_indent_5 {
+#esnbewthky .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zbvyrzjghl .katex-display {
+#esnbewthky .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zbvyrzjghl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#esnbewthky div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3375,6 +3681,39 @@ Shift   Accidents Person-Hours
 </div>
 </div>
 </div>
+<p>Using <code>rateratio()</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb143"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a></a><span class="fu">rateratio</span>(<span class="at">x=</span>events,<span class="at">y=</span>person_years)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$data
+          Outcome
+Predictor  events person_years
+  Exposed1     20         1240
+  Exposed2     25         1150
+  Total        45         2390
+
+$measure
+          rate ratio with 95% C.I.
+Predictor  estimate     lower   upper
+  Exposed1 1.000000        NA      NA
+  Exposed2 1.345627 0.7466559 2.45738
+
+$p.value
+          two-sided
+Predictor  midp.exact      wald
+  Exposed1         NA        NA
+  Exposed2  0.3232959 0.3179524
+
+attr(,"method")
+[1] "Median unbiased estimate &amp; mid-p exact CI"</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-15-4">
+<ul>
+<li>IDR: 1.35 (0.72-2.56)</li>
+<li>with <code>riskratio</code>: (0.75-2.46)</li>
+</ul>
 </div>
 </div>
 </div>
@@ -3411,33 +3750,33 @@ Shift   Accidents Person-Hours
 </ul></li>
 </ul>
 </section>
-<section id="example-12" class="slide level2">
+<section id="example-8" class="slide level2">
 <h2>Example</h2>
 <p>Suppose prior literature states that the incidence rate of a chronic disease is 0.40. Suppose we want to perform a prospective study to test the association between the disease incidence and family history, i.e.&nbsp;whether other family members were diagnosed with the chronic disease. We want to detect a proportion difference of 0.10 between groups with power of 80% (0.80) at a significance level of 0.05.</p>
 </section>
-<section id="example-13" class="slide level2">
+<section id="example-9" class="slide level2">
 <h2>Example</h2>
 <p>Suppose prior literature states that the incidence rate of a chronic disease is 0.40. Suppose we want to perform a prospective study to test the association between the disease incidence and family history, i.e.&nbsp;whether other family members were diagnosed with the chronic disease. We want to detect a proportion difference of 0.10 between groups with power of 80% (0.80) at a significance level of 0.05.</p>
 <ul>
 <li>We need 388 units per group (family +, family -). This brings us to 776 total units.</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">SAS Code</a></li><li><a href="#tabset-13-2">R Code</a></li></ul>
+<ul id="tabset-16" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-16-1">SAS Code</a></li><li><a href="#tabset-16-2">R Code</a></li></ul>
 <div class="tab-content">
-<div id="tabset-13-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a></a>proc power ;</span>
-<span id="cb122-2"><a></a>twosamplefreq</span>
-<span id="cb122-3"><a></a>    refproportion<span class="ot">=</span><span class="fl">0.4</span> </span>
-<span id="cb122-4"><a></a>    alpha<span class="ot">=</span><span class="fl">0.05</span></span>
-<span id="cb122-5"><a></a>    power<span class="ot">=</span><span class="fl">0.80</span></span>
-<span id="cb122-6"><a></a>    proportiondiff<span class="ot">=</span><span class="fl">0.1</span></span>
-<span id="cb122-7"><a></a>    npergroup<span class="ot">=</span>.;</span>
-<span id="cb122-8"><a></a></span>
-<span id="cb122-9"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-16-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb145"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a></a>proc power ;</span>
+<span id="cb145-2"><a></a>twosamplefreq</span>
+<span id="cb145-3"><a></a>    refproportion<span class="ot">=</span><span class="fl">0.4</span> </span>
+<span id="cb145-4"><a></a>    alpha<span class="ot">=</span><span class="fl">0.05</span></span>
+<span id="cb145-5"><a></a>    power<span class="ot">=</span><span class="fl">0.80</span></span>
+<span id="cb145-6"><a></a>    proportiondiff<span class="ot">=</span><span class="fl">0.1</span></span>
+<span id="cb145-7"><a></a>    npergroup<span class="ot">=</span>.;</span>
+<span id="cb145-8"><a></a></span>
+<span id="cb145-9"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-13-2">
+<div id="tabset-16-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a></a><span class="fu">power.prop.test</span>(<span class="at">p1=</span><span class="fl">0.4</span>,<span class="at">p2=</span><span class="fl">0.5</span>,<span class="at">power=</span><span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb146"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a></a><span class="fu">power.prop.test</span>(<span class="at">p1=</span><span class="fl">0.4</span>,<span class="at">p2=</span><span class="fl">0.5</span>,<span class="at">power=</span><span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample comparison of proportions power calculation 
@@ -3821,7 +4160,7 @@ NOTE: n is number in *each* group</code></pre>
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/MiguelFudolig\.github\.io\/EAB770-Slides-Website\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

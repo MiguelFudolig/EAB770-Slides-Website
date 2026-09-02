@@ -959,7 +959,7 @@
     "href": "Chapter3.html#outline",
     "title": "EAB 770 - Chapter 3",
     "section": "Outline",
-    "text": "Outline\n\nMantel-Haenszel test\nMeasures of Association\n\nCommon Odds ratio\nBreslow-Day test\nZelen’s Test"
+    "text": "Outline\n\nCochran-Mantel-Haenszel test\nMeasures of Association\n\nCommon Odds ratio\nBreslow-Day test\nZelen’s Test"
   },
   {
     "objectID": "Chapter3.html#sets-of-2times2-tables",
@@ -973,14 +973,14 @@
     "href": "Chapter3.html#stratified-analysis",
     "title": "EAB 770 - Chapter 3",
     "section": "Stratified Analysis",
-    "text": "Stratified Analysis\n\nStratified analysis examines the association between two variables while adjusting for the effect of other covariates.\n\nThe variable that define the strata may be an explanatory variable, location, or classification variable.\nEach table corresponds to one level of the explanatory variables (stratum)"
+    "text": "Stratified Analysis\nStratified analysis examines the association between two variables while adjusting for the effect of other covariates.\n\n\n\n\n\n\nNote\n\n\nThe variable that define the strata may be an explanatory variable, location, or classification variable. Each contingency table corresponds to one level of the explanatory variables (stratum)"
   },
   {
     "objectID": "Chapter3.html#mantel-haenszel-test",
     "href": "Chapter3.html#mantel-haenszel-test",
     "title": "EAB 770 - Chapter 3",
     "section": "Mantel-Haenszel Test",
-    "text": "Mantel-Haenszel Test\nRecall the Mantel-Haenszel Chi-Square statistic\n\\[\nQ = (n_{11}-m_{11})^2/v_{11}\n\\] where \\(m_{11}\\) is the expected value of the \\(n_{11}\\) and \\(v_{11}\\) is the variance of \\(n_{11}\\) based on the hypergeometric distribution assumption.\n\nIf there are \\(q\\) \\(2\\times 2\\) tables, each table will have a value for \\(Q\\)."
+    "text": "Mantel-Haenszel Test\nRecall the Mantel-Haenszel Chi-Square statistic\n\\[\nQ = (n_{11}-m_{11})^2/v_{11}\n\\] where \\(m_{11}\\) is the expected value of the \\(n_{11}\\) and \\(v_{11}\\) is the variance of \\(n_{11}\\) based on the hypergeometric distribution assumption.\n\n\n\n\n\n\nNote\n\n\nIf there are \\(q\\) \\(2\\times 2\\) tables, each table will have a value for \\(Q\\)."
   },
   {
     "objectID": "Chapter3.html#mantel-haenszel-test-1",
@@ -1015,28 +1015,28 @@
     "href": "Chapter3.html#example",
     "title": "EAB 770 - Chapter 3",
     "section": "Example",
-    "text": "Example\n\n\nThe table shows the results of a study about how general daily stress affects one’s opinion on a proposed new health policy. Participants were sampled from urban and rural areas.\n\nIs there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level."
+    "text": "Example\nThe table shows the results of a study about how general daily stress affects one’s opinion on a proposed new health policy. Participants were sampled from urban and rural areas.\n\nQuestionSAS CodeR CodeAnswer\n\n\n\nIs there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level.\n\n\n\n\ndata stress;\ninput region $ stress $ outcome $ count @@;\ndatalines;\nurban low f 48 urban low u 12\nurban high f 96 urban high u 94\nrural low f 55 rural low u 135\nrural high f 7 rural high u 53\n;\nproc freq order=data data=stress;\nweight count;\n1tables region*stress*outcome / all chisq cmh (mf) nocol nopct;\nrun;\n\n1\n\nCMH includes the Mantel-Haenszel statistics. MF gives the Mantel-Fleiss condition;\n\n\n\n\n\nlibrary(vcdExtra)\ndat  &lt;- expand.grid(Outcome = c(\"Favorable\",\"Unfavorable\"),\n                    Residence=c(\"Urban\",\"Rural\"),\n                    Stress = c(\"Low\",\"High\")\n                  ) \ndat$count &lt;- c(48,12,55,135,96,94,7,53)\n\nxtabs(count ~  Stress + Outcome + Residence  ,data=dat) -&gt; dat_cc\n\nCMHtest(dat_cc,\n        strata=\"Residence\",\n        types=\"ALL\",\n        overall=T)\n\n$`Residence:Urban`\nCochran-Mantel-Haenszel Statistics for Stress by Outcome \n    in stratum Residence:Urban \n\n                 AltHypothesis  Chisq Df       Prob\ngeneral    General association 16.155  1 5.8367e-05\nrmeans  Row mean scores differ 16.155  1 5.8367e-05\ncmeans  Col mean scores differ 16.155  1 5.8367e-05\ncor        Nonzero correlation 16.155  1 5.8367e-05\n\n\n$`Residence:Rural`\nCochran-Mantel-Haenszel Statistics for Stress by Outcome \n    in stratum Residence:Rural \n\n                 AltHypothesis  Chisq Df      Prob\ngeneral    General association 7.2724  1 0.0070022\nrmeans  Row mean scores differ 7.2724  1 0.0070022\ncmeans  Col mean scores differ 7.2724  1 0.0070022\ncor        Nonzero correlation 7.2724  1 0.0070022\n\n\n$ALL\nCochran-Mantel-Haenszel Statistics for Stress by Outcome \n    Overall tests, controlling for all strata \n\n                 AltHypothesis Chisq Df       Prob\ngeneral    General association 23.05  1 1.5783e-06\nrmeans  Row mean scores differ 23.05  1 1.5783e-06\ncmeans  Col mean scores differ 23.05  1 1.5783e-06\ncor        Nonzero correlation 23.05  1 1.5783e-06\n\n\n\n\n\\(\\chi^2 = 23.05\\), \\(df=1\\), \\(p &lt; 0.0001\\). There is strong evidence that the stress level is associated with the opinion outcome."
   },
   {
     "objectID": "Chapter3.html#example-1",
     "href": "Chapter3.html#example-1",
     "title": "EAB 770 - Chapter 3",
     "section": "Example",
-    "text": "Example\nThe table shows the results of a study about how general daily stress affects one’s opinion on a proposed new health policy. Participants were sampled from urban and rural areas.\n\nIs there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level.\n\n\nSAS CodeR CodeAnswer\n\n\ndata stress;\ninput region $ stress $ outcome $ count @@;\ndatalines;\nurban low f 48 urban low u 12\nurban high f 96 urban high u 94\nrural low f 55 rural low u 135\nrural high f 7 rural high u 53\n;\nproc freq order=data data=stress;\nweight count;\n1tables region*stress*outcome / all chisq cmh (mf) nocol nopct;\nrun;\n\n1\n\nCMH includes the Mantel-Haenszel statistics. MF gives the Mantel-Fleiss condition;\n\n\n\n\n\n\nCode\nlibrary(vcdExtra)\ndat  &lt;- expand.grid(Outcome = c(\"Favorable\",\"Unfavorable\"),\n                    Residence=c(\"Urban\",\"Rural\"),\n                    Stress = c(\"Low\",\"High\")\n                  ) |&gt; \nmutate(count = c(48,12,55,135,96,94,7,53))\n\nxtabs(count ~  Stress + Outcome + Residence  ,data=dat) -&gt; dat_cc\n\nCMHtest(dat_cc,\n        strata=\"Residence\",\n        types=\"ALL\",\n        overall=T)\n\n\n$`Residence:Urban`\nCochran-Mantel-Haenszel Statistics for Stress by Outcome \n    in stratum Residence:Urban \n\n                 AltHypothesis  Chisq Df       Prob\ngeneral    General association 16.155  1 5.8367e-05\nrmeans  Row mean scores differ 16.155  1 5.8367e-05\ncmeans  Col mean scores differ 16.155  1 5.8367e-05\ncor        Nonzero correlation 16.155  1 5.8367e-05\n\n\n$`Residence:Rural`\nCochran-Mantel-Haenszel Statistics for Stress by Outcome \n    in stratum Residence:Rural \n\n                 AltHypothesis  Chisq Df      Prob\ngeneral    General association 7.2724  1 0.0070022\nrmeans  Row mean scores differ 7.2724  1 0.0070022\ncmeans  Col mean scores differ 7.2724  1 0.0070022\ncor        Nonzero correlation 7.2724  1 0.0070022\n\n\n$ALL\nCochran-Mantel-Haenszel Statistics for Stress by Outcome \n    Overall tests, controlling for all strata \n\n                 AltHypothesis Chisq Df       Prob\ngeneral    General association 23.05  1 1.5783e-06\nrmeans  Row mean scores differ 23.05  1 1.5783e-06\ncmeans  Col mean scores differ 23.05  1 1.5783e-06\ncor        Nonzero correlation 23.05  1 1.5783e-06\n\n\n\n\n\\(\\chi^2 = 23.05\\), \\(df=1\\), \\(p &lt; 0.0001\\). There is strong evidence that the stress level is associated with the opinion outcome."
+    "text": "Example\n\n\nThe table shows the results of an RCT for a test treatment designed for respiratory infections. Is there a significant association between the treatment and the outcome after controlling for the center?\n\nIs the Mantel-Fleiss criterion satisfied?\n\n\n\n\n, , Center = 1\n\n         Improvement\nTreatment Yes No\n  Test     29 16\n  Placebo  14 31\n\n, , Center = 2\n\n         Improvement\nTreatment Yes No\n  Test     37  8\n  Placebo  24 21"
   },
   {
     "objectID": "Chapter3.html#example-2",
     "href": "Chapter3.html#example-2",
     "title": "EAB 770 - Chapter 3",
     "section": "Example",
-    "text": "Example\n\n\nThe table shows the results of an RCT for a test treatment designed for respiratory infections. Is there a significant association between the treatment and the outcome after controlling for the center?\n\nIs the Mantel-Fleiss criterion satisfied?\n\n\n\n\n, , Center = 1\n\n         Improvement\nTreatment Yes No\n  Test     29 16\n  Placebo  14 31\n\n, , Center = 2\n\n         Improvement\nTreatment Yes No\n  Test     37  8\n  Placebo  24 21"
+    "text": "Example\nThe table shows the results of an RCT for a test treatment designed for respiratory infections. Is there a significant association between the treatment and the outcome after controlling for the center?\n\nIs the Mantel-Fleiss criterion satisfied?\n\n\nSAS CodeR CodeAnswer\n\n\n\ndata resp;\nlength treatment $7.;\ninput treatment $ improvement $ center $ count;\ndatalines;\nTest Yes 1 29\nPlacebo Yes 1 14\nTest No 1 16\nPlacebo No 1 31\nTest Yes 2 37\nPlacebo Yes 2 24\nTest No 2 8\nPlacebo No 2 21\n;\n\n\nproc freq data=resp order=data;\nweight count;\ntables center*treatment*improvement / cmh (MF) nocol norow nopct;\nrun;\n\n\n\n\nCode\ndat  &lt;- expand.grid(Improvement = c(\"Yes\",\"No\"),\n                    Center=c(1,2),\n                    Treatment = c(\"Test\",\"Placebo\")\n                  ) |&gt; \nmutate(count = c(29,16,37,8,14,31,24,21))\n\nxtabs(count ~  Treatment+Improvement + Center, data=dat) -&gt; dat_cc\ndat_cc\n\n\n, , Center = 1\n\n         Improvement\nTreatment Yes No\n  Test     29 16\n  Placebo  14 31\n\n, , Center = 2\n\n         Improvement\nTreatment Yes No\n  Test     37  8\n  Placebo  24 21\n\n\nCode\nCMHtest(dat_cc,\n        strata=\"Center\",\n        types=\"ALL\",\n        overall=T)\n\n\n$`Center:1`\nCochran-Mantel-Haenszel Statistics for Treatment by Improvement \n    in stratum Center:1 \n\n                 AltHypothesis  Chisq Df      Prob\ngeneral    General association 9.9085  1 0.0016452\nrmeans  Row mean scores differ 9.9085  1 0.0016452\ncmeans  Col mean scores differ 9.9085  1 0.0016452\ncor        Nonzero correlation 9.9085  1 0.0016452\n\n\n$`Center:2`\nCochran-Mantel-Haenszel Statistics for Treatment by Improvement \n    in stratum Center:2 \n\n                 AltHypothesis  Chisq Df      Prob\ngeneral    General association 8.5025  1 0.0035465\nrmeans  Row mean scores differ 8.5025  1 0.0035465\ncmeans  Col mean scores differ 8.5025  1 0.0035465\ncor        Nonzero correlation 8.5025  1 0.0035465\n\n\n$ALL\nCochran-Mantel-Haenszel Statistics for Treatment by Improvement \n    Overall tests, controlling for all strata \n\n                 AltHypothesis  Chisq Df       Prob\ngeneral    General association 18.411  1 1.7807e-05\nrmeans  Row mean scores differ 18.411  1 1.7807e-05\ncmeans  Col mean scores differ 18.411  1 1.7807e-05\ncor        Nonzero correlation 18.411  1 1.7807e-05\n\n\n\n\n\nThe Mantel-Fleiss criterion was determined to be 36, which means the chi-square assumption holds.\n\\(Q_{MH}=18.4\\), \\(p &lt; 0.0001\\), there is strong evidence of an association between the treatment and improvement."
   },
   {
     "objectID": "Chapter3.html#example-3",
     "href": "Chapter3.html#example-3",
     "title": "EAB 770 - Chapter 3",
     "section": "Example",
-    "text": "Example\nThe table shows the results of an RCT for a test treatment designed for respiratory infections. Is there a significant association between the treatment and the outcome after controlling for the center?\n\nIs the Mantel-Fleiss criterion satisfied?\n\n\nSAS CodeR CodeAnswer\n\n\n\ndata resp;\nlength treatment $7.;\ninput treatment $ improvement $ center $ count;\ndatalines;\nTest Yes 1 29\nPlacebo Yes 1 14\nTest No 1 16\nPlacebo No 1 31\nTest Yes 2 37\nPlacebo Yes 2 24\nTest No 2 8\nPlacebo No 2 21\n;\n\n\nproc freq data=resp order=data;\nweight count;\ntables center*treatment*improvement / cmh (MF) nocol norow nopct;\nrun;\n\n\n\n\nCode\ndat  &lt;- expand.grid(Improvement = c(\"Yes\",\"No\"),\n                    Center=c(1,2),\n                    Treatment = c(\"Test\",\"Placebo\")\n                  ) |&gt; \nmutate(count = c(29,16,37,8,14,31,24,21))\n\nxtabs(count ~  Treatment+Improvement + Center, data=dat) -&gt; dat_cc\ndat_cc\n\n\n, , Center = 1\n\n         Improvement\nTreatment Yes No\n  Test     29 16\n  Placebo  14 31\n\n, , Center = 2\n\n         Improvement\nTreatment Yes No\n  Test     37  8\n  Placebo  24 21\n\n\nCode\nCMHtest(dat_cc,\n        strata=\"Center\",\n        types=\"ALL\",\n        overall=T)\n\n\n$`Center:1`\nCochran-Mantel-Haenszel Statistics for Treatment by Improvement \n    in stratum Center:1 \n\n                 AltHypothesis  Chisq Df      Prob\ngeneral    General association 9.9085  1 0.0016452\nrmeans  Row mean scores differ 9.9085  1 0.0016452\ncmeans  Col mean scores differ 9.9085  1 0.0016452\ncor        Nonzero correlation 9.9085  1 0.0016452\n\n\n$`Center:2`\nCochran-Mantel-Haenszel Statistics for Treatment by Improvement \n    in stratum Center:2 \n\n                 AltHypothesis  Chisq Df      Prob\ngeneral    General association 8.5025  1 0.0035465\nrmeans  Row mean scores differ 8.5025  1 0.0035465\ncmeans  Col mean scores differ 8.5025  1 0.0035465\ncor        Nonzero correlation 8.5025  1 0.0035465\n\n\n$ALL\nCochran-Mantel-Haenszel Statistics for Treatment by Improvement \n    Overall tests, controlling for all strata \n\n                 AltHypothesis  Chisq Df       Prob\ngeneral    General association 18.411  1 1.7807e-05\nrmeans  Row mean scores differ 18.411  1 1.7807e-05\ncmeans  Col mean scores differ 18.411  1 1.7807e-05\ncor        Nonzero correlation 18.411  1 1.7807e-05\n\n\n\n\n\nThe Mantel-Fleiss criterion was determined to be 36, which means the chi-square assumption holds.\n\\(Q_{MH}=18.4\\), \\(p &lt; 0.0001\\), there is strong evidence of an association between the treatment and improvement."
+    "text": "Example\n\n\nThe table shows the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios."
   },
   {
     "objectID": "Chapter3.html#common-odds-ratio",
@@ -1085,7 +1085,7 @@
     "href": "Chapter3.html#example-4",
     "title": "EAB 770 - Chapter 3",
     "section": "Example",
-    "text": "Example\n\n\nThe table shows the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios."
+    "text": "Example\nThe table shows the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios.\n\nSAS CodeAnswer\n\n\ndata ca;\ninput sex $ ECG $ disease $ count;\ndatalines;\nfemale &lt;0.1 yes 4\nfemale &lt;0.1 no 11\nfemale &gt;=0.1 yes 8\nfemale &gt;=0.1 no 10\nmale &lt;0.1 yes 9\nmale &lt;0.1 no 9\nmale &gt;=0.1 yes 21\nmale &gt;=0.1 no 6\n;\nproc freq data=ca ;\nweight count;\n1tables sex*disease / nocol nopct chisq measures;\n2tables sex*ECG*disease / nocol nopct cmh measures;\nrun;\n\n1\n\nTesting for an association between sex and disease status\n\n2\n\nUsing sex as a stratification variable/strata. measures includes common odds ratio plots.\n\n\n\n\n\nSex was determined to be associated with disease status (\\(\\chi^2=6.9, p=0.0084\\))\nControlling for sex, there is strong evidence that the ECG measurements are associated with disease status (\\(\\chi^2=4.5, p=0.03\\)).\nThe Breslow-Day test yielded a non-significant p-value (p=0.64), hence we can use the common odds ratios\nThe MH odds ratio was estimated to be 2.86 (95% CI: 1.1,7.5). We can interpret this value as: The odds of having the disease is 2.86 times higher for patients with a high ECG segment depression compared to those with a low ECG segment depression."
   },
   {
     "objectID": "Chapter3.html#example-5",
@@ -1711,31 +1711,11 @@
     ]
   },
   {
-    "objectID": "Chapter1.html#sas-example-contingency-table",
-    "href": "Chapter1.html#sas-example-contingency-table",
-    "title": "EAB 770 - Lecture 1",
-    "section": "SAS Example: Contingency Table",
-    "text": "SAS Example: Contingency Table\n\n\nproc freq data=respire;\nweight count;\ntables treat*outcome;\nrun;\n\n\nproc freq calls the FREQ procedure in SAS.\n\nNot defining data=respire means SAS will automatically use the most recently run data set.\n\nweight tells SAS the number of counts for each count\ntables creates the contingency table with row, column, and total percentages.\nrun; tells SAS to run the code. This is important!",
-    "crumbs": [
-      "Lecture 1"
-    ]
-  },
-  {
     "objectID": "Chapter1.html#sas-example-one-observation-per-row",
     "href": "Chapter1.html#sas-example-one-observation-per-row",
     "title": "EAB 770 - Lecture 1",
     "section": "SAS Example: One Observation per Row",
     "text": "SAS Example: One Observation per Row\n\n\ndata severe;\ninput treat $ outcome $ @@;\ndatalines;\nplacebo f placebo f placebo f\nplacebo f placebo f\nplacebo u placebo u placebo u\nplacebo u placebo u placebo u\nplacebo u placebo u placebo u\nplacebo u\ntest f test f test f\ntest f test f test f\ntest f test f\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u test u\ntest u test u\n;\n\n\nThis is an example of a data set where one row corresponds to one observational unit.\nThe @@ sign means that the data lines contain multiple observations. @@ basically means new line after two entries written in the datalines statement.",
-    "crumbs": [
-      "Lecture 1"
-    ]
-  },
-  {
-    "objectID": "Chapter1.html#sas-example-contingency-table-1",
-    "href": "Chapter1.html#sas-example-contingency-table-1",
-    "title": "EAB 770 - Lecture 1",
-    "section": "SAS Example: Contingency Table",
-    "text": "SAS Example: Contingency Table\n\n\nproc freq data=severe;\ntables treat*outcome / nocol nopct;\nrun;\n\n\nThe weight statement is not needed in the FREQ procedure when the data does not consist of aggregate counts.\nnocol suppresses the column percentages in the output\nnopct suppresses the total percentages in the output\nnorow suppresses the row percentages in the output",
     "crumbs": [
       "Lecture 1"
     ]
@@ -1776,26 +1756,6 @@
     "title": "EAB 770 - Lecture 1",
     "section": "Installing and Loading R Packages",
     "text": "Installing and Loading R Packages\nLike apps on a phone, R packages also need to be installed. These packages can be installed by running the following code snippet install.packages(\"PackageName\"). For example, to install the package tidyverse used for data manipulation and cleaning, you can run the following code:\ninstall.packages(\"tidyverse\")\nTo load this package in R, you can use the following syntax:\n\nlibrary(tidyverse)\n\n\n\n\n\n\n\nImportant\n\n\nYou must have an active internet connection to install R packages to your device.",
-    "crumbs": [
-      "Lecture 1"
-    ]
-  },
-  {
-    "objectID": "Chapter1.html#contingency-tables",
-    "href": "Chapter1.html#contingency-tables",
-    "title": "EAB 770 - Lecture 1",
-    "section": "Contingency Tables",
-    "text": "Contingency Tables\nTo create your own contingency table, you can use the data.frame() and xtabs() functions.\n\ncount_data &lt;- data.frame(Row = c(\"A\",\"A\",\"B\",\"B\"),\n                         Column = c(\"X\",\"Y\",\"X\",\"Y\"),\n                         Count = c(2,4,6,8))\ncount_data\n\n  Row Column Count\n1   A      X     2\n2   A      Y     4\n3   B      X     6\n4   B      Y     8\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 4\n  B 6 8",
-    "crumbs": [
-      "Lecture 1"
-    ]
-  },
-  {
-    "objectID": "Chapter1.html#exercise",
-    "href": "Chapter1.html#exercise",
-    "title": "EAB 770 - Lecture 1",
-    "section": "Exercise",
-    "text": "Exercise\n\nQuestionDistributionRSAS\n\n\nSuppose there are one hundred classrooms in a school, twenty of which have defective audiovisual equipment. If five classrooms were randomly selected for use at a conference, what is the probability that there are NO classrooms with defective audiovisual equipment?\n\n\nWe need to use the hypergeometric distribution to get P(X=0) where N=100, m=20, k=5.\n\n\n\nN &lt;- 100\nm &lt;- 20\nk &lt;- 5\n\ndhyper(x=0,m=m,n=N-m,k=k) \n\n[1] 0.3193094\n\n\n\n\ndata hypergeometric_prob;\np=pdf('HYPER', 0,100,20,5);\n;\nrun;",
     "crumbs": [
       "Lecture 1"
     ]
@@ -1861,11 +1821,11 @@
     ]
   },
   {
-    "objectID": "Chapter1.html#exercise-1",
-    "href": "Chapter1.html#exercise-1",
+    "objectID": "Chapter1.html#exercise",
+    "href": "Chapter1.html#exercise",
     "title": "EAB 770 - Lecture 1",
     "section": "Exercise",
-    "text": "Exercise\nSuppose that the survival probability of a new surgical procedure was 0.85. If a total of 200 patients went through the procedure independently, what is the probability that more than 190 of these patients survived the procedure?\n\nDistributionRSAS\n\n\nWe can consider the random variable to be those who survived the procedure. need to use a binomial distribution with a probability of success \\(p=0.85\\) out of a total sample size \\(n=200\\). We need to solve for \\(P(X&gt;190)\\).\n\n\n\np&lt;- 0.85\nn&lt;- 200\n\n1-pbinom(q=190,size=n,prob=p)\n\n[1] 2.005539e-06\n\n#OR\npbinom(q=190,size=n,prob=p,lower.tail=FALSE)\n\n[1] 2.005539e-06\n\n\n\n\ndata binomial_prob;\np=1-cdf('BINOMIAL', 190,0.85,200);\n;\nrun;",
+    "text": "Exercise\n\nQuestionDistributionRSAS\n\n\nSuppose there are one hundred classrooms in a school, twenty of which have defective audiovisual equipment. If five classrooms were randomly selected for use at a conference, what is the probability that there are NO classrooms with defective audiovisual equipment?\n\n\nWe need to use the hypergeometric distribution to get P(X=0) where N=100, m=20, k=5.\n\n\n\nN &lt;- 100\nm &lt;- 20\nk &lt;- 5\n\ndhyper(x=0,m=m,n=N-m,k=k) \n\n[1] 0.3193094\n\n\n\n\ndata hypergeometric_prob;\np=pdf('HYPER', 0,100,20,5);\n;\nrun;",
     "crumbs": [
       "Lecture 1"
     ]
@@ -1921,11 +1881,11 @@
     ]
   },
   {
-    "objectID": "Chapter1.html#exercise-2",
-    "href": "Chapter1.html#exercise-2",
+    "objectID": "Chapter1.html#exercise-1",
+    "href": "Chapter1.html#exercise-1",
     "title": "EAB 770 - Lecture 1",
     "section": "Exercise",
-    "text": "Exercise\n\nQuestionRSAS\n\n\nSuppose that over the last 50 years the average number of suicide attempts that occurred at a particular correctional facility each year is approximately 2.5. What is the probability that there are:\n\nExactly five suicide attempts at the facility in the next year.\nAt least ten suicide attempts at the facility in the next year.\n\n\n\n\n# Exactly 5\nlambda&lt;- 2.5\ndpois(5,lambda=lambda)\n\n[1] 0.06680094\n\n# At least 10 = 10 and higher\n\n1-ppois(q=9,lambda=lambda)\n\n[1] 0.0002773521\n\nppois(q=9,lambda=lambda,lower.tail = FALSE)\n\n[1] 0.0002773521\n\n\n\n\ndata pois_prob;\np1=pdf('POISSON',5,2.5)  ;\np2=1-cdf('POISSON',9,2.5)\n;\nrun;",
+    "text": "Exercise\nSuppose that the survival probability of a new surgical procedure was 0.85. If a total of 200 patients went through the procedure independently, what is the probability that more than 190 of these patients survived the procedure?\n\nDistributionRSAS\n\n\nWe can consider the random variable to be those who survived the procedure. need to use a binomial distribution with a probability of success \\(p=0.85\\) out of a total sample size \\(n=200\\). We need to solve for \\(P(X&gt;190)\\).\n\n\n\np&lt;- 0.85\nn&lt;- 200\n\n1-pbinom(q=190,size=n,prob=p)\n\n[1] 2.005539e-06\n\n#OR\npbinom(q=190,size=n,prob=p,lower.tail=FALSE)\n\n[1] 2.005539e-06\n\n\n\n\ndata binomial_prob;\np=1-cdf('BINOMIAL', 190,0.85,200);\n;\nrun;",
     "crumbs": [
       "Lecture 1"
     ]
@@ -2031,8 +1991,8 @@
     ]
   },
   {
-    "objectID": "Chapter1.html#exercise-3",
-    "href": "Chapter1.html#exercise-3",
+    "objectID": "Chapter1.html#exercise-2",
+    "href": "Chapter1.html#exercise-2",
     "title": "EAB 770 - Lecture 1",
     "section": "Exercise",
     "text": "Exercise\n\nQuestionRSAS\n\n\nSuppose that over the last 50 years the average number of suicide attempts that occurred at a particular correctional facility each year is approximately 2.5. What is the probability that there are:\n\nExactly five suicide attempts at the facility in the next year.\nAt least ten suicide attempts at the facility in the next year.\n\n\n\n\n# Exactly 5\nlambda&lt;- 2.5\ndpois(5,lambda=lambda)\n\n[1] 0.06680094\n\n# At least 10 = 10 and higher\n\n1-ppois(q=9,lambda=lambda)\n\n[1] 0.0002773521\n\nppois(q=9,lambda=lambda,lower.tail = FALSE)\n\n[1] 0.0002773521\n\n\n\n\ndata pois_prob;\np1=pdf('POISSON',5,2.5)  ;\np2=1-cdf('POISSON',9,2.5)\n;\nrun;",
@@ -2367,511 +2327,710 @@
     "href": "Chapter2.html#outline",
     "title": "EAB 770 - Chapter 2",
     "section": "Outline",
-    "text": "Outline\n\nContingency Tables\nChi-Square Statistics\nExact Tests\nDifference in Proportions\nOdds Ratio and Relative Risk\nSensitivity and Specificity\nMcNemar’s Test\nIncidence Densities\nPower Analysis"
+    "text": "Outline\n\nContingency Tables\nChi-Square Statistics\nExact Tests\nDifference in Proportions\nOdds Ratio and Relative Risk\nSensitivity and Specificity\nMcNemar’s Test\nIncidence Densities\nPower Analysis",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#x2-contingency-tables",
+    "href": "Chapter2.html#x2-contingency-tables",
+    "title": "EAB 770 - Chapter 2",
+    "section": "2x2 Contingency Tables",
+    "text": "2x2 Contingency Tables\n\n\n\nSummarizes categorical data\n\nResponse variable has two levels\nExploratory variable has two levels\n\nExample:\n\nTreatment/Placebo in RCT\nCase/Control in a retrospective study",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#contingency-tables-1",
     "href": "Chapter2.html#contingency-tables-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Contingency Tables",
-    "text": "Contingency Tables\nWe wish to determine whether there is an association between the row and column variables using the frequencies observed in each category.\n\n\n\n\n\n\nNote\n\n\nIs the risk variable associated with the prevalence rate?\n\n\n\nRecall: Intro to Statistics\n\nChi-square tests of homogeneity \\(H_0\\): The two populations (rows) have the same distribution of the column variable\nChi-square tests of independence \\(H_0\\): The row and column variables are independent of each other."
-  },
-  {
-    "objectID": "Chapter2.html#contingency-tables-2",
-    "href": "Chapter2.html#contingency-tables-2",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Contingency Tables",
-    "text": "Contingency Tables\nTo create your own contingency table, you can use the data.frame() and xtabs() functions.\n\ncount_data &lt;- data.frame(Row = c(\"A\",\"A\",\"B\",\"B\"),\n                         Column = c(\"X\",\"Y\",\"X\",\"Y\"),\n                         Count = c(2,4,6,8))\ncount_data\n\n  Row Column Count\n1   A      X     2\n2   A      Y     4\n3   B      X     6\n4   B      Y     8\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 4\n  B 6 8"
+    "text": "Contingency Tables\nWe wish to determine whether there is an association between the row and column variables using the frequencies observed in each category.\n\n\n\n\n\n\nNote\n\n\nIs the risk variable associated with the prevalence rate?\n\n\n\nRecall: Intro to Statistics\n\nChi-square tests of homogeneity \\(H_0\\): The two populations (rows) have the same distribution of the column variable\nChi-square tests of independence \\(H_0\\): The row and column variables are independent of each other.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#contingency-tables-convention",
     "href": "Chapter2.html#contingency-tables-convention",
     "title": "EAB 770 - Chapter 2",
     "section": "Contingency Tables: Convention",
-    "text": "Contingency Tables: Convention\nThe indices of contingency tables denote the row and column of each number. For a total sample size of \\(n\\),\n\n\n\n\\(n_{xy}\\) denotes the number at row \\(x\\) and column \\(y\\), also referred to as a joint frequency.\nSeeing a (+) sign indicates that it is a marginal sum, also referred to as marginal frequencies.\n\n\\(n_{x+}\\) denotes the sum of all columns in row \\(x\\).\n\\(n_{+y}\\) denotes the sum of all rows in column \\(y\\).\n\nThe placement of the + sign denotes the margin in which it was summed."
+    "text": "Contingency Tables: Convention\nThe indices of contingency tables denote the row and column of each number. For a total sample size of \\(n\\),\n\n\n\n\\(n_{xy}\\) denotes the number at row \\(x\\) and column \\(y\\), also referred to as a joint frequency.\nSeeing a (+) sign indicates that it is a marginal sum, also referred to as marginal frequencies.\n\n\\(n_{x+}\\) denotes the sum of all columns in row \\(x\\).\n\\(n_{+y}\\) denotes the sum of all rows in column \\(y\\).\n\nThe placement of the + sign denotes the margin in which it was summed.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#chi-square-statistics-1",
-    "href": "Chapter2.html#chi-square-statistics-1",
+    "objectID": "Chapter2.html#sas-example-contingency-table",
+    "href": "Chapter2.html#sas-example-contingency-table",
     "title": "EAB 770 - Chapter 2",
-    "section": "Chi-square Statistics",
-    "text": "Chi-square Statistics\nThe null hypothesis of no association (independence or homogeneity) between row and column variables imply that the totals are fixed. The probabilities of realization of each cell is determined by the hypergeometric distribution."
+    "section": "SAS Example: Contingency Table",
+    "text": "SAS Example: Contingency Table\n\n\ndata respire;\nlength treat $7. outcome $1. ;\ninput treat $ outcome $ count;\ndatalines;\nplacebo f 16\nplacebo u 48\ntest f 40\ntest u 20\n;\nrun;\n\nproc freq data=respire order=data;\nweight count;\ntables treat*outcome;\nrun;\n\n\nproc freq calls the FREQ procedure in SAS.\n\nNot defining data=respire means SAS will automatically use the most recently run data set.\n\norder=data means we are creating the rows and columns based on how the data was inputted, not alphabetical order.\nweight tells SAS the number of counts for each count\ntables creates the contingency table with row, column, and total percentages.\nrun; tells SAS to run the code. This is important!",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#chi-square-statistics-2",
-    "href": "Chapter2.html#chi-square-statistics-2",
+    "objectID": "Chapter2.html#contingency-tables-in-sas--long-format",
+    "href": "Chapter2.html#contingency-tables-in-sas--long-format",
     "title": "EAB 770 - Chapter 2",
-    "section": "Chi-square Statistics",
-    "text": "Chi-square Statistics\n\nRecall: Pearson Chi-square statistics\n\n\\[\nQ_P = \\sum_{i=1}^2\\sum_{j=1}^2 \\frac{(n_{ij}-m_{ij})^2}{m_{ij}}\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(m_{ij}\\) is the expected value of the number of observations in row \\(i\\) and column \\(j\\), \\(n_{ij}\\)."
+    "section": "Contingency Tables in SAS- Long Format",
+    "text": "Contingency Tables in SAS- Long Format\nWhen the data is not aggregated, the FREQ procedure can still be used to create contingency tables. We can use the import data procedure in SAS ODA to create work.spore from Spore.csv uploaded on Canvas.\nproc freq order=data data=severe;\nweight count;\ntables treat*outcome / chisq nocol;\nexact or;\nrun;",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#mantel-haenszel-chi-square-statistic",
-    "href": "Chapter2.html#mantel-haenszel-chi-square-statistic",
+    "objectID": "Chapter2.html#contingency-tables-in-r",
+    "href": "Chapter2.html#contingency-tables-in-r",
     "title": "EAB 770 - Chapter 2",
-    "section": "Mantel-Haenszel Chi-square statistic",
-    "text": "Mantel-Haenszel Chi-square statistic\nAnother form of the Chi-square statistic is the Mantel-Haenszel chi-square statistic, \\(Q\\). For \\(2\\times 2\\) contingency tables,\n\\[Q =  \\frac{(n_{11}-m_{11})^2}{v_{11}}\\]\n\\[m_{11} = n_{1+}n_{+1}/n; v_{11} = \\frac{n_{1+}n_{2+}n_{+1}n_{+2}}{n^2(n-1)}\\]\n\n\n\n\n\n\nNote\n\n\n\\(Q\\), also known as the randomization chi-square, is based on the condition that all marginal totals are fixed and the probability distribution of random allocation of units to groups is given by the hypergeometric distribution. \\(m_{11}\\) and \\(v_{11}\\) are the mean and variance of the hypergeometric distribution based on the \\(2 \\times 2\\) table, respectively."
+    "section": "Contingency Tables in R",
+    "text": "Contingency Tables in R\nTo create your own contingency table, you can use the data.frame() and xtabs() functions.\n\ncount_data &lt;- data.frame(Row = c(\"A\",\"A\",\"B\",\"B\"),\n                         Column = c(\"X\",\"Y\",\"X\",\"Y\"),\n                         Count = c(2,4,6,8))\ncount_data\n\n  Row Column Count\n1   A      X     2\n2   A      Y     4\n3   B      X     6\n4   B      Y     8\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 4\n  B 6 8\n\n\nYou can also use the expand.grid() function to create combinations of variable levels.\n\ncount_data &lt;- expand.grid(Row = factor(c(\"A\",\"B\"), levels=c(\"A\",\"B\")),\n                         Column = factor(c(\"X\",\"Y\"), levels=c(\"X\",\"Y\")))\n\ncount_data$Count = c(2,4,6,8)\n\ncount_data\n\n  Row Column Count\n1   A      X     2\n2   B      X     4\n3   A      Y     6\n4   B      Y     8\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 6\n  B 4 8\n\n\n\n\n\n\n\n\nNote\n\n\nordered can also be used to account for ordering in the row and column variables.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#pearson-chi-square-vs.-mantel-haenszel-chi-square",
-    "href": "Chapter2.html#pearson-chi-square-vs.-mantel-haenszel-chi-square",
+    "objectID": "Chapter2.html#contingency-tables-in-r--long-format",
+    "href": "Chapter2.html#contingency-tables-in-r--long-format",
     "title": "EAB 770 - Chapter 2",
-    "section": "Pearson Chi-square vs. Mantel-Haenszel Chi-square",
-    "text": "Pearson Chi-square vs. Mantel-Haenszel Chi-square\nThe relationship can also be approximated by the following relation:\n\\[Q_P = \\frac{n}{n-1}Q\\]\nFor large \\(n\\), both the MH chi-square and the Pearson chi-square approach a chi-square distribution with \\(1\\) degree of freedom (\\(\\chi^2_1\\)).\n\n\n\n\n\n\nWarning\n\n\nRule of thumb for \\(Q_P\\): The expected value for each cell should be at least 5, i.e. \\(m_{ij} \\geq 5\\) for all \\(i,j\\)\n\n\n\n\n\n\n\n\n\nTip\n\n\nBecause the MH chi-square statistic comes from a hypergeometric distribution, the MH chi-square statistic can be used for small samples using exact calculations of p-values from the hypergeometric distribution. This is not possible with the Pearson chi-square.\nThe MH chi-square statistic can also be extended for use in the presence of covariates/stratifying variables."
-  },
-  {
-    "objectID": "Chapter2.html#chi-square-distribution",
-    "href": "Chapter2.html#chi-square-distribution",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Chi-square distribution",
-    "text": "Chi-square distribution\n\n\n\nThe chi-square distribution, \\(\\chi_k^2\\), is defined by the number of degrees of freedom 𝑘, where 𝑘≥1.\nProperties include:\n\nThe value of \\(\\chi^2\\) can only assume non-negative values.\nThe \\(\\chi^2\\) distribution is asymmetric.\nThe sum of two or more independent chi-square variables also follows a chi-square distribution.\nMean: \\(k\\), Variance: \\(2k\\)"
-  },
-  {
-    "objectID": "Chapter2.html#chi-square-distribution-1",
-    "href": "Chapter2.html#chi-square-distribution-1",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Chi-square distribution",
-    "text": "Chi-square distribution\nFor large \\(n\\), both the MH/randomization chi-square and the Pearson chi-square approach a chi-square distribution with \\(1\\) degree of freedom (\\(\\chi^2_1\\)).\n\n\n\n\n\n\nWarning\n\n\n\nRule of thumb: The expected value for each cell should be at least 5, i.e. \\(m_{ij} \\geq 5\\) for all \\(i,j\\)"
-  },
-  {
-    "objectID": "Chapter2.html#hypothesis-testing",
-    "href": "Chapter2.html#hypothesis-testing",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Hypothesis testing",
-    "text": "Hypothesis testing\nThe null hypothesis of no association states that there is no association between row and column variables. - Assuming this is true and assumptions are satisfied, \\(Q\\) and \\(Q_P\\) follow a \\(\\chi^2_1\\) distribution for \\(2\\times2\\) tables.\n\n\n\n\n\n\nNote\n\n\nThe p-values are given by \\(P(\\chi^2 &gt; Q_P)\\) and \\(P(\\chi^2 &gt; Q)\\) for Pearson and MH Chi-squares, respectively."
-  },
-  {
-    "objectID": "Chapter2.html#hypothesis-testing-sas",
-    "href": "Chapter2.html#hypothesis-testing-sas",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Hypothesis Testing: SAS",
-    "text": "Hypothesis Testing: SAS"
-  },
-  {
-    "objectID": "Chapter2.html#freq-procedure",
-    "href": "Chapter2.html#freq-procedure",
-    "title": "EAB 770 - Chapter 2",
-    "section": "FREQ procedure",
-    "text": "FREQ procedure\n\nThe weight statement tells SAS if there is an aggregated count variable present in the data set.\nThe tables statement tells SAS to create a contingency table using the stated variables.\n\nUnder tables, you can include the cmh or the chisq option to calculate the randomization and Pearson chi-square values.\n\n\nBelow is a sample code.\nproc freq;\nweight count;\ntables a*b/ cmh chisq;\nrun;"
-  },
-  {
-    "objectID": "Chapter2.html#example",
-    "href": "Chapter2.html#example",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Example",
-    "text": "Example\nThe table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder.\n\nlibrary(tidyverse)\ndat &lt;- expand.grid(Treatment=factor(c(\"Placebo\",\"Test\"),levels=c(\"Placebo\",\"Test\")),\n                  Outcome = factor(c(\"Favorable\",\"Unfavorable\"),levels=c(\"Favorable\",\"Unfavorable\")))\n\ndat$count = c(16,40,48,20)\n\nxtabs(count ~ .,data=dat) \n\n         Outcome\nTreatment Favorable Unfavorable\n  Placebo        16          48\n  Test           40          20\n\n\n\nQuestionsSAS CodeR CodeAnswers\n\n\n\nWhat is the Pearson chi-square value?\nWhat is the Mantel-Haenszel chi-square value?\nIs there strong evidence of an association between treatment and outcome?\n\n\n\nSAScode &lt;- \"\ndata respire;\ninput treat $ outcome $ count; \ndatalines;\ntest f 40\ntest u 20\nplacebo f 16\nplacebo u 48\n;\n\nproc freq data=respire order=data; \nweight count;\ntables treat*outcome/chisq; \nrun;\n\"\n\n\n\n\nCode\ndat &lt;- expand.grid(Treatment=c(\"Placebo\",\"Test\"),\n                  Outcome = c(\"Favorable\",\"Unfavorable\")) |&gt; \nmutate(count = c(16,40,48,20))\n\nxtabs(count ~ .,data=dat) -&gt; dat_cc\n\n\nPearson Chi-square (without continuity adjustment)\n\n\nCode\n#install.packages(\"tidyverse\")\nlibrary(tidyverse)\ndat &lt;- expand.grid(Treatment=c(\"Placebo\",\"Test\"),\n                  Outcome = c(\"Favorable\",\"Unfavorable\")) |&gt; \nmutate(count = c(16,40,48,20))\n\nxtabs(count ~ .,data=dat) \n\n\n         Outcome\nTreatment Favorable Unfavorable\n  Placebo        16          48\n  Test           40          20\n\n\nCode\nchisq.test(dat_cc,correct=F)\n\n\n\n    Pearson's Chi-squared test\n\ndata:  dat_cc\nX-squared = 21.709, df = 1, p-value = 3.174e-06\n\n\nRandomization Chi-square\n\n# install.packages(\"vcdExtra\")\nlibrary(vcdExtra)\nCMH_CC &lt;-CMHtest(dat_cc) \nCMH_CC\n\nCochran-Mantel-Haenszel Statistics for Treatment by Outcome \n\n                 AltHypothesis  Chisq Df       Prob\ncor        Nonzero correlation 21.534  1 3.4768e-06\nrmeans  Row mean scores differ 21.534  1 3.4768e-06\ncmeans  Col mean scores differ 21.534  1 3.4768e-06\ngeneral    General association 21.534  1 3.4768e-06\n\n\n\n\n\nWhat is the Pearson chi-square value? 21.7\nWhat is the Mantel-Haenszel chi-square value? 21.53\nIs there strong evidence of an association between treatment and outcome?\n\np &lt; 0.0001; There is strong evidence of an association between the test treatment and the outcome."
-  },
-  {
-    "objectID": "Chapter2.html#example-1",
-    "href": "Chapter2.html#example-1",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Example",
-    "text": "Example\nThe table shown shows data from a study on treatments for healing severe infections. Calculate the exact p-value of this contingency table using the Fisher’s Exact Test.\n\nUnder the alternative hypothesis: The test treatment is positively associated with the outcome.\nUnder the alternative hypothesis: The test treatment is associated with the outcome.\nAt a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome?\n\n\n\n         Outcome\nTreatment Favorable Unfavorable\n  Test            5           1\n  Control         1           3"
+    "section": "Contingency Tables in R- Long Format",
+    "text": "Contingency Tables in R- Long Format\nWhen the data is not aggregated, the xtabs function can still be used to create contingency tables. First, we import Spore.csv from Canvas.\n\nspore &lt;- read.csv(\"Spore.csv\",stringsAsFactors = TRUE)\nspore\n\n   ID Treatment         Period Spore\n1   1      Test  Pre-Treatment  Full\n2   1      Test  Mid-Treatment  Some\n3   1      Test Post-Treatment  Some\n4   2      Test  Pre-Treatment  Full\n5   2      Test  Mid-Treatment  None\n6   2      Test Post-Treatment  None\n7   3      Test  Pre-Treatment  Full\n8   3      Test  Mid-Treatment  Some\n9   3      Test Post-Treatment  Some\n10  4      Test  Pre-Treatment  Full\n11  4      Test  Mid-Treatment  Some\n12  4      Test Post-Treatment      \n13  5      Test  Pre-Treatment  Full\n14  5      Test  Mid-Treatment  None\n15  5      Test Post-Treatment  None\n16  1   Placebo  Pre-Treatment  Full\n17  1   Placebo  Mid-Treatment  Full\n18  1   Placebo Post-Treatment  Full\n19  2   Placebo  Pre-Treatment  Full\n20  2   Placebo  Mid-Treatment  Some\n21  2   Placebo Post-Treatment  Some\n22  3   Placebo  Pre-Treatment  Full\n23  3   Placebo  Mid-Treatment  Some\n24  3   Placebo Post-Treatment  Some\n25  4   Placebo  Pre-Treatment  Full\n26  4   Placebo  Mid-Treatment  Some\n27  4   Placebo Post-Treatment  Some\n28  5   Placebo  Pre-Treatment  Some\n29  5   Placebo  Mid-Treatment      \n30  5   Placebo Post-Treatment      \n31  6      Test  Pre-Treatment  Full\n32  6      Test  Mid-Treatment  Some\n33  6      Test Post-Treatment  Some\n34  7      Test  Pre-Treatment  Full\n35  7      Test  Mid-Treatment  None\n36  7      Test Post-Treatment  None\n37  8      Test  Pre-Treatment  Full\n38  8      Test  Mid-Treatment  Some\n39  8      Test Post-Treatment  Some\n40  9      Test  Pre-Treatment  Full\n41  9      Test  Mid-Treatment  Some\n42  9      Test Post-Treatment  None\n43 10      Test  Pre-Treatment  Full\n44 10      Test  Mid-Treatment  Some\n45 10      Test Post-Treatment  Some\n46  6   Placebo  Pre-Treatment  Full\n47  6   Placebo  Mid-Treatment  Full\n48  6   Placebo Post-Treatment  Full\n49  7   Placebo  Pre-Treatment  Full\n50  7   Placebo  Mid-Treatment  Full\n51  7   Placebo Post-Treatment  Full\n52  8   Placebo  Pre-Treatment  Full\n53  8   Placebo  Mid-Treatment  Full\n54  8   Placebo Post-Treatment  Full\n55  9   Placebo  Pre-Treatment  Full\n56  9   Placebo  Mid-Treatment  Some\n57  9   Placebo Post-Treatment  Some\n58 10   Placebo  Pre-Treatment  Full\n59 10   Placebo  Mid-Treatment  Some\n60 10   Placebo Post-Treatment  Some\n61 11      Test  Pre-Treatment  Full\n62 11      Test  Mid-Treatment  Some\n63 11      Test Post-Treatment  None\n64 12      Test  Pre-Treatment  Full\n65 12      Test  Mid-Treatment  Some\n66 12      Test Post-Treatment  None\n67 13      Test  Pre-Treatment  Full\n68 13      Test  Mid-Treatment  Some\n69 13      Test Post-Treatment  Some\n70 14      Test  Pre-Treatment  Full\n71 14      Test  Mid-Treatment  None\n72 14      Test Post-Treatment  None\n73 15      Test  Pre-Treatment  Full\n74 15      Test  Mid-Treatment  None\n75 15      Test Post-Treatment  None\n76 11   Placebo  Pre-Treatment  Full\n77 11   Placebo  Mid-Treatment  Some\n78 11   Placebo Post-Treatment  Some\n79 12   Placebo  Pre-Treatment  Full\n80 12   Placebo  Mid-Treatment  Some\n81 12   Placebo Post-Treatment  Some\n82 13   Placebo  Pre-Treatment  Full\n83 13   Placebo  Mid-Treatment  Some\n84 13   Placebo Post-Treatment  Some\n85 14   Placebo  Pre-Treatment  Full\n86 14   Placebo  Mid-Treatment  Full\n87 14   Placebo Post-Treatment  Full\n88 15   Placebo  Pre-Treatment  Full\n89 15   Placebo  Mid-Treatment  Full\n90 15   Placebo Post-Treatment  Full\n\nxtabs(~Treatment+Spore,data=spore)\n\n         Spore\nTreatment    Full None Some\n  Placebo  2   26    0   17\n  Test     1   15   13   16",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#exercise",
     "href": "Chapter2.html#exercise",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nSuppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.\nEnter the data in SAS using the data step and generate the contingency tables. Name the data set enjoy.\n\n\n\n\n\n\n\n\n\n\n\n\nStrongly Agree\nAgree\nNeutral\nDisagree\nStrongly Disagree\n\n\n\n\nSophomore\n24\n43\n12\n25\n12\n\n\nSeniors\n19\n37\n24\n32\n21\n\n\n\n\nR CodeSAS Code\n\n\nOR\n\nenjoy &lt;- expand.grid(year=factor(c(\"Sophomore\",\"Seniors\"), levels = c(\"Sophomore\",\"Seniors\")),\n                     response = factor(c(\"SA\",\"A\",\"N\",\"D\",\"SD\"),levels = c(\"SA\",\"A\",\"N\",\"D\",\"SD\")))\nenjoy$Count &lt;- c(24,19,43,37,12,24,25,32,12,21)\nxtabs(Count~year+response,data=enjoy)\n\n           response\nyear        SA  A  N  D SD\n  Sophomore 24 43 12 25 12\n  Seniors   19 37 24 32 21\n\n\n\n\nThere are many ways to code the data step. Here’s one way to do it!\ndata enjoy;\nlength year $9. response $2.;\ninput year $ response $ count @@;\ndatalines;\nsophomore SA 24 sophomore A 43\nsophomore N 12\nsophomore D 25 sophomore SD 12\nsenior SA 19 senior A 37\nsenior N 24\nsenior D 32 senior SD 21\n;\n\nproc freq order=data data=enjoy;\nweight count;\ntables year*response;\nrun;"
+    "text": "Exercise\nSuppose a survey asking sophomores and senior students whether they agree with the statement “I enjoyed my in-person classes this semester.” yielded the following results.\nEnter the data in SAS using the data step and generate the contingency tables. Name the data set enjoy.\n\n\n\n\n\n\n\n\n\n\n\n\nStrongly Agree\nAgree\nNeutral\nDisagree\nStrongly Disagree\n\n\n\n\nSophomore\n24\n43\n12\n25\n12\n\n\nSeniors\n19\n37\n24\n32\n21\n\n\n\n\nR CodeSAS Code\n\n\nOR\n\nenjoy &lt;- expand.grid(year=factor(c(\"Sophomore\",\"Seniors\"), levels = c(\"Sophomore\",\"Seniors\")),\n                     response = factor(c(\"SA\",\"A\",\"N\",\"D\",\"SD\"),levels = c(\"SA\",\"A\",\"N\",\"D\",\"SD\")))\nenjoy$Count &lt;- c(24,19,43,37,12,24,25,32,12,21)\nxtabs(Count~year+response,data=enjoy)\n\n           response\nyear        SA  A  N  D SD\n  Sophomore 24 43 12 25 12\n  Seniors   19 37 24 32 21\n\n\n\n\nThere are many ways to code the data step. Here’s one way to do it!\ndata enjoy;\nlength year $9. response $2.;\ninput year $ response $ count @@;\ndatalines;\nsophomore SA 24 sophomore A 43\nsophomore N 12\nsophomore D 25 sophomore SD 12\nsenior SA 19 senior A 37\nsenior N 24\nsenior D 32 senior SD 21\n;\n\nproc freq order=data data=enjoy;\nweight count;\ntables year*response;\nrun;",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#independence",
+    "href": "Chapter2.html#independence",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Independence",
+    "text": "Independence\nIf the two categorical variables are independent of each other, they are not associated.\n\n\n\n\n\n\nNote\n\n\nIndependence also means that the joint probability \\(p_{ij}\\) can be determined solely on the basis of the marginal probabilities. These can be estimated using sample data.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#chi-square-statistics-1",
+    "href": "Chapter2.html#chi-square-statistics-1",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Chi-square Statistics",
+    "text": "Chi-square Statistics\nThe null hypothesis of no association (independence or homogeneity) between row and column variables imply that the totals are fixed. The probabilities of realization of each cell is determined by the hypergeometric distribution.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#chi-square-distribution",
+    "href": "Chapter2.html#chi-square-distribution",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Chi-square distribution",
+    "text": "Chi-square distribution\n\n\n\nThe chi-square distribution, \\(\\chi_k^2\\), is defined by the number of degrees of freedom 𝑘, where 𝑘≥1.\nProperties include:\n\nThe value of \\(\\chi^2\\) can only assume non-negative values.\nThe \\(\\chi^2\\) distribution is asymmetric.\nThe sum of two or more independent chi-square variables also follows a chi-square distribution.\nMean: \\(k\\), Variance: \\(2k\\)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#pearson-chi-square-statistic",
+    "href": "Chapter2.html#pearson-chi-square-statistic",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Pearson Chi-square Statistic",
+    "text": "Pearson Chi-square Statistic\nThe Pearson Chi-square statistic can be written in terms of the joint frequency n_ij and the expected frequency m_ij.\n\\[Q_P = \\sum_{i=1}^2\\sum_{j=1}^2 \\frac{(n_{ij}-m_{ij})^2}{m_{ij}}\\]\n\n\n\n\n\n\nNote\n\n\n\\(m_{ij}\\) is the expected value of the number of observations in row \\(i\\) and column \\(j\\), \\(n_{ij}\\). The expected frequency \\(m_{ij}\\) can be calculated based on the null hypothesis assumption.\n\nIndependence: \\(p_{ij}=p_{i+}p_{+j} \\to m_{ij} = \\frac{n_{i+}n_{+j}}{n}\\)\nHomogeneity: \\(p_{i+}=n_{i+}/n; p_{+j}=n_{+j}/n\\to m_{ij} = \\frac{n_{i+}n_{+j}}{n}\\)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#mantel-haenszel-chi-square-statistic",
+    "href": "Chapter2.html#mantel-haenszel-chi-square-statistic",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Mantel-Haenszel Chi-square statistic",
+    "text": "Mantel-Haenszel Chi-square statistic\nAnother form of the Chi-square statistic is the Mantel-Haenszel chi-square statistic, \\(Q\\). For \\(2\\times 2\\) contingency tables,\n\\[Q =  \\frac{(n_{11}-m_{11})^2}{v_{11}}\\]\n\\[m_{11} = n_{1+}n_{+1}/n; v_{11} = \\frac{n_{1+}n_{2+}n_{+1}n_{+2}}{n^2(n-1)}\\]\n\n\n\n\n\n\nNote\n\n\n\\(Q\\), also known as the randomization chi-square, is based on the condition that all marginal totals are fixed and the probability distribution of random allocation of units to groups is given by the hypergeometric distribution. \\(m_{11}\\) and \\(v_{11}\\) are the mean and variance of the hypergeometric distribution based on the \\(2 \\times 2\\) table, respectively.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#pearson-chi-square-vs.-mantel-haenszel-chi-square",
+    "href": "Chapter2.html#pearson-chi-square-vs.-mantel-haenszel-chi-square",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Pearson Chi-square vs. Mantel-Haenszel Chi-square",
+    "text": "Pearson Chi-square vs. Mantel-Haenszel Chi-square\nThe relationship can also be approximated by the following relation:\n\\[Q_P = \\frac{n}{n-1}Q\\]\nFor large \\(n\\), both the MH chi-square and the Pearson chi-square approach a chi-square distribution with \\(1\\) degree of freedom (\\(\\chi^2_1\\)).\n\n\n\n\n\n\nWarning\n\n\nRule of thumb for \\(Q_P\\): The expected value for each cell should be at least 5, i.e. \\(m_{ij} \\geq 5\\) for all \\(i,j\\)\n\n\n\n\n\n\n\n\n\nTip\n\n\nBecause the MH chi-square statistic comes from a hypergeometric distribution, the MH chi-square statistic can be used for small samples using exact calculations of p-values from the hypergeometric distribution. This is not possible with the Pearson chi-square.\nThe MH chi-square statistic can also be extended for use in the presence of covariates/stratifying variables.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#hypothesis-testing",
+    "href": "Chapter2.html#hypothesis-testing",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Hypothesis testing",
+    "text": "Hypothesis testing\nThe null hypothesis of no association states that there is no association between row and column variables. - Assuming this is true and assumptions are satisfied, \\(Q\\) and \\(Q_P\\) follow a \\(\\chi^2_1\\) distribution for \\(2\\times2\\) tables.\n\n\n\n\n\n\nNote\n\n\nThe p-values are given by \\(P(\\chi^2 &gt; Q_P)\\) and \\(P(\\chi^2 &gt; Q)\\) for Pearson and MH Chi-squares, respectively.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#hypothesis-testing-sas",
+    "href": "Chapter2.html#hypothesis-testing-sas",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Hypothesis Testing: SAS",
+    "text": "Hypothesis Testing: SAS",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#sas-freq-procedure",
+    "href": "Chapter2.html#sas-freq-procedure",
+    "title": "EAB 770 - Chapter 2",
+    "section": "SAS: FREQ procedure",
+    "text": "SAS: FREQ procedure\n\nThe weight statement tells SAS if there is an aggregated count variable present in the data set.\nThe tables statement tells SAS to create a contingency table using the stated variables.\n\nUnder tables, you can include the cmh or the chisq option to calculate the randomization and Pearson chi-square values.\n\n\nShown below is a sample SAS code.\nproc freq;\nweight count;\ntables a*b/ cmh chisq;\nrun;",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#r-vcdextra",
+    "href": "Chapter2.html#r-vcdextra",
+    "title": "EAB 770 - Chapter 2",
+    "section": "R: vcdExtra",
+    "text": "R: vcdExtra\nIn R, the vcdExtra package is required to perform the Mantel-Haenszel chi-square tests. The function CMHtest() provides the value of the Mantel-Haenszel statistic, while chisq.test() provides the Pearson chi-square statistic.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#example",
+    "href": "Chapter2.html#example",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Example",
+    "text": "Example\nThe table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder.\n\nlibrary(tidyverse)\ndat &lt;- expand.grid(Treatment=factor(c(\"Placebo\",\"Test\"),levels=c(\"Placebo\",\"Test\")),\n                  Outcome = factor(c(\"Favorable\",\"Unfavorable\"),levels=c(\"Favorable\",\"Unfavorable\")))\n\ndat$count = c(16,40,48,20)\n\nxtabs(count ~ .,data=dat) \n\n         Outcome\nTreatment Favorable Unfavorable\n  Placebo        16          48\n  Test           40          20\n\n\n\nQuestionsSAS CodeR CodeAnswers\n\n\n\nWhat is the Pearson chi-square value?\nWhat is the Mantel-Haenszel chi-square value?\nIs there strong evidence of an association between treatment and outcome?\n\n\n\nSAScode &lt;- \"\ndata respire;\ninput treat $ outcome $ count; \ndatalines;\ntest f 40\ntest u 20\nplacebo f 16\nplacebo u 48\n;\n\nproc freq data=respire order=data; \nweight count;\ntables treat*outcome/chisq; \nrun;\n\"\n\n\n\n\nCode\ndat &lt;- expand.grid(Treatment=c(\"Placebo\",\"Test\"),\n                  Outcome = c(\"Favorable\",\"Unfavorable\")) |&gt; \nmutate(count = c(16,40,48,20))\n\nxtabs(count ~ .,data=dat) -&gt; dat_cc\n\n\nPearson Chi-square (without continuity adjustment)\n\n\nCode\n#install.packages(\"tidyverse\")\nlibrary(tidyverse)\ndat &lt;- expand.grid(Treatment=c(\"Placebo\",\"Test\"),\n                  Outcome = c(\"Favorable\",\"Unfavorable\")) |&gt; \nmutate(count = c(16,40,48,20))\n\nxtabs(count ~ .,data=dat) \n\n\n         Outcome\nTreatment Favorable Unfavorable\n  Placebo        16          48\n  Test           40          20\n\n\nCode\nchisq.test(dat_cc,correct=F)\n\n\n\n    Pearson's Chi-squared test\n\ndata:  dat_cc\nX-squared = 21.709, df = 1, p-value = 3.174e-06\n\n\nRandomization Chi-square\n\n# install.packages(\"vcdExtra\")\nlibrary(vcdExtra)\nCMH_CC &lt;-CMHtest(dat_cc) \nCMH_CC\n\nCochran-Mantel-Haenszel Statistics for Treatment by Outcome \n\n                 AltHypothesis  Chisq Df       Prob\ncor        Nonzero correlation 21.534  1 3.4768e-06\nrmeans  Row mean scores differ 21.534  1 3.4768e-06\ncmeans  Col mean scores differ 21.534  1 3.4768e-06\ngeneral    General association 21.534  1 3.4768e-06\n\n\n\n\n\nWhat is the Pearson chi-square value? 21.7\nWhat is the Mantel-Haenszel chi-square value? 21.53\nIs there strong evidence of an association between treatment and outcome?\n\np &lt; 0.0001; There is strong evidence of an association between the test treatment and the outcome.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#exercise-1",
     "href": "Chapter2.html#exercise-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nSuppose we wish to determine if the frequency of falls is related to wheelchair use for Polio survivors. The data is shown in the table.\n\n\n            Wheelchair\nFall         Yes  No\n  Fallers     62 121\n  Nonfallers  18  32\n\n\n\nQuestionsSAS codeR\n\n\n\nWrite the code to enter the data and analyze using the FREQ procedure.\nWhat is the Pearson chi-square value?\nWhat is the Mantel-Haenszel chi-square value?\nUsing a significance level of 0.05, do we have sufficient evidence to warrant the conclusion that wheelchair use and falling are associated?\n\n\n\ndata wheelchair;\ninput fall $ wheelchair $ count;\ndatalines;\nf yes 62\nn yes 18\nf no 121\nn no 32\n;\n\nproc freq data=wheelchair order=data;\nweight count;\ntables fall*wheelchair/chisq;\nrun;\n\n\nPearson Chi-square (without continuity adjustment)\n\n#install.packages(\"tidyverse\")\n\nchisq.test(dat_cc, correct = F)\n\n\n    Pearson's Chi-squared test\n\ndata:  dat_cc\nX-squared = 0.078299, df = 1, p-value = 0.7796\n\n\nRandomization Chi-square\n\n# install.packages(\"vcdExtra\")\nCMH_CC &lt;-CMHtest(dat_cc) \nCMH_CC$table \n\n             Chisq Df     Prob\ncor     0.07796307  1 0.780077\nrmeans  0.07796307  1 0.780077\ncmeans  0.07796307  1 0.780077\ngeneral 0.07796307  1 0.780077"
+    "text": "Exercise\nSuppose we wish to determine if the frequency of falls is related to wheelchair use for Polio survivors. The data is shown in the table.\n\n\n            Wheelchair\nFall         Yes  No\n  Fallers     62 121\n  Nonfallers  18  32\n\n\n\nQuestionsSAS codeR\n\n\n\nWrite the code to enter the data and analyze using the FREQ procedure.\nWhat is the Pearson chi-square value?\nWhat is the Mantel-Haenszel chi-square value?\nUsing a significance level of 0.05, do we have sufficient evidence to warrant the conclusion that wheelchair use and falling are associated?\n\n\n\ndata wheelchair;\ninput fall $ wheelchair $ count;\ndatalines;\nf yes 62\nn yes 18\nf no 121\nn no 32\n;\n\nproc freq data=wheelchair order=data;\nweight count;\ntables fall*wheelchair/chisq;\nrun;\n\n\nPearson Chi-square (without continuity adjustment)\n\n#install.packages(\"tidyverse\")\n\nchisq.test(dat_cc, correct = F)\n\n\n    Pearson's Chi-squared test\n\ndata:  dat_cc\nX-squared = 0.078299, df = 1, p-value = 0.7796\n\n\nRandomization Chi-square\n\n# install.packages(\"vcdExtra\")\nCMH_CC &lt;-CMHtest(dat_cc) \nCMH_CC$table \n\n             Chisq Df     Prob\ncor     0.07796307  1 0.780077\nrmeans  0.07796307  1 0.780077\ncmeans  0.07796307  1 0.780077\ngeneral 0.07796307  1 0.780077",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#fishers-exact-test",
     "href": "Chapter2.html#fishers-exact-test",
     "title": "EAB 770 - Chapter 2",
     "section": "Fisher’s Exact Test",
-    "text": "Fisher’s Exact Test\nThe chi-square distribution assumption for \\(Q\\) and \\(Q_P\\) includes a large sample assumption.\n\n\n\n\n\n\nWarning\n\n\nWhat if \\(m_{ij} &lt; 5\\)?\n\n\n\nThe Fisher’s Exact Test can be used to analyze these contingency tables."
+    "text": "Fisher’s Exact Test\nThe chi-square distribution assumption for \\(Q\\) and \\(Q_P\\) includes a large sample assumption.\n\n\n\n\n\n\nWarning\n\n\nWhat if \\(m_{ij} &lt; 5\\)?\n\n\n\nThe Fisher’s Exact Test can be used to analyze these contingency tables.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#fishers-exact-test-1",
     "href": "Chapter2.html#fishers-exact-test-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Fisher’s Exact Test",
-    "text": "Fisher’s Exact Test\nFisher’s Exact Test is based on the hypergeometric distribution. The test calculates an exact p-value, unlike the chi-square test which only uses an approximation.\n\n\n\n\n\n\nNote\n\n\nThe test is easy to calculate for \\(2 \\times 2\\) and total sample sizes below 50, but computationally expensive as the number increases.\n\n\n\nThe p-value can be calculated using the hypergeometric distribution with the following parameters: \\(Hyper(N=n,m=n_{+1},k=n_{1+})\\)"
-  },
-  {
-    "objectID": "Chapter2.html#hypergeometric-distribution",
-    "href": "Chapter2.html#hypergeometric-distribution",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Hypergeometric distribution",
-    "text": "Hypergeometric distribution\nThe hypergeometric distribution describes the probability of the cell count for the (i,j) cell in a \\(2\\times2\\) table assuming the null hypothesis of no association assuming the null hypothesis of no association is true.\n\\[\nP(n_{11}) = \\frac{n_{1+}!n_{2+}!n_{+1}!n_{+2}!}{n! n_{11}!n_{12}!n_{21}!n_{22}!}\n\\]\n\nOne of margins can be regarded as fixed depending on the treatment assignment/sampling method.\nTo get the exact p-value, we sum the probabilities of tables that are as likely or less likely given the fixed margins."
+    "text": "Fisher’s Exact Test\nFisher’s Exact Test is based on the hypergeometric distribution. The test calculates an exact p-value, unlike the chi-square test which only uses an approximation.\n\n\n\n\n\n\nNote\n\n\nThe test is easy to calculate for \\(2 \\times 2\\) and total sample sizes below 50, but computationally expensive as the number increases.\n\n\n\nThe p-value can be calculated using the hypergeometric distribution with the following parameters: \\(Hyper(N=n,m=n_{+1},k=n_{1+})\\)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#fishers-exact-test-hypotheses",
     "href": "Chapter2.html#fishers-exact-test-hypotheses",
     "title": "EAB 770 - Chapter 2",
     "section": "Fisher’s Exact Test: Hypotheses",
-    "text": "Fisher’s Exact Test: Hypotheses\nNull hypothesis \\(H_0\\): there is no association between the row and column variables\n\nOne sided \\(H_a\\): There is a positive/negative association between the row and column variables. OR One combination of the row and column variable levels is more favored compared to the others.\nTwo-sided \\(H_a\\): there is an association between the row and column variables.\n\n\n\n\n\n\n\nNote\n\n\nTo solve the exact p-value using the hypergeometric distribution, only add probabilities of outcomes that have lower probabilities than the observed value in the direction of the alternative hypotheses."
+    "text": "Fisher’s Exact Test: Hypotheses\nNull hypothesis \\(H_0\\): there is no association between the row and column variables\n\nOne sided \\(H_a\\): There is a positive/negative association between the row and column variables. OR One combination of the row and column variable levels is more favored compared to the others.\nTwo-sided \\(H_a\\): there is an association between the row and column variables.\n\n\n\n\n\n\n\nNote\n\n\nTo solve the exact p-value using the hypergeometric distribution, only add probabilities of outcomes that have lower probabilities than the observed value in the direction of the alternative hypotheses.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#fishers-exact-test-sas",
     "href": "Chapter2.html#fishers-exact-test-sas",
     "title": "EAB 770 - Chapter 2",
     "section": "Fisher’s Exact Test: SAS",
-    "text": "Fisher’s Exact Test: SAS\nIncluding the exact or the chisq option under the tables statement will yield the results of the exact test.\nproc freq;\nweight count;\ntables a*b/ exact chisq;\nrun;"
+    "text": "Fisher’s Exact Test: SAS\nIncluding the exact or the chisq option under the tables statement will yield the results of the exact test.\nproc freq;\nweight count;\ntables a*b/ exact chisq;\nrun;",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#fishers-exact-test-r",
+    "href": "Chapter2.html#fishers-exact-test-r",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Fisher’s Exact Test: R",
+    "text": "Fisher’s Exact Test: R\nThe fisher.test() can perform Fisher’s exact test in R using a contingency table as input.\n\nfisher.test(contingency_table,alternative=\"two.sided\")",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#example-1",
+    "href": "Chapter2.html#example-1",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Example",
+    "text": "Example\nThe table shown shows data from a study on treatments for healing severe infections. Calculate the exact p-value of this contingency table using the Fisher’s Exact Test.\n\nUnder the alternative hypothesis: The test treatment is positively associated with the outcome.\nUnder the alternative hypothesis: The test treatment is associated with the outcome.\nAt a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome?\n\n\n\n         Outcome\nTreatment Favorable Unfavorable\n  Test            5           1\n  Control         1           3",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#example-2",
     "href": "Chapter2.html#example-2",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\n\nSAS CodeR CodeManual p-values: 1-sidedManual p-values: 2-sidedAnswers\n\n\ndata severe;\ninput treat $ outcome $ count;\ndatalines;\nTest f 5\nTest u 1\nControl f 1\nControl u 3\n;\nproc freq order=data data=severe;\nweight count;\ntables treat*outcome / chisq nocol;\nrun;\n\n\n\ndat &lt;- expand.grid(Treatment=factor(c(\"Test\",\"Control\"),levels=c(\"Test\",\"Control\")),\n                  Outcome = factor(c(\"Favorable\",\"Unfavorable\"),levels=c(\"Favorable\",\"Unfavorable\"))) \ndat$count &lt;- c(5,1,1,3)\n\ndat_cc &lt;- xtabs(count ~ .,data=dat) \ndat_cc\n\n         Outcome\nTreatment Favorable Unfavorable\n  Test            5           1\n  Control         1           3\n\n\n\nfisher.test(dat_cc, alternative = \"greater\") # one-sided\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.119\nalternative hypothesis: true odds ratio is greater than 1\n95 percent confidence interval:\n 0.5819    Inf\nsample estimates:\nodds ratio \n  10.29391 \n\nfisher.test(dat_cc,alternative= \"two.sided\")\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.1905\nalternative hypothesis: true odds ratio is not equal to 1\n95 percent confidence interval:\n   0.40161 930.24692\nsample estimates:\nodds ratio \n  10.29391 \n\n\n\n\n\nOne-sided hypothesis (+) corresponds to the the probabilities \\(P(X&gt;=5)\\) which are equal to or less than \\(P(X=5)\\).\n\n\nN &lt;- 5+1+1+3\nm &lt;- 6\nk &lt;- 6\n\ndhyper(x=5,m=m,n=N-m,k=k)\n\n[1] 0.1142857\n\n\nFor X &gt; 5, the only possible value of X is 6.\n\ndhyper(x=6,m=m,n=N-m,k=k)\n\n[1] 0.004761905\n\n\nThe p-value is then the sum of these two probabilities:\n\ndhyper(x=5,m=m,n=N-m,k=k) + dhyper(x=6,m=m,n=N-m,k=k)\n\n[1] 0.1190476\n\n\n\n\n\nTwo-sided hypothesis need to include values \\(P(X&lt;5)\\) that have probabilities lower than \\(P(X=5)\\). These probabilities will be added to the one-sided p-value to get the two-sided p-value.\n\n\ndhyper(x=4,m=m,n=N-m,k=k)\n\n[1] 0.4285714\n\ndhyper(x=3,m=m,n=N-m,k=k)\n\n[1] 0.3809524\n\ndhyper(x=2,m=m,n=N-m,k=k)\n\n[1] 0.07142857\n\ndhyper(x=1,m=m,n=N-m,k=k)\n\n[1] 0\n\ndhyper(x=0,m=m,n=N-m,k=k)\n\n[1] 0\n\n\n\\(P(X=0)\\), \\(P(X=1)\\), and \\(P(X=2)\\) have lower probabilities compared to \\(P(X=5)\\). Hence, we add these probabilities to the one-sided p-value to get the two-sided p-value.\n\ndhyper(x=5,m=m,n=N-m,k=k) + dhyper(x=6,m=m,n=N-m,k=k) + dhyper(x=2,m=m,n=N-m,k=k) + dhyper(x=1,m=m,n=N-m,k=k) + dhyper(x=0,m=m,n=N-m,k=k) \n\n[1] 0.1904762\n\n\n\n\n\nUnder the alternative hypothesis: The test treatment is positively associated with the outcome. p=0.119\nUnder the alternative hypothesis: The test treatment is associated with the outcome. p= 0.1905\nAt a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome? At \\(\\alpha = 0.10\\), we do not have sufficient evidence to conclude that treatment is associated with the outcomes in healing severe infections.\n\n\n\n\n\n\n\nNote\n\n\nIn SAS, be careful when selecting which one-sided alternative hypothesis to interpret from the results!"
-  },
-  {
-    "objectID": "Chapter2.html#example-3",
-    "href": "Chapter2.html#example-3",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Example",
-    "text": "Example\nThe contingency table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder.\n\n\n         Outcome\nTreatment Favorable Unfavorable\n  Placebo        16          48\n  Test           40          20\n\n\n\nQuestionSAS CodeR CodeAnswers\n\n\nCalculate the 95% confidence interval for the difference in proportion of favorable outcomes for both treatment groups.\n\nWald\nCorrected Wald\nAgresti-Caffo\nMiettinen-Nurminen\n\n\n\ndata respire;\ninput treat $ outcome $ count; \ndatalines;\ntest f 40\ntest u 20\nplacebo f 16\nplacebo u 48\n;\n\nproc freq data=respire order=data; \nweight count; \ntables treat*outcome/riskdiff(cl=(mn ac)) alpha=0.05; \ntables treat*outcome/riskdiff(correct) alpha=0.05; \nrun;\n\n\n\ndat &lt;- expand.grid(Treatment=c(\"Placebo\",\"Test\"),\n                  Outcome = c(\"Favorable\",\"Unfavorable\")) \ndat$count &lt;- c(16,40,48,20)\n\ndat_cc &lt;- xtabs(count ~ .,data=dat)\ndat_cc\n\n         Outcome\nTreatment Favorable Unfavorable\n  Placebo        16          48\n  Test           40          20\n\nlibrary(DescTools)\nBinomDiffCI(x1=40,\n            n1 = 40+20,\n            x2=16,\n            n2=16+48,\n            method=c('wald','waldcc','ac','mn'),\n            conf.level = 0.95) \n\n             est    lwr.ci    upr.ci\nwald   0.4166667 0.2570362 0.5762972\nwaldcc 0.4166667 0.2408903 0.5924430\nac     0.4166667 0.2455745 0.5618546\nmn     0.4166667 0.2460145 0.5626554\n\n\n\n\nThe estimated difference in proportion is 0.4167 with the following 95% confidence intervals: - Wald: 0.2570-0.5763 - Corrected Wald: 0.2409-0.5924 - Agresti-Caffo: 0.2456-0.5416 - Miettinen-Nurminen 0.2460-0.5627"
+    "text": "Example\n\nSAS CodeR CodeManual p-values: 1-sidedManual p-values: 2-sidedAnswers\n\n\ndata severe;\ninput treat $ outcome $ count;\ndatalines;\nTest f 5\nTest u 1\nControl f 1\nControl u 3\n;\nproc freq order=data data=severe;\nweight count;\ntables treat*outcome / chisq nocol;\nrun;\n\n\n\ndat &lt;- expand.grid(Treatment=factor(c(\"Test\",\"Control\"),levels=c(\"Test\",\"Control\")),\n                  Outcome = factor(c(\"Favorable\",\"Unfavorable\"),levels=c(\"Favorable\",\"Unfavorable\"))) \ndat$count &lt;- c(5,1,1,3)\n\ndat_cc &lt;- xtabs(count ~ Treatment+Outcome,data=dat) \ndat_cc\n\n         Outcome\nTreatment Favorable Unfavorable\n  Test            5           1\n  Control         1           3\n\n\n\nfisher.test(dat_cc, alternative = \"greater\") # one-sided\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.119\nalternative hypothesis: true odds ratio is greater than 1\n95 percent confidence interval:\n 0.5819    Inf\nsample estimates:\nodds ratio \n  10.29391 \n\nfisher.test(dat_cc,alternative= \"two.sided\")\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.1905\nalternative hypothesis: true odds ratio is not equal to 1\n95 percent confidence interval:\n   0.40161 930.24692\nsample estimates:\nodds ratio \n  10.29391 \n\n\n\n\n\nOne-sided hypothesis (+) corresponds to the the probabilities \\(P(X&gt;=5)\\) which are equal to or less than \\(P(X=5)\\).\n\n\nN &lt;- 5+1+1+3\nm &lt;- 6\nk &lt;- 6\n\ndhyper(x=5,m=m,n=N-m,k=k)\n\n[1] 0.1142857\n\n\nFor X &gt; 5, the only possible value of X is 6.\n\ndhyper(x=6,m=m,n=N-m,k=k)\n\n[1] 0.004761905\n\n\nThe p-value is then the sum of these two probabilities:\n\ndhyper(x=5,m=m,n=N-m,k=k) + dhyper(x=6,m=m,n=N-m,k=k)\n\n[1] 0.1190476\n\n\n\n\n\nTwo-sided hypothesis need to include values \\(P(X&lt;5)\\) that have probabilities lower than \\(P(X=5)\\). These probabilities will be added to the one-sided p-value to get the two-sided p-value.\n\n\ndhyper(x=4,m=m,n=N-m,k=k)\n\n[1] 0.4285714\n\ndhyper(x=3,m=m,n=N-m,k=k)\n\n[1] 0.3809524\n\ndhyper(x=2,m=m,n=N-m,k=k)\n\n[1] 0.07142857\n\ndhyper(x=1,m=m,n=N-m,k=k)\n\n[1] 0\n\ndhyper(x=0,m=m,n=N-m,k=k)\n\n[1] 0\n\n\n\\(P(X=0)\\), \\(P(X=1)\\), and \\(P(X=2)\\) have lower probabilities compared to \\(P(X=5)\\). Hence, we add these probabilities to the one-sided p-value to get the two-sided p-value.\n\ndhyper(x=5,m=m,n=N-m,k=k) + dhyper(x=6,m=m,n=N-m,k=k) + dhyper(x=2,m=m,n=N-m,k=k) + dhyper(x=1,m=m,n=N-m,k=k) + dhyper(x=0,m=m,n=N-m,k=k) \n\n[1] 0.1904762\n\n\n\n\n\nUnder the alternative hypothesis: The test treatment is positively associated with the outcome. p=0.119\nUnder the alternative hypothesis: The test treatment is associated with the outcome. p= 0.1905\nAt a significance level of 0.10, do you have enough evidence to conclude that the treatment is associated with the outcome? At \\(\\alpha = 0.10\\), we do not have sufficient evidence to conclude that treatment is associated with the outcomes in healing severe infections.\n\n\n\n\n\n\n\nNote\n\n\nIn SAS, be careful when selecting which one-sided alternative hypothesis to interpret from the results!",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#exercise-2",
     "href": "Chapter2.html#exercise-2",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nFisher’s experiment: A number of individuals gathered together for afternoon tea. A lady in the group said that she could differentiate between whether the milk or the tea was poured first into a cup. Fisher suggested to pour tea first into four cups and to pour milk first into four cups. The lady was blinded to which cups had milk or tea poured first, but she knew there were four of each. The contingency table is shown below. At \\(\\alpha=0.05\\), do we have sufficient evidence to conclude that the lady can differentiate tea based on how they were poured?\n\nContingency TableSAS CodeR fisher.exact()Hypergeometric: RAnswer\n\n\n\n\n      Guess\nActual Milk Tea\n  Milk    3   1\n  Tea     1   3\n\n\n\n\ndata tea;\ninput actual$ guess $ count;\ndatalines;\nmilk milk 3\nmilk tea 1\ntea milk 1\ntea tea 3\n;\n\nproc freq data=tea order=data;\nweight count;\ntables actual*guess/chisq;\nrun;\nDirection is specified, hence we need to use the “&gt;” one-sided p-value.\n\n\nDirection is specified, hence we need to use the “&gt;” one-sided p-value.\n\ndat &lt;- expand.grid(Actual=factor(c(\"Milk\",\"Tea\"),levels=c(\"Milk\",\"Tea\")),\n                  Guess = factor(c(\"Milk\",\"Tea\"),levels=c(\"Milk\",\"Tea\")))\n\ndat$count &lt;- c(3,1,1,3)\n\ndat_cc &lt;- xtabs(count ~ .,data=dat)\ndat_cc\n\n      Guess\nActual Milk Tea\n  Milk    3   1\n  Tea     1   3\n\n\n\nfisher.test(dat_cc, alternative=\"greater\")\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.2429\nalternative hypothesis: true odds ratio is greater than 1\n95 percent confidence interval:\n 0.3135693       Inf\nsample estimates:\nodds ratio \n  6.408309 \n\n\n\n\nDirection is specified, hence we need to use the “&gt;” one-sided p-value.\n\nN &lt;- 8\nm &lt;- 4\nk &lt;- 4\n\ndhyper(x=3,m=m,n=N-m,k=k)\n\n[1] 0.2285714\n\n\nThe only other possible value of \\(X\\) is \\(X=4\\).\n\ndhyper(x=4,m=m,n=N-m,k=k)\n\n[1] 0.01428571\n\n\nTo get the one-sided p-value, we need to add these two probabilities:\n\ndhyper(x=3,m=m,n=N-m,k=k) + dhyper(x=4,m=m,n=N-m,k=k)\n\n[1] 0.2428571\n\n\n\n\n\n\n\n\nNote\n\n\nNote that we needed to add \\(P(X=4)\\) because its value is less than that of \\(P(X=3)\\).\n\n\n\n\n\nThe resulting p-value is 0.2429. At significance level \\(\\alpha=0.05\\), we fail to reject the null hypothesis. We have no sufficient evidence to conclude that the lady can differentiate tea based on how they were poured."
-  },
-  {
-    "objectID": "Chapter2.html#exercise-3",
-    "href": "Chapter2.html#exercise-3",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Exercise",
-    "text": "Exercise\nOne of the most famous and largest clinical trials ever performed was in 1954. The data obtained from this RCT is shown in the contingency table.\n\n\nProblemSAS CodeR CodeAnswer\n\n\nCalculate the 90% confidence interval for the difference in proportion of polio-free children between the vaccine and placebo group.\n\nCorrected Wald\nMiettinen-Nurminen\nNewcombe\n\n\n\ndata vaxx;\nlength treat $7.;\ninput treat $ outcome $ count; \ndatalines;\nvax n 200688\nvax p 57\nplacebo n 201087\nplacebo p 142\n;\n\nproc freq data=vaxx order=data;\nweight count;\ntables treat*outcome/riskdiff(correct cl=(mn newcombe)) \nalpha=0.10;\nrun;\n\n\n\nlibrary(DescTools)\nBinomDiffCI(x1=142,\n            n1=201087+142,\n            x2=57,\n            n2 = 57+200688,\n            method=c('waldcc','mn','newcombe'),\n            conf.level = 0.9) \n\n                est       lwr.ci       upr.ci\nwaldcc 0.0004217214 0.0003013909 0.0005420518\nmn     0.0004217214 0.0003084844 0.0005405825\n\n\n\n\nThe estimated difference in proportion is 0.0004.\n\nCorrected Wald (0.0003,0.0005)\nMiettinen-Nurminen (0.0003,0.0005)\nNewcombe (0.0003,0.0005)"
+    "text": "Exercise\nFisher’s experiment: A number of individuals gathered together for afternoon tea. A lady in the group said that she could differentiate between whether the milk or the tea was poured first into a cup. Fisher suggested to pour tea first into four cups and to pour milk first into four cups. The lady was blinded to which cups had milk or tea poured first, but she knew there were four of each. The contingency table is shown below. At \\(\\alpha=0.05\\), do we have sufficient evidence to conclude that the lady can differentiate tea based on how they were poured?\n\nContingency TableSAS CodeR fisher.exact()Hypergeometric: RAnswer\n\n\n\n\n      Guess\nActual Milk Tea\n  Milk    3   1\n  Tea     1   3\n\n\n\n\ndata tea;\ninput actual$ guess $ count;\ndatalines;\nmilk milk 3\nmilk tea 1\ntea milk 1\ntea tea 3\n;\n\nproc freq data=tea order=data;\nweight count;\ntables actual*guess/chisq;\nrun;\nDirection is specified, hence we need to use the “&gt;” one-sided p-value.\n\n\nDirection is specified, hence we need to use the “&gt;” one-sided p-value.\n\ndat &lt;- expand.grid(Actual=factor(c(\"Milk\",\"Tea\"),levels=c(\"Milk\",\"Tea\")),\n                  Guess = factor(c(\"Milk\",\"Tea\"),levels=c(\"Milk\",\"Tea\")))\n\ndat$count &lt;- c(3,1,1,3)\n\ndat_cc &lt;- xtabs(count ~ .,data=dat)\ndat_cc\n\n      Guess\nActual Milk Tea\n  Milk    3   1\n  Tea     1   3\n\n\n\nfisher.test(dat_cc, alternative=\"greater\")\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.2429\nalternative hypothesis: true odds ratio is greater than 1\n95 percent confidence interval:\n 0.3135693       Inf\nsample estimates:\nodds ratio \n  6.408309 \n\n\n\n\nDirection is specified, hence we need to use the “&gt;” one-sided p-value.\n\nN &lt;- 8\nm &lt;- 4\nk &lt;- 4\n\ndhyper(x=3,m=m,n=N-m,k=k)\n\n[1] 0.2285714\n\n\nThe only other possible value of \\(X\\) is \\(X=4\\).\n\ndhyper(x=4,m=m,n=N-m,k=k)\n\n[1] 0.01428571\n\n\nTo get the one-sided p-value, we need to add these two probabilities:\n\ndhyper(x=3,m=m,n=N-m,k=k) + dhyper(x=4,m=m,n=N-m,k=k)\n\n[1] 0.2428571\n\n\n\n\n\n\n\n\nNote\n\n\nNote that we needed to add \\(P(X=4)\\) because its value is less than that of \\(P(X=3)\\).\n\n\n\n\n\nThe resulting p-value is 0.2429. At significance level \\(\\alpha=0.05\\), we fail to reject the null hypothesis. We have no sufficient evidence to conclude that the lady can differentiate tea based on how they were poured.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#difference-in-proportions-1",
     "href": "Chapter2.html#difference-in-proportions-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Difference in Proportions",
-    "text": "Difference in Proportions\nWe are often interested in comparing two independent populations. For binary responses, we can compare proportions of success.\n\n\n\n\n\n\nNote\n\n\nRecall from Intro to Stats course: we can estimate the confidence intervals and standardized statistics for the difference of two proportions."
+    "text": "Difference in Proportions\nWe are often interested in comparing two independent populations. For binary responses, we can compare proportions of success.\n\n\n\n\n\n\nNote\n\n\nRecall from Intro to Stats course: we can estimate the confidence intervals and standardized statistics for the difference of two proportions.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#difference-in-proportions-estimation",
     "href": "Chapter2.html#difference-in-proportions-estimation",
     "title": "EAB 770 - Chapter 2",
     "section": "Difference in Proportions: Estimation",
-    "text": "Difference in Proportions: Estimation\nEstimating the difference of the two proportions involves calculating the confidence intervals. There are different methods to calculate the confidence interval for the difference in proportion.\n\n\n\n\n\n\n\nNote\n\n\nIndependence of the two populations (Groups 1 and 2) mean that we have two independent binomial distributions."
+    "text": "Difference in Proportions: Estimation\nEstimating the difference of the two proportions involves calculating the confidence intervals. There are different methods to calculate the confidence interval for the difference in proportion.\n\n\n\n\n\n\n\nNote\n\n\nIndependence of the two populations (Groups 1 and 2) mean that we have two independent binomial distributions.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#confidence-intervals-wald",
     "href": "Chapter2.html#confidence-intervals-wald",
     "title": "EAB 770 - Chapter 2",
     "section": "Confidence Intervals: Wald",
-    "text": "Confidence Intervals: Wald\nThe commonly used confidence interval in estimating difference in proportions is the Wald confidence interval.\n\\[p_1-p_2 \\pm z_{1-\\alpha/2}\\sqrt{\\frac{p_1(1-p_1)}{n_{1+}} + \\frac{p_2(1-p_2)}{n_{2+}}}\\]\n\n\n\n\n\n\nWarning\n\n\nThis CI fails when \\(p_1\\) or \\(p_2\\) are close to the extreme values (0 and 1). this CI does not account for the discreteness of the data."
+    "text": "Confidence Intervals: Wald\nThe commonly used confidence interval in estimating difference in proportions is the Wald confidence interval.\n\\[p_1-p_2 \\pm z_{1-\\alpha/2}\\sqrt{\\frac{p_1(1-p_1)}{n_{1+}} + \\frac{p_2(1-p_2)}{n_{2+}}}\\]\n\n\n\n\n\n\nWarning\n\n\nThis CI fails when \\(p_1\\) or \\(p_2\\) are close to the extreme values (0 and 1). this CI does not account for the discreteness of the data.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#confidence-intervals-corrected-wald",
     "href": "Chapter2.html#confidence-intervals-corrected-wald",
     "title": "EAB 770 - Chapter 2",
     "section": "Confidence Intervals: Corrected Wald",
-    "text": "Confidence Intervals: Corrected Wald\nWe introduce a correction term to the Wald confidence interval to account for the continuity of the data.\n\\[p_1-p_2 \\pm z_{1-\\alpha/2}\\sqrt{\\frac{p_1(1-p_1)}{n_{1+}} + \\frac{p_2(1-p_2)}{n_{2+}}} +1/2 (1/n_{1+} +1/n_{2+} )\\]\n\n\n\n\n\n\nWarning\n\n\nThis CI still fails when \\(p_1\\) or \\(p_2\\) are close to the extreme values (0 and 1)."
+    "text": "Confidence Intervals: Corrected Wald\nWe introduce a correction term to the Wald confidence interval to account for the continuity of the data.\n\\[p_1-p_2 \\pm z_{1-\\alpha/2}\\sqrt{\\frac{p_1(1-p_1)}{n_{1+}} + \\frac{p_2(1-p_2)}{n_{2+}}} +1/2 (1/n_{1+} +1/n_{2+} )\\]\n\n\n\n\n\n\nWarning\n\n\nThis CI still fails when \\(p_1\\) or \\(p_2\\) are close to the extreme values (0 and 1).",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#confidence-intervals-agresti-caffo",
     "href": "Chapter2.html#confidence-intervals-agresti-caffo",
     "title": "EAB 770 - Chapter 2",
     "section": "Confidence Intervals: Agresti-Caffo",
-    "text": "Confidence Intervals: Agresti-Caffo\nWe introduce a correction term to the Wald confidence interval to account for the extreme values.\n\\[p_1-p_2 \\pm z_{1-\\alpha/2}\\sqrt{\\frac{\\tilde{p}_1(1-\\tilde{p}_1)}{n_{1+}+2} + \\frac{\\tilde{p}_2(1-\\tilde{p}_2)}{n_{2+}+2}}  \\] where\n\\[\\tilde{p}_1 = (n_{11}+1)/(n_{1+}+2) ; \\tilde{p}_2 = (n_{21}+1)/(n_{2+}+2)\\]\n\n\n\n\n\n\nNote\n\n\nThis correction keeps the coverage of the confidence interval at 95% for all possible values of \\(p_1\\) and \\(p_2\\)."
+    "text": "Confidence Intervals: Agresti-Caffo\nWe introduce a correction term to the Wald confidence interval to account for the extreme values.\n\\[p_1-p_2 \\pm z_{1-\\alpha/2}\\sqrt{\\frac{\\tilde{p}_1(1-\\tilde{p}_1)}{n_{1+}+2} + \\frac{\\tilde{p}_2(1-\\tilde{p}_2)}{n_{2+}+2}}  \\] where\n\\[\\tilde{p}_1 = (n_{11}+1)/(n_{1+}+2) ; \\tilde{p}_2 = (n_{21}+1)/(n_{2+}+2)\\]\n\n\n\n\n\n\nNote\n\n\nThis correction keeps the coverage of the confidence interval at 95% for all possible values of \\(p_1\\) and \\(p_2\\).",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#confidence-intervals-other",
-    "href": "Chapter2.html#confidence-intervals-other",
+    "objectID": "Chapter2.html#other-confidence-intervals",
+    "href": "Chapter2.html#other-confidence-intervals",
     "title": "EAB 770 - Chapter 2",
-    "section": "Confidence Intervals: Other",
-    "text": "Confidence Intervals: Other\n\n\n\n\n\n\n\n\nConfidence Intervals\nSAS code\nAdjustment Type\n\n\n\n\nWald\nwald\nDefault\n\n\nCorrected Wald\ncorrect\nContinuity correction\n\n\nAgresti-Caffo\nac\nImproved Coverage\n\n\nMiettinen-Nurminen\nmn\nUses goodness-of-fit to improve coverage\n\n\nNewcombe\nnewcombe\nhybrid interval that does well for small counts\n\n\nHauck-Anderson\nha\nAccounts for row totals\n\n\nExact\nexact\nMaximizes p-value overall possible values"
+    "section": "Other Confidence Intervals",
+    "text": "Other Confidence Intervals\n\n\n\n\n\n\n\n\n\nConfidence Intervals\nSAS code\nR code\nAdjustment Type\n\n\n\n\nWald\nwald\n“wald”\nDefault\n\n\nCorrected Wald\ncorrect\n“waldcc”\nContinuity correction\n\n\nAgresti-Caffo\nac\n“ac”\nImproved Coverage\n\n\nMiettinen-Nurminen\nmn\n“mn”\nUses goodness-of-fit to improve coverage\n\n\nNewcombe\nnewcombe\n“scorecc”\nhybrid interval that does well for small counts\n\n\nHauck-Anderson\nha\n“ha”\nAccounts for row totals",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#confidence-intervals-sas",
     "href": "Chapter2.html#confidence-intervals-sas",
     "title": "EAB 770 - Chapter 2",
     "section": "Confidence Intervals: SAS",
-    "text": "Confidence Intervals: SAS\n\nThe FREQ procedure has all mentioned confidence intervals\n\nThe options included in the tables statement are included in the previous slide.\nThe riskdiff option of the tables statement allows us to specify which confidence intervals we need for the difference as well as the estimates for the group proportions.\nThe alpha option can be used to change the confidence level.\n\n\nSample SAS code:\nproc freq;\nweight count;\ntables treat*outcome/riskdiff(correct cl=(mn ac)) alpha=0.05;\nrun;"
+    "text": "Confidence Intervals: SAS\n\nThe FREQ procedure has all mentioned confidence intervals\n\nThe options included in the tables statement are included in the previous slide.\nThe riskdiff option of the tables statement allows us to specify which confidence intervals we need for the difference as well as the estimates for the group proportions.\nThe alpha option can be used to change the confidence level.\n\n\nSample SAS code:\nproc freq;\nweight count;\ntables treat*outcome/riskdiff(correct cl=(mn ac)) alpha=0.05;\nrun;",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-4",
-    "href": "Chapter2.html#example-4",
+    "objectID": "Chapter2.html#confidence-intervals-r",
+    "href": "Chapter2.html#confidence-intervals-r",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Confidence Intervals: R",
+    "text": "Confidence Intervals: R\nThe BinomDiffCI() function in the DescTools package in R can calculate these confidence intervals.\n\n# install.packages(\"DescTools\")\nlibrary(DescTools)\nBinomDiffCI(x1=n11, n1 = row1sum, x2 = n21, n2=row2sum,\n            conf.level=0.95, \n            method = c(\"ac\", \"wald\", \"waldcc\", \"score\", \"scorecc\", \"mn\",\n                       \"mee\", \"blj\", \"ha\", \"hal\", \"jp\") \n            )",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#example-3",
+    "href": "Chapter2.html#example-3",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\nThe contingency table shows data from a study on treatments for severe infections. Calculate the asymptotic and exact confidence limits for the odds ratio of favorable outcomes for test and control groups.\n\n\n         Outcome\nTreatment Favorable Unfavorable\n  Test           10           2\n  Control         2           4"
+    "text": "Example\nThe contingency table shows the information from a randomized clinical trial that compared an experimental treatment to a placebo treatment for a respiratory disorder.\n\n\n         Outcome\nTreatment Favorable Unfavorable\n  Placebo        16          48\n  Test           40          20\n\n\n\nQuestionSAS CodeR CodeAnswers\n\n\nCalculate the 95% confidence interval for the difference in proportion of favorable outcomes for both treatment groups.\n\nWald\nCorrected Wald\nAgresti-Caffo\nMiettinen-Nurminen\n\n\n\ndata respire;\ninput treat $ outcome $ count; \ndatalines;\ntest f 40\ntest u 20\nplacebo f 16\nplacebo u 48\n;\n\nproc freq data=respire order=data; \nweight count; \ntables treat*outcome/riskdiff(cl=(mn ac)) alpha=0.05; \ntables treat*outcome/riskdiff(correct) alpha=0.05; \nrun;\n\n\n\ndat &lt;- expand.grid(Treatment=c(\"Placebo\",\"Test\"),\n                  Outcome = c(\"Favorable\",\"Unfavorable\")) \ndat$count &lt;- c(16,40,48,20)\n\ndat_cc &lt;- xtabs(count ~ .,data=dat)\ndat_cc\n\n         Outcome\nTreatment Favorable Unfavorable\n  Placebo        16          48\n  Test           40          20\n\nlibrary(DescTools)\nBinomDiffCI(x1=40,\n            n1 = 40+20,\n            x2=16,\n            n2=16+48,\n            method=c('wald','waldcc','ac','mn'),\n            conf.level = 0.95) \n\n             est    lwr.ci    upr.ci\nwald   0.4166667 0.2570362 0.5762972\nwaldcc 0.4166667 0.2408903 0.5924430\nac     0.4166667 0.2455745 0.5618546\nmn     0.4166667 0.2460145 0.5626554\n\n\n\n\nThe estimated difference in proportion is 0.4167 with the following 95% confidence intervals: - Wald: 0.2570-0.5763 - Corrected Wald: 0.2409-0.5924 - Agresti-Caffo: 0.2456-0.5416 - Miettinen-Nurminen 0.2460-0.5627",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-5",
-    "href": "Chapter2.html#example-5",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Example",
-    "text": "Example\nThe data set severe_long.csv includes data from a study on treatments for severe infections.\n\ndat &lt;- read.csv(\"severe_long.csv\")\nhead(dat)\n\n  Treatment   Outcome\n1      Test Favorable\n2      Test Favorable\n3      Test Favorable\n4      Test Favorable\n5      Test Favorable\n6      Test Favorable\n\n\n\nProblemSAS CodeR Code\n\n\nCalculate the asymptotic and exact confidence limits for the odds ratio of favorable outcomes for test and control groups.\n\n\n\nproc freq order=data data=severe;\nweight count;\ntables treat*outcome / chisq nocol;\nexact or;\nrun;\n\n\n\nMethod\nValue and CI\n\n\n\n\nAsymptotic\n10 (1.0256, 97.5005)\n\n\nExact\n10 (0.6896,166.3562)\n\n\n\nThe two methods lead to different conclusions.\n\n\n\ndat_cc &lt;- xtabs(~Treatment+Outcome,data=dat)\ndat_cc\n\n         Outcome\nTreatment Favorable Unfavorable\n  Control         2           4\n  Test           10           2\n\nlibrary(epitools)\n\noddsratio(dat_cc,\n          method=c(\"wald\"),\n          conf.level=0.95,\n          rev=\"rows\" #Reverses the rows\n          )\n\n$data\n         Outcome\nTreatment Favorable Unfavorable Total\n  Test           10           2    12\n  Control         2           4     6\n  Total          12           6    18\n\n$measure\n         odds ratio with 95% C.I.\nTreatment estimate    lower    upper\n  Test           1       NA       NA\n  Control       10 1.025636 97.50049\n\n$p.value\n         two-sided\nTreatment midp.exact fisher.exact chi.square\n  Test            NA           NA         NA\n  Control 0.06119371    0.1070351 0.03389485\n\n$correction\n[1] FALSE\n\nattr(,\"method\")\n[1] \"Unconditional MLE & normal approximation (Wald) CI\"\n\noddsratio(dat_cc,\n          method=c(\"fisher\"),\n          conf.level=0.95,\n          rev=\"rows\" #Reverses the rows\n          )\n\n$data\n         Outcome\nTreatment Favorable Unfavorable Total\n  Test           10           2    12\n  Control         2           4     6\n  Total          12           6    18\n\n$measure\n         odds ratio with 95% C.I.\nTreatment estimate     lower    upper\n  Test    1.000000        NA       NA\n  Control 8.457238 0.6896384 166.4345\n\n$p.value\n         two-sided\nTreatment midp.exact fisher.exact chi.square\n  Test            NA           NA         NA\n  Control 0.06119371    0.1070351 0.03389485\n\n$correction\n[1] FALSE\n\nattr(,\"method\")\n[1] \"Conditional MLE & exact CI from 'fisher.test'\"\n\n\n\n\n\n\n\n\nNote\n\n\nWe report the estimate of the odds ratio from the \"wald\" method, but use the \"fisher\" confidence interval as the exact confidence interval."
-  },
-  {
-    "objectID": "Chapter2.html#exercise-4",
-    "href": "Chapter2.html#exercise-4",
+    "objectID": "Chapter2.html#exercise-3",
+    "href": "Chapter2.html#exercise-3",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nTwo groups having the same symptoms of respiratory illness were sampled. One group was treated with an experimental treatment and the other group was treated with a placebo. The participants were asked whether there was an overall treatment in overall respiration.\n\nCalculate the odds ratio of respiratory improvement between test and placebo groups.\nWhat is the relative risk of having respiratory improvement if we consider the treatment as a risk factor?\nCalculate the asymptotic 95% CI for each answer.\n\n\n\n         Outcome\nTreatment Yes No\n  Test     29 16\n  Placebo  14 31"
+    "text": "Exercise\nOne of the most famous and largest clinical trials ever performed was in 1954. The data obtained from this RCT is shown in the contingency table.\n\n\nProblemSAS CodeR CodeAnswer\n\n\nCalculate the 90% confidence interval for the difference in proportion of polio-free children between the vaccine and placebo group.\n\nCorrected Wald\nMiettinen-Nurminen\nNewcombe\n\n\n\ndata vaxx;\nlength treat $7.;\ninput treat $ outcome $ count; \ndatalines;\nvax n 200688\nvax p 57\nplacebo n 201087\nplacebo p 142\n;\n\nproc freq data=vaxx order=data;\nweight count;\ntables treat*outcome/riskdiff(correct cl=(mn newcombe)) \nalpha=0.10;\nrun;\n\n\n\nlibrary(DescTools)\nBinomDiffCI(x1=142,\n            n1=201087+142,\n            x2=57,\n            n2 = 57+200688,\n            method=c('waldcc','mn','newcombe'),\n            conf.level = 0.9) \n\n                est       lwr.ci       upr.ci\nwaldcc 0.0004217214 0.0003013909 0.0005420518\nmn     0.0004217214 0.0003084844 0.0005405825\n\n\n\n\nThe estimated difference in proportion is 0.0004.\n\nCorrected Wald (0.0003,0.0005)\nMiettinen-Nurminen (0.0003,0.0005)\nNewcombe (0.0003,0.0005)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#exercise-5",
-    "href": "Chapter2.html#exercise-5",
+    "objectID": "Chapter2.html#odds-ratio-or",
+    "href": "Chapter2.html#odds-ratio-or",
     "title": "EAB 770 - Chapter 2",
-    "section": "Exercise",
-    "text": "Exercise\nTwo groups having the same symptoms of respiratory illness were sampled. One group was treated with an experimental treatment and the other group was treated with a placebo. The participants were asked whether there was an overall treatment in overall respiration.\n\nCalculate the odds ratio of respiratory improvement between test and placebo groups.4.01 (1.67,9.66)\nWhat is the relative risk of having respiratory improvement if we consider the treatment as a risk factor? 2.07 (1.27,3.37)\nCalculate the asymptotic 95% CI for each answer.\n\n\n\n         Outcome\nTreatment Yes No\n  Test     29 16\n  Placebo  14 31\n\n\n\nSAS CodeR Code\n\n\ndata resp;\ninput  Treatment $ Outcome  $ count;\ndatalines;\nTest Yes 29\nPlacebo Yes 14\nTest No 16\nPlacebo No 31\n;\nproc freq data=resp order=data;\nweight count;\ntables treatment*outcome/measures;\nrun;\n\n\nOdds ratio\n\nlibrary(epitools)\ndat_cc |&gt; oddsratio(rev=c(\"both\"), method=\"wald\",conf.level=0.95) -&gt; or\nor$measure\n\n         odds ratio with 95% C.I.\nTreatment estimate    lower    upper\n  Placebo 1.000000       NA       NA\n  Test    4.013393 1.668039 9.656441\n\n\nRelative Risk\n\ndat_cc |&gt; riskratio(rev=c(\"both\"),method=\"wald\")-&gt;rr\nrr$measure\n\n         risk ratio with 95% C.I.\nTreatment estimate    lower    upper\n  Placebo 1.000000       NA       NA\n  Test    2.071429 1.274194 3.367474"
+    "section": "Odds Ratio (OR)",
+    "text": "Odds Ratio (OR)\n\n\n\n\n\n\nOdds of success\n\n\nThe ratio of probability of success and failure of an outcome is referred to as the odds.\n\\[\nOdds = p/(1-p)\n\\]\n\n\n\n\n\n\n\n\n\nOdds Ratio\n\n\nThe ratio of the odds of success for Group 1 and Group 2 is referred to as the odds ratio. \\[\nOR = \\frac{p_1/(1-p_1)}{p_2/(1-p_2)} = (n_{11}n_{22}/n_{21}n_{12})\n\\]\nThe odds ratio is commonly used as an effect size for retrospective studies. This statistic is also used in logistic regression techniques, which will be discussed later.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#odds-ratio",
-    "href": "Chapter2.html#odds-ratio",
+    "objectID": "Chapter2.html#relative-risk-rr",
+    "href": "Chapter2.html#relative-risk-rr",
     "title": "EAB 770 - Chapter 2",
-    "section": "Odds Ratio",
-    "text": "Odds Ratio\n\nOdds of success: the ratio of probability of success and failure of an outcome. \\[Odds = p/(1-p)\\]\nOdds ratio between two groups: the ratio of the odds of success for Group 1 and Group 2. \\[OR = \\frac{p_1/(1-p_1)}{p_2/(1-p_2)} = (n_{11}n_{22}/n_{21}n_{12})\\]\nCommonly used in retrospective studies"
-  },
-  {
-    "objectID": "Chapter2.html#relative-risk",
-    "href": "Chapter2.html#relative-risk",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Relative Risk",
-    "text": "Relative Risk\n\nThe ratio of the risk developing a particular condition for individuals with risk factors present and absent\n\n\\[RR = p_1/p_2 = \\frac{(n_{11}/n_{1+})}{(n_{21}/n_{2+})}\\]\n\nCommonly used in prospective studies"
+    "section": "Relative Risk (RR)",
+    "text": "Relative Risk (RR)\nThe ratio of the risk developing a particular condition for individuals with risk factors present and absent is called the relative risk.\n\\[\nRR = p_1/p_2 = \\frac{(n_{11}/n_{1+})}{(n_{21}/n_{2+})}\n\\]\nThe relative risk is commonly used as an effect size in prospective studies.\n\n\n\n\n\n\nNote\n\n\nFor cross-sectional data, the relative risk is known as the prevalence ratio because the disease and risk factor are assessed at the same time.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#odds-ratio-relative-risk",
     "href": "Chapter2.html#odds-ratio-relative-risk",
     "title": "EAB 770 - Chapter 2",
     "section": "Odds Ratio & Relative Risk",
-    "text": "Odds Ratio & Relative Risk\n\nWhen OR, RR &gt; 1, Group 1 is more likely than Group 2 to record success.\nWhen OR, RR&lt; 1, Group 1 is less likely to record success.\nWhen OR, RR= 1, there is no association between group and success because the two groups are equally likely to record success.\n\n\n\n\n\n\n\nNote\n\n\nWhen the condition is rare, the OR is approximately equal to the RR."
+    "text": "Odds Ratio & Relative Risk\n\nWhen OR, RR &gt; 1, Group 1 is more likely than Group 2 to record success.\nWhen OR, RR&lt; 1, Group 1 is less likely to record success.\nWhen OR, RR= 1, there is no association between group and success because the two groups are equally likely to record success.\n\n\n\n\n\n\n\nNote\n\n\nWhen the condition is rare, the OR is approximately equal to the RR.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#odds-ratio-relative-risk-sas",
     "href": "Chapter2.html#odds-ratio-relative-risk-sas",
     "title": "EAB 770 - Chapter 2",
     "section": "Odds Ratio & Relative Risk: SAS",
-    "text": "Odds Ratio & Relative Risk: SAS\n\nOR and RR are calculated using the measures option in the TABLES statement in PROC FREQ.\nFor small sample sizes, the exact confidence limits can be calculated for the odds ratios.\n\nproc freq;\nweight count;\ntables a*b/measures;\nexact or rr;\nrun;"
+    "text": "Odds Ratio & Relative Risk: SAS\n\nOR and RR are calculated using the measures option in the TABLES statement in PROC FREQ.\nFor small sample sizes, the exact confidence limits can be calculated for the odds ratios.\n\nproc freq;\nweight count;\ntables a*b/measures;\nexact or rr;\nrun;",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-6",
-    "href": "Chapter2.html#example-6",
+    "objectID": "Chapter2.html#odds-ratio-relative-risk-r",
+    "href": "Chapter2.html#odds-ratio-relative-risk-r",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Odds Ratio & Relative Risk: R",
+    "text": "Odds Ratio & Relative Risk: R\nThe odds ratio and relative risk can be calculated using functions from the epitools package.\n\nlibrary(epitools)\nepitools::oddsratio(contingency_table,\n          conf.level = 0.95,\n          method=c(\"fisher\",\"wald\"),\n          rev=c(\"rows\",\"columns\",\"both\")\n)\n\nepitools::riskratio(contingency_table,\n          conf.level = 0.95,\n          method=c(\"fisher\",\"wald\"),\n          rev=c(\"rows\",\"columns\",\"both\")\n)\n\n\n\n\n\n\n\nTip\n\n\nThe fisher method provides exact confidence intervals for relative risk and odds ratio. The fisher.test() function provides an exact confidence interval for the odds ratio based on the hypergeometric distribution, but it does not include the relative risk.\n\n\n\n\n\n\n\n\n\nTip\n\n\nThe rev argument allows us to re-arrange the contingency table without defining factors to establish row and column R. The order of the columns for oddsratio and riskratio should follow this order:\n\nRows (top to bottom): No exposure (risk absent), Exposure (risk present)\nCols (left to right): Control (Outcome=0), Case (Outcome=1)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#example-4",
+    "href": "Chapter2.html#example-4",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\nThe following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device.\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       52        8\n  Disease Absent        20      100"
+    "text": "Example\nThe data set severe_long.csv includes data from a study on treatments for severe infections.\n\nProblemSAS CodeR Code\n\n\nCalculate the asymptotic and exact confidence limits for the odds ratio of favorable outcomes for test and control groups.\n\ndat &lt;- read.csv(\"severe_long.csv\")\nhead(dat)\n\n  Treatment   Outcome\n1      Test Favorable\n2      Test Favorable\n3      Test Favorable\n4      Test Favorable\n5      Test Favorable\n6      Test Favorable\n\n\n\n\nImport severe_long as work.severe_long in SAS.\nproc freq order=data data=work.severe_long;\ntables treat*outcome;\nexact or;\nrun;\n\n\n\nMethod\nValue and CI\n\n\n\n\nAsymptotic\n10 (1.0256, 97.5005)\n\n\nExact\n10 (0.6896,166.3562)\n\n\n\nThe two methods lead to different conclusions.\n\n\nCreate the contingency table.\n\ndat_cc &lt;- xtabs(~Treatment+Outcome,data=dat)\ndat_cc\n\n         Outcome\nTreatment Favorable Unfavorable\n  Control         2           4\n  Test           10           2\n\n\nCalculate the odds ratio and the confidence intervals.\n\nlibrary(epitools)\n\nepitools::oddsratio(dat_cc,\n          method=c(\"wald\"),\n          conf.level=0.95,\n          rev=\"columns\" #Reverses the columns\n          )\n\n$data\n         Outcome\nTreatment Unfavorable Favorable Total\n  Control           4         2     6\n  Test              2        10    12\n  Total             6        12    18\n\n$measure\n         odds ratio with 95% C.I.\nTreatment estimate    lower    upper\n  Control        1       NA       NA\n  Test          10 1.025636 97.50049\n\n$p.value\n         two-sided\nTreatment midp.exact fisher.exact chi.square\n  Control         NA           NA         NA\n  Test    0.06119371    0.1070351 0.03389485\n\n$correction\n[1] FALSE\n\nattr(,\"method\")\n[1] \"Unconditional MLE & normal approximation (Wald) CI\"\n\nepitools::oddsratio(dat_cc,\n          method=c(\"fisher\"),\n          conf.level=0.95,\n          rev=\"columns\" #Reverses the columns,\n          )\n\n$data\n         Outcome\nTreatment Unfavorable Favorable Total\n  Control           4         2     6\n  Test              2        10    12\n  Total             6        12    18\n\n$measure\n         odds ratio with 95% C.I.\nTreatment estimate     lower    upper\n  Control 1.000000        NA       NA\n  Test    8.457238 0.6896384 166.4345\n\n$p.value\n         two-sided\nTreatment midp.exact fisher.exact chi.square\n  Control         NA           NA         NA\n  Test    0.06119371    0.1070351 0.03389485\n\n$correction\n[1] FALSE\n\nattr(,\"method\")\n[1] \"Conditional MLE & exact CI from 'fisher.test'\"\n\n\n\n\n\n\n\n\nNote\n\n\nWe report the estimate of the odds ratio from the \"wald\" method, but use the \"fisher\" confidence interval as the exact confidence interval.\nWe also use epitools::oddsratio to tell R that we are using the oddsratio function in epitools and not another package (vcd also has a package of the same name).",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-7",
-    "href": "Chapter2.html#example-7",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Example",
-    "text": "Example\nThe following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device.\n\nSensitivity: 0.87 (0.75,0.94)\nSpecificity: 0.83 (0.75,0.90)\n\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       52        8\n  Disease Absent        20      100\n\n\nSAS Code\ndata screening;\ninput disease $ outcome $ count @@;\ndatalines;\npresent + 52 present - 8\nabsent + 20 absent - 100\n;\nproc freq data=screening order=data;\nweight count;\ntables disease*outcome / riskdiff;\nrun;"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-6",
-    "href": "Chapter2.html#exercise-6",
+    "objectID": "Chapter2.html#exercise-4",
+    "href": "Chapter2.html#exercise-4",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nA pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.\n\nWhat is the sensitivity of the test?\nWhat is the specificity of the test?\n\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       97       18\n  Disease Absent        45       75"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-7",
-    "href": "Chapter2.html#exercise-7",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Exercise",
-    "text": "Exercise\nA pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.\n\nWhat is the sensitivity of the test? 0.8435 (0.76, 0.90)\nWhat is the specificity of the test? 0.6250 (0.53, 0.71)\n\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       97       18\n  Disease Absent        45       75\n\n\nSAS Code\ndata screening;\ninput disease $ outcome $ count @@;\ndatalines;\npresent + 97 present - 18\nabsent + 45 absent - 75\n;\nproc freq data=screening order=data;\nweight count;\ntables disease*outcome / riskdiff;\nrun;"
+    "text": "Exercise\nTwo groups having the same symptoms of respiratory illness were sampled. One group was treated with an experimental treatment and the other group was treated with a placebo. The participants were asked whether there was an overall treatment in overall respiration.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n         Outcome\nTreatment Yes No\n  Test     29 16\n  Placebo  14 31\n\n\n\n\ndata resp;\ninput  Treatment $ Outcome  $ count;\ndatalines;\nTest Yes 29\nPlacebo Yes 14\nTest No 16\nPlacebo No 31\n;\nproc freq data=resp order=data;\nweight count;\ntables treatment*outcome/measures;\nrun;\n\n\n\ndat &lt;- expand.grid(Treatment=c(\"Test\",\"Placebo\"),\n                  Outcome = c(\"Yes\",\"No\")) \ndat$count = c(29,14,16,31)\n\ndat_cc&lt;- xtabs(count ~ .,data=dat) \ndat_cc\n\n         Outcome\nTreatment Yes No\n  Test     29 16\n  Placebo  14 31\n\n\nOdds ratio\n\nlibrary(epitools)\nor &lt;- epitools::oddsratio(dat_cc,\n                          method=\"wald\",\n                          conf.level=0.95,\n                          rev=\"both\")\nor\n\n$data\n         Outcome\nTreatment No Yes Total\n  Placebo 31  14    45\n  Test    16  29    45\n  Total   47  43    90\n\n$measure\n         odds ratio with 95% C.I.\nTreatment estimate    lower    upper\n  Placebo 1.000000       NA       NA\n  Test    4.013393 1.668039 9.656441\n\n$p.value\n         two-sided\nTreatment  midp.exact fisher.exact  chi.square\n  Placebo          NA           NA          NA\n  Test    0.001783016  0.002917802 0.001548669\n\n$correction\n[1] FALSE\n\nattr(,\"method\")\n[1] \"Unconditional MLE & normal approximation (Wald) CI\"\n\nor$measure\n\n         odds ratio with 95% C.I.\nTreatment estimate    lower    upper\n  Placebo 1.000000       NA       NA\n  Test    4.013393 1.668039 9.656441\n\n\nRelative Risk\n\nrr &lt;- riskratio(dat_cc,\n                method=\"wald\",\n                rev=\"both\")\nrr\n\n$data\n         Outcome\nTreatment No Yes Total\n  Placebo 31  14    45\n  Test    16  29    45\n  Total   47  43    90\n\n$measure\n         risk ratio with 95% C.I.\nTreatment estimate    lower    upper\n  Placebo 1.000000       NA       NA\n  Test    2.071429 1.274194 3.367474\n\n$p.value\n         two-sided\nTreatment  midp.exact fisher.exact  chi.square\n  Placebo          NA           NA          NA\n  Test    0.001783016  0.002917802 0.001548669\n\n$correction\n[1] FALSE\n\nattr(,\"method\")\n[1] \"Unconditional MLE & normal approximation (Wald) CI\"\n\nrr$measure\n\n         risk ratio with 95% C.I.\nTreatment estimate    lower    upper\n  Placebo 1.000000       NA       NA\n  Test    2.071429 1.274194 3.367474\n\n\n\n\n\nCalculate the odds ratio of respiratory improvement between test and placebo groups.4.01 (1.67-9.66)\nWhat is the relative risk of having respiratory improvement if we consider the treatment as a risk factor? 2.07 (1.27-3.37)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#sensitivity",
     "href": "Chapter2.html#sensitivity",
     "title": "EAB 770 - Chapter 2",
     "section": "Sensitivity",
-    "text": "Sensitivity\nTrue proportion of positive results that a test elicits when performed on subjects known to have the disease.\n\\[Sens=TP/(TP+FN) = n_{11}/n_{1+}\\] Sensitivity is the conditional probability of a positive test given that the subject has the disease (\\(P(PT|HD)\\))"
+    "text": "Sensitivity\nTrue proportion of positive results that a test elicits when performed on subjects known to have the disease.\n\\[\nSens=TP/(TP+FN) = n_{11}/n_{1+}\n\\]\nSensitivity is the conditional probability of a positive test given that the subject has the disease (\\(P(PT|HD)\\))",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#specificity",
     "href": "Chapter2.html#specificity",
     "title": "EAB 770 - Chapter 2",
     "section": "Specificity",
-    "text": "Specificity\nTrue proportion of negative results that a test elicits when performed on subjects known to be disease free.\n\\[Sens=TN/(TN+FP) = n_{22}/n_{2+}\\] Specificity is the conditional probability of a negative test when the subject does not have the disease (\\(P(NT|ND)\\))."
+    "text": "Specificity\nTrue proportion of negative results that a test elicits when performed on subjects known to be disease free.\n\\[\nSens=TN/(TN+FP) = n_{22}/n_{2+}\n\\]\nSpecificity is the conditional probability of a negative test when the subject does not have the disease (\\(P(NT|ND)\\)).",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#sensitivity-and-specificity-sas",
     "href": "Chapter2.html#sensitivity-and-specificity-sas",
     "title": "EAB 770 - Chapter 2",
     "section": "Sensitivity and Specificity: SAS",
-    "text": "Sensitivity and Specificity: SAS\nThe FREQ procedure can also calculate sensitivity and specificity.\n\nriskdiff approximates these metrics using the risk estimates.\n\nSensitivity: Row 1 risk estimate for Column 1\nSpecificity: Row 2 risk estimate for Column 2"
+    "text": "Sensitivity and Specificity: SAS\nThe FREQ procedure can also calculate sensitivity and specificity.\n\nriskdiff approximates these metrics using the risk estimates.\n\nSensitivity: Row 1 risk estimate for Column 1\nSpecificity: Row 2 risk estimate for Column 2",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-8",
-    "href": "Chapter2.html#example-8",
+    "objectID": "Chapter2.html#sensitivity-and-specificity-r",
+    "href": "Chapter2.html#sensitivity-and-specificity-r",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Sensitivity and Specificity: R",
+    "text": "Sensitivity and Specificity: R\nThe epiR package has the epi.tests() function that calculates sensitivity and specificity. For the following contingency table:\n\n\n\n\nOutcome +\nOutcome -\n\n\n\n\nTest +\n\\(n_{11}\\)\n\\(n_{12}\\)\n\n\nTest -\n\\(n_{21}\\)\n\\(n_{22}\\)\n\n\n\n\ninstall.packages(\"epiR\")\nlibrary(epiR)\n\nepi.tests(contingency_table,\n          method=c(\"exact\",\"wilson\",\"agresti\",\"clopper-pearson\",\"jeffreys\"))\n\n\n\n\n\n\n\nNote\n\n\nThe default method used to calculate confidence intervals for the sensitivity and specificity is the exact method.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#example-5",
+    "href": "Chapter2.html#example-5",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\nThe table displays data collected by political science researchers who polled husbands and wives on whether they approved of one of their U.S. senators. The cell counts represent the number of pairs of husbands and wives who fit the configurations indicated by the row and column levels. Use the McNemar’s test to determine whether there is no difference in husband and wife approvals on the state senator.\n\n\n       Wife\nHusband Yes No\n    Yes  20  5\n    No   10 10"
+    "text": "Example\nThe following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device with the corresponding exact 95% confidence interval.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n          Status\nTest       Disease Present Disease Absent\n  Positive              52             20\n  Negative               8            100\n\n\n\n\ndata screening;\ninput disease $ test $ count @@;\ndatalines;\npresent + 52 present - 8\nabsent + 20 absent - 100\n;\nproc freq data=screening order=data;\nweight count;\ntables disease*test / riskdiff;\nrun;\n\n\n\ndat &lt;- expand.grid(Status=c(\"Disease Present\",\"Disease Absent\"),\n                  Test = c(\"Positive\",\"Negative\")) |&gt; \nmutate(count = c(52,20,8,100))\n\nxtabs(count ~ Test+Status,data=dat) -&gt; dat_cc\ndat_cc\n\n          Status\nTest       Disease Present Disease Absent\n  Positive              52             20\n  Negative               8            100\n\n\n\nlibrary(epiR)\nepi.tests(dat_cc)\n\n          Outcome +    Outcome -      Total\nTest +           52           20         72\nTest -            8          100        108\nTotal            60          120        180\n\nPoint estimates and 95% CIs:\n--------------------------------------------------------------\nApparent prevalence *                  0.40 (0.33, 0.48)\nTrue prevalence *                      0.33 (0.26, 0.41)\nSensitivity *                          0.87 (0.75, 0.94)\nSpecificity *                          0.83 (0.75, 0.90)\nPositive predictive value *            0.72 (0.60, 0.82)\nNegative predictive value *            0.93 (0.86, 0.97)\nPositive likelihood ratio              5.20 (3.44, 7.85)\nNegative likelihood ratio              0.16 (0.08, 0.31)\nFalse T+ proportion for true D- *      0.17 (0.10, 0.25)\nFalse T- proportion for true D+ *      0.13 (0.06, 0.25)\nFalse T+ proportion for T+ *           0.28 (0.18, 0.40)\nFalse T- proportion for T- *           0.07 (0.03, 0.14)\nCorrectly classified proportion *      0.84 (0.78, 0.89)\n--------------------------------------------------------------\n* Exact CIs\n\n\n\n\n\nSensitivity: 0.87 (0.75-0.94)\nSpecificity: 0.83 (0.75-0.90)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-9",
-    "href": "Chapter2.html#example-9",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Example",
-    "text": "Example\nThe table displays data collected by political science researchers who polled husbands and wives on whether they approved of one of their U.S. senators. The cell counts represent the number of pairs of husbands and wives who fit the configurations indicated by the row and column levels. Use the McNemar’s test to determine whether there is no difference in husband and wife approvals on the state senator.\n\nExact p-value = 0.3018, which implies that there is no evidence of a difference between the senator approval ratings of the husbands and wives.\n\n\n\n       Wife\nHusband Yes No\n    Yes  20  5\n    No   10 10\n\n\nSAS Code\ndata approval;\ninput hus_resp $ wif_resp $ count;\ndatalines;\nyes yes 20\nyes no 5\nno yes 10\nno no 10\n;\n\nproc freq order=data;\nweight count;\ntables hus_resp*wif_resp / agree;\nexact mcnem;\nrun;"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-8",
-    "href": "Chapter2.html#exercise-8",
+    "objectID": "Chapter2.html#exercise-5",
+    "href": "Chapter2.html#exercise-5",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\nThe tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.\n\nUse the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (Hint: Small cell counts)\n\n\n\n           Ultrasound\nMRI         Localized Advanced\n  Localized         4        6\n  Advanced          3        3"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-9",
-    "href": "Chapter2.html#exercise-9",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Exercise",
-    "text": "Exercise\nThe tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.\n\n\n           Ultrasound\nMRI         Localized Advanced\n  Localized         4        6\n  Advanced          3        3\n\n\n\nAnswerSAS Code\n\n\n\nUse the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (Hint: Small cell counts)\n\nUse exact p-value\n\\(p=0.5078\\). No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.\n\n\n\n\ndata imaging;\ninput mri $ ult $ count;\ndatalines;\nloc loc 4\nloc adv 6\nadv loc 3\nadv adv 3\n;\n\nproc freq order=data;\nweight count;\ntables mri*ult / agree;\nexact mcnem;\nrun;"
+    "text": "Exercise\nA pharmaceutical company developed a screening test that can be used to detect infection of the Lassa virus. The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.\n\nQuestionR CodeSAS CodeAnswer\n\n\n\nWhat is the sensitivity of the test?\nWhat is the specificity of the test?\n\n\n\n                 Test\nStatus            Positive Negative\n  Disease Present       97       18\n  Disease Absent        45       75\n\n\n\n\n\nlibrary(tidyverse)\ndat &lt;- expand.grid(Status=c(\"Disease Present\",\"Disease Absent\"),\n                  Test = c(\"Positive\",\"Negative\")) \ndat$count = c(97,45,18,75)\n\ndat_cc &lt;- xtabs(count ~ Test+Status,data=dat)\ndat_cc\n\n          Status\nTest       Disease Present Disease Absent\n  Positive              97             45\n  Negative              18             75\n\n\n\nlibrary(epiR)\nepi.tests(dat_cc)\n\n          Outcome +    Outcome -      Total\nTest +           97           45        142\nTest -           18           75         93\nTotal           115          120        235\n\nPoint estimates and 95% CIs:\n--------------------------------------------------------------\nApparent prevalence *                  0.60 (0.54, 0.67)\nTrue prevalence *                      0.49 (0.42, 0.56)\nSensitivity *                          0.84 (0.76, 0.90)\nSpecificity *                          0.62 (0.53, 0.71)\nPositive predictive value *            0.68 (0.60, 0.76)\nNegative predictive value *            0.81 (0.71, 0.88)\nPositive likelihood ratio              2.25 (1.76, 2.87)\nNegative likelihood ratio              0.25 (0.16, 0.39)\nFalse T+ proportion for true D- *      0.38 (0.29, 0.47)\nFalse T- proportion for true D+ *      0.16 (0.10, 0.24)\nFalse T+ proportion for T+ *           0.32 (0.24, 0.40)\nFalse T- proportion for T- *           0.19 (0.12, 0.29)\nCorrectly classified proportion *      0.73 (0.67, 0.79)\n--------------------------------------------------------------\n* Exact CIs\n\n\n\n\ndata screening;\ninput disease $ outcome $ count @@;\ndatalines;\npresent + 97 present - 18\nabsent + 45 absent - 75\n;\nproc freq data=screening order=data;\nweight count;\ntables disease*outcome / riskdiff;\nrun;\n\n\n\nWhat is the sensitivity of the test? 0.8435 (0.76, 0.90)\nWhat is the specificity of the test? 0.6250 (0.53, 0.71)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#mcnemars-test-1",
     "href": "Chapter2.html#mcnemars-test-1",
     "title": "EAB 770 - Chapter 2",
     "section": "McNemar’s Test",
-    "text": "McNemar’s Test\n\nWhen the 2x2 table provides information from matched pairs, the two responses are related to each other. Hence, independence cannot be assumed.\nNull hypothesis: The marginal probabilities of each outcome are the same.\nThe test statistic for the McNemar’s test is \\(Q_M\\) given by\n\n\\[Q_M = (n_{12}-n_{21})^2/(n_{12}+n_{21})\\]"
+    "text": "McNemar’s Test\nWhen the 2x2 table provides information from matched pairs, the two responses are related to each other. Hence, independence cannot be assumed.\n\n\n\n\n\n\nNull Hypothesis\n\n\n\\(H_0\\): The marginal probabilities of each outcome are the same.\n\n\n\n\n\n\n\n\n\nTest Statistic\n\n\nThe test statistic for the McNemar’s test is \\(Q_M\\) given by\n\\[\nQ_M = (n_{12}-n_{21})^2/(n_{12}+n_{21})\n\\]",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#mcnemars-test-sas",
     "href": "Chapter2.html#mcnemars-test-sas",
     "title": "EAB 770 - Chapter 2",
     "section": "McNemar’s Test: SAS",
-    "text": "McNemar’s Test: SAS\n\nThe agree option in the tables statement can be used to perform the McNemar’s test.\nExact p-values can be calculated using the exact statement.\n\nSample SAS Code\nproc freq;\nweight count;\ntables a*b/agree;\nexact mcnem;\nrun;"
+    "text": "McNemar’s Test: SAS\n\nThe agree option in the tables statement can be used to perform the McNemar’s test.\nExact p-values can be calculated using the exact statement.\n\nSample SAS Code\nproc freq;\nweight count;\ntables a*b/agree;\nexact mcnem;\nrun;",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-10",
-    "href": "Chapter2.html#example-10",
+    "objectID": "Chapter2.html#mcnemars-test-r",
+    "href": "Chapter2.html#mcnemars-test-r",
+    "title": "EAB 770 - Chapter 2",
+    "section": "McNemar’s Test: R",
+    "text": "McNemar’s Test: R\nThe mcnemar.test() function can be used to perform the McNemar’s test.\n\nmcnemar.test(contingency_table) # no continuity correction\n\n\n\n\n\n\n\nNote\n\n\nThe p-value calculated using this function adds the continuity correction by default.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#example-6",
+    "href": "Chapter2.html#example-6",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\n\n\nThe table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.\n\nEstimate the IDR of hospitalization/emergency room visits between the two groups.\nCalculate the 95% CI."
+    "text": "Example\nThe table displays data collected by political science researchers who polled husbands and wives on whether they approved of one of their U.S. senators. The cell counts represent the number of pairs of husbands and wives who fit the configurations indicated by the row and column levels. Use the McNemar’s test to determine whether there is no difference in husband and wife approvals on the state senator.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n       Wife\nHusband Yes No\n    Yes  20  5\n    No   10 10\n\n\n\n\ndata approval;\ninput hus_resp $ wif_resp $ count;\ndatalines;\nyes yes 20\nyes no 5\nno yes 10\nno no 10\n;\n\nproc freq order=data;\nweight count;\ntables hus_resp*wif_resp / agree;\nexact mcnem;\nrun;\n\n\n\ndat &lt;- expand.grid(Husband=c(\"Yes\",\"No\"),\n                  Wife = c(\"Yes\",\"No\"))  \ndat$count &lt;- c(20,10,5,10)\n\ndat_cc &lt;- xtabs(count ~ Husband+Wife,data=dat) \ndat_cc\n\n       Wife\nHusband Yes No\n    Yes  20  5\n    No   10 10\n\n\n\nmcnemar.test(dat_cc)\n\n\n    McNemar's Chi-squared test with continuity correction\n\ndata:  dat_cc\nMcNemar's chi-squared = 1.0667, df = 1, p-value = 0.3017\n\n\n\n\n\n\n\n\nNote\n\n\nIf we want to recover the asymptotic p-value from SAS, we need to remove the continuity correction.\n\nmcnemar.test(dat_cc,correct=F)\n\n\n    McNemar's Chi-squared test\n\ndata:  dat_cc\nMcNemar's chi-squared = 1.6667, df = 1, p-value = 0.1967\n\n\n\n\n\n\n\nThe exact/corrected p-value = 0.3018, which implies that there is no evidence of a difference between the senator approval ratings of the husbands and wives.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-11",
-    "href": "Chapter2.html#example-11",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Example",
-    "text": "Example\n\n\nThe table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.\n\nEstimate the IDR of hospitalization/emergency room visits between the two groups. IDR = 0.05\nCalculate the 95% CI. (0.01, 0.15)\n\n\n\n\n\nSAS CodeR Code\n\n\ndata vaccine2;\ninput Outcome $ Count @@;\ndatalines;\nvaccine 3 placebo 58\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\n\n1proc freq order=data data=vaccine2;\nweight count;\ntables Outcome / binomial (exact); *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 3, 7500, 58 , 7250 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\norder=data is important so as to keep the proportions consistent.\n\n\n\n\n\nevents &lt;- c(3,58)\nperson_years &lt;- c(7500, 7250)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n0.05\n0.01002014\n0.1535468"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-10",
-    "href": "Chapter2.html#exercise-10",
+    "objectID": "Chapter2.html#exercise-6",
+    "href": "Chapter2.html#exercise-6",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\n\n\nThe table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.\n\n\n\n       Metric\nShift   Accidents Person-Hours\n  Night        25         1150\n  Day          20         1240"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-11",
-    "href": "Chapter2.html#exercise-11",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Exercise",
-    "text": "Exercise\n\n\nThe table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.\n\nIDR: 1.37\n95% CI: (0.72,2.56)\n\n\n\n\n       Metric\nShift   Accidents Person-Hours\n  Night        25         1150\n  Day          20         1240\n\n\n\n\nSAS CodeR Code\n\n\ndata accident;\n/*data only has the events. Person-Hours are used later.*/\ninput Outcome $ Count @@;\ndatalines;\n1night 25 day 20\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\nproc freq order=data data=accident;\nweight count;\ntables Outcome / binomial (exact) alpha=0.05; *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 25 1150 20 1240 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\n“Success” is an event happening during the night shift.\n\n\n\n\n\nevents &lt;- c(25,20)\nperson_years &lt;- c(1150,1240)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n1.347826\n0.7187612\n2.559057"
+    "text": "Exercise\nThe tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.\n\nQuestionR CodeSAS CodeAnswer\n\n\nUse the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (Hint: Small cell counts)\n\n\n           Ultrasound\nMRI         Localized Advanced\n  Localized         4        6\n  Advanced          3        3\n\n\n\n\n\n\n           Ultrasound\nMRI         Localized Advanced\n  Localized         4        6\n  Advanced          3        3\n\n\n\nmcnemar.test(dat_cc)\n\n\n    McNemar's Chi-squared test with continuity correction\n\ndata:  dat_cc\nMcNemar's chi-squared = 0.44444, df = 1, p-value = 0.505\n\n\n\n\ndata imaging;\ninput mri $ ult $ count;\ndatalines;\nloc loc 4\nloc adv 6\nadv loc 3\nadv adv 3\n;\n\nproc freq order=data;\nweight count;\ntables mri*ult / agree;\nexact mcnem;\nrun;\n\n\nUse the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (Hint: Small cell counts)\n\nUse exact p-value\n\\(p=0.51\\). No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#incidence-densities-1",
     "href": "Chapter2.html#incidence-densities-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Incidence Densities",
-    "text": "Incidence Densities\n\nCounts of subjects who responded within a duration of exposure to an event.\nPoisson distribution: counts\nExamples:\n\nBacteria colony count\nDisease incidence\nAccidents\nVaccine failure\n\nCommon measure of duration of exposure/ time-at-risk: person-time"
+    "text": "Incidence Densities\n\nCounts of subjects who responded within a duration of exposure to an event.\nPoisson distribution: counts\nExamples:\n\nBacteria colony count\nDisease incidence\nAccidents\nVaccine failure\n\nCommon measure of duration of exposure/ time-at-risk: person-time",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#poisson-distribution",
     "href": "Chapter2.html#poisson-distribution",
     "title": "EAB 770 - Chapter 2",
     "section": "Poisson Distribution",
-    "text": "Poisson Distribution\nRecall that the Poisson distribution is described by the following density function:\n\\[P(x)= e^{-\\lambda}\\lambda^x/x!\\]\nwhere \\(\\lambda\\) is the expected number of events at a given unit of time.\n\nis also referred to as incidence density.\nFor \\(t\\) units of time, the expected number of events scales to \\(\\lambda t\\).\nMain assumption: The time to event is a random variable following an exponential distribution."
+    "text": "Poisson Distribution\nRecall that the Poisson distribution is described by the following density function:\n\\[P(x)= e^{-\\lambda}\\lambda^x/x!\\]\nwhere \\(\\lambda\\) is the expected number of events at a given unit of time.\n\nis also referred to as incidence density.\nFor \\(t\\) units of time, the expected number of events scales to \\(\\lambda t\\).\nMain assumption: The time to event is a random variable following an exponential distribution.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#incidence-density-ratios",
     "href": "Chapter2.html#incidence-density-ratios",
     "title": "EAB 770 - Chapter 2",
     "section": "Incidence Density Ratios",
-    "text": "Incidence Density Ratios\n\n\n\nThe table shows the number of infections (events) and person years for participants of an RCT.\n\n\\(n_v\\) and \\(n_p\\) are Poisson random variables with respective incidence densities equal to \\(\\lambda_v\\) and \\(\\lambda_p\\)\n\nIf \\(\\lambda_v\\) is the incidence density for the vaccine group, then the expected number of events is \\(\\lambda_v N_v\\).\nSimilarly, the expected number of events in the placebo group is \\(\\lambda_p N_p\\)\nWe are interested in testing the null hypothesis \\(\\lambda_v/\\lambda_p = 1\\).\n\n\\(\\lambda_v/\\lambda_p\\) is referred to as the Incidence Density Ratio (IDR)"
+    "text": "Incidence Density Ratios\n\n\n\nThe table shows the number of infections (events) and person years for participants of an RCT.\n\n\\(n_v\\) and \\(n_p\\) are Poisson random variables with respective incidence densities equal to \\(\\lambda_v\\) and \\(\\lambda_p\\)\n\nIf \\(\\lambda_v\\) is the incidence density for the vaccine group, then the expected number of events is \\(\\lambda_v N_v\\).\nSimilarly, the expected number of events in the placebo group is \\(\\lambda_p N_p\\)\nWe are interested in testing the null hypothesis \\(\\lambda_v/\\lambda_p = 1\\).\n\n\\(\\lambda_v/\\lambda_p\\) is referred to as the Incidence Density Ratio (IDR)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#incidence-density-ratios-1",
     "href": "Chapter2.html#incidence-density-ratios-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Incidence Density Ratios",
-    "text": "Incidence Density Ratios\nThe IDR can be estimated using conditional binomial distributions assuming \\(n_v\\) and \\(n_p\\) are independent Poisson processes.\n\\[P(n_v|n_v+n_p) \\sim Bin\\left(N=n_v + n_p, p = \\frac{\\lambda_vN_v}{\\lambda_vN_v+\\lambda_pN_p}\\right)\\]"
+    "text": "Incidence Density Ratios\nThe IDR can be estimated using conditional binomial distributions assuming \\(n_v\\) and \\(n_p\\) are independent Poisson processes.\n\\[P(n_v|n_v+n_p) \\sim Bin\\left(N=n_v + n_p, p = \\frac{\\lambda_vN_v}{\\lambda_vN_v+\\lambda_pN_p}\\right)\\]",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#incidence-density-ratios-confidence-interval",
     "href": "Chapter2.html#incidence-density-ratios-confidence-interval",
     "title": "EAB 770 - Chapter 2",
     "section": "Incidence Density Ratios: Confidence Interval",
-    "text": "Incidence Density Ratios: Confidence Interval\nThe binomial proportion can be estimated using the proportion of events in the treatment group:\n\\[p = \\frac{n_v}{n_v+n_p} = \\frac{IDR(N_v/N_p)}{1+(IDR)(N_v/N_p)}\\] Using algebra (Problem Set 1), it is easy to show that:\n\\[IDR = \\frac{p}{1-p}\\left(N_p/N_v\\right)\\]"
+    "text": "Incidence Density Ratios: Confidence Interval\nThe binomial proportion can be estimated using the proportion of events in the treatment group:\n\\[p = \\frac{n_v}{n_v+n_p} = \\frac{IDR(N_v/N_p)}{1+(IDR)(N_v/N_p)}\\] Using algebra (Problem Set 1), it is easy to show that:\n\\[IDR = \\frac{p}{1-p}\\left(N_p/N_v\\right)\\]",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#incidence-density-ratios-confidence-interval-1",
     "href": "Chapter2.html#incidence-density-ratios-confidence-interval-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Incidence Density Ratios: Confidence Interval",
-    "text": "Incidence Density Ratios: Confidence Interval\nYou can calculate the confidence interval estimates for \\(p\\) using the binomial distribution assumption (\\(p_L,p_U\\)) and apply the scaling factor to each confidence limit.\n\\[95\\% CI: \\left(\\frac{p_L}{1-p_L}(N_p/N_v),\\frac{p_U}{1-p_U}(N_p/N_v)\\right)\\]"
+    "text": "Incidence Density Ratios: Confidence Interval\nYou can calculate the confidence interval estimates for \\(p\\) using the binomial distribution assumption (\\(p_L,p_U\\)) and apply the scaling factor to each confidence limit.\n\\[95\\% CI: \\left(\\frac{p_L}{1-p_L}(N_p/N_v),\\frac{p_U}{1-p_U}(N_p/N_v)\\right)\\]",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#incidence-density-ratios-sas",
     "href": "Chapter2.html#incidence-density-ratios-sas",
     "title": "EAB 770 - Chapter 2",
     "section": "Incidence Density Ratios: SAS",
-    "text": "Incidence Density Ratios: SAS\n\nThe binomial option in the tables statement produces the estimate and exact confidence limits for the binomial proportion \\(p\\), i.e. \\(p_L\\) and \\(p_U\\).\nWe use the estimate and exact confidence limits of \\(p\\) in calculating the IDR.\nThe IML procedure, which is the procedure used to perform mathematical equations, is used to calculate the IDR confidence limits.\n\nLater on, we will use the GENMOD procedure to calculate exact confidence intervals for the IDR."
+    "text": "Incidence Density Ratios: SAS\n\nThe binomial option in the tables statement produces the estimate and exact confidence limits for the binomial proportion \\(p\\), i.e. \\(p_L\\) and \\(p_U\\).\nWe use the estimate and exact confidence limits of \\(p\\) in calculating the IDR.\nThe IML procedure, which is the procedure used to perform mathematical equations, is used to calculate the IDR confidence limits.\n\nLater on, we will use the GENMOD procedure to calculate exact confidence intervals for the IDR.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-12",
-    "href": "Chapter2.html#example-12",
+    "objectID": "Chapter2.html#incidence-density-ratios-r",
+    "href": "Chapter2.html#incidence-density-ratios-r",
+    "title": "EAB 770 - Chapter 2",
+    "section": "Incidence Density Ratios: R",
+    "text": "Incidence Density Ratios: R\nThe epitools package includes the rateratio() function that can calculate an approximation of the incidence density ratio.\n\nrateratio(contingency_table)\n#OR\n\nrateratio(x=events,y=person_years)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
+  },
+  {
+    "objectID": "Chapter2.html#example-7",
+    "href": "Chapter2.html#example-7",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\nSuppose prior literature states that the incidence rate of a chronic disease is 0.40. Suppose we want to perform a prospective study to test the association between the disease incidence and family history, i.e. whether other family members were diagnosed with the chronic disease. We want to detect a proportion difference of 0.10 between groups with power of 80% (0.80) at a significance level of 0.05."
+    "text": "Example\nThe table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.\n\nQuestionsSAS CodeR CodeAnswers\n\n\n\nEstimate the IDR of hospitalization/emergency room visits between the two groups.\nCalculate the 95% CI.\n\n\n\n\ndata vaccine2;\ninput Outcome $ Count @@;\ndatalines;\nvaccine 3 placebo 58\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\n\n1proc freq order=data data=vaccine2;\nweight count;\ntables Outcome / binomial (exact); *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 3, 7500, 58 , 7250 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\norder=data is important so as to keep the proportions consistent.\n\n\n\n\n\nevents &lt;- c(58,3)\nperson_years &lt;- c(7250,7500)\n\nmult &lt;- person_years[1]/person_years[2] #multiplier\nDescTools::BinomCI(events[2],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n0.05\n0.01002014\n0.1535468\n\n\n\n\n\n\n\n\nrateratio(x=events,y=person_years)\n\n$data\n          Outcome\nPredictor  events person_years\n  Exposed1     58         7250\n  Exposed2      3         7500\n  Total        61        14750\n\n$measure\n          rate ratio with 95% C.I.\nPredictor    estimate      lower     upper\n  Exposed1 1.00000000         NA        NA\n  Exposed2 0.05253473 0.01239861 0.1418922\n\n$p.value\n          two-sided\nPredictor               midp.exact                  wald\n  Exposed1                      NA                    NA\n  Exposed2 0.000000000000006708884 0.0000000000007207568\n\nattr(,\"method\")\n[1] \"Median unbiased estimate & mid-p exact CI\"\n\n\n\n\n\nEstimate the IDR of hospitalization/emergency room visits between the two groups. IDR = 0.05\nCalculate the 95% CI. (0.01-0.15) or with riskratio: (0.01-0.14)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-13",
-    "href": "Chapter2.html#example-13",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Example",
-    "text": "Example\nSuppose prior literature states that the incidence rate of a chronic disease is 0.40. Suppose we want to perform a prospective study to test the association between the disease incidence and family history, i.e. whether other family members were diagnosed with the chronic disease. We want to detect a proportion difference of 0.10 between groups with power of 80% (0.80) at a significance level of 0.05.\n\nWe need 388 units per group (family +, family -). This brings us to 776 total units.\n\n\nSAS CodeR Code\n\n\nproc power ;\ntwosamplefreq\n    refproportion=0.4 \n    alpha=0.05\n    power=0.80\n    proportiondiff=0.1\n    npergroup=.;\n\nrun;\n\n\n\npower.prop.test(p1=0.4,p2=0.5,power=0.8)\n\n\n     Two-sample comparison of proportions power calculation \n\n              n = 387.3385\n             p1 = 0.4\n             p2 = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-12",
-    "href": "Chapter2.html#exercise-12",
+    "objectID": "Chapter2.html#exercise-7",
+    "href": "Chapter2.html#exercise-7",
     "title": "EAB 770 - Chapter 2",
     "section": "Exercise",
-    "text": "Exercise\n\n\nThe table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.\n\nIDR: 1.37\n95% CI: (0.72,2.56)\n\n\n\n\n       Metric\nShift   Accidents Person-Hours\n  Night        25         1150\n  Day          20         1240\n\n\n\n\nSAS CodeR Code\n\n\ndata accident;\n/*data only has the events. Person-Hours are used later.*/\ninput Outcome $ Count @@;\ndatalines;\n1night 25 day 20\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\nproc freq order=data data=accident;\nweight count;\ntables Outcome / binomial (exact) alpha=0.05; *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 25 1150 20 1240 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\n“Success” is an event happening during the night shift.\n\n\n\n\n\nevents &lt;- c(25,20)\nperson_years &lt;- c(1150,1240)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n1.347826\n0.7187612\n2.559057"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-13",
-    "href": "Chapter2.html#exercise-13",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Exercise",
-    "text": "Exercise\n\n\nThe table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.\n\nIDR: 1.37\n95% CI: (0.72,2.56)\n\n\n\n\n       Metric\nShift   Accidents Person-Hours\n  Night        25         1150\n  Day          20         1240\n\n\n\n\nSAS CodeR Code\n\n\ndata accident;\n/*data only has the events. Person-Hours are used later.*/\ninput Outcome $ Count @@;\ndatalines;\n1night 25 day 20\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\nproc freq order=data data=accident;\nweight count;\ntables Outcome / binomial (exact) alpha=0.05; *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 25 1150 20 1240 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\n“Success” is an event happening during the night shift.\n\n\n\n\n\nevents &lt;- c(25,20)\nperson_years &lt;- c(1150,1240)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n1.347826\n0.7187612\n2.559057"
+    "text": "Exercise\nThe table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n       Metric\nShift   Accidents Person-Hours\n  Night        25         1150\n  Day          20         1240\n\n\n\n\ndata accident;\n/*data only has the events. Person-Hours are used later.*/\ninput Outcome $ Count @@;\ndatalines;\n1night 25 day 20\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\nproc freq order=data data=accident;\nweight count;\ntables Outcome / binomial (exact) alpha=0.05; *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 25 1150 20 1240 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\n“Success” is an event happening during the night shift.\n\n\n\n\n\nevents &lt;- c(20,25)\nperson_years &lt;- c(1240,1150)\n\nmult &lt;- person_years[1]/person_years[2] #multiplier\nDescTools::BinomCI(events[2],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n1.347826\n0.7187612\n2.559057\n\n\n\n\n\n\n\nUsing rateratio()\n\nrateratio(x=events,y=person_years)\n\n$data\n          Outcome\nPredictor  events person_years\n  Exposed1     20         1240\n  Exposed2     25         1150\n  Total        45         2390\n\n$measure\n          rate ratio with 95% C.I.\nPredictor  estimate     lower   upper\n  Exposed1 1.000000        NA      NA\n  Exposed2 1.345627 0.7466559 2.45738\n\n$p.value\n          two-sided\nPredictor  midp.exact      wald\n  Exposed1         NA        NA\n  Exposed2  0.3232959 0.3179524\n\nattr(,\"method\")\n[1] \"Median unbiased estimate & mid-p exact CI\"\n\n\n\n\n\nIDR: 1.35 (0.72-2.56)\nwith riskratio: (0.75-2.46)",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#power-analysis-1",
     "href": "Chapter2.html#power-analysis-1",
     "title": "EAB 770 - Chapter 2",
     "section": "Power Analysis",
-    "text": "Power Analysis\n\nPower is defined as the probability of rejecting the null hypothesis when it is false.\n\nAcceptable range: 80% and above.\n\nAlso known as (a priori) Sample Size Calculations\n\nHow many samples do I need to detect a set difference between the treatment and placebo group at a significance level of 0.05?"
+    "text": "Power Analysis\n\nPower is defined as the probability of rejecting the null hypothesis when it is false.\n\nAcceptable range: 80% and above.\n\nAlso known as (a priori) Sample Size Calculations\n\nHow many samples do I need to detect a set difference between the treatment and placebo group at a significance level of 0.05?",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter2.html#power-analysis-sas",
     "href": "Chapter2.html#power-analysis-sas",
     "title": "EAB 770 - Chapter 2",
     "section": "Power Analysis: SAS",
-    "text": "Power Analysis: SAS\n\nThe POWER procedure enables us to calculate how many samples are needed to detect a set effect size in examining the difference between two proportions from two different populations.\nSpecifically, the TWOSAMPLEFREQ option\n\nRCT: treatment vs. control\n\nWe need to set an effect size (theory-based), significance level, and power level.\n\nOther options can be found here"
+    "text": "Power Analysis: SAS\n\nThe POWER procedure enables us to calculate how many samples are needed to detect a set effect size in examining the difference between two proportions from two different populations.\nSpecifically, the TWOSAMPLEFREQ option\n\nRCT: treatment vs. control\n\nWe need to set an effect size (theory-based), significance level, and power level.\n\nOther options can be found here",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-14",
-    "href": "Chapter2.html#example-14",
+    "objectID": "Chapter2.html#example-8",
+    "href": "Chapter2.html#example-8",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\nSuppose prior literature states that the incidence rate of a chronic disease is 0.40. Suppose we want to perform a prospective study to test the association between the disease incidence and family history, i.e. whether other family members were diagnosed with the chronic disease. We want to detect a proportion difference of 0.10 between groups with power of 80% (0.80) at a significance level of 0.05.\n\nWe need 388 units per group (family +, family -). This brings us to 776 total units.\n\n\nSAS CodeRCode\n\n\nproc power ;\ntwosamplefreq\n    refproportion=0.4 \n    alpha=0.05\n    power=0.80\n    proportiondiff=0.1\n    npergroup=.;\n\nrun;\n\n\n\npower.prop.test(p1=0.4,p2=0.5,power=0.8)\n\n\n     Two-sample comparison of proportions power calculation \n\n              n = 387.3385\n             p1 = 0.4\n             p2 = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group"
+    "text": "Example\nSuppose prior literature states that the incidence rate of a chronic disease is 0.40. Suppose we want to perform a prospective study to test the association between the disease incidence and family history, i.e. whether other family members were diagnosed with the chronic disease. We want to detect a proportion difference of 0.10 between groups with power of 80% (0.80) at a significance level of 0.05.",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
-    "objectID": "Chapter2.html#example-15",
-    "href": "Chapter2.html#example-15",
+    "objectID": "Chapter2.html#example-9",
+    "href": "Chapter2.html#example-9",
     "title": "EAB 770 - Chapter 2",
     "section": "Example",
-    "text": "Example\nSuppose prior literature states that the incidence rate of a chronic disease is 0.40. Suppose we want to perform a prospective study to test the association between the disease incidence and family history, i.e. whether other family members were diagnosed with the chronic disease. We want to detect a proportion difference of 0.10 between groups with power of 80% (0.80) at a significance level of 0.05.\n\nWe need 388 units per group (family +, family -). This brings us to 776 total units.\n\n\nSAS CodeRCode\n\n\nproc power ;\ntwosamplefreq\n    refproportion=0.4 \n    alpha=0.05\n    power=0.80\n    proportiondiff=0.1\n    npergroup=.;\n\nrun;\n\n\n\npower.prop.test(p1=0.4,p2=0.5,power=0.8)\n\n\n     Two-sample comparison of proportions power calculation \n\n              n = 387.3385\n             p1 = 0.4\n             p2 = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group"
+    "text": "Example\nSuppose prior literature states that the incidence rate of a chronic disease is 0.40. Suppose we want to perform a prospective study to test the association between the disease incidence and family history, i.e. whether other family members were diagnosed with the chronic disease. We want to detect a proportion difference of 0.10 between groups with power of 80% (0.80) at a significance level of 0.05.\n\nWe need 388 units per group (family +, family -). This brings us to 776 total units.\n\n\nSAS CodeR Code\n\n\nproc power ;\ntwosamplefreq\n    refproportion=0.4 \n    alpha=0.05\n    power=0.80\n    proportiondiff=0.1\n    npergroup=.;\n\nrun;\n\n\n\npower.prop.test(p1=0.4,p2=0.5,power=0.8)\n\n\n     Two-sample comparison of proportions power calculation \n\n              n = 387.3385\n             p1 = 0.4\n             p2 = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group",
+    "crumbs": [
+      "Chapter 2: 2x2 tables"
+    ]
   },
   {
     "objectID": "Chapter4.html#outline",
@@ -3497,122 +3656,38 @@
     "text": "Example\nThe following data come from a study in which a physical therapy practice experimented with different treatment modalities in a strengthening program. The therapists rotated patients through three programs for maintenance after basic strength had been attained. The strengthening programs included free weights, resistance bands, and weight machines. The therapists are interested in whether gender and age affect choice of strengthening programs.\n\n\n\n\n\n\nWarning\n\n\nSmall cell counts means we need to use exact methods.\n\n\n\n\nSAS CodeAnswer\n\n\nproc logistic data=pt;\ntitle \"asymptotic\";\nfreq count;\nclass gender(ref='females') age(ref='senior') / param=ref;\nmodel therapy(ref='machines') = gender age / link=glogit scale=none aggregate;\nrun;\n\nproc logistic data=pt;\ntitle \"exact\";\nfreq count;\nclass gender(ref='females') age(ref='senior') / param=ref;\nmodel therapy(ref='machines') = gender age / link=glogit scale=none aggregate;\nexact gender age/joint estimate=both;\nrun;\n\n\nThere is a marginal effect of gender ($ p=0.099\\(), but there is a significant effect of age (\\)^2 = 12.2, p=0.003$).\nThe odds of males preferring bands is 4.1 (0.49-59.55) times than that of females. Additionally, the odds of males preferring freeweights is 4.49 (0.93-30.2) times than that of females.\nThe odds of an adult preferring bands is 5.08 (0.60-53.2) times that of seniors. However, the odds of an adult preferring freeweights is 12.47 (2.7-84.0) times that of seniors."
   },
   {
-    "objectID": "Chapter2.html#x2-contingency-tables",
-    "href": "Chapter2.html#x2-contingency-tables",
-    "title": "EAB 770 - Chapter 2",
-    "section": "2x2 Contingency Tables",
-    "text": "2x2 Contingency Tables\n\n\n\nSummarizes categorical data\n\nResponse variable has two levels\nExploratory variable has two levels\n\nExample:\n\nTreatment/Placebo in RCT\nCase/Control in a retrospective study"
+    "objectID": "Chapter3.html#sets-of-2-times-2-tables",
+    "href": "Chapter3.html#sets-of-2-times-2-tables",
+    "title": "EAB 770 - Chapter 3",
+    "section": "Sets of \\(2 \\times 2\\) tables",
+    "text": "Sets of \\(2 \\times 2\\) tables\n\n\n\nConsider a multi-location RCT\n\nDifferent locations will have different contingency tables\nWe want to consolidate all data and account for the location effect in testing for the association between the treatment and outcome."
   },
   {
-    "objectID": "Chapter2.html#independence",
-    "href": "Chapter2.html#independence",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Independence",
-    "text": "Independence\nIf the two categorical variables are independent of each other, they are not associated.\n\n\n\n\n\n\nNote\n\n\nIndependence also means that the joint probability \\(p_{ij}\\) can be determined solely on the basis of the marginal probabilities. These can be estimated using sample data."
+    "objectID": "Chapter3.html#cochran-mantel-haenszel-test",
+    "href": "Chapter3.html#cochran-mantel-haenszel-test",
+    "title": "EAB 770 - Chapter 3",
+    "section": "Cochran-Mantel-Haenszel Test",
+    "text": "Cochran-Mantel-Haenszel Test\nThe Cochran-Mantel-Haenszel test assess the overall association of group and response after adjusting for the strata. If \\(n_{j11}\\) is the \\(n_{11}\\) value of the \\(j^{th}\\) contingency table, the Cochran-Mantel-Haenszel statistic, \\(Q_{MH}\\) can be written as:\n\\[\nQ_{MH} =    \\frac{\\left[\\sum_{j=1}^q n_{j11} - \\sum_{j=1}^q m_{j11}\\right]^2}{\\sum_{j=1}^q v_{j11}}\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(Q_{MH}\\) is often called an average partial association statistic."
   },
   {
-    "objectID": "Chapter2.html#pearson-chi-square-statistic",
-    "href": "Chapter2.html#pearson-chi-square-statistic",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Pearson Chi-square Statistic",
-    "text": "Pearson Chi-square Statistic\nThe Pearson Chi-square statistic can be written in terms of the joint frequency n_ij and the expected frequency m_ij.\n\\[Q_P = \\sum_{i=1}^2\\sum_{j=1}^2 \\frac{(n_{ij}-m_{ij})^2}{m_{ij}}\\]\n\n\n\n\n\n\nNote\n\n\n\\(m_{ij}\\) is the expected value of the number of observations in row \\(i\\) and column \\(j\\), \\(n_{ij}\\). The expected frequency \\(m_{ij}\\) can be calculated based on the null hypothesis assumption.\n\nIndependence: \\(p_{ij}=p_{i+}p_{+j} \\to m_{ij} = \\frac{n_{i+}n_{+j}}{n}\\)\nHomogeneity: \\(p_{i+}=n_{i+}/n; p_{+j}=n_{+j}/n\\to m_{ij} = \\frac{n_{i+}n_{+j}}{n}\\)"
+    "objectID": "Chapter3.html#mantel-haenszel-statistic",
+    "href": "Chapter3.html#mantel-haenszel-statistic",
+    "title": "EAB 770 - Chapter 3",
+    "section": "Mantel-Haenszel Statistic",
+    "text": "Mantel-Haenszel Statistic\nThe statistic \\(Q_{MH}\\) relies on detecting patterns of the differences of proportions in each table.\n\n\n\n\n\n\nNote\n\n\nThe statistic \\(Q_{MH}\\) approximately follows a chi-square distribution with one degree of freedom if the combined random sample sizes are large. This means that individual cell counts and isolated table sample sizes may be small.\nThe Mantel-Fleiss criterion can be used to check if the chi-square assumption holds. The MF score should be greater than 5."
   },
   {
-    "objectID": "Chapter2.html",
-    "href": "Chapter2.html",
-    "title": "EAB 770 - Chapter 2",
-    "section": "",
-    "text": "Contingency Tables\nChi-Square Statistics\nExact Tests\nDifference in Proportions\nOdds Ratio and Relative Risk\nSensitivity and Specificity\nMcNemar’s Test\nIncidence Densities\nPower Analysis"
+    "objectID": "Chapter3.html#cochran-mantel-haenszel-test-sas",
+    "href": "Chapter3.html#cochran-mantel-haenszel-test-sas",
+    "title": "EAB 770 - Chapter 3",
+    "section": "Cochran-Mantel-Haenszel Test: SAS",
+    "text": "Cochran-Mantel-Haenszel Test: SAS\n\nThe cmh option in the tables statement produces the Mantel-Haenszel statistic values. There will be three Mantel-Haenszel values included in the output.\nNonzero Correlation\nRow Mean Scores Differ\nGeneral Association\n\n\n\n\n\n\n\nNote\n\n\nFor \\(2 \\times 2\\) tables, the scores and degrees of freedom do not differ for these three MH-statistics. These measures will be distinguished for larger contingency tables.\n\n\n\n\n\n\n\n\n\nNote\n\n\nThe mf option in the tables statement produces the Mantel-Fleiss criterion. Recall that the Mantel-Fleiss criterion (MF) should be greater than 5 for the chi-square distributional assumption to be valid."
   },
   {
-    "objectID": "Chapter2.html#sas-example-contingency-table",
-    "href": "Chapter2.html#sas-example-contingency-table",
-    "title": "EAB 770 - Chapter 2",
-    "section": "SAS Example: Contingency Table",
-    "text": "SAS Example: Contingency Table\n\n\ndata respire;\nlength treat $7. outcome $1. ;\ninput treat $ outcome $ count;\ndatalines;\nplacebo f 16\nplacebo u 48\ntest f 40\ntest u 20\n;\nrun;\n\nproc freq data=respire order=data;\nweight count;\ntables treat*outcome;\nrun;\n\n\nproc freq calls the FREQ procedure in SAS.\n\nNot defining data=respire means SAS will automatically use the most recently run data set.\n\norder=data means we are creating the rows and columns based on how the data was inputted, not alphabetical order.\nweight tells SAS the number of counts for each count\ntables creates the contingency table with row, column, and total percentages.\nrun; tells SAS to run the code. This is important!"
-  },
-  {
-    "objectID": "Chapter2.html#exercise-14",
-    "href": "Chapter2.html#exercise-14",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Exercise",
-    "text": "Exercise\n\n\nThe table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.\n\nIDR: 1.37\n95% CI: (0.72,2.56)\n\n\n\n\n       Metric\nShift   Accidents Person-Hours\n  Night        25         1150\n  Day          20         1240\n\n\n\n\nSAS CodeR Code\n\n\ndata accident;\n/*data only has the events. Person-Hours are used later.*/\ninput Outcome $ Count @@;\ndatalines;\n1night 25 day 20\n;\n\nods select BinomialCLs; *this statement filters the output.;\n\nproc freq order=data data=accident;\nweight count;\ntables Outcome / binomial (exact) alpha=0.05; *calculates the exact confidence limits for the binomial proportion;\nods output BinomialCLs=BinomialCLs; *outputs a dataset that includes the binomial CLs.;\nrun;\n\nproc iml ;\nUse BinomialCLs var{LowerCL UpperCL};\nread all into CL;\nprint CL;\nq = { 25 1150 20 1240 }; *vector of numbers from the table;\nC= q[2]/q[4]; *q[i] represents the ith number in the q vector defined above. C is the person-years ratio Nv/Np;\nP= q[1]/ (q[1] + q[3]); *estimate of the binomial distribution;\nR= P/ ((1-P) *C) ; * IDR estimate;\nCI= CL[1]/((1-CL[1])*C) || CL[2]/((1-CL[2])*C) ; *IDR CL;\nprint r CI;\nquit;\n\n1\n\n“Success” is an event happening during the night shift.\n\n\n\n\n\nevents &lt;- c(25,20)\nperson_years &lt;- c(1150,1240)\n\nmult &lt;- person_years[2]/person_years[1] #multiplier\nDescTools::BinomCI(events[1],sum(events),method = \"clopper-pearson\") -&gt; p_est\n\n\n\ndata.frame(IDR = p_est[1]/(1-p_est[1])*mult,\n           IDR_lower = p_est[2]/(1-p_est[2])*mult,\n          IDR_higher = p_est[3]/(1-p_est[3])*mult) |&gt; gt::gt()\n\n\n\n\n\n\n\nIDR\nIDR_lower\nIDR_higher\n\n\n\n\n1.347826\n0.7187612\n2.559057"
-  },
-  {
-    "objectID": "Chapter2.html#contingency-tables-in-r",
-    "href": "Chapter2.html#contingency-tables-in-r",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Contingency Tables in R",
-    "text": "Contingency Tables in R\nTo create your own contingency table, you can use the data.frame() and xtabs() functions.\n\ncount_data &lt;- data.frame(Row = c(\"A\",\"A\",\"B\",\"B\"),\n                         Column = c(\"X\",\"Y\",\"X\",\"Y\"),\n                         Count = c(2,4,6,8))\ncount_data\n\n  Row Column Count\n1   A      X     2\n2   A      Y     4\n3   B      X     6\n4   B      Y     8\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 4\n  B 6 8\n\n\nYou can also use the expand.grid() function to create combinations of variable levels.\n\ncount_data &lt;- expand.grid(Row = factor(c(\"A\",\"B\"), levels=c(\"A\",\"B\")),\n                         Column = factor(c(\"X\",\"Y\"), levels=c(\"X\",\"Y\")))\n\ncount_data$Count = c(2,4,6,8)\n\ncount_data\n\n  Row Column Count\n1   A      X     2\n2   B      X     4\n3   A      Y     6\n4   B      Y     8\n\nxtabs(Count~Row+Column,data=count_data)\n\n   Column\nRow X Y\n  A 2 6\n  B 4 8\n\n\n\n\n\n\n\n\nNote\n\n\nordered can also be used to account for ordering in the row and column variables."
-  },
-  {
-    "objectID": "Chapter2.html#sas-freq-procedure",
-    "href": "Chapter2.html#sas-freq-procedure",
-    "title": "EAB 770 - Chapter 2",
-    "section": "SAS: FREQ procedure",
-    "text": "SAS: FREQ procedure\n\nThe weight statement tells SAS if there is an aggregated count variable present in the data set.\nThe tables statement tells SAS to create a contingency table using the stated variables.\n\nUnder tables, you can include the cmh or the chisq option to calculate the randomization and Pearson chi-square values.\n\n\nShown below is a sample SAS code.\nproc freq;\nweight count;\ntables a*b/ cmh chisq;\nrun;"
-  },
-  {
-    "objectID": "Chapter2.html#r-vcdextra",
-    "href": "Chapter2.html#r-vcdextra",
-    "title": "EAB 770 - Chapter 2",
-    "section": "R: vcdExtra",
-    "text": "R: vcdExtra\nIn R, the vcdExtra package is required to perform the Mantel-Haenszel chi-square tests. The function CMHtest() provides the value of the Mantel-Haenszel statistic, while chisq.test() provides the Pearson chi-square statistic."
-  },
-  {
-    "objectID": "Chapter2.html#fishers-exact-test-r",
-    "href": "Chapter2.html#fishers-exact-test-r",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Fisher’s Exact Test: R",
-    "text": "Fisher’s Exact Test: R\nThe fisher.test() can perform Fisher’s exact test in R using a contingency table as input.\n\nfisher.test(contingency_table,alternative=\"two.sided\")"
-  },
-  {
-    "objectID": "Chapter2.html#other-confidence-intervals",
-    "href": "Chapter2.html#other-confidence-intervals",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Other Confidence Intervals",
-    "text": "Other Confidence Intervals\n\n\n\n\n\n\n\n\n\nConfidence Intervals\nSAS code\nR code\nAdjustment Type\n\n\n\n\nWald\nwald\n“wald”\nDefault\n\n\nCorrected Wald\ncorrect\n“waldcc”\nContinuity correction\n\n\nAgresti-Caffo\nac\n“ac”\nImproved Coverage\n\n\nMiettinen-Nurminen\nmn\n“mn”\nUses goodness-of-fit to improve coverage\n\n\nNewcombe\nnewcombe\n“scorecc”\nhybrid interval that does well for small counts\n\n\nHauck-Anderson\nha\n“ha”\nAccounts for row totals"
-  },
-  {
-    "objectID": "Chapter2.html#confidence-intervals-r",
-    "href": "Chapter2.html#confidence-intervals-r",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Confidence Intervals: R",
-    "text": "Confidence Intervals: R\nThe BinomDiffCI() function in the DescTools package in R can calculate these confidence intervals.\n\n# install.packages(\"DescTools\")\nlibrary(DescTools)\nBinomDiffCI(x1=n11, n1 = row1sum, x2 = n21, n2=row2sum,\n            conf.level=0.95, \n            method = c(\"ac\", \"wald\", \"waldcc\", \"score\", \"scorecc\", \"mn\",\n                       \"mee\", \"blj\", \"ha\", \"hal\", \"jp\") \n            )"
-  },
-  {
-    "objectID": "Chapter2.html#contingency-tables-in-sas--long-format",
-    "href": "Chapter2.html#contingency-tables-in-sas--long-format",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Contingency Tables in SAS- Long Format",
-    "text": "Contingency Tables in SAS- Long Format\nWhen the data is not aggregated, the FREQ procedure can still be used to create contingency tables. We can use the import data procedure in SAS ODA to create work.spore from Spore.csv uploaded on Canvas.\nproc freq order=data data=severe;\nweight count;\ntables treat*outcome / chisq nocol;\nexact or;\nrun;"
-  },
-  {
-    "objectID": "Chapter2.html#contingency-tables-in-r--long-format",
-    "href": "Chapter2.html#contingency-tables-in-r--long-format",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Contingency Tables in R- Long Format",
-    "text": "Contingency Tables in R- Long Format\nWhen the data is not aggregated, the xtabs function can still be used to create contingency tables. First, we import Spore.csv from Canvas.\n\nspore &lt;- read.csv(\"Spore.csv\",stringsAsFactors = TRUE)\nspore\n\n   ID Treatment         Period Spore\n1   1      Test  Pre-Treatment  Full\n2   1      Test  Mid-Treatment  Some\n3   1      Test Post-Treatment  Some\n4   2      Test  Pre-Treatment  Full\n5   2      Test  Mid-Treatment  None\n6   2      Test Post-Treatment  None\n7   3      Test  Pre-Treatment  Full\n8   3      Test  Mid-Treatment  Some\n9   3      Test Post-Treatment  Some\n10  4      Test  Pre-Treatment  Full\n11  4      Test  Mid-Treatment  Some\n12  4      Test Post-Treatment      \n13  5      Test  Pre-Treatment  Full\n14  5      Test  Mid-Treatment  None\n15  5      Test Post-Treatment  None\n16  1   Placebo  Pre-Treatment  Full\n17  1   Placebo  Mid-Treatment  Full\n18  1   Placebo Post-Treatment  Full\n19  2   Placebo  Pre-Treatment  Full\n20  2   Placebo  Mid-Treatment  Some\n21  2   Placebo Post-Treatment  Some\n22  3   Placebo  Pre-Treatment  Full\n23  3   Placebo  Mid-Treatment  Some\n24  3   Placebo Post-Treatment  Some\n25  4   Placebo  Pre-Treatment  Full\n26  4   Placebo  Mid-Treatment  Some\n27  4   Placebo Post-Treatment  Some\n28  5   Placebo  Pre-Treatment  Some\n29  5   Placebo  Mid-Treatment      \n30  5   Placebo Post-Treatment      \n31  6      Test  Pre-Treatment  Full\n32  6      Test  Mid-Treatment  Some\n33  6      Test Post-Treatment  Some\n34  7      Test  Pre-Treatment  Full\n35  7      Test  Mid-Treatment  None\n36  7      Test Post-Treatment  None\n37  8      Test  Pre-Treatment  Full\n38  8      Test  Mid-Treatment  Some\n39  8      Test Post-Treatment  Some\n40  9      Test  Pre-Treatment  Full\n41  9      Test  Mid-Treatment  Some\n42  9      Test Post-Treatment  None\n43 10      Test  Pre-Treatment  Full\n44 10      Test  Mid-Treatment  Some\n45 10      Test Post-Treatment  Some\n46  6   Placebo  Pre-Treatment  Full\n47  6   Placebo  Mid-Treatment  Full\n48  6   Placebo Post-Treatment  Full\n49  7   Placebo  Pre-Treatment  Full\n50  7   Placebo  Mid-Treatment  Full\n51  7   Placebo Post-Treatment  Full\n52  8   Placebo  Pre-Treatment  Full\n53  8   Placebo  Mid-Treatment  Full\n54  8   Placebo Post-Treatment  Full\n55  9   Placebo  Pre-Treatment  Full\n56  9   Placebo  Mid-Treatment  Some\n57  9   Placebo Post-Treatment  Some\n58 10   Placebo  Pre-Treatment  Full\n59 10   Placebo  Mid-Treatment  Some\n60 10   Placebo Post-Treatment  Some\n61 11      Test  Pre-Treatment  Full\n62 11      Test  Mid-Treatment  Some\n63 11      Test Post-Treatment  None\n64 12      Test  Pre-Treatment  Full\n65 12      Test  Mid-Treatment  Some\n66 12      Test Post-Treatment  None\n67 13      Test  Pre-Treatment  Full\n68 13      Test  Mid-Treatment  Some\n69 13      Test Post-Treatment  Some\n70 14      Test  Pre-Treatment  Full\n71 14      Test  Mid-Treatment  None\n72 14      Test Post-Treatment  None\n73 15      Test  Pre-Treatment  Full\n74 15      Test  Mid-Treatment  None\n75 15      Test Post-Treatment  None\n76 11   Placebo  Pre-Treatment  Full\n77 11   Placebo  Mid-Treatment  Some\n78 11   Placebo Post-Treatment  Some\n79 12   Placebo  Pre-Treatment  Full\n80 12   Placebo  Mid-Treatment  Some\n81 12   Placebo Post-Treatment  Some\n82 13   Placebo  Pre-Treatment  Full\n83 13   Placebo  Mid-Treatment  Some\n84 13   Placebo Post-Treatment  Some\n85 14   Placebo  Pre-Treatment  Full\n86 14   Placebo  Mid-Treatment  Full\n87 14   Placebo Post-Treatment  Full\n88 15   Placebo  Pre-Treatment  Full\n89 15   Placebo  Mid-Treatment  Full\n90 15   Placebo Post-Treatment  Full\n\nxtabs(~Treatment+Spore,data=spore)\n\n         Spore\nTreatment    Full None Some\n  Placebo  2   26    0   17\n  Test     1   15   13   16"
-  },
-  {
-    "objectID": "Chapter2.html#odds-ratio-or",
-    "href": "Chapter2.html#odds-ratio-or",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Odds Ratio (OR)",
-    "text": "Odds Ratio (OR)\n\n\n\n\n\n\nOdds of success\n\n\nThe ratio of probability of success and failure of an outcome is referred to as the odds.\n\\[\nOdds = p/(1-p)\n\\]\n\n\n\n\n\n\n\n\n\nOdds Ratio\n\n\nThe ratio of the odds of success for Group 1 and Group 2 is referred to as the odds ratio. \\[\nOR = \\frac{p_1/(1-p_1)}{p_2/(1-p_2)} = (n_{11}n_{22}/n_{21}n_{12})\n\\]\nThe odds ratio is commonly used as an effect size for retrospective studies. This statistic is also used in logistic regression techniques, which will be discussed later."
-  },
-  {
-    "objectID": "Chapter2.html#relative-risk-rr",
-    "href": "Chapter2.html#relative-risk-rr",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Relative Risk (RR)",
-    "text": "Relative Risk (RR)\nThe ratio of the risk developing a particular condition for individuals with risk factors present and absent is called the relative risk.\n\\[\nRR = p_1/p_2 = \\frac{(n_{11}/n_{1+})}{(n_{21}/n_{2+})}\n\\]\nThe relative risk is commonly used as an effect size in prospective studies.\n\n\n\n\n\n\nNote\n\n\nFor cross-sectional data, the relative risk is known as the prevalence ratio because the disease and risk factor are assessed at the same time."
-  },
-  {
-    "objectID": "Chapter2.html#odds-ratio-relative-risk-r",
-    "href": "Chapter2.html#odds-ratio-relative-risk-r",
-    "title": "EAB 770 - Chapter 2",
-    "section": "Odds Ratio & Relative Risk: R",
-    "text": "Odds Ratio & Relative Risk: R\nThe odds ratio and relative risk can be calculated using functions from the epitools package.\n\nlibrary(epitools)\noddsratio(contingency_table,\n          conf.level = 0.95,\n          method=c(\"fisher\",\"wald\")\n)\n\nriskratio(contingency_table,\n          conf.level = 0.95,\n          method=c(\"fisher\",\"wald\")\n)\n\n\n\n\n\n\n\nTip\n\n\nThe fisher method provides exact confidence intervals for relative risk and odds ratio. The fisher.test() function provides an exact confidence interval for the odds ratio based on the hypergeometric distribution, but it does not include the relative risk."
+    "objectID": "Chapter3.html#cochran-mantel-haenszel-test-sas-1",
+    "href": "Chapter3.html#cochran-mantel-haenszel-test-sas-1",
+    "title": "EAB 770 - Chapter 3",
+    "section": "Cochran-Mantel-Haenszel Test: SAS",
+    "text": "Cochran-Mantel-Haenszel Test: SAS\nJust like the previous chapter, we can use the CMHtest() function in the vcdExtra package in R.\n\ncontingency_table &lt;- xtabs(count~row_var+column_var+strata_var, data=dat)\n# OR\n\ncontingency_table &lt;- xtabs(~ row_var+column_var+strata_var, data=dat) # for non-aggregated data\n\nlibrary(vcdExtra)\nCMHtest(contingency_table,overall=T,strata=strata_var)"
   }
 ]

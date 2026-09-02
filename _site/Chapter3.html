@@ -98,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d7d389961a246b163ae1cd8b562da1b6.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-146a52615c86749306b5caa224a9b489.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -218,7 +218,7 @@ Miguel Fudolig
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
-<li>Mantel-Haenszel test</li>
+<li>Cochran-Mantel-Haenszel test</li>
 <li>Measures of Association
 <ul>
 <li>Common Odds ratio</li>
@@ -228,12 +228,12 @@ Miguel Fudolig
 </ul>
 </section></section>
 <section>
-<section id="mantel-haenszel-statistic" class="title-slide slide level1 center">
-<h1>Mantel-Haenszel Statistic</h1>
+<section id="cochran-mantel-haenszel-statistic" class="title-slide slide level1 center">
+<h1>Cochran-Mantel-Haenszel Statistic</h1>
 
 </section>
-<section id="sets-of-2times2-tables" class="slide level2">
-<h2>Sets of <span class="math inline">\(2\times2\)</span> tables</h2>
+<section id="sets-of-2-times-2-tables" class="slide level2">
+<h2>Sets of <span class="math inline">\(2 \times 2\)</span> tables</h2>
 <div class="columns">
 <div class="column" style="width:40%; font-size: 85%">
 <ul>
@@ -249,13 +249,20 @@ Miguel Fudolig
 </section>
 <section id="stratified-analysis" class="slide level2">
 <h2>Stratified Analysis</h2>
-<ul>
-<li>Stratified analysis examines the association between two variables while adjusting for the effect of other covariates.
-<ul>
-<li>The variable that define the strata may be an explanatory variable, location, or classification variable.</li>
-<li>Each table corresponds to one level of the explanatory variables (stratum)</li>
-</ul></li>
-</ul>
+<p>Stratified analysis examines the association between two variables while adjusting for the effect of other covariates.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The variable that define the strata may be an explanatory variable, location, or classification variable. Each contingency table corresponds to one level of the explanatory variables (stratum)</p>
+</div>
+</div>
+</div>
 </section>
 <section id="mantel-haenszel-test" class="slide level2">
 <h2>Mantel-Haenszel Test</h2>
@@ -263,13 +270,23 @@ Miguel Fudolig
 <p><span class="math display">\[
 Q = (n_{11}-m_{11})^2/v_{11}
 \]</span> where <span class="math inline">\(m_{11}\)</span> is the expected value of the <span class="math inline">\(n_{11}\)</span> and <span class="math inline">\(v_{11}\)</span> is the variance of <span class="math inline">\(n_{11}\)</span> based on the hypergeometric distribution assumption.</p>
-<ul>
-<li>If there are <span class="math inline">\(q\)</span> <span class="math inline">\(2\times 2\)</span> tables, each table will have a value for <span class="math inline">\(Q\)</span>.</li>
-</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>If there are <span class="math inline">\(q\)</span> <span class="math inline">\(2\times 2\)</span> tables, each table will have a value for <span class="math inline">\(Q\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="mantel-haenszel-test-1" class="slide level2">
-<h2>Mantel-Haenszel Test</h2>
-<p>The Mantel-Haenszel test assess the overall association of group and response after adjusting for the strata. If <span class="math inline">\(n_{j11}\)</span> is the <span class="math inline">\(n_{11}\)</span> value of the <span class="math inline">\(j^{th}\)</span> contingency table, the Mantel-Haenszel statistic, <span class="math inline">\(Q_{MH}\)</span> can be written as:</p>
+<section id="cochran-mantel-haenszel-test" class="slide level2">
+<h2>Cochran-Mantel-Haenszel Test</h2>
+<p>The Cochran-Mantel-Haenszel test assess the overall association of group and response after adjusting for the strata. If <span class="math inline">\(n_{j11}\)</span> is the <span class="math inline">\(n_{11}\)</span> value of the <span class="math inline">\(j^{th}\)</span> contingency table, the Cochran-Mantel-Haenszel statistic, <span class="math inline">\(Q_{MH}\)</span> can be written as:</p>
 <p><span class="math display">\[
 Q_{MH} =    \frac{\left[\sum_{j=1}^q n_{j11} - \sum_{j=1}^q m_{j11}\right]^2}{\sum_{j=1}^q v_{j11}}
 \]</span></p>
@@ -287,19 +304,26 @@ Q_{MH} =    \frac{\left[\sum_{j=1}^q n_{j11} - \sum_{j=1}^q m_{j11}\right]^2}{\s
 </div>
 </div>
 </section>
-<section id="mantel-haenszel-statistic-1" class="slide level2">
+<section id="mantel-haenszel-statistic" class="slide level2">
 <h2>Mantel-Haenszel Statistic</h2>
-<ul>
-<li>The statistic <span class="math inline">\(Q_{MH}\)</span> relies on detecting patterns of the differences of proportions in each table</li>
-<li>The statistic <span class="math inline">\(Q_{MH}\)</span> approximately follows a chi-square distribution with one degree of freedom if the combined random sample sizes are large.
-<ul>
-<li>Individual cell counts and isolated table sample sizes may be small.</li>
-<li>The <em>Mantel-Fleiss criterion</em> can be used to check if the chi-square assumption holds. The MF score should be greater than 5.</li>
-</ul></li>
-</ul>
+<p>The statistic <span class="math inline">\(Q_{MH}\)</span> relies on detecting patterns of the differences of proportions in each table.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The statistic <span class="math inline">\(Q_{MH}\)</span> approximately follows a chi-square distribution with one degree of freedom if the <strong>combined</strong> random sample sizes are large. This means that individual cell counts and isolated table sample sizes may be small.</p>
+<p>The <strong>Mantel-Fleiss criterion</strong> can be used to check if the chi-square assumption holds. The MF score should be greater than 5.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="mantel-haenszel-test-sas" class="slide level2">
-<h2>Mantel-Haenszel Test: SAS</h2>
+<section id="cochran-mantel-haenszel-test-sas" class="slide level2">
+<h2>Cochran-Mantel-Haenszel Test: SAS</h2>
 <ul>
 <li><p>The <code>cmh</code> option in the <code>tables</code> statement produces the Mantel-Haenszel statistic values. There will be three Mantel-Haenszel values included in the output.</p></li>
 <li><p>Nonzero Correlation</p></li>
@@ -315,76 +339,84 @@ Q_{MH} =    \frac{\left[\sum_{j=1}^q n_{j11} - \sum_{j=1}^q m_{j11}\right]^2}{\s
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>For <span class="math inline">\(2 \times 2\)</span> tables, the scores and degrees of freedom do not differ for these three MH-statistics. These measures will be distinguished later in the course.</p>
+<p>For <span class="math inline">\(2 \times 2\)</span> tables, the scores and degrees of freedom do not differ for these three MH-statistics. These measures will be distinguished for larger contingency tables.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The <code>mf</code> option in the <code>tables</code> statement produces the Mantel-Fleiss criterion. Recall that the Mantel-Fleiss criterion (MF) should be greater than 5 for the chi-square distributional assumption to be valid.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="mantel-haenszel-test-sas-1" class="slide level2">
-<h2>Mantel-Haenszel Test: SAS</h2>
-<ul>
-<li>The <code>mf</code> option in the <code>tables</code> statement produces the Mantel-Fleiss criterion. Recall that the Mantel-Fleiss criterion (MF) should be greater than 5 for the chi-square distributional assumption to be valid.</li>
-</ul>
+<section id="cochran-mantel-haenszel-test-sas-1" class="slide level2">
+<h2>Cochran-Mantel-Haenszel Test: SAS</h2>
+<p>Just like the previous chapter, we can use the <code>CMHtest()</code> function in the <code>vcdExtra</code> package in <code>R</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>row_var<span class="sc">+</span>column_var<span class="sc">+</span>strata_var, <span class="at">data=</span>dat)</span>
+<span id="cb1-2"><a></a><span class="co"># OR</span></span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span> row_var<span class="sc">+</span>column_var<span class="sc">+</span>strata_var, <span class="at">data=</span>dat) <span class="co"># for non-aggregated data</span></span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a><span class="fu">library</span>(vcdExtra)</span>
+<span id="cb1-7"><a></a><span class="fu">CMHtest</span>(contingency_table,<span class="at">overall=</span>T,<span class="at">strata=</span>strata_var)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<div class="columns">
-<div class="column" style="width:40%; font-size: 85%">
 <p>The table shows the results of a study about how general daily stress affects one’s opinion on a proposed new health policy. Participants were sampled from urban and rural areas.</p>
-<ul>
-<li>Is there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level.</li>
-</ul>
-</div><div class="column" style="width:60%">
-<p><img data-src="img/health_C3.png"></p>
-</div></div>
-</section>
-<section id="example-1" class="slide level2">
-<h2>Example</h2>
-<p>The table shows the results of a study about how general daily stress affects one’s opinion on a proposed new health policy. Participants were sampled from urban and rural areas.</p>
-<ul>
-<li>Is there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level.</li>
-</ul>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Code</a></li><li><a href="#tabset-1-2">R Code</a></li><li><a href="#tabset-1-3">Answer</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Question</a></li><li><a href="#tabset-1-2">SAS Code</a></li><li><a href="#tabset-1-3">R Code</a></li><li><a href="#tabset-1-4">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2" data-code-line-numbers="11,12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a>data stress;</span>
-<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>input region <span class="sc">$</span> stress <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a>datalines;</span>
-<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4"></a>urban low f <span class="dv">48</span> urban low u <span class="dv">12</span></span>
-<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5"></a>urban high f <span class="dv">96</span> urban high u <span class="dv">94</span></span>
-<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6"></a>rural low f <span class="dv">55</span> rural low u <span class="dv">135</span></span>
-<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7"></a>rural high f <span class="dv">7</span> rural high u <span class="dv">53</span></span>
-<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8"></a>;</span>
-<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>stress;</span>
-<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-11" class="code-annotation-target"><a href="#annotated-cell-2-11"></a>tables region<span class="sc">*</span>stress<span class="sc">*</span>outcome <span class="sc">/</span> all chisq <span class="fu">cmh</span> (mf) nocol nopct;</span>
-<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Is there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level.</li>
+</ul>
+<p><img data-src="img/health_C3.png"></p>
+</div>
+<div id="tabset-1-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3" data-code-line-numbers="11,12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>data stress;</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>input region <span class="sc">$</span> stress <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a>datalines;</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a>urban low f <span class="dv">48</span> urban low u <span class="dv">12</span></span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a>urban high f <span class="dv">96</span> urban high u <span class="dv">94</span></span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>rural low f <span class="dv">55</span> rural low u <span class="dv">135</span></span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a>rural high f <span class="dv">7</span> rural high u <span class="dv">53</span></span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a>;</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>stress;</span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11"></a>tables region<span class="sc">*</span>stress<span class="sc">*</span>outcome <span class="sc">/</span> all chisq <span class="fu">cmh</span> (mf) nocol nopct;</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="11" data-code-annotation="1"><code>CMH</code> includes the Mantel-Haenszel statistics. <code>MF</code> gives the Mantel-Fleiss condition;</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="1"><code>CMH</code> includes the Mantel-Haenszel statistics. <code>MF</code> gives the Mantel-Fleiss condition;</span>
 </dd>
 </dl>
 </div>
-<div id="tabset-1-2">
+<div id="tabset-1-3">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(vcdExtra)</span>
-<span id="cb1-2"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Favorable"</span>,<span class="st">"Unfavorable"</span>),</span>
-<span id="cb1-3"><a></a>                    <span class="at">Residence=</span><span class="fu">c</span>(<span class="st">"Urban"</span>,<span class="st">"Rural"</span>),</span>
-<span id="cb1-4"><a></a>                    <span class="at">Stress =</span> <span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"High"</span>)</span>
-<span id="cb1-5"><a></a>                  ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-6"><a></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">48</span>,<span class="dv">12</span>,<span class="dv">55</span>,<span class="dv">135</span>,<span class="dv">96</span>,<span class="dv">94</span>,<span class="dv">7</span>,<span class="dv">53</span>))</span>
-<span id="cb1-7"><a></a></span>
-<span id="cb1-8"><a></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  Stress <span class="sc">+</span> Outcome <span class="sc">+</span> Residence  ,<span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
-<span id="cb1-11"><a></a>        <span class="at">strata=</span><span class="st">"Residence"</span>,</span>
-<span id="cb1-12"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<span id="cb1-13"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(vcdExtra)</span>
+<span id="cb2-2"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Favorable"</span>,<span class="st">"Unfavorable"</span>),</span>
+<span id="cb2-3"><a></a>                    <span class="at">Residence=</span><span class="fu">c</span>(<span class="st">"Urban"</span>,<span class="st">"Rural"</span>),</span>
+<span id="cb2-4"><a></a>                    <span class="at">Stress =</span> <span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"High"</span>)</span>
+<span id="cb2-5"><a></a>                  ) </span>
+<span id="cb2-6"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">48</span>,<span class="dv">12</span>,<span class="dv">55</span>,<span class="dv">135</span>,<span class="dv">96</span>,<span class="dv">94</span>,<span class="dv">7</span>,<span class="dv">53</span>)</span>
+<span id="cb2-7"><a></a></span>
+<span id="cb2-8"><a></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  Stress <span class="sc">+</span> Outcome <span class="sc">+</span> Residence  ,<span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb2-11"><a></a>        <span class="at">strata=</span><span class="st">"Residence"</span>,</span>
+<span id="cb2-12"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
+<span id="cb2-13"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Residence:Urban`
 Cochran-Mantel-Haenszel Statistics for Stress by Outcome 
@@ -420,13 +452,13 @@ cor        Nonzero correlation 23.05  1 1.5783e-06</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-1-3">
+<div id="tabset-1-4">
 <p><span class="math inline">\(\chi^2 = 23.05\)</span>, <span class="math inline">\(df=1\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>. There is strong evidence that the stress level is associated with the opinion outcome.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="example-2" class="slide level2">
+<section id="example-1" class="slide level2">
 <h2>Example</h2>
 <div class="columns">
 <div class="column" style="width:40%; font-size: 85%">
@@ -454,7 +486,7 @@ Treatment Yes No
 </div>
 </div></div>
 </section>
-<section id="example-3" class="slide level2">
+<section id="example-2" class="slide level2">
 <h2>Example</h2>
 <p>The table shows the results of an RCT for a test treatment designed for respiratory infections. Is there a significant association between the treatment and the outcome after controlling for the center?</p>
 <ul>
@@ -464,39 +496,39 @@ Treatment Yes No
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">R Code</a></li><li><a href="#tabset-2-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a></span>
-<span id="cb4-2"><a></a>data resp;</span>
-<span id="cb4-3"><a></a>length treatment <span class="sc">$</span><span class="fl">7.</span>;</span>
-<span id="cb4-4"><a></a>input treatment <span class="sc">$</span> improvement <span class="sc">$</span> center <span class="sc">$</span> count;</span>
-<span id="cb4-5"><a></a>datalines;</span>
-<span id="cb4-6"><a></a>Test Yes <span class="dv">1</span> <span class="dv">29</span></span>
-<span id="cb4-7"><a></a>Placebo Yes <span class="dv">1</span> <span class="dv">14</span></span>
-<span id="cb4-8"><a></a>Test No <span class="dv">1</span> <span class="dv">16</span></span>
-<span id="cb4-9"><a></a>Placebo No <span class="dv">1</span> <span class="dv">31</span></span>
-<span id="cb4-10"><a></a>Test Yes <span class="dv">2</span> <span class="dv">37</span></span>
-<span id="cb4-11"><a></a>Placebo Yes <span class="dv">2</span> <span class="dv">24</span></span>
-<span id="cb4-12"><a></a>Test No <span class="dv">2</span> <span class="dv">8</span></span>
-<span id="cb4-13"><a></a>Placebo No <span class="dv">2</span> <span class="dv">21</span></span>
-<span id="cb4-14"><a></a>;</span>
-<span id="cb4-15"><a></a></span>
-<span id="cb4-16"><a></a></span>
-<span id="cb4-17"><a></a>proc freq data<span class="ot">=</span>resp order<span class="ot">=</span>data;</span>
-<span id="cb4-18"><a></a>weight count;</span>
-<span id="cb4-19"><a></a>tables center<span class="sc">*</span>treatment<span class="sc">*</span>improvement <span class="sc">/</span> <span class="fu">cmh</span> (MF) nocol norow nopct;</span>
-<span id="cb4-20"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a></span>
+<span id="cb5-2"><a></a>data resp;</span>
+<span id="cb5-3"><a></a>length treatment <span class="sc">$</span><span class="fl">7.</span>;</span>
+<span id="cb5-4"><a></a>input treatment <span class="sc">$</span> improvement <span class="sc">$</span> center <span class="sc">$</span> count;</span>
+<span id="cb5-5"><a></a>datalines;</span>
+<span id="cb5-6"><a></a>Test Yes <span class="dv">1</span> <span class="dv">29</span></span>
+<span id="cb5-7"><a></a>Placebo Yes <span class="dv">1</span> <span class="dv">14</span></span>
+<span id="cb5-8"><a></a>Test No <span class="dv">1</span> <span class="dv">16</span></span>
+<span id="cb5-9"><a></a>Placebo No <span class="dv">1</span> <span class="dv">31</span></span>
+<span id="cb5-10"><a></a>Test Yes <span class="dv">2</span> <span class="dv">37</span></span>
+<span id="cb5-11"><a></a>Placebo Yes <span class="dv">2</span> <span class="dv">24</span></span>
+<span id="cb5-12"><a></a>Test No <span class="dv">2</span> <span class="dv">8</span></span>
+<span id="cb5-13"><a></a>Placebo No <span class="dv">2</span> <span class="dv">21</span></span>
+<span id="cb5-14"><a></a>;</span>
+<span id="cb5-15"><a></a></span>
+<span id="cb5-16"><a></a></span>
+<span id="cb5-17"><a></a>proc freq data<span class="ot">=</span>resp order<span class="ot">=</span>data;</span>
+<span id="cb5-18"><a></a>weight count;</span>
+<span id="cb5-19"><a></a>tables center<span class="sc">*</span>treatment<span class="sc">*</span>improvement <span class="sc">/</span> <span class="fu">cmh</span> (MF) nocol norow nopct;</span>
+<span id="cb5-20"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Improvement =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>),</span>
-<span id="cb5-2"><a></a>                    <span class="at">Center=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
-<span id="cb5-3"><a></a>                    <span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">"Test"</span>,<span class="st">"Placebo"</span>)</span>
-<span id="cb5-4"><a></a>                  ) <span class="sc">|&gt;</span> </span>
-<span id="cb5-5"><a></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">16</span>,<span class="dv">37</span>,<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">31</span>,<span class="dv">24</span>,<span class="dv">21</span>))</span>
-<span id="cb5-6"><a></a></span>
-<span id="cb5-7"><a></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  Treatment<span class="sc">+</span>Improvement <span class="sc">+</span> Center, <span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
-<span id="cb5-8"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Improvement =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>),</span>
+<span id="cb6-2"><a></a>                    <span class="at">Center=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb6-3"><a></a>                    <span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">"Test"</span>,<span class="st">"Placebo"</span>)</span>
+<span id="cb6-4"><a></a>                  ) <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">16</span>,<span class="dv">37</span>,<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">31</span>,<span class="dv">24</span>,<span class="dv">21</span>))</span>
+<span id="cb6-6"><a></a></span>
+<span id="cb6-7"><a></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  Treatment<span class="sc">+</span>Improvement <span class="sc">+</span> Center, <span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
+<span id="cb6-8"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , Center = 1
@@ -515,10 +547,10 @@ Treatment Yes No
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
-<span id="cb7-2"><a></a>        <span class="at">strata=</span><span class="st">"Center"</span>,</span>
-<span id="cb7-3"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<span id="cb7-4"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb8-2"><a></a>        <span class="at">strata=</span><span class="st">"Center"</span>,</span>
+<span id="cb8-3"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
+<span id="cb8-4"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Center:1`
@@ -681,12 +713,12 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
 <li>The <code>comor</code> and <code>eqor</code> options in the <code>exact</code> statement yield the exact common odds ratio and the Zelen’s test results, respectively.</li>
 </ul>
 <p>Sample SAS code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-code-line-numbers="2,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>proc freq;</span>
-<span id="cb9-2"><a></a>tables a<span class="sc">*</span>b<span class="sc">*</span>c<span class="sc">/</span>cmh measures;</span>
-<span id="cb9-3"><a></a>exact comor eqor;</span>
-<span id="cb9-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-code-line-numbers="2,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>proc freq;</span>
+<span id="cb10-2"><a></a>tables a<span class="sc">*</span>b<span class="sc">*</span>c<span class="sc">/</span>cmh measures;</span>
+<span id="cb10-3"><a></a>exact comor eqor;</span>
+<span id="cb10-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="example-4" class="slide level2">
+<section id="example-3" class="slide level2">
 <h2>Example</h2>
 <div class="columns">
 <div class="column" style="width:50%; font-size: 85%">
@@ -695,38 +727,38 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
 <p><img data-src="img/coronary_C3.png"></p>
 </div></div>
 </section>
-<section id="example-5" class="slide level2">
+<section id="example-4" class="slide level2">
 <h2>Example</h2>
 <p>The table shows the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios.</p>
 <div class="panel-tabset">
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a>data ca;</span>
-<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2"></a>input sex <span class="sc">$</span> ECG <span class="sc">$</span> disease <span class="sc">$</span> count;</span>
-<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3"></a>datalines;</span>
-<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">4</span></span>
-<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> no <span class="dv">11</span></span>
-<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6"></a>female <span class="sc">&gt;=</span><span class="fl">0.1</span> yes <span class="dv">8</span></span>
-<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7"></a>female <span class="sc">&gt;=</span><span class="fl">0.1</span> no <span class="dv">10</span></span>
-<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8"></a>male <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">9</span></span>
-<span id="annotated-cell-11-9"><a href="#annotated-cell-11-9"></a>male <span class="sc">&lt;</span><span class="fl">0.1</span> no <span class="dv">9</span></span>
-<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10"></a>male <span class="sc">&gt;=</span><span class="fl">0.1</span> yes <span class="dv">21</span></span>
-<span id="annotated-cell-11-11"><a href="#annotated-cell-11-11"></a>male <span class="sc">&gt;=</span><span class="fl">0.1</span> no <span class="dv">6</span></span>
-<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12"></a>;</span>
-<span id="annotated-cell-11-13"><a href="#annotated-cell-11-13"></a>proc freq data<span class="ot">=</span>ca ;</span>
-<span id="annotated-cell-11-14"><a href="#annotated-cell-11-14"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-15" class="code-annotation-target"><a href="#annotated-cell-11-15"></a>tables sex<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct chisq measures;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-11-16" class="code-annotation-target"><a href="#annotated-cell-11-16"></a>tables sex<span class="sc">*</span>ECG<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct cmh measures;</span>
-<span id="annotated-cell-11-17"><a href="#annotated-cell-11-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>data ca;</span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>input sex <span class="sc">$</span> ECG <span class="sc">$</span> disease <span class="sc">$</span> count;</span>
+<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a>datalines;</span>
+<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">4</span></span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> no <span class="dv">11</span></span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a>female <span class="sc">&gt;=</span><span class="fl">0.1</span> yes <span class="dv">8</span></span>
+<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>female <span class="sc">&gt;=</span><span class="fl">0.1</span> no <span class="dv">10</span></span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>male <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">9</span></span>
+<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a>male <span class="sc">&lt;</span><span class="fl">0.1</span> no <span class="dv">9</span></span>
+<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10"></a>male <span class="sc">&gt;=</span><span class="fl">0.1</span> yes <span class="dv">21</span></span>
+<span id="annotated-cell-12-11"><a href="#annotated-cell-12-11"></a>male <span class="sc">&gt;=</span><span class="fl">0.1</span> no <span class="dv">6</span></span>
+<span id="annotated-cell-12-12"><a href="#annotated-cell-12-12"></a>;</span>
+<span id="annotated-cell-12-13"><a href="#annotated-cell-12-13"></a>proc freq data<span class="ot">=</span>ca ;</span>
+<span id="annotated-cell-12-14"><a href="#annotated-cell-12-14"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-15" class="code-annotation-target"><a href="#annotated-cell-12-15"></a>tables sex<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct chisq measures;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-16" class="code-annotation-target"><a href="#annotated-cell-12-16"></a>tables sex<span class="sc">*</span>ECG<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct cmh measures;</span>
+<span id="annotated-cell-12-17"><a href="#annotated-cell-12-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="15" data-code-annotation="1">Testing for an association between sex and disease status</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="15" data-code-annotation="1">Testing for an association between sex and disease status</span>
 </dd>
-<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="16" data-code-annotation="2">Using sex as a stratification variable/strata. <code>measures</code> includes common odds ratio plots.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="16" data-code-annotation="2">Using sex as a stratification variable/strata. <code>measures</code> includes common odds ratio plots.</span>
 </dd>
 </dl>
 </div>
@@ -765,28 +797,28 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>data exercise;</span>
-<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>input location <span class="sc">$</span> program <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a>datalines;</span>
-<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>downtown office good <span class="dv">12</span> downtown office not <span class="dv">5</span></span>
-<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>downtown home good <span class="dv">3</span> downtown home not <span class="dv">5</span></span>
-<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a>satellite office good <span class="dv">6</span> satellite office not <span class="dv">1</span></span>
-<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>satellite home good <span class="dv">1</span> satellite home not <span class="dv">3</span></span>
-<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>;</span>
-<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a></span>
-<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10"></a>proc freq order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-12-11"><a href="#annotated-cell-12-11"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-12" class="code-annotation-target"><a href="#annotated-cell-12-12"></a>tables location<span class="sc">*</span>program<span class="sc">*</span>outcome <span class="sc">/</span><span class="fu">cmh</span>(mf);</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-13" class="code-annotation-target"><a href="#annotated-cell-12-13"></a>exact comor eqor;</span>
-<span id="annotated-cell-12-14"><a href="#annotated-cell-12-14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1"></a>data exercise;</span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2"></a>input location <span class="sc">$</span> program <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a>datalines;</span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4"></a>downtown office good <span class="dv">12</span> downtown office not <span class="dv">5</span></span>
+<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5"></a>downtown home good <span class="dv">3</span> downtown home not <span class="dv">5</span></span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6"></a>satellite office good <span class="dv">6</span> satellite office not <span class="dv">1</span></span>
+<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7"></a>satellite home good <span class="dv">1</span> satellite home not <span class="dv">3</span></span>
+<span id="annotated-cell-13-8"><a href="#annotated-cell-13-8"></a>;</span>
+<span id="annotated-cell-13-9"><a href="#annotated-cell-13-9"></a></span>
+<span id="annotated-cell-13-10"><a href="#annotated-cell-13-10"></a>proc freq order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-13-11"><a href="#annotated-cell-13-11"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-12" class="code-annotation-target"><a href="#annotated-cell-13-12"></a>tables location<span class="sc">*</span>program<span class="sc">*</span>outcome <span class="sc">/</span><span class="fu">cmh</span>(mf);</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-13-13" class="code-annotation-target"><a href="#annotated-cell-13-13"></a>exact comor eqor;</span>
+<span id="annotated-cell-13-14"><a href="#annotated-cell-13-14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="12" data-code-annotation="1"><code>MF</code> should be enclosed in parentheses</span>
+<span data-code-cell="annotated-cell-13" data-code-lines="12" data-code-annotation="1"><code>MF</code> should be enclosed in parentheses</span>
 </dd>
-<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="13" data-code-annotation="2"><code>eqor</code>: Zelen’s test, <code>comor</code>: exact confidence interval for the common odds ratio.</span>
+<span data-code-cell="annotated-cell-13" data-code-lines="13" data-code-annotation="2"><code>eqor</code>: Zelen’s test, <code>comor</code>: exact confidence interval for the common odds ratio.</span>
 </dd>
 </dl>
 </div>
@@ -810,7 +842,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{q} \sum_{j=1}^{q} \frac{(n_{hij}-m_{hij})^2
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Chapter 3- <a href="https://madfudolig.quarto.pub/eab770slides/">Back to home</a></p>
+<p>Chapter 3- <a href="https://miguelfudolig.github.io/EAB770-Slides-Website/">Back to home</a></p>
 </div>
 </div></div>
 

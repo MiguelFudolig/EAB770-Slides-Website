@@ -5,7 +5,7 @@ format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    footer: "Chapter 2- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
+    footer: "Chapter 2- [Back to home](https://miguelfudolig.github.io/EAB770-Slides-Website/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
@@ -15,6 +15,7 @@ format:
     echo: true
   pdf: 
     number-sections: true
+    toc: true
 ---
 
 # Chapter 2: $2\times2$ tables
@@ -578,7 +579,7 @@ dat <- expand.grid(Treatment=factor(c("Test","Control"),levels=c("Test","Control
                   Outcome = factor(c("Favorable","Unfavorable"),levels=c("Favorable","Unfavorable"))) 
 dat$count <- c(5,1,1,3)
 
-dat_cc <- xtabs(count ~ .,data=dat) 
+dat_cc <- xtabs(count ~ Treatment+Outcome,data=dat) 
 dat_cc
 ```
 
@@ -1038,14 +1039,16 @@ The odds ratio and relative risk can be calculated using functions from the `epi
 #| eval: false
 
 library(epitools)
-oddsratio(contingency_table,
+epitools::oddsratio(contingency_table,
           conf.level = 0.95,
-          method=c("fisher","wald")
+          method=c("fisher","wald"),
+          rev=c("rows","columns","both")
 )
 
-riskratio(contingency_table,
+epitools::riskratio(contingency_table,
           conf.level = 0.95,
-          method=c("fisher","wald")
+          method=c("fisher","wald"),
+          rev=c("rows","columns","both")
 )
 ```
 
@@ -1053,30 +1056,17 @@ riskratio(contingency_table,
 The `fisher` method provides exact confidence intervals for relative risk and odds ratio. The `fisher.test()` function provides an exact confidence interval for the odds ratio based on the hypergeometric distribution, but it does not include the relative risk.
 :::
 
+::: callout-tip
+The `rev` argument allows us to re-arrange the contingency table without defining factors to establish row and column `R`. The order of the columns for `oddsratio` and `riskratio` should follow this order:
+
+- Rows (top to bottom): No exposure (risk absent), Exposure (risk present)
+- Cols (left to right):  Control (Outcome=0), Case (Outcome=1)
+:::
+
 
 ## Example
 
-The contingency table shows data from a study on treatments for severe infections. Calculate the asymptotic and exact confidence limits for the odds ratio of favorable outcomes for test and control groups.
-
-```{r}
-#| echo: false
-dat <- expand.grid(Treatment=c("Test","Control"),
-                  Outcome = c("Favorable","Unfavorable"))  
-dat$count <- c(10,2,2,4)
-
-dat_cc<-xtabs(count ~ .,data=dat) 
-dat_cc
-```
-
-## Example
-
-The data set `severe_long.csv` includes data  from a study on treatments for severe infections. 
-
-```{r}
-dat <- read.csv("severe_long.csv")
-head(dat)
-```
-
+The data set `severe_long.csv` includes data  from a study on treatments for severe infections.  
 
 ::: panel-tabset
 
@@ -1084,13 +1074,18 @@ head(dat)
 
 Calculate the asymptotic and exact confidence limits for the odds ratio of favorable outcomes for test and control groups.
 
+```{r}
+dat <- read.csv("severe_long.csv")
+head(dat)
+```
+
 ### `SAS` Code
 
-``` r
+Import `severe_long` as `work.severe_long` in `SAS`.
 
-proc freq order=data data=severe;
-weight count;
-tables treat*outcome / chisq nocol;
+``` {.r}
+proc freq order=data data=work.severe_long;
+tables treat*outcome;
 exact or;
 run;
 ```
@@ -1104,69 +1099,61 @@ run;
 
 ### `R` Code
 
+Create the contingency table.
+
 ```{r}
 dat_cc <- xtabs(~Treatment+Outcome,data=dat)
 dat_cc
+```
 
+Calculate the odds ratio and the confidence intervals.
+
+```{r}
 library(epitools)
 
-oddsratio(dat_cc,
+epitools::oddsratio(dat_cc,
           method=c("wald"),
           conf.level=0.95,
-          rev="rows" #Reverses the rows
+          rev="columns" #Reverses the columns
           )
 
-oddsratio(dat_cc,
+epitools::oddsratio(dat_cc,
           method=c("fisher"),
           conf.level=0.95,
-          rev="rows" #Reverses the rows
+          rev="columns" #Reverses the columns,
           )
 ```
 
 ::: callout-note
 We report the **estimate** of the odds ratio from the `"wald"` method, but use the `"fisher"` confidence interval as the exact confidence interval.
+
+We also use `epitools::oddsratio` to tell `R` that we are using the `oddsratio` function in `epitools` and not another package (`vcd` also has a package of the same name).
 :::
 
 :::
-## Exercise
 
-Two groups having the same symptoms of respiratory illness were sampled. One group was treated with an experimental treatment and the other group was treated with a placebo. The participants were asked whether there was an overall treatment in overall respiration.
-
-- Calculate the odds ratio of respiratory improvement between test and placebo groups.
-- What is the relative risk of having respiratory improvement if we consider the treatment as a risk factor?
-- Calculate the asymptotic 95% CI for each answer.
-
-```{r}
-#| echo: false
-library(tidyverse)
-dat <- expand.grid(Treatment=c("Test","Placebo"),
-                  Outcome = c("Yes","No")) |> 
-mutate(count = c(29,14,16,31))
-
-xtabs(count ~ .,data=dat) -> dat_cc
-dat_cc
-```
 
 ## Exercise
 
 Two groups having the same symptoms of respiratory illness were sampled. One group was treated with an experimental treatment and the other group was treated with a placebo. The participants were asked whether there was an overall treatment in overall respiration.
 
-- Calculate the odds ratio of respiratory improvement between test and placebo groups.**4.01 (1.67,9.66)**
-- What is the relative risk of having respiratory improvement if we consider the treatment as a risk factor? **2.07 (1.27,3.37)**
-- Calculate the asymptotic 95% CI for each answer.
 
-```{r}
-#| echo: false
-library(tidyverse)
-dat <- expand.grid(Treatment=c("Test","Placebo"),
-                  Outcome = c("Yes","No")) |> 
-mutate(count = c(29,14,16,31))
-
-xtabs(count ~ .,data=dat) -> dat_cc
-dat_cc
-```
 
 ::: panel-tabset
+
+### Data
+
+```{r}
+#| echo: false
+library(tidyverse)
+dat <- expand.grid(Treatment=c("Test","Placebo"),
+                  Outcome = c("Yes","No"))  
+dat$count = c(29,14,16,31)
+
+dat_cc<- xtabs(count ~ .,data=dat) 
+dat_cc
+```
+
 ### SAS Code
 
 ``` r
@@ -1186,12 +1173,26 @@ run;
 
 ### R Code
 
+```{r}
+dat <- expand.grid(Treatment=c("Test","Placebo"),
+                  Outcome = c("Yes","No")) 
+dat$count = c(29,14,16,31)
+
+dat_cc<- xtabs(count ~ .,data=dat) 
+dat_cc
+```
+
+
 Odds ratio
 
 ```{r}
 #| echo: true
 library(epitools)
-dat_cc |> oddsratio(rev=c("both"), method="wald",conf.level=0.95) -> or
+or <- epitools::oddsratio(dat_cc,
+                          method="wald",
+                          conf.level=0.95,
+                          rev="both")
+or
 or$measure
 ```
 
@@ -1199,9 +1200,18 @@ Relative Risk
 
 ```{r}
 #| echo: true
-dat_cc |> riskratio(rev=c("both"),method="wald")->rr
+rr <- riskratio(dat_cc,
+                method="wald",
+                rev="both")
+rr
 rr$measure
 ```
+
+### Answer
+
+- Calculate the odds ratio of respiratory improvement between test and placebo groups.**4.01 (1.67-9.66)**
+- What is the relative risk of having respiratory improvement if we consider the treatment as a risk factor? **2.07 (1.27-3.37)**
+
 :::
 
 # Sensitivity and specificity
@@ -1210,14 +1220,20 @@ rr$measure
 
 True proportion of positive results that a test elicits when performed on subjects known to have the disease.
 
-$$Sens=TP/(TP+FN) = n_{11}/n_{1+}$$
+$$
+Sens=TP/(TP+FN) = n_{11}/n_{1+}
+$$
+
 Sensitivity is the conditional probability of a positive test given that the subject has the disease ($P(PT|HD)$)
 
 ## Specificity
 
 True proportion of negative results that a test elicits when performed on subjects known to be disease free.
 
-$$Sens=TN/(TN+FP) = n_{22}/n_{2+}$$
+$$
+Sens=TN/(TN+FP) = n_{22}/n_{2+}
+$$
+
 Specificity is the conditional probability of a negative test when the subject does not have the disease ($P(NT|ND)$).
 
 ## Sensitivity and Specificity: SAS
@@ -1228,9 +1244,38 @@ The `FREQ` procedure can also calculate sensitivity and specificity.
   - Sensitivity: Row 1 risk estimate for Column 1
   - Specificity: Row 2 risk estimate for Column 2
 
+## Sensitivity and Specificity: `R`
+
+The `epiR` package has the `epi.tests()` function that calculates sensitivity and specificity. For the following contingency table:
+
+
+|           | Outcome + | Outcome - |
+|:---------:|:--------------:|:-----:|
+| Test +|       $n_{11}$       | $n_{12}$  |
+|  Test -  |       $n_{21}$       |  $n_{22}$  |
+
+```{r}
+#| eval: false
+
+install.packages("epiR")
+library(epiR)
+
+epi.tests(contingency_table,
+          method=c("exact","wilson","agresti","clopper-pearson","jeffreys"))
+```
+
+::: callout-note
+The default method used to calculate confidence intervals for the sensitivity and specificity is the `exact` method.
+:::
+
+
 ## Example
 
-The following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device.
+The following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device with the corresponding exact 95% confidence interval.
+
+
+::: panel-tabset
+### Data
 
 ```{r}
 #| echo: false
@@ -1239,47 +1284,57 @@ dat <- expand.grid(Status=c("Disease Present","Disease Absent"),
                   Test = c("Positive","Negative")) |> 
 mutate(count = c(52,20,8,100))
 
-xtabs(count ~ .,data=dat) -> dat_cc
+xtabs(count ~ Test+Status,data=dat) -> dat_cc
 dat_cc
 ```
 
-## Example
+### SAS Code
 
-The following table shows the results of a study investigating a new screening device for a skin disease. Calculate the sensitivity and specificity of the screening device.
-
-- Sensitivity: 0.87 (0.75,0.94)
-- Specificity: 0.83 (0.75,0.90)
-
-```{r}
-#| echo: false
-library(tidyverse)
-dat <- expand.grid(Status=c("Disease Present","Disease Absent"),
-                  Test = c("Positive","Negative")) |> 
-mutate(count = c(52,20,8,100))
-
-xtabs(count ~ .,data=dat) -> dat_cc
-dat_cc
-```
-
-SAS Code
-
-``` r
+```{.r}
 data screening;
-input disease $ outcome $ count @@;
+input disease $ test $ count @@;
 datalines;
 present + 52 present - 8
 absent + 20 absent - 100
 ;
 proc freq data=screening order=data;
 weight count;
-tables disease*outcome / riskdiff;
+tables disease*test / riskdiff;
 run;
 ```
 
+### R Code
+
+```{r}
+dat <- expand.grid(Status=c("Disease Present","Disease Absent"),
+                  Test = c("Positive","Negative")) |> 
+mutate(count = c(52,20,8,100))
+
+xtabs(count ~ Test+Status,data=dat) -> dat_cc
+dat_cc
+```
+
+```{r}
+library(epiR)
+epi.tests(dat_cc)
+```
+
+### Answer
+
+- Sensitivity: 0.87 (0.75-0.94)
+
+- Specificity: 0.83 (0.75-0.90)
+
+
+:::
+
 ## Exercise
 
-A pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.
+A pharmaceutical company developed a screening test that can be used to detect infection of the Lassa virus. The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.
 
+::: panel-tabset
+
+### Question 
 - What is the sensitivity of the test?
 - What is the specificity of the test?
 
@@ -1294,22 +1349,20 @@ xtabs(count ~ .,data=dat) -> dat_cc
 dat_cc
 ```
 
-## Exercise
 
-A pharmaceutical company developed a screening test that can be used to detect infection of the Lassa (virus). The newly developed test was said to be cheaper than the tests currently available to the public, but its performance was yet to be evaluated. The screening test was applied to 115 diagnosed cases (w/ Lassa virus) and 120 control participants (w/o Lassa virus) of the Lassa fever. The resulting contingency table is shown in the table.
-
-- What is the sensitivity of the test? **0.8435 (0.76, 0.90)**
-- What is the specificity of the test? **0.6250 (0.53, 0.71)**
-
+### R Code
 ```{r}
-#| echo: false
 library(tidyverse)
 dat <- expand.grid(Status=c("Disease Present","Disease Absent"),
-                  Test = c("Positive","Negative")) |> 
-mutate(count = c(97,45,18,75))
+                  Test = c("Positive","Negative")) 
+dat$count = c(97,45,18,75)
 
-xtabs(count ~ .,data=dat) -> dat_cc
+dat_cc <- xtabs(count ~ Test+Status,data=dat)
 dat_cc
+```
+```{r}
+library(epiR)
+epi.tests(dat_cc)
 ```
 
 ### SAS Code
@@ -1327,24 +1380,43 @@ tables disease*outcome / riskdiff;
 run;
 ```
 
+### Answer
+
+- What is the sensitivity of the test? **0.8435 (0.76, 0.90)**
+
+- What is the specificity of the test? **0.6250 (0.53, 0.71)**
+
+:::
+
 # McNemar's Test
 
 ## McNemar's Test
 
-- When the 2x2 table provides information from matched pairs, the two responses are related to each other. Hence, independence cannot be assumed.
+When the 2x2 table provides information from matched pairs, the two responses are related to each other. Hence, independence cannot be assumed.
 
-- Null hypothesis: The marginal probabilities of each outcome are the same.
+::: callout-note
+### Null Hypothesis
 
-- The test statistic for the McNemar’s test is $Q_M$ given by
+$H_0$: The marginal probabilities of each outcome are the same.
+:::
 
-$$Q_M = (n_{12}-n_{21})^2/(n_{12}+n_{21})$$
+::: callout-note
+### Test Statistic
 
-## McNemar's Test: SAS
+The test statistic for the McNemar’s test is $Q_M$ given by
+
+$$
+Q_M = (n_{12}-n_{21})^2/(n_{12}+n_{21})
+$$
+
+:::
+
+## McNemar's Test: `SAS`
 
 - The `agree` option in the `tables` statement can be used to perform the McNemar's test.
 - Exact p-values can be calculated using the `exact` statement.
 
-### Sample SAS Code
+### Sample `SAS` Code
 
 ``` r
 proc freq;
@@ -1354,26 +1426,27 @@ exact mcnem;
 run;
 ```
 
-## Example
+## McNemar's Test: `R`
 
-The table displays data collected by political science researchers who polled husbands and wives on whether they approved of one of their U.S. senators. The cell counts represent the number of pairs of husbands and wives who fit the configurations indicated by the row and column levels. Use the McNemar’s test to determine whether there is no difference in husband and wife approvals on the state senator.
+The `mcnemar.test()` function can be used to perform the McNemar's test.
 
 ```{r}
-#| echo: false
-library(tidyverse)
-dat <- expand.grid(Husband=c("Yes","No"),
-                  Wife = c("Yes","No")) |> 
-mutate(count = c(20,10,5,10))
+#| eval: false
 
-xtabs(count ~ .,data=dat) -> dat_cc
-dat_cc
+mcnemar.test(contingency_table) # no continuity correction
 ```
+
+::: callout-note
+The p-value calculated using this function adds the continuity correction by default.
+:::
 
 ## Example
 
 The table displays data collected by political science researchers who polled husbands and wives on whether they approved of one of their U.S. senators. The cell counts represent the number of pairs of husbands and wives who fit the configurations indicated by the row and column levels. Use the McNemar’s test to determine whether there is no difference in husband and wife approvals on the state senator.
 
-- Exact p-value = 0.3018, which implies that there is no evidence of a difference between the senator approval ratings of the husbands and wives.
+::: panel-tabset
+
+### Data
 
 ```{r}
 #| echo: false
@@ -1405,46 +1478,73 @@ exact mcnem;
 run;
 ```
 
-## Exercise
 
-The tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.
-
-- Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (*Hint: Small cell counts*)
+### R Code
 
 ```{r}
-#| echo: false
-dat <- expand.grid(MRI=c("Localized","Advanced"),
-                  Ultrasound = c("Localized","Advanced")) |> 
-mutate(count = c(4,3,6,3))
+dat <- expand.grid(Husband=c("Yes","No"),
+                  Wife = c("Yes","No"))  
+dat$count <- c(20,10,5,10)
 
-xtabs(count ~ .,data=dat) -> dat_cc
+dat_cc <- xtabs(count ~ Husband+Wife,data=dat) 
 dat_cc
 ```
-
-## Exercise
-
-The tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.
+```{r}
+mcnemar.test(dat_cc)
+```
+::: callout-note
+If we want to recover the asymptotic p-value from `SAS`, we need to remove the continuity correction.
 
 ```{r}
-#| echo: false
-dat <- expand.grid(MRI=c("Localized","Advanced"),
-                  Ultrasound = c("Localized","Advanced")) |> 
-mutate(count = c(4,3,6,3))
-
-xtabs(count ~ .,data=dat) -> dat_cc
-dat_cc
+mcnemar.test(dat_cc,correct=F)
 ```
 
-::: panel-tabset
+
+:::
+
 ### Answer
 
-- Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (*Hint: Small cell counts*)
-  - Use exact p-value
-  - $p=0.5078$. No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.
+The exact/corrected p-value = 0.3018, which implies that there is no evidence of a difference between the senator approval ratings of the husbands and wives.
+:::
+
+## Exercise
+
+The tables show the data from a study that compared the diagnostic accuracy of magnetic resonance imaging (MRI) and ultrasound in patients who had been established as having localized prostate cancer by a gold standard test.
+
+::: panel-tabset
+### Question
+
+Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (*Hint: Small cell counts*)
+
+```{r}
+#| echo: false
+dat <- expand.grid(MRI=c("Localized","Advanced"),
+                  Ultrasound = c("Localized","Advanced")) |> 
+mutate(count = c(4,3,6,3))
+
+xtabs(count ~ .,data=dat) -> dat_cc
+dat_cc
+```
+
+### R Code
+
+```{r}
+#| echo: false
+dat <- expand.grid(MRI=c("Localized","Advanced"),
+                  Ultrasound = c("Localized","Advanced")) 
+dat$count <- c(4,3,6,3)
+
+dat_cc <- xtabs(count ~ MRI+Ultrasound,data=dat) 
+dat_cc
+```
+
+```{r}
+mcnemar.test(dat_cc)
+```
 
 ### SAS Code
 
-``` r
+```{.r}
 data imaging;
 input mri $ ult $ count;
 datalines;
@@ -1460,11 +1560,22 @@ tables mri*ult / agree;
 exact mcnem;
 run;
 ```
+
+
+### Answer
+
+Use the McNemar’s test to determine whether the two methods have a different probabilities in diagnosing localized prostate cancer. (*Hint: Small cell counts*)
+
+  - Use exact p-value
+  
+  - $p=0.51$. No evidence of any difference in probabilities in correctly diagnosing localized prostate cancer.
+
+
 :::
 
 # Incidence Densities
 
-## Incidence Densities {.smaller}
+## Incidence Densities 
 
 - Counts of subjects who responded within a duration of exposure to an event.
 - Poisson distribution: counts
@@ -1525,44 +1636,46 @@ You can calculate the confidence interval estimates for $p$ using the binomial d
 
 $$95\% CI: \left(\frac{p_L}{1-p_L}(N_p/N_v),\frac{p_U}{1-p_U}(N_p/N_v)\right)$$
 
-## Incidence Density Ratios: SAS
+## Incidence Density Ratios: `SAS`
 
 - The `binomial` option in the `tables` statement produces the estimate and exact confidence limits for the binomial proportion $p$, i.e. $p_L$ and $p_U$.
+
 - We use the estimate and exact confidence limits of $p$ in calculating the IDR.
+
 - The `IML` procedure, which is the procedure used to perform mathematical equations, is used to calculate the IDR confidence limits.
+
   - Later on, we will use the `GENMOD` procedure to calculate exact confidence intervals for the IDR.
+  
+## Incidence Density Ratios: `R`
+
+The `epitools` package includes the `rateratio()` function that can calculate an approximation of the incidence density ratio.
+
+```{r}
+#| eval: false
+
+rateratio(contingency_table)
+#OR
+
+rateratio(x=events,y=person_years)
+```
+
 
 ## Example
 
-::::: columns
-::: {.column style="width:50%; font-size: 95%"}
 The table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.
+
+
+
+::: panel-tabset
+### Questions
+
 
 - Estimate the IDR of hospitalization/emergency room visits between the two groups.
 - Calculate the 95% CI.
-:::
 
-::: {.column width="50%"}
-![](img/IDR.png)
-:::
-:::::
-
-## Example
-
-::::: columns
-::: {.column style="width:50%; font-size: 95%"}
-The table shows the results of an international study of the effect of a rotavirus vaccine in nearly 70,000 infants on health care events. The events counted were hospitalizations or emergency room visits.
-
-- Estimate the IDR of hospitalization/emergency room visits between the two groups. **IDR = 0.05**
-- Calculate the 95% CI. **(0.01, 0.15)**
-:::
-
-::: {.column width="50%"}
 ![](img/IDR2.png)
-:::
-:::::
 
-::: panel-tabset
+
 ### SAS Code
 
 ``` {.r code-line-numbers="12,13,16-27"}
@@ -1601,11 +1714,11 @@ quit;
 ```{r}
 #| echo: true
 
-events <- c(3,58)
-person_years <- c(7500, 7250)
+events <- c(58,3)
+person_years <- c(7250,7500)
 
-mult <- person_years[2]/person_years[1] #multiplier
-DescTools::BinomCI(events[1],sum(events),method = "clopper-pearson") -> p_est
+mult <- person_years[1]/person_years[2] #multiplier
+DescTools::BinomCI(events[2],sum(events),method = "clopper-pearson") -> p_est
 
 
 
@@ -1613,52 +1726,37 @@ data.frame(IDR = p_est[1]/(1-p_est[1])*mult,
            IDR_lower = p_est[2]/(1-p_est[2])*mult,
           IDR_higher = p_est[3]/(1-p_est[3])*mult) |> gt::gt()
 ```
+
+```{r}
+rateratio(x=events,y=person_years)
+```
+### Answers
+
+
+- Estimate the IDR of hospitalization/emergency room visits between the two groups. **IDR = 0.05**
+- Calculate the 95% CI. **(0.01-0.15)** or with `riskratio`: (0.01-0.14)
+
 :::
 
 ## Exercise
 
-::::: columns
-::: {.column style="width:50%; font-size: 85%"}
+
 The table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.
-:::
-
-::: {.column width="50%"}
-```{r}
-#| echo: false
-dat <- expand.grid(Shift=c("Night","Day"),
-                  Metric = c("Accidents","Person-Hours")) |> 
-mutate(count = c(25,20,1150,1240))
-
-xtabs(count ~ .,data=dat) -> dat_cc
-dat_cc
-```
-:::
-:::::
-
-## Exercise
-
-::::: columns
-::: {.column style="width:50%; font-size: 85%"}
-The table lists the number of accidents for day and night shift workers at a certain factory in Southeast Asia. The company wants you to investigate if there is any evidence of night shift workers having a higher accident density, i.e., higher incidence density of accidents, compared to the day shift.
-
-- IDR: 1.37
-- 95% CI: (0.72,2.56)
-:::
-
-::: {.column width="50%"}
-```{r}
-#| echo: false
-dat <- expand.grid(Shift=c("Night","Day"),
-                  Metric = c("Accidents","Person-Hours")) |> 
-mutate(count = c(25,20,1150,1240))
-
-xtabs(count ~ .,data=dat) -> dat_cc
-dat_cc
-```
-:::
-:::::
 
 ::: panel-tabset
+
+### Data
+```{r}
+#| echo: false
+dat <- expand.grid(Shift=c("Night","Day"),
+                  Metric = c("Accidents","Person-Hours")) |> 
+mutate(count = c(25,20,1150,1240))
+
+xtabs(count ~ .,data=dat) -> dat_cc
+dat_cc
+```
+
+
 ### SAS Code
 
 ``` r
@@ -1697,11 +1795,11 @@ quit;
 ```{r}
 #| echo: true
 
-events <- c(25,20)
-person_years <- c(1150,1240)
+events <- c(20,25)
+person_years <- c(1240,1150)
 
-mult <- person_years[2]/person_years[1] #multiplier
-DescTools::BinomCI(events[1],sum(events),method = "clopper-pearson") -> p_est
+mult <- person_years[1]/person_years[2] #multiplier
+DescTools::BinomCI(events[2],sum(events),method = "clopper-pearson") -> p_est
 
 
 
@@ -1709,6 +1807,18 @@ data.frame(IDR = p_est[1]/(1-p_est[1])*mult,
            IDR_lower = p_est[2]/(1-p_est[2])*mult,
           IDR_higher = p_est[3]/(1-p_est[3])*mult) |> gt::gt()
 ```
+
+Using `rateratio()`
+
+```{r}
+rateratio(x=events,y=person_years)
+```
+
+### Answer
+
+- IDR: 1.35 (0.72-2.56)
+- with `riskratio`: (0.75-2.46)
+
 :::
 
 # Power Analysis

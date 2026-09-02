@@ -5,13 +5,14 @@ format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    footer: "Chapter 3- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
+    footer: "Chapter 3- [Back to home](https://miguelfudolig.github.io/EAB770-Slides-Website/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
 ---
@@ -29,15 +30,15 @@ library(tidyverse)
 
 ## Outline
 
-- Mantel-Haenszel test
+- Cochran-Mantel-Haenszel test
 - Measures of Association
   - Common Odds ratio
   - Breslow-Day test
   - Zelen's Test
 
-# Mantel-Haenszel Statistic 
+# Cochran-Mantel-Haenszel Statistic 
 
-## Sets of $2\times2$ tables
+## Sets of $2 \times 2$ tables
 
 ::: columns
 ::: {.column style="width:40%; font-size: 85%"}
@@ -54,9 +55,11 @@ library(tidyverse)
 
 ## Stratified Analysis
 
-- Stratified analysis examines the association between two variables while adjusting for the effect of other covariates.
-  - The variable that define the strata may be an explanatory variable, location, or classification variable.
-  - Each table corresponds to one level of the explanatory variables (stratum)
+Stratified analysis examines the association between two variables while adjusting for the effect of other covariates.
+
+::: callout-note
+The variable that define the strata may be an explanatory variable, location, or classification variable. Each contingency table corresponds to one level of the explanatory variables (stratum)
+:::
 
 ## Mantel-Haenszel Test
 
@@ -67,11 +70,13 @@ Q = (n_{11}-m_{11})^2/v_{11}
 $$
 where $m_{11}$ is the expected value of the $n_{11}$ and $v_{11}$ is the variance of $n_{11}$ based on the hypergeometric distribution assumption.
 
-- If there are $q$ $2\times 2$ tables, each table will have a value for $Q$.
+::: callout-note
+If there are $q$ $2\times 2$ tables, each table will have a value for $Q$.
+:::
 
-## Mantel-Haenszel Test
+## Cochran-Mantel-Haenszel Test
 
-The Mantel-Haenszel test assess the overall association of group and response after adjusting for the strata. If $n_{j11}$ is the $n_{11}$ value of the $j^{th}$ contingency table, the Mantel-Haenszel statistic, $Q_{MH}$ can be written as:
+The Cochran-Mantel-Haenszel test assess the overall association of group and response after adjusting for the strata. If $n_{j11}$ is the $n_{11}$ value of the $j^{th}$ contingency table, the Cochran-Mantel-Haenszel statistic, $Q_{MH}$ can be written as:
 
 $$
 Q_{MH} =    \frac{\left[\sum_{j=1}^q n_{j11} - \sum_{j=1}^q m_{j11}\right]^2}{\sum_{j=1}^q v_{j11}}
@@ -84,13 +89,15 @@ $Q_{MH}$ is often called an **average partial association statistic**.
 
 ## Mantel-Haenszel Statistic
 
-- The statistic $Q_{MH}$ relies on detecting patterns of the differences of proportions in each table
-- The statistic $Q_{MH}$ approximately follows a chi-square distribution with one degree of freedom if the combined random sample sizes are large.
-  - Individual cell counts and isolated table sample sizes may be small.
-  - The _Mantel-Fleiss criterion_ can be used to check if the chi-square assumption holds. The MF score should be greater than 5.
+The statistic $Q_{MH}$ relies on detecting patterns of the differences of proportions in each table. 
 
+::: callout-note
+The statistic $Q_{MH}$ approximately follows a chi-square distribution with one degree of freedom if the **combined** random sample sizes are large. This means that individual cell counts and isolated table sample sizes may be small.
 
-## Mantel-Haenszel Test: SAS
+The **Mantel-Fleiss criterion** can be used to check if the chi-square assumption holds. The MF score should be greater than 5.
+:::
+
+## Cochran-Mantel-Haenszel Test: SAS
 
 - The `cmh` option in the `tables` statement produces the Mantel-Haenszel statistic values. There will be three Mantel-Haenszel values included in the output.
 
@@ -99,53 +106,44 @@ $Q_{MH}$ is often called an **average partial association statistic**.
 - General Association
 
 ::: callout-note
-For $2 \times 2$ tables, the scores and degrees of freedom do not differ for these three MH-statistics. These measures will be distinguished later in the course.
+For $2 \times 2$ tables, the scores and degrees of freedom do not differ for these three MH-statistics. These measures will be distinguished for larger contingency tables.
 :::
 
-## Mantel-Haenszel Test: SAS
-
-- The `mf` option in the `tables` statement produces the Mantel-Fleiss criterion. Recall that the Mantel-Fleiss criterion (MF) should be greater than 5 for the chi-square distributional assumption to be valid.
-
-
-
-## Example
-
-::: columns
-::: {.column style="width:40%; font-size: 85%"}
-The table shows the results of a study about how general daily stress affects one’s opinion on a proposed new health policy. Participants were sampled from urban and rural areas.
-
-- Is there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level.
-
-
+::: callout-note
+The `mf` option in the `tables` statement produces the Mantel-Fleiss criterion. Recall that the Mantel-Fleiss criterion (MF) should be greater than 5 for the chi-square distributional assumption to be valid.
 :::
 
-::: {.column style="width:60%"}
+## Cochran-Mantel-Haenszel Test: SAS
+
+Just like the previous chapter, we can use the `CMHtest()` function in the `vcdExtra` package in `R`.
+
 ```{r}
-#| echo: false
-#| output: false
-dat  <- expand.grid(Outcome = c("Favorable","Unfavorable"),
-                    Residence=c("Urban","Rural"),
-                    Stress = c("Low","High")
-                  ) |> 
-mutate(count = c(48,12,55,135,96,94,7,53))
+#| eval: false
 
-xtabs(count ~  Stress + Outcome + Residence  ,data=dat) -> dat_cc
-dat_cc
+contingency_table <- xtabs(count~row_var+column_var+strata_var, data=dat)
+# OR
+
+contingency_table <- xtabs(~ row_var+column_var+strata_var, data=dat) # for non-aggregated data
+
+library(vcdExtra)
+CMHtest(contingency_table,overall=T,strata=strata_var)
 ```
 
-![](img/health_C3.png)
-:::
-:::
+
 
 
 ## Example
 
-
 The table shows the results of a study about how general daily stress affects one’s opinion on a proposed new health policy. Participants were sampled from urban and rural areas.
+
+::: panel-tabset
+
+### Question
 
 - Is there enough evidence that there is an association between the opinion and stress levels of residents after controlling for residential area? Use 𝛼=0.05 as the significance level.
 
-::: {.panel-tabset}
+
+![](img/health_C3.png)
 
 ### SAS Code
 
@@ -169,14 +167,12 @@ run;
 ### R Code
 
 ```{r}
-#| echo: true
-#| code-fold: true
 library(vcdExtra)
 dat  <- expand.grid(Outcome = c("Favorable","Unfavorable"),
                     Residence=c("Urban","Rural"),
                     Stress = c("Low","High")
-                  ) |> 
-mutate(count = c(48,12,55,135,96,94,7,53))
+                  ) 
+dat$count <- c(48,12,55,135,96,94,7,53)
 
 xtabs(count ~  Stress + Outcome + Residence  ,data=dat) -> dat_cc
 

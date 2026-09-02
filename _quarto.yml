@@ -12,8 +12,8 @@ website:
         text: Home
       - href: Chapter1.qmd
         text: Lecture 1
-      # - href: Chapter2.qmd
-      #   text: "Chapter 2: 2x2 tables"
+      - href: Chapter2.qmd
+        text: "Chapter 2: 2x2 tables"
       # - href: Chapter3.qmd
       #   text: "Chapter 3: Sets of 2x2 tables"
       # - href: Chapter4.qmd
