@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Miguel Fudolig">
+  <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Lecture 1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-146a52615c86749306b5caa224a9b489.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">EAB 770 - Lecture 1</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Miguel Fudolig 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="lecture-1-introduction" class="title-slide slide level1 center">
+<h1>Lecture 1: Introduction</h1>
+
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>Syllabus Discussion</li>
+<li>Accessing <code>SAS</code> OnDemand for Academics</li>
+<li>Why are we here?</li>
+<li>Preliminary Materials</li>
+</ul>
+</section>
+<section id="syllabus" class="slide level2">
+<h2>Syllabus</h2>
+<ul>
+<li>The syllabus can be accessed through
+<ul>
+<li>Canvas</li>
+<li><a href="https://miguelfudolig-eab-770-syllabus.share.connect.posit.cloud" class="uri">https://miguelfudolig-eab-770-syllabus.share.connect.posit.cloud</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="programming-language" class="slide level2">
+<h2>Programming Language</h2>
+<ul>
+<li>We will primarily use R and <code>SAS</code> for this course.
+<ul>
+<li>You can access <code>SAS</code> through <code>SAS</code> On Demand for Academics. This will be free and accessible when you have internet connection.</li>
+<li>You can download the most recent versions of <code>R</code> and <code>RStudio</code> if you prefer to take the course in <code>R</code>. You can access a quick tutorial on how to install these <a href="https://rstudio-education.github.io/hopr/starting.html">here</a>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="accessing-sas-on-demand-for-academics" class="slide level2">
+<h2>Accessing <code>SAS</code> On Demand for Academics</h2>
+<ul>
+<li><p>Create a <code>SAS</code> Profile that will be used to register for <code>SAS</code> OnDemand for Academics. To register, visit <a href="https://www.sas.com" class="uri">https://www.sas.com</a> and fill out the form to <em>Create profile</em>.</p>
+<ul>
+<li>Use your UNLV email for faster verification.</li>
+</ul></li>
+<li><p>Create your account for <code>SAS</code> OnDemand for Academics. To register, visit <a href="https://welcome.oda.sas.com" class="uri">https://welcome.oda.sas.com</a> sign in with your <code>SAS</code> Profile and complete the steps to <em>Register for an account</em>.</p></li>
+</ul>
+</section></section>
+<section id="why-are-we-here" class="title-slide slide level1 center">
+<h1>Why are we here?</h1>
+<p>Why bother learning categorical data analysis?</p>
+</section>
+
+<section>
+<section id="categorical-data" class="title-slide slide level1 center">
+<h1>Categorical Data</h1>
+
+</section>
+<section id="categorical-data-1" class="slide level2">
+<h2>Categorical Data</h2>
+<p>Categorical data is present everywhere!</p>
+<ul>
+<li>Demographics</li>
+<li>Opinions</li>
+<li>Ratings</li>
+<li>Locations</li>
+</ul>
+</section>
+<section id="types-of-categorical-variables" class="slide level2">
+<h2>Types of Categorical Variables</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Dichotomous/Binary</a></li><li><a href="#tabset-1-2">Nominal</a></li><li><a href="#tabset-1-3">Ordinal</a></li><li><a href="#tabset-1-4">Discrete Counts</a></li><li><a href="#tabset-1-5">Grouped Survival Times</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p>These variables can only have 0/1 values. Examples include: Heads/Tails; Alive/Dead; Selected/Not Selected</p>
+</div>
+<div id="tabset-1-2">
+<p>These variables have more than two levels without inherent ordering. Examples include: Race; Religion; eye color.</p>
+</div>
+<div id="tabset-1-3">
+<p>These variables have more than two levels with inherent ordering. Examples include: Class Rank, Likert Scale</p>
+</div>
+<div id="tabset-1-4">
+<p>These variables consist of numerical outcomes consisting of counting numbers. Example include: Queue length, Number of hospitalizations</p>
+</div>
+<div id="tabset-1-5">
+<p>This specialized variable counts the number of patients who fail/survive during a specific time interval. The interval of failure/survival (time-to-event) is categorical.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="independent-and-dependent-variables" class="slide level2">
+<h2>Independent and Dependent Variables</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Independent variables, sometimes referred to as predictor variables, are those that are experimentally manipulated or used to predict another variable.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Dependent variables, sometimes referred to as response or outcome variables, is the variable of interest as an outcome or response. <strong>In this class, we will focus on categorical dependent variables</strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-frameworks" class="slide level2">
+<h2>Sampling Frameworks</h2>
+<ul>
+<li>Historical data
+<ul>
+<li>Observational data, usually secondary data</li>
+<li>No randomization</li>
+<li>Example: Public data sets.</li>
+</ul></li>
+<li>Experimental Data
+<ul>
+<li>Studies that involve random assignment of treatments to different subjects.</li>
+<li>Random assignment/allocation</li>
+<li>Example: Randomized Controlled Trials</li>
+</ul></li>
+<li>Sample Survey Studies
+<ul>
+<li>Randomly sampled from a larger study population</li>
+<li>Random selection</li>
+</ul></li>
+</ul>
+</section>
+<section id="effect-of-randomization" class="slide level2">
+<h2>Effect of Randomization</h2>
+<ul>
+<li>Randomization affects conclusions of generalization and causation.</li>
+<li>Historical data
+<ul>
+<li>No randomization: hard to generalize unless the data was randomly sampled from a predetermined population</li>
+</ul></li>
+<li>Experimental Data
+<ul>
+<li>Random assignment: balances effects of confounding variables</li>
+</ul></li>
+<li>Sample Survey Studies
+<ul>
+<li>Random sampling: representative sample provides good coverage of the larger population</li>
+</ul></li>
+</ul>
+</section>
+<section id="randomization" class="slide level2">
+<h2>Randomization</h2>
+<p>Randomization can be done per subject or a cluster of subject.</p>
+<ul>
+<li>Strata (survey studies) or blocks (experiments)</li>
+<li>Examples
+<ul>
+<li>Stratified random samples</li>
+<li>Randomized block designs</li>
+<li>Multi-level experimental designs</li>
+</ul></li>
+</ul>
+</section>
+<section id="sas-procedures-and-data" class="slide level2">
+<h2><code>SAS</code> Procedures and Data</h2>
+<ul>
+<li>There are multiple ways to import data into <code>SAS</code>
+<ul>
+<li>DATA step</li>
+<li>PROC IMPORT step</li>
+<li><code>SAS</code> OnDemand can import data from CSV files.</li>
+</ul></li>
+<li><code>FREQ</code>
+<ul>
+<li>Contingency tables (<span class="math inline">\(2\times 2\)</span>, <span class="math inline">\(s \times r\)</span>)</li>
+<li>Chi-squared tests</li>
+</ul></li>
+<li><code>LOGISTIC</code>
+<ul>
+<li>Logistic Regression</li>
+</ul></li>
+<li><code>GENMOD</code>
+<ul>
+<li>Generalized Estimating Equations</li>
+</ul></li>
+<li>Other procedures include <code>GLM</code> and <code>CATMOD</code>.</li>
+</ul>
+</section>
+<section id="sas-in-class" class="slide level2">
+<h2><code>SAS</code> in Class</h2>
+<ul>
+<li>Sample code will be provided, but there will be examples where we work the code out together as a class.</li>
+<li>Class computers have <code>SAS</code> installed in them.
+<ul>
+<li>You can save files on your Y drive (assigned to your ACE ID) to access files on other computers.</li>
+<li><code>SAS</code> can also be accessed through <code>SAS</code> OnDemand Academics.
+<ul>
+<li>Needs internet connection</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="sas-examples" class="slide level2">
+<h2><code>SAS</code> Examples</h2>
+<ul>
+<li>Download Chapter1.sas from Canvas.</li>
+</ul>
+</section>
+<section id="sas-example" class="slide level2">
+<h2><code>SAS</code> Example</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Coding Rules</a></li><li><a href="#tabset-2-2">Example</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<ul>
+<li>ALL lines should be ended with a semi-colon <strong>;</strong></li>
+<li><code>data</code> statement is followed by the data set name.</li>
+<li><code>length</code> specifies the number of characters included in each <strong>character</strong>.</li>
+<li><code>input</code> names all variables included in the data set
+<ul>
+<li>The <code>$</code> after the variable tells <code>SAS</code> that these variables are categorical variables.</li>
+</ul></li>
+<li><code>datalines;</code> tells <code>SAS</code> that you are about to add new data points.
+<ul>
+<li>Each row represents a data point in this data table.</li>
+<li>End with a separate <strong>;</strong></li>
+</ul></li>
+</ul>
+</div>
+<div id="tabset-2-2">
+<pre><code>data respire;
+length treat $7. outcome $1. ;
+input treat $ outcome $ count;
+datalines;
+placebo f 16
+placebo u 48
+test f 40
+test u 20
+;</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="sas-example-one-observation-per-row" class="slide level2">
+<h2><code>SAS</code> Example: One Observation per Row</h2>
+<div class="columns">
+<div class="column" style="width:50%; font-size: 100%">
+<pre><code>data severe;
+input treat $ outcome $ @@;
+datalines;
+placebo f placebo f placebo f
+placebo f placebo f
+placebo u placebo u placebo u
+placebo u placebo u placebo u
+placebo u placebo u placebo u
+placebo u
+test f test f test f
+test f test f test f
+test f test f
+test u test u test u
+test u test u test u
+test u test u test u
+test u test u test u
+test u test u test u
+test u test u test u
+test u test u
+;</code></pre>
+</div><div class="column" style="width:50%; font-size: 75%">
+<ul>
+<li>This is an example of a data set where one row corresponds to one observational unit.</li>
+<li>The <code>@@</code> sign means that the data lines contain multiple observations. <code>@@</code> basically means new line after two entries written in the <code>datalines</code> statement.</li>
+</ul>
+</div></div>
+<!-- ## `SAS` Example: Contingency Table -->
+<!-- ::: columns -->
+<!-- ::: {.column style="width:50%; font-size: 100%"} -->
+<!-- ``` -->
+<!-- proc freq data=severe; -->
+<!-- tables treat*outcome / nocol nopct; -->
+<!-- run; -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- ::: {.column style="width:50%; font-size: 75%"} -->
+<!-- - The `weight` statement is not needed in the `FREQ` procedure when the data does not consist of aggregate counts. -->
+<!-- - `nocol` suppresses the column percentages in the output -->
+<!-- - `nopct` suppresses the total percentages in the output -->
+<!-- - `norow` suppresses the row percentages in the output -->
+<!-- ::: -->
+<!-- ::: -->
+</section></section>
+<section>
+<section id="r" class="title-slide slide level1 center">
+<h1><code>R</code></h1>
+
+</section>
+<section id="importing-files" class="slide level2">
+<h2>Importing files</h2>
+<p>There are multiple ways to import files into <code>R</code>. The most common data set format is the <code>.csv</code> file. You can import CSV files using the <code>read.csv(filename)</code> function.</p>
+<p>First, download the file <code>adverse.csv</code> from Canvas in the same folder as your R source code.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">getwd</span>() <span class="co"># save your data in this folder</span></span>
+<span id="cb3-2"><a></a>adverse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"adverse.csv"</span>) <span class="co"># or use a specific path to your folder</span></span>
+<span id="cb3-3"><a></a>adverse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="data-frames" class="slide level2">
+<h2>Data Frames</h2>
+<p>Data frames are rectangular spreadsheets. Data are typically imported as data frames.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Rows correspond to observations and the columns correspond to variables.</p>
+</div>
+</div>
+</div>
+<p>Example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">head</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>sample_data  <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>,<span class="st">"Bob"</span>,<span class="st">"Charlie"</span>))</span>
+<span id="cb6-2"><a></a>sample_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID    Name
+1  1   Alice
+2  2     Bob
+3  3 Charlie</code></pre>
+</div>
+</div>
+</section>
+<section id="r-packages" class="slide level2">
+<h2><code>R</code> packages</h2>
+<p><code>R</code> packages extend the functionality of <code>R</code> by providing additional functions, data, and documentation. These packages are written by <code>R</code> users around the world and can be downloaded for free!</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Think of <code>R</code> as a new phone. <code>R</code> packages are apps that you can download to use your phone in many different ways.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="installing-and-loading-r-packages" class="slide level2">
+<h2>Installing and Loading <code>R</code> Packages</h2>
+<p>Like apps on a phone, <code>R</code> packages also need to be installed. These packages can be installed by running the following code snippet <code>install.packages("PackageName")</code>. For example, to install the package <code>tidyverse</code> used for data manipulation and cleaning, you can run the following code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To load this package in <code>R</code>, you can use the following syntax:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>You must have an active internet connection to install <code>R</code> packages to your device.</p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="probability-distributions" class="title-slide slide level1 center">
+<h1>Probability Distributions</h1>
+
+</section>
+<section id="sampling-distributions" class="slide level2">
+<h2>Sampling Distributions</h2>
+<p>Recall: Inferential statistics typically aims to determine how likely it is to have obtained a sample given certain assumptions about the population the sample was drawn.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The sampling distribution typically depends on the properties of the underlying distribution of the random variable of interest from a population.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>Recall: Central Limit Theorem (CLT) can be used for continuous variables. However, CLT might not work for some scenarios involving categorical response variables.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="probability-distributions-for-categorical-variables" class="slide level2">
+<h2>Probability Distributions for Categorical Variables</h2>
+<p>Distributions appropriate to categorical data should be used for inferential statistics.</p>
+<ul>
+<li>Hypergeometric Distribution</li>
+<li>Bernoulli/Binomial Distribution</li>
+<li>Multinomial Distribution</li>
+<li>Poisson Distribution</li>
+</ul>
+</section>
+<section id="hypergeometric-distribution" class="slide level2">
+<h2>Hypergeometric Distribution</h2>
+<p>This distribution can be used for discrete variables to determine the number of “successes” in a sequence of <span class="math inline">\(n\)</span> draws from a finite population of size <span class="math inline">\(M\)</span> where sampling is conducted without replacement.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Hypergeometric Distribution</strong></p>
+</div>
+<div class="callout-content">
+<p>Suppose there are <span class="math inline">\(N\)</span> balls in a bag and <span class="math inline">\(m\)</span> are green. If <span class="math inline">\(X\)</span> denotes the total number of green balls (success) desired and we have a total number of <span class="math inline">\(k\)</span> draws from the bag, then the probability of the random variable of the total number of successes to be equal to <span class="math inline">\(X\)</span> can be written as:</p>
+<p><span class="math display">\[
+P(X=x) = \frac{C(m,x)C(N-m,k-x)}{C(N,k)}; x\in \{0,1,...,m\}
+\]</span></p>
+<p>where <span class="math inline">\(C(a,b) = \frac{a!}{b!(a-b)!}\)</span> is the combination notation.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>As an example, the balls could be a pool of medical students. The green balls are international students. If we want to select a total of <span class="math inline">\(n\)</span> students from the pool of medical students, then the probability that we will select <span class="math inline">\(x\)</span> international students is given by the hypergeometric distribution.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="properties" class="slide level2">
+<h2>Properties</h2>
+<p>The mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> of the hypergeometric distribution can be found using the following equations:</p>
+<p><span class="math display">\[
+\mu = \frac{km}{N}; \sigma^2 = \frac{k(m/N)(1-m/N)(N-k)}{N-1}
+\]</span></p>
+</section>
+<section id="hypergeometric-distribution-2" class="slide level2">
+<h2>Hypergeometric Distribution</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1"><code>R</code></a></li><li><a href="#tabset-3-2"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<p>The probability mass function (PMF or <span class="math inline">\(P(X=x)\)</span>) of the hypergeometric distribution is:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span>x,</span>
+<span id="cb10-2"><a></a>       <span class="at">m=</span>m,</span>
+<span id="cb10-3"><a></a>       <span class="at">n=</span>N<span class="sc">-</span>m,</span>
+<span id="cb10-4"><a></a>       <span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The cumulative distribution function (CDF or <span class="math inline">\(P(X\leq x)\)</span>) of the hypergeometric distribution is:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">phyper</span>(<span class="at">q=</span>x,</span>
+<span id="cb11-2"><a></a>       <span class="at">m=</span>m,</span>
+<span id="cb11-3"><a></a>       <span class="at">n=</span>N<span class="sc">-</span>m,</span>
+<span id="cb11-4"><a></a>       <span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-3-2">
+<p>In a data step, we can use the <code>pdf()</code> function for (<span class="math inline">\(P(X=x)\)</span>), while <code>cdf()</code> can be used for (<span class="math inline">\(P(X\leq x)\)</span>)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data hypergeometric_prob;</span>
+<span id="cb12-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, x, N, m, k);</span>
+<span id="cb12-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'HYPER'</span>, x, N, m, k);</span>
+<span id="cb12-4"><a></a>;</span>
+<span id="cb12-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1" class="slide level2">
+<h2>Example</h2>
+<p>Suppose the admissions committee at a medical college has 15 qualified applicants, 3 of which are international students, and can only admit 2 new students. What is the probability of admitting <strong>at least one</strong> international student if the admissions committee were to randomly select two new students from the 15 qualified applicants?</p>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Distribution</a></li><li><a href="#tabset-4-2"><code>R</code></a></li><li><a href="#tabset-4-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<p>We need to use the hypergeometric distribution to get P(X<span class="math inline">\(\geq\)</span> 1) where N=15, m=3, k=2. Admitting at least one international student could mean <span class="math inline">\(x=1\)</span> or <span class="math inline">\(x=2\)</span>.</p>
+</div>
+<div id="tabset-4-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb13-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb13-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb13-4"><a></a></span>
+<span id="cb13-5"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">1</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k) <span class="sc">+</span> <span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3714286</code></pre>
+</div>
+</div>
+<p>or using complementarity, it could be 100% minus the probability of admitting no international student.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb15-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb15-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">phyper</span>(<span class="at">q=</span><span class="dv">0</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3714286</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>data hypergeometric_prob;</span>
+<span id="cb17-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">1</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>)<span class="sc">+</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>);</span>
+<span id="cb17-3"><a></a>c<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'HYPER'</span>, <span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">3</span>, <span class="dv">2</span>);</span>
+<span id="cb17-4"><a></a>;</span>
+<span id="cb17-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Using complementarity, it could be 100% minus the probability of admitting no international student.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Question</a></li><li><a href="#tabset-5-2">Distribution</a></li><li><a href="#tabset-5-3"><code>R</code></a></li><li><a href="#tabset-5-4"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<p>Suppose there are one hundred classrooms in a school, twenty of which have defective audiovisual equipment. If five classrooms were randomly selected for use at a conference, what is the probability that there are NO classrooms with defective audiovisual equipment?</p>
+</div>
+<div id="tabset-5-2">
+<p>We need to use the hypergeometric distribution to get P(X=0) where N=100, m=20, k=5.</p>
+</div>
+<div id="tabset-5-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb18-2"><a></a>m <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb18-3"><a></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a><span class="fu">dhyper</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="at">m=</span>m,<span class="at">n=</span>N<span class="sc">-</span>m,<span class="at">k=</span>k) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3193094</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>data hypergeometric_prob;</span>
+<span id="cb20-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'HYPER'</span>, <span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">20</span>,<span class="dv">5</span>);</span>
+<span id="cb20-3"><a></a>;</span>
+<span id="cb20-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bernoulli-distribution" class="slide level2">
+<h2>Bernoulli Distribution</h2>
+<p>This distribution can be used for binary variables, i.e.&nbsp;variables that can only take on two values (0/1). This distribution can be used to determine the probability of success if only one draw is made from a finite population. If there are <span class="math inline">\(m\)</span> successes in a total of <span class="math inline">\(N\)</span> possible outcomes, the probability of drawing a “success” in a single trial can be written as:</p>
+<p><span class="math display">\[
+P(X=1) = m/N
+\]</span></p>
+<p>It follows that the probability of failure is <span class="math inline">\(P(X=0) = 1-m/N\)</span>.</p>
+</section>
+<section id="binomial-distribution" class="slide level2">
+<h2>Binomial Distribution</h2>
+<p>This distribution can also be used for binary variables, however, the binomial distribution deals with more than one trial (denoted by <span class="math inline">\(n\)</span>).</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The binomial distribution assumes that the probability of success does not change after every trial, i.e.&nbsp;sampling with replacement. Each trial is treated as independent of the others, unlike the hypergeometric distribution where sampling is conducted without replacement, effectively changing the probability of success after every draw.</p>
+</div>
+</div>
+</div>
+<p>The probability of observing <span class="math inline">\(x\)</span> successes for a series of <span class="math inline">\(n\)</span> trials with a probability of success <span class="math inline">\(p\)</span> according to the binomial distribution can be written as:</p>
+<p><span class="math display">\[
+P(X=1) = C(n,x)p^x(1-p)^{(n-x)}; x\in\{0,1,2,...,n\}
+\]</span></p>
+</section>
+<section id="properties-1" class="slide level2">
+<h2>Properties</h2>
+<p>The mean and variance of the binomial distribution can be expressed as:</p>
+<p><span class="math display">\[
+\mu = np; \sigma^2 = np(1-p)
+\]</span></p>
+</section>
+<section id="binomial-distribution-1" class="slide level2">
+<h2>Binomial Distribution</h2>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1"><code>R</code></a></li><li><a href="#tabset-6-2">SAS</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
+<p>The PMF can be obtained using the <code>dbinom</code> function, while the CDF can be obtained using the <code>pbinom</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">dbinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span>
+<span id="cb21-2"><a></a><span class="fu">pbinom</span>(<span class="at">q=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p,<span class="at">lower.tail=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><code>lower.tail=FALSE</code> tells <code>R</code> that we are interested in <span class="math inline">\(P(X&gt;x)\)</span> instead of <span class="math inline">\(P(X\leq x)\)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2">
+<p>In a data step, we can use the <code>pdf()</code> function for (<span class="math inline">\(P(X=x)\)</span>), while <code>cdf()</code> can be used for (<span class="math inline">\(P(X\leq x)\)</span>)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>data binomial_prob;</span>
+<span id="cb22-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'BINOMIAL'</span>, x,p, n);</span>
+<span id="cb22-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'BINOMIAL'</span>, x, p, n);</span>
+<span id="cb22-4"><a></a>;</span>
+<span id="cb22-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2" class="slide level2">
+<h2>Example</h2>
+<p>Suppose that the probability of being proficient in mathematics at a particular school is 0.7. Three students are chosen at random from this school. What is the probability that all three are proficient in mathematics?</p>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Distribution</a></li><li><a href="#tabset-7-2"><code>R</code></a></li><li><a href="#tabset-7-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1">
+<p>We need to use a binomial distribution with a probability of success <span class="math inline">\(p=0.7\)</span> out of a total sample size <span class="math inline">\(n=3\)</span>. We need to solve for <span class="math inline">\(P(X=3)\)</span>.</p>
+</div>
+<div id="tabset-7-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>p<span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb23-2"><a></a>n<span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb23-3"><a></a></span>
+<span id="cb23-4"><a></a><span class="fu">dbinom</span>(<span class="at">x=</span><span class="dv">3</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.343</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>data binomial_prob;</span>
+<span id="cb25-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'BINOMIAL'</span>, <span class="dv">3</span>,<span class="fl">0.7</span>,<span class="dv">3</span>);</span>
+<span id="cb25-3"><a></a>;</span>
+<span id="cb25-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
+<p>Suppose that the survival probability of a new surgical procedure was 0.85. If a total of 200 patients went through the procedure independently, what is the probability that more than 190 of these patients survived the procedure?</p>
+<div class="panel-tabset">
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Distribution</a></li><li><a href="#tabset-8-2"><code>R</code></a></li><li><a href="#tabset-8-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1">
+<p>We can consider the random variable to be those who survived the procedure. need to use a binomial distribution with a probability of success <span class="math inline">\(p=0.85\)</span> out of a total sample size <span class="math inline">\(n=200\)</span>. We need to solve for <span class="math inline">\(P(X&gt;190)\)</span>.</p>
+</div>
+<div id="tabset-8-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>p<span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb26-2"><a></a>n<span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb26-3"><a></a></span>
+<span id="cb26-4"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pbinom</span>(<span class="at">q=</span><span class="dv">190</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.005539e-06</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co">#OR</span></span>
+<span id="cb28-2"><a></a><span class="fu">pbinom</span>(<span class="at">q=</span><span class="dv">190</span>,<span class="at">size=</span>n,<span class="at">prob=</span>p,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.005539e-06</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-8-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>data binomial_prob;</span>
+<span id="cb30-2"><a></a>p<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'BINOMIAL'</span>, <span class="dv">190</span>,<span class="fl">0.85</span>,<span class="dv">200</span>);</span>
+<span id="cb30-3"><a></a>;</span>
+<span id="cb30-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multinomial-distribution" class="slide level2">
+<h2>Multinomial Distribution</h2>
+<p>This distribution can be used to model random variables wih more than two possible outcomes. In a multinomial distribution, each trial results in one of <span class="math inline">\(I\)</span> outcomes, where <span class="math inline">\(I\)</span> is some fixed finite number and the probability of each possible outcome can be expressed by <span class="math inline">\(p_1,p_2,...p_I\)</span> such that the sum of all probabilities is <span class="math inline">\(\sum_{i=1}^i p_i = 1\)</span>.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Example</strong></p>
+</div>
+<div class="callout-content">
+<p>If students were classified as proficient or not proficient, the binomial distribution would be appropriate to use. However, if students were classified with more levels like basic, intermediate, and advanced proficiency, the multinomial distribution would need to be used.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="multinomial-distribution-pmf" class="slide level2">
+<h2>Multinomial Distribution: PMF</h2>
+<p>For <span class="math inline">\(n\)</span> trials with <span class="math inline">\(I\)</span> possible outcomes, where <span class="math inline">\(p_i\)</span> is the probability of the <span class="math inline">\(i^{th}\)</span> outcome, the joint probability that each possible outcome will have value <span class="math inline">\(x_i\)</span> is:</p>
+<p><span class="math display">\[
+P(X_1=x_1,X_2=x_2,...,X_I=x_I) = \frac{n!}{x_1!x_2!...x_I!}p_1^{x_1}p_2^{x_2}...p_I^{x_I}
+\]</span></p>
+<p>with the constraint that <span class="math inline">\(\sum_ix_i=n\)</span>.</p>
+</section>
+<section id="properties-2" class="slide level2">
+<h2>Properties</h2>
+<p>For the <span class="math inline">\(i^{th}\)</span> outcome, the mean can be expressed similar to the binomial distribution.</p>
+<p><span class="math display">\[
+\mu_i = np_i; \sigma^2 = np_i(1-p_i)
+\]</span></p>
+</section>
+<section id="multinomial-distribution-1" class="slide level2">
+<h2>Multinomial Distribution</h2>
+<p>The following functions can be used to determine the value of the PMF of the multinomial distribution</p>
+<div class="panel-tabset">
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1"><code>R</code></a></li><li><a href="#tabset-9-2"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(x1,x2,...,xI)</span>
+<span id="cb31-2"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(p1,p2,...,pI)</span>
+<span id="cb31-3"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-9-2">
+<p>There is no standalone <code>PDF</code> function in SAS.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>data multinom_prob;</span>
+<span id="cb32-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(n)<span class="sc">/</span>(<span class="fu">fact</span>(x1)<span class="sc">*</span><span class="fu">fact</span>(x2)<span class="sc">*</span><span class="fu">fact</span>(x3)<span class="sc">*</span>[...])<span class="sc">*</span>p1<span class="sc">**</span>x1<span class="sc">*</span>p2<span class="sc">**</span>x2<span class="sc">*</span>p3<span class="sc">**</span>x3<span class="sc">*</span>[...];</span>
+<span id="cb32-3"><a></a>;</span>
+<span id="cb32-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-4" class="slide level2">
+<h2>Example</h2>
+<p>Suppose exposure levels to secondhand smoke for a particular community was classified into three levels: “none”,“light”, and “heavy”. If the probability of having no exposure (none) is 0.05 and having light exposure is 0.37, what is the probability that out of 10 community members, 2 had no exposure, 5 had light exposure, and the rest had heavy exposure?</p>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Distribution</a></li><li><a href="#tabset-10-2"><code>R</code></a></li><li><a href="#tabset-10-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
+<p>Because there are three possible outcomes for exposure levels, we need to use the multinomial distribution. For this problem, <span class="math inline">\(n=10\)</span>, <span class="math inline">\(x_1=2,x_2=5,x_3=3\)</span>. The sum of the probabilities should be 1, so the probabilities are <span class="math inline">\(p_1=0.05,p_2=0.37,p_3=0.58\)</span>.</p>
+</div>
+<div id="tabset-10-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>n<span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb33-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb33-3"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.05</span>,<span class="fl">0.37</span>,<span class="fl">0.58</span>)</span>
+<span id="cb33-4"><a></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.008523798</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-10-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>data multinom_prob;</span>
+<span id="cb37-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(<span class="dv">10</span>)<span class="sc">/</span>(<span class="fu">fact</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">fact</span>(<span class="dv">5</span>)<span class="sc">*</span><span class="fu">fact</span>(<span class="dv">2</span>))<span class="sc">*</span><span class="fl">0.05</span><span class="sc">**</span><span class="dv">2</span><span class="sc">*</span><span class="fl">0.37</span><span class="sc">**</span><span class="dv">5</span><span class="sc">*</span><span class="fl">0.58</span><span class="sc">**</span><span class="dv">3</span>;</span>
+<span id="cb37-3"><a></a>;</span>
+<span id="cb37-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-5" class="slide level2">
+<h2>Example</h2>
+<p>Suppose that for a particular school district, the probability of having being a minimal reader is 0.12, the probability of being a basic reader is 0.23, and the probability of being a proficient reader is 0.65. If six students were selected at random, there will be two students from each category.</p>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Distribution</a></li><li><a href="#tabset-11-2"><code>R</code></a></li><li><a href="#tabset-11-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
+<p>Because there are three possible outcomes for reading level, we need to use the multinomial distribution. For this problem, <span class="math inline">\(n=6\)</span>, <span class="math inline">\(x_1=2,x_2=2,x_3=2\)</span>. The sum of the probabilities should be 1, which is satisfied by the probabilities. <span class="math inline">\(p_1=0.12,p_2=0.23,p_3=0.65\)</span>.</p>
+</div>
+<div id="tabset-11-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>n<span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb38-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb38-3"><a></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.12</span>,<span class="fl">0.23</span>,<span class="fl">0.65</span>)</span>
+<span id="cb38-4"><a></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">dmultinom</span>(<span class="at">x=</span>x,<span class="at">size=</span>n,<span class="at">prob=</span>p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02896592</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>data multinom_prob;</span>
+<span id="cb42-2"><a></a>p<span class="ot">=</span><span class="fu">fact</span>(n)<span class="sc">/</span>(<span class="fu">fact</span>(x1)<span class="sc">*</span><span class="fu">fact</span>(x2)<span class="sc">*</span><span class="fu">fact</span>(x3)<span class="sc">*</span>[...])<span class="sc">*</span>p1<span class="sc">**</span>x1<span class="sc">*</span>p2<span class="sc">**</span>x2<span class="sc">*</span>p3<span class="sc">**</span>x3<span class="sc">*</span>[...];</span>
+<span id="cb42-3"><a></a>;</span>
+<span id="cb42-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="poisson-distribution" class="slide level2">
+<h2>Poisson Distribution</h2>
+<p>This distribution is often used to model count data that varies randomly over time.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>As the number of trials gets larger, the binomial distribution tends to converge to the Poisson distribution when <span class="math inline">\(p\)</span> is fixed. The binomial distribution assumes that the number of trials is fixed, while the Poisson distribution assumes the period of time in which the observations occur must be fixed.</p>
+</div>
+</div>
+</div>
+<p>If the expected/average number of successes expected to occur in a fixed interval of time is <span class="math inline">\(\lambda\)</span>, the probability of observing <span class="math inline">\(x\)</span> successes in that time interval can be written using the Poisson PMF:</p>
+<p><span class="math display">\[
+P(X=x) = \frac{e^{-\lambda}\lambda^x}{x!}; x\in\{0,1,2,...\}
+\]</span></p>
+</section>
+<section id="properties-3" class="slide level2">
+<h2>Properties</h2>
+<p>The mean and variance of the Poisson distribution are equal.</p>
+<p><span class="math display">\[
+\mu=\lambda;\sigma^2=\lambda
+\]</span></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>With real-world count data, the variance often exceeds the mean. We refer to this phenomenon as overdispersion.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>For sufficiently large <span class="math inline">\(\lambda\)</span>, the normal distribution can approximate the Poisson distribution.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="poisson-distribution-1" class="slide level2">
+<h2>Poisson Distribution</h2>
+<div class="panel-tabset">
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1"><code>R</code></a></li><li><a href="#tabset-12-2"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1">
+<p>The functions <code>dpois()</code> and <code>ppois()</code> can be used to generate the PMF and CDF of the Poisson distribution, respectively.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">dpois</span>(<span class="at">x=</span>x,<span class="at">lambda=</span>lambda)</span>
+<span id="cb43-2"><a></a><span class="fu">ppois</span>(<span class="at">q=</span>x,<span class="at">lambda =</span> lambda,<span class="at">lower.tail=</span><span class="cn">TRUE</span><span class="sc">/</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-12-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>data pois_prob;</span>
+<span id="cb44-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,x,lambda);</span>
+<span id="cb44-3"><a></a>c<span class="ot">=</span><span class="fu">cdf</span>(<span class="st">'POISSON'</span>,x,lambda);</span>
+<span id="cb44-4"><a></a>;</span>
+<span id="cb44-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-6" class="slide level2">
+<h2>Example</h2>
+<p>Suppose that over the past month, the hourly average number of patients who use the restroom at the waiting room of a particular clinic is 4.2. What is the probability that there will be 2-3 patients using the restroom in the next hour?</p>
+<div class="panel-tabset">
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Distribution</a></li><li><a href="#tabset-13-2"><code>R</code></a></li><li><a href="#tabset-13-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1">
+<p>We can use the Poisson distribution to model the hourly count of patients using the restroom. The hourly average is 4.2, which serves as <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+<div id="tabset-13-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>lambda <span class="ot">&lt;-</span> <span class="fl">4.2</span></span>
+<span id="cb45-2"><a></a><span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">2</span>,<span class="at">lambda=</span>lambda) <span class="sc">+</span> <span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">3</span>,<span class="at">lambda=</span>lambda) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3174264</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-13-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>data pois_prob;</span>
+<span id="cb47-2"><a></a>p<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">2</span>,<span class="fl">4.2</span>) <span class="sc">+</span> <span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">3</span>,<span class="fl">4.2</span>) ;</span>
+<span id="cb47-3"><a></a>;</span>
+<span id="cb47-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise</h2>
+<div class="panel-tabset">
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Question</a></li><li><a href="#tabset-14-2"><code>R</code></a></li><li><a href="#tabset-14-3"><code>SAS</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1">
+<p>Suppose that over the last 50 years the average number of suicide attempts that occurred at a particular correctional facility each year is approximately 2.5. What is the probability that there are:</p>
+<ul>
+<li>Exactly five suicide attempts at the facility in the next year.</li>
+<li>At least ten suicide attempts at the facility in the next year.</li>
+</ul>
+</div>
+<div id="tabset-14-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="co"># Exactly 5</span></span>
+<span id="cb48-2"><a></a>lambda<span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
+<span id="cb48-3"><a></a><span class="fu">dpois</span>(<span class="dv">5</span>,<span class="at">lambda=</span>lambda)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06680094</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="co"># At least 10 = 10 and higher</span></span>
+<span id="cb50-2"><a></a></span>
+<span id="cb50-3"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">ppois</span>(<span class="at">q=</span><span class="dv">9</span>,<span class="at">lambda=</span>lambda)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0002773521</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">ppois</span>(<span class="at">q=</span><span class="dv">9</span>,<span class="at">lambda=</span>lambda,<span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0002773521</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-14-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>data pois_prob;</span>
+<span id="cb54-2"><a></a>p1<span class="ot">=</span><span class="fu">pdf</span>(<span class="st">'POISSON'</span>,<span class="dv">5</span>,<span class="fl">2.5</span>)  ;</span>
+<span id="cb54-3"><a></a>p2<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">cdf</span>(<span class="st">'POISSON'</span>,<span class="dv">9</span>,<span class="fl">2.5</span>)</span>
+<span id="cb54-4"><a></a>;</span>
+<span id="cb54-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Lecture 1 - <a href="https://miguelfudolig-eab770-slides.share.connect.posit.cloud">Back to home</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

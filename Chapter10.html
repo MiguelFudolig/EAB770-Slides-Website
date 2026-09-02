@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Miguel Fudolig">
+  <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 10</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-146a52615c86749306b5caa224a9b489.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">EAB 770 - Chapter 10</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Miguel Fudolig 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="conditional-logistic-regression" class="title-slide slide level1 center">
+<h1>Conditional Logistic Regression</h1>
+
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>Paired Observations and Crossover Design Studies</li>
+<li>General Conditional Logistic Regression
+<ul>
+<li>1:1 Conditional Logistic Regression</li>
+<li>1:m Conditional Logistic Regression</li>
+</ul></li>
+<li>Exact Conditional Logistic Regression</li>
+</ul>
+</section>
+<section id="conditional-logistic-regression-1" class="slide level2">
+<h2>Conditional Logistic Regression</h2>
+<ul>
+<li>When data is highly stratified and each strata contain small numbers of subjects, logistic regression may not be appropriate
+<ul>
+<li>Maximum likelihood estimates need a large sample size relative to the parameter number.</li>
+</ul></li>
+<li>Highly stratified data come from a cluster sampling design
+<ul>
+<li>Example: paired observations, matched case control studies in epidemiology.</li>
+</ul></li>
+<li>Conditional Logistic Regression accounts for stratification by basing the maximum likelihood estimation on a conditional likelihood.</li>
+</ul>
+</section>
+<section id="conditional-logistic-regression-2" class="slide level2">
+<h2>Conditional Logistic Regression</h2>
+<ul>
+<li>Consider a highly stratified cohort study where there are <span class="math inline">\(q\)</span> centers randomly selected. At each center, one randomly selected patient is placed on treatment and another randomly selected patient is assigned to a placebo.
+<ul>
+<li>Response: y_{hi}=1 if there is improvement, 0 otherwise.</li>
+<li>Two patients per center: leads to biased estimate</li>
+</ul></li>
+</ul>
+</section>
+<section id="likelihood" class="slide level2">
+<h2>Likelihood</h2>
+<p>The likelihood for <span class="math inline">\(y_{hi}\)</span> can be written as:</p>
+<p><span class="math display">\[
+P(y_{hi} = \pi_{hi} = \frac{\exp[\alpha_h + \beta x_{hi} + \sum_g \gamma'_g z_{hig}]}{1+ \exp[\alpha_h + \beta x_{hi} + \sum_g \gamma'_g z_{hig}]})
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\alpha_h\)</span> is an intercept for the <span class="math inline">\(h^{th}\)</span> center (strata), <span class="math inline">\(\beta\)</span> is the treatment parameter, and <span class="math inline">\(\gamma'\)</span> is the parameter of covariates <span class="math inline">\(z\)</span>. Note that there are a lot of parameters, which may lead to biased estimates with only two patients per center.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Nuisance parameters</strong></p>
+</div>
+<div class="callout-content">
+<p>We can fit a model based on probabilities conditioned on the center effects. After conditioning, the center dependent intercept <span class="math inline">\(\alpha_h\)</span> would not be important. This is why <span class="math inline">\(\alpha_h\)</span> is referred to as a <em>nuisance parameter</em>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-conditional" class="slide level2">
+<h2>Why conditional?</h2>
+<p>We condition the result to a specific “sufficient statistic” or event.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>In the example, the events considered could be concordant (both showed no effect or both improved) or discordant (only one improved per clinic) outcomes.</p>
+</div>
+</div>
+</div>
+<p>In the case of the cohort study, we can condition on the case that exactly one of the participants in each clinic will show improvement.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The improvement could be observed in the test participants (<span class="math inline">\(y_{h1}=1\)</span>, <span class="math inline">\(y_{h2}=0\)</span>) or the placebo participants (<span class="math inline">\(y_{h1}=0\)</span>, <span class="math inline">\(y_{h2}=1\)</span>). Either way, <span class="math inline">\(y_{h1}+y_{h2}=1\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="condiitonal-probability" class="slide level2">
+<h2>Condiitonal Probability</h2>
+<p>The conditional probability that the test participant improved conditioning on the discordant outcome that exactly one of the participants in each clinic will show improvement is:</p>
+<p><span class="math display">\[
+P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y_{h1}=1)P(y_{h2}=0) + P(y_{h1}=0)P(y_{h2}=1)}
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Performing the mathematical calculations, we will end up with a likelihood independent of <span class="math inline">\(\alpha_h\)</span>, which means we effectively removed center-only terms in our model.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="conditional-vs.-unconditional-logistic-regression" class="slide level2">
+<h2>Conditional vs.&nbsp;Unconditional Logistic Regression</h2>
+<ul>
+<li>The conditional likelihood has the same form as that of the unconditional likelihood, but the intercept term is now <span class="math inline">\(\beta\)</span>, which is related to the treatment effect.
+<ul>
+<li>The nuisance parameters <span class="math inline">\(\alpha_h\)</span> do not affect the likelihood.</li>
+</ul></li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The conditional likelihood applies to paired data can be written as a simple case of the Cox proportional hazards model, which is used in the analysis of survival times.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="conditional-logistic-regression-sas" class="slide level2">
+<h2>Conditional Logistic Regression: SAS</h2>
+<ul>
+<li>The <code>STRATA</code> statement allows us to add the stratification variables when there is a small sample size per strata.</li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>You should establish which variables are stratification variables and which ones are covariates.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<p>The data listed below includes data from a study about the effect of a new treatment on a skin condition. The data were collected from 79 clinics. In each clinic, one patient received the treatment, and another received a placebo. Demographic variables such as age, sex, and initial grade for the skin condition (1-4, mild to severe) was collected. The response variable was whether the skin condition improved.</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Data Set</a></li><li><a href="#tabset-1-2">SAS Code</a></li><li><a href="#tabset-1-3">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data trial;</span>
+<span id="cb1-2"><a></a>input center treatment <span class="sc">$</span> sex <span class="sc">$</span> age improve initial <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb1-3"><a></a>datalines;</span>
+<span id="cb1-4"><a></a><span class="dv">1</span> t f <span class="dv">27</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> p f <span class="dv">32</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">41</span> t f <span class="dv">13</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">41</span> p m <span class="dv">22</span> <span class="dv">0</span> <span class="dv">3</span></span>
+<span id="cb1-5"><a></a><span class="dv">2</span> t f <span class="dv">41</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">2</span> p f <span class="dv">47</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">42</span> t m <span class="dv">31</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">42</span> p f <span class="dv">21</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-6"><a></a><span class="dv">3</span> t m <span class="dv">19</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">3</span> p m <span class="dv">31</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">43</span> t f <span class="dv">19</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">43</span> p m <span class="dv">35</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-7"><a></a><span class="dv">4</span> t m <span class="dv">55</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">4</span> p m <span class="dv">24</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">44</span> t m <span class="dv">31</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">44</span> p f <span class="dv">37</span> <span class="dv">0</span> <span class="dv">2</span></span>
+<span id="cb1-8"><a></a><span class="dv">5</span> t f <span class="dv">51</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">5</span> p f <span class="dv">44</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">45</span> t f <span class="dv">44</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">45</span> p f <span class="dv">41</span> <span class="dv">1</span> <span class="dv">1</span></span>
+<span id="cb1-9"><a></a><span class="dv">6</span> t m <span class="dv">23</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">6</span> p f <span class="dv">44</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">46</span> t m <span class="dv">41</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">46</span> p m <span class="dv">41</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-10"><a></a><span class="dv">7</span> t m <span class="dv">31</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">7</span> p f <span class="dv">39</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">47</span> t m <span class="dv">41</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">47</span> p f <span class="dv">21</span> <span class="dv">0</span> <span class="dv">4</span></span>
+<span id="cb1-11"><a></a><span class="dv">8</span> t m <span class="dv">22</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">8</span> p m <span class="dv">54</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">48</span> t f <span class="dv">51</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">48</span> p m <span class="dv">22</span> <span class="dv">1</span> <span class="dv">1</span></span>
+<span id="cb1-12"><a></a><span class="dv">9</span> t m <span class="dv">37</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">9</span> p m <span class="dv">63</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">49</span> t f <span class="dv">62</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">49</span> p f <span class="dv">32</span> <span class="dv">0</span> <span class="dv">3</span></span>
+<span id="cb1-13"><a></a><span class="dv">10</span> t m <span class="dv">33</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">10</span> p f <span class="dv">43</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">50</span> t m <span class="dv">21</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">50</span> p m <span class="dv">34</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-14"><a></a><span class="dv">11</span> t f <span class="dv">32</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">11</span> p m <span class="dv">33</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">51</span> t m <span class="dv">55</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">51</span> p f <span class="dv">35</span> <span class="dv">1</span> <span class="dv">2</span></span>
+<span id="cb1-15"><a></a><span class="dv">12</span> t m <span class="dv">47</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">12</span> p m <span class="dv">24</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">52</span> t f <span class="dv">61</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">52</span> p m <span class="dv">19</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-16"><a></a><span class="dv">13</span> t m <span class="dv">55</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">13</span> p f <span class="dv">38</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">53</span> t m <span class="dv">43</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">53</span> p m <span class="dv">31</span> <span class="dv">0</span> <span class="dv">2</span></span>
+<span id="cb1-17"><a></a><span class="dv">14</span> t f <span class="dv">33</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">14</span> p f <span class="dv">28</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">54</span> t f <span class="dv">44</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">54</span> p f <span class="dv">41</span> <span class="dv">1</span> <span class="dv">1</span></span>
+<span id="cb1-18"><a></a><span class="dv">15</span> t f <span class="dv">48</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">15</span> p f <span class="dv">42</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">55</span> t m <span class="dv">67</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">55</span> p m <span class="dv">41</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-19"><a></a><span class="dv">16</span> t m <span class="dv">55</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">16</span> p m <span class="dv">52</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">56</span> t m <span class="dv">41</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">56</span> p m <span class="dv">21</span> <span class="dv">1</span> <span class="dv">4</span></span>
+<span id="cb1-20"><a></a><span class="dv">17</span> t m <span class="dv">30</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">17</span> p m <span class="dv">48</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">57</span> t f <span class="dv">51</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">57</span> p m <span class="dv">51</span> <span class="dv">0</span> <span class="dv">2</span></span>
+<span id="cb1-21"><a></a><span class="dv">18</span> t f <span class="dv">31</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">18</span> p m <span class="dv">27</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">58</span> t m <span class="dv">62</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">58</span> p m <span class="dv">54</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-22"><a></a><span class="dv">19</span> t m <span class="dv">66</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">19</span> p f <span class="dv">54</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">59</span> t m <span class="dv">22</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">59</span> p f <span class="dv">22</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-23"><a></a><span class="dv">20</span> t f <span class="dv">45</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">20</span> p f <span class="dv">66</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">60</span> t m <span class="dv">42</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">60</span> p f <span class="dv">29</span> <span class="dv">1</span> <span class="dv">2</span></span>
+<span id="cb1-24"><a></a><span class="dv">21</span> t m <span class="dv">19</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">21</span> p f <span class="dv">20</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">61</span> t f <span class="dv">51</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">61</span> p f <span class="dv">31</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-25"><a></a><span class="dv">22</span> t m <span class="dv">34</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">22</span> p f <span class="dv">31</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">62</span> t m <span class="dv">27</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">62</span> p m <span class="dv">32</span> <span class="dv">1</span> <span class="dv">2</span></span>
+<span id="cb1-26"><a></a><span class="dv">23</span> t f <span class="dv">46</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">23</span> p m <span class="dv">30</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">63</span> t m <span class="dv">31</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">63</span> p f <span class="dv">21</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-27"><a></a><span class="dv">24</span> t m <span class="dv">48</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">24</span> p f <span class="dv">62</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">64</span> t m <span class="dv">35</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">64</span> p m <span class="dv">33</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-28"><a></a><span class="dv">25</span> t m <span class="dv">50</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">25</span> p m <span class="dv">45</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">65</span> t m <span class="dv">67</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">65</span> p m <span class="dv">19</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-29"><a></a><span class="dv">26</span> t m <span class="dv">57</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">26</span> p f <span class="dv">43</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">66</span> t m <span class="dv">41</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">66</span> p m <span class="dv">62</span> <span class="dv">1</span> <span class="dv">4</span></span>
+<span id="cb1-30"><a></a><span class="dv">27</span> t f <span class="dv">13</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">27</span> p m <span class="dv">22</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">67</span> t f <span class="dv">31</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">67</span> p m <span class="dv">45</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-31"><a></a><span class="dv">28</span> t m <span class="dv">31</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">28</span> p f <span class="dv">21</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">68</span> t m <span class="dv">34</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">68</span> p f <span class="dv">54</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-32"><a></a><span class="dv">29</span> t m <span class="dv">35</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">29</span> p m <span class="dv">35</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">69</span> t f <span class="dv">21</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">69</span> p m <span class="dv">34</span> <span class="dv">1</span> <span class="dv">4</span></span>
+<span id="cb1-33"><a></a><span class="dv">30</span> t f <span class="dv">36</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">30</span> p f <span class="dv">37</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">70</span> t m <span class="dv">64</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">70</span> p m <span class="dv">51</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-34"><a></a><span class="dv">31</span> t f <span class="dv">45</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">31</span> p f <span class="dv">41</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">71</span> t f <span class="dv">61</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">71</span> p m <span class="dv">34</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-35"><a></a><span class="dv">32</span> t m <span class="dv">13</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">32</span> p m <span class="dv">42</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">72</span> t m <span class="dv">33</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">72</span> p f <span class="dv">43</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-36"><a></a><span class="dv">33</span> t m <span class="dv">14</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">33</span> p f <span class="dv">22</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">73</span> t f <span class="dv">36</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">73</span> p m <span class="dv">37</span> <span class="dv">0</span> <span class="dv">3</span></span>
+<span id="cb1-37"><a></a><span class="dv">34</span> t f <span class="dv">15</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">34</span> p m <span class="dv">24</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">74</span> t m <span class="dv">21</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">74</span> p m <span class="dv">55</span> <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb1-38"><a></a><span class="dv">35</span> t f <span class="dv">19</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">35</span> p f <span class="dv">31</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">75</span> t f <span class="dv">47</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">75</span> p f <span class="dv">42</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-39"><a></a><span class="dv">36</span> t m <span class="dv">20</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">36</span> p m <span class="dv">32</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">76</span> t f <span class="dv">51</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">76</span> p m <span class="dv">44</span> <span class="dv">0</span> <span class="dv">2</span></span>
+<span id="cb1-40"><a></a><span class="dv">37</span> t m <span class="dv">23</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">37</span> p f <span class="dv">35</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">77</span> t f <span class="dv">23</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">77</span> p m <span class="dv">41</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-41"><a></a><span class="dv">38</span> t f <span class="dv">23</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">38</span> p m <span class="dv">21</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">78</span> t m <span class="dv">31</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">78</span> p f <span class="dv">23</span> <span class="dv">1</span> <span class="dv">4</span></span>
+<span id="cb1-42"><a></a><span class="dv">39</span> t m <span class="dv">24</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">39</span> p m <span class="dv">30</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">79</span> t m <span class="dv">22</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">79</span> p m <span class="dv">19</span> <span class="dv">1</span> <span class="dv">4</span></span>
+<span id="cb1-43"><a></a><span class="dv">40</span> t m <span class="dv">57</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">40</span> p f <span class="dv">43</span> <span class="dv">1</span> <span class="dv">3</span></span>
+<span id="cb1-44"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-2">
+<h4 id="without-covariates">Without Covariates</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>proc logistic data<span class="ot">=</span>trial;</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>class <span class="fu">treatment</span>(<span class="at">ref=</span><span class="st">"p"</span>) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>strata center;</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a>model <span class="fu">improve</span>(<span class="at">event=</span><span class="st">"1"</span>)<span class="ot">=</span> treatment;</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="1">The strata argument lets SAS know that conditional logistic regression should be performed.</span>
+</dd>
+</dl>
+<h4 id="with-covariates">With Covariates</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc logistic data<span class="ot">=</span>trial;</span>
+<span id="cb2-2"><a></a>class <span class="fu">sex</span> (<span class="at">ref=</span><span class="st">"f"</span>) <span class="fu">treatment</span>(<span class="at">ref=</span><span class="st">"p"</span>) <span class="fu">initial</span>(<span class="at">ref=</span><span class="st">"1"</span>) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
+<span id="cb2-3"><a></a>strata center;</span>
+<span id="cb2-4"><a></a>model <span class="fu">improve</span>(<span class="at">event=</span><span class="st">"1"</span>) <span class="ot">=</span> treatment initial sex age<span class="sc">/</span></span>
+<span id="cb2-5"><a></a>selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">1</span> details;</span>
+<span id="cb2-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-3">
+<p>After adding the covariates, only the initial skin condition rating was added to the model. There is a significant effect of initial skin condition (<span class="math inline">\(\chi^2\)</span> = 10.57, p=0.0143), and a marginal effect of treatment ($^2 $= 2.93, p=0.09). The odds of improvement in the treatment group is 1.87 (0.914, 3.82) times that of the placebo group. The odds of improvement for severe initial skin condition is 26.5 (2.4, 292) times that of mild initial skin condition.</p>
+<p>Note that the answers will be different if you treated the initial skin condition as a continuous variable.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
+<p>The dataset CORRECT includes data from a study that asked pairs of individuals to interpret a visual infographic regarding health disparities arising from the COVID-19 pandemic. Each participant was asked about their occupations. The response variable was whether they correctly interpreted the infographic (1) or not (0). Implement a conditional logistic regression analysis to determine whether occupation affects the accuracy of interpretation of visual infographics.</p>
+<h3 id="sas-data-set-1">SAS Data Set</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data correct;</span>
+<span id="cb3-2"><a></a>format occupation <span class="sc">$</span><span class="fl">10.</span>;</span>
+<span id="cb3-3"><a></a>input pair Occupation <span class="sc">$</span> Correct;</span>
+<span id="cb3-4"><a></a>datalines;</span>
+<span id="cb3-5"><a></a><span class="dv">1</span> STEM <span class="dv">0</span></span>
+<span id="cb3-6"><a></a><span class="dv">1</span> Other <span class="dv">0</span></span>
+<span id="cb3-7"><a></a><span class="dv">2</span> Other <span class="dv">0</span></span>
+<span id="cb3-8"><a></a><span class="dv">2</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-9"><a></a><span class="dv">3</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-10"><a></a><span class="dv">3</span> Other <span class="dv">0</span></span>
+<span id="cb3-11"><a></a><span class="dv">4</span> Other <span class="dv">0</span></span>
+<span id="cb3-12"><a></a><span class="dv">4</span> STEM <span class="dv">0</span></span>
+<span id="cb3-13"><a></a><span class="dv">5</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-14"><a></a><span class="dv">5</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-15"><a></a><span class="dv">6</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-16"><a></a><span class="dv">6</span> STEM <span class="dv">0</span></span>
+<span id="cb3-17"><a></a><span class="dv">7</span> STEM <span class="dv">0</span></span>
+<span id="cb3-18"><a></a><span class="dv">7</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-19"><a></a><span class="dv">8</span> STEM <span class="dv">0</span></span>
+<span id="cb3-20"><a></a><span class="dv">8</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-21"><a></a><span class="dv">9</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-22"><a></a><span class="dv">9</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-23"><a></a><span class="dv">10</span> Other <span class="dv">0</span></span>
+<span id="cb3-24"><a></a><span class="dv">10</span> STEM <span class="dv">0</span></span>
+<span id="cb3-25"><a></a><span class="dv">11</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-26"><a></a><span class="dv">11</span> STEM <span class="dv">1</span></span>
+<span id="cb3-27"><a></a><span class="dv">12</span> Other <span class="dv">0</span></span>
+<span id="cb3-28"><a></a><span class="dv">12</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-29"><a></a><span class="dv">13</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-30"><a></a><span class="dv">13</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-31"><a></a><span class="dv">14</span> STEM <span class="dv">0</span></span>
+<span id="cb3-32"><a></a><span class="dv">14</span> STEM <span class="dv">0</span></span>
+<span id="cb3-33"><a></a><span class="dv">15</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-34"><a></a><span class="dv">15</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-35"><a></a><span class="dv">16</span> Other <span class="dv">0</span></span>
+<span id="cb3-36"><a></a><span class="dv">16</span> STEM <span class="dv">0</span></span>
+<span id="cb3-37"><a></a><span class="dv">17</span> Other <span class="dv">0</span></span>
+<span id="cb3-38"><a></a><span class="dv">17</span> STEM <span class="dv">0</span></span>
+<span id="cb3-39"><a></a><span class="dv">18</span> STEM <span class="dv">0</span></span>
+<span id="cb3-40"><a></a><span class="dv">18</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-41"><a></a><span class="dv">19</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-42"><a></a><span class="dv">19</span> Other <span class="dv">1</span></span>
+<span id="cb3-43"><a></a><span class="dv">20</span> Other <span class="dv">0</span></span>
+<span id="cb3-44"><a></a><span class="dv">20</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-45"><a></a><span class="dv">21</span> Other <span class="dv">0</span></span>
+<span id="cb3-46"><a></a><span class="dv">21</span> Other <span class="dv">0</span></span>
+<span id="cb3-47"><a></a><span class="dv">22</span> Other <span class="dv">1</span></span>
+<span id="cb3-48"><a></a><span class="dv">22</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-49"><a></a><span class="dv">23</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-50"><a></a><span class="dv">23</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-51"><a></a><span class="dv">24</span> Other <span class="dv">0</span></span>
+<span id="cb3-52"><a></a><span class="dv">24</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-53"><a></a><span class="dv">25</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-54"><a></a><span class="dv">25</span> STEM <span class="dv">0</span></span>
+<span id="cb3-55"><a></a><span class="dv">26</span> STEM <span class="dv">0</span></span>
+<span id="cb3-56"><a></a><span class="dv">26</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-57"><a></a><span class="dv">27</span> Other <span class="dv">1</span></span>
+<span id="cb3-58"><a></a><span class="dv">27</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-59"><a></a><span class="dv">28</span> Other <span class="dv">1</span></span>
+<span id="cb3-60"><a></a><span class="dv">28</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-61"><a></a><span class="dv">29</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-62"><a></a><span class="dv">29</span> STEM <span class="dv">0</span></span>
+<span id="cb3-63"><a></a><span class="dv">30</span> Other <span class="dv">0</span></span>
+<span id="cb3-64"><a></a><span class="dv">30</span> Other <span class="dv">0</span></span>
+<span id="cb3-65"><a></a><span class="dv">31</span> Other <span class="dv">1</span></span>
+<span id="cb3-66"><a></a><span class="dv">31</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-67"><a></a><span class="dv">32</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-68"><a></a><span class="dv">32</span> Other <span class="dv">1</span></span>
+<span id="cb3-69"><a></a><span class="dv">33</span> STEM <span class="dv">0</span></span>
+<span id="cb3-70"><a></a><span class="dv">33</span> Other <span class="dv">0</span></span>
+<span id="cb3-71"><a></a><span class="dv">34</span> Other <span class="dv">0</span></span>
+<span id="cb3-72"><a></a><span class="dv">34</span> STEM <span class="dv">1</span></span>
+<span id="cb3-73"><a></a><span class="dv">35</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-74"><a></a><span class="dv">35</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-75"><a></a><span class="dv">36</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-76"><a></a><span class="dv">36</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-77"><a></a><span class="dv">37</span> Other <span class="dv">0</span></span>
+<span id="cb3-78"><a></a><span class="dv">37</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-79"><a></a><span class="dv">38</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-80"><a></a><span class="dv">38</span> Other <span class="dv">1</span></span>
+<span id="cb3-81"><a></a><span class="dv">39</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-82"><a></a><span class="dv">39</span> Other <span class="dv">0</span></span>
+<span id="cb3-83"><a></a><span class="dv">40</span> Other <span class="dv">0</span></span>
+<span id="cb3-84"><a></a><span class="dv">40</span> Other <span class="dv">1</span></span>
+<span id="cb3-85"><a></a><span class="dv">41</span> Healthcare <span class="dv">1</span></span>
+<span id="cb3-86"><a></a><span class="dv">41</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-87"><a></a><span class="dv">42</span> Other <span class="dv">0</span></span>
+<span id="cb3-88"><a></a><span class="dv">42</span> Other <span class="dv">0</span></span>
+<span id="cb3-89"><a></a><span class="dv">43</span> Other <span class="dv">1</span></span>
+<span id="cb3-90"><a></a><span class="dv">43</span> STEM <span class="dv">0</span></span>
+<span id="cb3-91"><a></a><span class="dv">44</span> Other <span class="dv">1</span></span>
+<span id="cb3-92"><a></a><span class="dv">44</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-93"><a></a><span class="dv">45</span> STEM <span class="dv">0</span></span>
+<span id="cb3-94"><a></a><span class="dv">45</span> STEM <span class="dv">0</span></span>
+<span id="cb3-95"><a></a><span class="dv">46</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-96"><a></a><span class="dv">46</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-97"><a></a><span class="dv">47</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-98"><a></a><span class="dv">47</span> Other <span class="dv">1</span></span>
+<span id="cb3-99"><a></a><span class="dv">48</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-100"><a></a><span class="dv">48</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-101"><a></a><span class="dv">49</span> Other <span class="dv">0</span></span>
+<span id="cb3-102"><a></a><span class="dv">49</span> STEM <span class="dv">1</span></span>
+<span id="cb3-103"><a></a><span class="dv">50</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-104"><a></a><span class="dv">50</span> Healthcare <span class="dv">0</span></span>
+<span id="cb3-105"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
+<p>The dataset CORRECT includes data from a study that asked pairs of individuals to interpret a visual infographic regarding health disparities arising from the COVID-19 pandemic. Each participant was asked about their occupations. The response variable was whether they correctly interpreted the infographic (1) or not (0). Implement a conditional logistic regression analysis to determine whether occupation affects the accuracy of interpretation of visual infographics.</p>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc logistic data<span class="ot">=</span>correct;</span>
+<span id="cb4-2"><a></a>strata pair;</span>
+<span id="cb4-3"><a></a>class <span class="fu">occupation</span>(<span class="at">ref=</span><span class="st">"Other"</span>)<span class="sc">/</span>param<span class="ot">=</span>ref;</span>
+<span id="cb4-4"><a></a>model <span class="fu">correct</span>(<span class="at">event=</span><span class="st">"1"</span>)<span class="ot">=</span>occupation<span class="sc">/</span>details;</span>
+<span id="cb4-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-2-2">
+<p>There was no significant effect of occupation on the accuracy of interpretation of visual infographics.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="crossover-designs" class="slide level2">
+<h2>Crossover Designs</h2>
+<ul>
+<li>When an individual or group of individuals undergo different treatments at each pre-determined period.
+<ul>
+<li>Patients act as their own controls.</li>
+</ul></li>
+<li>Common types of crossover design studies:
+<ul>
+<li>Two-period design (AB/BA)</li>
+<li>Three-period design (ABC/CBA/ACB…)</li>
+</ul></li>
+<li>Important effects to account for in crossover designs are the carryover effect and the period effect.
+<ul>
+<li>An extra variable can be introduced to indicate which effect is carried over at any given period.</li>
+<li>If the preceding treatment is a placebo, it is safe to assume the absence of a carryover effect.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-1" class="slide level2">
+<h2>Example</h2>
+<p>Patients were stratified according to two age groups and then assigned to one of three treatment sequences. Responses were measured as favorable (F) or unfavorable (U); thus, FF indicates a favorable response in both Period 1 and Period 2. The data is included in the SAS file as CROSS2.</p>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Contingency Table</a></li><li><a href="#tabset-3-2">Data Set</a></li><li><a href="#tabset-3-3">SAS Code</a></li><li><a href="#tabset-3-4">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<p><img data-src="img/crossover_C10.png"></p>
+</div>
+<div id="tabset-3-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data <span class="fu">cross1</span> (<span class="at">drop=</span>count);</span>
+<span id="cb5-2"><a></a>input age <span class="sc">$</span> sequence <span class="sc">$</span> time1 <span class="sc">$</span> time2 <span class="sc">$</span> count;</span>
+<span id="cb5-3"><a></a>do i<span class="ot">=</span><span class="dv">1</span> to count;</span>
+<span id="cb5-4"><a></a>output;</span>
+<span id="cb5-5"><a></a>end;</span>
+<span id="cb5-6"><a></a>datalines;</span>
+<span id="cb5-7"><a></a>older AB F F <span class="dv">12</span></span>
+<span id="cb5-8"><a></a>older AB F U <span class="dv">12</span></span>
+<span id="cb5-9"><a></a>older AB U F <span class="dv">6</span></span>
+<span id="cb5-10"><a></a>older AB U U <span class="dv">20</span></span>
+<span id="cb5-11"><a></a>older BP F F <span class="dv">8</span></span>
+<span id="cb5-12"><a></a>older BP F U <span class="dv">5</span></span>
+<span id="cb5-13"><a></a>older BP U F <span class="dv">6</span></span>
+<span id="cb5-14"><a></a>older BP U U <span class="dv">31</span></span>
+<span id="cb5-15"><a></a>older PA F F <span class="dv">5</span></span>
+<span id="cb5-16"><a></a>older PA F U <span class="dv">3</span></span>
+<span id="cb5-17"><a></a>older PA U F <span class="dv">22</span></span>
+<span id="cb5-18"><a></a>older PA U U <span class="dv">20</span></span>
+<span id="cb5-19"><a></a>younger BA F F <span class="dv">19</span></span>
+<span id="cb5-20"><a></a>younger BA F U <span class="dv">3</span></span>
+<span id="cb5-21"><a></a>younger BA U F <span class="dv">25</span></span>
+<span id="cb5-22"><a></a>younger BA U U <span class="dv">3</span></span>
+<span id="cb5-23"><a></a>younger AP F F <span class="dv">25</span></span>
+<span id="cb5-24"><a></a>younger AP F U <span class="dv">6</span></span>
+<span id="cb5-25"><a></a>younger AP U F <span class="dv">6</span></span>
+<span id="cb5-26"><a></a>younger AP U U <span class="dv">13</span></span>
+<span id="cb5-27"><a></a>younger PB F F <span class="dv">13</span></span>
+<span id="cb5-28"><a></a>younger PB F U <span class="dv">5</span></span>
+<span id="cb5-29"><a></a>younger PB U F <span class="dv">21</span></span>
+<span id="cb5-30"><a></a>younger PB U U <span class="dv">11</span></span>
+<span id="cb5-31"><a></a>;</span>
+<span id="cb5-32"><a></a></span>
+<span id="cb5-33"><a></a>data cross2; set cross1;</span>
+<span id="cb5-34"><a></a>subject<span class="ot">=</span>_n_;</span>
+<span id="cb5-35"><a></a>period<span class="ot">=</span><span class="dv">1</span>;</span>
+<span id="cb5-36"><a></a>drug <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">1</span>, <span class="dv">1</span>);</span>
+<span id="cb5-37"><a></a>carry<span class="ot">=</span><span class="st">'none'</span>;</span>
+<span id="cb5-38"><a></a>response <span class="ot">=</span>time1;</span>
+<span id="cb5-39"><a></a>output;</span>
+<span id="cb5-40"><a></a>period<span class="ot">=</span><span class="dv">2</span>;</span>
+<span id="cb5-41"><a></a>drug <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">2</span>, <span class="dv">1</span>);</span>
+<span id="cb5-42"><a></a>carry <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">1</span>, <span class="dv">1</span>);</span>
+<span id="cb5-43"><a></a><span class="cf">if</span> carry<span class="ot">=</span><span class="st">'P'</span> then carry<span class="ot">=</span><span class="st">'none'</span>;</span>
+<span id="cb5-44"><a></a>response <span class="ot">=</span>time2;</span>
+<span id="cb5-45"><a></a>output;</span>
+<span id="cb5-46"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>proc logistic data<span class="ot">=</span>cross2;</span>
+<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>class drug period age carry <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a>strata subject;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-4" class="code-annotation-target"><a href="#annotated-cell-7-4"></a>model response <span class="ot">=</span> period drug period<span class="sc">*</span>age carry;</span>
+<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5"></a>A_B<span class="sc">:</span> test drugA<span class="ot">=</span>drugB;</span>
+<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6"></a>oddsratio drug;</span>
+<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="4" data-code-annotation="1">Carryover effect is accounted for with <code>carry</code>.</span>
+</dd>
+</dl>
+<p>Since there is no significant carryover effect, we can remove it from the model.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>proc logistic data<span class="ot">=</span>cross2;</span>
+<span id="cb6-2"><a></a>class drug period age carry <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
+<span id="cb6-3"><a></a>strata subject;</span>
+<span id="cb6-4"><a></a>model response <span class="ot">=</span> period drug period<span class="sc">*</span>age;</span>
+<span id="cb6-5"><a></a>A_B<span class="sc">:</span> test drugA<span class="ot">=</span>drugB;</span>
+<span id="cb6-6"><a></a>oddsratio drug;</span>
+<span id="cb6-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-4">
+<p>There is no significant carryover effect. At a significance level of 0.05, there is no significant interaction effect. There is a significant drug effect (<span class="math inline">\(\chi^2\)</span> = 18.7, p=0.001). The odds of a favorable response with drug A is 3.84 (2.02, 7.32) times that for the placebo and 2.95 (1.55, 5.59) times that for drug B.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="three-period-crossover-studies" class="slide level2">
+<h2>Three-Period Crossover Studies</h2>
+<ul>
+<li>The approach is similar to the two-period crossover studies
+<ul>
+<li>Period effect</li>
+<li>Crossover effect – Need to restrict which levels you assume a carryover effect for.</li>
+</ul></li>
+<li>The response profiles would be different:
+<ul>
+<li>The total values of {<span class="math inline">\(y_{hi}\)</span>={0,1,2,3}} can be {0,1,2,3}. Only {1,2} is informative, but adds complexity to the likelihood.</li>
+</ul></li>
+<li>PROC LOGISTIC can handle three-period crossover studies with the same syntax.</li>
+</ul>
+</section>
+<section id="matching-in-case-control-studies" class="slide level2">
+<h2>Matching in Case-Control Studies</h2>
+<ul>
+<li>Case-control studies pair a person known to have the event of interest (case) with a person who doesn’t have the event (control)
+<ul>
+<li>Research question: Is the exposure/risk factor associated with the event?</li>
+</ul></li>
+</ul>
+</section>
+<section id="conditional-logistic-regression-matching" class="slide level2">
+<h2>Conditional Logistic Regression: Matching</h2>
+<ul>
+<li>The conditional likelihood for the matched pairs data is the unconditional likelihood for a logistic regression model where the response is always equal to 1, the covariate values are equal to the differences between the values for the case and the control, and there is no intercept.
+<ul>
+<li>The pairs/groups are used as the strata in the analysis.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-2" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li>The data set ENDO is subset of the data from the Los Angeles Study of the Endometrial Cancer Data in Breslow and Day (1980). Outcome=1 corresponds to cases of endometrial cancer. Two prognostic factors are included
+<ul>
+<li>Gall: gallbladder disease</li>
+<li>Hyper: hypertension</li>
+</ul></li>
+<li>Use conditional logistic regression to determine the association between gallbladder disease and endometrial cancer after controlling for hypertension.</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">SAS Code</a></li><li><a href="#tabset-4-3">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data endo;</span>
+<span id="cb7-2"><a></a>   do ID<span class="ot">=</span><span class="dv">1</span> to <span class="dv">63</span>;</span>
+<span id="cb7-3"><a></a>      do Outcome <span class="ot">=</span> <span class="dv">1</span> to <span class="dv">0</span> by <span class="sc">-</span><span class="dv">1</span>;</span>
+<span id="cb7-4"><a></a>         input Gall Hyper <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb7-5"><a></a>         output;</span>
+<span id="cb7-6"><a></a>      end;</span>
+<span id="cb7-7"><a></a>   end;</span>
+<span id="cb7-8"><a></a>   datalines;</span>
+<span id="cb7-9"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb7-10"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-11"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb7-12"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-13"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-14"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-15"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">1</span></span>
+<span id="cb7-16"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-17"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-18"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb7-19"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-20"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-21"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb7-22"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc logistic data<span class="ot">=</span>endo;</span>
+<span id="cb8-2"><a></a>   strata ID;</span>
+<span id="cb8-3"><a></a>   model <span class="fu">outcome</span>(<span class="at">event=</span><span class="st">'1'</span>)<span class="ot">=</span>Gall hyper Gall<span class="sc">*</span>hyper<span class="sc">/</span>selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> details;</span>
+<span id="cb8-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-3">
+<p>There is marginal association between history of gallbladder disease (<span class="math inline">\(\chi^2\)</span> = 3.34, p=0.07) and endometrial cancer, but there is no evidence of an association between hypertension and endometrial cancer (<span class="math inline">\(\chi^2\)</span> = 0.85, p=0.36). The odds of developing endometrial cancer is 164% higher for those with gallbladder disease (OR: 2.64, 95% CI: 0.93, 7.5)</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exact-conditional-logistic-regression" class="slide level2">
+<h2>Exact Conditional Logistic Regression</h2>
+<ul>
+<li>Exact tests can be used if there is not enough data, or the data are too sparse.
+<ul>
+<li>EXACT statement in SAS can estimate effects and perform joint tests for repeated measures.</li>
+<li>If exact methods are used, selection options cannot be used concurrently.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-exact-conditional-logistic-regression" class="slide level2">
+<h2>Example: Exact Conditional Logistic Regression</h2>
+<p>The data set CARDIO includes data from a cardiovascular study of eight animals who received various drug treatments. Researchers then arrested coronary flow, which led to the development of regional ischemia, and they recorded whether an adverse cardiovascular event occurred during an eight-minute interval. The heart was re-perfused for 50 minutes to allow the heart to return to normal, and then another treatment was tested. Thus, there are up to five repeated measurements on eight animals. The treatments are: (1) Control (C), (2) Test Drug with counteracting agent (DA), (3) Low dose test drug (D1), (4) High dose test drug (D2).</p>
+<p>The treatment S indicates the placement of intracoronary artery catheter, which is dropped in the final data set.</p>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Data Set</a></li><li><a href="#tabset-5-2">SAS Code</a></li><li><a href="#tabset-5-3">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data cardio;</span>
+<span id="cb9-2"><a></a>input animal treatment <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
+<span id="cb9-3"><a></a><span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'S'</span> then delete;</span>
+<span id="cb9-4"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'C'</span> then ordtreat<span class="ot">=</span><span class="dv">1</span>;</span>
+<span id="cb9-5"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'DA'</span> then ordtreat<span class="ot">=</span><span class="dv">2</span>;</span>
+<span id="cb9-6"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'D1'</span> then ordtreat<span class="ot">=</span><span class="dv">3</span>;</span>
+<span id="cb9-7"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'D2'</span> then ordtreat<span class="ot">=</span><span class="dv">4</span>;</span>
+<span id="cb9-8"><a></a>datalines;</span>
+<span id="cb9-9"><a></a><span class="dv">1</span> S no <span class="dv">1</span> C no <span class="dv">1</span> C no <span class="dv">1</span> D2 yes <span class="dv">1</span> D1 yes</span>
+<span id="cb9-10"><a></a><span class="dv">2</span> S no <span class="dv">2</span> D2 yes <span class="dv">2</span> C no <span class="dv">2</span> D1 yes</span>
+<span id="cb9-11"><a></a><span class="dv">3</span> S no <span class="dv">3</span> C yes <span class="dv">3</span> D1 yes <span class="dv">3</span> DA no <span class="dv">3</span> C no</span>
+<span id="cb9-12"><a></a><span class="dv">4</span> S no <span class="dv">4</span> C no <span class="dv">4</span> D1 yes <span class="dv">4</span> DA no <span class="dv">4</span> C no</span>
+<span id="cb9-13"><a></a><span class="dv">5</span> S yes <span class="dv">5</span> C no <span class="dv">5</span> DA no <span class="dv">5</span> D1 no <span class="dv">5</span> C no</span>
+<span id="cb9-14"><a></a><span class="dv">6</span> S no <span class="dv">6</span> C no <span class="dv">6</span> D1 yes <span class="dv">6</span> DA no <span class="dv">6</span> C no</span>
+<span id="cb9-15"><a></a><span class="dv">7</span> S no <span class="dv">7</span> C no <span class="dv">7</span> D1 yes <span class="dv">7</span> DA no <span class="dv">7</span> C no</span>
+<span id="cb9-16"><a></a><span class="dv">8</span> S yes <span class="dv">8</span> C yes <span class="dv">8</span> D1 yes</span>
+<span id="cb9-17"><a></a>;</span>
+<span id="cb9-18"><a></a></span>
+<span id="cb9-19"><a></a>data cardio;</span>
+<span id="cb9-20"><a></a>set cardio;</span>
+<span id="cb9-21"><a></a>drop treatment;</span>
+<span id="cb9-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>proc logistic data<span class="ot">=</span>cardio descending exactonly;</span>
+<span id="cb10-2"><a></a>strata animal;</span>
+<span id="cb10-3"><a></a>model response <span class="ot">=</span> ordtreat;</span>
+<span id="cb10-4"><a></a>exact ordtreat <span class="sc">/</span> estimate<span class="ot">=</span>both;</span>
+<span id="cb10-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-3">
+<p>We treat the treatments as an ordinal variable with equal separation. Based on the exact analysis, there is a significant effect of treatment (p=0.0017). The odds of an adverse event becomes seven times higher with each unit change in treatment level.</p>
+</div>
+</div>
+</div>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Chapter 10- <a href="https://madfudolig.quarto.pub/eab770slides/">Back to home</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+            let selectedAnnoteEl;
+            const selectorForAnnotation = ( cell, annotation) => {
+              let cellAttr = 'data-code-cell="' + cell + '"';
+              let lineAttr = 'data-code-annotation="' +  annotation + '"';
+              const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+              return selector;
+            }
+            const selectCodeLines = (annoteEl) => {
+              const doc = window.document;
+              const targetCell = annoteEl.getAttribute("data-target-cell");
+              const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+              const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+              const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+              const lineIds = lines.map((line) => {
+                return targetCell + "-" + line;
+              })
+              let top = null;
+              let height = null;
+              let parent = null;
+              if (lineIds.length > 0) {
+                  //compute the position of the single el (top and bottom and make a div)
+                  const el = window.document.getElementById(lineIds[0]);
+                  top = el.offsetTop;
+                  height = el.offsetHeight;
+                  parent = el.parentElement.parentElement;
+                if (lineIds.length > 1) {
+                  const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                  const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                  height = bottom - top;
+                }
+                if (top !== null && height !== null && parent !== null) {
+                  // cook up a div (if necessary) and position it 
+                  let div = window.document.getElementById("code-annotation-line-highlight");
+                  if (div === null) {
+                    div = window.document.createElement("div");
+                    div.setAttribute("id", "code-annotation-line-highlight");
+                    div.style.position = 'absolute';
+                    parent.appendChild(div);
+                  }
+                  div.style.top = top - 2 + "px";
+                  div.style.height = height + 4 + "px";
+                  div.style.left = 0;
+                  let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                  if (gutterDiv === null) {
+                    gutterDiv = window.document.createElement("div");
+                    gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                    gutterDiv.style.position = 'absolute';
+                    const codeCell = window.document.getElementById(targetCell);
+                    const gutter = codeCell.querySelector('.code-annotation-gutter');
+                    gutter.appendChild(gutterDiv);
+                  }
+                  gutterDiv.style.top = top - 2 + "px";
+                  gutterDiv.style.height = height + 4 + "px";
+                }
+                selectedAnnoteEl = annoteEl;
+              }
+            };
+            const unselectCodeLines = () => {
+              const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+              elementsIds.forEach((elId) => {
+                const div = window.document.getElementById(elId);
+                if (div) {
+                  div.remove();
+                }
+              });
+              selectedAnnoteEl = undefined;
+            };
+              // Handle positioning of the toggle
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              elRect = undefined;
+              if (selectedAnnoteEl) {
+                selectCodeLines(selectedAnnoteEl);
+              }
+            }, 10)
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
+                  fn.apply(this, args);
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
+            // Attach click handler to the DT
+            const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+            for (const annoteDlNode of annoteDls) {
+              annoteDlNode.addEventListener('click', (event) => {
+                const clickedEl = event.target;
+                if (clickedEl !== selectedAnnoteEl) {
+                  unselectCodeLines();
+                  const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+                  if (activeEl) {
+                    activeEl.classList.remove('code-annotation-active');
+                  }
+                  selectCodeLines(clickedEl);
+                  clickedEl.classList.add('code-annotation-active');
+                } else {
+                  // Unselect the line
+                  unselectCodeLines();
+                  clickedEl.classList.remove('code-annotation-active');
+                }
+              });
+            }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
