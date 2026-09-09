@@ -5,13 +5,14 @@ format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    footer: "Chapter 5- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
+    footer: "Chapter 5- [Back to home](https://miguelfudolig.github.io/EAB770-Slides-Website/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
 ---
@@ -40,27 +41,39 @@ library(vcdExtra)
 -   Observer Agreement (inter-rater reliability)
 -   Test for Ordered Differences
 
+# What if there are more than two groups outcomes?
+
+## Multiple Categorical Outcomes
+
+Common examples include Likert Scale (Strongly Disagree, Disagree, Neutral, Agree, Strongly Agree) responses and parts of a whole (None, Some, All).
+
+::: callout-note
+We would need more than two columns in our contingency table to account for these other outcomes. Variables can be forced to be “binary”, but some important information can be lost.
+:::
+
+## Multiple Groups
+
+It is also common to compare responses from multiple groups such as Race, Income Status, and Exposure levels. Dichotomizing these variables to fit into a 2x2 will also result in loss of information.
+
+# Associations in $s \times r$ tables
+
 ## $s \times r$ tables
 
-We now evolve the contingency table from a $2 \times 2 \to  s  \times r$, where $s$ is the number of rows and $r$ is the number of columns.
+We now evolve the contingency table from a $2 \times 2 \to  s  \times r$, where $s$ is the number of rows and $r$ is the number of columns. Both $s$ and $r$ are expected to be at least 2.
 
-## Nominal Categorical variables
-
-::::: columns
-::: {.column style="width:40%; font-size: 75%"}
-The response variables can now have $r \geq 2$ levels and be strictly nominal.
-:::
-
-::: {.column style="width:60%"}
 ![](img/sxr_C5.png)
-:::
-:::::
+
 
 ## General Association Statistic
 
--   The groups and the response variable categories can be nominally scaled.
-    -   $H_0$: there is no general association between the groups and response variables.
-    -   $H_A$: there is a general association between the two variables
+When the groups and the response variable categories can be nominally scaled, we can only test for general association.
+
+::: callout-note
+### Statistical Hypotheses
+
+-   $H_0$: there is no general association between the groups and response variables.
+-   $H_A$: there is a general association between the two variables
+:::
 
 ## General Association Statistic
 
@@ -69,6 +82,8 @@ The randomization statistic based on Mantel-Haenszel statistics can be calculate
 $$
 Q = \left(\frac{n-1}{n}\right) Q_P
 $$ 
+
+where,
 
 $$
 Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
@@ -80,23 +95,37 @@ When $n$ is large, $Q \approx Q_P$. Like the Pearson chi-square, $Q$ follows a c
 
 ## Mosaic Plot
 
-::::: columns
-::: {.column style="width:40%; font-size: 75%"}
--   A mosaic plot visualizes the proportion in each cell of the contingency table.
-    -   Horizontal space is divided by sizes corresponding to the relative count of x-axis variable levels
-    -   Vertical space is divided up according to relative sizes of the y-axis variable levels.
+ A mosaic plot visualizes the proportion in each cell of the contingency table.
+ 
+::: callout-note
+The horizontal space is divided by sizes corresponding to the relative count of x-axis variable levels, while the vertical space is divided up according to relative sizes of the y-axis variable levels.
 :::
 
-::: {.column style="width:60%"}
+## Mosaic Plot in `R`
+
+The `mosaic()` function in the `vcd` package creates a mosaic plot for data frames/contingency tables. Shown below is the mosaic plot for the `UCBAdmissions` data set, which shows the aggregate data on applicants to graduate school at UC Berkeley in 1973.
+
+
+::: panel-tabset
+
+### Plot
+
 ```{r}
-#| echo: false
 library(vcd)
-mosaic(~Admit + Dept,
+mosaic(~Admit +Dept,
        highlighting="Admit",
+       highlighting_fill=c("blue","red"),
        data=UCBAdmissions)
 ```
+
+### Notes
+
+::: callout-tip
+The `highlighting` option provides `mosaic` information about which variables need to be shaded. The `highlighting_fill` provides the colors you want to use the highlight these variables.
 :::
-:::::
+
+
+:::
 
 ## General Association: SAS
 
@@ -112,34 +141,39 @@ tables a*b/cmh plots=mosaicplot; # <1>
 run;
 ```
 
-1.  `cmh` calculates the general association Mantel-Haenszel statistic. `plots=mosaicplot` tells SAS to create a mosaic plot with $a$ and $b$.
+1.  `cmh` calculates the general association Cochran-Mantel-Haenszel statistic. `plots=mosaicplot` tells SAS to create a mosaic plot with $a$ and $b$.
+
+## General Association: `R`
+
+The `CMHtest()` function provides the general association Cochram-Mantel-Haenszel statistic.
+
+```{r}
+#| eval: false
+
+CMHtest(contingencytable)
+```
+
 
 ## Example
 
-::::: columns
-::: {.column style="width:40%; font-size: 75%"}
-The table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.
-
--   What is the Pearson chi-square value?
--   What is the randomization statistic?
--   Is there sufficient evidence of an association between political party and neighborhood?
-:::
-
-::: {.column style="width:60%"}
-![](img/party_C5.png)
-:::
-:::::
-
-## Example
 
 The table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.
-
--   What is the Pearson chi-square value?
--   What is the randomization statistic?
--   Is there sufficient evidence of an association between political party and neighborhood?
 
 ::: panel-tabset
-### SAS Code
+
+### Questions
+
+-   What is the Pearson chi-square value?
+-   What is the randomization statistic?
+-   Is there sufficient evidence of an association between political party and neighborhood?
+-   Create a mosaic plot for this problem.
+
+
+![](img/party_C5.png)
+
+
+
+### `SAS` 
 
 ``` r
 data neighbor;
@@ -163,27 +197,63 @@ run;
 
 1.  Included both `chisq` and `cmh` to show discrepancy.
 
+### `R` Data
+
+```{r}
+dat <- expand.grid(Party=c("Democrat","Independent","Republican"),
+                   Neighborhood = c("Bayside","Highland","Longview","Sheffield"))
+
+dat$count <- c(221,200,208,160,291,106,360,160,316,140,311,97)
+```
+
+### `R` Code
+
+```{r}
+dat_cc <- xtabs(count~Party+Neighborhood,data=dat)
+dat_cc
+
+mosaic(data=dat_cc,
+       ~Party+Neighborhood,
+       highlighting="Party")
+```
+Pearson chi-square:
+
+```{r}
+chisq.test(dat_cc)
+```
+Randomization Statistic (use general association):
+
+```{r}
+CMHtest(dat_cc)
+```
+
+
 ### Answer
 
 $Q_P$ = 273.92, $Q$ = 273.81. The corresponding p-value $p<0.001$ suggests there is an association between party affiliation and neighborhood.
 
--   Note that the Mantel-Haenszel statistic reported in the `chisq` output corresponds to the correlation statistic which doesn't make sense in this case (discussed later).
+
+::: callout-note
+
+In SAS, note that the Mantel-Haenszel statistic reported in the `chisq` output corresponds to the correlation statistic which doesn't make sense in this case (discussed later).
+
+:::
+
 :::
 
 ## Exercise
 
-::::: columns
-::: {.column style="width:40%; font-size: 75%"}
 Secondary school teachers were randomly sampled from four school districts in Nevada and asked what marker color they used in grading students’ work.
 
 -   What is the Pearson chi-square statistic?
 -   What is the randomization statistic?
 -   Generate a mosaic plot for this example. Can you see a trend between the colors and/or the counties?
 -   At a significance level of 0.05, do we have sufficient evidence of a general association between the two variables?
-:::
 
-::: {.column style="width:60%"}
-Data set:
+
+::: panel-tabset
+
+### Data
 
 ``` r
 data color;
@@ -196,19 +266,15 @@ wa blu 5 wa red 56 wa green 7 wa blk 9
 ;
 run;
 ```
-:::
-:::::
 
-## Exercise
+```{r}
+dat <- expand.grid(county=c("clark","carson","douglas","washoe"),
+                   color = c("blue","red","green","black")) 
+dat$count <- c(22,12,17,5,57,30,34,56,12,6,17,7,15,15,10,9)
 
-Secondary school teachers were randomly sampled from four school districts in Nevada and asked what marker color they used in grading students’ work.
+dat_cc <- xtabs(count~county+color,data=dat)
+```
 
--   What is the Pearson chi-square statistic?
--   What is the randomization statistic?
--   Generate a mosaic plot for this example. Can you see a trend between the colors and/or the counties?
--   At a significance level of 0.05, do we have sufficient evidence of a general association between the two variables?
-
-::: panel-tabset
 ### SAS Code
 
 ``` r
@@ -235,62 +301,126 @@ run;
 $Q_P$= 24.36, $Q$ = 24.28, p = 0.004, which means there is strong evidence of an association between school district and marker color used for grading.
 
 ```{r}
-#| echo: false
 
-library(ggmosaic)
-dat <- expand.grid(county=c("cl","ca","do","wa"),
-                   color = c("blu","red","green","blk")) |> 
-  mutate(count=c(22,12,17,5,57,30,34,56,12,6,17,7,15,15,10,9))
+dat <- expand.grid(county=c("clark","carson","douglas","washoe"),
+                   color = c("blue","red","green","black")) 
+dat$count <- c(22,12,17,5,57,30,34,56,12,6,17,7,15,15,10,9)
 
 dat_cc <- xtabs(count~county+color,data=dat)
-# spine(dat_cc)
-dat |> ggplot() + geom_mosaic(aes(weight=count,x=product(county,color),fill=color)) + scale_fill_manual(values = c("blue","red","green","black"),name="Color") + theme_minimal()
+
+mosaic(data=dat_cc,
+       ~color + county,
+       highlighting="color",
+       highlighting_fill=c("blue","red","green","black"))
 ```
 :::
 
-## Mean Score Tests
+## Associations Involving Ordinal Variables
 
--   Used when the column variable is ordinal.
--   Row variable could be nominal
-    -   $H_0$: there is no difference in mean scores across the groups
-    -   $H_a$: at least one group has a different mean score compared to the others
--   Scores are calculated for each row
--   Recall: 2xr tables
+Suppose the column variable is ordinal such that $A_j$ is the $j^{th}$ outcome level. Since $A_J$ is ordinal, then $A_1 < A_2 < A_3 <... A_r$.
 
-## Mean Score Tests
+To account for ordinality, we assign a set of scores $\mathbf{a}$ reflecting the relationship between response levels.
 
--   The mean score statistic $Q_S$ can be used to test the difference between the mean scores.
-    -   Consistent with the ANOVA approach
--   Recall 2xr table: Sample size requirement
--   Set a cutoff column, the totals to the left and right of this column should be greater than 5.
-    -   Row totals should be **greater than 20**
--   Included in the `cmh` table as "Row Mean Scores Differ"
+$$
+\mathbf{a} = \{a_1, a_2, a_3,... a_r\} : a_1 < a_2 < ...< a_r
+$$
+
+::: callout-note
+The relationship can be $\leq$ instead of $<$ as long as at least one pair is a strict inequality.
+:::
+
+## Row Mean Scores
+
+Consider the following contingency table:
+
+![](img/2xr_C4.png)
+
+We can define a group mean for $X_1$, denoted by $\bar{f}_1$.
+
+$$
+\bar{f}_1 = \sum_{j=1}^r \frac{a_j n_{1j}}{n_{1+}}
+$$
+
+::: callout-note
+The scores $\bar{f}_j$ are referred to as **row mean scores**. The random variable $\bar{f}_j$ approximately has a normal distribution when the central limit theorem is imposed. This occurs when the row sums are high.
+
+The term $a_j$ are the assigned scores for the columns. These can be regular integral scores (0,1,2,3,...) or based on rank. Rank-based scores yield midranks for tied values and are standardized for tied values.
+:::
+
+## Mean Score Tests: Null Hypothesis
+
+The null hypothesis for tests involving the row mean scores is $H_0$: There is no association between the row (X) and column (A) variables. 
+Under the null hypothesis, the expected value of the row mean scores, $\mu_a$, can be calculated as:
+
+$$
+\mu_a =  \sum_{j=1}^r \frac{a_j n_{+j}}{n}
+$$
+
+The corresponding alternative hypothesis is $H_a:$ There is a location shift across the groups.
+## Mean Score Tests: Test Statistic
+
+The test statistic is the mean score statistic $Q_S$ for an $s \times r$ table is given by:
+
+$$
+Q_S = \frac{(n-1)\sum_{i=1}^sn_{i+}(f_i-\mu_a)^2}{nv_a}
+$$
+
+where $v_a = \sum_{j=1}^r(a_j-\mu_a)^2(n_{+j}/n)$ is the variance of the row mean scores. This is consistent with an ANOVA approach in comparing means across each group.
+
+## Mean Score Tests: Sample Considerations
+
+::: callout-note
+The $Q_S$ sample size condition is less stringent: 
+
+- The row totals should be greater than 20.
+- Choose one or more cutpoints $j = (2,3,...(r-1))$, add the first through $j^{th}$ columns together and add the $(j+1)^{th}$ through $r^{th}$ columns together. If both of these sums are 5 or greater for at least one cutpoint in each row, then the sample size is adequate.
+:::
+
+If the sample size conditions are reached, $Q_S$ approximately follows a chi-square distribution with $(s-1)$ degrees of freedom, where $s$ is the number of rows.
+
+::: callout-note
+The mean score test uses less degrees of freedom compared to the general association test and the Pearson chi-square test.
+:::
+
+## Mean Score Tests: `SAs`
+
+Included in the `cmh` table as "Row Mean Scores Differ". 
+
+::: callout-note
+Use `scores=ridit` to use standardized rank scores or `scores=modridit` to use the expected valurs of the order statistics of the uniform distribution on (0,1).
+:::
+
+## Mean Score Tests: `R`
+
+The `CMHtest()` default output includes the `Row mean scores differ` row in the analysis. Ensure that the ordinal variable is assigned as the column variable.
+
+```{r}
+#| eval: false
+
+CMHtest(contingencytable,
+        cscores="midrank")
+```
+
+
+::: callout-note
+The Col mean scores differ functions similarly with the ordinal variable assigned as the rows.
+
+The `cscores` argument lets `R` know what $a_j$ to use for the columns. `CMHtest` will use integers as scores, which assumes the ordinal variable is equally spaced. To use rank-based scores, we can specify `cscores="midrank"`. 
+:::
 
 ## Example
 
-::::: columns
-::: {.column style="width:50%; font-size: 75%"}
 The data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain
-
--   Is the chi-square approximation valid for this case?
--   What kind of scoring method is most appropriate for this data set?
--   Make the appropriate conclusion based on the result of the mean score tests using a significance level $\alpha=0.05$.
-:::
-
-::: {.column style="width:50%"}
-![](img/pain_C5.png)
-:::
-:::::
-
-## Example
-
-The data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain
-
--   Is the chi-square approximation valid for this case?
--   What kind of scoring method is most appropriate for this data set?
--   Make the appropriate conclusion based on the result of the mean score tests using a significance level $\alpha=0.05$.
 
 ::: panel-tabset
+### Question + Data
+
+-   Is the chi-square approximation valid for this case?
+-   What kind of scoring method is most appropriate for this data set?
+-   Make the appropriate conclusion based on the result of the mean score tests using a significance level $\alpha=0.05$.
+
+![](img/pain_C5.png)
+
 ### SAS Code
 
 ``` r
@@ -308,18 +438,47 @@ tables treatment*hours/ cmh nocol nopct;
 run;
 ```
 
+### R Code
+
+```{r}
+dat <- expand.grid(Treatment = c("Placebo","Standard","Test"),
+                   Hours = 0:4)
+
+dat$Count <- c(6,1,2,9,4,5,6,6,6,3,6,8,1,8,6)
+
+dat_cc <- xtabs(Count~Treatment+Hours,data=dat)
+dat_cc
+```
+Now we can perform the mean score test. The integer scoring method is most appropriate because of the equal distance between the ordinal column variable values.
+
+```{r}
+CMHtest(dat_cc)
+```
+
+
 ### Answer
 
 -   Use column 3 (Hours = 2) as cutoff. The use of the chi-square approximation is justified!
 
 -   The integer scoring method is most appropriate.
 
--   $Q_S$ = 13.7, p=0.001. There is sufficient evidence to conclude that at least one treatment group is different compared to the others.
+-   $Q_S$ = 13.7, df=2, p=0.001. At $\alpha=0.05$, there is sufficient evidence to conclude that at least one treatment group is different compared to the others.
+
+::: callout-warning
+If we used the general association test, we would end up with p=0.07 and failing to reject the null hypothesis instead.
+:::
+
+
 :::
 
 ## Exercise
 
 The table shows data from a study that investigates intent to breastfeed of women who are interested in having children. The women who participated in the study were asked if they intended to breastfeed your child up to 6 months after birth. The researchers want to know if there is an effect of the order of pregnancy on their intent to breastfeed.
+
+
+::: panel-tabset
+
+### SAS Data
 
 ``` r
 data preg;
@@ -331,7 +490,9 @@ fp sd 1 18 fp d 2 8 fp n 3 22 fp a 4 23 fp sa 5 11
 pwc sd 1 35 pwc d 2 13 pwc n 3 10 pwc a 4 9 pwc sa 5 6
 ; 
 ```
-::: {.callout-note title="Variables"}
+::: callout-note
+### Variables
+
 - npnc: not pregnant, no children 
 - npc: not pregnant with children
 - fp: first pregnancy
@@ -343,11 +504,7 @@ pwc sd 1 35 pwc d 2 13 pwc n 3 10 pwc a 4 9 pwc sa 5 6
 - sa: strongly agree
 :::
 
-## Exercise
 
-The table shows data from a study that investigates intent to breastfeed of women who are interested in having children. The women who participated in the study were asked if they intended to breastfeed your child up to 6 months after birth. The researchers want to know if there is an effect of the order of pregnancy on their intent to breastfeed.
-
-::: panel-tabset
 ### SAS Code
 
 ``` r
@@ -365,48 +522,98 @@ run;
 
 1.  The `means` procedure is shown to display the mean scores and how they indeed differ for each pregnancy order.
 
+### R Data
+
+```{r}
+dat <- expand.grid(Pregnancy = c("NPNC","NPC","FP","PWC"),
+                   Outcome =c("S Disagree","Disagree","Neutral","Agree","S Agree"))
+
+dat$Count <- c(8,15,18,35,22,23,8,13,24,15,22,10,27,19,23,9,15,9,11,6)
+
+dat_cc <- xtabs(Count~Pregnancy+Outcome,data=dat)
+dat_cc
+
+```
+
+### R Code
+
+```{r}
+CMHtest(dat_cc)
+```
+
+
 ### Answer
 
-$Q_S= 27.2$, p\<0.0001. There is sufficient evidence of an effect of pregnancy order on intent to breastfeed.
+$Q_S= 27.2$, df=3, p=5.35e-6. There is sufficient evidence of an effect of pregnancy order on intent to breastfeed.
 :::
 
-## Correlation Tests
+## Ordinal Row and Column Variables
 
--   When both and row variables are ordinally scaled, we can look at correlations between them.
--   Recall sx2 tables: Correlation statistic $Q_{CS}$
-    -   sxr tables: Assign scores to both rows and columns
-    -   $Q_{CS}$ can be calculated using matrix algebra.
+When the row variable is also ordinal, we can assign row scores $c_j$ such that
 
 $$
-Q_{CS} = (n-1)r_{ac}^2
-$$ where $r_{ac}$ is the Pearson correlation coefficient.
+\mathbf{c} = \{c_1, c_2, c_3,... c_s\} : c_1 < c_2 < ...< c_s
+$$
+
+:::callout-note
+Because both variables are ordinal, we can test for correlation between the two variables.
+:::
+
+
+Then for each cell, the expected frequency, $\bar{f}$ can be written as:
+
+$$
+\bar{f} = \sum_{i=1}^s\sum_{j=1}^r \frac{c_ia_jn_{ij}}{n}
+$$
+
 
 ## Correlation Tests
 
-::: callout-note
-$Q_{CS}$ follows a chi-square distribution with 1 degree of freedom 
+The null hypothesis for the association tests remains to be $H_0$: There is no association between the two variables. To test this hypothesis, we can use a randomization statistic $Q_{CS}$ that accounts for the ordinality of both variables.
 
-- Sample size requirement is the same as the sx2 tables. 
-- Uses 1 degree of freedom regardless of the size of the contingency table
+$$
+Q_{CS} = \frac{(\bar{f}-\mu_c\mu_a)^2}{v_cv_a/(n-1)} = (n-1)r_{ac}^2
+$$
+
+
+::: callout-note
+
+- $\mu_c$ is the expected value of the row scores
+- $\mu_a$ is the expected value of the column scores.
+- $v_c$ is the variance of the row scores
+- $v_a$ is variance of the column scores
+
+$r_{ac}$ is the Pearson correlation coefficient, which measures the correlation between the ordinal variables.
 :::
 
-## Correlation Tests: SAS
+## Correlation Tests
 
-$Q_{CS}$ is the Mantel-Haenszel chi-square statistic displayed by the `chisq` output.
+$Q_{CS}$ follows a chi-square distribution with 1 degree of freedom, regardless of the size of the table, when the sample size is at least 20.
 
--   `chisq` and `cmh` will both yield the correlation statistic.
 
-## Example 
+## Correlation Tests: `SAS`
 
-A water treatment company is studying water additives and investigating how they affect clothes washing. The treatments studied were no treatment (plain water), the standard treatment, and a double dose of the standard treatment, called super. Washability was measured as low, medium, and high. The company claims that the dose of water treatment affects the washability of water. Do we have sufficient evidence to support this claim?
+$Q_{CS}$ is the Mantel-Haenszel chi-square statistic displayed by the `chisq` and `cmh` output.
 
-![](img/wash_C5.png)
+## Correlation Tests: `R`
+
+$Q_{CS}$ is part of the `CMHtest()` output. 
+
+::: callout-note
+The default scores for the row and column scores are integer scores. Specify `rscores`/`cscores` as `midrank` to use rank-based scores.
+:::
 
 ## Example
 
 A water treatment company is studying water additives and investigating how they affect clothes washing. The treatments studied were no treatment (plain water), the standard treatment, and a double dose of the standard treatment, called super. Washability was measured as low, medium, and high. The company claims that the dose of water treatment affects the washability of water. Do we have sufficient evidence to support this claim?
 
 ::: panel-tabset
+
+### Data
+
+![](img/wash_C5.png)
+
+
 ### SAS Code
 
 ``` r
@@ -426,6 +633,26 @@ noprint nocol nopct;
 run;
 ```
 
+### R Code
+
+```{r}
+dat <- expand.grid(Treatment=c("Water","Standard","Super"),
+                   Washability=c("Low","Medium","High"))
+
+dat$Count <- c(27,10,5,14,17,12,5,26,50)
+
+dat_cc <- xtabs(Count~Treatment+Washability,data=dat)
+dat_cc
+```
+```{r}
+CMHtest(dat_cc)
+
+CMHtest(dat_cc,
+        rscores="midrank",
+        cscores="midrank")
+```
+
+
 ### Answer
 
 $Q_{CS}=50.6$, p\<0.0001. There is sufficient evidence to claim that the dose of water treatment is associated with the washability of the water.
@@ -435,7 +662,15 @@ If modridit scores are used, $Q_{CS}=49.5$.
 
 ## Exercise
 
-A random sample of 400 college students are classified according to class status and drinking habits. Test the hypothesis that class status and drinking habits are not correlated to each other.
+A random sample of 400 college students are classified according to class status and drinking habits. Test the null hypothesis that class status and drinking habits are not correlated to each other.
+
+::: panel-tabset
+
+### Data
+
+::: {.callout-note title="Variables"}
+non: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior
+:::
 
 ```{.r}
 data drink; 
@@ -447,15 +682,25 @@ hea fres 29 hea soph 41 hea jun 33 hea sen 28
 ;
 ```
 
-::: {.callout-note title="Variables"}
-non: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior
-::::
+```{r}
+dat <- expand.grid(habit = c("Nondrinkers","Moderate","Heavy"),
+                   Status = c("Freshmen","Sophomore","Junior","Senior"))
 
-## Exercise
+dat$Count <- c(55,32,29,34,29,41,27,36,33,17,39,28)
+```
 
-A random sample of 400 college students are classified according to class status and drinking habits. Test the hypothesis that class status and drinking habits are not correlated to each other.
+### R Code
 
-::: panel-tabset
+```{r}
+dat_cc <- xtabs(Count~habit+Status,data=dat)
+dat_cc
+```
+
+```{r}
+CMHtest(dat_cc)
+```
+
+
 ### SAS Code
 
 ```{.r}
@@ -475,22 +720,17 @@ run;
 
 ### Answer
 
-Table Scores: $Q_{CS}$ = 9.2, p=0.0024. There is sufficient evidence to support the claim that class status and drinking habits are correlated to each other.
+Table Scores: $Q_{CS}$ = 9.18, p=0.0024. At $\alpha=0.05$, here is sufficient evidence to support the claim that class status and drinking habits are correlated to each other.
 :::
 
 ## Exact Tests
 
--   Recall: Fisher’s Exact Test
-    -   sxr: Generalized to a multivariate hypergeometric distribution
--   For general association, we can get exact p-values for the Pearson chi-square, and likelihood ratio chi-square.
--   Unlike Fisher’s Exact Test for 2x2 tables, there are no one-sided alternative hypothesis.
--   Exact p-value for randomization statistic 𝑄 is the same as the Pearson chi-square p-value.
+For a 2x2 contingency table, we have Fisher’s Exact Test. The Fisher's Exact test can be generalized to larger contingency tables using a multivariate hypergeometric distribution.
+Unlike Fisher’s Exact Test for 2x2 tables, there are no one-sided alternative hypothesis.
 
-## Exact Tests
-
--   Recall: Exact testing of sx2 tables
-    -   The correlation statistic is suitable when sample size requirements are not met, but we can't use the chi-square distribution. 
-    -   Exact p-value is the sum of p-values associated with contingency tables where the test statistic is larger than the observed table.
+::: callout-note
+Exact p-value is the sum of p-values associated with contingency tables where the test statistic is larger than the observed table.
+:::
 
 ## Exact Tests: SAS
 
@@ -508,17 +748,26 @@ Exact tests are computationally intensive. More cells lead to more calculations,
 -   You can set the `MAXTIME` option in the exact statement to tell SAS to stop computations beyond a certain number of seconds.
 :::
 
-## Example 
+## Exact Tests: `R`
 
-A marketing research firm organized a focus group to consider issues of new car marketing. Members of the group included people who had purchased a car from a local dealer in the last month. Researchers were interested in whether there was an association between the type of car bought and how group members found out about the car in the media. Cars were classified as sedans, sporty, and utility. The types of media included television, magazines, newspapers, and radio.
+If the sample size is small enough, the `fisher.test()` function can be used to implement exact tests.
 
-![](img/car_C5.png)
+::: callout-tip
+`SAS` has better functions to perform exact tests for the Pearson and randomization statistics.
+:::
+
 
 ## Example 
 
 A marketing research firm organized a focus group to consider issues of new car marketing. Members of the group included people who had purchased a car from a local dealer in the last month. Researchers were interested in whether there was an association between the type of car bought and how group members found out about the car in the media. Cars were classified as sedans, sporty, and utility. The types of media included television, magazines, newspapers, and radio.
 
 ::: panel-tabset
+
+### Data
+
+![](img/car_C5.png)
+
+
 ### SAS Code
 
 ``` r
@@ -537,14 +786,36 @@ exact fisher pchi lrchi;
 run;
 ```
 
+### R Code
+
+```{r}
+dat<- expand.grid(Car=c("Sedan","Sporty","Utility"),
+                  AdSource=c("TV","Magazine","Newspaper","Radio"))
+
+dat$Count <- c(4,0,5,0,3,5,0,3,2,2,4,2)
+
+dat_cc <- xtabs(Count~Car+AdSource,data=dat)
+dat_cc
+```
+
+```{r}
+fisher.test(dat_cc)
+```
+
+
+
 ### Answer
 
-We need to use Fisher's exact test because of the small sample size. The p-value was calculated to be 0.04, which is sufficient evidence to conclude that there is an association between car type and media.
+We need to use Fisher's exact test because of the small sample size. The p-value was calculated to be 0.047, which is sufficient evidence to conclude that there is an association between car type and media at the 0.05 level of significance.
 :::
 
 ## Exercise
 
 A university professor wanted to test the general association between the most used social media app and the type of high school attended by freshmen. The professor asked 23 students in his class about their social media habits and respective high schools.
+
+:::{.panel-tabset}
+
+### Data
 
 |                       | Tiktok | Instagram | Snapchat | Other |
 |-----------------------|--------|-----------|----------|-------|
@@ -553,11 +824,7 @@ A university professor wanted to test the general association between the most u
 | Priv., out-of-state | 4      | 1         | 0        | 1     |
 | Pub., out-of-state  | 1      | 0         | 0        | 1     |
 
-## Exercise
 
-A university professor wanted to test the general association between the most used social media app and the type of high school attended by freshmen. The professor asked 23 students in his class about their social media habits and respective high schools.
-
-:::{.panel-tabset}
 ### SAS Code
 
 ```{.r}
@@ -565,7 +832,7 @@ data sm;
 input school $ social $ count @@;
 datalines;
 Pr_IS t 3 Pr_IS i 2 Pr_IS s 3 Pr_IS o 0
-Pu_IS t 3 Pu_IS i 1 Pu_IS s 3 Pu_IS o 0
+Pu_IS t 3 Pu_IS i 1 Pu_IS s 0 Pu_IS o 0
 Pr_OS t 4 Pr_OS i 1 Pr_OS s 0 Pr_OS o 1
 Pu_OS t 1 Pu_OS i 0 Pu_OS s 0 Pu_OS o 1
 ;
@@ -577,9 +844,25 @@ exact fisher pchi lrchi;
 run;
 ```
 
+### R Code
+
+```{r}
+dat <- expand.grid(School=c("Priv_In","Public_In","Priv_Out","Public_Out"),
+                   Social=c("Tiktok","Instagram","Snapchat","Other"))
+
+dat$Count <- c(3,3,4,1,2,1,1,0,3,0,0,0,0,0,1,1)
+
+dat_cc <- xtabs(Count~School+Social,data=dat)
+dat_cc
+```
+```{r}
+fisher.test(dat_cc)
+```
+
+
 ### Answer
 
-The Fisher's exact test yielded p=0.45, which means there is insufficient evidence to claim that social media habits are associated with the type of high school attended by the students.
+The Fisher's exact test yielded p=0.4878, which means there is insufficient evidence to claim that social media habits are associated with the type of high school attended by the students.
 
 :::
 
@@ -587,18 +870,25 @@ The Fisher's exact test yielded p=0.45, which means there is insufficient eviden
 
 ## Measures of Association
 
-- We only have information on whether the row and column variables are associated, but not by how much.
-- Depends on the scale of the measurements
-  - Ordinal vs. Nominal
-  - Are levels equally spaced?
+We only have information on whether the row and column variables are associated, but not by how much.
+
+::: callout-note
+We only have the standardized statistic and the p-value (ex. t-statistic, p-value), but not the strength of association (ex. Pearson correlation)
+:::
+
+::: callout-tip
+The strength of association depends on the scale of the measurements (Ordinal vs. Nominal). For ordinal variables, the appropriate score assignment should also be considered.
+:::
   
 
 ## Ordinal variables
 
 When both row and column variables are ordinal, we can use correlation coefficients.
 
-:::callout-note
-When scores are equally spaced, the **Pearson** correlation coefficient is appropriate. For data without an obvious scale, the **Spearman** correlation coefficient is more appropriate.
+::: callout-note
+When scores are equally spaced, the **Pearson** correlation coefficient is appropriate. For data without an obvious scale, the **Spearman** correlation coefficient is more appropriate. 
+
+These are not calculable in `R` for contingency tables.
 :::
 
 
@@ -610,7 +900,7 @@ When scores are equally spaced, the **Pearson** correlation coefficient is appro
   - Depends on relative ordering of the levels of variables
 
 
-:::callout-note
+::: callout-note
 Measures of association that use these pairs are Gamma $\gamma$, Kendall's $\tau_B$, Stuart's $\tau_C$, Somers' Delta.
 
 - All measures range from -1 to 1, inclusive.

@@ -284,7 +284,7 @@ CMHtest(dat_cc,
         overall=T)
 ```
 
-Calculating the Mantel-Fleiss manually:
+Calculating the Mantel-Fleiss manually. The function below uses the `mantel_fleiss(contingencytable,k)` function where `contingencytable` corresponds to the contingency table in the problem and `k` is the number of strata.
 
 ```{r}
 mantel_fleiss <- function(cc,k){
@@ -509,7 +509,11 @@ run;
 
 ## Common Odds Ratios: `R`
 
-The `mantelhaen.test()` provides an estimate of the common odds ratio. This function provides the Mantel-Haenszel confidence interval provided in `SAS`.
+The `mantelhaen.test()` provides an estimate of the common odds ratio for a 2x2 contingency table. This function provides the Mantel-Haenszel confidence interval provided in `SAS`.
+
+The `breslow_day_test()` function in the `vcdExtra` package performs the Breslow-Day test.
+
+The `zelen.test()` function in the `NSM3` package performs the Zelen's test.
 
 
 
@@ -574,6 +578,9 @@ dat_cc
 ```{r}
 breslow_day_test(dat_cc)
 mantelhaen.test(dat_cc, correct=F)
+
+library(NSM3)
+zelen.test(dat_cc)
 ```
 
 
@@ -632,6 +639,30 @@ run;
 
 1. `MF` should be enclosed in parentheses
 2. `eqor`: Zelen's test, `comor`: exact confidence interval for the common odds ratio.
+
+### R Code
+
+```{r}
+dat  <- expand.grid(Location = c("D","S"),
+                    Program=c("Office","Home"),
+                    Outcome = c("Good","Not Good")
+                  )  
+dat$count = c(12,6,3,1,5,1,5,3)
+
+dat_cc <- xtabs(count ~  Program+Outcome+Location, data=dat) 
+dat_cc
+```
+Check the Mantel-Fleiss Criterion first.
+
+```{r}
+mantel_fleiss(dat_cc,k=2)
+```
+Because MF is less than 5, we need to use Zelen's test.
+
+```{r}
+zelen.test(dat_cc)
+```
+
 
 ### Answer
 

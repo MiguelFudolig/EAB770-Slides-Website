@@ -638,7 +638,7 @@ cmeans  Col mean scores differ 23.05  1 1.5783e-06
 general    General association 23.05  1 1.5783e-06</code></pre>
 </div>
 </div>
-<p>Calculating the Mantel-Fleiss manually:</p>
+<p>Calculating the Mantel-Fleiss manually. The function below uses the <code>mantel_fleiss(contingencytable,k)</code> function where <code>contingencytable</code> corresponds to the contingency table in the problem and <code>k</code> is the number of strata.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>mantel_fleiss <span class="ot">&lt;-</span> <span class="cf">function</span>(cc,k){</span>
 <span id="cb9-2"><a></a>  sum_expected <span class="ot">=</span><span class="dv">0</span></span>
@@ -944,7 +944,9 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 </section>
 <section id="common-odds-ratios-r" class="slide level2">
 <h2>Common Odds Ratios: <code>R</code></h2>
-<p>The <code>mantelhaen.test()</code> provides an estimate of the common odds ratio. This function provides the Mantel-Haenszel confidence interval provided in <code>SAS</code>.</p>
+<p>The <code>mantelhaen.test()</code> provides an estimate of the common odds ratio for a 2x2 contingency table. This function provides the Mantel-Haenszel confidence interval provided in <code>SAS</code>.</p>
+<p>The <code>breslow_day_test()</code> function in the <code>vcdExtra</code> package performs the Breslow-Day test.</p>
+<p>The <code>zelen.test()</code> function in the <code>NSM3</code> package performs the Zelen’s test.</p>
 </section>
 <section id="example-2" class="slide level2">
 <h2>Example</h2>
@@ -1058,6 +1060,13 @@ sample estimates:
 common odds ratio 
          2.846734 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">library</span>(NSM3)</span>
+<span id="cb33-2"><a></a><span class="fu">zelen.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Zelen's test:
+P = 1</code></pre>
+</div>
 </div>
 </div>
 <div id="tabset-4-4">
@@ -1092,35 +1101,78 @@ common odds ratio
 <li>Use Zelen’s test to test if the odds ratio is uniform in both locations</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">Answer</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">R Code</a></li><li><a href="#tabset-5-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-35"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-35-1"><a href="#annotated-cell-35-1"></a>data exercise;</span>
-<span id="annotated-cell-35-2"><a href="#annotated-cell-35-2"></a>input location <span class="sc">$</span> program <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-35-3"><a href="#annotated-cell-35-3"></a>datalines;</span>
-<span id="annotated-cell-35-4"><a href="#annotated-cell-35-4"></a>downtown office good <span class="dv">12</span> downtown office not <span class="dv">5</span></span>
-<span id="annotated-cell-35-5"><a href="#annotated-cell-35-5"></a>downtown home good <span class="dv">3</span> downtown home not <span class="dv">5</span></span>
-<span id="annotated-cell-35-6"><a href="#annotated-cell-35-6"></a>satellite office good <span class="dv">6</span> satellite office not <span class="dv">1</span></span>
-<span id="annotated-cell-35-7"><a href="#annotated-cell-35-7"></a>satellite home good <span class="dv">1</span> satellite home not <span class="dv">3</span></span>
-<span id="annotated-cell-35-8"><a href="#annotated-cell-35-8"></a>;</span>
-<span id="annotated-cell-35-9"><a href="#annotated-cell-35-9"></a></span>
-<span id="annotated-cell-35-10"><a href="#annotated-cell-35-10"></a>proc freq order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-35-11"><a href="#annotated-cell-35-11"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-35" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-35-12" class="code-annotation-target"><a href="#annotated-cell-35-12"></a>tables location<span class="sc">*</span>program<span class="sc">*</span>outcome <span class="sc">/</span><span class="fu">cmh</span>(mf);</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-35" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-35-13" class="code-annotation-target"><a href="#annotated-cell-35-13"></a>exact comor eqor;</span>
-<span id="annotated-cell-35-14"><a href="#annotated-cell-35-14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-37"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-37-1"><a href="#annotated-cell-37-1"></a>data exercise;</span>
+<span id="annotated-cell-37-2"><a href="#annotated-cell-37-2"></a>input location <span class="sc">$</span> program <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-37-3"><a href="#annotated-cell-37-3"></a>datalines;</span>
+<span id="annotated-cell-37-4"><a href="#annotated-cell-37-4"></a>downtown office good <span class="dv">12</span> downtown office not <span class="dv">5</span></span>
+<span id="annotated-cell-37-5"><a href="#annotated-cell-37-5"></a>downtown home good <span class="dv">3</span> downtown home not <span class="dv">5</span></span>
+<span id="annotated-cell-37-6"><a href="#annotated-cell-37-6"></a>satellite office good <span class="dv">6</span> satellite office not <span class="dv">1</span></span>
+<span id="annotated-cell-37-7"><a href="#annotated-cell-37-7"></a>satellite home good <span class="dv">1</span> satellite home not <span class="dv">3</span></span>
+<span id="annotated-cell-37-8"><a href="#annotated-cell-37-8"></a>;</span>
+<span id="annotated-cell-37-9"><a href="#annotated-cell-37-9"></a></span>
+<span id="annotated-cell-37-10"><a href="#annotated-cell-37-10"></a>proc freq order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-37-11"><a href="#annotated-cell-37-11"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-37" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-37-12" class="code-annotation-target"><a href="#annotated-cell-37-12"></a>tables location<span class="sc">*</span>program<span class="sc">*</span>outcome <span class="sc">/</span><span class="fu">cmh</span>(mf);</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-37" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-37-13" class="code-annotation-target"><a href="#annotated-cell-37-13"></a>exact comor eqor;</span>
+<span id="annotated-cell-37-14"><a href="#annotated-cell-37-14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-35" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-37" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-35" data-code-lines="12" data-code-annotation="1"><code>MF</code> should be enclosed in parentheses</span>
+<span data-code-cell="annotated-cell-37" data-code-lines="12" data-code-annotation="1"><code>MF</code> should be enclosed in parentheses</span>
 </dd>
-<dt data-target-cell="annotated-cell-35" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-37" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-35" data-code-lines="13" data-code-annotation="2"><code>eqor</code>: Zelen’s test, <code>comor</code>: exact confidence interval for the common odds ratio.</span>
+<span data-code-cell="annotated-cell-37" data-code-lines="13" data-code-annotation="2"><code>eqor</code>: Zelen’s test, <code>comor</code>: exact confidence interval for the common odds ratio.</span>
 </dd>
 </dl>
 </div>
 <div id="tabset-5-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Location =</span> <span class="fu">c</span>(<span class="st">"D"</span>,<span class="st">"S"</span>),</span>
+<span id="cb35-2"><a></a>                    <span class="at">Program=</span><span class="fu">c</span>(<span class="st">"Office"</span>,<span class="st">"Home"</span>),</span>
+<span id="cb35-3"><a></a>                    <span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Good"</span>,<span class="st">"Not Good"</span>)</span>
+<span id="cb35-4"><a></a>                  )  </span>
+<span id="cb35-5"><a></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb35-6"><a></a></span>
+<span id="cb35-7"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Program<span class="sc">+</span>Outcome<span class="sc">+</span>Location, <span class="at">data=</span>dat) </span>
+<span id="cb35-8"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , Location = D
+
+        Outcome
+Program  Good Not Good
+  Office   12        5
+  Home      3        5
+
+, , Location = S
+
+        Outcome
+Program  Good Not Good
+  Office    6        1
+  Home      1        3</code></pre>
+</div>
+</div>
+<p>Check the Mantel-Fleiss Criterion first.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">mantel_fleiss</span>(dat_cc,<span class="at">k=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.654545</code></pre>
+</div>
+</div>
+<p>Because MF is less than 5, we need to use Zelen’s test.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">zelen.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Zelen's test:
+P = 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-3">
 <ul>
 <li>Mantel-Fleiss criterion is not satisfied (MF=4.65), so be careful with using the asymptotic chi-square test for <span class="math inline">\(Q_{MH}\)</span>.
 <ul>
@@ -1505,7 +1557,7 @@ common odds ratio
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/MiguelFudolig\.github\.io\/EAB770-Slides-Website\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
