@@ -233,29 +233,62 @@ Miguel Fudolig
 <li>Observer Agreement (inter-rater reliability)</li>
 <li>Test for Ordered Differences</li>
 </ul>
+</section></section>
+<section>
+<section id="what-if-there-are-more-than-two-groups-outcomes" class="title-slide slide level1 center">
+<h1>What if there are more than two groups outcomes?</h1>
+
+</section>
+<section id="multiple-categorical-outcomes" class="slide level2">
+<h2>Multiple Categorical Outcomes</h2>
+<p>Common examples include Likert Scale (Strongly Disagree, Disagree, Neutral, Agree, Strongly Agree) responses and parts of a whole (None, Some, All).</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>We would need more than two columns in our contingency table to account for these other outcomes. Variables can be forced to be “binary”, but some important information can be lost.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-groups" class="slide level2">
+<h2>Multiple Groups</h2>
+<p>It is also common to compare responses from multiple groups such as Race, Income Status, and Exposure levels. Dichotomizing these variables to fit into a 2x2 will also result in loss of information.</p>
+</section></section>
+<section>
+<section id="associations-in-s-times-r-tables" class="title-slide slide level1 center">
+<h1>Associations in <span class="math inline">\(s \times r\)</span> tables</h1>
+
 </section>
 <section id="s-times-r-tables-1" class="slide level2">
 <h2><span class="math inline">\(s \times r\)</span> tables</h2>
-<p>We now evolve the contingency table from a <span class="math inline">\(2 \times 2 \to  s  \times r\)</span>, where <span class="math inline">\(s\)</span> is the number of rows and <span class="math inline">\(r\)</span> is the number of columns.</p>
-</section>
-<section id="nominal-categorical-variables" class="slide level2">
-<h2>Nominal Categorical variables</h2>
-<div class="columns">
-<div class="column" style="width:40%; font-size: 75%">
-<p>The response variables can now have <span class="math inline">\(r \geq 2\)</span> levels and be strictly nominal.</p>
-</div><div class="column" style="width:60%">
-<p><img data-src="img/sxr_C5.png"></p>
-</div></div>
-</section>
+<p>We now evolve the contingency table from a <span class="math inline">\(2 \times 2 \to  s  \times r\)</span>, where <span class="math inline">\(s\)</span> is the number of rows and <span class="math inline">\(r\)</span> is the number of columns. Both <span class="math inline">\(s\)</span> and <span class="math inline">\(r\)</span> are expected to be at least 2.</p>
+
+<img data-src="img/sxr_C5.png" class="r-stretch"></section>
 <section id="general-association-statistic" class="slide level2">
 <h2>General Association Statistic</h2>
-<ul>
-<li>The groups and the response variable categories can be nominally scaled.
+<p>When the groups and the response variable categories can be nominally scaled, we can only test for general association.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Statistical Hypotheses</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><span class="math inline">\(H_0\)</span>: there is no general association between the groups and response variables.</li>
 <li><span class="math inline">\(H_A\)</span>: there is a general association between the two variables</li>
-</ul></li>
 </ul>
+</div>
+</div>
+</div>
 </section>
 <section id="general-association-statistic-1" class="slide level2">
 <h2>General Association Statistic</h2>
@@ -263,6 +296,7 @@ Miguel Fudolig
 <p><span class="math display">\[
 Q = \left(\frac{n-1}{n}\right) Q_P
 \]</span></p>
+<p>where,</p>
 <p><span class="math display">\[
 Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 \]</span></p>
@@ -282,17 +316,34 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 </section>
 <section id="mosaic-plot" class="slide level2">
 <h2>Mosaic Plot</h2>
-<div class="columns">
-<div class="column" style="width:40%; font-size: 75%">
-<ul>
-<li>A mosaic plot visualizes the proportion in each cell of the contingency table.
-<ul>
-<li>Horizontal space is divided by sizes corresponding to the relative count of x-axis variable levels</li>
-<li>Vertical space is divided up according to relative sizes of the y-axis variable levels.</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:60%">
+<p>A mosaic plot visualizes the proportion in each cell of the contingency table.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The horizontal space is divided by sizes corresponding to the relative count of x-axis variable levels, while the vertical space is divided up according to relative sizes of the y-axis variable levels.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="mosaic-plot-in-r" class="slide level2">
+<h2>Mosaic Plot in <code>R</code></h2>
+<p>The <code>mosaic()</code> function in the <code>vcd</code> package creates a mosaic plot for data frames/contingency tables. Shown below is the mosaic plot for the <code>UCBAdmissions</code> data set, which shows the aggregate data on applicants to graduate school at UC Berkeley in 1973.</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Plot</a></li><li><a href="#tabset-1-2">Notes</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(vcd)</span>
+<span id="cb1-2"><a></a><span class="fu">mosaic</span>(<span class="sc">~</span>Admit <span class="sc">+</span>Dept,</span>
+<span id="cb1-3"><a></a>       <span class="at">highlighting=</span><span class="st">"Admit"</span>,</span>
+<span id="cb1-4"><a></a>       <span class="at">highlighting_fill=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>),</span>
+<span id="cb1-5"><a></a>       <span class="at">data=</span>UCBAdmissions)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -301,7 +352,24 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 </div>
 </div>
 </div>
-</div></div>
+</div>
+<div id="tabset-1-2">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>The <code>highlighting</code> option provides <code>mosaic</code> information about which variables need to be shaded. The <code>highlighting_fill</code> provides the colors you want to use the highlight these variables.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="general-association-sas" class="slide level2">
 <h2>General Association: SAS</h2>
@@ -320,95 +388,133 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="1"><code>cmh</code> calculates the general association Mantel-Haenszel statistic. <code>plots=mosaicplot</code> tells SAS to create a mosaic plot with <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="1"><code>cmh</code> calculates the general association Cochran-Mantel-Haenszel statistic. <code>plots=mosaicplot</code> tells SAS to create a mosaic plot with <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</span>
 </dd>
 </dl>
+</section>
+<section id="general-association-r" class="slide level2">
+<h2>General Association: <code>R</code></h2>
+<p>The <code>CMHtest()</code> function provides the general association Cochram-Mantel-Haenszel statistic.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">CMHtest</span>(contingencytable)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<div class="columns">
-<div class="column" style="width:40%; font-size: 75%">
 <p>The table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.</p>
-<ul>
-<li>What is the Pearson chi-square value?</li>
-<li>What is the randomization statistic?</li>
-<li>Is there sufficient evidence of an association between political party and neighborhood?</li>
-</ul>
-</div><div class="column" style="width:60%">
-<p><img data-src="img/party_C5.png"></p>
-</div></div>
-</section>
-<section id="example-1" class="slide level2">
-<h2>Example</h2>
-<p>The table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.</p>
-<ul>
-<li>What is the Pearson chi-square value?</li>
-<li>What is the randomization statistic?</li>
-<li>Is there sufficient evidence of an association between political party and neighborhood?</li>
-</ul>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Code</a></li><li><a href="#tabset-1-2">Answer</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Questions</a></li><li><a href="#tabset-2-2"><code>SAS</code></a></li><li><a href="#tabset-2-3"><code>R</code> Data</a></li><li><a href="#tabset-2-4"><code>R</code> Code</a></li><li><a href="#tabset-2-5">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a>data neighbor;</span>
-<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
-<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3"></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4"></a>datalines;</span>
-<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5"></a>democrat longview <span class="dv">360</span> democrat bayside <span class="dv">221</span></span>
-<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6"></a>democrat sheffeld <span class="dv">140</span> democrat highland <span class="dv">160</span></span>
-<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7"></a>republican longview <span class="dv">316</span> republican bayside <span class="dv">208</span></span>
-<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8"></a>republican sheffeld <span class="dv">97</span> republican highland <span class="dv">106</span></span>
-<span id="annotated-cell-8-9"><a href="#annotated-cell-8-9"></a>independent longview <span class="dv">160</span> independent bayside <span class="dv">200</span></span>
-<span id="annotated-cell-8-10"><a href="#annotated-cell-8-10"></a>independent sheffeld <span class="dv">311</span> independent highland <span class="dv">291</span></span>
-<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11"></a>;</span>
-<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12"></a></span>
-<span id="annotated-cell-8-13"><a href="#annotated-cell-8-13"></a>proc freq data<span class="ot">=</span>neighbor;</span>
-<span id="annotated-cell-8-14"><a href="#annotated-cell-8-14"></a>weight count;</span>
-<span id="annotated-cell-8-15"><a href="#annotated-cell-8-15"></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-16" class="code-annotation-target"><a href="#annotated-cell-8-16"></a>plots<span class="ot">=</span>mosaicplot chisq cmh nocol nopct;</span>
-<span id="annotated-cell-8-17"><a href="#annotated-cell-8-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-2-1">
+<ul>
+<li>What is the Pearson chi-square value?</li>
+<li>What is the randomization statistic?</li>
+<li>Is there sufficient evidence of an association between political party and neighborhood?</li>
+<li>Create a mosaic plot for this problem.</li>
+</ul>
+<p><img data-src="img/party_C5.png"></p>
+</div>
+<div id="tabset-2-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1"></a>data neighbor;</span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4"></a>datalines;</span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5"></a>democrat longview <span class="dv">360</span> democrat bayside <span class="dv">221</span></span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6"></a>democrat sheffeld <span class="dv">140</span> democrat highland <span class="dv">160</span></span>
+<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7"></a>republican longview <span class="dv">316</span> republican bayside <span class="dv">208</span></span>
+<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8"></a>republican sheffeld <span class="dv">97</span> republican highland <span class="dv">106</span></span>
+<span id="annotated-cell-9-9"><a href="#annotated-cell-9-9"></a>independent longview <span class="dv">160</span> independent bayside <span class="dv">200</span></span>
+<span id="annotated-cell-9-10"><a href="#annotated-cell-9-10"></a>independent sheffeld <span class="dv">311</span> independent highland <span class="dv">291</span></span>
+<span id="annotated-cell-9-11"><a href="#annotated-cell-9-11"></a>;</span>
+<span id="annotated-cell-9-12"><a href="#annotated-cell-9-12"></a></span>
+<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13"></a>proc freq data<span class="ot">=</span>neighbor;</span>
+<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14"></a>weight count;</span>
+<span id="annotated-cell-9-15"><a href="#annotated-cell-9-15"></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-16" class="code-annotation-target"><a href="#annotated-cell-9-16"></a>plots<span class="ot">=</span>mosaicplot chisq cmh nocol nopct;</span>
+<span id="annotated-cell-9-17"><a href="#annotated-cell-9-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="16" data-code-annotation="1">Included both <code>chisq</code> and <code>cmh</code> to show discrepancy.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="16" data-code-annotation="1">Included both <code>chisq</code> and <code>cmh</code> to show discrepancy.</span>
 </dd>
 </dl>
 </div>
-<div id="tabset-1-2">
+<div id="tabset-2-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Party=</span><span class="fu">c</span>(<span class="st">"Democrat"</span>,<span class="st">"Independent"</span>,<span class="st">"Republican"</span>),</span>
+<span id="cb3-2"><a></a>                   <span class="at">Neighborhood =</span> <span class="fu">c</span>(<span class="st">"Bayside"</span>,<span class="st">"Highland"</span>,<span class="st">"Longview"</span>,<span class="st">"Sheffield"</span>))</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">221</span>,<span class="dv">200</span>,<span class="dv">208</span>,<span class="dv">160</span>,<span class="dv">291</span>,<span class="dv">106</span>,<span class="dv">360</span>,<span class="dv">160</span>,<span class="dv">316</span>,<span class="dv">140</span>,<span class="dv">311</span>,<span class="dv">97</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-2-4">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>Party<span class="sc">+</span>Neighborhood,<span class="at">data=</span>dat)</span>
+<span id="cb4-2"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Neighborhood
+Party         Bayside Highland Longview Sheffield
+  Democrat        221      160      360       140
+  Independent     200      291      160       311
+  Republican      208      106      316        97</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">mosaic</span>(<span class="at">data=</span>dat_cc,</span>
+<span id="cb6-2"><a></a>       <span class="sc">~</span>Party<span class="sc">+</span>Neighborhood,</span>
+<span id="cb6-3"><a></a>       <span class="at">highlighting=</span><span class="st">"Party"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Chapter5_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pearson chi-square:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">chisq.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  dat_cc
+X-squared = 273.92, df = 6, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Randomization Statistic (use general association):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">CMHtest</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for Party by Neighborhood 
+
+                 AltHypothesis     Chisq Df       Prob
+cor        Nonzero correlation   0.81238  1 3.6742e-01
+rmeans  Row mean scores differ  13.89377  2 9.6163e-04
+cmeans  Col mean scores differ   3.15865  3 3.6781e-01
+general    General association 273.81223  6 3.3158e-56</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-5">
 <p><span class="math inline">\(Q_P\)</span> = 273.92, <span class="math inline">\(Q\)</span> = 273.81. The corresponding p-value <span class="math inline">\(p&lt;0.001\)</span> suggests there is an association between party affiliation and neighborhood.</p>
-<ul>
-<li>Note that the Mantel-Haenszel statistic reported in the <code>chisq</code> output corresponds to the correlation statistic which doesn’t make sense in this case (discussed later).</li>
-</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>In SAS, note that the Mantel-Haenszel statistic reported in the <code>chisq</code> output corresponds to the correlation statistic which doesn’t make sense in this case (discussed later).</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 </section>
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
-<div class="columns">
-<div class="column" style="width:40%; font-size: 75%">
-<p>Secondary school teachers were randomly sampled from four school districts in Nevada and asked what marker color they used in grading students’ work.</p>
-<ul>
-<li>What is the Pearson chi-square statistic?</li>
-<li>What is the randomization statistic?</li>
-<li>Generate a mosaic plot for this example. Can you see a trend between the colors and/or the counties?</li>
-<li>At a significance level of 0.05, do we have sufficient evidence of a general association between the two variables?</li>
-</ul>
-</div><div class="column" style="width:60%">
-<p>Data set:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data color;</span>
-<span id="cb1-2"><a></a>input county <span class="sc">$</span> color <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb1-3"><a></a>datalines;</span>
-<span id="cb1-4"><a></a>cl blu <span class="dv">22</span> cl red <span class="dv">57</span> cl green <span class="dv">12</span> cl blk <span class="dv">15</span></span>
-<span id="cb1-5"><a></a>ca blu <span class="dv">12</span> ca red <span class="dv">30</span> ca green <span class="dv">6</span> ca blk <span class="dv">15</span></span>
-<span id="cb1-6"><a></a>do blu <span class="dv">17</span> do red <span class="dv">34</span> do green <span class="dv">17</span> do blk <span class="dv">10</span></span>
-<span id="cb1-7"><a></a>wa blu <span class="dv">5</span> wa red <span class="dv">56</span> wa green <span class="dv">7</span> wa blk <span class="dv">9</span></span>
-<span id="cb1-8"><a></a>;</span>
-<span id="cb1-9"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
-</section>
-<section id="exercise-1" class="slide level2">
-<h2>Exercise</h2>
 <p>Secondary school teachers were randomly sampled from four school districts in Nevada and asked what marker color they used in grading students’ work.</p>
 <ul>
 <li>What is the Pearson chi-square statistic?</li>
@@ -417,33 +523,61 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <li>At a significance level of 0.05, do we have sufficient evidence of a general association between the two variables?</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">Answer</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Data</a></li><li><a href="#tabset-3-2">SAS Code</a></li><li><a href="#tabset-3-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a></span>
-<span id="cb2-2"><a></a>data color;</span>
-<span id="cb2-3"><a></a>input county <span class="sc">$</span> color <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb2-4"><a></a>datalines;</span>
-<span id="cb2-5"><a></a>cl blu <span class="dv">22</span> cl red <span class="dv">57</span> cl green <span class="dv">12</span> cl blk <span class="dv">15</span></span>
-<span id="cb2-6"><a></a>ca blu <span class="dv">12</span> ca red <span class="dv">30</span> ca green <span class="dv">6</span> ca blk <span class="dv">15</span></span>
-<span id="cb2-7"><a></a>do blu <span class="dv">17</span> do red <span class="dv">34</span> do green <span class="dv">17</span> do blk <span class="dv">10</span></span>
-<span id="cb2-8"><a></a>wa blu <span class="dv">5</span> wa red <span class="dv">56</span> wa green <span class="dv">7</span> wa blk <span class="dv">9</span></span>
-<span id="cb2-9"><a></a>;</span>
-<span id="cb2-10"><a></a>run;</span>
-<span id="cb2-11"><a></a></span>
-<span id="cb2-12"><a></a>proc freq data<span class="ot">=</span>color;</span>
-<span id="cb2-13"><a></a>weight count;</span>
-<span id="cb2-14"><a></a>tables county<span class="sc">*</span>color<span class="sc">/</span></span>
-<span id="cb2-15"><a></a>plots<span class="ot">=</span>mosaicplot chisq cmh nocol nopct measures cl;</span>
-<span id="cb2-16"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-3-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>data color;</span>
+<span id="cb11-2"><a></a>input county <span class="sc">$</span> color <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb11-3"><a></a>datalines;</span>
+<span id="cb11-4"><a></a>cl blu <span class="dv">22</span> cl red <span class="dv">57</span> cl green <span class="dv">12</span> cl blk <span class="dv">15</span></span>
+<span id="cb11-5"><a></a>ca blu <span class="dv">12</span> ca red <span class="dv">30</span> ca green <span class="dv">6</span> ca blk <span class="dv">15</span></span>
+<span id="cb11-6"><a></a>do blu <span class="dv">17</span> do red <span class="dv">34</span> do green <span class="dv">17</span> do blk <span class="dv">10</span></span>
+<span id="cb11-7"><a></a>wa blu <span class="dv">5</span> wa red <span class="dv">56</span> wa green <span class="dv">7</span> wa blk <span class="dv">9</span></span>
+<span id="cb11-8"><a></a>;</span>
+<span id="cb11-9"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">county=</span><span class="fu">c</span>(<span class="st">"clark"</span>,<span class="st">"carson"</span>,<span class="st">"douglas"</span>,<span class="st">"washoe"</span>),</span>
+<span id="cb12-2"><a></a>                   <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>,<span class="st">"green"</span>,<span class="st">"black"</span>)) </span>
+<span id="cb12-3"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">22</span>,<span class="dv">12</span>,<span class="dv">17</span>,<span class="dv">5</span>,<span class="dv">57</span>,<span class="dv">30</span>,<span class="dv">34</span>,<span class="dv">56</span>,<span class="dv">12</span>,<span class="dv">6</span>,<span class="dv">17</span>,<span class="dv">7</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">10</span>,<span class="dv">9</span>)</span>
+<span id="cb12-4"><a></a></span>
+<span id="cb12-5"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>county<span class="sc">+</span>color,<span class="at">data=</span>dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-2-2">
+</div>
+<div id="tabset-3-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a></span>
+<span id="cb13-2"><a></a>data color;</span>
+<span id="cb13-3"><a></a>input county <span class="sc">$</span> color <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb13-4"><a></a>datalines;</span>
+<span id="cb13-5"><a></a>cl blu <span class="dv">22</span> cl red <span class="dv">57</span> cl green <span class="dv">12</span> cl blk <span class="dv">15</span></span>
+<span id="cb13-6"><a></a>ca blu <span class="dv">12</span> ca red <span class="dv">30</span> ca green <span class="dv">6</span> ca blk <span class="dv">15</span></span>
+<span id="cb13-7"><a></a>do blu <span class="dv">17</span> do red <span class="dv">34</span> do green <span class="dv">17</span> do blk <span class="dv">10</span></span>
+<span id="cb13-8"><a></a>wa blu <span class="dv">5</span> wa red <span class="dv">56</span> wa green <span class="dv">7</span> wa blk <span class="dv">9</span></span>
+<span id="cb13-9"><a></a>;</span>
+<span id="cb13-10"><a></a>run;</span>
+<span id="cb13-11"><a></a></span>
+<span id="cb13-12"><a></a>proc freq data<span class="ot">=</span>color;</span>
+<span id="cb13-13"><a></a>weight count;</span>
+<span id="cb13-14"><a></a>tables county<span class="sc">*</span>color<span class="sc">/</span></span>
+<span id="cb13-15"><a></a>plots<span class="ot">=</span>mosaicplot chisq cmh nocol nopct measures cl;</span>
+<span id="cb13-16"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-3">
 <p><span class="math inline">\(Q_P\)</span>= 24.36, <span class="math inline">\(Q\)</span> = 24.28, p = 0.004, which means there is strong evidence of an association between school district and marker color used for grading.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">county=</span><span class="fu">c</span>(<span class="st">"clark"</span>,<span class="st">"carson"</span>,<span class="st">"douglas"</span>,<span class="st">"washoe"</span>),</span>
+<span id="cb14-2"><a></a>                   <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>,<span class="st">"green"</span>,<span class="st">"black"</span>)) </span>
+<span id="cb14-3"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">22</span>,<span class="dv">12</span>,<span class="dv">17</span>,<span class="dv">5</span>,<span class="dv">57</span>,<span class="dv">30</span>,<span class="dv">34</span>,<span class="dv">56</span>,<span class="dv">12</span>,<span class="dv">6</span>,<span class="dv">17</span>,<span class="dv">7</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">10</span>,<span class="dv">9</span>)</span>
+<span id="cb14-4"><a></a></span>
+<span id="cb14-5"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>county<span class="sc">+</span>color,<span class="at">data=</span>dat)</span>
+<span id="cb14-6"><a></a></span>
+<span id="cb14-7"><a></a><span class="fu">mosaic</span>(<span class="at">data=</span>dat_cc,</span>
+<span id="cb14-8"><a></a>       <span class="sc">~</span>color <span class="sc">+</span> county,</span>
+<span id="cb14-9"><a></a>       <span class="at">highlighting=</span><span class="st">"color"</span>,</span>
+<span id="cb14-10"><a></a>       <span class="at">highlighting_fill=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>,<span class="st">"green"</span>,<span class="st">"black"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Chapter5_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+<p><img data-src="Chapter5_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -452,94 +586,233 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 </div>
 </div>
 </section>
-<section id="mean-score-tests" class="slide level2">
-<h2>Mean Score Tests</h2>
-<ul>
-<li>Used when the column variable is ordinal.</li>
-<li>Row variable could be nominal
-<ul>
-<li><span class="math inline">\(H_0\)</span>: there is no difference in mean scores across the groups</li>
-<li><span class="math inline">\(H_a\)</span>: at least one group has a different mean score compared to the others</li>
-</ul></li>
-<li>Scores are calculated for each row</li>
-<li>Recall: 2xr tables</li>
-</ul>
-</section>
-<section id="mean-score-tests-1" class="slide level2">
-<h2>Mean Score Tests</h2>
-<ul>
-<li>The mean score statistic <span class="math inline">\(Q_S\)</span> can be used to test the difference between the mean scores.
-<ul>
-<li>Consistent with the ANOVA approach</li>
-</ul></li>
-<li>Recall 2xr table: Sample size requirement</li>
-<li>Set a cutoff column, the totals to the left and right of this column should be greater than 5.
-<ul>
-<li>Row totals should be <strong>greater than 20</strong></li>
-</ul></li>
-<li>Included in the <code>cmh</code> table as “Row Mean Scores Differ”</li>
-</ul>
-</section>
-<section id="example-2" class="slide level2">
-<h2>Example</h2>
-<div class="columns">
-<div class="column" style="width:50%; font-size: 75%">
-<p>The data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain</p>
-<ul>
-<li>Is the chi-square approximation valid for this case?</li>
-<li>What kind of scoring method is most appropriate for this data set?</li>
-<li>Make the appropriate conclusion based on the result of the mean score tests using a significance level <span class="math inline">\(\alpha=0.05\)</span>.</li>
-</ul>
-</div><div class="column" style="width:50%">
-<p><img data-src="img/pain_C5.png"></p>
-</div></div>
-</section>
-<section id="example-3" class="slide level2">
-<h2>Example</h2>
-<p>The data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain</p>
-<ul>
-<li>Is the chi-square approximation valid for this case?</li>
-<li>What kind of scoring method is most appropriate for this data set?</li>
-<li>Make the appropriate conclusion based on the result of the mean score tests using a significance level <span class="math inline">\(\alpha=0.05\)</span>.</li>
-</ul>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Code</a></li><li><a href="#tabset-3-2">Answer</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data pain;</span>
-<span id="cb3-2"><a></a>input treatment <span class="sc">$</span> hours count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb3-3"><a></a>datalines;</span>
-<span id="cb3-4"><a></a>placebo <span class="dv">0</span> <span class="dv">6</span> placebo <span class="dv">1</span> <span class="dv">9</span> placebo <span class="dv">2</span> <span class="dv">6</span> placebo <span class="dv">3</span> <span class="dv">3</span> placebo <span class="dv">4</span> <span class="dv">1</span></span>
-<span id="cb3-5"><a></a>standard <span class="dv">0</span> <span class="dv">1</span> standard <span class="dv">1</span> <span class="dv">4</span> standard <span class="dv">2</span> <span class="dv">6</span> standard <span class="dv">3</span> <span class="dv">6</span> standard <span class="dv">4</span> <span class="dv">8</span></span>
-<span id="cb3-6"><a></a>test <span class="dv">0</span> <span class="dv">2</span> test <span class="dv">1</span> <span class="dv">5</span> test <span class="dv">2</span> <span class="dv">6</span> test <span class="dv">3</span> <span class="dv">8</span> test <span class="dv">4</span> <span class="dv">6</span></span>
-<span id="cb3-7"><a></a>;</span>
-<span id="cb3-8"><a></a></span>
-<span id="cb3-9"><a></a>proc freq data<span class="ot">=</span>pain order<span class="ot">=</span>data;</span>
-<span id="cb3-10"><a></a>weight count;</span>
-<span id="cb3-11"><a></a>tables treatment<span class="sc">*</span>hours<span class="sc">/</span> cmh nocol nopct;</span>
-<span id="cb3-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="associations-involving-ordinal-variables" class="slide level2">
+<h2>Associations Involving Ordinal Variables</h2>
+<p>Suppose the column variable is ordinal such that <span class="math inline">\(A_j\)</span> is the <span class="math inline">\(j^{th}\)</span> outcome level. Since <span class="math inline">\(A_J\)</span> is ordinal, then <span class="math inline">\(A_1 &lt; A_2 &lt; A_3 &lt;... A_r\)</span>.</p>
+<p>To account for ordinality, we assign a set of scores <span class="math inline">\(\mathbf{a}\)</span> reflecting the relationship between response levels.</p>
+<p><span class="math display">\[
+\mathbf{a} = \{a_1, a_2, a_3,... a_r\} : a_1 &lt; a_2 &lt; ...&lt; a_r
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="tabset-3-2">
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The relationship can be <span class="math inline">\(\leq\)</span> instead of <span class="math inline">\(&lt;\)</span> as long as at least one pair is a strict inequality.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="row-mean-scores" class="slide level2">
+<h2>Row Mean Scores</h2>
+<p>Consider the following contingency table:</p>
+
+<img data-src="img/2xr_C4.png" class="r-stretch"><p>We can define a group mean for <span class="math inline">\(X_1\)</span>, denoted by <span class="math inline">\(\bar{f}_1\)</span>.</p>
+<p><span class="math display">\[
+\bar{f}_1 = \sum_{j=1}^r \frac{a_j n_{1j}}{n_{1+}}
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The scores <span class="math inline">\(\bar{f}_j\)</span> are referred to as <strong>row mean scores</strong>. The random variable <span class="math inline">\(\bar{f}_j\)</span> approximately has a normal distribution when the central limit theorem is imposed. This occurs when the row sums are high.</p>
+<p>The term <span class="math inline">\(a_j\)</span> are the assigned scores for the columns. These can be regular integral scores (0,1,2,3,…) or based on rank. Rank-based scores yield midranks for tied values and are standardized for tied values.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="mean-score-tests-null-hypothesis" class="slide level2">
+<h2>Mean Score Tests: Null Hypothesis</h2>
+<p>The null hypothesis for tests involving the row mean scores is <span class="math inline">\(H_0\)</span>: There is no association between the row (X) and column (A) variables. Under the null hypothesis, the expected value of the row mean scores, <span class="math inline">\(\mu_a\)</span>, can be calculated as:</p>
+<p><span class="math display">\[
+\mu_a =  \sum_{j=1}^r \frac{a_j n_{+j}}{n}
+\]</span></p>
+<p>The corresponding alternative hypothesis is <span class="math inline">\(H_a:\)</span> There is a location shift across the groups. ## Mean Score Tests: Test Statistic</p>
+<p>The test statistic is the mean score statistic <span class="math inline">\(Q_S\)</span> for an <span class="math inline">\(s \times r\)</span> table is given by:</p>
+<p><span class="math display">\[
+Q_S = \frac{(n-1)\sum_{i=1}^sn_{i+}(f_i-\mu_a)^2}{nv_a}
+\]</span></p>
+<p>where <span class="math inline">\(v_a = \sum_{j=1}^r(a_j-\mu_a)^2(n_{+j}/n)\)</span> is the variance of the row mean scores. This is consistent with an ANOVA approach in comparing means across each group.</p>
+</section>
+<section id="mean-score-tests-sample-considerations" class="slide level2">
+<h2>Mean Score Tests: Sample Considerations</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The <span class="math inline">\(Q_S\)</span> sample size condition is less stringent:</p>
+<ul>
+<li>The row totals should be greater than 20.</li>
+<li>Choose one or more cutpoints <span class="math inline">\(j = (2,3,...(r-1))\)</span>, add the first through <span class="math inline">\(j^{th}\)</span> columns together and add the <span class="math inline">\((j+1)^{th}\)</span> through <span class="math inline">\(r^{th}\)</span> columns together. If both of these sums are 5 or greater for at least one cutpoint in each row, then the sample size is adequate.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>If the sample size conditions are reached, <span class="math inline">\(Q_S\)</span> approximately follows a chi-square distribution with <span class="math inline">\((s-1)\)</span> degrees of freedom, where <span class="math inline">\(s\)</span> is the number of rows.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The mean score test uses less degrees of freedom compared to the general association test and the Pearson chi-square test.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="mean-score-tests-sas" class="slide level2">
+<h2>Mean Score Tests: <code>SAs</code></h2>
+<p>Included in the <code>cmh</code> table as “Row Mean Scores Differ”.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Use <code>scores=ridit</code> to use standardized rank scores or <code>scores=modridit</code> to use the expected valurs of the order statistics of the uniform distribution on (0,1).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="mean-score-tests-r" class="slide level2">
+<h2>Mean Score Tests: <code>R</code></h2>
+<p>The <code>CMHtest()</code> default output includes the <code>Row mean scores differ</code> row in the analysis. Ensure that the ordinal variable is assigned as the column variable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">CMHtest</span>(contingencytable,</span>
+<span id="cb15-2"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The Col mean scores differ functions similarly with the ordinal variable assigned as the rows.</p>
+<p>The <code>cscores</code> argument lets <code>R</code> know what <span class="math inline">\(a_j\)</span> to use for the columns. <code>CMHtest</code> will use integers as scores, which assumes the ordinal variable is equally spaced. To use rank-based scores, we can specify <code>cscores="midrank"</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1" class="slide level2">
+<h2>Example</h2>
+<p>The data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain</p>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Question + Data</a></li><li><a href="#tabset-4-2">SAS Code</a></li><li><a href="#tabset-4-3">R Code</a></li><li><a href="#tabset-4-4">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<ul>
+<li>Is the chi-square approximation valid for this case?</li>
+<li>What kind of scoring method is most appropriate for this data set?</li>
+<li>Make the appropriate conclusion based on the result of the mean score tests using a significance level <span class="math inline">\(\alpha=0.05\)</span>.</li>
+</ul>
+<p><img data-src="img/pain_C5.png"></p>
+</div>
+<div id="tabset-4-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>data pain;</span>
+<span id="cb16-2"><a></a>input treatment <span class="sc">$</span> hours count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb16-3"><a></a>datalines;</span>
+<span id="cb16-4"><a></a>placebo <span class="dv">0</span> <span class="dv">6</span> placebo <span class="dv">1</span> <span class="dv">9</span> placebo <span class="dv">2</span> <span class="dv">6</span> placebo <span class="dv">3</span> <span class="dv">3</span> placebo <span class="dv">4</span> <span class="dv">1</span></span>
+<span id="cb16-5"><a></a>standard <span class="dv">0</span> <span class="dv">1</span> standard <span class="dv">1</span> <span class="dv">4</span> standard <span class="dv">2</span> <span class="dv">6</span> standard <span class="dv">3</span> <span class="dv">6</span> standard <span class="dv">4</span> <span class="dv">8</span></span>
+<span id="cb16-6"><a></a>test <span class="dv">0</span> <span class="dv">2</span> test <span class="dv">1</span> <span class="dv">5</span> test <span class="dv">2</span> <span class="dv">6</span> test <span class="dv">3</span> <span class="dv">8</span> test <span class="dv">4</span> <span class="dv">6</span></span>
+<span id="cb16-7"><a></a>;</span>
+<span id="cb16-8"><a></a></span>
+<span id="cb16-9"><a></a>proc freq data<span class="ot">=</span>pain order<span class="ot">=</span>data;</span>
+<span id="cb16-10"><a></a>weight count;</span>
+<span id="cb16-11"><a></a>tables treatment<span class="sc">*</span>hours<span class="sc">/</span> cmh nocol nopct;</span>
+<span id="cb16-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">"Placebo"</span>,<span class="st">"Standard"</span>,<span class="st">"Test"</span>),</span>
+<span id="cb17-2"><a></a>                   <span class="at">Hours =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb17-3"><a></a></span>
+<span id="cb17-4"><a></a>dat<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">9</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">6</span>)</span>
+<span id="cb17-5"><a></a></span>
+<span id="cb17-6"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>Treatment<span class="sc">+</span>Hours,<span class="at">data=</span>dat)</span>
+<span id="cb17-7"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Hours
+Treatment  0 1 2 3 4
+  Placebo  6 9 6 3 1
+  Standard 1 4 6 6 8
+  Test     2 5 6 8 6</code></pre>
+</div>
+</div>
+<p>Now we can perform the mean score test. The integer scoring method is most appropriate because of the equal distance between the ordinal column variable values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">CMHtest</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for Treatment by Hours 
+
+                 AltHypothesis   Chisq Df      Prob
+cor        Nonzero correlation  8.0668  1 0.0045084
+rmeans  Row mean scores differ 13.7346  2 0.0010413
+cmeans  Col mean scores differ  8.4151  4 0.0775017
+general    General association 14.4030  8 0.0718470</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-4">
 <ul>
 <li><p>Use column 3 (Hours = 2) as cutoff. The use of the chi-square approximation is justified!</p></li>
 <li><p>The integer scoring method is most appropriate.</p></li>
-<li><p><span class="math inline">\(Q_S\)</span> = 13.7, p=0.001. There is sufficient evidence to conclude that at least one treatment group is different compared to the others.</p></li>
+<li><p><span class="math inline">\(Q_S\)</span> = 13.7, df=2, p=0.001. At <span class="math inline">\(\alpha=0.05\)</span>, there is sufficient evidence to conclude that at least one treatment group is different compared to the others.</p></li>
 </ul>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>If we used the general association test, we would end up with p=0.07 and failing to reject the null hypothesis instead.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-2" class="slide level2">
+<section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
 <p>The table shows data from a study that investigates intent to breastfeed of women who are interested in having children. The women who participated in the study were asked if they intended to breastfeed your child up to 6 months after birth. The researchers want to know if there is an effect of the order of pregnancy on their intent to breastfeed.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>data preg;</span>
-<span id="cb4-2"><a></a>input pregnancy <span class="sc">$</span>  outcome <span class="sc">$</span> score  count <span class="sc">@</span><span class="er">@</span> ;</span>
-<span id="cb4-3"><a></a>datalines;</span>
-<span id="cb4-4"><a></a>npnc sd <span class="dv">1</span> <span class="dv">8</span> npnc d <span class="dv">2</span> <span class="dv">22</span> npnc n <span class="dv">3</span> <span class="dv">24</span> npnc a <span class="dv">4</span> <span class="dv">27</span> npnc sa <span class="dv">5</span> <span class="dv">15</span></span>
-<span id="cb4-5"><a></a>npc sd <span class="dv">1</span> <span class="dv">15</span> npc d <span class="dv">2</span> <span class="dv">23</span> npc n <span class="dv">3</span> <span class="dv">15</span> npc a <span class="dv">4</span> <span class="dv">19</span> npc sa <span class="dv">5</span> <span class="dv">9</span></span>
-<span id="cb4-6"><a></a>fp sd <span class="dv">1</span> <span class="dv">18</span> fp d <span class="dv">2</span> <span class="dv">8</span> fp n <span class="dv">3</span> <span class="dv">22</span> fp a <span class="dv">4</span> <span class="dv">23</span> fp sa <span class="dv">5</span> <span class="dv">11</span></span>
-<span id="cb4-7"><a></a>pwc sd <span class="dv">1</span> <span class="dv">35</span> pwc d <span class="dv">2</span> <span class="dv">13</span> pwc n <span class="dv">3</span> <span class="dv">10</span> pwc a <span class="dv">4</span> <span class="dv">9</span> pwc sa <span class="dv">5</span> <span class="dv">6</span></span>
-<span id="cb4-8"><a></a>; </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Data</a></li><li><a href="#tabset-5-2">SAS Code</a></li><li><a href="#tabset-5-3">R Data</a></li><li><a href="#tabset-5-4">R Code</a></li><li><a href="#tabset-5-5">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>data preg;</span>
+<span id="cb21-2"><a></a>input pregnancy <span class="sc">$</span>  outcome <span class="sc">$</span> score  count <span class="sc">@</span><span class="er">@</span> ;</span>
+<span id="cb21-3"><a></a>datalines;</span>
+<span id="cb21-4"><a></a>npnc sd <span class="dv">1</span> <span class="dv">8</span> npnc d <span class="dv">2</span> <span class="dv">22</span> npnc n <span class="dv">3</span> <span class="dv">24</span> npnc a <span class="dv">4</span> <span class="dv">27</span> npnc sa <span class="dv">5</span> <span class="dv">15</span></span>
+<span id="cb21-5"><a></a>npc sd <span class="dv">1</span> <span class="dv">15</span> npc d <span class="dv">2</span> <span class="dv">23</span> npc n <span class="dv">3</span> <span class="dv">15</span> npc a <span class="dv">4</span> <span class="dv">19</span> npc sa <span class="dv">5</span> <span class="dv">9</span></span>
+<span id="cb21-6"><a></a>fp sd <span class="dv">1</span> <span class="dv">18</span> fp d <span class="dv">2</span> <span class="dv">8</span> fp n <span class="dv">3</span> <span class="dv">22</span> fp a <span class="dv">4</span> <span class="dv">23</span> fp sa <span class="dv">5</span> <span class="dv">11</span></span>
+<span id="cb21-7"><a></a>pwc sd <span class="dv">1</span> <span class="dv">35</span> pwc d <span class="dv">2</span> <span class="dv">13</span> pwc n <span class="dv">3</span> <span class="dv">10</span> pwc a <span class="dv">4</span> <span class="dv">9</span> pwc sa <span class="dv">5</span> <span class="dv">6</span></span>
+<span id="cb21-8"><a></a>; </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div title="Variables">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -565,53 +838,70 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 </div>
 </div>
 </div>
-</section>
-<section id="exercise-3" class="slide level2">
-<h2>Exercise</h2>
-<p>The table shows data from a study that investigates intent to breastfeed of women who are interested in having children. The women who participated in the study were asked if they intended to breastfeed your child up to 6 months after birth. The researchers want to know if there is an effect of the order of pregnancy on their intent to breastfeed.</p>
-<div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">Answer</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>proc freq data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>weight count;</span>
-<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a>tables pregnancy<span class="sc">*</span>outcome <span class="sc">/</span> cmh nocol nopct;</span>
-<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>run;</span>
-<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-6" class="code-annotation-target"><a href="#annotated-cell-12-6"></a>proc means data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>freq count;</span>
-<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>class pregnancy;</span>
-<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a>var score;</span>
-<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-28"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-28-1"><a href="#annotated-cell-28-1"></a>proc freq data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-28-2"><a href="#annotated-cell-28-2"></a>weight count;</span>
+<span id="annotated-cell-28-3"><a href="#annotated-cell-28-3"></a>tables pregnancy<span class="sc">*</span>outcome <span class="sc">/</span> cmh nocol nopct;</span>
+<span id="annotated-cell-28-4"><a href="#annotated-cell-28-4"></a>run;</span>
+<span id="annotated-cell-28-5"><a href="#annotated-cell-28-5"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-28-6" class="code-annotation-target"><a href="#annotated-cell-28-6"></a>proc means data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-28-7"><a href="#annotated-cell-28-7"></a>freq count;</span>
+<span id="annotated-cell-28-8"><a href="#annotated-cell-28-8"></a>class pregnancy;</span>
+<span id="annotated-cell-28-9"><a href="#annotated-cell-28-9"></a>var score;</span>
+<span id="annotated-cell-28-10"><a href="#annotated-cell-28-10"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-28" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="6" data-code-annotation="1">The <code>means</code> procedure is shown to display the mean scores and how they indeed differ for each pregnancy order.</span>
+<span data-code-cell="annotated-cell-28" data-code-lines="6" data-code-annotation="1">The <code>means</code> procedure is shown to display the mean scores and how they indeed differ for each pregnancy order.</span>
 </dd>
 </dl>
 </div>
-<div id="tabset-4-2">
-<p><span class="math inline">\(Q_S= 27.2\)</span>, p&lt;0.0001. There is sufficient evidence of an effect of pregnancy order on intent to breastfeed.</p>
+<div id="tabset-5-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Pregnancy =</span> <span class="fu">c</span>(<span class="st">"NPNC"</span>,<span class="st">"NPC"</span>,<span class="st">"FP"</span>,<span class="st">"PWC"</span>),</span>
+<span id="cb22-2"><a></a>                   <span class="at">Outcome =</span><span class="fu">c</span>(<span class="st">"S Disagree"</span>,<span class="st">"Disagree"</span>,<span class="st">"Neutral"</span>,<span class="st">"Agree"</span>,<span class="st">"S Agree"</span>))</span>
+<span id="cb22-3"><a></a></span>
+<span id="cb22-4"><a></a>dat<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">15</span>,<span class="dv">18</span>,<span class="dv">35</span>,<span class="dv">22</span>,<span class="dv">23</span>,<span class="dv">8</span>,<span class="dv">13</span>,<span class="dv">24</span>,<span class="dv">15</span>,<span class="dv">22</span>,<span class="dv">10</span>,<span class="dv">27</span>,<span class="dv">19</span>,<span class="dv">23</span>,<span class="dv">9</span>,<span class="dv">15</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">6</span>)</span>
+<span id="cb22-5"><a></a></span>
+<span id="cb22-6"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>Pregnancy<span class="sc">+</span>Outcome,<span class="at">data=</span>dat)</span>
+<span id="cb22-7"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Outcome
+Pregnancy S Disagree Disagree Neutral Agree S Agree
+     NPNC          8       22      24    27      15
+     NPC          15       23      15    19       9
+     FP           18        8      22    23      11
+     PWC          35       13      10     9       6</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-4">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">CMHtest</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for Pregnancy by Outcome 
+
+                 AltHypothesis  Chisq Df       Prob
+cor        Nonzero correlation 18.634  1 1.5837e-05
+rmeans  Row mean scores differ 27.200  3 5.3462e-06
+cmeans  Col mean scores differ 33.731  4 8.4615e-07
+general    General association 48.794 12 2.2725e-06</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-5">
+<p><span class="math inline">\(Q_S= 27.2\)</span>, df=3, p=5.35e-6. There is sufficient evidence of an effect of pregnancy order on intent to breastfeed.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="correlation-tests" class="slide level2">
-<h2>Correlation Tests</h2>
-<ul>
-<li>When both and row variables are ordinally scaled, we can look at correlations between them.</li>
-<li>Recall sx2 tables: Correlation statistic <span class="math inline">\(Q_{CS}\)</span>
-<ul>
-<li>sxr tables: Assign scores to both rows and columns</li>
-<li><span class="math inline">\(Q_{CS}\)</span> can be calculated using matrix algebra.</li>
-</ul></li>
-</ul>
+<section id="ordinal-row-and-column-variables" class="slide level2">
+<h2>Ordinal Row and Column Variables</h2>
+<p>When the row variable is also ordinal, we can assign row scores <span class="math inline">\(c_j\)</span> such that</p>
 <p><span class="math display">\[
-Q_{CS} = (n-1)r_{ac}^2
-\]</span> where <span class="math inline">\(r_{ac}\)</span> is the Pearson correlation coefficient.</p>
-</section>
-<section id="correlation-tests-1" class="slide level2">
-<h2>Correlation Tests</h2>
+\mathbf{c} = \{c_1, c_2, c_3,... c_s\} : c_1 &lt; c_2 &lt; ...&lt; c_s
+\]</span></p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -621,66 +911,137 @@ Q_{CS} = (n-1)r_{ac}^2
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(Q_{CS}\)</span> follows a chi-square distribution with 1 degree of freedom</p>
+<p>Because both variables are ordinal, we can test for correlation between the two variables.</p>
+</div>
+</div>
+</div>
+<p>Then for each cell, the expected frequency, <span class="math inline">\(\bar{f}\)</span> can be written as:</p>
+<p><span class="math display">\[
+\bar{f} = \sum_{i=1}^s\sum_{j=1}^r \frac{c_ia_jn_{ij}}{n}
+\]</span></p>
+</section>
+<section id="correlation-tests" class="slide level2">
+<h2>Correlation Tests</h2>
+<p>The null hypothesis for the association tests remains to be <span class="math inline">\(H_0\)</span>: There is no association between the two variables. To test this hypothesis, we can use a randomization statistic <span class="math inline">\(Q_{CS}\)</span> that accounts for the ordinality of both variables.</p>
+<p><span class="math display">\[
+Q_{CS} = \frac{(\bar{f}-\mu_c\mu_a)^2}{v_cv_a/(n-1)} = (n-1)r_{ac}^2
+\]</span> ::: callout-note</p>
 <ul>
-<li>Sample size requirement is the same as the sx2 tables.</li>
-<li>Uses 1 degree of freedom regardless of the size of the contingency table</li>
+<li><span class="math inline">\(\mu_c\)</span> is the expected value of the row scores</li>
+<li><span class="math inline">\(\mu_a\)</span> is the expected value of the column scores.</li>
+<li><span class="math inline">\(v_c\)</span> is the variance of the row scores</li>
+<li><span class="math inline">\(v_a\)</span> is variance of the column scores</li>
 </ul>
-</div>
-</div>
-</div>
+<p><span class="math inline">\(r_{ac}\)</span> is the Pearson correlation coefficient, which measures the correlation between the ordinal variables. :::</p>
+</section>
+<section id="correlation-tests-1" class="slide level2">
+<h2>Correlation Tests</h2>
+<p><span class="math inline">\(Q_{CS}\)</span> follows a chi-square distribution with 1 degree of freedom, regardless of the size of the table, when the sample size is at least 20.</p>
 </section>
 <section id="correlation-tests-sas" class="slide level2">
-<h2>Correlation Tests: SAS</h2>
-<p><span class="math inline">\(Q_{CS}\)</span> is the Mantel-Haenszel chi-square statistic displayed by the <code>chisq</code> output.</p>
-<ul>
-<li><code>chisq</code> and <code>cmh</code> will both yield the correlation statistic.</li>
-</ul>
+<h2>Correlation Tests: <code>SAS</code></h2>
+<p><span class="math inline">\(Q_{CS}\)</span> is the Mantel-Haenszel chi-square statistic displayed by the <code>chisq</code> and <code>cmh</code> output.</p>
 </section>
-<section id="example-4" class="slide level2">
+<section id="correlation-tests-r" class="slide level2">
+<h2>Correlation Tests: <code>R</code></h2>
+<p><span class="math inline">\(Q_{CS}\)</span> is part of the <code>CMHtest()</code> output.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The default scores for the row and column scores are integer scores. Specify <code>rscores</code>/<code>cscores</code> as <code>midrank</code> to use rank-based scores.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2" class="slide level2">
 <h2>Example</h2>
 <p>A water treatment company is studying water additives and investigating how they affect clothes washing. The treatments studied were no treatment (plain water), the standard treatment, and a double dose of the standard treatment, called super. Washability was measured as low, medium, and high. The company claims that the dose of water treatment affects the washability of water. Do we have sufficient evidence to support this claim?</p>
 
 <img data-src="img/wash_C5.png" class="r-stretch"></section>
-<section id="example-5" class="slide level2">
+<section id="example-3" class="slide level2">
 <h2>Example</h2>
 <p>A water treatment company is studying water additives and investigating how they affect clothes washing. The treatments studied were no treatment (plain water), the standard treatment, and a double dose of the standard treatment, called super. Washability was measured as low, medium, and high. The company claims that the dose of water treatment affects the washability of water. Do we have sufficient evidence to support this claim?</p>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">Answer</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">R Code</a></li><li><a href="#tabset-6-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data wash;</span>
-<span id="cb5-2"><a></a>input treatment <span class="sc">$</span> washability <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb5-3"><a></a>datalines;</span>
-<span id="cb5-4"><a></a>water low <span class="dv">27</span> water medium <span class="dv">14</span> water high <span class="dv">5</span></span>
-<span id="cb5-5"><a></a>standard low <span class="dv">10</span> standard medium <span class="dv">17</span> standard high <span class="dv">26</span></span>
-<span id="cb5-6"><a></a>super low <span class="dv">5</span> super medium <span class="dv">12</span> super high <span class="dv">50</span></span>
-<span id="cb5-7"><a></a>;</span>
-<span id="cb5-8"><a></a></span>
-<span id="cb5-9"><a></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>wash;</span>
-<span id="cb5-10"><a></a>weight count;</span>
-<span id="cb5-11"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span> chisq cmh;</span>
-<span id="cb5-12"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span> scores<span class="ot">=</span>modridit cmh</span>
-<span id="cb5-13"><a></a>noprint nocol nopct;</span>
-<span id="cb5-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-6-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>data wash;</span>
+<span id="cb26-2"><a></a>input treatment <span class="sc">$</span> washability <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb26-3"><a></a>datalines;</span>
+<span id="cb26-4"><a></a>water low <span class="dv">27</span> water medium <span class="dv">14</span> water high <span class="dv">5</span></span>
+<span id="cb26-5"><a></a>standard low <span class="dv">10</span> standard medium <span class="dv">17</span> standard high <span class="dv">26</span></span>
+<span id="cb26-6"><a></a>super low <span class="dv">5</span> super medium <span class="dv">12</span> super high <span class="dv">50</span></span>
+<span id="cb26-7"><a></a>;</span>
+<span id="cb26-8"><a></a></span>
+<span id="cb26-9"><a></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>wash;</span>
+<span id="cb26-10"><a></a>weight count;</span>
+<span id="cb26-11"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span> chisq cmh;</span>
+<span id="cb26-12"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span> scores<span class="ot">=</span>modridit cmh</span>
+<span id="cb26-13"><a></a>noprint nocol nopct;</span>
+<span id="cb26-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-5-2">
+<div id="tabset-6-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Treatment=</span><span class="fu">c</span>(<span class="st">"Water"</span>,<span class="st">"Standard"</span>,<span class="st">"Super"</span>),</span>
+<span id="cb27-2"><a></a>                   <span class="at">Washability=</span><span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"Medium"</span>,<span class="st">"High"</span>))</span>
+<span id="cb27-3"><a></a></span>
+<span id="cb27-4"><a></a>dat<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">27</span>,<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">14</span>,<span class="dv">17</span>,<span class="dv">12</span>,<span class="dv">5</span>,<span class="dv">26</span>,<span class="dv">50</span>)</span>
+<span id="cb27-5"><a></a></span>
+<span id="cb27-6"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>Treatment<span class="sc">+</span>Washability,<span class="at">data=</span>dat)</span>
+<span id="cb27-7"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Washability
+Treatment  Low Medium High
+  Water     27     14    5
+  Standard  10     17   26
+  Super      5     12   50</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">CMHtest</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for Treatment by Washability 
+
+                 AltHypothesis  Chisq Df       Prob
+cor        Nonzero correlation 50.602  1 1.1315e-12
+rmeans  Row mean scores differ 52.779  2 3.4616e-12
+cmeans  Col mean scores differ 50.782  2 9.3945e-12
+general    General association 54.756  4 3.6548e-11</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb31-2"><a></a>        <span class="at">rscores=</span><span class="st">"midrank"</span>,</span>
+<span id="cb31-3"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for Treatment by Washability 
+
+                 AltHypothesis  Chisq Df       Prob
+cor        Nonzero correlation 49.541  1 1.9427e-12
+rmeans  Row mean scores differ 52.515  2 3.9496e-12
+cmeans  Col mean scores differ 49.572  2 1.7205e-11
+general    General association 54.756  4 3.6548e-11</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-6-3">
 <p><span class="math inline">\(Q_{CS}=50.6\)</span>, p&lt;0.0001. There is sufficient evidence to claim that the dose of water treatment is associated with the washability of the water.</p>
 <p>If modridit scores are used, <span class="math inline">\(Q_{CS}=49.5\)</span>.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-4" class="slide level2">
+<section id="exercise-2" class="slide level2">
 <h2>Exercise</h2>
-<p>A random sample of 400 college students are classified according to class status and drinking habits. Test the hypothesis that class status and drinking habits are not correlated to each other.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data drink; </span>
-<span id="cb6-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb6-3"><a></a>datalines;</span>
-<span id="cb6-4"><a></a>non fres <span class="dv">55</span> non soph <span class="dv">34</span> non jun <span class="dv">27</span> non sen <span class="dv">17</span></span>
-<span id="cb6-5"><a></a>mod fres <span class="dv">32</span> mod soph <span class="dv">29</span> mod jun <span class="dv">36</span> mod sen <span class="dv">39</span></span>
-<span id="cb6-6"><a></a>hea fres <span class="dv">29</span> hea soph <span class="dv">41</span> hea jun <span class="dv">33</span> hea sen <span class="dv">28</span></span>
-<span id="cb6-7"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A random sample of 400 college students are classified according to class status and drinking habits. Test the null hypothesis that class status and drinking habits are not correlated to each other.</p>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Data</a></li><li><a href="#tabset-7-2">R Code</a></li><li><a href="#tabset-7-3">SAS Code</a></li><li><a href="#tabset-7-4">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1">
 <div title="Variables">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -696,29 +1057,61 @@ Q_{CS} = (n-1)r_{ac}^2
 </div>
 </div>
 </div>
-</section>
-<section id="exercise-5" class="slide level2">
-<h2>Exercise</h2>
-<p>A random sample of 400 college students are classified according to class status and drinking habits. Test the hypothesis that class status and drinking habits are not correlated to each other.</p>
-<div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">Answer</a></li></ul>
-<div class="tab-content">
-<div id="tabset-6-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data drink;</span>
-<span id="cb7-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb7-3"><a></a>datalines;</span>
-<span id="cb7-4"><a></a>non f <span class="dv">55</span> non soph <span class="dv">34</span> non j <span class="dv">27</span> non sen <span class="dv">17</span></span>
-<span id="cb7-5"><a></a>mod f <span class="dv">32</span> mod soph <span class="dv">29</span> mod j <span class="dv">36</span> mod sen <span class="dv">39</span></span>
-<span id="cb7-6"><a></a>hea f <span class="dv">29</span> hea soph <span class="dv">41</span> hea j <span class="dv">33</span> hea sen <span class="dv">28</span></span>
-<span id="cb7-7"><a></a>;</span>
-<span id="cb7-8"><a></a></span>
-<span id="cb7-9"><a></a>proc freq data<span class="ot">=</span>drink order<span class="ot">=</span>data;</span>
-<span id="cb7-10"><a></a>weight count;</span>
-<span id="cb7-11"><a></a>tables habit<span class="sc">*</span>status<span class="sc">/</span>cmh chisq;</span>
-<span id="cb7-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>data drink; </span>
+<span id="cb33-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb33-3"><a></a>datalines;</span>
+<span id="cb33-4"><a></a>non fres <span class="dv">55</span> non soph <span class="dv">34</span> non jun <span class="dv">27</span> non sen <span class="dv">17</span></span>
+<span id="cb33-5"><a></a>mod fres <span class="dv">32</span> mod soph <span class="dv">29</span> mod jun <span class="dv">36</span> mod sen <span class="dv">39</span></span>
+<span id="cb33-6"><a></a>hea fres <span class="dv">29</span> hea soph <span class="dv">41</span> hea jun <span class="dv">33</span> hea sen <span class="dv">28</span></span>
+<span id="cb33-7"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">habit =</span> <span class="fu">c</span>(<span class="st">"Nondrinkers"</span>,<span class="st">"Moderate"</span>,<span class="st">"Heavy"</span>),</span>
+<span id="cb34-2"><a></a>                   <span class="at">Status =</span> <span class="fu">c</span>(<span class="st">"Freshmen"</span>,<span class="st">"Sophomore"</span>,<span class="st">"Junior"</span>,<span class="st">"Senior"</span>))</span>
+<span id="cb34-3"><a></a></span>
+<span id="cb34-4"><a></a>dat<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">55</span>,<span class="dv">32</span>,<span class="dv">29</span>,<span class="dv">34</span>,<span class="dv">29</span>,<span class="dv">41</span>,<span class="dv">27</span>,<span class="dv">36</span>,<span class="dv">33</span>,<span class="dv">17</span>,<span class="dv">39</span>,<span class="dv">28</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-6-2">
-<p>Table Scores: <span class="math inline">\(Q_{CS}\)</span> = 9.2, p=0.0024. There is sufficient evidence to support the claim that class status and drinking habits are correlated to each other.</p>
+</div>
+<div id="tabset-7-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>habit<span class="sc">+</span>Status,<span class="at">data=</span>dat)</span>
+<span id="cb35-2"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Status
+habit         Freshmen Sophomore Junior Senior
+  Nondrinkers       55        34     27     17
+  Moderate          32        29     36     39
+  Heavy             29        41     33     28</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">CMHtest</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for habit by Status 
+
+                 AltHypothesis  Chisq Df       Prob
+cor        Nonzero correlation  9.182  1 0.00244408
+rmeans  Row mean scores differ 18.147  2 0.00011468
+cmeans  Col mean scores differ 12.249  3 0.00657745
+general    General association 22.325  6 0.00105692</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>data drink;</span>
+<span id="cb39-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb39-3"><a></a>datalines;</span>
+<span id="cb39-4"><a></a>non f <span class="dv">55</span> non soph <span class="dv">34</span> non j <span class="dv">27</span> non sen <span class="dv">17</span></span>
+<span id="cb39-5"><a></a>mod f <span class="dv">32</span> mod soph <span class="dv">29</span> mod j <span class="dv">36</span> mod sen <span class="dv">39</span></span>
+<span id="cb39-6"><a></a>hea f <span class="dv">29</span> hea soph <span class="dv">41</span> hea j <span class="dv">33</span> hea sen <span class="dv">28</span></span>
+<span id="cb39-7"><a></a>;</span>
+<span id="cb39-8"><a></a></span>
+<span id="cb39-9"><a></a>proc freq data<span class="ot">=</span>drink order<span class="ot">=</span>data;</span>
+<span id="cb39-10"><a></a>weight count;</span>
+<span id="cb39-11"><a></a>tables habit<span class="sc">*</span>status<span class="sc">/</span>cmh chisq;</span>
+<span id="cb39-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-7-4">
+<p>Table Scores: <span class="math inline">\(Q_{CS}\)</span> = 9.18, p=0.0024. At <span class="math inline">\(\alpha=0.05\)</span>, here is sufficient evidence to support the claim that class status and drinking habits are correlated to each other.</p>
 </div>
 </div>
 </div>
@@ -776,39 +1169,39 @@ Q_{CS} = (n-1)r_{ac}^2
 </div>
 </div>
 </section>
-<section id="example-6" class="slide level2">
+<section id="example-4" class="slide level2">
 <h2>Example</h2>
 <p>A marketing research firm organized a focus group to consider issues of new car marketing. Members of the group included people who had purchased a car from a local dealer in the last month. Researchers were interested in whether there was an association between the type of car bought and how group members found out about the car in the media. Cars were classified as sedans, sporty, and utility. The types of media included television, magazines, newspapers, and radio.</p>
 
 <img data-src="img/car_C5.png" class="r-stretch"></section>
-<section id="example-7" class="slide level2">
+<section id="example-5" class="slide level2">
 <h2>Example</h2>
 <p>A marketing research firm organized a focus group to consider issues of new car marketing. Members of the group included people who had purchased a car from a local dealer in the last month. Researchers were interested in whether there was an association between the type of car bought and how group members found out about the car in the media. Cars were classified as sedans, sporty, and utility. The types of media included television, magazines, newspapers, and radio.</p>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">Answer</a></li></ul>
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">SAS Code</a></li><li><a href="#tabset-8-2">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-7-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data market;</span>
-<span id="cb8-2"><a></a>length AdSource <span class="sc">$</span> <span class="fl">9.</span> ;</span>
-<span id="cb8-3"><a></a>input car <span class="sc">$</span> AdSource <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb8-4"><a></a>datalines;</span>
-<span id="cb8-5"><a></a>sporty paper <span class="dv">3</span> sporty radio <span class="dv">4</span> sporty tv <span class="dv">0</span> sporty magazine <span class="dv">3</span></span>
-<span id="cb8-6"><a></a>sedan paper <span class="dv">0</span> sedan radio <span class="dv">2</span> sedan tv <span class="dv">4</span> sedan magazine <span class="dv">0</span></span>
-<span id="cb8-7"><a></a>utility paper <span class="dv">2</span> utility radio <span class="dv">2</span> utility tv <span class="dv">5</span> utility magazine <span class="dv">5</span></span>
-<span id="cb8-8"><a></a>;</span>
-<span id="cb8-9"><a></a>proc freq;</span>
-<span id="cb8-10"><a></a>weight count;</span>
-<span id="cb8-11"><a></a>table car<span class="sc">*</span>AdSource <span class="sc">/</span> norow nocol nopct;</span>
-<span id="cb8-12"><a></a>exact fisher pchi lrchi;</span>
-<span id="cb8-13"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-8-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>data market;</span>
+<span id="cb40-2"><a></a>length AdSource <span class="sc">$</span> <span class="fl">9.</span> ;</span>
+<span id="cb40-3"><a></a>input car <span class="sc">$</span> AdSource <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb40-4"><a></a>datalines;</span>
+<span id="cb40-5"><a></a>sporty paper <span class="dv">3</span> sporty radio <span class="dv">4</span> sporty tv <span class="dv">0</span> sporty magazine <span class="dv">3</span></span>
+<span id="cb40-6"><a></a>sedan paper <span class="dv">0</span> sedan radio <span class="dv">2</span> sedan tv <span class="dv">4</span> sedan magazine <span class="dv">0</span></span>
+<span id="cb40-7"><a></a>utility paper <span class="dv">2</span> utility radio <span class="dv">2</span> utility tv <span class="dv">5</span> utility magazine <span class="dv">5</span></span>
+<span id="cb40-8"><a></a>;</span>
+<span id="cb40-9"><a></a>proc freq;</span>
+<span id="cb40-10"><a></a>weight count;</span>
+<span id="cb40-11"><a></a>table car<span class="sc">*</span>AdSource <span class="sc">/</span> norow nocol nopct;</span>
+<span id="cb40-12"><a></a>exact fisher pchi lrchi;</span>
+<span id="cb40-13"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-7-2">
+<div id="tabset-8-2">
 <p>We need to use Fisher’s exact test because of the small sample size. The p-value was calculated to be 0.04, which is sufficient evidence to conclude that there is an association between car type and media.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-6" class="slide level2">
+<section id="exercise-3" class="slide level2">
 <h2>Exercise</h2>
 <p>A university professor wanted to test the general association between the most used social media app and the type of high school attended by freshmen. The professor asked 23 students in his class about their social media habits and respective high schools.</p>
 <table class="caption-top">
@@ -853,29 +1246,29 @@ Q_{CS} = (n-1)r_{ac}^2
 </tbody>
 </table>
 </section>
-<section id="exercise-7" class="slide level2">
+<section id="exercise-4" class="slide level2">
 <h2>Exercise</h2>
 <p>A university professor wanted to test the general association between the most used social media app and the type of high school attended by freshmen. The professor asked 23 students in his class about their social media habits and respective high schools.</p>
 <div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">SAS Code</a></li><li><a href="#tabset-8-2">Answer</a></li></ul>
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">SAS Code</a></li><li><a href="#tabset-9-2">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-8-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data sm;</span>
-<span id="cb9-2"><a></a>input school <span class="sc">$</span> social <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb9-3"><a></a>datalines;</span>
-<span id="cb9-4"><a></a>Pr_IS t <span class="dv">3</span> Pr_IS i <span class="dv">2</span> Pr_IS s <span class="dv">3</span> Pr_IS o <span class="dv">0</span></span>
-<span id="cb9-5"><a></a>Pu_IS t <span class="dv">3</span> Pu_IS i <span class="dv">1</span> Pu_IS s <span class="dv">3</span> Pu_IS o <span class="dv">0</span></span>
-<span id="cb9-6"><a></a>Pr_OS t <span class="dv">4</span> Pr_OS i <span class="dv">1</span> Pr_OS s <span class="dv">0</span> Pr_OS o <span class="dv">1</span></span>
-<span id="cb9-7"><a></a>Pu_OS t <span class="dv">1</span> Pu_OS i <span class="dv">0</span> Pu_OS s <span class="dv">0</span> Pu_OS o <span class="dv">1</span></span>
-<span id="cb9-8"><a></a>;</span>
-<span id="cb9-9"><a></a></span>
-<span id="cb9-10"><a></a>proc freq data<span class="ot">=</span>sm order<span class="ot">=</span>data;</span>
-<span id="cb9-11"><a></a>weight count;</span>
-<span id="cb9-12"><a></a>tables school<span class="sc">*</span>social;</span>
-<span id="cb9-13"><a></a>exact fisher pchi lrchi;</span>
-<span id="cb9-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-9-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>data sm;</span>
+<span id="cb41-2"><a></a>input school <span class="sc">$</span> social <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb41-3"><a></a>datalines;</span>
+<span id="cb41-4"><a></a>Pr_IS t <span class="dv">3</span> Pr_IS i <span class="dv">2</span> Pr_IS s <span class="dv">3</span> Pr_IS o <span class="dv">0</span></span>
+<span id="cb41-5"><a></a>Pu_IS t <span class="dv">3</span> Pu_IS i <span class="dv">1</span> Pu_IS s <span class="dv">3</span> Pu_IS o <span class="dv">0</span></span>
+<span id="cb41-6"><a></a>Pr_OS t <span class="dv">4</span> Pr_OS i <span class="dv">1</span> Pr_OS s <span class="dv">0</span> Pr_OS o <span class="dv">1</span></span>
+<span id="cb41-7"><a></a>Pu_OS t <span class="dv">1</span> Pu_OS i <span class="dv">0</span> Pu_OS s <span class="dv">0</span> Pu_OS o <span class="dv">1</span></span>
+<span id="cb41-8"><a></a>;</span>
+<span id="cb41-9"><a></a></span>
+<span id="cb41-10"><a></a>proc freq data<span class="ot">=</span>sm order<span class="ot">=</span>data;</span>
+<span id="cb41-11"><a></a>weight count;</span>
+<span id="cb41-12"><a></a>tables school<span class="sc">*</span>social;</span>
+<span id="cb41-13"><a></a>exact fisher pchi lrchi;</span>
+<span id="cb41-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-8-2">
+<div id="tabset-9-2">
 <p>The Fisher’s exact test yielded p=0.45, which means there is insufficient evidence to claim that social media habits are associated with the type of high school attended by the students.</p>
 </div>
 </div>
@@ -959,7 +1352,7 @@ measure \pm 1.96*ASE
 \]</span></p>
 <p>where ASE is the asymptotic standard error reported in the <code>measures</code> output from the <code>freq</code> procedure. - The confidence interval can be calculated using the <code>cl</code> option in the <code>freq</code> procedure.</p>
 </section>
-<section id="exercise-8" class="slide level2">
+<section id="exercise-5" class="slide level2">
 <h2>Exercise</h2>
 <p>Consider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.</p>
 <ul>
@@ -972,26 +1365,26 @@ measure \pm 1.96*ASE
 </ul>
 
 <img data-src="img/wash_C5.png" class="r-stretch"></section>
-<section id="exercise-9" class="slide level2">
+<section id="exercise-6" class="slide level2">
 <h2>Exercise</h2>
 <p>Consider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.</p>
 <div class="panel-tabset">
-<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">SAS Code</a></li><li><a href="#tabset-9-2">Answer</a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">SAS Code</a></li><li><a href="#tabset-10-2">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-9-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data wash;</span>
-<span id="cb10-2"><a></a>input treatment <span class="sc">$</span> washability <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb10-3"><a></a>datalines;</span>
-<span id="cb10-4"><a></a>water low <span class="dv">27</span> water medium <span class="dv">14</span> water high <span class="dv">5</span></span>
-<span id="cb10-5"><a></a>standard low <span class="dv">10</span> standard medium <span class="dv">17</span> standard high <span class="dv">26</span></span>
-<span id="cb10-6"><a></a>super low <span class="dv">5</span> super medium <span class="dv">12</span> super high <span class="dv">50</span></span>
-<span id="cb10-7"><a></a>;</span>
-<span id="cb10-8"><a></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>wash;</span>
-<span id="cb10-9"><a></a>weight count;</span>
-<span id="cb10-10"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span>  measures cl;</span>
-<span id="cb10-11"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-10-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>data wash;</span>
+<span id="cb42-2"><a></a>input treatment <span class="sc">$</span> washability <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb42-3"><a></a>datalines;</span>
+<span id="cb42-4"><a></a>water low <span class="dv">27</span> water medium <span class="dv">14</span> water high <span class="dv">5</span></span>
+<span id="cb42-5"><a></a>standard low <span class="dv">10</span> standard medium <span class="dv">17</span> standard high <span class="dv">26</span></span>
+<span id="cb42-6"><a></a>super low <span class="dv">5</span> super medium <span class="dv">12</span> super high <span class="dv">50</span></span>
+<span id="cb42-7"><a></a>;</span>
+<span id="cb42-8"><a></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>wash;</span>
+<span id="cb42-9"><a></a>weight count;</span>
+<span id="cb42-10"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span>  measures cl;</span>
+<span id="cb42-11"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-9-2">
+<div id="tabset-10-2">
 <ul>
 <li>Pearson Correlation: 0.55 (0.44,0.67)</li>
 <li>Spearman Correlation: 0.55 (0.43, 0.66)</li>
@@ -1004,7 +1397,7 @@ measure \pm 1.96*ASE
 </div>
 </div>
 </section>
-<section id="exercise-10" class="slide level2">
+<section id="exercise-7" class="slide level2">
 <h2>Exercise</h2>
 <p>A random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.</p>
 <ul>
@@ -1029,27 +1422,27 @@ measure \pm 1.96*ASE
 </dd>
 </dl>
 </section>
-<section id="exercise-11" class="slide level2">
+<section id="exercise-8" class="slide level2">
 <h2>Exercise</h2>
 <p>A random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.</p>
 <div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">SAS Code</a></li><li><a href="#tabset-10-2">Answer</a></li></ul>
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-10-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>data drink;</span>
-<span id="cb11-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb11-3"><a></a>datalines;</span>
-<span id="cb11-4"><a></a>non f <span class="dv">55</span> non soph <span class="dv">34</span> non j <span class="dv">27</span> non sen <span class="dv">17</span></span>
-<span id="cb11-5"><a></a>mod f <span class="dv">32</span> mod soph <span class="dv">29</span> mod j <span class="dv">36</span> mod sen <span class="dv">39</span></span>
-<span id="cb11-6"><a></a>hea f <span class="dv">29</span> hea soph <span class="dv">41</span> hea j <span class="dv">33</span> hea sen <span class="dv">28</span></span>
-<span id="cb11-7"><a></a>;</span>
-<span id="cb11-8"><a></a></span>
-<span id="cb11-9"><a></a>proc freq data<span class="ot">=</span>drink order<span class="ot">=</span>data;</span>
-<span id="cb11-10"><a></a>weight count;</span>
-<span id="cb11-11"><a></a>tables habit<span class="sc">*</span>status<span class="sc">/</span>measures cl;</span>
-<span id="cb11-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-11-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>data drink;</span>
+<span id="cb43-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb43-3"><a></a>datalines;</span>
+<span id="cb43-4"><a></a>non f <span class="dv">55</span> non soph <span class="dv">34</span> non j <span class="dv">27</span> non sen <span class="dv">17</span></span>
+<span id="cb43-5"><a></a>mod f <span class="dv">32</span> mod soph <span class="dv">29</span> mod j <span class="dv">36</span> mod sen <span class="dv">39</span></span>
+<span id="cb43-6"><a></a>hea f <span class="dv">29</span> hea soph <span class="dv">41</span> hea j <span class="dv">33</span> hea sen <span class="dv">28</span></span>
+<span id="cb43-7"><a></a>;</span>
+<span id="cb43-8"><a></a></span>
+<span id="cb43-9"><a></a>proc freq data<span class="ot">=</span>drink order<span class="ot">=</span>data;</span>
+<span id="cb43-10"><a></a>weight count;</span>
+<span id="cb43-11"><a></a>tables habit<span class="sc">*</span>status<span class="sc">/</span>measures cl;</span>
+<span id="cb43-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-10-2">
+<div id="tabset-11-2">
 <ul>
 <li>Pearson Correlation: 0.15 (0.06,0.25)</li>
 <li>Spearman Correlation: 0.16 (0.06, 0.25)</li>
@@ -1101,7 +1494,7 @@ measure \pm 1.96*ASE
 <li>Symmetric: weighted average of the two asymmetric uncertainty coefficients.</li>
 </ul>
 </section>
-<section id="exercise-12" class="slide level2">
+<section id="exercise-9" class="slide level2">
 <h2>Exercise</h2>
 <div class="columns">
 <div class="column" style="width:40%; font-size: 75%">
@@ -1114,7 +1507,7 @@ measure \pm 1.96*ASE
 <p><img data-src="img/party_C5.png"></p>
 </div></div>
 </section>
-<section id="exercise-13" class="slide level2">
+<section id="exercise-10" class="slide level2">
 <h2>Exercise</h2>
 <p>The table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.</p>
 <ul>
@@ -1122,28 +1515,28 @@ measure \pm 1.96*ASE
 <li>Provide the estimate and the 95% CI of these measures.</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">Answer</a></li></ul>
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">SAS Code</a></li><li><a href="#tabset-12-2">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-11-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data neighbor;</span>
-<span id="cb12-2"><a></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
-<span id="cb12-3"><a></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb12-4"><a></a>datalines;</span>
-<span id="cb12-5"><a></a>democrat longview <span class="dv">360</span> democrat bayside <span class="dv">221</span></span>
-<span id="cb12-6"><a></a>democrat sheffeld <span class="dv">140</span> democrat highland <span class="dv">160</span></span>
-<span id="cb12-7"><a></a>republican longview <span class="dv">316</span> republican bayside <span class="dv">208</span></span>
-<span id="cb12-8"><a></a>republican sheffeld <span class="dv">97</span> republican highland <span class="dv">106</span></span>
-<span id="cb12-9"><a></a>independent longview <span class="dv">160</span> independent bayside <span class="dv">200</span></span>
-<span id="cb12-10"><a></a>independent sheffeld <span class="dv">311</span> independent highland <span class="dv">291</span></span>
-<span id="cb12-11"><a></a>;</span>
-<span id="cb12-12"><a></a></span>
-<span id="cb12-13"><a></a>proc freq data<span class="ot">=</span>neighbor;</span>
-<span id="cb12-14"><a></a>weight count;</span>
-<span id="cb12-15"><a></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
-<span id="cb12-16"><a></a>measures cl;</span>
-<span id="cb12-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-12-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>data neighbor;</span>
+<span id="cb44-2"><a></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
+<span id="cb44-3"><a></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb44-4"><a></a>datalines;</span>
+<span id="cb44-5"><a></a>democrat longview <span class="dv">360</span> democrat bayside <span class="dv">221</span></span>
+<span id="cb44-6"><a></a>democrat sheffeld <span class="dv">140</span> democrat highland <span class="dv">160</span></span>
+<span id="cb44-7"><a></a>republican longview <span class="dv">316</span> republican bayside <span class="dv">208</span></span>
+<span id="cb44-8"><a></a>republican sheffeld <span class="dv">97</span> republican highland <span class="dv">106</span></span>
+<span id="cb44-9"><a></a>independent longview <span class="dv">160</span> independent bayside <span class="dv">200</span></span>
+<span id="cb44-10"><a></a>independent sheffeld <span class="dv">311</span> independent highland <span class="dv">291</span></span>
+<span id="cb44-11"><a></a>;</span>
+<span id="cb44-12"><a></a></span>
+<span id="cb44-13"><a></a>proc freq data<span class="ot">=</span>neighbor;</span>
+<span id="cb44-14"><a></a>weight count;</span>
+<span id="cb44-15"><a></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
+<span id="cb44-16"><a></a>measures cl;</span>
+<span id="cb44-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-11-2">
+<div id="tabset-12-2">
 <p>You can choose to report the asymmetric <span class="math inline">\(\lambda\)</span>, symmetric <span class="math inline">\(\lambda\)</span>, asymmetric uncertainty coefficient, or the symmetric uncertainty coefficient.</p>
 <p>The asymmetric uncertainty coefficient R|C is estimated to be 0.05 (95% CI: 0.04,0.06). The estimated proportion of uncertainty in party affiliation explained by the neighborhood is estimated to be 0.05.</p>
 </div>
@@ -1243,7 +1636,7 @@ measure \pm 1.96*ASE
 </ul></li>
 </ul>
 </section>
-<section id="example-8" class="slide level2">
+<section id="example-6" class="slide level2">
 <h2>Example</h2>
 <ul>
 <li>The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
@@ -1253,17 +1646,17 @@ measure \pm 1.96*ASE
 </ul></li>
 </ul>
 
-<img data-src="img/neuro_C5.png" class="r-stretch"><h3 id="sas-code-11">SAS Code</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>data classify;</span>
-<span id="cb13-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb13-3"><a></a>datalines;</span>
-<span id="cb13-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
-<span id="cb13-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
-<span id="cb13-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
-<span id="cb13-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
-<span id="cb13-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<img data-src="img/neuro_C5.png" class="r-stretch"><h3 id="sas-code-10">SAS Code</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>data classify;</span>
+<span id="cb45-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb45-3"><a></a>datalines;</span>
+<span id="cb45-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
+<span id="cb45-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb45-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
+<span id="cb45-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
+<span id="cb45-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="example-9" class="slide level2">
+<section id="example-7" class="slide level2">
 <h2>Example</h2>
 <ul>
 <li>The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
@@ -1273,32 +1666,32 @@ measure \pm 1.96*ASE
 </ul></li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">SAS Code</a></li><li><a href="#tabset-12-2">Answer</a></li></ul>
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">SAS Code</a></li><li><a href="#tabset-13-2">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-12-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>data classify;</span>
-<span id="cb14-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb14-3"><a></a>datalines;</span>
-<span id="cb14-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
-<span id="cb14-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
-<span id="cb14-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
-<span id="cb14-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
-<span id="cb14-8"><a></a>;</span>
-<span id="cb14-9"><a></a></span>
-<span id="cb14-10"><a></a></span>
-<span id="cb14-11"><a></a>proc freq;</span>
-<span id="cb14-12"><a></a>weight count;</span>
-<span id="cb14-13"><a></a>tables no_rater<span class="sc">*</span>w_rater <span class="sc">/</span> agree norow nocol nopct;</span>
-<span id="cb14-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-13-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>data classify;</span>
+<span id="cb46-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb46-3"><a></a>datalines;</span>
+<span id="cb46-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
+<span id="cb46-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb46-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
+<span id="cb46-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
+<span id="cb46-8"><a></a>;</span>
+<span id="cb46-9"><a></a></span>
+<span id="cb46-10"><a></a></span>
+<span id="cb46-11"><a></a>proc freq;</span>
+<span id="cb46-12"><a></a>weight count;</span>
+<span id="cb46-13"><a></a>tables no_rater<span class="sc">*</span>w_rater <span class="sc">/</span> agree norow nocol nopct;</span>
+<span id="cb46-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-12-2">
+<div id="tabset-13-2">
 <p>Simple <span class="math inline">\(\kappa\)</span>: 0.21 (0.11,0.31) Weighted <span class="math inline">\(\kappa\)</span>: 0.38 (0.28,0.48)</p>
 <p>Since the weighted <span class="math inline">\(\kappa\)</span> is higher than the simple <span class="math inline">\(\kappa\)</span>, we can infer that there were more disagreements closer to the diagonal. There is a slight to moderate agreement between the two neurologists.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-14" class="slide level2">
+<section id="exercise-11" class="slide level2">
 <h2>Exercise</h2>
 <p>Two radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:</p>
 <p>0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’</p>
@@ -1306,30 +1699,30 @@ measure \pm 1.96*ASE
 <li>Calculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.</li>
 <li>Compare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a></span>
-<span id="cb15-2"><a></a>data radiology;</span>
-<span id="cb15-3"><a></a>input rater1 rater2 count;</span>
-<span id="cb15-4"><a></a>cards;</span>
-<span id="cb15-5"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
-<span id="cb15-6"><a></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">12</span></span>
-<span id="cb15-7"><a></a><span class="dv">0</span> <span class="dv">2</span>  <span class="dv">0</span></span>
-<span id="cb15-8"><a></a><span class="dv">0</span> <span class="dv">3</span>  <span class="dv">0</span></span>
-<span id="cb15-9"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">4</span></span>
-<span id="cb15-10"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">17</span></span>
-<span id="cb15-11"><a></a><span class="dv">1</span> <span class="dv">2</span>  <span class="dv">1</span></span>
-<span id="cb15-12"><a></a><span class="dv">1</span> <span class="dv">3</span>  <span class="dv">0</span></span>
-<span id="cb15-13"><a></a><span class="dv">2</span> <span class="dv">0</span>  <span class="dv">3</span></span>
-<span id="cb15-14"><a></a><span class="dv">2</span> <span class="dv">1</span>  <span class="dv">9</span></span>
-<span id="cb15-15"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">15</span></span>
-<span id="cb15-16"><a></a><span class="dv">2</span> <span class="dv">3</span>  <span class="dv">2</span></span>
-<span id="cb15-17"><a></a><span class="dv">3</span> <span class="dv">0</span>  <span class="dv">0</span></span>
-<span id="cb15-18"><a></a><span class="dv">3</span> <span class="dv">1</span>  <span class="dv">0</span></span>
-<span id="cb15-19"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
-<span id="cb15-20"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
-<span id="cb15-21"><a></a>;</span>
-<span id="cb15-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a></span>
+<span id="cb47-2"><a></a>data radiology;</span>
+<span id="cb47-3"><a></a>input rater1 rater2 count;</span>
+<span id="cb47-4"><a></a>cards;</span>
+<span id="cb47-5"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
+<span id="cb47-6"><a></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">12</span></span>
+<span id="cb47-7"><a></a><span class="dv">0</span> <span class="dv">2</span>  <span class="dv">0</span></span>
+<span id="cb47-8"><a></a><span class="dv">0</span> <span class="dv">3</span>  <span class="dv">0</span></span>
+<span id="cb47-9"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">4</span></span>
+<span id="cb47-10"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">17</span></span>
+<span id="cb47-11"><a></a><span class="dv">1</span> <span class="dv">2</span>  <span class="dv">1</span></span>
+<span id="cb47-12"><a></a><span class="dv">1</span> <span class="dv">3</span>  <span class="dv">0</span></span>
+<span id="cb47-13"><a></a><span class="dv">2</span> <span class="dv">0</span>  <span class="dv">3</span></span>
+<span id="cb47-14"><a></a><span class="dv">2</span> <span class="dv">1</span>  <span class="dv">9</span></span>
+<span id="cb47-15"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">15</span></span>
+<span id="cb47-16"><a></a><span class="dv">2</span> <span class="dv">3</span>  <span class="dv">2</span></span>
+<span id="cb47-17"><a></a><span class="dv">3</span> <span class="dv">0</span>  <span class="dv">0</span></span>
+<span id="cb47-18"><a></a><span class="dv">3</span> <span class="dv">1</span>  <span class="dv">0</span></span>
+<span id="cb47-19"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
+<span id="cb47-20"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
+<span id="cb47-21"><a></a>;</span>
+<span id="cb47-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="exercise-15" class="slide level2">
+<section id="exercise-12" class="slide level2">
 <h2>Exercise</h2>
 <p>Two radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:</p>
 <p>0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’</p>
@@ -1338,39 +1731,39 @@ measure \pm 1.96*ASE
 <li>Compare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">SAS Code</a></li><li><a href="#tabset-13-2">Answer</a></li></ul>
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">SAS Code</a></li><li><a href="#tabset-14-2">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-13-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>data radiology;</span>
-<span id="cb16-2"><a></a>input rater1 rater2 count;</span>
-<span id="cb16-3"><a></a>cards;</span>
-<span id="cb16-4"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
-<span id="cb16-5"><a></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">12</span></span>
-<span id="cb16-6"><a></a><span class="dv">0</span> <span class="dv">2</span>  <span class="dv">0</span></span>
-<span id="cb16-7"><a></a><span class="dv">0</span> <span class="dv">3</span>  <span class="dv">0</span></span>
-<span id="cb16-8"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">4</span></span>
-<span id="cb16-9"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">17</span></span>
-<span id="cb16-10"><a></a><span class="dv">1</span> <span class="dv">2</span>  <span class="dv">1</span></span>
-<span id="cb16-11"><a></a><span class="dv">1</span> <span class="dv">3</span>  <span class="dv">0</span></span>
-<span id="cb16-12"><a></a><span class="dv">2</span> <span class="dv">0</span>  <span class="dv">3</span></span>
-<span id="cb16-13"><a></a><span class="dv">2</span> <span class="dv">1</span>  <span class="dv">9</span></span>
-<span id="cb16-14"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">15</span></span>
-<span id="cb16-15"><a></a><span class="dv">2</span> <span class="dv">3</span>  <span class="dv">2</span></span>
-<span id="cb16-16"><a></a><span class="dv">3</span> <span class="dv">0</span>  <span class="dv">0</span></span>
-<span id="cb16-17"><a></a><span class="dv">3</span> <span class="dv">1</span>  <span class="dv">0</span></span>
-<span id="cb16-18"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
-<span id="cb16-19"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
-<span id="cb16-20"><a></a>;</span>
-<span id="cb16-21"><a></a>run;</span>
-<span id="cb16-22"><a></a></span>
-<span id="cb16-23"><a></a>proc freq data<span class="ot">=</span>radiology;</span>
-<span id="cb16-24"><a></a>tables rater1<span class="sc">*</span>rater2<span class="sc">/</span>norow nocol nopct agree;</span>
-<span id="cb16-25"><a></a>weight count;</span>
-<span id="cb16-26"><a></a>test kappa;</span>
-<span id="cb16-27"><a></a>exact kappa;</span>
-<span id="cb16-28"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-14-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>data radiology;</span>
+<span id="cb48-2"><a></a>input rater1 rater2 count;</span>
+<span id="cb48-3"><a></a>cards;</span>
+<span id="cb48-4"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
+<span id="cb48-5"><a></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">12</span></span>
+<span id="cb48-6"><a></a><span class="dv">0</span> <span class="dv">2</span>  <span class="dv">0</span></span>
+<span id="cb48-7"><a></a><span class="dv">0</span> <span class="dv">3</span>  <span class="dv">0</span></span>
+<span id="cb48-8"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">4</span></span>
+<span id="cb48-9"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">17</span></span>
+<span id="cb48-10"><a></a><span class="dv">1</span> <span class="dv">2</span>  <span class="dv">1</span></span>
+<span id="cb48-11"><a></a><span class="dv">1</span> <span class="dv">3</span>  <span class="dv">0</span></span>
+<span id="cb48-12"><a></a><span class="dv">2</span> <span class="dv">0</span>  <span class="dv">3</span></span>
+<span id="cb48-13"><a></a><span class="dv">2</span> <span class="dv">1</span>  <span class="dv">9</span></span>
+<span id="cb48-14"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">15</span></span>
+<span id="cb48-15"><a></a><span class="dv">2</span> <span class="dv">3</span>  <span class="dv">2</span></span>
+<span id="cb48-16"><a></a><span class="dv">3</span> <span class="dv">0</span>  <span class="dv">0</span></span>
+<span id="cb48-17"><a></a><span class="dv">3</span> <span class="dv">1</span>  <span class="dv">0</span></span>
+<span id="cb48-18"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
+<span id="cb48-19"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
+<span id="cb48-20"><a></a>;</span>
+<span id="cb48-21"><a></a>run;</span>
+<span id="cb48-22"><a></a></span>
+<span id="cb48-23"><a></a>proc freq data<span class="ot">=</span>radiology;</span>
+<span id="cb48-24"><a></a>tables rater1<span class="sc">*</span>rater2<span class="sc">/</span>norow nocol nopct agree;</span>
+<span id="cb48-25"><a></a>weight count;</span>
+<span id="cb48-26"><a></a>test kappa;</span>
+<span id="cb48-27"><a></a>exact kappa;</span>
+<span id="cb48-28"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-13-2">
+<div id="tabset-14-2">
 <p>Simple <span class="math inline">\(\kappa\)</span>: 0.47 (0.33,0.62) Weighted <span class="math inline">\(\kappa\)</span>: 0.57 (0.44,0.70)</p>
 <p>The exact p-value is p&lt;0.001, which shows there is sufficient evidence of an agreement between the radiologists. Based on the simple and weighted kappa values, there is moderate agreement between the two radiologists.</p>
 </div>
@@ -1433,7 +1826,7 @@ measure \pm 1.96*ASE
 </div>
 </div>
 </section>
-<section id="example-10" class="slide level2">
+<section id="example-8" class="slide level2">
 <h2>Example</h2>
 <p>Investigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:</p>
 <ul>
@@ -1443,29 +1836,29 @@ measure \pm 1.96*ASE
 <li>gre: gastric resection (removal of 75% of gastric tissue)</li>
 </ul>
 <p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is increasing as the amount of gastric tissue removed increased. Ignore hospital effects.</p>
-<h3 id="sas-code-14">SAS Code</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>data operate;</span>
-<span id="cb17-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb17-3"><a></a>datalines;</span>
-<span id="cb17-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
-<span id="cb17-5"><a></a><span class="dv">1</span> v<span class="sc">+</span>a none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>a slight <span class="dv">10</span> <span class="dv">1</span> v<span class="sc">+</span>a moderate <span class="dv">5</span></span>
-<span id="cb17-6"><a></a><span class="dv">1</span> v<span class="sc">+</span>h none <span class="dv">20</span> <span class="dv">1</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">1</span> v<span class="sc">+</span>h moderate <span class="dv">5</span></span>
-<span id="cb17-7"><a></a><span class="dv">1</span> gre none <span class="dv">24</span> <span class="dv">1</span> gre slight <span class="dv">10</span> <span class="dv">1</span> gre moderate <span class="dv">6</span></span>
-<span id="cb17-8"><a></a><span class="dv">2</span> v<span class="sc">+</span>d none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
-<span id="cb17-9"><a></a><span class="dv">2</span> v<span class="sc">+</span>a none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>a slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
-<span id="cb17-10"><a></a><span class="dv">2</span> v<span class="sc">+</span>h none <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
-<span id="cb17-11"><a></a><span class="dv">2</span> gre none <span class="dv">9</span> <span class="dv">2</span> gre slight <span class="dv">15</span> <span class="dv">2</span> gre moderate <span class="dv">2</span></span>
-<span id="cb17-12"><a></a><span class="dv">3</span> v<span class="sc">+</span>d none <span class="dv">8</span> <span class="dv">3</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>d moderate <span class="dv">3</span></span>
-<span id="cb17-13"><a></a><span class="dv">3</span> v<span class="sc">+</span>a none <span class="dv">12</span> <span class="dv">3</span> v<span class="sc">+</span>a slight <span class="dv">4</span> <span class="dv">3</span> v<span class="sc">+</span>a moderate <span class="dv">4</span></span>
-<span id="cb17-14"><a></a><span class="dv">3</span> v<span class="sc">+</span>h none <span class="dv">11</span> <span class="dv">3</span> v<span class="sc">+</span>h slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
-<span id="cb17-15"><a></a><span class="dv">3</span> gre none <span class="dv">7</span> <span class="dv">3</span> gre slight <span class="dv">7</span> <span class="dv">3</span> gre moderate <span class="dv">4</span></span>
-<span id="cb17-16"><a></a><span class="dv">4</span> v<span class="sc">+</span>d none <span class="dv">12</span> <span class="dv">4</span> v<span class="sc">+</span>d slight <span class="dv">9</span> <span class="dv">4</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
-<span id="cb17-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
-<span id="cb17-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
-<span id="cb17-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
-<span id="cb17-20"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="sas-code-13">SAS Code</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>data operate;</span>
+<span id="cb49-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb49-3"><a></a>datalines;</span>
+<span id="cb49-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
+<span id="cb49-5"><a></a><span class="dv">1</span> v<span class="sc">+</span>a none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>a slight <span class="dv">10</span> <span class="dv">1</span> v<span class="sc">+</span>a moderate <span class="dv">5</span></span>
+<span id="cb49-6"><a></a><span class="dv">1</span> v<span class="sc">+</span>h none <span class="dv">20</span> <span class="dv">1</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">1</span> v<span class="sc">+</span>h moderate <span class="dv">5</span></span>
+<span id="cb49-7"><a></a><span class="dv">1</span> gre none <span class="dv">24</span> <span class="dv">1</span> gre slight <span class="dv">10</span> <span class="dv">1</span> gre moderate <span class="dv">6</span></span>
+<span id="cb49-8"><a></a><span class="dv">2</span> v<span class="sc">+</span>d none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
+<span id="cb49-9"><a></a><span class="dv">2</span> v<span class="sc">+</span>a none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>a slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
+<span id="cb49-10"><a></a><span class="dv">2</span> v<span class="sc">+</span>h none <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
+<span id="cb49-11"><a></a><span class="dv">2</span> gre none <span class="dv">9</span> <span class="dv">2</span> gre slight <span class="dv">15</span> <span class="dv">2</span> gre moderate <span class="dv">2</span></span>
+<span id="cb49-12"><a></a><span class="dv">3</span> v<span class="sc">+</span>d none <span class="dv">8</span> <span class="dv">3</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>d moderate <span class="dv">3</span></span>
+<span id="cb49-13"><a></a><span class="dv">3</span> v<span class="sc">+</span>a none <span class="dv">12</span> <span class="dv">3</span> v<span class="sc">+</span>a slight <span class="dv">4</span> <span class="dv">3</span> v<span class="sc">+</span>a moderate <span class="dv">4</span></span>
+<span id="cb49-14"><a></a><span class="dv">3</span> v<span class="sc">+</span>h none <span class="dv">11</span> <span class="dv">3</span> v<span class="sc">+</span>h slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
+<span id="cb49-15"><a></a><span class="dv">3</span> gre none <span class="dv">7</span> <span class="dv">3</span> gre slight <span class="dv">7</span> <span class="dv">3</span> gre moderate <span class="dv">4</span></span>
+<span id="cb49-16"><a></a><span class="dv">4</span> v<span class="sc">+</span>d none <span class="dv">12</span> <span class="dv">4</span> v<span class="sc">+</span>d slight <span class="dv">9</span> <span class="dv">4</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
+<span id="cb49-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
+<span id="cb49-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
+<span id="cb49-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
+<span id="cb49-20"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="example-11" class="slide level2">
+<section id="example-9" class="slide level2">
 <h2>Example</h2>
 <p>Investigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:</p>
 <ul>
@@ -1476,36 +1869,36 @@ measure \pm 1.96*ASE
 </ul>
 <p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.</p>
 <div class="panel-tabset">
-<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">SAS Code</a></li><li><a href="#tabset-14-2">Answer</a></li></ul>
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">SAS Code</a></li><li><a href="#tabset-15-2">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-14-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>data operate;</span>
-<span id="cb18-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb18-3"><a></a>datalines;</span>
-<span id="cb18-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
-<span id="cb18-5"><a></a><span class="dv">1</span> v<span class="sc">+</span>a none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>a slight <span class="dv">10</span> <span class="dv">1</span> v<span class="sc">+</span>a moderate <span class="dv">5</span></span>
-<span id="cb18-6"><a></a><span class="dv">1</span> v<span class="sc">+</span>h none <span class="dv">20</span> <span class="dv">1</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">1</span> v<span class="sc">+</span>h moderate <span class="dv">5</span></span>
-<span id="cb18-7"><a></a><span class="dv">1</span> gre none <span class="dv">24</span> <span class="dv">1</span> gre slight <span class="dv">10</span> <span class="dv">1</span> gre moderate <span class="dv">6</span></span>
-<span id="cb18-8"><a></a><span class="dv">2</span> v<span class="sc">+</span>d none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
-<span id="cb18-9"><a></a><span class="dv">2</span> v<span class="sc">+</span>a none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>a slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
-<span id="cb18-10"><a></a><span class="dv">2</span> v<span class="sc">+</span>h none <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
-<span id="cb18-11"><a></a><span class="dv">2</span> gre none <span class="dv">9</span> <span class="dv">2</span> gre slight <span class="dv">15</span> <span class="dv">2</span> gre moderate <span class="dv">2</span></span>
-<span id="cb18-12"><a></a><span class="dv">3</span> v<span class="sc">+</span>d none <span class="dv">8</span> <span class="dv">3</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>d moderate <span class="dv">3</span></span>
-<span id="cb18-13"><a></a><span class="dv">3</span> v<span class="sc">+</span>a none <span class="dv">12</span> <span class="dv">3</span> v<span class="sc">+</span>a slight <span class="dv">4</span> <span class="dv">3</span> v<span class="sc">+</span>a moderate <span class="dv">4</span></span>
-<span id="cb18-14"><a></a><span class="dv">3</span> v<span class="sc">+</span>h none <span class="dv">11</span> <span class="dv">3</span> v<span class="sc">+</span>h slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
-<span id="cb18-15"><a></a><span class="dv">3</span> gre none <span class="dv">7</span> <span class="dv">3</span> gre slight <span class="dv">7</span> <span class="dv">3</span> gre moderate <span class="dv">4</span></span>
-<span id="cb18-16"><a></a><span class="dv">4</span> v<span class="sc">+</span>d none <span class="dv">12</span> <span class="dv">4</span> v<span class="sc">+</span>d slight <span class="dv">9</span> <span class="dv">4</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
-<span id="cb18-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
-<span id="cb18-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
-<span id="cb18-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
-<span id="cb18-20"><a></a>;</span>
-<span id="cb18-21"><a></a></span>
-<span id="cb18-22"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
-<span id="cb18-23"><a></a>weight wt;</span>
-<span id="cb18-24"><a></a>tables trt<span class="sc">*</span>severity <span class="sc">/</span>  jt;</span>
-<span id="cb18-25"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-15-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>data operate;</span>
+<span id="cb50-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb50-3"><a></a>datalines;</span>
+<span id="cb50-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
+<span id="cb50-5"><a></a><span class="dv">1</span> v<span class="sc">+</span>a none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>a slight <span class="dv">10</span> <span class="dv">1</span> v<span class="sc">+</span>a moderate <span class="dv">5</span></span>
+<span id="cb50-6"><a></a><span class="dv">1</span> v<span class="sc">+</span>h none <span class="dv">20</span> <span class="dv">1</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">1</span> v<span class="sc">+</span>h moderate <span class="dv">5</span></span>
+<span id="cb50-7"><a></a><span class="dv">1</span> gre none <span class="dv">24</span> <span class="dv">1</span> gre slight <span class="dv">10</span> <span class="dv">1</span> gre moderate <span class="dv">6</span></span>
+<span id="cb50-8"><a></a><span class="dv">2</span> v<span class="sc">+</span>d none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
+<span id="cb50-9"><a></a><span class="dv">2</span> v<span class="sc">+</span>a none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>a slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
+<span id="cb50-10"><a></a><span class="dv">2</span> v<span class="sc">+</span>h none <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
+<span id="cb50-11"><a></a><span class="dv">2</span> gre none <span class="dv">9</span> <span class="dv">2</span> gre slight <span class="dv">15</span> <span class="dv">2</span> gre moderate <span class="dv">2</span></span>
+<span id="cb50-12"><a></a><span class="dv">3</span> v<span class="sc">+</span>d none <span class="dv">8</span> <span class="dv">3</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>d moderate <span class="dv">3</span></span>
+<span id="cb50-13"><a></a><span class="dv">3</span> v<span class="sc">+</span>a none <span class="dv">12</span> <span class="dv">3</span> v<span class="sc">+</span>a slight <span class="dv">4</span> <span class="dv">3</span> v<span class="sc">+</span>a moderate <span class="dv">4</span></span>
+<span id="cb50-14"><a></a><span class="dv">3</span> v<span class="sc">+</span>h none <span class="dv">11</span> <span class="dv">3</span> v<span class="sc">+</span>h slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
+<span id="cb50-15"><a></a><span class="dv">3</span> gre none <span class="dv">7</span> <span class="dv">3</span> gre slight <span class="dv">7</span> <span class="dv">3</span> gre moderate <span class="dv">4</span></span>
+<span id="cb50-16"><a></a><span class="dv">4</span> v<span class="sc">+</span>d none <span class="dv">12</span> <span class="dv">4</span> v<span class="sc">+</span>d slight <span class="dv">9</span> <span class="dv">4</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
+<span id="cb50-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
+<span id="cb50-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
+<span id="cb50-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
+<span id="cb50-20"><a></a>;</span>
+<span id="cb50-21"><a></a></span>
+<span id="cb50-22"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
+<span id="cb50-23"><a></a>weight wt;</span>
+<span id="cb50-24"><a></a>tables trt<span class="sc">*</span>severity <span class="sc">/</span>  jt;</span>
+<span id="cb50-25"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-14-2">
+<div id="tabset-15-2">
 <p>The JT statistic was estimated to be 35,697, corresponding to a one-sided p-value <span class="math inline">\(p=0.005\)</span>, which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.</p>
 </div>
 </div>
@@ -1516,7 +1909,7 @@ measure \pm 1.96*ASE
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Chapter 5- <a href="https://madfudolig.quarto.pub/eab770slides/">Back to home</a></p>
+<p>Chapter 5- <a href="https://miguelfudolig.github.io/EAB770-Slides-Website/">Back to home</a></p>
 </div>
 </div></div>
 
