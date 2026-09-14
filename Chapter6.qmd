@@ -14,8 +14,10 @@ format:
     self-contained-math: true
     code-annotations: false
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
+    toc: true
 ---
 
 # Sets of $s \times r$ tables
@@ -28,9 +30,9 @@ format:
 
 ## General Mantel-Haenszel Method
 
--   Recall: 2x2, sx2, 2xr, sxr tables all use Mantel-Haenszel Statistics
+-   Recall: 2x2, and sxr tables all use Mantel-Haenszel Statistics
     -   Able to account for ordinality unlike Pearson Chi-Square tests
-    -   Less stringent sample size requirements
+    -   Less stringent sample size requirements for ordinal variables
 -   MH statistics in sets of contingency tables removes the confounding influence of the stratification variable.
 
 ## General Mantel-Haenszel Method
@@ -66,6 +68,8 @@ Investigators conducted a randomized clinical trial in four hospitals, where pat
 
 The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, **controlling** for hospital effects.
 
+::: panel-tabset
+
 ### SAS Data set
 ```{.r}
 data operate;
@@ -90,9 +94,21 @@ datalines;
 ;
 ```
 
+### R Data Set
+
+Please refer to `operate.csv` for the data.
+
+```{r}
+library(tidyverse)
+operate <- read.csv("operate.csv") |> 
+  mutate(Treatment=factor(Treatment,levels=c("v+d","v+a","v+h","gre")),
+         Severity=factor(Severity,levels=c("none","slight","moderate")))
+```
+
+:::
 ## Example
 
-The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, **controlling** for hospital effects.
+The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, **controlling** for hospital effects. Use rank-based scores.
 
 :::{.panel-tabset}
 ### SAS Code
@@ -101,21 +117,38 @@ The response measured was the severity (none, slight, moderate) of symptoms, whi
 proc freq data=operate order=data;
 weight wt;
 tables hospital*trt*severity / cmh; # <1>
-tables hospital*trt*severity / cmh scores=modridit; # <2>
+tables hospital*trt*severity / cmh scores=ridit; # <2>
 run;
 ```
 
 1. Table Scores
-2. Modridit scores
+2. Rank-based scores
+
+### R Code
+
+```{r}
+
+dat_cc <- xtabs(Count~Treatment+Severity,data=operate)
+dat_cc
+library(vcdExtra)
+
+CMHtest(dat_cc,
+        rscores="midrank",
+        cscores="midrank")
+```
+
 
 ### Answer
 
-Both variables are ordinal, hence we can test for correlation using $Q_{CSMH}$. Using modridit scores, we get $Q_{CSMH}=6.93$, p=0.0085. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.
+Both variables are ordinal, hence we can test for correlation using $Q_{CSMH}$. Using modridit scores, we get $Q_{CSMH}=6.64$, p=0.0100. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.
 :::
 
 ## Exercise 
 
 The following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.
+
+::: panel-tabset
+### SAS Code
 
 ```{.r}
 data shoulder;
@@ -142,6 +175,16 @@ mountain rural small no 85 mountain rural small yes 43
 ;
 ```
 
+### R Code
+
+```{r}
+library(tidyverse)
+harness <- read.csv("harness.csv")
+glimpse(harness)
+```
+
+
+:::
 ## Exercise
 
 
@@ -153,33 +196,44 @@ The following data were collected in a study of shoulder harness usage in observ
 ```{.r}
 proc freq data=shoulder order=data;
 weight count;
-tables area*location*size*usage / cmh scores=modridit;
+tables area*location*size*usage / cmh scores=ridit;
 ;
 run;
 ```
 
+### R Code
+
+```{r}
+dat_cc <- xtabs(Count~CarSize+Usage+Area+Location,data=harness)
+CMHtest(dat_cc,
+        rscores="midrank",
+        cscores="midrank")
+```
+
 ### Answer
 
-Both variables are ordinal. We can use the extended correlation statistic $Q_{CSMH}$. Using modridit scores, $Q_{CSMH}$ =6.64, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated.
+Both variables are ordinal. We can use the extended correlation statistic $Q_{CSMH}$. Using ridit/rank-based scores, $Q_{CSMH}$ =6.44, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated after controlling for geographical area and location.
 
 :::
 
-## Repeated Measures
+# Repeated Measures
 
-- Commonly used in longitudinal studies
-  - Cohort studies
-- Dental experiments: multiple teeth from each subject
-- Mantel-Haenszel statistics can be calculated to determine whether there is an association between a repeated measurement factor (usually time) and a response variable adjusting for an effect of subject.
-  - Controlling for subject adjusts for the variability between subjects, which focuses the analysis to within-subject.
+## Repeated Measures: Application 
+
+Repeated measures are commonly encountered in longitudinal studies (e.g. cohort studies). 
+
+::: callout-note
+Mantel-Haenszel statistics can be calculated to determine whether there is an association between a repeated measurement factor (usually time) and a response variable adjusting for an effect of subject. Controlling for subject adjusts for the variability between subjects, which focuses the analysis to within-subject.
+:::
   
 
 ## Repeated Measures
 
-
-- Consider an experiment with $n$ subjects.
+Consider an experiment with $n$ subjects.
   - The treatment is applied to each subject.
   - The response is measured at $t$ time points. 
   - Cohort studies/ longitudinal RCT
+
 - In general, the repeated measures can come from multiple subjects. Responses can come from:
   - Same location
   - Same family/litter
@@ -204,25 +258,26 @@ $n_{ijk} = 1$ if response $k$ is measured at time $j$. Otherwise, $n_{ijk}=0$
 
 ## Repeated Measures: Hypotheses
 
-- Mantel-Haenszel statistics can be used to test the hypothesis of no association between time and response.
-  - Assumption: marginal totals per subject in response and time is fixed.
-  - $H_0$: The response variable is distributed at random with respect to the time points
-  - The null hypothesis is referred to as the hypothesis of interchangeability or marginal homogeneity.
-- As in previous chapters, $Q_{CSMH}$, $Q_{SMH}$, and $Q_{GMH}$ pertain to different alternatives to no association.
+Mantel-Haenszel statistics can be used to test the hypothesis of no association between time and response under the assumption that marginal totals per subject in response and time is fixed.
 
-## Repeated Measures: Caution
+::: callout-note
+The null hypothesis for Mantel-Haenszel tests for repetaed measures is $H_0$: The response variable is distributed at random with respect to the time points.This null hypothesis is referred to as the hypothesis of interchangeability or marginal homogeneity.
+
+As in previous chapters, $Q_{CSMH}$, $Q_{SMH}$, and $Q_{GMH}$ pertain to different alternatives to no association.
+:::
+
 
 :::callout-warning
 Odds ratio estimates and CI limits assumes independence between contingency table entries, which is broken in repeated measures data. Breslow-Day assumptions are also not satisfied.
 
 The Breslow-Day statistic as well as the MH and logit estimates of the odds ratio should be taken with a grain of salt. 
-
 :::
 
-## Example {.smaller}
+## Example
 
 A running shoe company produces a new model of running shoe that includes a harder material for the insert that corrects for overpronation. However, the company is concerned that the material will induce heel tenderness as a result of some loss of cushioning on the strike of each step. It conducted a study on 87 runners who used the new shoe for a month. Researchers asked the participants whether they experienced occasional heel tenderness before and after they used the new shoe. Is there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?
 
+::: callout-note
 ### SAS Data
 
 ```{.r}
@@ -276,6 +331,22 @@ datalines;
 ;
 
 ```
+
+### R Data
+
+Please refer to `pump.csv` on Canvas.
+
+```{r}
+library(tidyverse)
+
+pump <- read.csv("pump.csv") |> 
+  mutate(Subject = as.factor(Subject))
+glimpse(pump)
+```
+
+
+:::
+
 
 ## Example
 
@@ -342,6 +413,15 @@ run;
 
 1. There's no weight statement because each line is an observational unit.
 
+### R Code
+
+```{r}
+dat_cc<- xtabs(~Time+Response+Subject,data=pump)
+
+mantelhaen.test(dat_cc,correct=F)
+```
+
+
 ### Answer
 
 - We can construct 2x2 tables for each runner and control for each subject. The resulting CMH tables will have the same results because of the shape of the contingency tables.
@@ -367,6 +447,17 @@ run;
 
 ```
 
+In `R`, we can create a repeated measures table and apply the McNemar's test.
+
+```{r}
+dat2 <- pump |> 
+  pivot_wider(names_from=Time,values_from=Response) 
+dat_cc2 <- xtabs(~before+after,data=dat2)
+
+mcnemar.test(dat_cc2,correct=F)
+```
+
+
 The McNemar's test yields the same result as $Q_{CSMH}$.
 :::
 
@@ -376,6 +467,8 @@ The DRUG2 dataset shows the data from a study in which 46 patients were each tre
 
 - Which Mantel-Haenszel statistic is the most appropriate for this example?
 - At a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?
+
+::: panel-tabset
 
 ### SAS Data
 
@@ -405,6 +498,19 @@ end;
 run;
 ```
 
+### R Data
+
+Please refer to `drug.csv` uploaded on Canvas.
+
+```{r}
+drug <- read.csv("drug.csv") |> 
+  mutate(Patient=as.factor(Patient),
+         Outcome=factor(Outcome,levels=c("U","F")))
+glimpse(drug)
+```
+
+:::
+
 ## Exercise
 
 - Which Mantel-Haenszel statistic is the most appropriate for this example?
@@ -419,9 +525,18 @@ tables patient*drug*response/cmh noprint;
 run;
 ```
 
+### R Code
+
+```{r}
+dat_cc <- xtabs(~Drug+Outcome+Patient,data=drug)
+
+CMHtest(dat_cc,overall=T)$ALL
+```
+
+
 ### Answer
 
-The most appropriate MH statistic to examine is "Row Means Differ".
+The most appropriate MH statistic to examine is the mean score statistic, specifically the row means.
 
 The statistic $Q_{SMH}=8.47$ yields a p-value $p=0.0145$. At a significance level of 0.01, there is marginally sufficient evidence that at least one drug has a different probability of a favorable response.
 :::

@@ -15,6 +15,7 @@ format:
     echo: true
   pdf: 
     number-sections: true
+    toc: true
 ---
 
 ```{r}
@@ -644,6 +645,8 @@ dat$Count <- c(27,10,5,14,17,12,5,26,50)
 dat_cc <- xtabs(Count~Treatment+Washability,data=dat)
 dat_cc
 ```
+
+
 ```{r}
 CMHtest(dat_cc)
 
@@ -894,7 +897,8 @@ These are not calculable in `R` for contingency tables.
 
 ## Ordinal Variables
 
-- Association can also be measured by classifying all possible pairs of subjects as concordant or discordant pairs.
+Association can also be measured by classifying all possible pairs of subjects as concordant or discordant pairs.
+
   - Concordant: Subject ranks higher on the row variable also ranks higher on the column variable
   - Discordant: Subject that ranks higher on the row variable also ranks lower on the column variable
   - Depends on relative ordering of the levels of variables
@@ -911,32 +915,60 @@ Measures of association that use these pairs are Gamma $\gamma$, Kendall's $\tau
 
 These measures differ in adjusting for ties and sample size.
 
-- Somers’ D depends on the location of the explanatory variable.
-- Stuart’s $\tau_C$ includes an adjustment for table size  to a correction for ties. Recommended when two ordinal variables under consideration have different numbers of values.
-- Kendall’s $\tau_B$ is preferred when the contingency table is square ($m\times m$)
-- Gamma does not account for ties, so it is only recommended if there are no ties.
+::: panel-tabset
 
-## Measures of Association
+### $\gamma$
 
-When the sample size is large enough, 95% confidence intervals can be calculated for these measures using a normal approximation.
+The Goodman Kruskal's Gamma measures association for two ordinal variables based on the number of discordant and concordant pairs. This ignores any ties that happen in the data set.
+
+
+### $D$
+
+Somers’ Delta ($D$) is the ratio of concordant and discordant pairs divided by the pairs from either row/column variable.
+
+::: callout-note
+Because the denominator is conditional on the margin, $D$ is asymmetric. 
+:::
+
+### $\tau_C$
+Stuart’s $\tau_C$ includes an adjustment for table size  to a correction for ties. This is recommended when two ordinal variables under consideration have different numbers of values.
+
+### $\tau_B$
+
+Kendall’s $\tau_B$ is preferred when the contingency table is square ($m\times m$).
+
+:::
+
+## Measures of Association: `SAS`
+
+The `measures` option in the `tables` statement produces the different measures of association for the contingency tables. When the sample size is large enough, 95% confidence intervals can be calculated for these measures using a normal approximation. These confidence intervals can be produced using the `cl` option.
 
 $$
 measure \pm 1.96*ASE
 $$
 
-where ASE is the asymptotic standard error reported in the `measures` output from the `freq` procedure.
-  - The confidence interval can be calculated using the `cl` option in the `freq` procedure.
-  
+where ASE is the approximate standard error reported in the `measures` output from the `freq` procedure.
+
+## Measures of Association in `R`
+
+The `DescTools` package includes the functions that measures of association for contingency tables.
+
+- `SomersDelta(direction=c("row","column"))`: Somers' Delta
+- `StuartTauC()`: Stuart's $\tau_c$
+- `KendallTauA()`: Kendall's $\tau_a$
+- `GoodmanKruskalGamma()`: Goodman and Kruskal's Gamma
+
+
 ## Exercise
 
 Consider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.
 
-- Pearson correlation
-- Spearman Correlation
-- Gamma
+- Pearson correlation (SAS only)
+- Spearman Correlation (SAS only)
+- Goodman and Kruskal's Gamma
 - Kendall’s $\tau_b$
 - Stuart’s $\tau_c$
-- Somers’ Delta 
+- Somers’ Delta  (C|R)
 
 
 ![](img/wash_C5.png)
@@ -961,6 +993,26 @@ tables treatment*washability /  measures cl;
 run;
 ```
 
+### R Code
+
+```{r}
+dat <- expand.grid(Treatment=c("Water","Standard","Super"),
+                   Washability=c("Low","Medium","High"))
+
+dat$Count <- c(27,10,5,14,17,12,5,26,50)
+
+dat_cc <- xtabs(Count~Treatment+Washability,data=dat)
+dat_cc
+```
+
+```{r}
+library(DescTools)
+GoodmanKruskalGamma(dat_cc,conf.level=0.95)
+KendallTauB(dat_cc,conf.level=0.95)
+StuartTauC(dat_cc,conf.level = 0.95)
+SomersDelta(dat_cc,conf.level = 0.95)
+```
+
 
 
 ### Answer
@@ -968,9 +1020,9 @@ run;
 - Pearson Correlation: 0.55 (0.44,0.67)
 - Spearman Correlation: 0.55 (0.43, 0.66)
 - Gamma: 0.6974 (0.57-0.82)
-- $\tau_b$: 0.50 (0.39,0.61)
-- $\tau_C$: 0.48 (0.37,0.59)
-- Somers' D C|R: 0.49 (0.38,0.59)
+- $\tau_b$: 0.50 (0.39-0.61)
+- $\tau_C$: 0.48 (0.37-0.59)
+- Somers' D C|R: 0.49 (0.38-0.59)
 
 :::
 
@@ -985,6 +1037,13 @@ A random sample of 400 college students are classified according to class status
 - Stuart’s $\tau_c$
 - Somers’ Delta 
 
+```{r}
+dat <- expand.grid(habit = c("Nondrinkers","Moderate","Heavy"),
+                   Status = c("Freshmen","Sophomore","Junior","Senior"))
+
+dat$Count <- c(55,32,29,34,29,41,27,36,33,17,39,28)
+```
+
 ```{.r}
 data drink; # <1>
 input habit $ status $ count @@;
@@ -995,6 +1054,8 @@ hea fres 29 hea soph 41 hea jun 33 hea sen 28
 ;
 ```
 1.  non: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior
+
+
 
 ## Exercise 
 
@@ -1018,7 +1079,24 @@ tables habit*status/measures cl;
 run;
 ```
 
+### R Code
 
+```{r}
+dat <- expand.grid(habit = c("Nondrinkers","Moderate","Heavy"),
+                   Status = c("Freshmen","Sophomore","Junior","Senior"))
+
+dat$Count <- c(55,32,29,34,29,41,27,36,33,17,39,28)
+```
+
+```{r}
+dat_cc <- xtabs(Count~habit+Status,data=dat)
+dat_cc
+
+GoodmanKruskalGamma(dat_cc,conf.level=0.95)
+KendallTauB(dat_cc,conf.level=0.95)
+StuartTauC(dat_cc,conf.level = 0.95)
+SomersDelta(dat_cc,conf.level = 0.95,direction="column")
+```
 
 ### Answer
 
@@ -1027,7 +1105,7 @@ run;
 - Gamma: 0.18 (0.07,0.30)
 - $\tau_b$: 0.13 (0.05,0.21)
 - $\tau_C$: 0.14 (0.05,0.22)
-- Somers' D C|R: 0.14 (0.05,0.22)
+- Somers' D R|C: 0.12 (0.05,0.20)
 
 :::
 
@@ -1038,17 +1116,9 @@ It is slightly tricky to define association between two nominal variables. There
 - Lambda $\lambda$
 - Uncertainty coefficients
 
-Both of these measures are included in the `measures` output.
+## Goodman Kruskal Lambda $\lambda$
 
-:::callout-warning
-Note that SAS will calculate all measures despite the nature of the variables. It is your job as an analyst to only report the relevant measures.
-
-Do not use ordinal measures for nominal variables. Do not use nominal measures for ordinal variables
-:::
-
-## Lambda $\lambda$
-
-Lambda measures the probable improvement in predicting the column variable given knowledge of the row variable.
+Goodman Kruskal Lambda measures the probable improvement in predicting the column variable given knowledge of the row variable.
 
 - Asymmetric: Can be C|R or R|C depending on where the explanatory variable is located
 - Symmetric: weighted average of the two asymmetric $\lambda$ values.
@@ -1060,7 +1130,32 @@ The uncertainty coefficient, similar to $R^2$, measures the proportion of uncert
 - Asymmetric: Can be C|R or R|C depending on where the explanatory variable is located
 - Symmetric: weighted average of the two asymmetric uncertainty coefficients.
 
+## Nominal Variables: `SAS`
 
+Both the Goodman Kruskal Lambda and uncertainty measures are included in the `measures` output.
+
+:::callout-warning
+Note that SAS will calculate all measures despite the nature of the variables. It is your job as an analyst to only report the relevant measures.
+
+Do not use ordinal measures for nominal variables. Do not use nominal measures for ordinal variables
+:::
+
+## Nominal Variables: `R`
+
+The `Lambda()` and `UncertCoef()` functions in DescTools calculate the Goodman Kruskal Lambda and Uncertainty measures, respectively. 
+
+::: callout-note
+Because the measures could be symmetric or asymmetric, both functions can specify the direction as "symmetric","row", or "column".
+
+```{r}
+#| eval: false
+
+Lambda(contingencytable, direction=c("symmetric","row","column"),conf.level = 0.95)
+UncertCoef(contingencytable, direction=c("symmetric","row","column"),conf.level = 0.95)
+
+```
+
+:::
 ## Exercise
 
 ::::: columns
@@ -1105,13 +1200,28 @@ measures cl;
 run;
 ```
 
+### R Code
+
+```{r}
+library(DescTools)
+dat <- expand.grid(Party=c("Democrat","Independent","Republican"),
+                   Neighborhood = c("Bayside","Highland","Longview","Sheffield"))
+
+dat$count <- c(221,200,208,160,291,106,360,160,316,140,311,97)
+
+dat_cc <- xtabs(count~Party+Neighborhood,data=dat)
+dat_cc
+
+Lambda(dat_cc, direction=c("symmetric"),conf.level = 0.95)
+UncertCoef(dat_cc, direction=c("symmetric"),conf.level = 0.95)
+```
 
 
 ### Answer
 
 You can choose to report the asymmetric $\lambda$, symmetric $\lambda$, asymmetric uncertainty coefficient, or the symmetric uncertainty coefficient. 
 
-The asymmetric uncertainty coefficient R|C is estimated to be 0.05 (95% CI: 0.04,0.06). The estimated proportion of uncertainty in party affiliation explained by the neighborhood is estimated to be 0.05.
+The symmetric $\lambda$ is estimated to be 0.11 (95% CI: 0.09,0.13). The estimated proportion of uncertainty in party affiliation explained by the neighborhood is estimated to be 0.04 (0.03, 0.05).
 :::
 
 # Observer Agreement
@@ -1120,10 +1230,8 @@ The asymmetric uncertainty coefficient R|C is estimated to be 0.05 (95% CI: 0.04
 
 Errors are inevitable in making measurements!
 
-  - Biggest error: Observer error
-
 :::callout-note
-How do we account for observer error, especially for multiple observer measurements?
+The biggest error is observer error, when observers do not agree about the measurement. How do we account for observer error, especially for multiple observer measurements?
 :::
 
 ## Observer Agreement: $\kappa$
@@ -1136,6 +1244,14 @@ The kappa statistic $\kappa$ measures the extent of agreement between two observ
 - $\kappa \geq$ 0.4: moderate agreement
 
 ::: callout-note
+
+Rule of thumb: 
+
+- $\kappa$=0: any agreement is made by chance
+- $\kappa$=1: perfect agreement
+- $\kappa \geq$ 0.8: excellent agreement
+- $\kappa \geq$ 0.4: moderate agreement
+
 This is similar to the intraclass correlation coefficient in ANOVA models.
 :::
   
@@ -1150,37 +1266,78 @@ where $\Pi_O$ is the probability that observers agreed based on the data, $\Pi_E
 
 ## Observer Agreement
 
-- When there is order in the categories, we might need to account how different the disagreements are.
-- We can use weighted $\kappa$ measurements such as:
+When there is order in the categories, we might need to account how different the disagreements are.
+
+::: callout-note
+We can use weighted $\kappa$ measurements such as:
   - Cicchetti-Allison weights puts more weight on cells closest to the diagonal.
   - Fleiss-Cohen kappa weights use a squared distance between categories, which penalizes highly discordant pairs.
-
+:::
 
 ## Bowker's Test
 
-- Tests whether the contingency table is symmetric about the diagonals.
-  - Works for square tables 
-  - Same as McNemar’s test when the table is $2\times 2$
+The Bowker's test tests whether the contingency table is symmetric about the diagonals.The test works for square tables.
 
+::: callout-note
+The test is equivalent to the McNemar’s test when the table is $2\times 2$.
+:::
 
 ## Observer Agreement: SAS
 
 - The `AGREE` option in the tables statement generates the kappa statistics and Bowker’s symmetry test.
   - `AGREE (WT=FC)` specifies to use the *Fleiss-Cohen* criterion for the Weighted Kappa statistic.
+  -  Not specifying `(WT=FC)` will produce the Cichetti-Allison criterion instead.
 - The agreement plot is also shown.
   - Comparison of shaded portions of the rectangles to the entire area of the rectangle provides information about the agreement between the two raters.
 - Exact testing can also be done by specifying `KAPPA` in the `EXACT` statement.
   - Small cell counts with multiple 0 cell counts.
 
+## Observer Agreement: `R`
+
+::: panel-tabset
+
+### $\kappa$
+
+The `Kappa()` function in the `vcd` package calculates the Cohen's kappa statistic.
+
+::: callout-tip
+We can also specify which weights we use to calculate the weighted kappa statistic. By default, the weighting method used is the Cichetti-Allison method, also referred to as "Equal-Spacing". To use the Fleiss-Cohen weighting method, we need to specify "Fleiss-Cohen".
+
+```{r}
+#| eval: false
+
+
+K_CA <-Kappa(contingencytable,weight="Equal-Spacing")
+K_CA
+confint(K_CA)
+
+K_FC <- Kappa(contingencytable,weight="Fleiss-Cohen")
+K_FC
+confint(K_FC)
+```
+
+To perform Bowker's Test, we can use the `mcnemar.test()` function in `R`, similar to how we can use `mcnemar.test()` to perform the McNemar's test.
+:::
+
+### Agreement Plot
+
+Agreement plots can be used to visualize observer agreements. These can be generated using the `agreementplot()` function in the `vcd` package in `R`.
+
+:::
+
+
 ## Example 
 
-- The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
-  - Calculate the estimate and 95% confidence interval for the simple and weighted Kappa statistic.
+The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
+
+  - Calculate the estimate and 95% confidence interval for the simple and Fleiss-Cohen weighted Kappa statistic.
   - What can you say about the agreement between the New Orleans and Winnipeg neurologists?
 
 ![](img/neuro_C5.png)
 
-### SAS Code
+::: panel-tabset
+
+### SAS Data
 
 ```{.r}
 data classify;
@@ -1193,11 +1350,26 @@ datalines;
 ;
 ```
 
+### R Data
+
+```{r}
+dat <- expand.grid(NO=1:4,
+                   WN=1:4)
+
+dat$count <- c(38,33,10,3,5,11,14,7,0,3,5,3,1,0,6,10)
+
+dat_cc <- xtabs(count~NO+WN,data=dat)
+dat_cc
+```
+
+
+:::
 
 ## Example 
 
-- The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
-  - Calculate the estimate and 95% confidence interval for the simple and weighted Kappa statistic.
+The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
+
+  - Calculate the estimate and 95% confidence interval for the simple and Fleiss-Cohen weighted Kappa statistic.
   - What can you say about the agreement between the New Orleans and Winnipeg neurologists?
   
 ::: {.panel-tabset}
@@ -1220,12 +1392,23 @@ run;
 
 ```
 
+### R Code
+
+```{r}
+agreementplot(dat_cc)
+
+K_FC <- Kappa(dat_cc,weights="Fleiss-Cohen")
+
+K_FC
+confint(K_FC)
+```
+
 ### Answer
 
 Simple $\kappa$: 0.21 (0.11,0.31)
-Weighted $\kappa$: 0.38 (0.28,0.48)
+Weighted $\kappa$: 0.52 (0.41,0.64)
 
-Since the weighted $\kappa$ is higher than the simple $\kappa$, we can infer that there were more disagreements closer to the diagonal. There is a slight to moderate agreement between the two neurologists.
+Since the weighted $\kappa$ is higher than the simple $\kappa$, we can infer that there were more disagreements closer to the diagonal. There is moderate agreement between the two neurologists based on the weighted $\kappa$.
 :::
 
 ## Exercise 
@@ -1235,6 +1418,10 @@ Two radiologists rated 85 patients with respect to liver lesions. The ratings we
 
 - Calculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.
 - Compare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.
+
+::: panel-tabset
+
+### SAS Data
 
 ```{.r}
 
@@ -1262,12 +1449,23 @@ run;
 
 ```
 
+### R Data
+
+Please refer to `radiology.csv`
+```{r}
+radio <- read.csv("radiology.csv") |> 
+  mutate(across(c("Rater1","Rater2"),~as.factor(.x)))
+glimpse(radio)
+```
+
+:::
+
 ## Exercise 
 Two radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:
 
 0 ='Normal'; 1 ='Benign’ ; 2 ='Suspected'; 3 ='Cancer’
 
-- Calculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.
+- Calculate the simple and weighted (Cichetti-Allison and Fleiss-Cohen) kappa statistics and the corresponding 95% confidence intervals.
 - Compare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.
 
 
@@ -1304,10 +1502,27 @@ exact kappa;
 run;
 ```
 
+### R Code
+
+```{r}
+dat_cc <- xtabs(Count~Rater1+Rater2,data=radio)
+dat_cc
+
+K_CA <-Kappa(dat_cc,weight="Equal-Spacing")
+K_CA
+confint(K_CA)
+
+K_FC <- Kappa(dat_cc,weight="Fleiss-Cohen")
+K_FC
+confint(K_FC)
+```
+
+
 ### Answer
 
 Simple $\kappa$: 0.47 (0.33,0.62)
-Weighted $\kappa$: 0.57 (0.44,0.70)
+Cichetti-Allison Weighted $\kappa$: 0.57 (0.44,0.70)
+Fleiss-Cohen Weighted $\kappa$: 0.67 (0.54,0.80)
 
 The exact p-value is p<0.001, which shows there is sufficient evidence of an agreement between the radiologists. Based on the simple and weighted kappa values, there is moderate agreement between the two radiologists.
 :::
@@ -1324,21 +1539,51 @@ The exact p-value is p<0.001, which shows there is sufficient evidence of an agr
 
 ## Test for Ordered Differences 
 
-The Jonckheere-Terpstra test is a nonparametric test that is based on sums of Mann-Whitney test statistics
+The Jonckheere-Terpstra test is a nonparametric rank-based test that is based on sums of Mann-Whitney test statistics. This test detects whether there are differences in the trend of group effects.
 
-  - Rank-based test
-
-This test detects whether there are differences in the trend of group effects.
-
-  - Are the scores strictly increasing or decreasing?
-
+  
 :::callout-note
-The null hypothesis $H_0$ assumes that the distribution of ordered responses is the same for all groups. For one-sided tests, this tests detect whether $d_1 \leq d_2 \leq... d_s$ where $d_i$ corresponds to the $i^{th}$ group effect.
+The test performs the hypothesis test that answers the question "Are the scores strictly increasing or decreasing?"
+
+The null hypothesis $H_0$ assumes that the distribution of ordered responses is the same for all groups. 
+
+For one-sided tests, this tests detect whether $d_1 \leq d_2 \leq... d_s$ where $d_i$ corresponds to the $i^{th}$ group effect.
+
+For two-sided tests, this tests detect whether there is a monotonic trend across the different groups.
 :::
+
+## Jonckheere-Terpstra Test: `SAS`
 
 :::callout-note
 The Jonckheere-Terpstra test can be performed by adding the `JT` option to the `tables` statement. An exact implementation of the Jonckheere-Terpstra test can also be performed by adding the `JT` option to the `exact` statement.
 ::: 
+
+
+## Jonckheere-Terpstra Test: `R`
+
+An exact implementation of the Jonckheere-Terpstra test can be performed using the `JonckheereTerpstraTest()` function in the `DescTools` package.
+
+::: callout-tip
+Unlike the previous examples, the `JonckheereTerpstraTest()` function does not take a contingency table as input. It needs line-level input with a column for the `dependent` variable and the `independent` variable.
+
+```{r}
+#| eval: false
+
+JonckheereTerpstraTest(dependent~independent,
+                       data=example_data,
+                       alternative = c("two.sided","increasing","decreasing"),
+                       nperm=10000)
+
+JonckheereTerpstraTest(dependent~independent,
+                       data=example_data,
+                       alternative = c("two.sided","increasing","decreasing"), 
+                       nperm=10000,
+                       exact=T) #for exact tests
+
+```
+
+:::
+
 
 ## Example 
 
@@ -1351,6 +1596,7 @@ Investigators conducted a randomized clinical trial in four hospitals, where pat
 
 The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is increasing as the amount of gastric tissue removed increased. Ignore hospital effects.
 
+::: panel-tabset
 ### SAS Code
 ```{.r}
 data operate;
@@ -1375,8 +1621,21 @@ datalines;
 ;
 ```
 
+### R Data
+
+Please refer to `operate.csv` for the data.
+
+```{r}
+library(tidyverse)
+operate <- read.csv("operate.csv") |> 
+  uncount(weights=Count) |> 
+  mutate(Treatment=factor(Treatment,levels=c("v+d","v+a","v+h","gre")),
+         Severity=factor(Severity,levels=c("none","slight","moderate")))
+glimpse(operate)
+```
 
 
+:::
 
 ## Example 
 
@@ -1420,6 +1679,13 @@ weight wt;
 tables trt*severity /  jt;
 run;
 ```
+
+### R Code
+
+```{r}
+JonckheereTerpstraTest(Severity~Treatment,data=operate,alternative="increasing",nperm=10000)
+```
+
 
 ### Answer
 

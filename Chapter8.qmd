@@ -12,6 +12,7 @@ format:
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
 editor: 
@@ -24,50 +25,38 @@ editor:
 ## Outline
 
 -   Dichotomous Explanatory Variables
-    -   The LOGISTIC procedure
-    -   CLASS statement
 -   Qualitative Explanatory Variables
 -   Continuous and Ordinal Explanatory Variables
 -   Diagnostics
 -   Likelihood methods
-    -   The GENMOD procedure
+
 
 ## Review: Mantel-Haenszel Tests
 
--   Mantel-Haenszel statistics investigate association between two
-    variables with adjustment for a stratification variable.
+Mantel-Haenszel statistics investigate association between two variables with adjustment for a stratification variable.
     -   General association
     -   Location shifts for means
-    -   Linear/increasing trends -Mantel-Haenszel does not involve
-        statistical models.
-    -   Can’t be used for estimation
+    -   Linear/increasing trends 
+    
+::: callout-note
+Mantel-Haenszel Tests do not involve statistical models, and therefore can’t be used for estimation for effect sizes or prediction. Furthermore, these tests cannot accommodate for continuous variables as predictors.
+:::
 
 ## Logistic Regression
 
--   Statistical modeling method that enables us to:
-    -   make inferences
-    -   estimate/predict outcome variables
--   Describes the relationship between a categorical response variable
-    and multiple explanatory variables
-    -   Continuous explanatory variables can be included in the analysis
-    -   Responses can be dichotomous or polytomous
+Statistical modeling method that enables us to make inferences, estimate/predict outcome variables, and describe the relationship between a categorical response variable and multiple explanatory variables. Possible applications include epidemiology, medical research, agronomy, and social science research.
 
-## Logistic Regression
+::: callout-note
+Continuous explanatory variables can be included in the analysis, unlike in Mantel-Haenszel tests. Responses can be dichotomous or polytomous (more than two levels).
+:::
 
--   Possible applications include epidemiology, medical research,
-    agronomy, and social science research.
-
-## Logistic Regression: Dichotomous Variables
-
--   When both response and explanatory variables are dichotomous, it
-    corresponds to a $2 \times 2$ table.
-    -   Rows pertain to groups/populations/subpopulations
--   Logistic regression enables us to write a model for the probability
-    of success for each group.
+# Dichotomous Response
 
 ## Logistic Regression: Model
 
-Let $\theta_{mi}$ be the probability of success fo the $i^{th}$ group in
+Logistic regression enables us to write a model for the probability of success for each group.
+
+Let $\theta_{mi}$ be the probability of success of the $i^{th}$ group in
 the $m^{th}$ strata.The logistic model can be used to describe the
 variation among {$\theta_{mi}$}
 
@@ -81,7 +70,9 @@ Where
 
 $$
 \eta_{mi} = \alpha + \sum_{k=1}^t \beta_kx_{mik}
-$$ and $t$ is the number of explanatory variables.
+$$ 
+
+and $t$ is the number of explanatory variables.
 
 ::: callout-note
 $\eta_{mi}$ is referred to as the linear predictor of the model.
@@ -99,6 +90,8 @@ $$
 $\log\left[\frac{\theta_{mi}}{1-\theta_{mi}}\right]$ is referred to as
 the **logit** transformation of $\theta_{mi}$, which is the logarithm of
 the odds.
+
+Other functions that can serve as a link function include the probit model and the complementary log-log model.
 :::
 
 ## Odds and Odds Ratios
@@ -121,7 +114,7 @@ $$
 
 -   The logit transformation enables us to monitor the change in log
     odds.
--   Easy to calculate ods ratio.
+-   Easy to calculate odds ratio.
 -   The linear predictor can take on values from $(-\infty,\infty)$, but
     the values of $\theta_{mi}$ will be constrained in \[0,1\].
 
@@ -164,7 +157,7 @@ test for a goodness of fit.
 -   Both cases are accounted for using generalized linear mixed
     models/generalized estimating equations.
 
-## Chi-square statistics: sample size
+## Chi-square statistics: Sample Size
 
 Sample size guidelines for the chi-square assumption for these fit
 statistics include:
@@ -175,45 +168,40 @@ statistics include:
 -   Failure to satisfy these assumptions means exact tests should be
     used.
 
-## Chi-square statistics: hypothesis test
+## Chi-square statistics: Hypothesis Test
 
 The null hypothesis for both deviance and goodness-of-fit tests is that
 the departures of the observed data from the predicted values based on
 the model are random.
 
--   Failure to reject the null hypothesis means we have no evidence
-    against good agreement between observed and predicted values based
-    on the model.
+::: callout-note
+Failure to reject the null hypothesis means we have no evidence against good agreement between observed and predicted values based on the model.
+:::
 
 ## Fit Statistics
 
--   The Akaike Infomation Criterion (AIC) and the Bayesian Information
-    Criterion (BIC) can also be used to assess model fit.
-
-::: callout-note
-The Bayesian Information Criterion is also known as the Schwarz
-Criterion (SC).
-:::
+The Akaike Infomation Criterion (AIC) and the Bayesian Information Criterion (BIC)/Schwarz Criterion (SC) can also be used to assess model fit. Lower values of these criteria indicate better model fit.
 
 ::: callout-note
 AIC predicts estimation error based on the provided model. BIC also
 predicts estimation error but uses a different penalization scheme for
 errors.
+
+The AIC (or BIC) for the full model (intercept + covariates) should be lower than the AIC (or BIC) of the intercept-only model if the covariates are associated with the response.
+
 :::
 
--   The AIC (or BIC) for the full model (intercept + covariates) should
-    be lower than the AIC (or BIC) of the intercept-only model.
 
 ## The Main Effect Model
 
 Recall that the linear predictor can be written as:
 
 $$
-\eta_i = \alpha + \beta_1x_{i1} + \beta_2x_{i2} + ...
+\eta_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + ...
 $$ 
 
 ::: callout-note 
-$\alpha$ is the intercept of the linear model 
+$\beta_0$ is the intercept of the linear model 
 :::
 
 ::: callout-note
@@ -223,13 +211,11 @@ coefficients will tell us the effect of predictor $x_{ik}$.
 
 ## The Main Effect Model
 
--   The current form of the linear predictor assumes the explanatory
-    variables are in quantitative form.
--   When the explanatory variables are categorical, we need to create
-    dichotomous dummy variables to denote each level of the variables.
-    -   The case $x_{ik}=0$ is called the reference level of the
-        variables. When all $x_{ik}=0$ the linear predictor collapses to
-        the intercept $\alpha$.
+The current form of the linear predictor assumes the explanatory variables are in quantitative form. When the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.
+    
+::: callout-note    
+The case $x_{ik}=0$ is called the reference level of the variables. When all $x_{ik}=0$ the linear predictor collapses to        the intercept $\beta_0$.
+:::
 
 ::: callout-note
 For dummy dichotomous variables, odds ratios can be calculated as an
@@ -243,14 +229,14 @@ The main effect model follows a regression framework, which means we can
 use ANOVA to test for effect significance.
 :::
 
-## The LOGISTIC Procedure
+## `SAS`: The LOGISTIC Procedure
 
 The LOGISTIC procedure can perform logistic regression in SAS.
 
 -   Can take both categorical and continuous explanatory variable
 -   Syntax is slightly different from the FREQ procedure.
 
-## The LOGISTIC Procedure
+## `SAS`: The LOGISTIC Procedure
 
 The LOGISTIC procedure provides estimates for $\beta$ as in regression
 analysis.

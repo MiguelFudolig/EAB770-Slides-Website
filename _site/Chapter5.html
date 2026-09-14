@@ -415,27 +415,27 @@ Q_P = \sum_{i=1}^s\sum_{j=1}^r \frac{(n_{ij}-m_{ij})^2}{m_{ij}}
 <p><img data-src="img/party_C5.png"></p>
 </div>
 <div id="tabset-2-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1"></a>data neighbor;</span>
-<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
-<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4"></a>datalines;</span>
-<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5"></a>democrat longview <span class="dv">360</span> democrat bayside <span class="dv">221</span></span>
-<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6"></a>democrat sheffeld <span class="dv">140</span> democrat highland <span class="dv">160</span></span>
-<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7"></a>republican longview <span class="dv">316</span> republican bayside <span class="dv">208</span></span>
-<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8"></a>republican sheffeld <span class="dv">97</span> republican highland <span class="dv">106</span></span>
-<span id="annotated-cell-9-9"><a href="#annotated-cell-9-9"></a>independent longview <span class="dv">160</span> independent bayside <span class="dv">200</span></span>
-<span id="annotated-cell-9-10"><a href="#annotated-cell-9-10"></a>independent sheffeld <span class="dv">311</span> independent highland <span class="dv">291</span></span>
-<span id="annotated-cell-9-11"><a href="#annotated-cell-9-11"></a>;</span>
-<span id="annotated-cell-9-12"><a href="#annotated-cell-9-12"></a></span>
-<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13"></a>proc freq data<span class="ot">=</span>neighbor;</span>
-<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14"></a>weight count;</span>
-<span id="annotated-cell-9-15"><a href="#annotated-cell-9-15"></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-16" class="code-annotation-target"><a href="#annotated-cell-9-16"></a>plots<span class="ot">=</span>mosaicplot chisq cmh nocol nopct;</span>
-<span id="annotated-cell-9-17"><a href="#annotated-cell-9-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>data neighbor;</span>
+<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4"></a>datalines;</span>
+<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5"></a>democrat longview <span class="dv">360</span> democrat bayside <span class="dv">221</span></span>
+<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6"></a>democrat sheffeld <span class="dv">140</span> democrat highland <span class="dv">160</span></span>
+<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7"></a>republican longview <span class="dv">316</span> republican bayside <span class="dv">208</span></span>
+<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8"></a>republican sheffeld <span class="dv">97</span> republican highland <span class="dv">106</span></span>
+<span id="annotated-cell-7-9"><a href="#annotated-cell-7-9"></a>independent longview <span class="dv">160</span> independent bayside <span class="dv">200</span></span>
+<span id="annotated-cell-7-10"><a href="#annotated-cell-7-10"></a>independent sheffeld <span class="dv">311</span> independent highland <span class="dv">291</span></span>
+<span id="annotated-cell-7-11"><a href="#annotated-cell-7-11"></a>;</span>
+<span id="annotated-cell-7-12"><a href="#annotated-cell-7-12"></a></span>
+<span id="annotated-cell-7-13"><a href="#annotated-cell-7-13"></a>proc freq data<span class="ot">=</span>neighbor;</span>
+<span id="annotated-cell-7-14"><a href="#annotated-cell-7-14"></a>weight count;</span>
+<span id="annotated-cell-7-15"><a href="#annotated-cell-7-15"></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-16" class="code-annotation-target"><a href="#annotated-cell-7-16"></a>plots<span class="ot">=</span>mosaicplot chisq cmh nocol nopct;</span>
+<span id="annotated-cell-7-17"><a href="#annotated-cell-7-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="16" data-code-annotation="1">Included both <code>chisq</code> and <code>cmh</code> to show discrepancy.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="16" data-code-annotation="1">Included both <code>chisq</code> and <code>cmh</code> to show discrepancy.</span>
 </dd>
 </dl>
 </div>
@@ -838,20 +838,20 @@ general    General association 14.4030  8 0.0718470</code></pre>
 </div>
 </div>
 <div id="tabset-5-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-28"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-28-1"><a href="#annotated-cell-28-1"></a>proc freq data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-28-2"><a href="#annotated-cell-28-2"></a>weight count;</span>
-<span id="annotated-cell-28-3"><a href="#annotated-cell-28-3"></a>tables pregnancy<span class="sc">*</span>outcome <span class="sc">/</span> cmh nocol nopct;</span>
-<span id="annotated-cell-28-4"><a href="#annotated-cell-28-4"></a>run;</span>
-<span id="annotated-cell-28-5"><a href="#annotated-cell-28-5"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-28-6" class="code-annotation-target"><a href="#annotated-cell-28-6"></a>proc means data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-28-7"><a href="#annotated-cell-28-7"></a>freq count;</span>
-<span id="annotated-cell-28-8"><a href="#annotated-cell-28-8"></a>class pregnancy;</span>
-<span id="annotated-cell-28-9"><a href="#annotated-cell-28-9"></a>var score;</span>
-<span id="annotated-cell-28-10"><a href="#annotated-cell-28-10"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-26"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-26-1"><a href="#annotated-cell-26-1"></a>proc freq data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-26-2"><a href="#annotated-cell-26-2"></a>weight count;</span>
+<span id="annotated-cell-26-3"><a href="#annotated-cell-26-3"></a>tables pregnancy<span class="sc">*</span>outcome <span class="sc">/</span> cmh nocol nopct;</span>
+<span id="annotated-cell-26-4"><a href="#annotated-cell-26-4"></a>run;</span>
+<span id="annotated-cell-26-5"><a href="#annotated-cell-26-5"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-26" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-26-6" class="code-annotation-target"><a href="#annotated-cell-26-6"></a>proc means data<span class="ot">=</span>preg order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-26-7"><a href="#annotated-cell-26-7"></a>freq count;</span>
+<span id="annotated-cell-26-8"><a href="#annotated-cell-26-8"></a>class pregnancy;</span>
+<span id="annotated-cell-26-9"><a href="#annotated-cell-26-9"></a>var score;</span>
+<span id="annotated-cell-26-10"><a href="#annotated-cell-26-10"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-28" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-26" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="6" data-code-annotation="1">The <code>means</code> procedure is shown to display the mean scores and how they indeed differ for each pregnancy order.</span>
+<span data-code-cell="annotated-cell-26" data-code-lines="6" data-code-annotation="1">The <code>means</code> procedure is shown to display the mean scores and how they indeed differ for each pregnancy order.</span>
 </dd>
 </dl>
 </div>
@@ -1404,13 +1404,11 @@ alternative hypothesis: two.sided</code></pre>
 </section>
 <section id="ordinal-variables-1" class="slide level2">
 <h2>Ordinal Variables</h2>
-<ul>
-<li>Association can also be measured by classifying all possible pairs of subjects as concordant or discordant pairs.
+<p>Association can also be measured by classifying all possible pairs of subjects as concordant or discordant pairs.</p>
 <ul>
 <li>Concordant: Subject ranks higher on the row variable also ranks higher on the column variable</li>
 <li>Discordant: Subject that ranks higher on the row variable also ranks lower on the column variable</li>
 <li>Depends on relative ordering of the levels of variables</li>
-</ul></li>
 </ul>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -1432,31 +1430,65 @@ alternative hypothesis: two.sided</code></pre>
 <section id="measures-of-association-2" class="slide level2">
 <h2>Measures of Association</h2>
 <p>These measures differ in adjusting for ties and sample size.</p>
-<ul>
-<li>Somers’ D depends on the location of the explanatory variable.</li>
-<li>Stuart’s <span class="math inline">\(\tau_C\)</span> includes an adjustment for table size to a correction for ties. Recommended when two ordinal variables under consideration have different numbers of values.</li>
-<li>Kendall’s <span class="math inline">\(\tau_B\)</span> is preferred when the contingency table is square (<span class="math inline">\(m\times m\)</span>)</li>
-<li>Gamma does not account for ties, so it is only recommended if there are no ties.</li>
-</ul>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1"><span class="math inline">\(\gamma\)</span></a></li><li><a href="#tabset-10-2"><span class="math inline">\(D\)</span></a></li><li><a href="#tabset-10-3"><span class="math inline">\(\tau_C\)</span></a></li><li><a href="#tabset-10-4"><span class="math inline">\(\tau_B\)</span></a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
+<p>The Goodman Kruskal’s Gamma measures association for two ordinal variables based on the number of discordant and concordant pairs. This ignores any ties that happen in the data set.</p>
+</div>
+<div id="tabset-10-2">
+<p>Somers’ Delta (<span class="math inline">\(D\)</span>) is the ratio of concordant and discordant pairs divided by the pairs from either row/column variable.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Because the denominator is conditional on the margin, <span class="math inline">\(D\)</span> is asymmetric.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-10-3">
+<p>Stuart’s <span class="math inline">\(\tau_C\)</span> includes an adjustment for table size to a correction for ties. This is recommended when two ordinal variables under consideration have different numbers of values.</p>
+</div>
+<div id="tabset-10-4">
+<p>Kendall’s <span class="math inline">\(\tau_B\)</span> is preferred when the contingency table is square (<span class="math inline">\(m\times m\)</span>).</p>
+</div>
+</div>
+</div>
 </section>
-<section id="measures-of-association-3" class="slide level2">
-<h2>Measures of Association</h2>
-<p>When the sample size is large enough, 95% confidence intervals can be calculated for these measures using a normal approximation.</p>
+<section id="measures-of-association-sas" class="slide level2">
+<h2>Measures of Association: <code>SAS</code></h2>
+<p>The <code>measures</code> option in the <code>tables</code> statement produces the different measures of association for the contingency tables. When the sample size is large enough, 95% confidence intervals can be calculated for these measures using a normal approximation. These confidence intervals can be produced using the <code>cl</code> option.</p>
 <p><span class="math display">\[
 measure \pm 1.96*ASE
 \]</span></p>
-<p>where ASE is the asymptotic standard error reported in the <code>measures</code> output from the <code>freq</code> procedure. - The confidence interval can be calculated using the <code>cl</code> option in the <code>freq</code> procedure.</p>
+<p>where ASE is the approximate standard error reported in the <code>measures</code> output from the <code>freq</code> procedure.</p>
+</section>
+<section id="measures-of-association-in-r" class="slide level2">
+<h2>Measures of Association in <code>R</code></h2>
+<p>The <code>DescTools</code> package includes the functions that measures of association for contingency tables.</p>
+<ul>
+<li><code>SomersDelta(direction=c("row","column"))</code>: Somers’ Delta</li>
+<li><code>StuartTauC()</code>: Stuart’s <span class="math inline">\(\tau_c\)</span></li>
+<li><code>KendallTauA()</code>: Kendall’s <span class="math inline">\(\tau_a\)</span></li>
+<li><code>GoodmanKruskalGamma()</code>: Goodman and Kruskal’s Gamma</li>
+</ul>
 </section>
 <section id="exercise-4" class="slide level2">
 <h2>Exercise</h2>
 <p>Consider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.</p>
 <ul>
-<li>Pearson correlation</li>
-<li>Spearman Correlation</li>
-<li>Gamma</li>
+<li>Pearson correlation (SAS only)</li>
+<li>Spearman Correlation (SAS only)</li>
+<li>Goodman and Kruskal’s Gamma</li>
 <li>Kendall’s <span class="math inline">\(\tau_b\)</span></li>
 <li>Stuart’s <span class="math inline">\(\tau_c\)</span></li>
-<li>Somers’ Delta</li>
+<li>Somers’ Delta (C|R)</li>
 </ul>
 
 <img data-src="img/wash_C5.png" class="r-stretch"></section>
@@ -1464,9 +1496,9 @@ measure \pm 1.96*ASE
 <h2>Exercise</h2>
 <p>Consider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.</p>
 <div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">SAS Code</a></li><li><a href="#tabset-10-2">Answer</a></li></ul>
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">R Code</a></li><li><a href="#tabset-11-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-10-1">
+<div id="tabset-11-1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>data wash;</span>
 <span id="cb50-2"><a></a>input treatment <span class="sc">$</span> washability <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb50-3"><a></a>datalines;</span>
@@ -1479,14 +1511,55 @@ measure \pm 1.96*ASE
 <span id="cb50-10"><a></a>tables treatment<span class="sc">*</span>washability <span class="sc">/</span>  measures cl;</span>
 <span id="cb50-11"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-10-2">
+<div id="tabset-11-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Treatment=</span><span class="fu">c</span>(<span class="st">"Water"</span>,<span class="st">"Standard"</span>,<span class="st">"Super"</span>),</span>
+<span id="cb51-2"><a></a>                   <span class="at">Washability=</span><span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"Medium"</span>,<span class="st">"High"</span>))</span>
+<span id="cb51-3"><a></a></span>
+<span id="cb51-4"><a></a>dat<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">27</span>,<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">14</span>,<span class="dv">17</span>,<span class="dv">12</span>,<span class="dv">5</span>,<span class="dv">26</span>,<span class="dv">50</span>)</span>
+<span id="cb51-5"><a></a></span>
+<span id="cb51-6"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>Treatment<span class="sc">+</span>Washability,<span class="at">data=</span>dat)</span>
+<span id="cb51-7"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Washability
+Treatment  Low Medium High
+  Water     27     14    5
+  Standard  10     17   26
+  Super      5     12   50</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb53-2"><a></a><span class="fu">GoodmanKruskalGamma</span>(dat_cc,<span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    gamma    lwr.ci    upr.ci 
+0.6974391 0.5727748 0.8221035 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">KendallTauB</span>(dat_cc,<span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    tau_b    lwr.ci    upr.ci 
+0.4969046 0.3883285 0.6054808 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="fu">StuartTauC</span>(dat_cc,<span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     tauc    lwr.ci    upr.ci 
+0.4803310 0.3734224 0.5872395 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a><span class="fu">SomersDelta</span>(dat_cc,<span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   somers    lwr.ci    upr.ci 
+0.5076516 0.3948344 0.6204687 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-3">
 <ul>
 <li>Pearson Correlation: 0.55 (0.44,0.67)</li>
 <li>Spearman Correlation: 0.55 (0.43, 0.66)</li>
 <li>Gamma: 0.6974 (0.57-0.82)</li>
-<li><span class="math inline">\(\tau_b\)</span>: 0.50 (0.39,0.61)</li>
-<li><span class="math inline">\(\tau_C\)</span>: 0.48 (0.37,0.59)</li>
-<li>Somers’ D C|R: 0.49 (0.38,0.59)</li>
+<li><span class="math inline">\(\tau_b\)</span>: 0.50 (0.39-0.61)</li>
+<li><span class="math inline">\(\tau_C\)</span>: 0.48 (0.37-0.59)</li>
+<li>Somers’ D C|R: 0.49 (0.38-0.59)</li>
 </ul>
 </div>
 </div>
@@ -1503,17 +1576,23 @@ measure \pm 1.96*ASE
 <li>Stuart’s <span class="math inline">\(\tau_c\)</span></li>
 <li>Somers’ Delta</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a>data drink;</span>
-<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a>datalines;</span>
-<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>non fres <span class="dv">55</span> non soph <span class="dv">34</span> non jun <span class="dv">27</span> non sen <span class="dv">17</span></span>
-<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>mod fres <span class="dv">32</span> mod soph <span class="dv">29</span> mod jun <span class="dv">36</span> mod sen <span class="dv">39</span></span>
-<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>hea fres <span class="dv">29</span> hea soph <span class="dv">41</span> hea jun <span class="dv">33</span> hea sen <span class="dv">28</span></span>
-<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">habit =</span> <span class="fu">c</span>(<span class="st">"Nondrinkers"</span>,<span class="st">"Moderate"</span>,<span class="st">"Heavy"</span>),</span>
+<span id="cb61-2"><a></a>                   <span class="at">Status =</span> <span class="fu">c</span>(<span class="st">"Freshmen"</span>,<span class="st">"Sophomore"</span>,<span class="st">"Junior"</span>,<span class="st">"Senior"</span>))</span>
+<span id="cb61-3"><a></a></span>
+<span id="cb61-4"><a></a>dat<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">55</span>,<span class="dv">32</span>,<span class="dv">29</span>,<span class="dv">34</span>,<span class="dv">29</span>,<span class="dv">41</span>,<span class="dv">27</span>,<span class="dv">36</span>,<span class="dv">33</span>,<span class="dv">17</span>,<span class="dv">39</span>,<span class="dv">28</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1"></a>data drink;</span>
+<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3"></a>datalines;</span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4"></a>non fres <span class="dv">55</span> non soph <span class="dv">34</span> non jun <span class="dv">27</span> non sen <span class="dv">17</span></span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5"></a>mod fres <span class="dv">32</span> mod soph <span class="dv">29</span> mod jun <span class="dv">36</span> mod sen <span class="dv">39</span></span>
+<span id="annotated-cell-5-6"><a href="#annotated-cell-5-6"></a>hea fres <span class="dv">29</span> hea soph <span class="dv">41</span> hea jun <span class="dv">33</span> hea sen <span class="dv">28</span></span>
+<span id="annotated-cell-5-7"><a href="#annotated-cell-5-7"></a>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="1" data-code-annotation="1">non: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="1" data-code-annotation="1">non: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior</span>
 </dd>
 </dl>
 </section>
@@ -1521,30 +1600,69 @@ measure \pm 1.96*ASE
 <h2>Exercise</h2>
 <p>A random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.</p>
 <div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">Answer</a></li></ul>
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">SAS Code</a></li><li><a href="#tabset-12-2">R Code</a></li><li><a href="#tabset-12-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-11-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>data drink;</span>
-<span id="cb51-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb51-3"><a></a>datalines;</span>
-<span id="cb51-4"><a></a>non f <span class="dv">55</span> non soph <span class="dv">34</span> non j <span class="dv">27</span> non sen <span class="dv">17</span></span>
-<span id="cb51-5"><a></a>mod f <span class="dv">32</span> mod soph <span class="dv">29</span> mod j <span class="dv">36</span> mod sen <span class="dv">39</span></span>
-<span id="cb51-6"><a></a>hea f <span class="dv">29</span> hea soph <span class="dv">41</span> hea j <span class="dv">33</span> hea sen <span class="dv">28</span></span>
-<span id="cb51-7"><a></a>;</span>
-<span id="cb51-8"><a></a></span>
-<span id="cb51-9"><a></a>proc freq data<span class="ot">=</span>drink order<span class="ot">=</span>data;</span>
-<span id="cb51-10"><a></a>weight count;</span>
-<span id="cb51-11"><a></a>tables habit<span class="sc">*</span>status<span class="sc">/</span>measures cl;</span>
-<span id="cb51-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-12-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a>data drink;</span>
+<span id="cb62-2"><a></a>input habit <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb62-3"><a></a>datalines;</span>
+<span id="cb62-4"><a></a>non f <span class="dv">55</span> non soph <span class="dv">34</span> non j <span class="dv">27</span> non sen <span class="dv">17</span></span>
+<span id="cb62-5"><a></a>mod f <span class="dv">32</span> mod soph <span class="dv">29</span> mod j <span class="dv">36</span> mod sen <span class="dv">39</span></span>
+<span id="cb62-6"><a></a>hea f <span class="dv">29</span> hea soph <span class="dv">41</span> hea j <span class="dv">33</span> hea sen <span class="dv">28</span></span>
+<span id="cb62-7"><a></a>;</span>
+<span id="cb62-8"><a></a></span>
+<span id="cb62-9"><a></a>proc freq data<span class="ot">=</span>drink order<span class="ot">=</span>data;</span>
+<span id="cb62-10"><a></a>weight count;</span>
+<span id="cb62-11"><a></a>tables habit<span class="sc">*</span>status<span class="sc">/</span>measures cl;</span>
+<span id="cb62-12"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-11-2">
+<div id="tabset-12-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">habit =</span> <span class="fu">c</span>(<span class="st">"Nondrinkers"</span>,<span class="st">"Moderate"</span>,<span class="st">"Heavy"</span>),</span>
+<span id="cb63-2"><a></a>                   <span class="at">Status =</span> <span class="fu">c</span>(<span class="st">"Freshmen"</span>,<span class="st">"Sophomore"</span>,<span class="st">"Junior"</span>,<span class="st">"Senior"</span>))</span>
+<span id="cb63-3"><a></a></span>
+<span id="cb63-4"><a></a>dat<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">55</span>,<span class="dv">32</span>,<span class="dv">29</span>,<span class="dv">34</span>,<span class="dv">29</span>,<span class="dv">41</span>,<span class="dv">27</span>,<span class="dv">36</span>,<span class="dv">33</span>,<span class="dv">17</span>,<span class="dv">39</span>,<span class="dv">28</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>habit<span class="sc">+</span>Status,<span class="at">data=</span>dat)</span>
+<span id="cb64-2"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Status
+habit         Freshmen Sophomore Junior Senior
+  Nondrinkers       55        34     27     17
+  Moderate          32        29     36     39
+  Heavy             29        41     33     28</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a><span class="fu">GoodmanKruskalGamma</span>(dat_cc,<span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     gamma     lwr.ci     upr.ci 
+0.18448486 0.07155751 0.29741221 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a><span class="fu">KendallTauB</span>(dat_cc,<span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     tau_b     lwr.ci     upr.ci 
+0.13138585 0.05034547 0.21242623 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="fu">StuartTauC</span>(dat_cc,<span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      tauc     lwr.ci     upr.ci 
+0.13903125 0.05330567 0.22475683 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a><span class="fu">SomersDelta</span>(dat_cc,<span class="at">conf.level =</span> <span class="fl">0.95</span>,<span class="at">direction=</span><span class="st">"column"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    somers     lwr.ci     upr.ci 
+0.13904776 0.05331078 0.22478475 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-12-3">
 <ul>
 <li>Pearson Correlation: 0.15 (0.06,0.25)</li>
 <li>Spearman Correlation: 0.16 (0.06, 0.25)</li>
 <li>Gamma: 0.18 (0.07,0.30)</li>
 <li><span class="math inline">\(\tau_b\)</span>: 0.13 (0.05,0.21)</li>
 <li><span class="math inline">\(\tau_C\)</span>: 0.14 (0.05,0.22)</li>
-<li>Somers’ D C|R: 0.14 (0.05,0.22)</li>
+<li>Somers’ D R|C: 0.12 (0.05,0.20)</li>
 </ul>
 </div>
 </div>
@@ -1557,7 +1675,26 @@ measure \pm 1.96*ASE
 <li>Lambda <span class="math inline">\(\lambda\)</span></li>
 <li>Uncertainty coefficients</li>
 </ul>
-<p>Both of these measures are included in the <code>measures</code> output.</p>
+</section>
+<section id="goodman-kruskal-lambda-lambda" class="slide level2">
+<h2>Goodman Kruskal Lambda <span class="math inline">\(\lambda\)</span></h2>
+<p>Goodman Kruskal Lambda measures the probable improvement in predicting the column variable given knowledge of the row variable.</p>
+<ul>
+<li>Asymmetric: Can be C|R or R|C depending on where the explanatory variable is located</li>
+<li>Symmetric: weighted average of the two asymmetric <span class="math inline">\(\lambda\)</span> values.</li>
+</ul>
+</section>
+<section id="uncertainty-coefficient" class="slide level2">
+<h2>Uncertainty coefficient</h2>
+<p>The uncertainty coefficient, similar to <span class="math inline">\(R^2\)</span>, measures the proportion of uncertainty in column variable as explained by the row variable.</p>
+<ul>
+<li>Asymmetric: Can be C|R or R|C depending on where the explanatory variable is located</li>
+<li>Symmetric: weighted average of the two asymmetric uncertainty coefficients.</li>
+</ul>
+</section>
+<section id="nominal-variables-sas" class="slide level2">
+<h2>Nominal Variables: <code>SAS</code></h2>
+<p>Both the Goodman Kruskal Lambda and uncertainty measures are included in the <code>measures</code> output.</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1573,21 +1710,26 @@ measure \pm 1.96*ASE
 </div>
 </div>
 </section>
-<section id="lambda-lambda" class="slide level2">
-<h2>Lambda <span class="math inline">\(\lambda\)</span></h2>
-<p>Lambda measures the probable improvement in predicting the column variable given knowledge of the row variable.</p>
-<ul>
-<li>Asymmetric: Can be C|R or R|C depending on where the explanatory variable is located</li>
-<li>Symmetric: weighted average of the two asymmetric <span class="math inline">\(\lambda\)</span> values.</li>
-</ul>
-</section>
-<section id="uncertainty-coefficient" class="slide level2">
-<h2>Uncertainty coefficient</h2>
-<p>The uncertainty coefficient, similar to <span class="math inline">\(R^2\)</span>, measures the proportion of uncertainty in column variable as explained by the row variable.</p>
-<ul>
-<li>Asymmetric: Can be C|R or R|C depending on where the explanatory variable is located</li>
-<li>Symmetric: weighted average of the two asymmetric uncertainty coefficients.</li>
-</ul>
+<section id="nominal-variables-r" class="slide level2">
+<h2>Nominal Variables: <code>R</code></h2>
+<p>The <code>Lambda()</code> and <code>UncertCoef()</code> functions in DescTools calculate the Goodman Kruskal Lambda and Uncertainty measures, respectively.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Because the measures could be symmetric or asymmetric, both functions can specify the direction as “symmetric”,“row”, or “column”.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a><span class="fu">Lambda</span>(contingencytable, <span class="at">direction=</span><span class="fu">c</span>(<span class="st">"symmetric"</span>,<span class="st">"row"</span>,<span class="st">"column"</span>),<span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb74-2"><a></a><span class="fu">UncertCoef</span>(contingencytable, <span class="at">direction=</span><span class="fu">c</span>(<span class="st">"symmetric"</span>,<span class="st">"row"</span>,<span class="st">"column"</span>),<span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="exercise-8" class="slide level2">
 <h2>Exercise</h2>
@@ -1610,30 +1752,59 @@ measure \pm 1.96*ASE
 <li>Provide the estimate and the 95% CI of these measures.</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">SAS Code</a></li><li><a href="#tabset-12-2">Answer</a></li></ul>
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">SAS Code</a></li><li><a href="#tabset-13-2">R Code</a></li><li><a href="#tabset-13-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-12-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>data neighbor;</span>
-<span id="cb52-2"><a></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
-<span id="cb52-3"><a></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb52-4"><a></a>datalines;</span>
-<span id="cb52-5"><a></a>democrat longview <span class="dv">360</span> democrat bayside <span class="dv">221</span></span>
-<span id="cb52-6"><a></a>democrat sheffeld <span class="dv">140</span> democrat highland <span class="dv">160</span></span>
-<span id="cb52-7"><a></a>republican longview <span class="dv">316</span> republican bayside <span class="dv">208</span></span>
-<span id="cb52-8"><a></a>republican sheffeld <span class="dv">97</span> republican highland <span class="dv">106</span></span>
-<span id="cb52-9"><a></a>independent longview <span class="dv">160</span> independent bayside <span class="dv">200</span></span>
-<span id="cb52-10"><a></a>independent sheffeld <span class="dv">311</span> independent highland <span class="dv">291</span></span>
-<span id="cb52-11"><a></a>;</span>
-<span id="cb52-12"><a></a></span>
-<span id="cb52-13"><a></a>proc freq data<span class="ot">=</span>neighbor;</span>
-<span id="cb52-14"><a></a>weight count;</span>
-<span id="cb52-15"><a></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
-<span id="cb52-16"><a></a>measures cl;</span>
-<span id="cb52-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-13-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>data neighbor;</span>
+<span id="cb75-2"><a></a>length party <span class="sc">$</span> <span class="dv">11</span> neighborhood <span class="sc">$</span> <span class="dv">10</span>;</span>
+<span id="cb75-3"><a></a>input party <span class="sc">$</span> neighborhood <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb75-4"><a></a>datalines;</span>
+<span id="cb75-5"><a></a>democrat longview <span class="dv">360</span> democrat bayside <span class="dv">221</span></span>
+<span id="cb75-6"><a></a>democrat sheffeld <span class="dv">140</span> democrat highland <span class="dv">160</span></span>
+<span id="cb75-7"><a></a>republican longview <span class="dv">316</span> republican bayside <span class="dv">208</span></span>
+<span id="cb75-8"><a></a>republican sheffeld <span class="dv">97</span> republican highland <span class="dv">106</span></span>
+<span id="cb75-9"><a></a>independent longview <span class="dv">160</span> independent bayside <span class="dv">200</span></span>
+<span id="cb75-10"><a></a>independent sheffeld <span class="dv">311</span> independent highland <span class="dv">291</span></span>
+<span id="cb75-11"><a></a>;</span>
+<span id="cb75-12"><a></a></span>
+<span id="cb75-13"><a></a>proc freq data<span class="ot">=</span>neighbor;</span>
+<span id="cb75-14"><a></a>weight count;</span>
+<span id="cb75-15"><a></a>tables party<span class="sc">*</span>neighborhood <span class="sc">/</span></span>
+<span id="cb75-16"><a></a>measures cl;</span>
+<span id="cb75-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-12-2">
+<div id="tabset-13-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb76-2"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Party=</span><span class="fu">c</span>(<span class="st">"Democrat"</span>,<span class="st">"Independent"</span>,<span class="st">"Republican"</span>),</span>
+<span id="cb76-3"><a></a>                   <span class="at">Neighborhood =</span> <span class="fu">c</span>(<span class="st">"Bayside"</span>,<span class="st">"Highland"</span>,<span class="st">"Longview"</span>,<span class="st">"Sheffield"</span>))</span>
+<span id="cb76-4"><a></a></span>
+<span id="cb76-5"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">221</span>,<span class="dv">200</span>,<span class="dv">208</span>,<span class="dv">160</span>,<span class="dv">291</span>,<span class="dv">106</span>,<span class="dv">360</span>,<span class="dv">160</span>,<span class="dv">316</span>,<span class="dv">140</span>,<span class="dv">311</span>,<span class="dv">97</span>)</span>
+<span id="cb76-6"><a></a></span>
+<span id="cb76-7"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>Party<span class="sc">+</span>Neighborhood,<span class="at">data=</span>dat)</span>
+<span id="cb76-8"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Neighborhood
+Party         Bayside Highland Longview Sheffield
+  Democrat        221      160      360       140
+  Independent     200      291      160       311
+  Republican      208      106      316        97</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a></a><span class="fu">Lambda</span>(dat_cc, <span class="at">direction=</span><span class="fu">c</span>(<span class="st">"symmetric"</span>),<span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    lambda     lwr.ci     upr.ci 
+0.11131059 0.08790156 0.13471963 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a><span class="fu">UncertCoef</span>(dat_cc, <span class="at">direction=</span><span class="fu">c</span>(<span class="st">"symmetric"</span>),<span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        uc     lwr.ci     upr.ci 
+0.04460640 0.03458648 0.05462631 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-13-3">
 <p>You can choose to report the asymmetric <span class="math inline">\(\lambda\)</span>, symmetric <span class="math inline">\(\lambda\)</span>, asymmetric uncertainty coefficient, or the symmetric uncertainty coefficient.</p>
-<p>The asymmetric uncertainty coefficient R|C is estimated to be 0.05 (95% CI: 0.04,0.06). The estimated proportion of uncertainty in party affiliation explained by the neighborhood is estimated to be 0.05.</p>
+<p>The symmetric <span class="math inline">\(\lambda\)</span> is estimated to be 0.11 (95% CI: 0.09,0.13). The estimated proportion of uncertainty in party affiliation explained by the neighborhood is estimated to be 0.04 (0.03, 0.05).</p>
 </div>
 </div>
 </div>
@@ -1646,9 +1817,6 @@ measure \pm 1.96*ASE
 <section id="observer-agreement-1" class="slide level2">
 <h2>Observer Agreement</h2>
 <p>Errors are inevitable in making measurements!</p>
-<ul>
-<li>Biggest error: Observer error</li>
-</ul>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1658,7 +1826,7 @@ measure \pm 1.96*ASE
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>How do we account for observer error, especially for multiple observer measurements?</p>
+<p>The biggest error is observer error, when observers do not agree about the measurement. How do we account for observer error, especially for multiple observer measurements?</p>
 </div>
 </div>
 </div>
@@ -1681,6 +1849,13 @@ measure \pm 1.96*ASE
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
+<p>Rule of thumb:</p>
+<ul>
+<li><span class="math inline">\(\kappa\)</span>=0: any agreement is made by chance</li>
+<li><span class="math inline">\(\kappa\)</span>=1: perfect agreement</li>
+<li><span class="math inline">\(\kappa \geq\)</span> 0.8: excellent agreement</li>
+<li><span class="math inline">\(\kappa \geq\)</span> 0.4: moderate agreement</li>
+</ul>
 <p>This is similar to the intraclass correlation coefficient in ANOVA models.</p>
 </div>
 </div>
@@ -1695,24 +1870,37 @@ measure \pm 1.96*ASE
 </section>
 <section id="observer-agreement-2" class="slide level2">
 <h2>Observer Agreement</h2>
-<ul>
-<li>When there is order in the categories, we might need to account how different the disagreements are.</li>
-<li>We can use weighted <span class="math inline">\(\kappa\)</span> measurements such as:
-<ul>
-<li>Cicchetti-Allison weights puts more weight on cells closest to the diagonal.</li>
-<li>Fleiss-Cohen kappa weights use a squared distance between categories, which penalizes highly discordant pairs.</li>
-</ul></li>
-</ul>
+<p>When there is order in the categories, we might need to account how different the disagreements are.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>We can use weighted <span class="math inline">\(\kappa\)</span> measurements such as: - Cicchetti-Allison weights puts more weight on cells closest to the diagonal. - Fleiss-Cohen kappa weights use a squared distance between categories, which penalizes highly discordant pairs.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="bowkers-test" class="slide level2">
 <h2>Bowker’s Test</h2>
-<ul>
-<li>Tests whether the contingency table is symmetric about the diagonals.
-<ul>
-<li>Works for square tables</li>
-<li>Same as McNemar’s test when the table is <span class="math inline">\(2\times 2\)</span></li>
-</ul></li>
-</ul>
+<p>The Bowker’s test tests whether the contingency table is symmetric about the diagonals.The test works for square tables.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The test is equivalent to the McNemar’s test when the table is <span class="math inline">\(2\times 2\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="observer-agreement-sas" class="slide level2">
 <h2>Observer Agreement: SAS</h2>
@@ -1720,6 +1908,7 @@ measure \pm 1.96*ASE
 <li>The <code>AGREE</code> option in the tables statement generates the kappa statistics and Bowker’s symmetry test.
 <ul>
 <li><code>AGREE (WT=FC)</code> specifies to use the <em>Fleiss-Cohen</em> criterion for the Weighted Kappa statistic.</li>
+<li>Not specifying <code>(WT=FC)</code> will produce the Cichetti-Allison criterion instead.</li>
 </ul></li>
 <li>The agreement plot is also shown.
 <ul>
@@ -1731,57 +1920,142 @@ measure \pm 1.96*ASE
 </ul></li>
 </ul>
 </section>
+<section id="observer-agreement-r" class="slide level2">
+<h2>Observer Agreement: <code>R</code></h2>
+<div class="panel-tabset">
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1"><span class="math inline">\(\kappa\)</span></a></li><li><a href="#tabset-14-2">Agreement Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1">
+<p>The <code>Kappa()</code> function in the <code>vcd</code> package calculates the Cohen’s kappa statistic.</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>We can also specify which weights we use to calculate the weighted kappa statistic. By default, the weighting method used is the Cichetti-Allison method, also referred to as “Equal-Spacing”. To use the Fleiss-Cohen weighting method, we need to specify “Fleiss-Cohen”.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a></a>K_CA <span class="ot">&lt;-</span><span class="fu">Kappa</span>(contingencytable,<span class="at">weight=</span><span class="st">"Equal-Spacing"</span>)</span>
+<span id="cb82-2"><a></a>K_CA</span>
+<span id="cb82-3"><a></a><span class="fu">confint</span>(K_CA)</span>
+<span id="cb82-4"><a></a></span>
+<span id="cb82-5"><a></a>K_FC <span class="ot">&lt;-</span> <span class="fu">Kappa</span>(contingencytable,<span class="at">weight=</span><span class="st">"Fleiss-Cohen"</span>)</span>
+<span id="cb82-6"><a></a>K_FC</span>
+<span id="cb82-7"><a></a><span class="fu">confint</span>(K_FC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To perform Bowker’s Test, we can use the <code>mcnemar.test()</code> function in <code>R</code>, similar to how we can use <code>mcnemar.test()</code> to perform the McNemar’s test.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-14-2">
+<p>Agreement plots can be used to visualize observer agreements. These can be generated using the <code>agreementplot()</code> function in the <code>vcd</code> package in <code>R</code>.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="example-4" class="slide level2">
 <h2>Example</h2>
+<p>The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.</p>
 <ul>
-<li>The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
-<ul>
-<li>Calculate the estimate and 95% confidence interval for the simple and weighted Kappa statistic.</li>
+<li>Calculate the estimate and 95% confidence interval for the simple and Fleiss-Cohen weighted Kappa statistic.</li>
 <li>What can you say about the agreement between the New Orleans and Winnipeg neurologists?</li>
-</ul></li>
 </ul>
 
-<img data-src="img/neuro_C5.png" class="r-stretch"><h3 id="sas-code-10">SAS Code</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>data classify;</span>
-<span id="cb53-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb53-3"><a></a>datalines;</span>
-<span id="cb53-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
-<span id="cb53-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
-<span id="cb53-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
-<span id="cb53-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
-<span id="cb53-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<img data-src="img/neuro_C5.png" class="r-stretch"><div class="panel-tabset">
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">SAS Data</a></li><li><a href="#tabset-15-2">R Data</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a>data classify;</span>
+<span id="cb83-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb83-3"><a></a>datalines;</span>
+<span id="cb83-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
+<span id="cb83-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb83-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
+<span id="cb83-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
+<span id="cb83-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-15-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">NO=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb84-2"><a></a>                   <span class="at">WN=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb84-3"><a></a></span>
+<span id="cb84-4"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">38</span>,<span class="dv">33</span>,<span class="dv">10</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">11</span>,<span class="dv">14</span>,<span class="dv">7</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">10</span>)</span>
+<span id="cb84-5"><a></a></span>
+<span id="cb84-6"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>NO<span class="sc">+</span>WN,<span class="at">data=</span>dat)</span>
+<span id="cb84-7"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   WN
+NO   1  2  3  4
+  1 38  5  0  1
+  2 33 11  3  0
+  3 10 14  5  6
+  4  3  7  3 10</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="example-5" class="slide level2">
 <h2>Example</h2>
+<p>The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.</p>
 <ul>
-<li>The data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.
-<ul>
-<li>Calculate the estimate and 95% confidence interval for the simple and weighted Kappa statistic.</li>
+<li>Calculate the estimate and 95% confidence interval for the simple and Fleiss-Cohen weighted Kappa statistic.</li>
 <li>What can you say about the agreement between the New Orleans and Winnipeg neurologists?</li>
-</ul></li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">SAS Code</a></li><li><a href="#tabset-13-2">Answer</a></li></ul>
+<ul id="tabset-16" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-16-1">SAS Code</a></li><li><a href="#tabset-16-2">R Code</a></li><li><a href="#tabset-16-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-13-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>data classify;</span>
-<span id="cb54-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb54-3"><a></a>datalines;</span>
-<span id="cb54-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
-<span id="cb54-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
-<span id="cb54-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
-<span id="cb54-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
-<span id="cb54-8"><a></a>;</span>
-<span id="cb54-9"><a></a></span>
-<span id="cb54-10"><a></a></span>
-<span id="cb54-11"><a></a>proc freq;</span>
-<span id="cb54-12"><a></a>weight count;</span>
-<span id="cb54-13"><a></a>tables no_rater<span class="sc">*</span>w_rater <span class="sc">/</span> agree norow nocol nopct;</span>
-<span id="cb54-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-16-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a></a>data classify;</span>
+<span id="cb86-2"><a></a>input no_rater w_rater count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb86-3"><a></a>datalines;</span>
+<span id="cb86-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">38</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">1</span></span>
+<span id="cb86-5"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">11</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb86-6"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">10</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span></span>
+<span id="cb86-7"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">10</span></span>
+<span id="cb86-8"><a></a>;</span>
+<span id="cb86-9"><a></a></span>
+<span id="cb86-10"><a></a></span>
+<span id="cb86-11"><a></a>proc freq;</span>
+<span id="cb86-12"><a></a>weight count;</span>
+<span id="cb86-13"><a></a>tables no_rater<span class="sc">*</span>w_rater <span class="sc">/</span> agree norow nocol nopct;</span>
+<span id="cb86-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-13-2">
-<p>Simple <span class="math inline">\(\kappa\)</span>: 0.21 (0.11,0.31) Weighted <span class="math inline">\(\kappa\)</span>: 0.38 (0.28,0.48)</p>
-<p>Since the weighted <span class="math inline">\(\kappa\)</span> is higher than the simple <span class="math inline">\(\kappa\)</span>, we can infer that there were more disagreements closer to the diagonal. There is a slight to moderate agreement between the two neurologists.</p>
+<div id="tabset-16-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a><span class="fu">agreementplot</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Chapter5_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a>K_FC <span class="ot">&lt;-</span> <span class="fu">Kappa</span>(dat_cc,<span class="at">weights=</span><span class="st">"Fleiss-Cohen"</span>)</span>
+<span id="cb88-2"><a></a></span>
+<span id="cb88-3"><a></a>K_FC</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            value     ASE     z
+Unweighted 0.2079 0.05046 4.121
+Weighted   0.5246 0.06006 8.735</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a></a><span class="fu">confint</span>(K_FC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+Kappa              lwr       upr
+  Unweighted 0.1090518 0.3068332
+  Weighted   0.4068706 0.6422823</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-16-3">
+<p>Simple <span class="math inline">\(\kappa\)</span>: 0.21 (0.11,0.31) Weighted <span class="math inline">\(\kappa\)</span>: 0.52 (0.41,0.64)</p>
+<p>Since the weighted <span class="math inline">\(\kappa\)</span> is higher than the simple <span class="math inline">\(\kappa\)</span>, we can infer that there were more disagreements closer to the diagonal. There is moderate agreement between the two neurologists based on the weighted <span class="math inline">\(\kappa\)</span>.</p>
 </div>
 </div>
 </div>
@@ -1794,72 +2068,136 @@ measure \pm 1.96*ASE
 <li>Calculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.</li>
 <li>Compare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a></span>
-<span id="cb55-2"><a></a>data radiology;</span>
-<span id="cb55-3"><a></a>input rater1 rater2 count;</span>
-<span id="cb55-4"><a></a>cards;</span>
-<span id="cb55-5"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
-<span id="cb55-6"><a></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">12</span></span>
-<span id="cb55-7"><a></a><span class="dv">0</span> <span class="dv">2</span>  <span class="dv">0</span></span>
-<span id="cb55-8"><a></a><span class="dv">0</span> <span class="dv">3</span>  <span class="dv">0</span></span>
-<span id="cb55-9"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">4</span></span>
-<span id="cb55-10"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">17</span></span>
-<span id="cb55-11"><a></a><span class="dv">1</span> <span class="dv">2</span>  <span class="dv">1</span></span>
-<span id="cb55-12"><a></a><span class="dv">1</span> <span class="dv">3</span>  <span class="dv">0</span></span>
-<span id="cb55-13"><a></a><span class="dv">2</span> <span class="dv">0</span>  <span class="dv">3</span></span>
-<span id="cb55-14"><a></a><span class="dv">2</span> <span class="dv">1</span>  <span class="dv">9</span></span>
-<span id="cb55-15"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">15</span></span>
-<span id="cb55-16"><a></a><span class="dv">2</span> <span class="dv">3</span>  <span class="dv">2</span></span>
-<span id="cb55-17"><a></a><span class="dv">3</span> <span class="dv">0</span>  <span class="dv">0</span></span>
-<span id="cb55-18"><a></a><span class="dv">3</span> <span class="dv">1</span>  <span class="dv">0</span></span>
-<span id="cb55-19"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
-<span id="cb55-20"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
-<span id="cb55-21"><a></a>;</span>
-<span id="cb55-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="panel-tabset">
+<ul id="tabset-17" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-17-1">SAS Data</a></li><li><a href="#tabset-17-2">R Data</a></li></ul>
+<div class="tab-content">
+<div id="tabset-17-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a></a></span>
+<span id="cb92-2"><a></a>data radiology;</span>
+<span id="cb92-3"><a></a>input rater1 rater2 count;</span>
+<span id="cb92-4"><a></a>cards;</span>
+<span id="cb92-5"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
+<span id="cb92-6"><a></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">12</span></span>
+<span id="cb92-7"><a></a><span class="dv">0</span> <span class="dv">2</span>  <span class="dv">0</span></span>
+<span id="cb92-8"><a></a><span class="dv">0</span> <span class="dv">3</span>  <span class="dv">0</span></span>
+<span id="cb92-9"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">4</span></span>
+<span id="cb92-10"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">17</span></span>
+<span id="cb92-11"><a></a><span class="dv">1</span> <span class="dv">2</span>  <span class="dv">1</span></span>
+<span id="cb92-12"><a></a><span class="dv">1</span> <span class="dv">3</span>  <span class="dv">0</span></span>
+<span id="cb92-13"><a></a><span class="dv">2</span> <span class="dv">0</span>  <span class="dv">3</span></span>
+<span id="cb92-14"><a></a><span class="dv">2</span> <span class="dv">1</span>  <span class="dv">9</span></span>
+<span id="cb92-15"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">15</span></span>
+<span id="cb92-16"><a></a><span class="dv">2</span> <span class="dv">3</span>  <span class="dv">2</span></span>
+<span id="cb92-17"><a></a><span class="dv">3</span> <span class="dv">0</span>  <span class="dv">0</span></span>
+<span id="cb92-18"><a></a><span class="dv">3</span> <span class="dv">1</span>  <span class="dv">0</span></span>
+<span id="cb92-19"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
+<span id="cb92-20"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
+<span id="cb92-21"><a></a>;</span>
+<span id="cb92-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-17-2">
+<p>Please refer to <code>radiology.csv</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a></a>radio <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"radiology.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb93-2"><a></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"Rater1"</span>,<span class="st">"Rater2"</span>),<span class="sc">~</span><span class="fu">as.factor</span>(.x)))</span>
+<span id="cb93-3"><a></a><span class="fu">glimpse</span>(radio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 16
+Columns: 3
+$ Rater1 &lt;fct&gt; 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3
+$ Rater2 &lt;fct&gt; 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3
+$ Count  &lt;int&gt; 21, 12, 0, 0, 4, 17, 1, 0, 3, 9, 15, 2, 0, 0, 0, 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="exercise-11" class="slide level2">
 <h2>Exercise</h2>
 <p>Two radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:</p>
 <p>0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’</p>
 <ul>
-<li>Calculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.</li>
+<li>Calculate the simple and weighted (Cichetti-Allison and Fleiss-Cohen) kappa statistics and the corresponding 95% confidence intervals.</li>
 <li>Compare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">SAS Code</a></li><li><a href="#tabset-14-2">Answer</a></li></ul>
+<ul id="tabset-18" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-18-1">SAS Code</a></li><li><a href="#tabset-18-2">R Code</a></li><li><a href="#tabset-18-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-14-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>data radiology;</span>
-<span id="cb56-2"><a></a>input rater1 rater2 count;</span>
-<span id="cb56-3"><a></a>cards;</span>
-<span id="cb56-4"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
-<span id="cb56-5"><a></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">12</span></span>
-<span id="cb56-6"><a></a><span class="dv">0</span> <span class="dv">2</span>  <span class="dv">0</span></span>
-<span id="cb56-7"><a></a><span class="dv">0</span> <span class="dv">3</span>  <span class="dv">0</span></span>
-<span id="cb56-8"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">4</span></span>
-<span id="cb56-9"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">17</span></span>
-<span id="cb56-10"><a></a><span class="dv">1</span> <span class="dv">2</span>  <span class="dv">1</span></span>
-<span id="cb56-11"><a></a><span class="dv">1</span> <span class="dv">3</span>  <span class="dv">0</span></span>
-<span id="cb56-12"><a></a><span class="dv">2</span> <span class="dv">0</span>  <span class="dv">3</span></span>
-<span id="cb56-13"><a></a><span class="dv">2</span> <span class="dv">1</span>  <span class="dv">9</span></span>
-<span id="cb56-14"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">15</span></span>
-<span id="cb56-15"><a></a><span class="dv">2</span> <span class="dv">3</span>  <span class="dv">2</span></span>
-<span id="cb56-16"><a></a><span class="dv">3</span> <span class="dv">0</span>  <span class="dv">0</span></span>
-<span id="cb56-17"><a></a><span class="dv">3</span> <span class="dv">1</span>  <span class="dv">0</span></span>
-<span id="cb56-18"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
-<span id="cb56-19"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
-<span id="cb56-20"><a></a>;</span>
-<span id="cb56-21"><a></a>run;</span>
-<span id="cb56-22"><a></a></span>
-<span id="cb56-23"><a></a>proc freq data<span class="ot">=</span>radiology;</span>
-<span id="cb56-24"><a></a>tables rater1<span class="sc">*</span>rater2<span class="sc">/</span>norow nocol nopct agree;</span>
-<span id="cb56-25"><a></a>weight count;</span>
-<span id="cb56-26"><a></a>test kappa;</span>
-<span id="cb56-27"><a></a>exact kappa;</span>
-<span id="cb56-28"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-18-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a></a>data radiology;</span>
+<span id="cb95-2"><a></a>input rater1 rater2 count;</span>
+<span id="cb95-3"><a></a>cards;</span>
+<span id="cb95-4"><a></a><span class="dv">0</span> <span class="dv">0</span> <span class="dv">21</span></span>
+<span id="cb95-5"><a></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">12</span></span>
+<span id="cb95-6"><a></a><span class="dv">0</span> <span class="dv">2</span>  <span class="dv">0</span></span>
+<span id="cb95-7"><a></a><span class="dv">0</span> <span class="dv">3</span>  <span class="dv">0</span></span>
+<span id="cb95-8"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">4</span></span>
+<span id="cb95-9"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">17</span></span>
+<span id="cb95-10"><a></a><span class="dv">1</span> <span class="dv">2</span>  <span class="dv">1</span></span>
+<span id="cb95-11"><a></a><span class="dv">1</span> <span class="dv">3</span>  <span class="dv">0</span></span>
+<span id="cb95-12"><a></a><span class="dv">2</span> <span class="dv">0</span>  <span class="dv">3</span></span>
+<span id="cb95-13"><a></a><span class="dv">2</span> <span class="dv">1</span>  <span class="dv">9</span></span>
+<span id="cb95-14"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">15</span></span>
+<span id="cb95-15"><a></a><span class="dv">2</span> <span class="dv">3</span>  <span class="dv">2</span></span>
+<span id="cb95-16"><a></a><span class="dv">3</span> <span class="dv">0</span>  <span class="dv">0</span></span>
+<span id="cb95-17"><a></a><span class="dv">3</span> <span class="dv">1</span>  <span class="dv">0</span></span>
+<span id="cb95-18"><a></a><span class="dv">3</span> <span class="dv">2</span>  <span class="dv">0</span></span>
+<span id="cb95-19"><a></a><span class="dv">3</span> <span class="dv">3</span>  <span class="dv">1</span></span>
+<span id="cb95-20"><a></a>;</span>
+<span id="cb95-21"><a></a>run;</span>
+<span id="cb95-22"><a></a></span>
+<span id="cb95-23"><a></a>proc freq data<span class="ot">=</span>radiology;</span>
+<span id="cb95-24"><a></a>tables rater1<span class="sc">*</span>rater2<span class="sc">/</span>norow nocol nopct agree;</span>
+<span id="cb95-25"><a></a>weight count;</span>
+<span id="cb95-26"><a></a>test kappa;</span>
+<span id="cb95-27"><a></a>exact kappa;</span>
+<span id="cb95-28"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-14-2">
-<p>Simple <span class="math inline">\(\kappa\)</span>: 0.47 (0.33,0.62) Weighted <span class="math inline">\(\kappa\)</span>: 0.57 (0.44,0.70)</p>
+<div id="tabset-18-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>Rater1<span class="sc">+</span>Rater2,<span class="at">data=</span>radio)</span>
+<span id="cb96-2"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Rater2
+Rater1  0  1  2  3
+     0 21 12  0  0
+     1  4 17  1  0
+     2  3  9 15  2
+     3  0  0  0  1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a></a>K_CA <span class="ot">&lt;-</span><span class="fu">Kappa</span>(dat_cc,<span class="at">weight=</span><span class="st">"Equal-Spacing"</span>)</span>
+<span id="cb98-2"><a></a>K_CA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            value     ASE     z
+Unweighted 0.4728 0.07272 6.502
+Weighted   0.5684 0.06756 8.414</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a></a><span class="fu">confint</span>(K_CA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+Kappa              lwr       upr
+  Unweighted 0.3302696 0.6153086
+  Weighted   0.4359915 0.7008065</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a></a>K_FC <span class="ot">&lt;-</span> <span class="fu">Kappa</span>(dat_cc,<span class="at">weight=</span><span class="st">"Fleiss-Cohen"</span>)</span>
+<span id="cb102-2"><a></a>K_FC</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            value     ASE     z
+Unweighted 0.4728 0.07272 6.502
+Weighted   0.6714 0.06811 9.857</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a></a><span class="fu">confint</span>(K_FC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+Kappa              lwr       upr
+  Unweighted 0.3302696 0.6153086
+  Weighted   0.5378687 0.8048725</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-18-3">
+<p>Simple <span class="math inline">\(\kappa\)</span>: 0.47 (0.33,0.62) Cichetti-Allison Weighted <span class="math inline">\(\kappa\)</span>: 0.57 (0.44,0.70) Fleiss-Cohen Weighted <span class="math inline">\(\kappa\)</span>: 0.67 (0.54,0.80)</p>
 <p>The exact p-value is p&lt;0.001, which shows there is sufficient evidence of an agreement between the radiologists. Based on the simple and weighted kappa values, there is moderate agreement between the two radiologists.</p>
 </div>
 </div>
@@ -1886,14 +2224,7 @@ measure \pm 1.96*ASE
 </section>
 <section id="test-for-ordered-differences-1" class="slide level2">
 <h2>Test for Ordered Differences</h2>
-<p>The Jonckheere-Terpstra test is a nonparametric test that is based on sums of Mann-Whitney test statistics</p>
-<ul>
-<li>Rank-based test</li>
-</ul>
-<p>This test detects whether there are differences in the trend of group effects.</p>
-<ul>
-<li>Are the scores strictly increasing or decreasing?</li>
-</ul>
+<p>The Jonckheere-Terpstra test is a nonparametric rank-based test that is based on sums of Mann-Whitney test statistics. This test detects whether there are differences in the trend of group effects.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1903,10 +2234,16 @@ measure \pm 1.96*ASE
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The null hypothesis <span class="math inline">\(H_0\)</span> assumes that the distribution of ordered responses is the same for all groups. For one-sided tests, this tests detect whether <span class="math inline">\(d_1 \leq d_2 \leq... d_s\)</span> where <span class="math inline">\(d_i\)</span> corresponds to the <span class="math inline">\(i^{th}\)</span> group effect.</p>
+<p>The test performs the hypothesis test that answers the question “Are the scores strictly increasing or decreasing?”</p>
+<p>The null hypothesis <span class="math inline">\(H_0\)</span> assumes that the distribution of ordered responses is the same for all groups.</p>
+<p>For one-sided tests, this tests detect whether <span class="math inline">\(d_1 \leq d_2 \leq... d_s\)</span> where <span class="math inline">\(d_i\)</span> corresponds to the <span class="math inline">\(i^{th}\)</span> group effect.</p>
+<p>For two-sided tests, this tests detect whether there is a monotonic trend across the different groups.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="jonckheere-terpstra-test-sas" class="slide level2">
+<h2>Jonckheere-Terpstra Test: <code>SAS</code></h2>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1921,6 +2258,35 @@ measure \pm 1.96*ASE
 </div>
 </div>
 </section>
+<section id="jonckheere-terpstra-test-r" class="slide level2">
+<h2>Jonckheere-Terpstra Test: <code>R</code></h2>
+<p>An exact implementation of the Jonckheere-Terpstra test can be performed using the <code>JonckheereTerpstraTest()</code> function in the <code>DescTools</code> package.</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Unlike the previous examples, the <code>JonckheereTerpstraTest()</code> function does not take a contingency table as input. It needs line-level input with a column for the <code>dependent</code> variable and the <code>independent</code> variable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a><span class="fu">JonckheereTerpstraTest</span>(dependent<span class="sc">~</span>independent,</span>
+<span id="cb106-2"><a></a>                       <span class="at">data=</span>example_data,</span>
+<span id="cb106-3"><a></a>                       <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>,<span class="st">"increasing"</span>,<span class="st">"decreasing"</span>),</span>
+<span id="cb106-4"><a></a>                       <span class="at">nperm=</span><span class="dv">10000</span>)</span>
+<span id="cb106-5"><a></a></span>
+<span id="cb106-6"><a></a><span class="fu">JonckheereTerpstraTest</span>(dependent<span class="sc">~</span>independent,</span>
+<span id="cb106-7"><a></a>                       <span class="at">data=</span>example_data,</span>
+<span id="cb106-8"><a></a>                       <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>,<span class="st">"increasing"</span>,<span class="st">"decreasing"</span>), </span>
+<span id="cb106-9"><a></a>                       <span class="at">nperm=</span><span class="dv">10000</span>,</span>
+<span id="cb106-10"><a></a>                       <span class="at">exact=</span>T) <span class="co">#for exact tests</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="example-6" class="slide level2">
 <h2>Example</h2>
 <p>Investigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:</p>
@@ -1931,27 +2297,51 @@ measure \pm 1.96*ASE
 <li>gre: gastric resection (removal of 75% of gastric tissue)</li>
 </ul>
 <p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is increasing as the amount of gastric tissue removed increased. Ignore hospital effects.</p>
-<h3 id="sas-code-13">SAS Code</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>data operate;</span>
-<span id="cb57-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb57-3"><a></a>datalines;</span>
-<span id="cb57-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
-<span id="cb57-5"><a></a><span class="dv">1</span> v<span class="sc">+</span>a none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>a slight <span class="dv">10</span> <span class="dv">1</span> v<span class="sc">+</span>a moderate <span class="dv">5</span></span>
-<span id="cb57-6"><a></a><span class="dv">1</span> v<span class="sc">+</span>h none <span class="dv">20</span> <span class="dv">1</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">1</span> v<span class="sc">+</span>h moderate <span class="dv">5</span></span>
-<span id="cb57-7"><a></a><span class="dv">1</span> gre none <span class="dv">24</span> <span class="dv">1</span> gre slight <span class="dv">10</span> <span class="dv">1</span> gre moderate <span class="dv">6</span></span>
-<span id="cb57-8"><a></a><span class="dv">2</span> v<span class="sc">+</span>d none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
-<span id="cb57-9"><a></a><span class="dv">2</span> v<span class="sc">+</span>a none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>a slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
-<span id="cb57-10"><a></a><span class="dv">2</span> v<span class="sc">+</span>h none <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
-<span id="cb57-11"><a></a><span class="dv">2</span> gre none <span class="dv">9</span> <span class="dv">2</span> gre slight <span class="dv">15</span> <span class="dv">2</span> gre moderate <span class="dv">2</span></span>
-<span id="cb57-12"><a></a><span class="dv">3</span> v<span class="sc">+</span>d none <span class="dv">8</span> <span class="dv">3</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>d moderate <span class="dv">3</span></span>
-<span id="cb57-13"><a></a><span class="dv">3</span> v<span class="sc">+</span>a none <span class="dv">12</span> <span class="dv">3</span> v<span class="sc">+</span>a slight <span class="dv">4</span> <span class="dv">3</span> v<span class="sc">+</span>a moderate <span class="dv">4</span></span>
-<span id="cb57-14"><a></a><span class="dv">3</span> v<span class="sc">+</span>h none <span class="dv">11</span> <span class="dv">3</span> v<span class="sc">+</span>h slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
-<span id="cb57-15"><a></a><span class="dv">3</span> gre none <span class="dv">7</span> <span class="dv">3</span> gre slight <span class="dv">7</span> <span class="dv">3</span> gre moderate <span class="dv">4</span></span>
-<span id="cb57-16"><a></a><span class="dv">4</span> v<span class="sc">+</span>d none <span class="dv">12</span> <span class="dv">4</span> v<span class="sc">+</span>d slight <span class="dv">9</span> <span class="dv">4</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
-<span id="cb57-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
-<span id="cb57-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
-<span id="cb57-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
-<span id="cb57-20"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="panel-tabset">
+<ul id="tabset-19" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-19-1">SAS Code</a></li><li><a href="#tabset-19-2">R Data</a></li></ul>
+<div class="tab-content">
+<div id="tabset-19-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a></a>data operate;</span>
+<span id="cb107-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb107-3"><a></a>datalines;</span>
+<span id="cb107-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
+<span id="cb107-5"><a></a><span class="dv">1</span> v<span class="sc">+</span>a none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>a slight <span class="dv">10</span> <span class="dv">1</span> v<span class="sc">+</span>a moderate <span class="dv">5</span></span>
+<span id="cb107-6"><a></a><span class="dv">1</span> v<span class="sc">+</span>h none <span class="dv">20</span> <span class="dv">1</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">1</span> v<span class="sc">+</span>h moderate <span class="dv">5</span></span>
+<span id="cb107-7"><a></a><span class="dv">1</span> gre none <span class="dv">24</span> <span class="dv">1</span> gre slight <span class="dv">10</span> <span class="dv">1</span> gre moderate <span class="dv">6</span></span>
+<span id="cb107-8"><a></a><span class="dv">2</span> v<span class="sc">+</span>d none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
+<span id="cb107-9"><a></a><span class="dv">2</span> v<span class="sc">+</span>a none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>a slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
+<span id="cb107-10"><a></a><span class="dv">2</span> v<span class="sc">+</span>h none <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
+<span id="cb107-11"><a></a><span class="dv">2</span> gre none <span class="dv">9</span> <span class="dv">2</span> gre slight <span class="dv">15</span> <span class="dv">2</span> gre moderate <span class="dv">2</span></span>
+<span id="cb107-12"><a></a><span class="dv">3</span> v<span class="sc">+</span>d none <span class="dv">8</span> <span class="dv">3</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>d moderate <span class="dv">3</span></span>
+<span id="cb107-13"><a></a><span class="dv">3</span> v<span class="sc">+</span>a none <span class="dv">12</span> <span class="dv">3</span> v<span class="sc">+</span>a slight <span class="dv">4</span> <span class="dv">3</span> v<span class="sc">+</span>a moderate <span class="dv">4</span></span>
+<span id="cb107-14"><a></a><span class="dv">3</span> v<span class="sc">+</span>h none <span class="dv">11</span> <span class="dv">3</span> v<span class="sc">+</span>h slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
+<span id="cb107-15"><a></a><span class="dv">3</span> gre none <span class="dv">7</span> <span class="dv">3</span> gre slight <span class="dv">7</span> <span class="dv">3</span> gre moderate <span class="dv">4</span></span>
+<span id="cb107-16"><a></a><span class="dv">4</span> v<span class="sc">+</span>d none <span class="dv">12</span> <span class="dv">4</span> v<span class="sc">+</span>d slight <span class="dv">9</span> <span class="dv">4</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
+<span id="cb107-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
+<span id="cb107-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
+<span id="cb107-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
+<span id="cb107-20"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-19-2">
+<p>Please refer to <code>operate.csv</code> for the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb108-2"><a></a>operate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"operate.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb108-3"><a></a>  <span class="fu">uncount</span>(<span class="at">weights=</span>Count) <span class="sc">|&gt;</span> </span>
+<span id="cb108-4"><a></a>  <span class="fu">mutate</span>(<span class="at">Treatment=</span><span class="fu">factor</span>(Treatment,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"v+d"</span>,<span class="st">"v+a"</span>,<span class="st">"v+h"</span>,<span class="st">"gre"</span>)),</span>
+<span id="cb108-5"><a></a>         <span class="at">Severity=</span><span class="fu">factor</span>(Severity,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"none"</span>,<span class="st">"slight"</span>,<span class="st">"moderate"</span>)))</span>
+<span id="cb108-6"><a></a><span class="fu">glimpse</span>(operate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 417
+Columns: 3
+$ Hospital  &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ Treatment &lt;fct&gt; v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, …
+$ Severity  &lt;fct&gt; none, none, none, none, none, none, none, none, none, none, …</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="example-7" class="slide level2">
 <h2>Example</h2>
@@ -1964,36 +2354,49 @@ measure \pm 1.96*ASE
 </ul>
 <p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.</p>
 <div class="panel-tabset">
-<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">SAS Code</a></li><li><a href="#tabset-15-2">Answer</a></li></ul>
+<ul id="tabset-20" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-20-1">SAS Code</a></li><li><a href="#tabset-20-2">R Code</a></li><li><a href="#tabset-20-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-15-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a>data operate;</span>
-<span id="cb58-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb58-3"><a></a>datalines;</span>
-<span id="cb58-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
-<span id="cb58-5"><a></a><span class="dv">1</span> v<span class="sc">+</span>a none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>a slight <span class="dv">10</span> <span class="dv">1</span> v<span class="sc">+</span>a moderate <span class="dv">5</span></span>
-<span id="cb58-6"><a></a><span class="dv">1</span> v<span class="sc">+</span>h none <span class="dv">20</span> <span class="dv">1</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">1</span> v<span class="sc">+</span>h moderate <span class="dv">5</span></span>
-<span id="cb58-7"><a></a><span class="dv">1</span> gre none <span class="dv">24</span> <span class="dv">1</span> gre slight <span class="dv">10</span> <span class="dv">1</span> gre moderate <span class="dv">6</span></span>
-<span id="cb58-8"><a></a><span class="dv">2</span> v<span class="sc">+</span>d none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
-<span id="cb58-9"><a></a><span class="dv">2</span> v<span class="sc">+</span>a none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>a slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
-<span id="cb58-10"><a></a><span class="dv">2</span> v<span class="sc">+</span>h none <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
-<span id="cb58-11"><a></a><span class="dv">2</span> gre none <span class="dv">9</span> <span class="dv">2</span> gre slight <span class="dv">15</span> <span class="dv">2</span> gre moderate <span class="dv">2</span></span>
-<span id="cb58-12"><a></a><span class="dv">3</span> v<span class="sc">+</span>d none <span class="dv">8</span> <span class="dv">3</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>d moderate <span class="dv">3</span></span>
-<span id="cb58-13"><a></a><span class="dv">3</span> v<span class="sc">+</span>a none <span class="dv">12</span> <span class="dv">3</span> v<span class="sc">+</span>a slight <span class="dv">4</span> <span class="dv">3</span> v<span class="sc">+</span>a moderate <span class="dv">4</span></span>
-<span id="cb58-14"><a></a><span class="dv">3</span> v<span class="sc">+</span>h none <span class="dv">11</span> <span class="dv">3</span> v<span class="sc">+</span>h slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
-<span id="cb58-15"><a></a><span class="dv">3</span> gre none <span class="dv">7</span> <span class="dv">3</span> gre slight <span class="dv">7</span> <span class="dv">3</span> gre moderate <span class="dv">4</span></span>
-<span id="cb58-16"><a></a><span class="dv">4</span> v<span class="sc">+</span>d none <span class="dv">12</span> <span class="dv">4</span> v<span class="sc">+</span>d slight <span class="dv">9</span> <span class="dv">4</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
-<span id="cb58-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
-<span id="cb58-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
-<span id="cb58-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
-<span id="cb58-20"><a></a>;</span>
-<span id="cb58-21"><a></a></span>
-<span id="cb58-22"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
-<span id="cb58-23"><a></a>weight wt;</span>
-<span id="cb58-24"><a></a>tables trt<span class="sc">*</span>severity <span class="sc">/</span>  jt;</span>
-<span id="cb58-25"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-20-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a></a>data operate;</span>
+<span id="cb110-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb110-3"><a></a>datalines;</span>
+<span id="cb110-4"><a></a><span class="dv">1</span> v<span class="sc">+</span>d none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>d slight <span class="dv">7</span> <span class="dv">1</span> v<span class="sc">+</span>d moderate <span class="dv">2</span></span>
+<span id="cb110-5"><a></a><span class="dv">1</span> v<span class="sc">+</span>a none <span class="dv">23</span> <span class="dv">1</span> v<span class="sc">+</span>a slight <span class="dv">10</span> <span class="dv">1</span> v<span class="sc">+</span>a moderate <span class="dv">5</span></span>
+<span id="cb110-6"><a></a><span class="dv">1</span> v<span class="sc">+</span>h none <span class="dv">20</span> <span class="dv">1</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">1</span> v<span class="sc">+</span>h moderate <span class="dv">5</span></span>
+<span id="cb110-7"><a></a><span class="dv">1</span> gre none <span class="dv">24</span> <span class="dv">1</span> gre slight <span class="dv">10</span> <span class="dv">1</span> gre moderate <span class="dv">6</span></span>
+<span id="cb110-8"><a></a><span class="dv">2</span> v<span class="sc">+</span>d none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
+<span id="cb110-9"><a></a><span class="dv">2</span> v<span class="sc">+</span>a none <span class="dv">18</span> <span class="dv">2</span> v<span class="sc">+</span>a slight <span class="dv">6</span> <span class="dv">2</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
+<span id="cb110-10"><a></a><span class="dv">2</span> v<span class="sc">+</span>h none <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h slight <span class="dv">13</span> <span class="dv">2</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
+<span id="cb110-11"><a></a><span class="dv">2</span> gre none <span class="dv">9</span> <span class="dv">2</span> gre slight <span class="dv">15</span> <span class="dv">2</span> gre moderate <span class="dv">2</span></span>
+<span id="cb110-12"><a></a><span class="dv">3</span> v<span class="sc">+</span>d none <span class="dv">8</span> <span class="dv">3</span> v<span class="sc">+</span>d slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>d moderate <span class="dv">3</span></span>
+<span id="cb110-13"><a></a><span class="dv">3</span> v<span class="sc">+</span>a none <span class="dv">12</span> <span class="dv">3</span> v<span class="sc">+</span>a slight <span class="dv">4</span> <span class="dv">3</span> v<span class="sc">+</span>a moderate <span class="dv">4</span></span>
+<span id="cb110-14"><a></a><span class="dv">3</span> v<span class="sc">+</span>h none <span class="dv">11</span> <span class="dv">3</span> v<span class="sc">+</span>h slight <span class="dv">6</span> <span class="dv">3</span> v<span class="sc">+</span>h moderate <span class="dv">2</span></span>
+<span id="cb110-15"><a></a><span class="dv">3</span> gre none <span class="dv">7</span> <span class="dv">3</span> gre slight <span class="dv">7</span> <span class="dv">3</span> gre moderate <span class="dv">4</span></span>
+<span id="cb110-16"><a></a><span class="dv">4</span> v<span class="sc">+</span>d none <span class="dv">12</span> <span class="dv">4</span> v<span class="sc">+</span>d slight <span class="dv">9</span> <span class="dv">4</span> v<span class="sc">+</span>d moderate <span class="dv">1</span></span>
+<span id="cb110-17"><a></a><span class="dv">4</span> v<span class="sc">+</span>a none <span class="dv">15</span> <span class="dv">4</span> v<span class="sc">+</span>a slight <span class="dv">3</span> <span class="dv">4</span> v<span class="sc">+</span>a moderate <span class="dv">2</span></span>
+<span id="cb110-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
+<span id="cb110-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
+<span id="cb110-20"><a></a>;</span>
+<span id="cb110-21"><a></a></span>
+<span id="cb110-22"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
+<span id="cb110-23"><a></a>weight wt;</span>
+<span id="cb110-24"><a></a>tables trt<span class="sc">*</span>severity <span class="sc">/</span>  jt;</span>
+<span id="cb110-25"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-15-2">
+<div id="tabset-20-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a></a><span class="fu">JonckheereTerpstraTest</span>(Severity<span class="sc">~</span>Treatment,<span class="at">data=</span>operate,<span class="at">alternative=</span><span class="st">"increasing"</span>,<span class="at">nperm=</span><span class="dv">10000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Jonckheere-Terpstra test
+
+data:  Severity by Treatment
+JT = 35697, p-value = 0.0056
+alternative hypothesis: increasing</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-20-3">
 <p>The JT statistic was estimated to be 35,697, corresponding to a one-sided p-value <span class="math inline">\(p=0.005\)</span>, which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.</p>
 </div>
 </div>
@@ -2364,7 +2767,7 @@ measure \pm 1.96*ASE
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/MiguelFudolig\.github\.io\/EAB770-Slides-Website\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

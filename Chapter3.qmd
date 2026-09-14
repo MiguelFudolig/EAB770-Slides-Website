@@ -453,7 +453,7 @@ Zelen's test is similar to the Breslow-Day test, but uses exact methods.
 ::: callout-note
 Similar to the Fisher's Exact Test, the Zelen's test entails calculating the probability of all possible sets of tables. The resulting p-value is the sum of all table probabilities that are lower than the probability of the observed table. This test is not available in `R`.
 :::
-
+:::
 
 # Measures of Association
 
@@ -576,6 +576,7 @@ dat_cc
 ```
 
 ```{r}
+library(vcdExtra)
 breslow_day_test(dat_cc)
 mantelhaen.test(dat_cc, correct=F)
 

@@ -14,56 +14,42 @@
     "href": "Chapter8.html#outline",
     "title": "EAB 770 - Chapter 8",
     "section": "Outline",
-    "text": "Outline\n\nDichotomous Explanatory Variables\n\nThe LOGISTIC procedure\nCLASS statement\n\nQualitative Explanatory Variables\nContinuous and Ordinal Explanatory Variables\nDiagnostics\nLikelihood methods\n\nThe GENMOD procedure"
+    "text": "Outline\n\nDichotomous Explanatory Variables\nQualitative Explanatory Variables\nContinuous and Ordinal Explanatory Variables\nDiagnostics\nLikelihood methods"
   },
   {
     "objectID": "Chapter8.html#review-mantel-haenszel-tests",
     "href": "Chapter8.html#review-mantel-haenszel-tests",
     "title": "EAB 770 - Chapter 8",
     "section": "Review: Mantel-Haenszel Tests",
-    "text": "Review: Mantel-Haenszel Tests\n\nMantel-Haenszel statistics investigate association between two variables with adjustment for a stratification variable.\n\nGeneral association\nLocation shifts for means\nLinear/increasing trends -Mantel-Haenszel does not involve statistical models.\nCan’t be used for estimation"
+    "text": "Review: Mantel-Haenszel Tests\nMantel-Haenszel statistics investigate association between two variables with adjustment for a stratification variable. - General association - Location shifts for means - Linear/increasing trends\n\n\n\n\n\n\nNote\n\n\nMantel-Haenszel Tests do not involve statistical models, and therefore can’t be used for estimation for effect sizes or prediction. Furthermore, these tests cannot accommodate for continuous variables as predictors."
   },
   {
     "objectID": "Chapter8.html#logistic-regression",
     "href": "Chapter8.html#logistic-regression",
     "title": "EAB 770 - Chapter 8",
     "section": "Logistic Regression",
-    "text": "Logistic Regression\n\nStatistical modeling method that enables us to:\n\nmake inferences\nestimate/predict outcome variables\n\nDescribes the relationship between a categorical response variable and multiple explanatory variables\n\nContinuous explanatory variables can be included in the analysis\nResponses can be dichotomous or polytomous"
-  },
-  {
-    "objectID": "Chapter8.html#logistic-regression-1",
-    "href": "Chapter8.html#logistic-regression-1",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Logistic Regression",
-    "text": "Logistic Regression\n\nPossible applications include epidemiology, medical research, agronomy, and social science research."
-  },
-  {
-    "objectID": "Chapter8.html#logistic-regression-dichotomous-variables",
-    "href": "Chapter8.html#logistic-regression-dichotomous-variables",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Logistic Regression: Dichotomous Variables",
-    "text": "Logistic Regression: Dichotomous Variables\n\nWhen both response and explanatory variables are dichotomous, it corresponds to a \\(2 \\times 2\\) table.\n\nRows pertain to groups/populations/subpopulations\n\nLogistic regression enables us to write a model for the probability of success for each group."
+    "text": "Logistic Regression\nStatistical modeling method that enables us to make inferences, estimate/predict outcome variables, and describe the relationship between a categorical response variable and multiple explanatory variables. Possible applications include epidemiology, medical research, agronomy, and social science research.\n\n\n\n\n\n\nNote\n\n\nContinuous explanatory variables can be included in the analysis, unlike in Mantel-Haenszel tests. Responses can be dichotomous or polytomous (more than two levels)."
   },
   {
     "objectID": "Chapter8.html#logistic-regression-model",
     "href": "Chapter8.html#logistic-regression-model",
     "title": "EAB 770 - Chapter 8",
     "section": "Logistic Regression: Model",
-    "text": "Logistic Regression: Model\nLet \\(\\theta_{mi}\\) be the probability of success fo the \\(i^{th}\\) group in the \\(m^{th}\\) strata.The logistic model can be used to describe the variation among {\\(\\theta_{mi}\\)}\n\\[\n\\theta_{mi} = \\frac{1}{1+\\exp[-\\eta_{mi}]}\n\\]"
+    "text": "Logistic Regression: Model\nLogistic regression enables us to write a model for the probability of success for each group.\nLet \\(\\theta_{mi}\\) be the probability of success of the \\(i^{th}\\) group in the \\(m^{th}\\) strata.The logistic model can be used to describe the variation among {\\(\\theta_{mi}\\)}\n\\[\n\\theta_{mi} = \\frac{1}{1+\\exp[-\\eta_{mi}]}\n\\]"
   },
   {
     "objectID": "Chapter8.html#logistic-regression-model-1",
     "href": "Chapter8.html#logistic-regression-model-1",
     "title": "EAB 770 - Chapter 8",
     "section": "Logistic Regression: Model",
-    "text": "Logistic Regression: Model\nWhere\n\\[\n\\eta_{mi} = \\alpha + \\sum_{k=1}^t \\beta_kx_{mik}\n\\] and \\(t\\) is the number of explanatory variables.\n\n\n\n\n\n\nNote\n\n\n\\(\\eta_{mi}\\) is referred to as the linear predictor of the model."
+    "text": "Logistic Regression: Model\nWhere\n\\[\n\\eta_{mi} = \\alpha + \\sum_{k=1}^t \\beta_kx_{mik}\n\\]\nand \\(t\\) is the number of explanatory variables.\n\n\n\n\n\n\nNote\n\n\n\\(\\eta_{mi}\\) is referred to as the linear predictor of the model."
   },
   {
     "objectID": "Chapter8.html#logistic-regression-model-2",
     "href": "Chapter8.html#logistic-regression-model-2",
     "title": "EAB 770 - Chapter 8",
     "section": "Logistic Regression: Model",
-    "text": "Logistic Regression: Model\nUsing algebra, we can invert the equation to the following form:\n\\[\n\\eta_{mi} = \\alpha + \\sum_{k=1}^t \\beta_kx_{mik} = \\log\\left[\\frac{\\theta_{mi}}{1-\\theta_{mi}}\\right]\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\log\\left[\\frac{\\theta_{mi}}{1-\\theta_{mi}}\\right]\\) is referred to as the logit transformation of \\(\\theta_{mi}\\), which is the logarithm of the odds."
+    "text": "Logistic Regression: Model\nUsing algebra, we can invert the equation to the following form:\n\\[\n\\eta_{mi} = \\alpha + \\sum_{k=1}^t \\beta_kx_{mik} = \\log\\left[\\frac{\\theta_{mi}}{1-\\theta_{mi}}\\right]\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\log\\left[\\frac{\\theta_{mi}}{1-\\theta_{mi}}\\right]\\) is referred to as the logit transformation of \\(\\theta_{mi}\\), which is the logarithm of the odds.\nOther functions that can serve as a link function include the probit model and the complementary log-log model."
   },
   {
     "objectID": "Chapter8.html#odds-and-odds-ratios",
@@ -77,7 +63,7 @@
     "href": "Chapter8.html#advantages",
     "title": "EAB 770 - Chapter 8",
     "section": "Advantages",
-    "text": "Advantages\n\nThe logit transformation enables us to monitor the change in log odds.\nEasy to calculate ods ratio.\nThe linear predictor can take on values from \\((-\\infty,\\infty)\\), but the values of \\(\\theta_{mi}\\) will be constrained in [0,1].\n\n\n\n\n\n\n\nTip\n\n\nIf you used linear regression to model a proportion, it assumes that the response variable can be negative or above 1."
+    "text": "Advantages\n\nThe logit transformation enables us to monitor the change in log odds.\nEasy to calculate odds ratio.\nThe linear predictor can take on values from \\((-\\infty,\\infty)\\), but the values of \\(\\theta_{mi}\\) will be constrained in [0,1].\n\n\n\n\n\n\n\nTip\n\n\nIf you used linear regression to model a proportion, it assumes that the response variable can be negative or above 1."
   },
   {
     "objectID": "Chapter8.html#fit-statistics",
@@ -104,36 +90,36 @@
     "objectID": "Chapter8.html#chi-square-statistics-sample-size",
     "href": "Chapter8.html#chi-square-statistics-sample-size",
     "title": "EAB 770 - Chapter 8",
-    "section": "Chi-square statistics: sample size",
-    "text": "Chi-square statistics: sample size\nSample size guidelines for the chi-square assumption for these fit statistics include:\n\nEach group should have at least ten subjects.\n80% of the predicted counts should be at least 5.\nNo 0 counts, remaining 20% of the counts should be above 2.\nFailure to satisfy these assumptions means exact tests should be used."
+    "section": "Chi-square statistics: Sample Size",
+    "text": "Chi-square statistics: Sample Size\nSample size guidelines for the chi-square assumption for these fit statistics include:\n\nEach group should have at least ten subjects.\n80% of the predicted counts should be at least 5.\nNo 0 counts, remaining 20% of the counts should be above 2.\nFailure to satisfy these assumptions means exact tests should be used."
   },
   {
     "objectID": "Chapter8.html#chi-square-statistics-hypothesis-test",
     "href": "Chapter8.html#chi-square-statistics-hypothesis-test",
     "title": "EAB 770 - Chapter 8",
-    "section": "Chi-square statistics: hypothesis test",
-    "text": "Chi-square statistics: hypothesis test\nThe null hypothesis for both deviance and goodness-of-fit tests is that the departures of the observed data from the predicted values based on the model are random.\n\nFailure to reject the null hypothesis means we have no evidence against good agreement between observed and predicted values based on the model."
+    "section": "Chi-square statistics: Hypothesis Test",
+    "text": "Chi-square statistics: Hypothesis Test\nThe null hypothesis for both deviance and goodness-of-fit tests is that the departures of the observed data from the predicted values based on the model are random.\n\n\n\n\n\n\nNote\n\n\nFailure to reject the null hypothesis means we have no evidence against good agreement between observed and predicted values based on the model."
   },
   {
     "objectID": "Chapter8.html#fit-statistics-1",
     "href": "Chapter8.html#fit-statistics-1",
     "title": "EAB 770 - Chapter 8",
     "section": "Fit Statistics",
-    "text": "Fit Statistics\n\nThe Akaike Infomation Criterion (AIC) and the Bayesian Information Criterion (BIC) can also be used to assess model fit.\n\n\n\n\n\n\n\nNote\n\n\nThe Bayesian Information Criterion is also known as the Schwarz Criterion (SC).\n\n\n\n\n\n\n\n\n\nNote\n\n\nAIC predicts estimation error based on the provided model. BIC also predicts estimation error but uses a different penalization scheme for errors.\n\n\n\n\nThe AIC (or BIC) for the full model (intercept + covariates) should be lower than the AIC (or BIC) of the intercept-only model."
+    "text": "Fit Statistics\nThe Akaike Infomation Criterion (AIC) and the Bayesian Information Criterion (BIC)/Schwarz Criterion (SC) can also be used to assess model fit. Lower values of these criteria indicate better model fit.\n\n\n\n\n\n\nNote\n\n\nAIC predicts estimation error based on the provided model. BIC also predicts estimation error but uses a different penalization scheme for errors.\nThe AIC (or BIC) for the full model (intercept + covariates) should be lower than the AIC (or BIC) of the intercept-only model if the covariates are associated with the response."
   },
   {
     "objectID": "Chapter8.html#the-main-effect-model",
     "href": "Chapter8.html#the-main-effect-model",
     "title": "EAB 770 - Chapter 8",
     "section": "The Main Effect Model",
-    "text": "The Main Effect Model\nRecall that the linear predictor can be written as:\n\\[\n\\eta_i = \\alpha + \\beta_1x_{i1} + \\beta_2x_{i2} + ...\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\alpha\\) is the intercept of the linear model\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_k\\) are the coefficients of the explanatory variables. These coefficients will tell us the effect of predictor \\(x_{ik}\\)."
+    "text": "The Main Effect Model\nRecall that the linear predictor can be written as:\n\\[\n\\eta_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + ...\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_0\\) is the intercept of the linear model\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_k\\) are the coefficients of the explanatory variables. These coefficients will tell us the effect of predictor \\(x_{ik}\\)."
   },
   {
     "objectID": "Chapter8.html#the-main-effect-model-1",
     "href": "Chapter8.html#the-main-effect-model-1",
     "title": "EAB 770 - Chapter 8",
     "section": "The Main Effect Model",
-    "text": "The Main Effect Model\n\nThe current form of the linear predictor assumes the explanatory variables are in quantitative form.\nWhen the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.\n\nThe case \\(x_{ik}=0\\) is called the reference level of the variables. When all \\(x_{ik}=0\\) the linear predictor collapses to the intercept \\(\\alpha\\).\n\n\n\n\n\n\n\n\nNote\n\n\nFor dummy dichotomous variables, odds ratios can be calculated as an effect size of association."
+    "text": "The Main Effect Model\nThe current form of the linear predictor assumes the explanatory variables are in quantitative form. When the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.\n\n\n\n\n\n\nNote\n\n\nThe case \\(x_{ik}=0\\) is called the reference level of the variables. When all \\(x_{ik}=0\\) the linear predictor collapses to the intercept \\(\\beta_0\\).\n\n\n\n\n\n\n\n\n\nNote\n\n\nFor dummy dichotomous variables, odds ratios can be calculated as an effect size of association."
   },
   {
     "objectID": "Chapter8.html#the-main-effect-model-2",
@@ -143,18 +129,18 @@
     "text": "The Main Effect Model\n\n\n\n\n\n\nNote\n\n\nThe main effect model follows a regression framework, which means we can use ANOVA to test for effect significance."
   },
   {
-    "objectID": "Chapter8.html#the-logistic-procedure",
-    "href": "Chapter8.html#the-logistic-procedure",
+    "objectID": "Chapter8.html#sas-the-logistic-procedure",
+    "href": "Chapter8.html#sas-the-logistic-procedure",
     "title": "EAB 770 - Chapter 8",
-    "section": "The LOGISTIC Procedure",
-    "text": "The LOGISTIC Procedure\nThe LOGISTIC procedure can perform logistic regression in SAS.\n\nCan take both categorical and continuous explanatory variable\nSyntax is slightly different from the FREQ procedure."
+    "section": "SAS: The LOGISTIC Procedure",
+    "text": "SAS: The LOGISTIC Procedure\nThe LOGISTIC procedure can perform logistic regression in SAS.\n\nCan take both categorical and continuous explanatory variable\nSyntax is slightly different from the FREQ procedure."
   },
   {
-    "objectID": "Chapter8.html#the-logistic-procedure-1",
-    "href": "Chapter8.html#the-logistic-procedure-1",
+    "objectID": "Chapter8.html#sas-the-logistic-procedure-1",
+    "href": "Chapter8.html#sas-the-logistic-procedure-1",
     "title": "EAB 770 - Chapter 8",
-    "section": "The LOGISTIC Procedure",
-    "text": "The LOGISTIC Procedure\nThe LOGISTIC procedure provides estimates for \\(\\beta\\) as in regression analysis.\nSample Syntax\nproc logistic data=data;\n1freq count;\n2model y(event='Yes') = x1 x2 /scale=none aggregate;\nrun;\n\n1\n\nfreq functions similar to weight in the FREQ procedure. When the data consists of an observation for each row, this statement is not needed.\n\n2\n\nmodel specifies the model for the response y using the explanatory variables x1 and x2. event tells SAS what the “success” response level is. The scale option produces goodness-of-fit statistics. The aggregate option requests that SAS treat each unique combination of the explanatory variable values as a distinct group in computing the goodness-of-fit statistics."
+    "section": "SAS: The LOGISTIC Procedure",
+    "text": "SAS: The LOGISTIC Procedure\nThe LOGISTIC procedure provides estimates for \\(\\beta\\) as in regression analysis.\nSample Syntax\nproc logistic data=data;\n1freq count;\n2model y(event='Yes') = x1 x2 /scale=none aggregate;\nrun;\n\n1\n\nfreq functions similar to weight in the FREQ procedure. When the data consists of an observation for each row, this statement is not needed.\n\n2\n\nmodel specifies the model for the response y using the explanatory variables x1 and x2. event tells SAS what the “success” response level is. The scale option produces goodness-of-fit statistics. The aggregate option requests that SAS treat each unique combination of the explanatory variable values as a distinct group in computing the goodness-of-fit statistics."
   },
   {
     "objectID": "Chapter8.html#example",
@@ -795,16 +781,6 @@
     ]
   },
   {
-    "objectID": "Chapter5.html#example-3",
-    "href": "Chapter5.html#example-3",
-    "title": "EAB 770 - Chapter 5",
-    "section": "Example",
-    "text": "Example\nA marketing research firm organized a focus group to consider issues of new car marketing. Members of the group included people who had purchased a car from a local dealer in the last month. Researchers were interested in whether there was an association between the type of car bought and how group members found out about the car in the media. Cars were classified as sedans, sporty, and utility. The types of media included television, magazines, newspapers, and radio.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n\ndata market;\nlength AdSource $ 9. ;\ninput car $ AdSource $ count @@;\ndatalines;\nsporty paper 3 sporty radio 4 sporty tv 0 sporty magazine 3\nsedan paper 0 sedan radio 2 sedan tv 4 sedan magazine 0\nutility paper 2 utility radio 2 utility tv 5 utility magazine 5\n;\nproc freq;\nweight count;\ntable car*AdSource / norow nocol nopct;\nexact fisher pchi lrchi;\nrun;\n\n\n\ndat&lt;- expand.grid(Car=c(\"Sedan\",\"Sporty\",\"Utility\"),\n                  AdSource=c(\"TV\",\"Magazine\",\"Newspaper\",\"Radio\"))\n\ndat$Count &lt;- c(4,0,5,0,3,5,0,3,2,2,4,2)\n\ndat_cc &lt;- xtabs(Count~Car+AdSource,data=dat)\ndat_cc\n\n         AdSource\nCar       TV Magazine Newspaper Radio\n  Sedan    4        0         0     2\n  Sporty   0        3         3     4\n  Utility  5        5         2     2\n\n\n\nfisher.test(dat_cc)\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.04734\nalternative hypothesis: two.sided\n\n\n\n\nWe need to use Fisher’s exact test because of the small sample size. The p-value was calculated to be 0.047, which is sufficient evidence to conclude that there is an association between car type and media at the 0.05 level of significance.",
-    "crumbs": [
-      "Chapter 5: sxr tables"
-    ]
-  },
-  {
     "objectID": "Chapter5.html#exercise-2",
     "href": "Chapter5.html#exercise-2",
     "title": "EAB 770 - Chapter 5",
@@ -820,16 +796,6 @@
     "title": "EAB 770 - Chapter 5",
     "section": "Exact Tests",
     "text": "Exact Tests\nFor a 2x2 contingency table, we have Fisher’s Exact Test. The Fisher’s Exact test can be generalized to larger contingency tables using a multivariate hypergeometric distribution. Unlike Fisher’s Exact Test for 2x2 tables, there are no one-sided alternative hypothesis.\n\n\n\n\n\n\nNote\n\n\nExact p-value is the sum of p-values associated with contingency tables where the test statistic is larger than the observed table.",
-    "crumbs": [
-      "Chapter 5: sxr tables"
-    ]
-  },
-  {
-    "objectID": "Chapter5.html#exact-tests-1",
-    "href": "Chapter5.html#exact-tests-1",
-    "title": "EAB 770 - Chapter 5",
-    "section": "Exact Tests",
-    "text": "Exact Tests\n\nRecall: Exact testing of sx2 tables\n\nThe correlation statistic is suitable when sample size requirements are not met, but we can’t use the chi-square distribution.\nExact p-value is the sum of p-values associated with contingency tables where the test statistic is larger than the observed table.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -855,21 +821,21 @@
     ]
   },
   {
-    "objectID": "Chapter5.html#example-4",
-    "href": "Chapter5.html#example-4",
+    "objectID": "Chapter5.html#exact-tests-r",
+    "href": "Chapter5.html#exact-tests-r",
     "title": "EAB 770 - Chapter 5",
-    "section": "Example",
-    "text": "Example\n\nThe data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.\n\nCalculate the estimate and 95% confidence interval for the simple and weighted Kappa statistic.\nWhat can you say about the agreement between the New Orleans and Winnipeg neurologists?\n\n\n\nSAS Code\ndata classify;\ninput no_rater w_rater count @@;\ndatalines;\n1 1 38 1 2 5 1 3 0 1 4 1\n2 1 33 2 2 11 2 3 3 2 4 0\n3 1 10 3 2 14 3 3 5 3 4 6\n4 1 3 4 2 7 4 3 3 4 4 10\n;",
+    "section": "Exact Tests: R",
+    "text": "Exact Tests: R\nIf the sample size is small enough, the fisher.test() function can be used to implement exact tests.\n\n\n\n\n\n\nTip\n\n\nSAS has better functions to perform exact tests for the Pearson and randomization statistics.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
   },
   {
-    "objectID": "Chapter5.html#example-5",
-    "href": "Chapter5.html#example-5",
+    "objectID": "Chapter5.html#example-3",
+    "href": "Chapter5.html#example-3",
     "title": "EAB 770 - Chapter 5",
     "section": "Example",
-    "text": "Example\n\nThe data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.\n\nCalculate the estimate and 95% confidence interval for the simple and weighted Kappa statistic.\nWhat can you say about the agreement between the New Orleans and Winnipeg neurologists?\n\n\n\nSAS CodeAnswer\n\n\ndata classify;\ninput no_rater w_rater count @@;\ndatalines;\n1 1 38 1 2 5 1 3 0 1 4 1\n2 1 33 2 2 11 2 3 3 2 4 0\n3 1 10 3 2 14 3 3 5 3 4 6\n4 1 3 4 2 7 4 3 3 4 4 10\n;\n\n\nproc freq;\nweight count;\ntables no_rater*w_rater / agree norow nocol nopct;\nrun;\n\n\nSimple \\(\\kappa\\): 0.21 (0.11,0.31) Weighted \\(\\kappa\\): 0.38 (0.28,0.48)\nSince the weighted \\(\\kappa\\) is higher than the simple \\(\\kappa\\), we can infer that there were more disagreements closer to the diagonal. There is a slight to moderate agreement between the two neurologists.",
+    "text": "Example\nA marketing research firm organized a focus group to consider issues of new car marketing. Members of the group included people who had purchased a car from a local dealer in the last month. Researchers were interested in whether there was an association between the type of car bought and how group members found out about the car in the media. Cars were classified as sedans, sporty, and utility. The types of media included television, magazines, newspapers, and radio.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n\ndata market;\nlength AdSource $ 9. ;\ninput car $ AdSource $ count @@;\ndatalines;\nsporty paper 3 sporty radio 4 sporty tv 0 sporty magazine 3\nsedan paper 0 sedan radio 2 sedan tv 4 sedan magazine 0\nutility paper 2 utility radio 2 utility tv 5 utility magazine 5\n;\nproc freq;\nweight count;\ntable car*AdSource / norow nocol nopct;\nexact fisher pchi lrchi;\nrun;\n\n\n\ndat&lt;- expand.grid(Car=c(\"Sedan\",\"Sporty\",\"Utility\"),\n                  AdSource=c(\"TV\",\"Magazine\",\"Newspaper\",\"Radio\"))\n\ndat$Count &lt;- c(4,0,5,0,3,5,0,3,2,2,4,2)\n\ndat_cc &lt;- xtabs(Count~Car+AdSource,data=dat)\ndat_cc\n\n         AdSource\nCar       TV Magazine Newspaper Radio\n  Sedan    4        0         0     2\n  Sporty   0        3         3     4\n  Utility  5        5         2     2\n\n\n\nfisher.test(dat_cc)\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.04734\nalternative hypothesis: two.sided\n\n\n\n\nWe need to use Fisher’s exact test because of the small sample size. The p-value was calculated to be 0.047, which is sufficient evidence to conclude that there is an association between car type and media at the 0.05 level of significance.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -880,16 +846,6 @@
     "title": "EAB 770 - Chapter 5",
     "section": "Exercise",
     "text": "Exercise\nA university professor wanted to test the general association between the most used social media app and the type of high school attended by freshmen. The professor asked 23 students in his class about their social media habits and respective high schools.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n\n\nTiktok\nInstagram\nSnapchat\nOther\n\n\n\n\nPriv., in-state\n3\n2\n3\n0\n\n\nPub., in-state\n3\n1\n0\n0\n\n\nPriv., out-of-state\n4\n1\n0\n1\n\n\nPub., out-of-state\n1\n0\n0\n1\n\n\n\n\n\ndata sm;\ninput school $ social $ count @@;\ndatalines;\nPr_IS t 3 Pr_IS i 2 Pr_IS s 3 Pr_IS o 0\nPu_IS t 3 Pu_IS i 1 Pu_IS s 0 Pu_IS o 0\nPr_OS t 4 Pr_OS i 1 Pr_OS s 0 Pr_OS o 1\nPu_OS t 1 Pu_OS i 0 Pu_OS s 0 Pu_OS o 1\n;\n\nproc freq data=sm order=data;\nweight count;\ntables school*social;\nexact fisher pchi lrchi;\nrun;\n\n\n\ndat &lt;- expand.grid(School=c(\"Priv_In\",\"Public_In\",\"Priv_Out\",\"Public_Out\"),\n                   Social=c(\"Tiktok\",\"Instagram\",\"Snapchat\",\"Other\"))\n\ndat$Count &lt;- c(3,3,4,1,2,1,1,0,3,0,0,0,0,0,1,1)\n\ndat_cc &lt;- xtabs(Count~School+Social,data=dat)\ndat_cc\n\n            Social\nSchool       Tiktok Instagram Snapchat Other\n  Priv_In         3         2        3     0\n  Public_In       3         1        0     0\n  Priv_Out        4         1        0     1\n  Public_Out      1         0        0     1\n\n\n\nfisher.test(dat_cc)\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  dat_cc\np-value = 0.4878\nalternative hypothesis: two.sided\n\n\n\n\nThe Fisher’s exact test yielded p=0.4878, which means there is insufficient evidence to claim that social media habits are associated with the type of high school attended by the students.",
-    "crumbs": [
-      "Chapter 5: sxr tables"
-    ]
-  },
-  {
-    "objectID": "Chapter5.html#exercise-4",
-    "href": "Chapter5.html#exercise-4",
-    "title": "EAB 770 - Chapter 5",
-    "section": "Exercise",
-    "text": "Exercise\nConsider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.\n\nPearson correlation\nSpearman Correlation\nGamma\nKendall’s \\(\\tau_b\\)\nStuart’s \\(\\tau_c\\)\nSomers’ Delta",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -919,7 +875,7 @@
     "href": "Chapter5.html#ordinal-variables-1",
     "title": "EAB 770 - Chapter 5",
     "section": "Ordinal Variables",
-    "text": "Ordinal Variables\n\nAssociation can also be measured by classifying all possible pairs of subjects as concordant or discordant pairs.\n\nConcordant: Subject ranks higher on the row variable also ranks higher on the column variable\nDiscordant: Subject that ranks higher on the row variable also ranks lower on the column variable\nDepends on relative ordering of the levels of variables\n\n\n\n\n\n\n\n\nNote\n\n\nMeasures of association that use these pairs are Gamma \\(\\gamma\\), Kendall’s \\(\\tau_B\\), Stuart’s \\(\\tau_C\\), Somers’ Delta.\n\nAll measures range from -1 to 1, inclusive.",
+    "text": "Ordinal Variables\nAssociation can also be measured by classifying all possible pairs of subjects as concordant or discordant pairs.\n\nConcordant: Subject ranks higher on the row variable also ranks higher on the column variable\nDiscordant: Subject that ranks higher on the row variable also ranks lower on the column variable\nDepends on relative ordering of the levels of variables\n\n\n\n\n\n\n\nNote\n\n\nMeasures of association that use these pairs are Gamma \\(\\gamma\\), Kendall’s \\(\\tau_B\\), Stuart’s \\(\\tau_C\\), Somers’ Delta.\n\nAll measures range from -1 to 1, inclusive.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -929,17 +885,37 @@
     "href": "Chapter5.html#measures-of-association-2",
     "title": "EAB 770 - Chapter 5",
     "section": "Measures of Association",
-    "text": "Measures of Association\nThese measures differ in adjusting for ties and sample size.\n\nSomers’ D depends on the location of the explanatory variable.\nStuart’s \\(\\tau_C\\) includes an adjustment for table size to a correction for ties. Recommended when two ordinal variables under consideration have different numbers of values.\nKendall’s \\(\\tau_B\\) is preferred when the contingency table is square (\\(m\\times m\\))\nGamma does not account for ties, so it is only recommended if there are no ties.",
+    "text": "Measures of Association\nThese measures differ in adjusting for ties and sample size.\n\n\\(\\gamma\\)\\(D\\)\\(\\tau_C\\)\\(\\tau_B\\)\n\n\nThe Goodman Kruskal’s Gamma measures association for two ordinal variables based on the number of discordant and concordant pairs. This ignores any ties that happen in the data set.\n\n\nSomers’ Delta (\\(D\\)) is the ratio of concordant and discordant pairs divided by the pairs from either row/column variable.\n\n\n\n\n\n\nNote\n\n\nBecause the denominator is conditional on the margin, \\(D\\) is asymmetric.\n\n\n\n\n\nStuart’s \\(\\tau_C\\) includes an adjustment for table size to a correction for ties. This is recommended when two ordinal variables under consideration have different numbers of values.\n\n\nKendall’s \\(\\tau_B\\) is preferred when the contingency table is square (\\(m\\times m\\)).",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
   },
   {
-    "objectID": "Chapter5.html#measures-of-association-3",
-    "href": "Chapter5.html#measures-of-association-3",
+    "objectID": "Chapter5.html#measures-of-association-sas",
+    "href": "Chapter5.html#measures-of-association-sas",
     "title": "EAB 770 - Chapter 5",
-    "section": "Measures of Association",
-    "text": "Measures of Association\nWhen the sample size is large enough, 95% confidence intervals can be calculated for these measures using a normal approximation.\n\\[\nmeasure \\pm 1.96*ASE\n\\]\nwhere ASE is the asymptotic standard error reported in the measures output from the freq procedure. - The confidence interval can be calculated using the cl option in the freq procedure.",
+    "section": "Measures of Association: SAS",
+    "text": "Measures of Association: SAS\nThe measures option in the tables statement produces the different measures of association for the contingency tables. When the sample size is large enough, 95% confidence intervals can be calculated for these measures using a normal approximation. These confidence intervals can be produced using the cl option.\n\\[\nmeasure \\pm 1.96*ASE\n\\]\nwhere ASE is the approximate standard error reported in the measures output from the freq procedure.",
+    "crumbs": [
+      "Chapter 5: sxr tables"
+    ]
+  },
+  {
+    "objectID": "Chapter5.html#measures-of-association-in-r",
+    "href": "Chapter5.html#measures-of-association-in-r",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Measures of Association in R",
+    "text": "Measures of Association in R\nThe DescTools package includes the functions that measures of association for contingency tables.\n\nSomersDelta(direction=c(\"row\",\"column\")): Somers’ Delta\nStuartTauC(): Stuart’s \\(\\tau_c\\)\nKendallTauA(): Kendall’s \\(\\tau_a\\)\nGoodmanKruskalGamma(): Goodman and Kruskal’s Gamma",
+    "crumbs": [
+      "Chapter 5: sxr tables"
+    ]
+  },
+  {
+    "objectID": "Chapter5.html#exercise-4",
+    "href": "Chapter5.html#exercise-4",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Exercise",
+    "text": "Exercise\nConsider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.\n\nPearson correlation (SAS only)\nSpearman Correlation (SAS only)\nGoodman and Kruskal’s Gamma\nKendall’s \\(\\tau_b\\)\nStuart’s \\(\\tau_c\\)\nSomers’ Delta (C|R)",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -949,7 +925,7 @@
     "href": "Chapter5.html#exercise-5",
     "title": "EAB 770 - Chapter 5",
     "section": "Exercise",
-    "text": "Exercise\nConsider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.\n\nSAS CodeAnswer\n\n\ndata wash;\ninput treatment $ washability $ count @@;\ndatalines;\nwater low 27 water medium 14 water high 5\nstandard low 10 standard medium 17 standard high 26\nsuper low 5 super medium 12 super high 50\n;\nproc freq order=data data=wash;\nweight count;\ntables treatment*washability /  measures cl;\nrun;\n\n\n\nPearson Correlation: 0.55 (0.44,0.67)\nSpearman Correlation: 0.55 (0.43, 0.66)\nGamma: 0.6974 (0.57-0.82)\n\\(\\tau_b\\): 0.50 (0.39,0.61)\n\\(\\tau_C\\): 0.48 (0.37,0.59)\nSomers’ D C|R: 0.49 (0.38,0.59)",
+    "text": "Exercise\nConsider the water treatment example. Calculate the following measures of association with the corresponding 95% CI.\n\nSAS CodeR CodeAnswer\n\n\ndata wash;\ninput treatment $ washability $ count @@;\ndatalines;\nwater low 27 water medium 14 water high 5\nstandard low 10 standard medium 17 standard high 26\nsuper low 5 super medium 12 super high 50\n;\nproc freq order=data data=wash;\nweight count;\ntables treatment*washability /  measures cl;\nrun;\n\n\n\ndat &lt;- expand.grid(Treatment=c(\"Water\",\"Standard\",\"Super\"),\n                   Washability=c(\"Low\",\"Medium\",\"High\"))\n\ndat$Count &lt;- c(27,10,5,14,17,12,5,26,50)\n\ndat_cc &lt;- xtabs(Count~Treatment+Washability,data=dat)\ndat_cc\n\n          Washability\nTreatment  Low Medium High\n  Water     27     14    5\n  Standard  10     17   26\n  Super      5     12   50\n\n\n\nlibrary(DescTools)\nGoodmanKruskalGamma(dat_cc,conf.level=0.95)\n\n    gamma    lwr.ci    upr.ci \n0.6974391 0.5727748 0.8221035 \n\nKendallTauB(dat_cc,conf.level=0.95)\n\n    tau_b    lwr.ci    upr.ci \n0.4969046 0.3883285 0.6054808 \n\nStuartTauC(dat_cc,conf.level = 0.95)\n\n     tauc    lwr.ci    upr.ci \n0.4803310 0.3734224 0.5872395 \n\nSomersDelta(dat_cc,conf.level = 0.95)\n\n   somers    lwr.ci    upr.ci \n0.5076516 0.3948344 0.6204687 \n\n\n\n\n\nPearson Correlation: 0.55 (0.44,0.67)\nSpearman Correlation: 0.55 (0.43, 0.66)\nGamma: 0.6974 (0.57-0.82)\n\\(\\tau_b\\): 0.50 (0.39-0.61)\n\\(\\tau_C\\): 0.48 (0.37-0.59)\nSomers’ D C|R: 0.49 (0.38-0.59)",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -959,7 +935,7 @@
     "href": "Chapter5.html#exercise-6",
     "title": "EAB 770 - Chapter 5",
     "section": "Exercise",
-    "text": "Exercise\nA random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.\n\nPearson correlation\nSpearman Correlation\nGamma\nKendall’s \\(\\tau_b\\)\nStuart’s \\(\\tau_c\\)\nSomers’ Delta\n\n1data drink;\ninput habit $ status $ count @@;\ndatalines;\nnon fres 55 non soph 34 non jun 27 non sen 17\nmod fres 32 mod soph 29 mod jun 36 mod sen 39\nhea fres 29 hea soph 41 hea jun 33 hea sen 28\n;\n\n1\n\nnon: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior",
+    "text": "Exercise\nA random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.\n\nPearson correlation\nSpearman Correlation\nGamma\nKendall’s \\(\\tau_b\\)\nStuart’s \\(\\tau_c\\)\nSomers’ Delta\n\n\ndat &lt;- expand.grid(habit = c(\"Nondrinkers\",\"Moderate\",\"Heavy\"),\n                   Status = c(\"Freshmen\",\"Sophomore\",\"Junior\",\"Senior\"))\n\ndat$Count &lt;- c(55,32,29,34,29,41,27,36,33,17,39,28)\n\n1data drink;\ninput habit $ status $ count @@;\ndatalines;\nnon fres 55 non soph 34 non jun 27 non sen 17\nmod fres 32 mod soph 29 mod jun 36 mod sen 39\nhea fres 29 hea soph 41 hea jun 33 hea sen 28\n;\n\n1\n\nnon: nondrinkers; mod: moderate; hea: heavy; fres: freshman; soph: sophomore; jun: junior; sen:senior",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -969,17 +945,7 @@
     "href": "Chapter5.html#exercise-7",
     "title": "EAB 770 - Chapter 5",
     "section": "Exercise",
-    "text": "Exercise\nA random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.\n\nSAS CodeAnswer\n\n\ndata drink;\ninput habit $ status $ count @@;\ndatalines;\nnon f 55 non soph 34 non j 27 non sen 17\nmod f 32 mod soph 29 mod j 36 mod sen 39\nhea f 29 hea soph 41 hea j 33 hea sen 28\n;\n\nproc freq data=drink order=data;\nweight count;\ntables habit*status/measures cl;\nrun;\n\n\n\nPearson Correlation: 0.15 (0.06,0.25)\nSpearman Correlation: 0.16 (0.06, 0.25)\nGamma: 0.18 (0.07,0.30)\n\\(\\tau_b\\): 0.13 (0.05,0.21)\n\\(\\tau_C\\): 0.14 (0.05,0.22)\nSomers’ D C|R: 0.14 (0.05,0.22)",
-    "crumbs": [
-      "Chapter 5: sxr tables"
-    ]
-  },
-  {
-    "objectID": "Chapter5.html#exercise-8",
-    "href": "Chapter5.html#exercise-8",
-    "title": "EAB 770 - Chapter 5",
-    "section": "Exercise",
-    "text": "Exercise\n\n\nThe table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.\n\nWhat are the appropriate measures of association to report?\nProvide the estimate and the 95% CI of these measures.",
+    "text": "Exercise\nA random sample of 400 college students are classified according to class status and drinking habits. Calculate the following measures of association and the 95% CI.\n\nSAS CodeR CodeAnswer\n\n\ndata drink;\ninput habit $ status $ count @@;\ndatalines;\nnon f 55 non soph 34 non j 27 non sen 17\nmod f 32 mod soph 29 mod j 36 mod sen 39\nhea f 29 hea soph 41 hea j 33 hea sen 28\n;\n\nproc freq data=drink order=data;\nweight count;\ntables habit*status/measures cl;\nrun;\n\n\n\ndat &lt;- expand.grid(habit = c(\"Nondrinkers\",\"Moderate\",\"Heavy\"),\n                   Status = c(\"Freshmen\",\"Sophomore\",\"Junior\",\"Senior\"))\n\ndat$Count &lt;- c(55,32,29,34,29,41,27,36,33,17,39,28)\n\n\ndat_cc &lt;- xtabs(Count~habit+Status,data=dat)\ndat_cc\n\n             Status\nhabit         Freshmen Sophomore Junior Senior\n  Nondrinkers       55        34     27     17\n  Moderate          32        29     36     39\n  Heavy             29        41     33     28\n\nGoodmanKruskalGamma(dat_cc,conf.level=0.95)\n\n     gamma     lwr.ci     upr.ci \n0.18448486 0.07155751 0.29741221 \n\nKendallTauB(dat_cc,conf.level=0.95)\n\n     tau_b     lwr.ci     upr.ci \n0.13138585 0.05034547 0.21242623 \n\nStuartTauC(dat_cc,conf.level = 0.95)\n\n      tauc     lwr.ci     upr.ci \n0.13903125 0.05330567 0.22475683 \n\nSomersDelta(dat_cc,conf.level = 0.95,direction=\"column\")\n\n    somers     lwr.ci     upr.ci \n0.13904776 0.05331078 0.22478475 \n\n\n\n\n\nPearson Correlation: 0.15 (0.06,0.25)\nSpearman Correlation: 0.16 (0.06, 0.25)\nGamma: 0.18 (0.07,0.30)\n\\(\\tau_b\\): 0.13 (0.05,0.21)\n\\(\\tau_C\\): 0.14 (0.05,0.22)\nSomers’ D R|C: 0.12 (0.05,0.20)",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -989,17 +955,17 @@
     "href": "Chapter5.html#nominal-variables",
     "title": "EAB 770 - Chapter 5",
     "section": "Nominal Variables",
-    "text": "Nominal Variables\nIt is slightly tricky to define association between two nominal variables. There are two measures of association that could measure the strength of association between nominal variables.\n\nLambda \\(\\lambda\\)\nUncertainty coefficients\n\nBoth of these measures are included in the measures output.\n\n\n\n\n\n\nWarning\n\n\nNote that SAS will calculate all measures despite the nature of the variables. It is your job as an analyst to only report the relevant measures.\nDo not use ordinal measures for nominal variables. Do not use nominal measures for ordinal variables",
+    "text": "Nominal Variables\nIt is slightly tricky to define association between two nominal variables. There are two measures of association that could measure the strength of association between nominal variables.\n\nLambda \\(\\lambda\\)\nUncertainty coefficients",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
   },
   {
-    "objectID": "Chapter5.html#lambda-lambda",
-    "href": "Chapter5.html#lambda-lambda",
+    "objectID": "Chapter5.html#goodman-kruskal-lambda-lambda",
+    "href": "Chapter5.html#goodman-kruskal-lambda-lambda",
     "title": "EAB 770 - Chapter 5",
-    "section": "Lambda \\(\\lambda\\)",
-    "text": "Lambda \\(\\lambda\\)\nLambda measures the probable improvement in predicting the column variable given knowledge of the row variable.\n\nAsymmetric: Can be C|R or R|C depending on where the explanatory variable is located\nSymmetric: weighted average of the two asymmetric \\(\\lambda\\) values.",
+    "section": "Goodman Kruskal Lambda \\(\\lambda\\)",
+    "text": "Goodman Kruskal Lambda \\(\\lambda\\)\nGoodman Kruskal Lambda measures the probable improvement in predicting the column variable given knowledge of the row variable.\n\nAsymmetric: Can be C|R or R|C depending on where the explanatory variable is located\nSymmetric: weighted average of the two asymmetric \\(\\lambda\\) values.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1015,21 +981,41 @@
     ]
   },
   {
-    "objectID": "Chapter5.html#exercise-9",
-    "href": "Chapter5.html#exercise-9",
+    "objectID": "Chapter5.html#nominal-variables-sas",
+    "href": "Chapter5.html#nominal-variables-sas",
     "title": "EAB 770 - Chapter 5",
-    "section": "Exercise",
-    "text": "Exercise\nThe table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.\n\nWhat are the appropriate measures of association to report?\nProvide the estimate and the 95% CI of these measures.\n\n\nSAS CodeAnswer\n\n\ndata neighbor;\nlength party $ 11 neighborhood $ 10;\ninput party $ neighborhood $ count @@;\ndatalines;\ndemocrat longview 360 democrat bayside 221\ndemocrat sheffeld 140 democrat highland 160\nrepublican longview 316 republican bayside 208\nrepublican sheffeld 97 republican highland 106\nindependent longview 160 independent bayside 200\nindependent sheffeld 311 independent highland 291\n;\n\nproc freq data=neighbor;\nweight count;\ntables party*neighborhood /\nmeasures cl;\nrun;\n\n\nYou can choose to report the asymmetric \\(\\lambda\\), symmetric \\(\\lambda\\), asymmetric uncertainty coefficient, or the symmetric uncertainty coefficient.\nThe asymmetric uncertainty coefficient R|C is estimated to be 0.05 (95% CI: 0.04,0.06). The estimated proportion of uncertainty in party affiliation explained by the neighborhood is estimated to be 0.05.",
+    "section": "Nominal Variables: SAS",
+    "text": "Nominal Variables: SAS\nBoth the Goodman Kruskal Lambda and uncertainty measures are included in the measures output.\n\n\n\n\n\n\nWarning\n\n\nNote that SAS will calculate all measures despite the nature of the variables. It is your job as an analyst to only report the relevant measures.\nDo not use ordinal measures for nominal variables. Do not use nominal measures for ordinal variables",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
   },
   {
-    "objectID": "Chapter5.html#exercise-10",
-    "href": "Chapter5.html#exercise-10",
+    "objectID": "Chapter5.html#nominal-variables-r",
+    "href": "Chapter5.html#nominal-variables-r",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Nominal Variables: R",
+    "text": "Nominal Variables: R\nThe Lambda() and UncertCoef() functions in DescTools calculate the Goodman Kruskal Lambda and Uncertainty measures, respectively.\n\n\n\n\n\n\nNote\n\n\nBecause the measures could be symmetric or asymmetric, both functions can specify the direction as “symmetric”,“row”, or “column”.\n\nLambda(contingencytable, direction=c(\"symmetric\",\"row\",\"column\"),conf.level = 0.95)\nUncertCoef(contingencytable, direction=c(\"symmetric\",\"row\",\"column\"),conf.level = 0.95)",
+    "crumbs": [
+      "Chapter 5: sxr tables"
+    ]
+  },
+  {
+    "objectID": "Chapter5.html#exercise-8",
+    "href": "Chapter5.html#exercise-8",
     "title": "EAB 770 - Chapter 5",
     "section": "Exercise",
-    "text": "Exercise\nTwo radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:\n0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’\n\nCalculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.\nCompare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.\n\n\ndata radiology;\ninput rater1 rater2 count;\ncards;\n0 0 21\n0 1 12\n0 2  0\n0 3  0\n1 0  4\n1 1 17\n1 2  1\n1 3  0\n2 0  3\n2 1  9\n2 2 15\n2 3  2\n3 0  0\n3 1  0\n3 2  0\n3 3  1\n;\nrun;",
+    "text": "Exercise\n\n\nThe table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.\n\nWhat are the appropriate measures of association to report?\nProvide the estimate and the 95% CI of these measures.",
+    "crumbs": [
+      "Chapter 5: sxr tables"
+    ]
+  },
+  {
+    "objectID": "Chapter5.html#exercise-9",
+    "href": "Chapter5.html#exercise-9",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Exercise",
+    "text": "Exercise\nThe table contains data from a study concerning the distribution of party affiliation in a city suburb. The interest was whether there was an association between registered political party and neighborhood.\n\nWhat are the appropriate measures of association to report?\nProvide the estimate and the 95% CI of these measures.\n\n\nSAS CodeR CodeAnswer\n\n\ndata neighbor;\nlength party $ 11 neighborhood $ 10;\ninput party $ neighborhood $ count @@;\ndatalines;\ndemocrat longview 360 democrat bayside 221\ndemocrat sheffeld 140 democrat highland 160\nrepublican longview 316 republican bayside 208\nrepublican sheffeld 97 republican highland 106\nindependent longview 160 independent bayside 200\nindependent sheffeld 311 independent highland 291\n;\n\nproc freq data=neighbor;\nweight count;\ntables party*neighborhood /\nmeasures cl;\nrun;\n\n\n\nlibrary(DescTools)\ndat &lt;- expand.grid(Party=c(\"Democrat\",\"Independent\",\"Republican\"),\n                   Neighborhood = c(\"Bayside\",\"Highland\",\"Longview\",\"Sheffield\"))\n\ndat$count &lt;- c(221,200,208,160,291,106,360,160,316,140,311,97)\n\ndat_cc &lt;- xtabs(count~Party+Neighborhood,data=dat)\ndat_cc\n\n             Neighborhood\nParty         Bayside Highland Longview Sheffield\n  Democrat        221      160      360       140\n  Independent     200      291      160       311\n  Republican      208      106      316        97\n\nLambda(dat_cc, direction=c(\"symmetric\"),conf.level = 0.95)\n\n    lambda     lwr.ci     upr.ci \n0.11131059 0.08790156 0.13471963 \n\nUncertCoef(dat_cc, direction=c(\"symmetric\"),conf.level = 0.95)\n\n        uc     lwr.ci     upr.ci \n0.04460640 0.03458648 0.05462631 \n\n\n\n\nYou can choose to report the asymmetric \\(\\lambda\\), symmetric \\(\\lambda\\), asymmetric uncertainty coefficient, or the symmetric uncertainty coefficient.\nThe symmetric \\(\\lambda\\) is estimated to be 0.11 (95% CI: 0.09,0.13). The estimated proportion of uncertainty in party affiliation explained by the neighborhood is estimated to be 0.04 (0.03, 0.05).",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1039,7 +1025,7 @@
     "href": "Chapter5.html#observer-agreement-1",
     "title": "EAB 770 - Chapter 5",
     "section": "Observer Agreement",
-    "text": "Observer Agreement\nErrors are inevitable in making measurements!\n\nBiggest error: Observer error\n\n\n\n\n\n\n\nNote\n\n\nHow do we account for observer error, especially for multiple observer measurements?",
+    "text": "Observer Agreement\nErrors are inevitable in making measurements!\n\n\n\n\n\n\nNote\n\n\nThe biggest error is observer error, when observers do not agree about the measurement. How do we account for observer error, especially for multiple observer measurements?",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1049,7 +1035,7 @@
     "href": "Chapter5.html#observer-agreement-kappa",
     "title": "EAB 770 - Chapter 5",
     "section": "Observer Agreement: \\(\\kappa\\)",
-    "text": "Observer Agreement: \\(\\kappa\\)\nThe kappa statistic \\(\\kappa\\) measures the extent of agreement between two observers.\n\n\\(\\kappa\\)=0: any agreement is made by chance\n\\(\\kappa\\)=1: perfect agreement\n\\(\\kappa \\geq\\) 0.8: excellent agreement\n\\(\\kappa \\geq\\) 0.4: moderate agreement\n\n\n\n\n\n\n\nNote\n\n\nThis is similar to the intraclass correlation coefficient in ANOVA models.",
+    "text": "Observer Agreement: \\(\\kappa\\)\nThe kappa statistic \\(\\kappa\\) measures the extent of agreement between two observers.\n\n\\(\\kappa\\)=0: any agreement is made by chance\n\\(\\kappa\\)=1: perfect agreement\n\\(\\kappa \\geq\\) 0.8: excellent agreement\n\\(\\kappa \\geq\\) 0.4: moderate agreement\n\n\n\n\n\n\n\nNote\n\n\nRule of thumb:\n\n\\(\\kappa\\)=0: any agreement is made by chance\n\\(\\kappa\\)=1: perfect agreement\n\\(\\kappa \\geq\\) 0.8: excellent agreement\n\\(\\kappa \\geq\\) 0.4: moderate agreement\n\nThis is similar to the intraclass correlation coefficient in ANOVA models.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1069,7 +1055,7 @@
     "href": "Chapter5.html#observer-agreement-2",
     "title": "EAB 770 - Chapter 5",
     "section": "Observer Agreement",
-    "text": "Observer Agreement\n\nWhen there is order in the categories, we might need to account how different the disagreements are.\nWe can use weighted \\(\\kappa\\) measurements such as:\n\nCicchetti-Allison weights puts more weight on cells closest to the diagonal.\nFleiss-Cohen kappa weights use a squared distance between categories, which penalizes highly discordant pairs.",
+    "text": "Observer Agreement\nWhen there is order in the categories, we might need to account how different the disagreements are.\n\n\n\n\n\n\nNote\n\n\nWe can use weighted \\(\\kappa\\) measurements such as: - Cicchetti-Allison weights puts more weight on cells closest to the diagonal. - Fleiss-Cohen kappa weights use a squared distance between categories, which penalizes highly discordant pairs.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1079,7 +1065,7 @@
     "href": "Chapter5.html#bowkers-test",
     "title": "EAB 770 - Chapter 5",
     "section": "Bowker’s Test",
-    "text": "Bowker’s Test\n\nTests whether the contingency table is symmetric about the diagonals.\n\nWorks for square tables\nSame as McNemar’s test when the table is \\(2\\times 2\\)",
+    "text": "Bowker’s Test\nThe Bowker’s test tests whether the contingency table is symmetric about the diagonals.The test works for square tables.\n\n\n\n\n\n\nNote\n\n\nThe test is equivalent to the McNemar’s test when the table is \\(2\\times 2\\).",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1089,27 +1075,47 @@
     "href": "Chapter5.html#observer-agreement-sas",
     "title": "EAB 770 - Chapter 5",
     "section": "Observer Agreement: SAS",
-    "text": "Observer Agreement: SAS\n\nThe AGREE option in the tables statement generates the kappa statistics and Bowker’s symmetry test.\n\nAGREE (WT=FC) specifies to use the Fleiss-Cohen criterion for the Weighted Kappa statistic.\n\nThe agreement plot is also shown.\n\nComparison of shaded portions of the rectangles to the entire area of the rectangle provides information about the agreement between the two raters.\n\nExact testing can also be done by specifying KAPPA in the EXACT statement.\n\nSmall cell counts with multiple 0 cell counts.",
+    "text": "Observer Agreement: SAS\n\nThe AGREE option in the tables statement generates the kappa statistics and Bowker’s symmetry test.\n\nAGREE (WT=FC) specifies to use the Fleiss-Cohen criterion for the Weighted Kappa statistic.\nNot specifying (WT=FC) will produce the Cichetti-Allison criterion instead.\n\nThe agreement plot is also shown.\n\nComparison of shaded portions of the rectangles to the entire area of the rectangle provides information about the agreement between the two raters.\n\nExact testing can also be done by specifying KAPPA in the EXACT statement.\n\nSmall cell counts with multiple 0 cell counts.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
   },
   {
-    "objectID": "Chapter5.html#example-6",
-    "href": "Chapter5.html#example-6",
+    "objectID": "Chapter5.html#observer-agreement-r",
+    "href": "Chapter5.html#observer-agreement-r",
     "title": "EAB 770 - Chapter 5",
-    "section": "Example",
-    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is increasing as the amount of gastric tissue removed increased. Ignore hospital effects.\nSAS Code\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;",
+    "section": "Observer Agreement: R",
+    "text": "Observer Agreement: R\n\n\\(\\kappa\\)Agreement Plot\n\n\nThe Kappa() function in the vcd package calculates the Cohen’s kappa statistic.\n\n\n\n\n\n\nTip\n\n\nWe can also specify which weights we use to calculate the weighted kappa statistic. By default, the weighting method used is the Cichetti-Allison method, also referred to as “Equal-Spacing”. To use the Fleiss-Cohen weighting method, we need to specify “Fleiss-Cohen”.\n\nK_CA &lt;-Kappa(contingencytable,weight=\"Equal-Spacing\")\nK_CA\nconfint(K_CA)\n\nK_FC &lt;- Kappa(contingencytable,weight=\"Fleiss-Cohen\")\nK_FC\nconfint(K_FC)\n\nTo perform Bowker’s Test, we can use the mcnemar.test() function in R, similar to how we can use mcnemar.test() to perform the McNemar’s test.\n\n\n\n\n\nAgreement plots can be used to visualize observer agreements. These can be generated using the agreementplot() function in the vcd package in R.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
   },
   {
-    "objectID": "Chapter5.html#example-7",
-    "href": "Chapter5.html#example-7",
+    "objectID": "Chapter5.html#example-4",
+    "href": "Chapter5.html#example-4",
     "title": "EAB 770 - Chapter 5",
     "section": "Example",
-    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.\n\nSAS CodeAnswer\n\n\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;\n\nproc freq data=operate order=data;\nweight wt;\ntables trt*severity /  jt;\nrun;\n\n\nThe JT statistic was estimated to be 35,697, corresponding to a one-sided p-value \\(p=0.005\\), which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.",
+    "text": "Example\nThe data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.\n\nCalculate the estimate and 95% confidence interval for the simple and Fleiss-Cohen weighted Kappa statistic.\nWhat can you say about the agreement between the New Orleans and Winnipeg neurologists?\n\n\n\nSAS DataR Data\n\n\ndata classify;\ninput no_rater w_rater count @@;\ndatalines;\n1 1 38 1 2 5 1 3 0 1 4 1\n2 1 33 2 2 11 2 3 3 2 4 0\n3 1 10 3 2 14 3 3 5 3 4 6\n4 1 3 4 2 7 4 3 3 4 4 10\n;\n\n\n\ndat &lt;- expand.grid(NO=1:4,\n                   WN=1:4)\n\ndat$count &lt;- c(38,33,10,3,5,11,14,7,0,3,5,3,1,0,6,10)\n\ndat_cc &lt;- xtabs(count~NO+WN,data=dat)\ndat_cc\n\n   WN\nNO   1  2  3  4\n  1 38  5  0  1\n  2 33 11  3  0\n  3 10 14  5  6\n  4  3  7  3 10",
+    "crumbs": [
+      "Chapter 5: sxr tables"
+    ]
+  },
+  {
+    "objectID": "Chapter5.html#example-5",
+    "href": "Chapter5.html#example-5",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Example",
+    "text": "Example\nThe data comes from a study concerning the diagnostic classification of multiple sclerosis patients. Patients from Winnipeg and New Orleans were classified into one of four diagnostic classes by both a Winnipeg neurologist and a New Orleans neurologist.\n\nCalculate the estimate and 95% confidence interval for the simple and Fleiss-Cohen weighted Kappa statistic.\nWhat can you say about the agreement between the New Orleans and Winnipeg neurologists?\n\n\nSAS CodeR CodeAnswer\n\n\ndata classify;\ninput no_rater w_rater count @@;\ndatalines;\n1 1 38 1 2 5 1 3 0 1 4 1\n2 1 33 2 2 11 2 3 3 2 4 0\n3 1 10 3 2 14 3 3 5 3 4 6\n4 1 3 4 2 7 4 3 3 4 4 10\n;\n\n\nproc freq;\nweight count;\ntables no_rater*w_rater / agree norow nocol nopct;\nrun;\n\n\n\nagreementplot(dat_cc)\n\n\n\n\n\n\n\nK_FC &lt;- Kappa(dat_cc,weights=\"Fleiss-Cohen\")\n\nK_FC\n\n            value     ASE     z\nUnweighted 0.2079 0.05046 4.121\nWeighted   0.5246 0.06006 8.735\n\nconfint(K_FC)\n\n            \nKappa              lwr       upr\n  Unweighted 0.1090518 0.3068332\n  Weighted   0.4068706 0.6422823\n\n\n\n\nSimple \\(\\kappa\\): 0.21 (0.11,0.31) Weighted \\(\\kappa\\): 0.52 (0.41,0.64)\nSince the weighted \\(\\kappa\\) is higher than the simple \\(\\kappa\\), we can infer that there were more disagreements closer to the diagonal. There is moderate agreement between the two neurologists based on the weighted \\(\\kappa\\).",
+    "crumbs": [
+      "Chapter 5: sxr tables"
+    ]
+  },
+  {
+    "objectID": "Chapter5.html#exercise-10",
+    "href": "Chapter5.html#exercise-10",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Exercise",
+    "text": "Exercise\nTwo radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:\n0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’\n\nCalculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.\nCompare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.\n\n\nSAS DataR Data\n\n\n\ndata radiology;\ninput rater1 rater2 count;\ncards;\n0 0 21\n0 1 12\n0 2  0\n0 3  0\n1 0  4\n1 1 17\n1 2  1\n1 3  0\n2 0  3\n2 1  9\n2 2 15\n2 3  2\n3 0  0\n3 1  0\n3 2  0\n3 3  1\n;\nrun;\n\n\nPlease refer to radiology.csv\n\nradio &lt;- read.csv(\"radiology.csv\") |&gt; \n  mutate(across(c(\"Rater1\",\"Rater2\"),~as.factor(.x)))\nglimpse(radio)\n\nRows: 16\nColumns: 3\n$ Rater1 &lt;fct&gt; 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3\n$ Rater2 &lt;fct&gt; 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3\n$ Count  &lt;int&gt; 21, 12, 0, 0, 4, 17, 1, 0, 3, 9, 15, 2, 0, 0, 0, 1",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1119,17 +1125,7 @@
     "href": "Chapter5.html#exercise-11",
     "title": "EAB 770 - Chapter 5",
     "section": "Exercise",
-    "text": "Exercise\nTwo radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:\n0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’\n\nCalculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.\nCompare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.\n\n\nSAS CodeAnswer\n\n\ndata radiology;\ninput rater1 rater2 count;\ncards;\n0 0 21\n0 1 12\n0 2  0\n0 3  0\n1 0  4\n1 1 17\n1 2  1\n1 3  0\n2 0  3\n2 1  9\n2 2 15\n2 3  2\n3 0  0\n3 1  0\n3 2  0\n3 3  1\n;\nrun;\n\nproc freq data=radiology;\ntables rater1*rater2/norow nocol nopct agree;\nweight count;\ntest kappa;\nexact kappa;\nrun;\n\n\nSimple \\(\\kappa\\): 0.47 (0.33,0.62) Weighted \\(\\kappa\\): 0.57 (0.44,0.70)\nThe exact p-value is p&lt;0.001, which shows there is sufficient evidence of an agreement between the radiologists. Based on the simple and weighted kappa values, there is moderate agreement between the two radiologists.",
-    "crumbs": [
-      "Chapter 5: sxr tables"
-    ]
-  },
-  {
-    "objectID": "Chapter5.html#exercise-12",
-    "href": "Chapter5.html#exercise-12",
-    "title": "EAB 770 - Chapter 5",
-    "section": "Exercise",
-    "text": "Exercise\nTwo radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:\n0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’\n\nCalculate the simple and weighted kappa statistics and the corresponding 95% confidence intervals.\nCompare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.\n\n\nSAS CodeAnswer\n\n\ndata radiology;\ninput rater1 rater2 count;\ncards;\n0 0 21\n0 1 12\n0 2  0\n0 3  0\n1 0  4\n1 1 17\n1 2  1\n1 3  0\n2 0  3\n2 1  9\n2 2 15\n2 3  2\n3 0  0\n3 1  0\n3 2  0\n3 3  1\n;\nrun;\n\nproc freq data=radiology;\ntables rater1*rater2/norow nocol nopct agree;\nweight count;\ntest kappa;\nexact kappa;\nrun;\n\n\nSimple \\(\\kappa\\): 0.47 (0.33,0.62) Weighted \\(\\kappa\\): 0.57 (0.44,0.70)\nThe exact p-value is p&lt;0.001, which shows there is sufficient evidence of an agreement between the radiologists. Based on the simple and weighted kappa values, there is moderate agreement between the two radiologists.",
+    "text": "Exercise\nTwo radiologists rated 85 patients with respect to liver lesions. The ratings were designated on an ordinal scale as:\n0 =‘Normal’; 1 =‘Benign’ ; 2 =’Suspected’; 3 =’Cancer’\n\nCalculate the simple and weighted (Cichetti-Allison and Fleiss-Cohen) kappa statistics and the corresponding 95% confidence intervals.\nCompare the asymptotic and exact p-values in testing whether there is an agreement between the two radiologists.\n\n\nSAS CodeR CodeAnswer\n\n\ndata radiology;\ninput rater1 rater2 count;\ncards;\n0 0 21\n0 1 12\n0 2  0\n0 3  0\n1 0  4\n1 1 17\n1 2  1\n1 3  0\n2 0  3\n2 1  9\n2 2 15\n2 3  2\n3 0  0\n3 1  0\n3 2  0\n3 3  1\n;\nrun;\n\nproc freq data=radiology;\ntables rater1*rater2/norow nocol nopct agree;\nweight count;\ntest kappa;\nexact kappa;\nrun;\n\n\n\ndat_cc &lt;- xtabs(Count~Rater1+Rater2,data=radio)\ndat_cc\n\n      Rater2\nRater1  0  1  2  3\n     0 21 12  0  0\n     1  4 17  1  0\n     2  3  9 15  2\n     3  0  0  0  1\n\nK_CA &lt;-Kappa(dat_cc,weight=\"Equal-Spacing\")\nK_CA\n\n            value     ASE     z\nUnweighted 0.4728 0.07272 6.502\nWeighted   0.5684 0.06756 8.414\n\nconfint(K_CA)\n\n            \nKappa              lwr       upr\n  Unweighted 0.3302696 0.6153086\n  Weighted   0.4359915 0.7008065\n\nK_FC &lt;- Kappa(dat_cc,weight=\"Fleiss-Cohen\")\nK_FC\n\n            value     ASE     z\nUnweighted 0.4728 0.07272 6.502\nWeighted   0.6714 0.06811 9.857\n\nconfint(K_FC)\n\n            \nKappa              lwr       upr\n  Unweighted 0.3302696 0.6153086\n  Weighted   0.5378687 0.8048725\n\n\n\n\nSimple \\(\\kappa\\): 0.47 (0.33,0.62) Cichetti-Allison Weighted \\(\\kappa\\): 0.57 (0.44,0.70) Fleiss-Cohen Weighted \\(\\kappa\\): 0.67 (0.54,0.80)\nThe exact p-value is p&lt;0.001, which shows there is sufficient evidence of an agreement between the radiologists. Based on the simple and weighted kappa values, there is moderate agreement between the two radiologists.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1149,27 +1145,47 @@
     "href": "Chapter5.html#test-for-ordered-differences-1",
     "title": "EAB 770 - Chapter 5",
     "section": "Test for Ordered Differences",
-    "text": "Test for Ordered Differences\nThe Jonckheere-Terpstra test is a nonparametric test that is based on sums of Mann-Whitney test statistics\n\nRank-based test\n\nThis test detects whether there are differences in the trend of group effects.\n\nAre the scores strictly increasing or decreasing?\n\n\n\n\n\n\n\nNote\n\n\nThe null hypothesis \\(H_0\\) assumes that the distribution of ordered responses is the same for all groups. For one-sided tests, this tests detect whether \\(d_1 \\leq d_2 \\leq... d_s\\) where \\(d_i\\) corresponds to the \\(i^{th}\\) group effect.\n\n\n\n\n\n\n\n\n\nNote\n\n\nThe Jonckheere-Terpstra test can be performed by adding the JT option to the tables statement. An exact implementation of the Jonckheere-Terpstra test can also be performed by adding the JT option to the exact statement.",
+    "text": "Test for Ordered Differences\nThe Jonckheere-Terpstra test is a nonparametric rank-based test that is based on sums of Mann-Whitney test statistics. This test detects whether there are differences in the trend of group effects.\n\n\n\n\n\n\nNote\n\n\nThe test performs the hypothesis test that answers the question “Are the scores strictly increasing or decreasing?”\nThe null hypothesis \\(H_0\\) assumes that the distribution of ordered responses is the same for all groups.\nFor one-sided tests, this tests detect whether \\(d_1 \\leq d_2 \\leq... d_s\\) where \\(d_i\\) corresponds to the \\(i^{th}\\) group effect.\nFor two-sided tests, this tests detect whether there is a monotonic trend across the different groups.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
   },
   {
-    "objectID": "Chapter5.html#example-8",
-    "href": "Chapter5.html#example-8",
+    "objectID": "Chapter5.html#jonckheere-terpstra-test-sas",
+    "href": "Chapter5.html#jonckheere-terpstra-test-sas",
     "title": "EAB 770 - Chapter 5",
-    "section": "Example",
-    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.\n\nSAS CodeAnswer\n\n\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;\n\nproc freq data=operate order=data;\nweight wt;\ntables trt*severity /  jt;\nrun;\n\n\nThe JT statistic was estimated to be 35,697, corresponding to a one-sided p-value \\(p=0.005\\), which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.",
+    "section": "Jonckheere-Terpstra Test: SAS",
+    "text": "Jonckheere-Terpstra Test: SAS\n\n\n\n\n\n\nNote\n\n\nThe Jonckheere-Terpstra test can be performed by adding the JT option to the tables statement. An exact implementation of the Jonckheere-Terpstra test can also be performed by adding the JT option to the exact statement.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
   },
   {
-    "objectID": "Chapter5.html#example-9",
-    "href": "Chapter5.html#example-9",
+    "objectID": "Chapter5.html#jonckheere-terpstra-test-r",
+    "href": "Chapter5.html#jonckheere-terpstra-test-r",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Jonckheere-Terpstra Test: R",
+    "text": "Jonckheere-Terpstra Test: R\nAn exact implementation of the Jonckheere-Terpstra test can be performed using the JonckheereTerpstraTest() function in the DescTools package.\n\n\n\n\n\n\nTip\n\n\nUnlike the previous examples, the JonckheereTerpstraTest() function does not take a contingency table as input. It needs line-level input with a column for the dependent variable and the independent variable.\n\nJonckheereTerpstraTest(dependent~independent,\n                       data=example_data,\n                       alternative = c(\"two.sided\",\"increasing\",\"decreasing\"),\n                       nperm=10000)\n\nJonckheereTerpstraTest(dependent~independent,\n                       data=example_data,\n                       alternative = c(\"two.sided\",\"increasing\",\"decreasing\"), \n                       nperm=10000,\n                       exact=T) #for exact tests",
+    "crumbs": [
+      "Chapter 5: sxr tables"
+    ]
+  },
+  {
+    "objectID": "Chapter5.html#example-6",
+    "href": "Chapter5.html#example-6",
     "title": "EAB 770 - Chapter 5",
     "section": "Example",
-    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.\n\nSAS CodeAnswer\n\n\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;\n\nproc freq data=operate order=data;\nweight wt;\ntables trt*severity /  jt;\nrun;\n\n\nThe JT statistic was estimated to be 35,697, corresponding to a one-sided p-value \\(p=0.005\\), which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.",
+    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is increasing as the amount of gastric tissue removed increased. Ignore hospital effects.\n\nSAS CodeR Data\n\n\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;\n\n\nPlease refer to operate.csv for the data.\n\nlibrary(tidyverse)\noperate &lt;- read.csv(\"operate.csv\") |&gt; \n  uncount(weights=Count) |&gt; \n  mutate(Treatment=factor(Treatment,levels=c(\"v+d\",\"v+a\",\"v+h\",\"gre\")),\n         Severity=factor(Severity,levels=c(\"none\",\"slight\",\"moderate\")))\nglimpse(operate)\n\nRows: 417\nColumns: 3\n$ Hospital  &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ Treatment &lt;fct&gt; v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, v+d, …\n$ Severity  &lt;fct&gt; none, none, none, none, none, none, none, none, none, none, …",
+    "crumbs": [
+      "Chapter 5: sxr tables"
+    ]
+  },
+  {
+    "objectID": "Chapter5.html#example-7",
+    "href": "Chapter5.html#example-7",
+    "title": "EAB 770 - Chapter 5",
+    "section": "Example",
+    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.\n\nSAS CodeR CodeAnswer\n\n\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;\n\nproc freq data=operate order=data;\nweight wt;\ntables trt*severity /  jt;\nrun;\n\n\n\nJonckheereTerpstraTest(Severity~Treatment,data=operate,alternative=\"increasing\",nperm=10000)\n\n\n    Jonckheere-Terpstra test\n\ndata:  Severity by Treatment\nJT = 35697, p-value = 0.0056\nalternative hypothesis: increasing\n\n\n\n\nThe JT statistic was estimated to be 35,697, corresponding to a one-sided p-value \\(p=0.005\\), which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1349,7 +1365,7 @@
     "href": "Chapter3.html#homogeneity-of-odds-ratios",
     "title": "EAB 770 - Chapter 3",
     "section": "Homogeneity of Odds Ratios",
-    "text": "Homogeneity of Odds Ratios\nThe Breslow-Day test or the Zelen’s test can be used to test if the homogeneous association is satisfied.\n\nBreslow-Day testZelen’s Test\n\n\nThe null hypothesis associated with the Breslow-Day test is that there is homogeneous association between \\(X\\) and \\(Y\\).\n\n\n\n\n\n\nNote\n\n\nWhen the null hypothesis is rejected, there is an implied three-way association between the variables. This implies that conditional associations should be investigated at each strata.\n\n\n\n\\[\nQ_{BD}  = \\sum_{h=1}^{q} \\sum_{i=1}^{2} \\sum_{j=1}^{2} \\frac{(n_{hij}-m_{hij})^2}{m_{hij}}\n\\]\nwhich approximately follows a chi-square distribution with \\((n-1)\\) degrees of freedom.\n\n\nZelen’s test is similar to the Breslow-Day test, but uses exact methods.\n\n\n\n\n\n\nNote\n\n\nSimilar to the Fisher’s Exact Test, the Zelen’s test entails calculating the probability of all possible sets of tables. The resulting p-value is the sum of all table probabilities that are lower than the probability of the observed table. This test is not available in R.\n\n\n\n\nMeasures of Association\n\n\n\nCommon Odds Ratio\nWhen there is homogeneous association, we can compute a common odds ratio to summarize the conditional associations that exist in the partial tables.\n\nThe Mantel-Haenszel estimator \\(\\hat{\\psi}_{MH}\\) can approximate the common odds ratio such that\n\n\\[\n\\hat{\\psi}_{MH} = \\frac{\\sum_{j=1}^q n_{j11}n_{j22}/n_j}{\\sum_{j=1}^q n_{j12}n_{j21}/n_j}\n\\]\n\n\n\n\n\n\nNote\n\n\nWe can calculate confidence intervals (asymptotic and exact) for common odds ratios!\n\n\n\n\n\nCommon Odds Ratio: Confidence Intervals\nThere are two confidence intervals for the common odds ratios provided by SAS: The Mantel-Haenszel and Logit confidence limits.\n\nMantel-HaenszelLogit\n\n\n\nbased on an estimate of the variance of \\(\\log \\psi_{MH}\\)\nNot sensitive to small sample sizes\n\n\n\n\nbased on weighted regression estimates\nreasonable but requires adequate sample sizes, i.e. \\(n_{hij} \\geq 5\\)\n\n\n\n\n\n\nCommon Odds Ratios: SAS\n\nThe common odds ratios are calculated with the cmh option\n\nOnly includes asymptotic (MH and logit) CI limits.\nIncluding the measures options yields plots of common odds ratios and stratum-level odds ratios.\n\nThe Breslow-Day test is also included in the cmh option\nThe comor and eqor options in the exact statement yield the exact common odds ratio and the Zelen’s test results, respectively.\n\nSample SAS code:\nproc freq;\ntables a*b*c/cmh measures;\nexact comor eqor;\nrun;\n\n\nCommon Odds Ratios: R\nThe mantelhaen.test() provides an estimate of the common odds ratio for a 2x2 contingency table. This function provides the Mantel-Haenszel confidence interval provided in SAS.\nThe breslow_day_test() function in the vcdExtra package performs the Breslow-Day test.\nThe zelen.test() function in the NSM3 package performs the Zelen’s test.\n\n\nExample\nThe table shows the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n\ndata ca;\ninput sex $ ECG $ disease $ count;\ndatalines;\nfemale &lt;0.1 yes 4\nfemale &lt;0.1 no 11\nfemale &gt;=0.1 yes 8\nfemale &gt;=0.1 no 10\nmale &lt;0.1 yes 9\nmale &lt;0.1 no 9\nmale &gt;=0.1 yes 21\nmale &gt;=0.1 no 6\n;\nproc freq data=ca ;\nweight count;\n1tables sex*disease / nocol nopct chisq measures;\n2tables sex*ECG*disease / nocol nopct cmh measures;\nrun;\n\n1\n\nTesting for marginal association between sex and disease status\n\n2\n\nUsing sex as a stratification variable/strata. measures includes common odds ratio plots.\n\n\n\n\n\ndat  &lt;- expand.grid(Sex = c(\"Female\",\"Male\"),\n                    ECG=c(\"Less\",\"Greater\"),\n                    Disease = c(\"No\",\"Yes\")\n                  )  \ndat$count = c(11,9,10,6,4,9,8,21)\n\ndat_cc &lt;- xtabs(count ~  Disease+Sex, data=dat) \ndat_cc\n\n       Sex\nDisease Female Male\n    No      21   15\n    Yes     12   30\n\nCMHtest(dat_cc, correct=F)\n\nCochran-Mantel-Haenszel Statistics for Disease by Sex \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 6.9444  1 0.008408\nrmeans  Row mean scores differ 6.9444  1 0.008408\ncmeans  Col mean scores differ 6.9444  1 0.008408\ngeneral    General association 6.9444  1 0.008408\n\n\nAccounting for partial tables,\n\ndat_cc &lt;- xtabs(count ~  ECG+Disease+Sex, data=dat) \ndat_cc\n\n, , Sex = Female\n\n         Disease\nECG       No Yes\n  Less    11   4\n  Greater 10   8\n\n, , Sex = Male\n\n         Disease\nECG       No Yes\n  Less     9   9\n  Greater  6  21\n\n\n\nbreslow_day_test(dat_cc)\n\n\nBreslow-Day Test on Homogeneity of Odds Ratios \n\nData:          dat_cc \nOR variables:  ECG, Disease \nStrata:        Sex \nCommon OR:     2.847 \n\nX-squared = 0.2155, df = 1, p-value = 0.6425\n\nmantelhaen.test(dat_cc, correct=F)\n\n\n    Mantel-Haenszel chi-squared test without continuity correction\n\ndata:  dat_cc\nMantel-Haenszel X-squared = 4.5026, df = 1, p-value = 0.03384\nalternative hypothesis: true common odds ratio is not equal to 1\n95 percent confidence interval:\n 1.076514 7.527901\nsample estimates:\ncommon odds ratio \n         2.846734 \n\nlibrary(NSM3)\nzelen.test(dat_cc)\n\n\nZelen's test:\nP = 1\n\n\n\n\n\nSex was determined to be marginally associated with disease status (\\(\\chi^2=6.9, p=0.0084\\)).\nControlling for sex, there is strong evidence that the ECG measurements is conditionally associated with disease status (\\(\\chi^2=4.5, p=0.03\\)).\nThe Breslow-Day test yielded a non-significant p-value (p=0.64), hence we can use the common odds ratios\nThe MH odds ratio was estimated to be 2.86 (95% CI: 1.1,7.5). We can interpret this value as: The odds of having the disease is 2.86 times that for patients with a high ECG segment depression compared to those with a low ECG segment depression.\n\n\n\n\n\n\nExercise\n\n\nTable 3.8 shows the data from research done by a small company in initiating exercise programs (office/home) in their two locations in a nearby suburbs. After a year, participants and non-participants underwent a cardiovascular stress test to assess their fitness, and their result was recorded as good or not good depending on age-adjusted criteria. The exercise counselor was interested in whether type of program was associated with good test results.\n\nCalculate the common odds ratio \\(\\psi_{MH}\\) and the exact 95% confidence intervals.\nUse Zelen’s test to test if the odds ratio is uniform in both locations.\n\n\n\n\n\n\nExercise\nTable 3.8 shows the data from research done by a small company in initiating exercise programs (office/home) in their two locations in a nearby suburbs. After a year, participants and non-participants underwent a cardiovascular stress test to assess their fitness, and their result was recorded as good or not good depending on age-adjusted criteria. The exercise counselor was interested in whether type of program was associated with good test results.\n\nCalculate the common odds ratio \\(\\psi_{MH}\\) and the exact 95% confidence intervals.\nUse Zelen’s test to test if the odds ratio is uniform in both locations\n\n\nSAS CodeR CodeAnswer\n\n\ndata exercise;\ninput location $ program $ outcome $ count @@;\ndatalines;\ndowntown office good 12 downtown office not 5\ndowntown home good 3 downtown home not 5\nsatellite office good 6 satellite office not 1\nsatellite home good 1 satellite home not 3\n;\n\nproc freq order=data;\nweight count;\n1tables location*program*outcome /cmh(mf);\n2exact comor eqor;\nrun;\n\n1\n\nMF should be enclosed in parentheses\n\n2\n\neqor: Zelen’s test, comor: exact confidence interval for the common odds ratio.\n\n\n\n\n\ndat  &lt;- expand.grid(Location = c(\"D\",\"S\"),\n                    Program=c(\"Office\",\"Home\"),\n                    Outcome = c(\"Good\",\"Not Good\")\n                  )  \ndat$count = c(12,6,3,1,5,1,5,3)\n\ndat_cc &lt;- xtabs(count ~  Program+Outcome+Location, data=dat) \ndat_cc\n\n, , Location = D\n\n        Outcome\nProgram  Good Not Good\n  Office   12        5\n  Home      3        5\n\n, , Location = S\n\n        Outcome\nProgram  Good Not Good\n  Office    6        1\n  Home      1        3\n\n\nCheck the Mantel-Fleiss Criterion first.\n\nmantel_fleiss(dat_cc,k=2)\n\n[1] 4.654545\n\n\nBecause MF is less than 5, we need to use Zelen’s test.\n\nzelen.test(dat_cc)\n\n\nZelen's test:\nP = 1\n\n\n\n\n\nMantel-Fleiss criterion is not satisfied (MF=4.65), so be careful with using the asymptotic chi-square test for \\(Q_{MH}\\).\n\nThis motivates using exact methods in calculating effect sizes.\n\nCommon odds ratio was estimated to be 5.84 (EXACT 95% CI: 1.05, 33.3). There is sufficient evidence at the 0.05 significance level that the program type is associated with the quality of cardiovascular test results.\n\nThe Zelen’s test yielded \\(p=1\\), which means there is no evidence against homogeneity.",
+    "text": "Homogeneity of Odds Ratios\nThe Breslow-Day test or the Zelen’s test can be used to test if the homogeneous association is satisfied.\n\nBreslow-Day testZelen’s Test\n\n\nThe null hypothesis associated with the Breslow-Day test is that there is homogeneous association between \\(X\\) and \\(Y\\).\n\n\n\n\n\n\nNote\n\n\nWhen the null hypothesis is rejected, there is an implied three-way association between the variables. This implies that conditional associations should be investigated at each strata.\n\n\n\n\\[\nQ_{BD}  = \\sum_{h=1}^{q} \\sum_{i=1}^{2} \\sum_{j=1}^{2} \\frac{(n_{hij}-m_{hij})^2}{m_{hij}}\n\\]\nwhich approximately follows a chi-square distribution with \\((n-1)\\) degrees of freedom.\n\n\nZelen’s test is similar to the Breslow-Day test, but uses exact methods.\n\n\n\n\n\n\nNote\n\n\nSimilar to the Fisher’s Exact Test, the Zelen’s test entails calculating the probability of all possible sets of tables. The resulting p-value is the sum of all table probabilities that are lower than the probability of the observed table. This test is not available in R.",
     "crumbs": [
       "Chapter 3: Sets of 2x2 tables"
     ]
@@ -1399,7 +1415,7 @@
     "href": "Chapter3.html#example-2",
     "title": "EAB 770 - Chapter 3",
     "section": "Example",
-    "text": "Example\nThe table shows the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n\ndata ca;\ninput sex $ ECG $ disease $ count;\ndatalines;\nfemale &lt;0.1 yes 4\nfemale &lt;0.1 no 11\nfemale &gt;=0.1 yes 8\nfemale &gt;=0.1 no 10\nmale &lt;0.1 yes 9\nmale &lt;0.1 no 9\nmale &gt;=0.1 yes 21\nmale &gt;=0.1 no 6\n;\nproc freq data=ca ;\nweight count;\n1tables sex*disease / nocol nopct chisq measures;\n2tables sex*ECG*disease / nocol nopct cmh measures;\nrun;\n\n1\n\nTesting for marginal association between sex and disease status\n\n2\n\nUsing sex as a stratification variable/strata. measures includes common odds ratio plots.\n\n\n\n\n\ndat  &lt;- expand.grid(Sex = c(\"Female\",\"Male\"),\n                    ECG=c(\"Less\",\"Greater\"),\n                    Disease = c(\"No\",\"Yes\")\n                  )  \ndat$count = c(11,9,10,6,4,9,8,21)\n\ndat_cc &lt;- xtabs(count ~  Disease+Sex, data=dat) \ndat_cc\n\n       Sex\nDisease Female Male\n    No      21   15\n    Yes     12   30\n\nCMHtest(dat_cc, correct=F)\n\nCochran-Mantel-Haenszel Statistics for Disease by Sex \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 6.9444  1 0.008408\nrmeans  Row mean scores differ 6.9444  1 0.008408\ncmeans  Col mean scores differ 6.9444  1 0.008408\ngeneral    General association 6.9444  1 0.008408\n\n\nAccounting for partial tables,\n\ndat_cc &lt;- xtabs(count ~  ECG+Disease+Sex, data=dat) \ndat_cc\n\n, , Sex = Female\n\n         Disease\nECG       No Yes\n  Less    11   4\n  Greater 10   8\n\n, , Sex = Male\n\n         Disease\nECG       No Yes\n  Less     9   9\n  Greater  6  21\n\n\n\nbreslow_day_test(dat_cc)\n\n\nBreslow-Day Test on Homogeneity of Odds Ratios \n\nData:          dat_cc \nOR variables:  ECG, Disease \nStrata:        Sex \nCommon OR:     2.847 \n\nX-squared = 0.2155, df = 1, p-value = 0.6425\n\nmantelhaen.test(dat_cc, correct=F)\n\n\n    Mantel-Haenszel chi-squared test without continuity correction\n\ndata:  dat_cc\nMantel-Haenszel X-squared = 4.5026, df = 1, p-value = 0.03384\nalternative hypothesis: true common odds ratio is not equal to 1\n95 percent confidence interval:\n 1.076514 7.527901\nsample estimates:\ncommon odds ratio \n         2.846734 \n\nlibrary(NSM3)\nzelen.test(dat_cc)\n\n\nZelen's test:\nP = 1\n\n\n\n\n\nSex was determined to be marginally associated with disease status (\\(\\chi^2=6.9, p=0.0084\\)).\nControlling for sex, there is strong evidence that the ECG measurements is conditionally associated with disease status (\\(\\chi^2=4.5, p=0.03\\)).\nThe Breslow-Day test yielded a non-significant p-value (p=0.64), hence we can use the common odds ratios\nThe MH odds ratio was estimated to be 2.86 (95% CI: 1.1,7.5). We can interpret this value as: The odds of having the disease is 2.86 times that for patients with a high ECG segment depression compared to those with a low ECG segment depression.",
+    "text": "Example\nThe table shows the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios.\n\nDataSAS CodeR CodeAnswer\n\n\n\n\n\ndata ca;\ninput sex $ ECG $ disease $ count;\ndatalines;\nfemale &lt;0.1 yes 4\nfemale &lt;0.1 no 11\nfemale &gt;=0.1 yes 8\nfemale &gt;=0.1 no 10\nmale &lt;0.1 yes 9\nmale &lt;0.1 no 9\nmale &gt;=0.1 yes 21\nmale &gt;=0.1 no 6\n;\nproc freq data=ca ;\nweight count;\n1tables sex*disease / nocol nopct chisq measures;\n2tables sex*ECG*disease / nocol nopct cmh measures;\nrun;\n\n1\n\nTesting for marginal association between sex and disease status\n\n2\n\nUsing sex as a stratification variable/strata. measures includes common odds ratio plots.\n\n\n\n\n\ndat  &lt;- expand.grid(Sex = c(\"Female\",\"Male\"),\n                    ECG=c(\"Less\",\"Greater\"),\n                    Disease = c(\"No\",\"Yes\")\n                  )  \ndat$count = c(11,9,10,6,4,9,8,21)\n\ndat_cc &lt;- xtabs(count ~  Disease+Sex, data=dat) \ndat_cc\n\n       Sex\nDisease Female Male\n    No      21   15\n    Yes     12   30\n\nCMHtest(dat_cc, correct=F)\n\nCochran-Mantel-Haenszel Statistics for Disease by Sex \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 6.9444  1 0.008408\nrmeans  Row mean scores differ 6.9444  1 0.008408\ncmeans  Col mean scores differ 6.9444  1 0.008408\ngeneral    General association 6.9444  1 0.008408\n\n\nAccounting for partial tables,\n\ndat_cc &lt;- xtabs(count ~  ECG+Disease+Sex, data=dat) \ndat_cc\n\n, , Sex = Female\n\n         Disease\nECG       No Yes\n  Less    11   4\n  Greater 10   8\n\n, , Sex = Male\n\n         Disease\nECG       No Yes\n  Less     9   9\n  Greater  6  21\n\n\n\nlibrary(vcdExtra)\nbreslow_day_test(dat_cc)\n\n\nBreslow-Day Test on Homogeneity of Odds Ratios \n\nData:          dat_cc \nOR variables:  ECG, Disease \nStrata:        Sex \nCommon OR:     2.847 \n\nX-squared = 0.2155, df = 1, p-value = 0.6425\n\nmantelhaen.test(dat_cc, correct=F)\n\n\n    Mantel-Haenszel chi-squared test without continuity correction\n\ndata:  dat_cc\nMantel-Haenszel X-squared = 4.5026, df = 1, p-value = 0.03384\nalternative hypothesis: true common odds ratio is not equal to 1\n95 percent confidence interval:\n 1.076514 7.527901\nsample estimates:\ncommon odds ratio \n         2.846734 \n\nlibrary(NSM3)\nzelen.test(dat_cc)\n\n\nZelen's test:\nP = 1\n\n\n\n\n\nSex was determined to be marginally associated with disease status (\\(\\chi^2=6.9, p=0.0084\\)).\nControlling for sex, there is strong evidence that the ECG measurements is conditionally associated with disease status (\\(\\chi^2=4.5, p=0.03\\)).\nThe Breslow-Day test yielded a non-significant p-value (p=0.64), hence we can use the common odds ratios\nThe MH odds ratio was estimated to be 2.86 (95% CI: 1.1,7.5). We can interpret this value as: The odds of having the disease is 2.86 times that for patients with a high ECG segment depression compared to those with a low ECG segment depression.",
     "crumbs": [
       "Chapter 3: Sets of 2x2 tables"
     ]
@@ -3633,126 +3649,170 @@
     "href": "Chapter6.html#outline",
     "title": "EAB 770 - Chapter 6",
     "section": "Outline",
-    "text": "Outline\n\nGeneral Mantel-Haenszel Method\nMantel-Haesnzel Applications\nRepeated Measures"
+    "text": "Outline\n\nGeneral Mantel-Haenszel Method\nMantel-Haesnzel Applications\nRepeated Measures",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#general-mantel-haenszel-method",
     "href": "Chapter6.html#general-mantel-haenszel-method",
     "title": "EAB 770 - Chapter 6",
     "section": "General Mantel-Haenszel Method",
-    "text": "General Mantel-Haenszel Method\n\nRecall: 2x2, sx2, 2xr, sxr tables all use Mantel-Haenszel Statistics\n\nAble to account for ordinality unlike Pearson Chi-Square tests\nLess stringent sample size requirements\n\nMH statistics in sets of contingency tables removes the confounding influence of the stratification variable."
+    "text": "General Mantel-Haenszel Method\n\nRecall: 2x2, and sxr tables all use Mantel-Haenszel Statistics\n\nAble to account for ordinality unlike Pearson Chi-Square tests\nLess stringent sample size requirements for ordinal variables\n\nMH statistics in sets of contingency tables removes the confounding influence of the stratification variable.",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#general-mantel-haenszel-method-1",
     "href": "Chapter6.html#general-mantel-haenszel-method-1",
     "title": "EAB 770 - Chapter 6",
     "section": "General Mantel-Haenszel Method",
-    "text": "General Mantel-Haenszel Method\n\n\n\n\n\n\nNote\n\n\n\\(H_0\\): The response variable is distributed at random with respect to the groups defined by the row variables\n\n\n\nDepending on the nature of the row and column variables, the Mantel-Haenszel statistic has different forms:\n\n\\(Q_{GMH}\\): General Mantel-Haenszel statistic\n\\(Q_{SMH}\\): Mean Score Statistic\n\\(Q_{CSMH}\\): Correlation Statistic"
+    "text": "General Mantel-Haenszel Method\n\n\n\n\n\n\nNote\n\n\n\\(H_0\\): The response variable is distributed at random with respect to the groups defined by the row variables\n\n\n\nDepending on the nature of the row and column variables, the Mantel-Haenszel statistic has different forms:\n\n\\(Q_{GMH}\\): General Mantel-Haenszel statistic\n\\(Q_{SMH}\\): Mean Score Statistic\n\\(Q_{CSMH}\\): Correlation Statistic",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#general-mantel-haenszel-method-2",
     "href": "Chapter6.html#general-mantel-haenszel-method-2",
     "title": "EAB 770 - Chapter 6",
     "section": "General Mantel-Haenszel Method",
-    "text": "General Mantel-Haenszel Method\n\nExtended Mantel-Haenszel Statistics\n\n\n\n\n\n\n\n\n\n\nMH Statistic\nAlternative Hypothesis\nSAS Output Label\nDegrees of Freedom\nScale Requirements\nNonparametric Equivalents\n\n\n\n\n\\(Q_{GMH}\\)\nGeneral Association\nGeneral Association\n\\((s-1)(r-1)\\)\nNone\n\n\n\n\\(Q_{SMH}\\)\nMean score location shifts\nRow Means Scores Differ\n\\((s-1)\\)\nColumn Variable Ordinal\nKruskal-Wallis\n\n\n\\(Q_{CSMH}\\)\nLinear Association\nNonzero correlation\n\\(1\\)\nRow and Column Variable Ordinal\nSpearman Correlation"
+    "text": "General Mantel-Haenszel Method\n\nExtended Mantel-Haenszel Statistics\n\n\n\n\n\n\n\n\n\n\nMH Statistic\nAlternative Hypothesis\nSAS Output Label\nDegrees of Freedom\nScale Requirements\nNonparametric Equivalents\n\n\n\n\n\\(Q_{GMH}\\)\nGeneral Association\nGeneral Association\n\\((s-1)(r-1)\\)\nNone\n\n\n\n\\(Q_{SMH}\\)\nMean score location shifts\nRow Means Scores Differ\n\\((s-1)\\)\nColumn Variable Ordinal\nKruskal-Wallis\n\n\n\\(Q_{CSMH}\\)\nLinear Association\nNonzero correlation\n\\(1\\)\nRow and Column Variable Ordinal\nSpearman Correlation",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#example",
     "href": "Chapter6.html#example",
     "title": "EAB 770 - Chapter 6",
     "section": "Example",
-    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, controlling for hospital effects.\nSAS Data set\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;"
+    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, controlling for hospital effects.\n\nSAS Data setR Data Set\n\n\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;\n\n\nPlease refer to operate.csv for the data.\n\nlibrary(tidyverse)\noperate &lt;- read.csv(\"operate.csv\") |&gt; \n  mutate(Treatment=factor(Treatment,levels=c(\"v+d\",\"v+a\",\"v+h\",\"gre\")),\n         Severity=factor(Severity,levels=c(\"none\",\"slight\",\"moderate\")))",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#example-1",
     "href": "Chapter6.html#example-1",
     "title": "EAB 770 - Chapter 6",
     "section": "Example",
-    "text": "Example\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, controlling for hospital effects.\n\nSAS CodeAnswer\n\n\nproc freq data=operate order=data;\nweight wt;\ntables hospital*trt*severity / cmh; # &lt;1&gt;\ntables hospital*trt*severity / cmh scores=modridit; # &lt;2&gt;\nrun;\n\nTable Scores\nModridit scores\n\n\n\nBoth variables are ordinal, hence we can test for correlation using \\(Q_{CSMH}\\). Using modridit scores, we get \\(Q_{CSMH}=6.93\\), p=0.0085. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients."
+    "text": "Example\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, controlling for hospital effects. Use rank-based scores.\n\nSAS CodeR CodeAnswer\n\n\nproc freq data=operate order=data;\nweight wt;\ntables hospital*trt*severity / cmh; # &lt;1&gt;\ntables hospital*trt*severity / cmh scores=ridit; # &lt;2&gt;\nrun;\n\nTable Scores\nRank-based scores\n\n\n\n\ndat_cc &lt;- xtabs(Count~Treatment+Severity,data=operate)\ndat_cc\n\n         Severity\nTreatment none slight moderate\n      v+d   61     28        7\n      v+a   68     23       13\n      v+h   58     40       12\n      gre   53     38       16\n\nlibrary(vcdExtra)\n\nCMHtest(dat_cc,\n        rscores=\"midrank\",\n        cscores=\"midrank\")\n\nCochran-Mantel-Haenszel Statistics for Treatment by Severity \n\n                 AltHypothesis   Chisq Df      Prob\ncor        Nonzero correlation  6.6405  1 0.0099687\nrmeans  Row mean scores differ  7.2468  3 0.0644329\ncmeans  Col mean scores differ  6.6688  2 0.0356356\ngeneral    General association 10.5166  6 0.1045146\n\n\n\n\nBoth variables are ordinal, hence we can test for correlation using \\(Q_{CSMH}\\). Using modridit scores, we get \\(Q_{CSMH}=6.64\\), p=0.0100. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#exercise",
     "href": "Chapter6.html#exercise",
     "title": "EAB 770 - Chapter 6",
     "section": "Exercise",
-    "text": "Exercise\nThe following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.\ndata shoulder;\ninput area $ location $ size $ usage $ count @@;\ndatalines;\ncoast urban large no 174 coast urban large yes 69\ncoast urban medium no 134 coast urban medium yes 56\ncoast urban small no 150 coast urban small yes 54\ncoast rural large no 52 coast rural large yes 14\ncoast rural medium no 31 coast rural medium yes 14\ncoast rural small no 25 coast rural small yes 17\npiedmont urban large no 127 piedmont urban large yes 62\npiedmont urban medium no 94 piedmont urban medium yes 63\npiedmont urban small no 112 piedmont urban small yes 93\npiedmont rural large no 35 piedmont rural large yes 29\npiedmont rural medium no 32 piedmont rural medium yes 30\npiedmont rural small no 46 piedmont rural small yes 34\nmountain urban large no 111 mountain urban large yes 26\nmountain urban medium no 120 mountain urban medium yes 47\nmountain urban small no 145 mountain urban small yes 68\nmountain rural large no 62 mountain rural large yes 31\nmountain rural medium no 44 mountain rural medium yes 32\nmountain rural small no 85 mountain rural small yes 43\n;"
+    "text": "Exercise\nThe following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.\n\nSAS CodeR Code\n\n\ndata shoulder;\ninput area $ location $ size $ usage $ count @@;\ndatalines;\ncoast urban large no 174 coast urban large yes 69\ncoast urban medium no 134 coast urban medium yes 56\ncoast urban small no 150 coast urban small yes 54\ncoast rural large no 52 coast rural large yes 14\ncoast rural medium no 31 coast rural medium yes 14\ncoast rural small no 25 coast rural small yes 17\npiedmont urban large no 127 piedmont urban large yes 62\npiedmont urban medium no 94 piedmont urban medium yes 63\npiedmont urban small no 112 piedmont urban small yes 93\npiedmont rural large no 35 piedmont rural large yes 29\npiedmont rural medium no 32 piedmont rural medium yes 30\npiedmont rural small no 46 piedmont rural small yes 34\nmountain urban large no 111 mountain urban large yes 26\nmountain urban medium no 120 mountain urban medium yes 47\nmountain urban small no 145 mountain urban small yes 68\nmountain rural large no 62 mountain rural large yes 31\nmountain rural medium no 44 mountain rural medium yes 32\nmountain rural small no 85 mountain rural small yes 43\n;\n\n\n\nlibrary(tidyverse)\nharness &lt;- read.csv(\"harness.csv\")\nglimpse(harness)\n\nRows: 36\nColumns: 5\n$ Area     &lt;chr&gt; \"coast\", \"coast\", \"coast\", \"coast\", \"coast\", \"coast\", \"coast\"…\n$ Location &lt;chr&gt; \"urban\", \"urban\", \"urban\", \"urban\", \"urban\", \"urban\", \"rural\"…\n$ CarSize  &lt;chr&gt; \"large\", \"large\", \"medium\", \"medium\", \"small\", \"small\", \"larg…\n$ Usage    &lt;chr&gt; \"no\", \"yes\", \"no\", \"yes\", \"no\", \"yes\", \"no\", \"yes\", \"no\", \"ye…\n$ Count    &lt;int&gt; 174, 69, 134, 56, 150, 54, 52, 14, 31, 14, 25, 17, 127, 62, 9…",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#exercise-1",
     "href": "Chapter6.html#exercise-1",
     "title": "EAB 770 - Chapter 6",
     "section": "Exercise",
-    "text": "Exercise\nThe following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.\n\nSAS CodeAnswer\n\n\nproc freq data=shoulder order=data;\nweight count;\ntables area*location*size*usage / cmh scores=modridit;\n;\nrun;\n\n\nBoth variables are ordinal. We can use the extended correlation statistic \\(Q_{CSMH}\\). Using modridit scores, \\(Q_{CSMH}\\) =6.64, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated."
+    "text": "Exercise\nThe following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.\n\nSAS CodeR CodeAnswer\n\n\nproc freq data=shoulder order=data;\nweight count;\ntables area*location*size*usage / cmh scores=ridit;\n;\nrun;\n\n\n\ndat_cc &lt;- xtabs(Count~CarSize+Usage+Area+Location,data=harness)\nCMHtest(dat_cc,\n        rscores=\"midrank\",\n        cscores=\"midrank\")\n\n$`Area:coast|Location:rural`\nCochran-Mantel-Haenszel Statistics for CarSize by Usage \n    in stratum Area:coast|Location:rural \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 4.6341  1 0.031343\nrmeans  Row mean scores differ 4.6460  2 0.097980\ncmeans  Col mean scores differ 4.6341  1 0.031343\ngeneral    General association 4.6460  2 0.097980\n\n\n$`Area:mountain|Location:rural`\nCochran-Mantel-Haenszel Statistics for CarSize by Usage \n    in stratum Area:mountain|Location:rural \n\n                 AltHypothesis    Chisq Df    Prob\ncor        Nonzero correlation 0.017854  1 0.89370\nrmeans  Row mean scores differ 1.826674  2 0.40118\ncmeans  Col mean scores differ 0.017854  1 0.89370\ngeneral    General association 1.826674  2 0.40118\n\n\n$`Area:piedmont|Location:rural`\nCochran-Mantel-Haenszel Statistics for CarSize by Usage \n    in stratum Area:piedmont|Location:rural \n\n                 AltHypothesis   Chisq Df    Prob\ncor        Nonzero correlation 0.15378  1 0.69495\nrmeans  Row mean scores differ 0.48751  2 0.78368\ncmeans  Col mean scores differ 0.15378  1 0.69495\ngeneral    General association 0.48751  2 0.78368\n\n\n$`Area:coast|Location:urban`\nCochran-Mantel-Haenszel Statistics for CarSize by Usage \n    in stratum Area:coast|Location:urban \n\n                 AltHypothesis   Chisq Df    Prob\ncor        Nonzero correlation 0.17007  1 0.68005\nrmeans  Row mean scores differ 0.45528  2 0.79641\ncmeans  Col mean scores differ 0.17007  1 0.68005\ngeneral    General association 0.45528  2 0.79641\n\n\n$`Area:mountain|Location:urban`\nCochran-Mantel-Haenszel Statistics for CarSize by Usage \n    in stratum Area:mountain|Location:urban \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 6.4876  1 0.010863\nrmeans  Row mean scores differ 7.1263  2 0.028349\ncmeans  Col mean scores differ 6.4876  1 0.010863\ngeneral    General association 7.1263  2 0.028349\n\n\n$`Area:piedmont|Location:urban`\nCochran-Mantel-Haenszel Statistics for CarSize by Usage \n    in stratum Area:piedmont|Location:urban \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 6.4411  1 0.011151\nrmeans  Row mean scores differ 6.5068  2 0.038643\ncmeans  Col mean scores differ 6.4411  1 0.011151\ngeneral    General association 6.5068  2 0.038643\n\n\n\n\nBoth variables are ordinal. We can use the extended correlation statistic \\(Q_{CSMH}\\). Using ridit/rank-based scores, \\(Q_{CSMH}\\) =6.44, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated after controlling for geographical area and location.",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
-    "objectID": "Chapter6.html#repeated-measures",
-    "href": "Chapter6.html#repeated-measures",
+    "objectID": "Chapter6.html#repeated-measures-application",
+    "href": "Chapter6.html#repeated-measures-application",
     "title": "EAB 770 - Chapter 6",
-    "section": "Repeated Measures",
-    "text": "Repeated Measures\n\nCommonly used in longitudinal studies\n\nCohort studies\n\nDental experiments: multiple teeth from each subject\nMantel-Haenszel statistics can be calculated to determine whether there is an association between a repeated measurement factor (usually time) and a response variable adjusting for an effect of subject.\n\nControlling for subject adjusts for the variability between subjects, which focuses the analysis to within-subject."
+    "section": "Repeated Measures: Application",
+    "text": "Repeated Measures: Application\nRepeated measures are commonly encountered in longitudinal studies (e.g. cohort studies).\n\n\n\n\n\n\nNote\n\n\nMantel-Haenszel statistics can be calculated to determine whether there is an association between a repeated measurement factor (usually time) and a response variable adjusting for an effect of subject. Controlling for subject adjusts for the variability between subjects, which focuses the analysis to within-subject.",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#repeated-measures-1",
     "href": "Chapter6.html#repeated-measures-1",
     "title": "EAB 770 - Chapter 6",
     "section": "Repeated Measures",
-    "text": "Repeated Measures\n\nConsider an experiment with \\(n\\) subjects.\n\nThe treatment is applied to each subject.\nThe response is measured at \\(t\\) time points.\nCohort studies/ longitudinal RCT\n\nIn general, the repeated measures can come from multiple subjects. Responses can come from:\n\nSame location\nSame family/litter\nMatched pairs"
+    "text": "Repeated Measures\nConsider an experiment with \\(n\\) subjects. - The treatment is applied to each subject. - The response is measured at \\(t\\) time points. - Cohort studies/ longitudinal RCT\n\nIn general, the repeated measures can come from multiple subjects. Responses can come from:\n\nSame location\nSame family/litter\nMatched pairs",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#repeated-measures-2",
     "href": "Chapter6.html#repeated-measures-2",
     "title": "EAB 770 - Chapter 6",
     "section": "Repeated Measures",
-    "text": "Repeated Measures\nConsider a repeated measures design with \\(t\\) time points and a response variable with \\(C\\) levels.\n\n\n\n\n\n\n\nNote\n\n\nEach time point will have a measured response value. For a sample size \\(n\\), we will end up with \\(n\\) contingency tables with shape \\(t \\times C\\)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(n_{ijk} = 1\\) if response \\(k\\) is measured at time \\(j\\). Otherwise, \\(n_{ijk}=0\\)"
+    "text": "Repeated Measures\nConsider a repeated measures design with \\(t\\) time points and a response variable with \\(C\\) levels.\n\n\n\n\n\n\n\nNote\n\n\nEach time point will have a measured response value. For a sample size \\(n\\), we will end up with \\(n\\) contingency tables with shape \\(t \\times C\\)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(n_{ijk} = 1\\) if response \\(k\\) is measured at time \\(j\\). Otherwise, \\(n_{ijk}=0\\)",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#repeated-measures-hypotheses",
     "href": "Chapter6.html#repeated-measures-hypotheses",
     "title": "EAB 770 - Chapter 6",
     "section": "Repeated Measures: Hypotheses",
-    "text": "Repeated Measures: Hypotheses\n\nMantel-Haenszel statistics can be used to test the hypothesis of no association between time and response.\n\nAssumption: marginal totals per subject in response and time is fixed.\n\\(H_0\\): The response variable is distributed at random with respect to the time points\nThe null hypothesis is referred to as the hypothesis of interchangeability or marginal homogeneity.\n\nAs in previous chapters, \\(Q_{CSMH}\\), \\(Q_{SMH}\\), and \\(Q_{GMH}\\) pertain to different alternatives to no association."
-  },
-  {
-    "objectID": "Chapter6.html#repeated-measures-caution",
-    "href": "Chapter6.html#repeated-measures-caution",
-    "title": "EAB 770 - Chapter 6",
-    "section": "Repeated Measures: Caution",
-    "text": "Repeated Measures: Caution\n\n\n\n\n\n\nWarning\n\n\nOdds ratio estimates and CI limits assumes independence between contingency table entries, which is broken in repeated measures data. Breslow-Day assumptions are also not satisfied.\nThe Breslow-Day statistic as well as the MH and logit estimates of the odds ratio should be taken with a grain of salt."
+    "text": "Repeated Measures: Hypotheses\nMantel-Haenszel statistics can be used to test the hypothesis of no association between time and response under the assumption that marginal totals per subject in response and time is fixed.\n\n\n\n\n\n\nNote\n\n\nThe null hypothesis for Mantel-Haenszel tests for repetaed measures is \\(H_0\\): The response variable is distributed at random with respect to the time points.This null hypothesis is referred to as the hypothesis of interchangeability or marginal homogeneity.\nAs in previous chapters, \\(Q_{CSMH}\\), \\(Q_{SMH}\\), and \\(Q_{GMH}\\) pertain to different alternatives to no association.\n\n\n\n\n\n\n\n\n\nWarning\n\n\nOdds ratio estimates and CI limits assumes independence between contingency table entries, which is broken in repeated measures data. Breslow-Day assumptions are also not satisfied.\nThe Breslow-Day statistic as well as the MH and logit estimates of the odds ratio should be taken with a grain of salt.",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#example-2",
     "href": "Chapter6.html#example-2",
     "title": "EAB 770 - Chapter 6",
     "section": "Example",
-    "text": "Example\nA running shoe company produces a new model of running shoe that includes a harder material for the insert that corrects for overpronation. However, the company is concerned that the material will induce heel tenderness as a result of some loss of cushioning on the strike of each step. It conducted a study on 87 runners who used the new shoe for a month. Researchers asked the participants whether they experienced occasional heel tenderness before and after they used the new shoe. Is there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?\nSAS Data\ndata pump;\ninput subject time $ response $ @@;\ndatalines;\n1 before no 1 after no 2 before no 2 after no\n3 before no 3 after no 4 before no 4 after no\n5 before no 5 after no 6 before no 6 after no\n7 before no 7 after no 8 before no 8 after no\n9 before no 9 after no 10 before no 10 after no\n11 before no 11 after no 12 before no 12 after no\n13 before no 13 after no 14 before no 14 after no\n15 before no 15 after no 16 before no 16 after no\n17 before no 17 after no 18 before no 18 after no\n19 before no 19 after no 20 before no 20 after no\n21 before no 21 after no 22 before no 22 after no\n23 before no 23 after no 24 before no 24 after no\n25 before no 25 after no 26 before no 26 after no\n27 before no 27 after no 28 before no 28 after no\n29 before no 29 after no 30 before no 30 after no\n31 before no 31 after no 32 before no 32 after no\n33 before no 33 after no 34 before no 34 after no\n35 before no 35 after no 36 before no 36 after no\n37 before no 37 after no 38 before no 38 after no\n39 before no 39 after no 40 before no 40 after no\n41 before no 41 after no 42 before no 42 after no\n43 before no 43 after no 44 before no 44 after no\n45 before no 45 after no 46 before no 46 after no\n47 before no 47 after no 48 before no 48 after no\n49 before no 49 after yes 50 before no 50 after yes\n51 before no 51 after yes 52 before no 52 after yes\n53 before no 53 after yes 54 before no 54 after yes\n55 before no 55 after yes 56 before no 56 after yes\n57 before no 57 after yes 58 before no 58 after yes\n59 before no 59 after yes 60 before no 60 after yes\n61 before no 61 after yes 62 before no 62 after yes\n63 before no 63 after yes 64 before yes 64 after no\n65 before yes 65 after no 66 before yes 66 after no\n67 before yes 67 after no 68 before yes 68 after no\n69 before yes 69 after yes 70 before yes 70 after yes\n71 before yes 71 after yes 72 before yes 72 after yes\n73 before yes 73 after yes 74 before yes 74 after yes\n75 before yes 75 after yes 76 before yes 76 after yes\n77 before yes 77 after yes 78 before yes 78 after yes\n79 before yes 79 after yes 80 before yes 80 after yes\n81 before yes 81 after yes 82 before yes 82 after yes\n83 before yes 83 after yes 84 before yes 84 after yes\n85 before yes 85 after yes 86 before yes 86 after yes\n87 before yes 87 after yes\n;"
+    "text": "Example\nA running shoe company produces a new model of running shoe that includes a harder material for the insert that corrects for overpronation. However, the company is concerned that the material will induce heel tenderness as a result of some loss of cushioning on the strike of each step. It conducted a study on 87 runners who used the new shoe for a month. Researchers asked the participants whether they experienced occasional heel tenderness before and after they used the new shoe. Is there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?\n\n\n\n\n\n\nSAS Data\n\n\ndata pump;\ninput subject time $ response $ @@;\ndatalines;\n1 before no 1 after no 2 before no 2 after no\n3 before no 3 after no 4 before no 4 after no\n5 before no 5 after no 6 before no 6 after no\n7 before no 7 after no 8 before no 8 after no\n9 before no 9 after no 10 before no 10 after no\n11 before no 11 after no 12 before no 12 after no\n13 before no 13 after no 14 before no 14 after no\n15 before no 15 after no 16 before no 16 after no\n17 before no 17 after no 18 before no 18 after no\n19 before no 19 after no 20 before no 20 after no\n21 before no 21 after no 22 before no 22 after no\n23 before no 23 after no 24 before no 24 after no\n25 before no 25 after no 26 before no 26 after no\n27 before no 27 after no 28 before no 28 after no\n29 before no 29 after no 30 before no 30 after no\n31 before no 31 after no 32 before no 32 after no\n33 before no 33 after no 34 before no 34 after no\n35 before no 35 after no 36 before no 36 after no\n37 before no 37 after no 38 before no 38 after no\n39 before no 39 after no 40 before no 40 after no\n41 before no 41 after no 42 before no 42 after no\n43 before no 43 after no 44 before no 44 after no\n45 before no 45 after no 46 before no 46 after no\n47 before no 47 after no 48 before no 48 after no\n49 before no 49 after yes 50 before no 50 after yes\n51 before no 51 after yes 52 before no 52 after yes\n53 before no 53 after yes 54 before no 54 after yes\n55 before no 55 after yes 56 before no 56 after yes\n57 before no 57 after yes 58 before no 58 after yes\n59 before no 59 after yes 60 before no 60 after yes\n61 before no 61 after yes 62 before no 62 after yes\n63 before no 63 after yes 64 before yes 64 after no\n65 before yes 65 after no 66 before yes 66 after no\n67 before yes 67 after no 68 before yes 68 after no\n69 before yes 69 after yes 70 before yes 70 after yes\n71 before yes 71 after yes 72 before yes 72 after yes\n73 before yes 73 after yes 74 before yes 74 after yes\n75 before yes 75 after yes 76 before yes 76 after yes\n77 before yes 77 after yes 78 before yes 78 after yes\n79 before yes 79 after yes 80 before yes 80 after yes\n81 before yes 81 after yes 82 before yes 82 after yes\n83 before yes 83 after yes 84 before yes 84 after yes\n85 before yes 85 after yes 86 before yes 86 after yes\n87 before yes 87 after yes\n;\nR Data\nPlease refer to pump.csv on Canvas.\n\nlibrary(tidyverse)\n\npump &lt;- read.csv(\"pump.csv\") |&gt; \n  mutate(Subject = as.factor(Subject))\nglimpse(pump)\n\nRows: 174\nColumns: 3\n$ Subject  &lt;fct&gt; 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10,…\n$ Time     &lt;chr&gt; \"before\", \"after\", \"before\", \"after\", \"before\", \"after\", \"bef…\n$ Response &lt;chr&gt; \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"…",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#example-3",
     "href": "Chapter6.html#example-3",
     "title": "EAB 770 - Chapter 6",
     "section": "Example",
-    "text": "Example\nIs there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?\n\nSAS CodeAnswerMcNemar’s test\n\n\n\ndata pump;\ninput subject time $ response $ @@;\ndatalines;\n1 before no 1 after no 2 before no 2 after no\n3 before no 3 after no 4 before no 4 after no\n5 before no 5 after no 6 before no 6 after no\n7 before no 7 after no 8 before no 8 after no\n9 before no 9 after no 10 before no 10 after no\n11 before no 11 after no 12 before no 12 after no\n13 before no 13 after no 14 before no 14 after no\n15 before no 15 after no 16 before no 16 after no\n17 before no 17 after no 18 before no 18 after no\n19 before no 19 after no 20 before no 20 after no\n21 before no 21 after no 22 before no 22 after no\n23 before no 23 after no 24 before no 24 after no\n25 before no 25 after no 26 before no 26 after no\n27 before no 27 after no 28 before no 28 after no\n29 before no 29 after no 30 before no 30 after no\n31 before no 31 after no 32 before no 32 after no\n33 before no 33 after no 34 before no 34 after no\n35 before no 35 after no 36 before no 36 after no\n37 before no 37 after no 38 before no 38 after no\n39 before no 39 after no 40 before no 40 after no\n41 before no 41 after no 42 before no 42 after no\n43 before no 43 after no 44 before no 44 after no\n45 before no 45 after no 46 before no 46 after no\n47 before no 47 after no 48 before no 48 after no\n49 before no 49 after yes 50 before no 50 after yes\n51 before no 51 after yes 52 before no 52 after yes\n53 before no 53 after yes 54 before no 54 after yes\n55 before no 55 after yes 56 before no 56 after yes\n57 before no 57 after yes 58 before no 58 after yes\n59 before no 59 after yes 60 before no 60 after yes\n61 before no 61 after yes 62 before no 62 after yes\n63 before no 63 after yes 64 before yes 64 after no\n65 before yes 65 after no 66 before yes 66 after no\n67 before yes 67 after no 68 before yes 68 after no\n69 before yes 69 after yes 70 before yes 70 after yes\n71 before yes 71 after yes 72 before yes 72 after yes\n73 before yes 73 after yes 74 before yes 74 after yes\n75 before yes 75 after yes 76 before yes 76 after yes\n77 before yes 77 after yes 78 before yes 78 after yes\n79 before yes 79 after yes 80 before yes 80 after yes\n81 before yes 81 after yes 82 before yes 82 after yes\n83 before yes 83 after yes 84 before yes 84 after yes\n85 before yes 85 after yes 86 before yes 86 after yes\n87 before yes 87 after yes\n;\n\nproc freq data=pump order=data; #&lt;1&gt;\ntables subject*time*response/ noprint cmh; *noprint does not print the 87 contingency tables.;\nrun;\n\nThere’s no weight statement because each line is an observational unit.\n\n\n\n\nWe can construct 2x2 tables for each runner and control for each subject. The resulting CMH tables will have the same results because of the shape of the contingency tables.\n\\(Q_{CSMH}\\)=5, p=0.03, which means there is strong evidence that there is a difference in heel tenderness before and after using the new shoe.\nAll extended Mantel-Haenszel statistic will yield the same result because the resulting contingency table for each subject is a 2x2 table.\n\n\n\ndata shoes;\ninput before $ after $ count;\ndatalines;\nyes yes 19\nyes no 5\nno yes 15\nno no 48\n;\n\nproc freq data=shoes order=data;\nweight count;\ntables before*after/agree;\nrun;\nThe McNemar’s test yields the same result as \\(Q_{CSMH}\\)."
+    "text": "Example\nIs there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?\n\nSAS CodeR CodeAnswerMcNemar’s test\n\n\n\ndata pump;\ninput subject time $ response $ @@;\ndatalines;\n1 before no 1 after no 2 before no 2 after no\n3 before no 3 after no 4 before no 4 after no\n5 before no 5 after no 6 before no 6 after no\n7 before no 7 after no 8 before no 8 after no\n9 before no 9 after no 10 before no 10 after no\n11 before no 11 after no 12 before no 12 after no\n13 before no 13 after no 14 before no 14 after no\n15 before no 15 after no 16 before no 16 after no\n17 before no 17 after no 18 before no 18 after no\n19 before no 19 after no 20 before no 20 after no\n21 before no 21 after no 22 before no 22 after no\n23 before no 23 after no 24 before no 24 after no\n25 before no 25 after no 26 before no 26 after no\n27 before no 27 after no 28 before no 28 after no\n29 before no 29 after no 30 before no 30 after no\n31 before no 31 after no 32 before no 32 after no\n33 before no 33 after no 34 before no 34 after no\n35 before no 35 after no 36 before no 36 after no\n37 before no 37 after no 38 before no 38 after no\n39 before no 39 after no 40 before no 40 after no\n41 before no 41 after no 42 before no 42 after no\n43 before no 43 after no 44 before no 44 after no\n45 before no 45 after no 46 before no 46 after no\n47 before no 47 after no 48 before no 48 after no\n49 before no 49 after yes 50 before no 50 after yes\n51 before no 51 after yes 52 before no 52 after yes\n53 before no 53 after yes 54 before no 54 after yes\n55 before no 55 after yes 56 before no 56 after yes\n57 before no 57 after yes 58 before no 58 after yes\n59 before no 59 after yes 60 before no 60 after yes\n61 before no 61 after yes 62 before no 62 after yes\n63 before no 63 after yes 64 before yes 64 after no\n65 before yes 65 after no 66 before yes 66 after no\n67 before yes 67 after no 68 before yes 68 after no\n69 before yes 69 after yes 70 before yes 70 after yes\n71 before yes 71 after yes 72 before yes 72 after yes\n73 before yes 73 after yes 74 before yes 74 after yes\n75 before yes 75 after yes 76 before yes 76 after yes\n77 before yes 77 after yes 78 before yes 78 after yes\n79 before yes 79 after yes 80 before yes 80 after yes\n81 before yes 81 after yes 82 before yes 82 after yes\n83 before yes 83 after yes 84 before yes 84 after yes\n85 before yes 85 after yes 86 before yes 86 after yes\n87 before yes 87 after yes\n;\n\nproc freq data=pump order=data; #&lt;1&gt;\ntables subject*time*response/ noprint cmh; *noprint does not print the 87 contingency tables.;\nrun;\n\nThere’s no weight statement because each line is an observational unit.\n\n\n\n\ndat_cc&lt;- xtabs(~Time+Response+Subject,data=pump)\n\nmantelhaen.test(dat_cc,correct=F)\n\n\n    Mantel-Haenszel chi-squared test without continuity correction\n\ndata:  dat_cc\nMantel-Haenszel X-squared = 5, df = 1, p-value = 0.02535\nalternative hypothesis: true common odds ratio is not equal to 1\n95 percent confidence interval:\n 0.1211491 0.9171436\nsample estimates:\ncommon odds ratio \n        0.3333333 \n\n\n\n\n\nWe can construct 2x2 tables for each runner and control for each subject. The resulting CMH tables will have the same results because of the shape of the contingency tables.\n\\(Q_{CSMH}\\)=5, p=0.03, which means there is strong evidence that there is a difference in heel tenderness before and after using the new shoe.\nAll extended Mantel-Haenszel statistic will yield the same result because the resulting contingency table for each subject is a 2x2 table.\n\n\n\ndata shoes;\ninput before $ after $ count;\ndatalines;\nyes yes 19\nyes no 5\nno yes 15\nno no 48\n;\n\nproc freq data=shoes order=data;\nweight count;\ntables before*after/agree;\nrun;\nIn R, we can create a repeated measures table and apply the McNemar’s test.\n\ndat2 &lt;- pump |&gt; \n  pivot_wider(names_from=Time,values_from=Response) \ndat_cc2 &lt;- xtabs(~before+after,data=dat2)\n\nmcnemar.test(dat_cc2,correct=F)\n\n\n    McNemar's Chi-squared test\n\ndata:  dat_cc2\nMcNemar's chi-squared = 5, df = 1, p-value = 0.02535\n\n\nThe McNemar’s test yields the same result as \\(Q_{CSMH}\\).",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#exercise-2",
     "href": "Chapter6.html#exercise-2",
     "title": "EAB 770 - Chapter 6",
     "section": "Exercise",
-    "text": "Exercise\nThe DRUG2 dataset shows the data from a study in which 46 patients were each treated with three drugs (A, B, and C). The response to each drug was recorded as favorable (F) or unfavorable (U). Use the appropriate test to determine whether the three drugs have equal probabilities for favorable response.\n\nWhich Mantel-Haenszel statistic is the most appropriate for this example?\nAt a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?\n\nSAS Data\ndata drug;\ninput druga $ drugb $ drugc $ count;\ndatalines;\nF F F 6\nF F U 16\nF U F 2\nF U U 4\nU F F 2\nU F U 4\nU U F 6\nU U U 6\n;\nrun;\ndata drug2; set drug;\nkeep patient drug response;\nretain patient 0;\ndo i=1 to count;\npatient=patient+1;\ndrug='A'; response=druga; output;\ndrug='B'; response=drugb; output;\ndrug='C'; response=drugc; output;\nend;\nrun;"
+    "text": "Exercise\nThe DRUG2 dataset shows the data from a study in which 46 patients were each treated with three drugs (A, B, and C). The response to each drug was recorded as favorable (F) or unfavorable (U). Use the appropriate test to determine whether the three drugs have equal probabilities for favorable response.\n\nWhich Mantel-Haenszel statistic is the most appropriate for this example?\nAt a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?\n\n\nSAS DataR Data\n\n\ndata drug;\ninput druga $ drugb $ drugc $ count;\ndatalines;\nF F F 6\nF F U 16\nF U F 2\nF U U 4\nU F F 2\nU F U 4\nU U F 6\nU U U 6\n;\nrun;\ndata drug2; set drug;\nkeep patient drug response;\nretain patient 0;\ndo i=1 to count;\npatient=patient+1;\ndrug='A'; response=druga; output;\ndrug='B'; response=drugb; output;\ndrug='C'; response=drugc; output;\nend;\nrun;\n\n\nPlease refer to drug.csv uploaded on Canvas.\n\ndrug &lt;- read.csv(\"drug.csv\") |&gt; \n  mutate(Patient=as.factor(Patient),\n         Outcome=factor(Outcome,levels=c(\"U\",\"F\")))\nglimpse(drug)\n\nRows: 138\nColumns: 3\n$ Patient &lt;fct&gt; 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7,…\n$ Drug    &lt;chr&gt; \"A\", \"B\", \"C\", \"A\", \"B\", \"C\", \"A\", \"B\", \"C\", \"A\", \"B\", \"C\", \"A…\n$ Outcome &lt;fct&gt; F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, U,…",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#exercise-3",
     "href": "Chapter6.html#exercise-3",
     "title": "EAB 770 - Chapter 6",
     "section": "Exercise",
-    "text": "Exercise\n\nWhich Mantel-Haenszel statistic is the most appropriate for this example?\nAt a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?\n\n\nSAS CodeAnswer\n\n\nproc freq data=drug2 order=data;\ntables patient*drug*response/cmh noprint;\nrun;\n\n\nThe most appropriate MH statistic to examine is “Row Means Differ”.\nThe statistic \\(Q_{SMH}=8.47\\) yields a p-value \\(p=0.0145\\). At a significance level of 0.01, there is marginally sufficient evidence that at least one drug has a different probability of a favorable response."
+    "text": "Exercise\n\nWhich Mantel-Haenszel statistic is the most appropriate for this example?\nAt a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?\n\n\nSAS CodeR CodeAnswer\n\n\nproc freq data=drug2 order=data;\ntables patient*drug*response/cmh noprint;\nrun;\n\n\n\ndat_cc &lt;- xtabs(~Drug+Outcome+Patient,data=drug)\n\nCMHtest(dat_cc,overall=T)$ALL\n\nCochran-Mantel-Haenszel Statistics for Drug by Outcome \n    Overall tests, controlling for all strata \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 6.3529  1 0.011719\nrmeans  Row mean scores differ 8.4706  2 0.014476\ncmeans  Col mean scores differ 6.3529  1 0.011719\ngeneral    General association 8.4706  2 0.014476\n\n\n\n\nThe most appropriate MH statistic to examine is the mean score statistic, specifically the row means.\nThe statistic \\(Q_{SMH}=8.47\\) yields a p-value \\(p=0.0145\\). At a significance level of 0.01, there is marginally sufficient evidence that at least one drug has a different probability of a favorable response.",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter6.html#ordinal-response-with-missing-data",
     "href": "Chapter6.html#ordinal-response-with-missing-data",
     "title": "EAB 770 - Chapter 6",
     "section": "Ordinal Response with Missing Data",
-    "text": "Ordinal Response with Missing Data\nExperiments using a repeated measures design tend to include plenty of missing data.\n\nMissing data decreases the power of the study.\n\nIncluding missing data in the analysis still gives a higher power than excluding incomplete cases in the analysis.\n\nTechniques to deal with missing data include:\n\nMultiple imputation\nOmission\nAdjusting ANOVA scores"
+    "text": "Ordinal Response with Missing Data\nExperiments using a repeated measures design tend to include plenty of missing data.\n\nMissing data decreases the power of the study.\n\nIncluding missing data in the analysis still gives a higher power than excluding incomplete cases in the analysis.\n\nTechniques to deal with missing data include:\n\nMultiple imputation\nOmission\nAdjusting ANOVA scores",
+    "crumbs": [
+      "Chapter 6: Sets of sxr tables"
+    ]
   },
   {
     "objectID": "Chapter9.html#outline",
@@ -3970,15 +4030,5 @@
     "title": "EAB 770 - Chapter 9",
     "section": "Example",
     "text": "Example\nThe following data come from a study in which a physical therapy practice experimented with different treatment modalities in a strengthening program. The therapists rotated patients through three programs for maintenance after basic strength had been attained. The strengthening programs included free weights, resistance bands, and weight machines. The therapists are interested in whether gender and age affect choice of strengthening programs.\n\n\n\n\n\n\nWarning\n\n\nSmall cell counts means we need to use exact methods.\n\n\n\n\nSAS CodeAnswer\n\n\nproc logistic data=pt;\ntitle \"asymptotic\";\nfreq count;\nclass gender(ref='females') age(ref='senior') / param=ref;\nmodel therapy(ref='machines') = gender age / link=glogit scale=none aggregate;\nrun;\n\nproc logistic data=pt;\ntitle \"exact\";\nfreq count;\nclass gender(ref='females') age(ref='senior') / param=ref;\nmodel therapy(ref='machines') = gender age / link=glogit scale=none aggregate;\nexact gender age/joint estimate=both;\nrun;\n\n\nThere is a marginal effect of gender ($ p=0.099\\(), but there is a significant effect of age (\\)^2 = 12.2, p=0.003$).\nThe odds of males preferring bands is 4.1 (0.49-59.55) times than that of females. Additionally, the odds of males preferring freeweights is 4.49 (0.93-30.2) times than that of females.\nThe odds of an adult preferring bands is 5.08 (0.60-53.2) times that of seniors. However, the odds of an adult preferring freeweights is 12.47 (2.7-84.0) times that of seniors."
-  },
-  {
-    "objectID": "Chapter5.html#exact-tests-r",
-    "href": "Chapter5.html#exact-tests-r",
-    "title": "EAB 770 - Chapter 5",
-    "section": "Exact Tests: R",
-    "text": "Exact Tests: R\nIf the sample size is small enough, the fisher.test() function can be used to implement exact tests.\n\n\n\n\n\n\nTip\n\n\nSAS has better functions to perform exact tests for the Pearson and randomization statistics.",
-    "crumbs": [
-      "Chapter 5: sxr tables"
-    ]
   }
 ]

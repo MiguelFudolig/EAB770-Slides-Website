@@ -226,10 +226,10 @@ Miguel Fudolig
 <section id="general-mantel-haenszel-method" class="slide level2">
 <h2>General Mantel-Haenszel Method</h2>
 <ul>
-<li>Recall: 2x2, sx2, 2xr, sxr tables all use Mantel-Haenszel Statistics
+<li>Recall: 2x2, and sxr tables all use Mantel-Haenszel Statistics
 <ul>
 <li>Able to account for ordinality unlike Pearson Chi-Square tests</li>
-<li>Less stringent sample size requirements</li>
+<li>Less stringent sample size requirements for ordinal variables</li>
 </ul></li>
 <li>MH statistics in sets of contingency tables removes the confounding influence of the stratification variable.</li>
 </ul>
@@ -316,7 +316,10 @@ Miguel Fudolig
 <li>gre: gastric resection (removal of 75% of gastric tissue)</li>
 </ul>
 <p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, <strong>controlling</strong> for hospital effects.</p>
-<h3 id="sas-data-set">SAS Data set</h3>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Data set</a></li><li><a href="#tabset-1-2">R Data Set</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data operate;</span>
 <span id="cb1-2"><a></a>input hospital trt <span class="sc">$</span> severity <span class="sc">$</span> wt <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="cb1-3"><a></a>datalines;</span>
@@ -337,26 +340,66 @@ Miguel Fudolig
 <span id="cb1-18"><a></a><span class="dv">4</span> v<span class="sc">+</span>h none <span class="dv">14</span> <span class="dv">4</span> v<span class="sc">+</span>h slight <span class="dv">8</span> <span class="dv">4</span> v<span class="sc">+</span>h moderate <span class="dv">3</span></span>
 <span id="cb1-19"><a></a><span class="dv">4</span> gre none <span class="dv">13</span> <span class="dv">4</span> gre slight <span class="dv">6</span> <span class="dv">4</span> gre moderate <span class="dv">4</span></span>
 <span id="cb1-20"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-2">
+<p>Please refer to <code>operate.csv</code> for the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a></a>operate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"operate.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a></a>  <span class="fu">mutate</span>(<span class="at">Treatment=</span><span class="fu">factor</span>(Treatment,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"v+d"</span>,<span class="st">"v+a"</span>,<span class="st">"v+h"</span>,<span class="st">"gre"</span>)),</span>
+<span id="cb2-4"><a></a>         <span class="at">Severity=</span><span class="fu">factor</span>(Severity,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"none"</span>,<span class="st">"slight"</span>,<span class="st">"moderate"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
-<p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, <strong>controlling</strong> for hospital effects.</p>
+<p>The response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, <strong>controlling</strong> for hospital effects. Use rank-based scores.</p>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Code</a></li><li><a href="#tabset-1-2">Answer</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">R Code</a></li><li><a href="#tabset-2-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
-<span id="cb2-2"><a></a>weight wt;</span>
-<span id="cb2-3"><a></a>tables hospital<span class="sc">*</span>trt<span class="sc">*</span>severity <span class="sc">/</span> cmh; <span class="co"># &lt;1&gt;</span></span>
-<span id="cb2-4"><a></a>tables hospital<span class="sc">*</span>trt<span class="sc">*</span>severity <span class="sc">/</span> cmh scores<span class="ot">=</span>modridit; <span class="co"># &lt;2&gt;</span></span>
-<span id="cb2-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-2-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>proc freq data<span class="ot">=</span>operate order<span class="ot">=</span>data;</span>
+<span id="cb3-2"><a></a>weight wt;</span>
+<span id="cb3-3"><a></a>tables hospital<span class="sc">*</span>trt<span class="sc">*</span>severity <span class="sc">/</span> cmh; <span class="co"># &lt;1&gt;</span></span>
+<span id="cb3-4"><a></a>tables hospital<span class="sc">*</span>trt<span class="sc">*</span>severity <span class="sc">/</span> cmh scores<span class="ot">=</span>ridit; <span class="co"># &lt;2&gt;</span></span>
+<span id="cb3-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="1">
 <li>Table Scores</li>
-<li>Modridit scores</li>
+<li>Rank-based scores</li>
 </ol>
 </div>
-<div id="tabset-1-2">
-<p>Both variables are ordinal, hence we can test for correlation using <span class="math inline">\(Q_{CSMH}\)</span>. Using modridit scores, we get <span class="math inline">\(Q_{CSMH}=6.93\)</span>, p=0.0085. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.</p>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>Treatment<span class="sc">+</span>Severity,<span class="at">data=</span>operate)</span>
+<span id="cb4-2"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Severity
+Treatment none slight moderate
+      v+d   61     28        7
+      v+a   68     23       13
+      v+h   58     40       12
+      gre   53     38       16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(vcdExtra)</span>
+<span id="cb6-2"><a></a></span>
+<span id="cb6-3"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb6-4"><a></a>        <span class="at">rscores=</span><span class="st">"midrank"</span>,</span>
+<span id="cb6-5"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for Treatment by Severity 
+
+                 AltHypothesis   Chisq Df      Prob
+cor        Nonzero correlation  6.6405  1 0.0099687
+rmeans  Row mean scores differ  7.2468  3 0.0644329
+cmeans  Col mean scores differ  6.6688  2 0.0356356
+general    General association 10.5166  6 0.1045146</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-3">
+<p>Both variables are ordinal, hence we can test for correlation using <span class="math inline">\(Q_{CSMH}\)</span>. Using modridit scores, we get <span class="math inline">\(Q_{CSMH}=6.64\)</span>, p=0.0100. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.</p>
 </div>
 </div>
 </div>
@@ -364,71 +407,171 @@ Miguel Fudolig
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
 <p>The following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data shoulder;</span>
-<span id="cb3-2"><a></a>input area <span class="sc">$</span> location <span class="sc">$</span> size <span class="sc">$</span> usage <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb3-3"><a></a>datalines;</span>
-<span id="cb3-4"><a></a>coast urban large no <span class="dv">174</span> coast urban large yes <span class="dv">69</span></span>
-<span id="cb3-5"><a></a>coast urban medium no <span class="dv">134</span> coast urban medium yes <span class="dv">56</span></span>
-<span id="cb3-6"><a></a>coast urban small no <span class="dv">150</span> coast urban small yes <span class="dv">54</span></span>
-<span id="cb3-7"><a></a>coast rural large no <span class="dv">52</span> coast rural large yes <span class="dv">14</span></span>
-<span id="cb3-8"><a></a>coast rural medium no <span class="dv">31</span> coast rural medium yes <span class="dv">14</span></span>
-<span id="cb3-9"><a></a>coast rural small no <span class="dv">25</span> coast rural small yes <span class="dv">17</span></span>
-<span id="cb3-10"><a></a>piedmont urban large no <span class="dv">127</span> piedmont urban large yes <span class="dv">62</span></span>
-<span id="cb3-11"><a></a>piedmont urban medium no <span class="dv">94</span> piedmont urban medium yes <span class="dv">63</span></span>
-<span id="cb3-12"><a></a>piedmont urban small no <span class="dv">112</span> piedmont urban small yes <span class="dv">93</span></span>
-<span id="cb3-13"><a></a>piedmont rural large no <span class="dv">35</span> piedmont rural large yes <span class="dv">29</span></span>
-<span id="cb3-14"><a></a>piedmont rural medium no <span class="dv">32</span> piedmont rural medium yes <span class="dv">30</span></span>
-<span id="cb3-15"><a></a>piedmont rural small no <span class="dv">46</span> piedmont rural small yes <span class="dv">34</span></span>
-<span id="cb3-16"><a></a>mountain urban large no <span class="dv">111</span> mountain urban large yes <span class="dv">26</span></span>
-<span id="cb3-17"><a></a>mountain urban medium no <span class="dv">120</span> mountain urban medium yes <span class="dv">47</span></span>
-<span id="cb3-18"><a></a>mountain urban small no <span class="dv">145</span> mountain urban small yes <span class="dv">68</span></span>
-<span id="cb3-19"><a></a>mountain rural large no <span class="dv">62</span> mountain rural large yes <span class="dv">31</span></span>
-<span id="cb3-20"><a></a>mountain rural medium no <span class="dv">44</span> mountain rural medium yes <span class="dv">32</span></span>
-<span id="cb3-21"><a></a>mountain rural small no <span class="dv">85</span> mountain rural small yes <span class="dv">43</span></span>
-<span id="cb3-22"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Code</a></li><li><a href="#tabset-3-2">R Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data shoulder;</span>
+<span id="cb8-2"><a></a>input area <span class="sc">$</span> location <span class="sc">$</span> size <span class="sc">$</span> usage <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb8-3"><a></a>datalines;</span>
+<span id="cb8-4"><a></a>coast urban large no <span class="dv">174</span> coast urban large yes <span class="dv">69</span></span>
+<span id="cb8-5"><a></a>coast urban medium no <span class="dv">134</span> coast urban medium yes <span class="dv">56</span></span>
+<span id="cb8-6"><a></a>coast urban small no <span class="dv">150</span> coast urban small yes <span class="dv">54</span></span>
+<span id="cb8-7"><a></a>coast rural large no <span class="dv">52</span> coast rural large yes <span class="dv">14</span></span>
+<span id="cb8-8"><a></a>coast rural medium no <span class="dv">31</span> coast rural medium yes <span class="dv">14</span></span>
+<span id="cb8-9"><a></a>coast rural small no <span class="dv">25</span> coast rural small yes <span class="dv">17</span></span>
+<span id="cb8-10"><a></a>piedmont urban large no <span class="dv">127</span> piedmont urban large yes <span class="dv">62</span></span>
+<span id="cb8-11"><a></a>piedmont urban medium no <span class="dv">94</span> piedmont urban medium yes <span class="dv">63</span></span>
+<span id="cb8-12"><a></a>piedmont urban small no <span class="dv">112</span> piedmont urban small yes <span class="dv">93</span></span>
+<span id="cb8-13"><a></a>piedmont rural large no <span class="dv">35</span> piedmont rural large yes <span class="dv">29</span></span>
+<span id="cb8-14"><a></a>piedmont rural medium no <span class="dv">32</span> piedmont rural medium yes <span class="dv">30</span></span>
+<span id="cb8-15"><a></a>piedmont rural small no <span class="dv">46</span> piedmont rural small yes <span class="dv">34</span></span>
+<span id="cb8-16"><a></a>mountain urban large no <span class="dv">111</span> mountain urban large yes <span class="dv">26</span></span>
+<span id="cb8-17"><a></a>mountain urban medium no <span class="dv">120</span> mountain urban medium yes <span class="dv">47</span></span>
+<span id="cb8-18"><a></a>mountain urban small no <span class="dv">145</span> mountain urban small yes <span class="dv">68</span></span>
+<span id="cb8-19"><a></a>mountain rural large no <span class="dv">62</span> mountain rural large yes <span class="dv">31</span></span>
+<span id="cb8-20"><a></a>mountain rural medium no <span class="dv">44</span> mountain rural medium yes <span class="dv">32</span></span>
+<span id="cb8-21"><a></a>mountain rural small no <span class="dv">85</span> mountain rural small yes <span class="dv">43</span></span>
+<span id="cb8-22"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a></a>harness <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"harness.csv"</span>)</span>
+<span id="cb9-3"><a></a><span class="fu">glimpse</span>(harness)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 36
+Columns: 5
+$ Area     &lt;chr&gt; "coast", "coast", "coast", "coast", "coast", "coast", "coast"…
+$ Location &lt;chr&gt; "urban", "urban", "urban", "urban", "urban", "urban", "rural"…
+$ CarSize  &lt;chr&gt; "large", "large", "medium", "medium", "small", "small", "larg…
+$ Usage    &lt;chr&gt; "no", "yes", "no", "yes", "no", "yes", "no", "yes", "no", "ye…
+$ Count    &lt;int&gt; 174, 69, 134, 56, 150, 54, 52, 14, 31, 14, 25, 17, 127, 62, 9…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
 <p>The following data were collected in a study of shoulder harness usage in observations for a sample of North Carolina cars. The researchers wanted to test for an association between car size and usage after adjusting for geographical area and location.</p>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">Answer</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">R Code</a></li><li><a href="#tabset-4-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc freq data<span class="ot">=</span>shoulder order<span class="ot">=</span>data;</span>
-<span id="cb4-2"><a></a>weight count;</span>
-<span id="cb4-3"><a></a>tables area<span class="sc">*</span>location<span class="sc">*</span>size<span class="sc">*</span>usage <span class="sc">/</span> cmh scores<span class="ot">=</span>modridit;</span>
-<span id="cb4-4"><a></a>;</span>
-<span id="cb4-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-4-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>proc freq data<span class="ot">=</span>shoulder order<span class="ot">=</span>data;</span>
+<span id="cb11-2"><a></a>weight count;</span>
+<span id="cb11-3"><a></a>tables area<span class="sc">*</span>location<span class="sc">*</span>size<span class="sc">*</span>usage <span class="sc">/</span> cmh scores<span class="ot">=</span>ridit;</span>
+<span id="cb11-4"><a></a>;</span>
+<span id="cb11-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-2-2">
-<p>Both variables are ordinal. We can use the extended correlation statistic <span class="math inline">\(Q_{CSMH}\)</span>. Using modridit scores, <span class="math inline">\(Q_{CSMH}\)</span> =6.64, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated.</p>
+<div id="tabset-4-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>CarSize<span class="sc">+</span>Usage<span class="sc">+</span>Area<span class="sc">+</span>Location,<span class="at">data=</span>harness)</span>
+<span id="cb12-2"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb12-3"><a></a>        <span class="at">rscores=</span><span class="st">"midrank"</span>,</span>
+<span id="cb12-4"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$`Area:coast|Location:rural`
+Cochran-Mantel-Haenszel Statistics for CarSize by Usage 
+    in stratum Area:coast|Location:rural 
+
+                 AltHypothesis  Chisq Df     Prob
+cor        Nonzero correlation 4.6341  1 0.031343
+rmeans  Row mean scores differ 4.6460  2 0.097980
+cmeans  Col mean scores differ 4.6341  1 0.031343
+general    General association 4.6460  2 0.097980
+
+
+$`Area:mountain|Location:rural`
+Cochran-Mantel-Haenszel Statistics for CarSize by Usage 
+    in stratum Area:mountain|Location:rural 
+
+                 AltHypothesis    Chisq Df    Prob
+cor        Nonzero correlation 0.017854  1 0.89370
+rmeans  Row mean scores differ 1.826674  2 0.40118
+cmeans  Col mean scores differ 0.017854  1 0.89370
+general    General association 1.826674  2 0.40118
+
+
+$`Area:piedmont|Location:rural`
+Cochran-Mantel-Haenszel Statistics for CarSize by Usage 
+    in stratum Area:piedmont|Location:rural 
+
+                 AltHypothesis   Chisq Df    Prob
+cor        Nonzero correlation 0.15378  1 0.69495
+rmeans  Row mean scores differ 0.48751  2 0.78368
+cmeans  Col mean scores differ 0.15378  1 0.69495
+general    General association 0.48751  2 0.78368
+
+
+$`Area:coast|Location:urban`
+Cochran-Mantel-Haenszel Statistics for CarSize by Usage 
+    in stratum Area:coast|Location:urban 
+
+                 AltHypothesis   Chisq Df    Prob
+cor        Nonzero correlation 0.17007  1 0.68005
+rmeans  Row mean scores differ 0.45528  2 0.79641
+cmeans  Col mean scores differ 0.17007  1 0.68005
+general    General association 0.45528  2 0.79641
+
+
+$`Area:mountain|Location:urban`
+Cochran-Mantel-Haenszel Statistics for CarSize by Usage 
+    in stratum Area:mountain|Location:urban 
+
+                 AltHypothesis  Chisq Df     Prob
+cor        Nonzero correlation 6.4876  1 0.010863
+rmeans  Row mean scores differ 7.1263  2 0.028349
+cmeans  Col mean scores differ 6.4876  1 0.010863
+general    General association 7.1263  2 0.028349
+
+
+$`Area:piedmont|Location:urban`
+Cochran-Mantel-Haenszel Statistics for CarSize by Usage 
+    in stratum Area:piedmont|Location:urban 
+
+                 AltHypothesis  Chisq Df     Prob
+cor        Nonzero correlation 6.4411  1 0.011151
+rmeans  Row mean scores differ 6.5068  2 0.038643
+cmeans  Col mean scores differ 6.4411  1 0.011151
+general    General association 6.5068  2 0.038643</code></pre>
 </div>
 </div>
 </div>
+<div id="tabset-4-3">
+<p>Both variables are ordinal. We can use the extended correlation statistic <span class="math inline">\(Q_{CSMH}\)</span>. Using ridit/rank-based scores, <span class="math inline">\(Q_{CSMH}\)</span> =6.44, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated after controlling for geographical area and location.</p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="repeated-measures" class="title-slide slide level1 center">
+<h1>Repeated Measures</h1>
+
 </section>
-<section id="repeated-measures" class="slide level2">
-<h2>Repeated Measures</h2>
-<ul>
-<li>Commonly used in longitudinal studies
-<ul>
-<li>Cohort studies</li>
-</ul></li>
-<li>Dental experiments: multiple teeth from each subject</li>
-<li>Mantel-Haenszel statistics can be calculated to determine whether there is an association between a repeated measurement factor (usually time) and a response variable adjusting for an effect of subject.
-<ul>
-<li>Controlling for subject adjusts for the variability between subjects, which focuses the analysis to within-subject.</li>
-</ul></li>
-</ul>
+<section id="repeated-measures-application" class="slide level2">
+<h2>Repeated Measures: Application</h2>
+<p>Repeated measures are commonly encountered in longitudinal studies (e.g.&nbsp;cohort studies).</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Mantel-Haenszel statistics can be calculated to determine whether there is an association between a repeated measurement factor (usually time) and a response variable adjusting for an effect of subject. Controlling for subject adjusts for the variability between subjects, which focuses the analysis to within-subject.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="repeated-measures-1" class="slide level2">
 <h2>Repeated Measures</h2>
+<p>Consider an experiment with <span class="math inline">\(n\)</span> subjects. - The treatment is applied to each subject. - The response is measured at <span class="math inline">\(t\)</span> time points. - Cohort studies/ longitudinal RCT</p>
 <ul>
-<li>Consider an experiment with <span class="math inline">\(n\)</span> subjects.
-<ul>
-<li>The treatment is applied to each subject.</li>
-<li>The response is measured at <span class="math inline">\(t\)</span> time points.</li>
-<li>Cohort studies/ longitudinal RCT</li>
-</ul></li>
 <li>In general, the repeated measures can come from multiple subjects. Responses can come from:
 <ul>
 <li>Same location</li>
@@ -471,18 +614,21 @@ Miguel Fudolig
 </section>
 <section id="repeated-measures-hypotheses" class="slide level2">
 <h2>Repeated Measures: Hypotheses</h2>
-<ul>
-<li>Mantel-Haenszel statistics can be used to test the hypothesis of no association between time and response.
-<ul>
-<li>Assumption: marginal totals per subject in response and time is fixed.</li>
-<li><span class="math inline">\(H_0\)</span>: The response variable is distributed at random with respect to the time points</li>
-<li>The null hypothesis is referred to as the hypothesis of interchangeability or marginal homogeneity.</li>
-</ul></li>
-<li>As in previous chapters, <span class="math inline">\(Q_{CSMH}\)</span>, <span class="math inline">\(Q_{SMH}\)</span>, and <span class="math inline">\(Q_{GMH}\)</span> pertain to different alternatives to no association.</li>
-</ul>
-</section>
-<section id="repeated-measures-caution" class="slide level2">
-<h2>Repeated Measures: Caution</h2>
+<p>Mantel-Haenszel statistics can be used to test the hypothesis of no association between time and response under the assumption that marginal totals per subject in response and time is fixed.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The null hypothesis for Mantel-Haenszel tests for repetaed measures is <span class="math inline">\(H_0\)</span>: The response variable is distributed at random with respect to the time points.This null hypothesis is referred to as the hypothesis of interchangeability or marginal homogeneity.</p>
+<p>As in previous chapters, <span class="math inline">\(Q_{CSMH}\)</span>, <span class="math inline">\(Q_{SMH}\)</span>, and <span class="math inline">\(Q_{GMH}\)</span> pertain to different alternatives to no association.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -498,144 +644,206 @@ Miguel Fudolig
 </div>
 </div>
 </section>
-<section id="example-2" class="slide level2 smaller">
+<section id="example-2" class="slide level2">
 <h2>Example</h2>
 <p>A running shoe company produces a new model of running shoe that includes a harder material for the insert that corrects for overpronation. However, the company is concerned that the material will induce heel tenderness as a result of some loss of cushioning on the strike of each step. It conducted a study on 87 runners who used the new shoe for a month. Researchers asked the participants whether they experienced occasional heel tenderness before and after they used the new shoe. Is there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?</p>
-<h3 id="sas-data">SAS Data</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data pump;</span>
-<span id="cb5-2"><a></a>input subject time <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
-<span id="cb5-3"><a></a>datalines;</span>
-<span id="cb5-4"><a></a><span class="dv">1</span> before no <span class="dv">1</span> after no <span class="dv">2</span> before no <span class="dv">2</span> after no</span>
-<span id="cb5-5"><a></a><span class="dv">3</span> before no <span class="dv">3</span> after no <span class="dv">4</span> before no <span class="dv">4</span> after no</span>
-<span id="cb5-6"><a></a><span class="dv">5</span> before no <span class="dv">5</span> after no <span class="dv">6</span> before no <span class="dv">6</span> after no</span>
-<span id="cb5-7"><a></a><span class="dv">7</span> before no <span class="dv">7</span> after no <span class="dv">8</span> before no <span class="dv">8</span> after no</span>
-<span id="cb5-8"><a></a><span class="dv">9</span> before no <span class="dv">9</span> after no <span class="dv">10</span> before no <span class="dv">10</span> after no</span>
-<span id="cb5-9"><a></a><span class="dv">11</span> before no <span class="dv">11</span> after no <span class="dv">12</span> before no <span class="dv">12</span> after no</span>
-<span id="cb5-10"><a></a><span class="dv">13</span> before no <span class="dv">13</span> after no <span class="dv">14</span> before no <span class="dv">14</span> after no</span>
-<span id="cb5-11"><a></a><span class="dv">15</span> before no <span class="dv">15</span> after no <span class="dv">16</span> before no <span class="dv">16</span> after no</span>
-<span id="cb5-12"><a></a><span class="dv">17</span> before no <span class="dv">17</span> after no <span class="dv">18</span> before no <span class="dv">18</span> after no</span>
-<span id="cb5-13"><a></a><span class="dv">19</span> before no <span class="dv">19</span> after no <span class="dv">20</span> before no <span class="dv">20</span> after no</span>
-<span id="cb5-14"><a></a><span class="dv">21</span> before no <span class="dv">21</span> after no <span class="dv">22</span> before no <span class="dv">22</span> after no</span>
-<span id="cb5-15"><a></a><span class="dv">23</span> before no <span class="dv">23</span> after no <span class="dv">24</span> before no <span class="dv">24</span> after no</span>
-<span id="cb5-16"><a></a><span class="dv">25</span> before no <span class="dv">25</span> after no <span class="dv">26</span> before no <span class="dv">26</span> after no</span>
-<span id="cb5-17"><a></a><span class="dv">27</span> before no <span class="dv">27</span> after no <span class="dv">28</span> before no <span class="dv">28</span> after no</span>
-<span id="cb5-18"><a></a><span class="dv">29</span> before no <span class="dv">29</span> after no <span class="dv">30</span> before no <span class="dv">30</span> after no</span>
-<span id="cb5-19"><a></a><span class="dv">31</span> before no <span class="dv">31</span> after no <span class="dv">32</span> before no <span class="dv">32</span> after no</span>
-<span id="cb5-20"><a></a><span class="dv">33</span> before no <span class="dv">33</span> after no <span class="dv">34</span> before no <span class="dv">34</span> after no</span>
-<span id="cb5-21"><a></a><span class="dv">35</span> before no <span class="dv">35</span> after no <span class="dv">36</span> before no <span class="dv">36</span> after no</span>
-<span id="cb5-22"><a></a><span class="dv">37</span> before no <span class="dv">37</span> after no <span class="dv">38</span> before no <span class="dv">38</span> after no</span>
-<span id="cb5-23"><a></a><span class="dv">39</span> before no <span class="dv">39</span> after no <span class="dv">40</span> before no <span class="dv">40</span> after no</span>
-<span id="cb5-24"><a></a><span class="dv">41</span> before no <span class="dv">41</span> after no <span class="dv">42</span> before no <span class="dv">42</span> after no</span>
-<span id="cb5-25"><a></a><span class="dv">43</span> before no <span class="dv">43</span> after no <span class="dv">44</span> before no <span class="dv">44</span> after no</span>
-<span id="cb5-26"><a></a><span class="dv">45</span> before no <span class="dv">45</span> after no <span class="dv">46</span> before no <span class="dv">46</span> after no</span>
-<span id="cb5-27"><a></a><span class="dv">47</span> before no <span class="dv">47</span> after no <span class="dv">48</span> before no <span class="dv">48</span> after no</span>
-<span id="cb5-28"><a></a><span class="dv">49</span> before no <span class="dv">49</span> after yes <span class="dv">50</span> before no <span class="dv">50</span> after yes</span>
-<span id="cb5-29"><a></a><span class="dv">51</span> before no <span class="dv">51</span> after yes <span class="dv">52</span> before no <span class="dv">52</span> after yes</span>
-<span id="cb5-30"><a></a><span class="dv">53</span> before no <span class="dv">53</span> after yes <span class="dv">54</span> before no <span class="dv">54</span> after yes</span>
-<span id="cb5-31"><a></a><span class="dv">55</span> before no <span class="dv">55</span> after yes <span class="dv">56</span> before no <span class="dv">56</span> after yes</span>
-<span id="cb5-32"><a></a><span class="dv">57</span> before no <span class="dv">57</span> after yes <span class="dv">58</span> before no <span class="dv">58</span> after yes</span>
-<span id="cb5-33"><a></a><span class="dv">59</span> before no <span class="dv">59</span> after yes <span class="dv">60</span> before no <span class="dv">60</span> after yes</span>
-<span id="cb5-34"><a></a><span class="dv">61</span> before no <span class="dv">61</span> after yes <span class="dv">62</span> before no <span class="dv">62</span> after yes</span>
-<span id="cb5-35"><a></a><span class="dv">63</span> before no <span class="dv">63</span> after yes <span class="dv">64</span> before yes <span class="dv">64</span> after no</span>
-<span id="cb5-36"><a></a><span class="dv">65</span> before yes <span class="dv">65</span> after no <span class="dv">66</span> before yes <span class="dv">66</span> after no</span>
-<span id="cb5-37"><a></a><span class="dv">67</span> before yes <span class="dv">67</span> after no <span class="dv">68</span> before yes <span class="dv">68</span> after no</span>
-<span id="cb5-38"><a></a><span class="dv">69</span> before yes <span class="dv">69</span> after yes <span class="dv">70</span> before yes <span class="dv">70</span> after yes</span>
-<span id="cb5-39"><a></a><span class="dv">71</span> before yes <span class="dv">71</span> after yes <span class="dv">72</span> before yes <span class="dv">72</span> after yes</span>
-<span id="cb5-40"><a></a><span class="dv">73</span> before yes <span class="dv">73</span> after yes <span class="dv">74</span> before yes <span class="dv">74</span> after yes</span>
-<span id="cb5-41"><a></a><span class="dv">75</span> before yes <span class="dv">75</span> after yes <span class="dv">76</span> before yes <span class="dv">76</span> after yes</span>
-<span id="cb5-42"><a></a><span class="dv">77</span> before yes <span class="dv">77</span> after yes <span class="dv">78</span> before yes <span class="dv">78</span> after yes</span>
-<span id="cb5-43"><a></a><span class="dv">79</span> before yes <span class="dv">79</span> after yes <span class="dv">80</span> before yes <span class="dv">80</span> after yes</span>
-<span id="cb5-44"><a></a><span class="dv">81</span> before yes <span class="dv">81</span> after yes <span class="dv">82</span> before yes <span class="dv">82</span> after yes</span>
-<span id="cb5-45"><a></a><span class="dv">83</span> before yes <span class="dv">83</span> after yes <span class="dv">84</span> before yes <span class="dv">84</span> after yes</span>
-<span id="cb5-46"><a></a><span class="dv">85</span> before yes <span class="dv">85</span> after yes <span class="dv">86</span> before yes <span class="dv">86</span> after yes</span>
-<span id="cb5-47"><a></a><span class="dv">87</span> before yes <span class="dv">87</span> after yes</span>
-<span id="cb5-48"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>SAS Data</strong></p>
+</div>
+<div class="callout-content">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>data pump;</span>
+<span id="cb14-2"><a></a>input subject time <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
+<span id="cb14-3"><a></a>datalines;</span>
+<span id="cb14-4"><a></a><span class="dv">1</span> before no <span class="dv">1</span> after no <span class="dv">2</span> before no <span class="dv">2</span> after no</span>
+<span id="cb14-5"><a></a><span class="dv">3</span> before no <span class="dv">3</span> after no <span class="dv">4</span> before no <span class="dv">4</span> after no</span>
+<span id="cb14-6"><a></a><span class="dv">5</span> before no <span class="dv">5</span> after no <span class="dv">6</span> before no <span class="dv">6</span> after no</span>
+<span id="cb14-7"><a></a><span class="dv">7</span> before no <span class="dv">7</span> after no <span class="dv">8</span> before no <span class="dv">8</span> after no</span>
+<span id="cb14-8"><a></a><span class="dv">9</span> before no <span class="dv">9</span> after no <span class="dv">10</span> before no <span class="dv">10</span> after no</span>
+<span id="cb14-9"><a></a><span class="dv">11</span> before no <span class="dv">11</span> after no <span class="dv">12</span> before no <span class="dv">12</span> after no</span>
+<span id="cb14-10"><a></a><span class="dv">13</span> before no <span class="dv">13</span> after no <span class="dv">14</span> before no <span class="dv">14</span> after no</span>
+<span id="cb14-11"><a></a><span class="dv">15</span> before no <span class="dv">15</span> after no <span class="dv">16</span> before no <span class="dv">16</span> after no</span>
+<span id="cb14-12"><a></a><span class="dv">17</span> before no <span class="dv">17</span> after no <span class="dv">18</span> before no <span class="dv">18</span> after no</span>
+<span id="cb14-13"><a></a><span class="dv">19</span> before no <span class="dv">19</span> after no <span class="dv">20</span> before no <span class="dv">20</span> after no</span>
+<span id="cb14-14"><a></a><span class="dv">21</span> before no <span class="dv">21</span> after no <span class="dv">22</span> before no <span class="dv">22</span> after no</span>
+<span id="cb14-15"><a></a><span class="dv">23</span> before no <span class="dv">23</span> after no <span class="dv">24</span> before no <span class="dv">24</span> after no</span>
+<span id="cb14-16"><a></a><span class="dv">25</span> before no <span class="dv">25</span> after no <span class="dv">26</span> before no <span class="dv">26</span> after no</span>
+<span id="cb14-17"><a></a><span class="dv">27</span> before no <span class="dv">27</span> after no <span class="dv">28</span> before no <span class="dv">28</span> after no</span>
+<span id="cb14-18"><a></a><span class="dv">29</span> before no <span class="dv">29</span> after no <span class="dv">30</span> before no <span class="dv">30</span> after no</span>
+<span id="cb14-19"><a></a><span class="dv">31</span> before no <span class="dv">31</span> after no <span class="dv">32</span> before no <span class="dv">32</span> after no</span>
+<span id="cb14-20"><a></a><span class="dv">33</span> before no <span class="dv">33</span> after no <span class="dv">34</span> before no <span class="dv">34</span> after no</span>
+<span id="cb14-21"><a></a><span class="dv">35</span> before no <span class="dv">35</span> after no <span class="dv">36</span> before no <span class="dv">36</span> after no</span>
+<span id="cb14-22"><a></a><span class="dv">37</span> before no <span class="dv">37</span> after no <span class="dv">38</span> before no <span class="dv">38</span> after no</span>
+<span id="cb14-23"><a></a><span class="dv">39</span> before no <span class="dv">39</span> after no <span class="dv">40</span> before no <span class="dv">40</span> after no</span>
+<span id="cb14-24"><a></a><span class="dv">41</span> before no <span class="dv">41</span> after no <span class="dv">42</span> before no <span class="dv">42</span> after no</span>
+<span id="cb14-25"><a></a><span class="dv">43</span> before no <span class="dv">43</span> after no <span class="dv">44</span> before no <span class="dv">44</span> after no</span>
+<span id="cb14-26"><a></a><span class="dv">45</span> before no <span class="dv">45</span> after no <span class="dv">46</span> before no <span class="dv">46</span> after no</span>
+<span id="cb14-27"><a></a><span class="dv">47</span> before no <span class="dv">47</span> after no <span class="dv">48</span> before no <span class="dv">48</span> after no</span>
+<span id="cb14-28"><a></a><span class="dv">49</span> before no <span class="dv">49</span> after yes <span class="dv">50</span> before no <span class="dv">50</span> after yes</span>
+<span id="cb14-29"><a></a><span class="dv">51</span> before no <span class="dv">51</span> after yes <span class="dv">52</span> before no <span class="dv">52</span> after yes</span>
+<span id="cb14-30"><a></a><span class="dv">53</span> before no <span class="dv">53</span> after yes <span class="dv">54</span> before no <span class="dv">54</span> after yes</span>
+<span id="cb14-31"><a></a><span class="dv">55</span> before no <span class="dv">55</span> after yes <span class="dv">56</span> before no <span class="dv">56</span> after yes</span>
+<span id="cb14-32"><a></a><span class="dv">57</span> before no <span class="dv">57</span> after yes <span class="dv">58</span> before no <span class="dv">58</span> after yes</span>
+<span id="cb14-33"><a></a><span class="dv">59</span> before no <span class="dv">59</span> after yes <span class="dv">60</span> before no <span class="dv">60</span> after yes</span>
+<span id="cb14-34"><a></a><span class="dv">61</span> before no <span class="dv">61</span> after yes <span class="dv">62</span> before no <span class="dv">62</span> after yes</span>
+<span id="cb14-35"><a></a><span class="dv">63</span> before no <span class="dv">63</span> after yes <span class="dv">64</span> before yes <span class="dv">64</span> after no</span>
+<span id="cb14-36"><a></a><span class="dv">65</span> before yes <span class="dv">65</span> after no <span class="dv">66</span> before yes <span class="dv">66</span> after no</span>
+<span id="cb14-37"><a></a><span class="dv">67</span> before yes <span class="dv">67</span> after no <span class="dv">68</span> before yes <span class="dv">68</span> after no</span>
+<span id="cb14-38"><a></a><span class="dv">69</span> before yes <span class="dv">69</span> after yes <span class="dv">70</span> before yes <span class="dv">70</span> after yes</span>
+<span id="cb14-39"><a></a><span class="dv">71</span> before yes <span class="dv">71</span> after yes <span class="dv">72</span> before yes <span class="dv">72</span> after yes</span>
+<span id="cb14-40"><a></a><span class="dv">73</span> before yes <span class="dv">73</span> after yes <span class="dv">74</span> before yes <span class="dv">74</span> after yes</span>
+<span id="cb14-41"><a></a><span class="dv">75</span> before yes <span class="dv">75</span> after yes <span class="dv">76</span> before yes <span class="dv">76</span> after yes</span>
+<span id="cb14-42"><a></a><span class="dv">77</span> before yes <span class="dv">77</span> after yes <span class="dv">78</span> before yes <span class="dv">78</span> after yes</span>
+<span id="cb14-43"><a></a><span class="dv">79</span> before yes <span class="dv">79</span> after yes <span class="dv">80</span> before yes <span class="dv">80</span> after yes</span>
+<span id="cb14-44"><a></a><span class="dv">81</span> before yes <span class="dv">81</span> after yes <span class="dv">82</span> before yes <span class="dv">82</span> after yes</span>
+<span id="cb14-45"><a></a><span class="dv">83</span> before yes <span class="dv">83</span> after yes <span class="dv">84</span> before yes <span class="dv">84</span> after yes</span>
+<span id="cb14-46"><a></a><span class="dv">85</span> before yes <span class="dv">85</span> after yes <span class="dv">86</span> before yes <span class="dv">86</span> after yes</span>
+<span id="cb14-47"><a></a><span class="dv">87</span> before yes <span class="dv">87</span> after yes</span>
+<span id="cb14-48"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="r-data">R Data</h3>
+<p>Please refer to <code>pump.csv</code> on Canvas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a>pump <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"pump.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb15-4"><a></a>  <span class="fu">mutate</span>(<span class="at">Subject =</span> <span class="fu">as.factor</span>(Subject))</span>
+<span id="cb15-5"><a></a><span class="fu">glimpse</span>(pump)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 174
+Columns: 3
+$ Subject  &lt;fct&gt; 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10,…
+$ Time     &lt;chr&gt; "before", "after", "before", "after", "before", "after", "bef…
+$ Response &lt;chr&gt; "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="example-3" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>Is there a difference in proportion of people reporting more heel tenderness with the new running shoes compared with the older running shoes?</p>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Code</a></li><li><a href="#tabset-3-2">Answer</a></li><li><a href="#tabset-3-3">McNemar’s test</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">R Code</a></li><li><a href="#tabset-5-3">Answer</a></li><li><a href="#tabset-5-4">McNemar’s test</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a></span>
-<span id="cb6-2"><a></a>data pump;</span>
-<span id="cb6-3"><a></a>input subject time <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
-<span id="cb6-4"><a></a>datalines;</span>
-<span id="cb6-5"><a></a><span class="dv">1</span> before no <span class="dv">1</span> after no <span class="dv">2</span> before no <span class="dv">2</span> after no</span>
-<span id="cb6-6"><a></a><span class="dv">3</span> before no <span class="dv">3</span> after no <span class="dv">4</span> before no <span class="dv">4</span> after no</span>
-<span id="cb6-7"><a></a><span class="dv">5</span> before no <span class="dv">5</span> after no <span class="dv">6</span> before no <span class="dv">6</span> after no</span>
-<span id="cb6-8"><a></a><span class="dv">7</span> before no <span class="dv">7</span> after no <span class="dv">8</span> before no <span class="dv">8</span> after no</span>
-<span id="cb6-9"><a></a><span class="dv">9</span> before no <span class="dv">9</span> after no <span class="dv">10</span> before no <span class="dv">10</span> after no</span>
-<span id="cb6-10"><a></a><span class="dv">11</span> before no <span class="dv">11</span> after no <span class="dv">12</span> before no <span class="dv">12</span> after no</span>
-<span id="cb6-11"><a></a><span class="dv">13</span> before no <span class="dv">13</span> after no <span class="dv">14</span> before no <span class="dv">14</span> after no</span>
-<span id="cb6-12"><a></a><span class="dv">15</span> before no <span class="dv">15</span> after no <span class="dv">16</span> before no <span class="dv">16</span> after no</span>
-<span id="cb6-13"><a></a><span class="dv">17</span> before no <span class="dv">17</span> after no <span class="dv">18</span> before no <span class="dv">18</span> after no</span>
-<span id="cb6-14"><a></a><span class="dv">19</span> before no <span class="dv">19</span> after no <span class="dv">20</span> before no <span class="dv">20</span> after no</span>
-<span id="cb6-15"><a></a><span class="dv">21</span> before no <span class="dv">21</span> after no <span class="dv">22</span> before no <span class="dv">22</span> after no</span>
-<span id="cb6-16"><a></a><span class="dv">23</span> before no <span class="dv">23</span> after no <span class="dv">24</span> before no <span class="dv">24</span> after no</span>
-<span id="cb6-17"><a></a><span class="dv">25</span> before no <span class="dv">25</span> after no <span class="dv">26</span> before no <span class="dv">26</span> after no</span>
-<span id="cb6-18"><a></a><span class="dv">27</span> before no <span class="dv">27</span> after no <span class="dv">28</span> before no <span class="dv">28</span> after no</span>
-<span id="cb6-19"><a></a><span class="dv">29</span> before no <span class="dv">29</span> after no <span class="dv">30</span> before no <span class="dv">30</span> after no</span>
-<span id="cb6-20"><a></a><span class="dv">31</span> before no <span class="dv">31</span> after no <span class="dv">32</span> before no <span class="dv">32</span> after no</span>
-<span id="cb6-21"><a></a><span class="dv">33</span> before no <span class="dv">33</span> after no <span class="dv">34</span> before no <span class="dv">34</span> after no</span>
-<span id="cb6-22"><a></a><span class="dv">35</span> before no <span class="dv">35</span> after no <span class="dv">36</span> before no <span class="dv">36</span> after no</span>
-<span id="cb6-23"><a></a><span class="dv">37</span> before no <span class="dv">37</span> after no <span class="dv">38</span> before no <span class="dv">38</span> after no</span>
-<span id="cb6-24"><a></a><span class="dv">39</span> before no <span class="dv">39</span> after no <span class="dv">40</span> before no <span class="dv">40</span> after no</span>
-<span id="cb6-25"><a></a><span class="dv">41</span> before no <span class="dv">41</span> after no <span class="dv">42</span> before no <span class="dv">42</span> after no</span>
-<span id="cb6-26"><a></a><span class="dv">43</span> before no <span class="dv">43</span> after no <span class="dv">44</span> before no <span class="dv">44</span> after no</span>
-<span id="cb6-27"><a></a><span class="dv">45</span> before no <span class="dv">45</span> after no <span class="dv">46</span> before no <span class="dv">46</span> after no</span>
-<span id="cb6-28"><a></a><span class="dv">47</span> before no <span class="dv">47</span> after no <span class="dv">48</span> before no <span class="dv">48</span> after no</span>
-<span id="cb6-29"><a></a><span class="dv">49</span> before no <span class="dv">49</span> after yes <span class="dv">50</span> before no <span class="dv">50</span> after yes</span>
-<span id="cb6-30"><a></a><span class="dv">51</span> before no <span class="dv">51</span> after yes <span class="dv">52</span> before no <span class="dv">52</span> after yes</span>
-<span id="cb6-31"><a></a><span class="dv">53</span> before no <span class="dv">53</span> after yes <span class="dv">54</span> before no <span class="dv">54</span> after yes</span>
-<span id="cb6-32"><a></a><span class="dv">55</span> before no <span class="dv">55</span> after yes <span class="dv">56</span> before no <span class="dv">56</span> after yes</span>
-<span id="cb6-33"><a></a><span class="dv">57</span> before no <span class="dv">57</span> after yes <span class="dv">58</span> before no <span class="dv">58</span> after yes</span>
-<span id="cb6-34"><a></a><span class="dv">59</span> before no <span class="dv">59</span> after yes <span class="dv">60</span> before no <span class="dv">60</span> after yes</span>
-<span id="cb6-35"><a></a><span class="dv">61</span> before no <span class="dv">61</span> after yes <span class="dv">62</span> before no <span class="dv">62</span> after yes</span>
-<span id="cb6-36"><a></a><span class="dv">63</span> before no <span class="dv">63</span> after yes <span class="dv">64</span> before yes <span class="dv">64</span> after no</span>
-<span id="cb6-37"><a></a><span class="dv">65</span> before yes <span class="dv">65</span> after no <span class="dv">66</span> before yes <span class="dv">66</span> after no</span>
-<span id="cb6-38"><a></a><span class="dv">67</span> before yes <span class="dv">67</span> after no <span class="dv">68</span> before yes <span class="dv">68</span> after no</span>
-<span id="cb6-39"><a></a><span class="dv">69</span> before yes <span class="dv">69</span> after yes <span class="dv">70</span> before yes <span class="dv">70</span> after yes</span>
-<span id="cb6-40"><a></a><span class="dv">71</span> before yes <span class="dv">71</span> after yes <span class="dv">72</span> before yes <span class="dv">72</span> after yes</span>
-<span id="cb6-41"><a></a><span class="dv">73</span> before yes <span class="dv">73</span> after yes <span class="dv">74</span> before yes <span class="dv">74</span> after yes</span>
-<span id="cb6-42"><a></a><span class="dv">75</span> before yes <span class="dv">75</span> after yes <span class="dv">76</span> before yes <span class="dv">76</span> after yes</span>
-<span id="cb6-43"><a></a><span class="dv">77</span> before yes <span class="dv">77</span> after yes <span class="dv">78</span> before yes <span class="dv">78</span> after yes</span>
-<span id="cb6-44"><a></a><span class="dv">79</span> before yes <span class="dv">79</span> after yes <span class="dv">80</span> before yes <span class="dv">80</span> after yes</span>
-<span id="cb6-45"><a></a><span class="dv">81</span> before yes <span class="dv">81</span> after yes <span class="dv">82</span> before yes <span class="dv">82</span> after yes</span>
-<span id="cb6-46"><a></a><span class="dv">83</span> before yes <span class="dv">83</span> after yes <span class="dv">84</span> before yes <span class="dv">84</span> after yes</span>
-<span id="cb6-47"><a></a><span class="dv">85</span> before yes <span class="dv">85</span> after yes <span class="dv">86</span> before yes <span class="dv">86</span> after yes</span>
-<span id="cb6-48"><a></a><span class="dv">87</span> before yes <span class="dv">87</span> after yes</span>
-<span id="cb6-49"><a></a>;</span>
-<span id="cb6-50"><a></a></span>
-<span id="cb6-51"><a></a>proc freq data<span class="ot">=</span>pump order<span class="ot">=</span>data; <span class="co">#&lt;1&gt;</span></span>
-<span id="cb6-52"><a></a>tables subject<span class="sc">*</span>time<span class="sc">*</span>response<span class="sc">/</span> noprint cmh; <span class="sc">*</span>noprint does not print the <span class="dv">87</span> contingency tables.;</span>
-<span id="cb6-53"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-5-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a></span>
+<span id="cb17-2"><a></a>data pump;</span>
+<span id="cb17-3"><a></a>input subject time <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
+<span id="cb17-4"><a></a>datalines;</span>
+<span id="cb17-5"><a></a><span class="dv">1</span> before no <span class="dv">1</span> after no <span class="dv">2</span> before no <span class="dv">2</span> after no</span>
+<span id="cb17-6"><a></a><span class="dv">3</span> before no <span class="dv">3</span> after no <span class="dv">4</span> before no <span class="dv">4</span> after no</span>
+<span id="cb17-7"><a></a><span class="dv">5</span> before no <span class="dv">5</span> after no <span class="dv">6</span> before no <span class="dv">6</span> after no</span>
+<span id="cb17-8"><a></a><span class="dv">7</span> before no <span class="dv">7</span> after no <span class="dv">8</span> before no <span class="dv">8</span> after no</span>
+<span id="cb17-9"><a></a><span class="dv">9</span> before no <span class="dv">9</span> after no <span class="dv">10</span> before no <span class="dv">10</span> after no</span>
+<span id="cb17-10"><a></a><span class="dv">11</span> before no <span class="dv">11</span> after no <span class="dv">12</span> before no <span class="dv">12</span> after no</span>
+<span id="cb17-11"><a></a><span class="dv">13</span> before no <span class="dv">13</span> after no <span class="dv">14</span> before no <span class="dv">14</span> after no</span>
+<span id="cb17-12"><a></a><span class="dv">15</span> before no <span class="dv">15</span> after no <span class="dv">16</span> before no <span class="dv">16</span> after no</span>
+<span id="cb17-13"><a></a><span class="dv">17</span> before no <span class="dv">17</span> after no <span class="dv">18</span> before no <span class="dv">18</span> after no</span>
+<span id="cb17-14"><a></a><span class="dv">19</span> before no <span class="dv">19</span> after no <span class="dv">20</span> before no <span class="dv">20</span> after no</span>
+<span id="cb17-15"><a></a><span class="dv">21</span> before no <span class="dv">21</span> after no <span class="dv">22</span> before no <span class="dv">22</span> after no</span>
+<span id="cb17-16"><a></a><span class="dv">23</span> before no <span class="dv">23</span> after no <span class="dv">24</span> before no <span class="dv">24</span> after no</span>
+<span id="cb17-17"><a></a><span class="dv">25</span> before no <span class="dv">25</span> after no <span class="dv">26</span> before no <span class="dv">26</span> after no</span>
+<span id="cb17-18"><a></a><span class="dv">27</span> before no <span class="dv">27</span> after no <span class="dv">28</span> before no <span class="dv">28</span> after no</span>
+<span id="cb17-19"><a></a><span class="dv">29</span> before no <span class="dv">29</span> after no <span class="dv">30</span> before no <span class="dv">30</span> after no</span>
+<span id="cb17-20"><a></a><span class="dv">31</span> before no <span class="dv">31</span> after no <span class="dv">32</span> before no <span class="dv">32</span> after no</span>
+<span id="cb17-21"><a></a><span class="dv">33</span> before no <span class="dv">33</span> after no <span class="dv">34</span> before no <span class="dv">34</span> after no</span>
+<span id="cb17-22"><a></a><span class="dv">35</span> before no <span class="dv">35</span> after no <span class="dv">36</span> before no <span class="dv">36</span> after no</span>
+<span id="cb17-23"><a></a><span class="dv">37</span> before no <span class="dv">37</span> after no <span class="dv">38</span> before no <span class="dv">38</span> after no</span>
+<span id="cb17-24"><a></a><span class="dv">39</span> before no <span class="dv">39</span> after no <span class="dv">40</span> before no <span class="dv">40</span> after no</span>
+<span id="cb17-25"><a></a><span class="dv">41</span> before no <span class="dv">41</span> after no <span class="dv">42</span> before no <span class="dv">42</span> after no</span>
+<span id="cb17-26"><a></a><span class="dv">43</span> before no <span class="dv">43</span> after no <span class="dv">44</span> before no <span class="dv">44</span> after no</span>
+<span id="cb17-27"><a></a><span class="dv">45</span> before no <span class="dv">45</span> after no <span class="dv">46</span> before no <span class="dv">46</span> after no</span>
+<span id="cb17-28"><a></a><span class="dv">47</span> before no <span class="dv">47</span> after no <span class="dv">48</span> before no <span class="dv">48</span> after no</span>
+<span id="cb17-29"><a></a><span class="dv">49</span> before no <span class="dv">49</span> after yes <span class="dv">50</span> before no <span class="dv">50</span> after yes</span>
+<span id="cb17-30"><a></a><span class="dv">51</span> before no <span class="dv">51</span> after yes <span class="dv">52</span> before no <span class="dv">52</span> after yes</span>
+<span id="cb17-31"><a></a><span class="dv">53</span> before no <span class="dv">53</span> after yes <span class="dv">54</span> before no <span class="dv">54</span> after yes</span>
+<span id="cb17-32"><a></a><span class="dv">55</span> before no <span class="dv">55</span> after yes <span class="dv">56</span> before no <span class="dv">56</span> after yes</span>
+<span id="cb17-33"><a></a><span class="dv">57</span> before no <span class="dv">57</span> after yes <span class="dv">58</span> before no <span class="dv">58</span> after yes</span>
+<span id="cb17-34"><a></a><span class="dv">59</span> before no <span class="dv">59</span> after yes <span class="dv">60</span> before no <span class="dv">60</span> after yes</span>
+<span id="cb17-35"><a></a><span class="dv">61</span> before no <span class="dv">61</span> after yes <span class="dv">62</span> before no <span class="dv">62</span> after yes</span>
+<span id="cb17-36"><a></a><span class="dv">63</span> before no <span class="dv">63</span> after yes <span class="dv">64</span> before yes <span class="dv">64</span> after no</span>
+<span id="cb17-37"><a></a><span class="dv">65</span> before yes <span class="dv">65</span> after no <span class="dv">66</span> before yes <span class="dv">66</span> after no</span>
+<span id="cb17-38"><a></a><span class="dv">67</span> before yes <span class="dv">67</span> after no <span class="dv">68</span> before yes <span class="dv">68</span> after no</span>
+<span id="cb17-39"><a></a><span class="dv">69</span> before yes <span class="dv">69</span> after yes <span class="dv">70</span> before yes <span class="dv">70</span> after yes</span>
+<span id="cb17-40"><a></a><span class="dv">71</span> before yes <span class="dv">71</span> after yes <span class="dv">72</span> before yes <span class="dv">72</span> after yes</span>
+<span id="cb17-41"><a></a><span class="dv">73</span> before yes <span class="dv">73</span> after yes <span class="dv">74</span> before yes <span class="dv">74</span> after yes</span>
+<span id="cb17-42"><a></a><span class="dv">75</span> before yes <span class="dv">75</span> after yes <span class="dv">76</span> before yes <span class="dv">76</span> after yes</span>
+<span id="cb17-43"><a></a><span class="dv">77</span> before yes <span class="dv">77</span> after yes <span class="dv">78</span> before yes <span class="dv">78</span> after yes</span>
+<span id="cb17-44"><a></a><span class="dv">79</span> before yes <span class="dv">79</span> after yes <span class="dv">80</span> before yes <span class="dv">80</span> after yes</span>
+<span id="cb17-45"><a></a><span class="dv">81</span> before yes <span class="dv">81</span> after yes <span class="dv">82</span> before yes <span class="dv">82</span> after yes</span>
+<span id="cb17-46"><a></a><span class="dv">83</span> before yes <span class="dv">83</span> after yes <span class="dv">84</span> before yes <span class="dv">84</span> after yes</span>
+<span id="cb17-47"><a></a><span class="dv">85</span> before yes <span class="dv">85</span> after yes <span class="dv">86</span> before yes <span class="dv">86</span> after yes</span>
+<span id="cb17-48"><a></a><span class="dv">87</span> before yes <span class="dv">87</span> after yes</span>
+<span id="cb17-49"><a></a>;</span>
+<span id="cb17-50"><a></a></span>
+<span id="cb17-51"><a></a>proc freq data<span class="ot">=</span>pump order<span class="ot">=</span>data; <span class="co">#&lt;1&gt;</span></span>
+<span id="cb17-52"><a></a>tables subject<span class="sc">*</span>time<span class="sc">*</span>response<span class="sc">/</span> noprint cmh; <span class="sc">*</span>noprint does not print the <span class="dv">87</span> contingency tables.;</span>
+<span id="cb17-53"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="1">
 <li>There’s no weight statement because each line is an observational unit.</li>
 </ol>
 </div>
-<div id="tabset-3-2">
+<div id="tabset-5-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>dat_cc<span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>Time<span class="sc">+</span>Response<span class="sc">+</span>Subject,<span class="at">data=</span>pump)</span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a><span class="fu">mantelhaen.test</span>(dat_cc,<span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Mantel-Haenszel chi-squared test without continuity correction
+
+data:  dat_cc
+Mantel-Haenszel X-squared = 5, df = 1, p-value = 0.02535
+alternative hypothesis: true common odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.1211491 0.9171436
+sample estimates:
+common odds ratio 
+        0.3333333 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-3">
 <ul>
 <li>We can construct 2x2 tables for each runner and control for each subject. The resulting CMH tables will have the same results because of the shape of the contingency tables.</li>
 <li><span class="math inline">\(Q_{CSMH}\)</span>=5, p=0.03, which means there is strong evidence that there is a difference in heel tenderness before and after using the new shoe.</li>
 <li>All extended Mantel-Haenszel statistic will yield the same result because the resulting contingency table for each subject is a 2x2 table.</li>
 </ul>
 </div>
-<div id="tabset-3-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>data shoes;</span>
-<span id="cb7-2"><a></a>input before <span class="sc">$</span> after <span class="sc">$</span> count;</span>
-<span id="cb7-3"><a></a>datalines;</span>
-<span id="cb7-4"><a></a>yes yes <span class="dv">19</span></span>
-<span id="cb7-5"><a></a>yes no <span class="dv">5</span></span>
-<span id="cb7-6"><a></a>no yes <span class="dv">15</span></span>
-<span id="cb7-7"><a></a>no no <span class="dv">48</span></span>
-<span id="cb7-8"><a></a>;</span>
-<span id="cb7-9"><a></a></span>
-<span id="cb7-10"><a></a>proc freq data<span class="ot">=</span>shoes order<span class="ot">=</span>data;</span>
-<span id="cb7-11"><a></a>weight count;</span>
-<span id="cb7-12"><a></a>tables before<span class="sc">*</span>after<span class="sc">/</span>agree;</span>
-<span id="cb7-13"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-5-4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>data shoes;</span>
+<span id="cb20-2"><a></a>input before <span class="sc">$</span> after <span class="sc">$</span> count;</span>
+<span id="cb20-3"><a></a>datalines;</span>
+<span id="cb20-4"><a></a>yes yes <span class="dv">19</span></span>
+<span id="cb20-5"><a></a>yes no <span class="dv">5</span></span>
+<span id="cb20-6"><a></a>no yes <span class="dv">15</span></span>
+<span id="cb20-7"><a></a>no no <span class="dv">48</span></span>
+<span id="cb20-8"><a></a>;</span>
+<span id="cb20-9"><a></a></span>
+<span id="cb20-10"><a></a>proc freq data<span class="ot">=</span>shoes order<span class="ot">=</span>data;</span>
+<span id="cb20-11"><a></a>weight count;</span>
+<span id="cb20-12"><a></a>tables before<span class="sc">*</span>after<span class="sc">/</span>agree;</span>
+<span id="cb20-13"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In <code>R</code>, we can create a repeated measures table and apply the McNemar’s test.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>dat2 <span class="ot">&lt;-</span> pump <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>Time,<span class="at">values_from=</span>Response) </span>
+<span id="cb21-3"><a></a>dat_cc2 <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>before<span class="sc">+</span>after,<span class="at">data=</span>dat2)</span>
+<span id="cb21-4"><a></a></span>
+<span id="cb21-5"><a></a><span class="fu">mcnemar.test</span>(dat_cc2,<span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    McNemar's Chi-squared test
+
+data:  dat_cc2
+McNemar's chi-squared = 5, df = 1, p-value = 0.02535</code></pre>
+</div>
+</div>
 <p>The McNemar’s test yields the same result as <span class="math inline">\(Q_{CSMH}\)</span>.</p>
 </div>
 </div>
@@ -648,30 +856,52 @@ Miguel Fudolig
 <li>Which Mantel-Haenszel statistic is the most appropriate for this example?</li>
 <li>At a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?</li>
 </ul>
-<h3 id="sas-data-1">SAS Data</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-code-line-numbers="14-23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data drug;</span>
-<span id="cb8-2"><a></a>input druga <span class="sc">$</span> drugb <span class="sc">$</span> drugc <span class="sc">$</span> count;</span>
-<span id="cb8-3"><a></a>datalines;</span>
-<span id="cb8-4"><a></a>F F F <span class="dv">6</span></span>
-<span id="cb8-5"><a></a>F F U <span class="dv">16</span></span>
-<span id="cb8-6"><a></a>F U F <span class="dv">2</span></span>
-<span id="cb8-7"><a></a>F U U <span class="dv">4</span></span>
-<span id="cb8-8"><a></a>U F F <span class="dv">2</span></span>
-<span id="cb8-9"><a></a>U F U <span class="dv">4</span></span>
-<span id="cb8-10"><a></a>U U F <span class="dv">6</span></span>
-<span id="cb8-11"><a></a>U U U <span class="dv">6</span></span>
-<span id="cb8-12"><a></a>;</span>
-<span id="cb8-13"><a></a>run;</span>
-<span id="cb8-14"><a></a>data drug2; set drug;</span>
-<span id="cb8-15"><a></a>keep patient drug response;</span>
-<span id="cb8-16"><a></a>retain patient <span class="dv">0</span>;</span>
-<span id="cb8-17"><a></a>do i<span class="ot">=</span><span class="dv">1</span> to count;</span>
-<span id="cb8-18"><a></a>patient<span class="ot">=</span>patient<span class="sc">+</span><span class="dv">1</span>;</span>
-<span id="cb8-19"><a></a>drug<span class="ot">=</span><span class="st">'A'</span>; response<span class="ot">=</span>druga; output;</span>
-<span id="cb8-20"><a></a>drug<span class="ot">=</span><span class="st">'B'</span>; response<span class="ot">=</span>drugb; output;</span>
-<span id="cb8-21"><a></a>drug<span class="ot">=</span><span class="st">'C'</span>; response<span class="ot">=</span>drugc; output;</span>
-<span id="cb8-22"><a></a>end;</span>
-<span id="cb8-23"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Data</a></li><li><a href="#tabset-6-2">R Data</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23" data-code-line-numbers="14-23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>data drug;</span>
+<span id="cb23-2"><a></a>input druga <span class="sc">$</span> drugb <span class="sc">$</span> drugc <span class="sc">$</span> count;</span>
+<span id="cb23-3"><a></a>datalines;</span>
+<span id="cb23-4"><a></a>F F F <span class="dv">6</span></span>
+<span id="cb23-5"><a></a>F F U <span class="dv">16</span></span>
+<span id="cb23-6"><a></a>F U F <span class="dv">2</span></span>
+<span id="cb23-7"><a></a>F U U <span class="dv">4</span></span>
+<span id="cb23-8"><a></a>U F F <span class="dv">2</span></span>
+<span id="cb23-9"><a></a>U F U <span class="dv">4</span></span>
+<span id="cb23-10"><a></a>U U F <span class="dv">6</span></span>
+<span id="cb23-11"><a></a>U U U <span class="dv">6</span></span>
+<span id="cb23-12"><a></a>;</span>
+<span id="cb23-13"><a></a>run;</span>
+<span id="cb23-14"><a></a>data drug2; set drug;</span>
+<span id="cb23-15"><a></a>keep patient drug response;</span>
+<span id="cb23-16"><a></a>retain patient <span class="dv">0</span>;</span>
+<span id="cb23-17"><a></a>do i<span class="ot">=</span><span class="dv">1</span> to count;</span>
+<span id="cb23-18"><a></a>patient<span class="ot">=</span>patient<span class="sc">+</span><span class="dv">1</span>;</span>
+<span id="cb23-19"><a></a>drug<span class="ot">=</span><span class="st">'A'</span>; response<span class="ot">=</span>druga; output;</span>
+<span id="cb23-20"><a></a>drug<span class="ot">=</span><span class="st">'B'</span>; response<span class="ot">=</span>drugb; output;</span>
+<span id="cb23-21"><a></a>drug<span class="ot">=</span><span class="st">'C'</span>; response<span class="ot">=</span>drugc; output;</span>
+<span id="cb23-22"><a></a>end;</span>
+<span id="cb23-23"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-6-2">
+<p>Please refer to <code>drug.csv</code> uploaded on Canvas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>drug <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"drug.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a></a>  <span class="fu">mutate</span>(<span class="at">Patient=</span><span class="fu">as.factor</span>(Patient),</span>
+<span id="cb24-3"><a></a>         <span class="at">Outcome=</span><span class="fu">factor</span>(Outcome,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"U"</span>,<span class="st">"F"</span>)))</span>
+<span id="cb24-4"><a></a><span class="fu">glimpse</span>(drug)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 138
+Columns: 3
+$ Patient &lt;fct&gt; 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7,…
+$ Drug    &lt;chr&gt; "A", "B", "C", "A", "B", "C", "A", "B", "C", "A", "B", "C", "A…
+$ Outcome &lt;fct&gt; F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, U,…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="exercise-3" class="slide level2">
 <h2>Exercise</h2>
@@ -680,15 +910,32 @@ Miguel Fudolig
 <li>At a significance level of 0.01, is there sufficient evidence against the hypothesis that the three drugs have equal probabilities?</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">Answer</a></li></ul>
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">R Code</a></li><li><a href="#tabset-7-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>proc freq data<span class="ot">=</span>drug2 order<span class="ot">=</span>data;</span>
-<span id="cb9-2"><a></a>tables patient<span class="sc">*</span>drug<span class="sc">*</span>response<span class="sc">/</span>cmh noprint;</span>
-<span id="cb9-3"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-7-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>proc freq data<span class="ot">=</span>drug2 order<span class="ot">=</span>data;</span>
+<span id="cb26-2"><a></a>tables patient<span class="sc">*</span>drug<span class="sc">*</span>response<span class="sc">/</span>cmh noprint;</span>
+<span id="cb26-3"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-4-2">
-<p>The most appropriate MH statistic to examine is “Row Means Differ”.</p>
+<div id="tabset-7-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>Drug<span class="sc">+</span>Outcome<span class="sc">+</span>Patient,<span class="at">data=</span>drug)</span>
+<span id="cb27-2"><a></a></span>
+<span id="cb27-3"><a></a><span class="fu">CMHtest</span>(dat_cc,<span class="at">overall=</span>T)<span class="sc">$</span>ALL</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for Drug by Outcome 
+    Overall tests, controlling for all strata 
+
+                 AltHypothesis  Chisq Df     Prob
+cor        Nonzero correlation 6.3529  1 0.011719
+rmeans  Row mean scores differ 8.4706  2 0.014476
+cmeans  Col mean scores differ 6.3529  1 0.011719
+general    General association 8.4706  2 0.014476</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-3">
+<p>The most appropriate MH statistic to examine is the mean score statistic, specifically the row means.</p>
 <p>The statistic <span class="math inline">\(Q_{SMH}=8.47\)</span> yields a p-value <span class="math inline">\(p=0.0145\)</span>. At a significance level of 0.01, there is marginally sufficient evidence that at least one drug has a different probability of a favorable response.</p>
 </div>
 </div>
@@ -929,6 +1176,82 @@ Miguel Fudolig
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
