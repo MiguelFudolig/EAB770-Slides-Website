@@ -218,66 +218,56 @@ Miguel Fudolig
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
-<li>Dichotomous Explanatory Variables
-<ul>
-<li>The LOGISTIC procedure</li>
-<li>CLASS statement</li>
-</ul></li>
+<li>Dichotomous Explanatory Variables</li>
 <li>Qualitative Explanatory Variables</li>
 <li>Continuous and Ordinal Explanatory Variables</li>
 <li>Diagnostics</li>
-<li>Likelihood methods
-<ul>
-<li>The GENMOD procedure</li>
-</ul></li>
+<li>Likelihood methods</li>
 </ul>
 </section>
 <section id="review-mantel-haenszel-tests" class="slide level2">
 <h2>Review: Mantel-Haenszel Tests</h2>
-<ul>
-<li>Mantel-Haenszel statistics investigate association between two variables with adjustment for a stratification variable.
-<ul>
-<li>General association</li>
-<li>Location shifts for means</li>
-<li>Linear/increasing trends -Mantel-Haenszel does not involve statistical models.</li>
-<li>Can’t be used for estimation</li>
-</ul></li>
-</ul>
+<p>Mantel-Haenszel statistics investigate association between two variables with adjustment for a stratification variable. - General association - Location shifts for means - Linear/increasing trends</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Mantel-Haenszel Tests do not involve statistical models, and therefore can’t be used for estimation for effect sizes or prediction. Furthermore, these tests cannot accommodate for continuous variables as predictors.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="logistic-regression" class="slide level2">
 <h2>Logistic Regression</h2>
-<ul>
-<li>Statistical modeling method that enables us to:
-<ul>
-<li>make inferences</li>
-<li>estimate/predict outcome variables</li>
-</ul></li>
-<li>Describes the relationship between a categorical response variable and multiple explanatory variables
-<ul>
-<li>Continuous explanatory variables can be included in the analysis</li>
-<li>Responses can be dichotomous or polytomous</li>
-</ul></li>
-</ul>
-</section>
-<section id="logistic-regression-1" class="slide level2">
-<h2>Logistic Regression</h2>
-<ul>
-<li>Possible applications include epidemiology, medical research, agronomy, and social science research.</li>
-</ul>
-</section>
-<section id="logistic-regression-dichotomous-variables" class="slide level2">
-<h2>Logistic Regression: Dichotomous Variables</h2>
-<ul>
-<li>When both response and explanatory variables are dichotomous, it corresponds to a <span class="math inline">\(2 \times 2\)</span> table.
-<ul>
-<li>Rows pertain to groups/populations/subpopulations</li>
-</ul></li>
-<li>Logistic regression enables us to write a model for the probability of success for each group.</li>
-</ul>
+<p>Statistical modeling method that enables us to make inferences, estimate/predict outcome variables, and describe the relationship between a categorical response variable and multiple explanatory variables. Possible applications include epidemiology, medical research, agronomy, and social science research.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Continuous explanatory variables can be included in the analysis, unlike in Mantel-Haenszel tests. Responses can be dichotomous or polytomous (more than two levels).</p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="dichotomous-response" class="title-slide slide level1 center">
+<h1>Dichotomous Response</h1>
+
 </section>
 <section id="logistic-regression-model" class="slide level2">
 <h2>Logistic Regression: Model</h2>
-<p>Let <span class="math inline">\(\theta_{mi}\)</span> be the probability of success fo the <span class="math inline">\(i^{th}\)</span> group in the <span class="math inline">\(m^{th}\)</span> strata.The logistic model can be used to describe the variation among {<span class="math inline">\(\theta_{mi}\)</span>}</p>
+<p>Logistic regression enables us to write a model for the probability of success for each group.</p>
+<p>Let <span class="math inline">\(\theta_{mi}\)</span> be the probability of success of the <span class="math inline">\(i^{th}\)</span> group in the <span class="math inline">\(m^{th}\)</span> strata.The logistic model can be used to describe the variation among {<span class="math inline">\(\theta_{mi}\)</span>}</p>
 <p><span class="math display">\[
 \theta_{mi} = \frac{1}{1+\exp[-\eta_{mi}]}
 \]</span></p>
@@ -287,7 +277,8 @@ Miguel Fudolig
 <p>Where</p>
 <p><span class="math display">\[
 \eta_{mi} = \alpha + \sum_{k=1}^t \beta_kx_{mik}
-\]</span> and <span class="math inline">\(t\)</span> is the number of explanatory variables.</p>
+\]</span></p>
+<p>and <span class="math inline">\(t\)</span> is the number of explanatory variables.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -318,6 +309,7 @@ Miguel Fudolig
 </div>
 <div class="callout-content">
 <p><span class="math inline">\(\log\left[\frac{\theta_{mi}}{1-\theta_{mi}}\right]\)</span> is referred to as the <strong>logit</strong> transformation of <span class="math inline">\(\theta_{mi}\)</span>, which is the logarithm of the odds.</p>
+<p>Other functions that can serve as a link function include the probit model and the complementary log-log model.</p>
 </div>
 </div>
 </div>
@@ -337,7 +329,7 @@ OR = \frac{odds_{mj}}{odds_{mi}} = e^{\eta_{mj}}/e^{\eta_{mi}} = e^{\eta_{mj}-\e
 <h2>Advantages</h2>
 <ul>
 <li>The logit transformation enables us to monitor the change in log odds.</li>
-<li>Easy to calculate ods ratio.</li>
+<li>Easy to calculate odds ratio.</li>
 <li>The linear predictor can take on values from <span class="math inline">\((-\infty,\infty)\)</span>, but the values of <span class="math inline">\(\theta_{mi}\)</span> will be constrained in [0,1].</li>
 </ul>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -417,7 +409,7 @@ OR = \frac{odds_{mj}}{odds_{mi}} = e^{\eta_{mj}}/e^{\eta_{mi}} = e^{\eta_{mj}-\e
 </ul>
 </section>
 <section id="chi-square-statistics-sample-size" class="slide level2">
-<h2>Chi-square statistics: sample size</h2>
+<h2>Chi-square statistics: Sample Size</h2>
 <p>Sample size guidelines for the chi-square assumption for these fit statistics include:</p>
 <ul>
 <li>Each group should have at least ten subjects.</li>
@@ -427,17 +419,8 @@ OR = \frac{odds_{mj}}{odds_{mi}} = e^{\eta_{mj}}/e^{\eta_{mi}} = e^{\eta_{mj}-\e
 </ul>
 </section>
 <section id="chi-square-statistics-hypothesis-test" class="slide level2">
-<h2>Chi-square statistics: hypothesis test</h2>
+<h2>Chi-square statistics: Hypothesis Test</h2>
 <p>The null hypothesis for both deviance and goodness-of-fit tests is that the departures of the observed data from the predicted values based on the model are random.</p>
-<ul>
-<li>Failure to reject the null hypothesis means we have no evidence against good agreement between observed and predicted values based on the model.</li>
-</ul>
-</section>
-<section id="fit-statistics-1" class="slide level2">
-<h2>Fit Statistics</h2>
-<ul>
-<li>The Akaike Infomation Criterion (AIC) and the Bayesian Information Criterion (BIC) can also be used to assess model fit.</li>
-</ul>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -447,10 +430,14 @@ OR = \frac{odds_{mj}}{odds_{mi}} = e^{\eta_{mj}}/e^{\eta_{mi}} = e^{\eta_{mj}-\e
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The Bayesian Information Criterion is also known as the Schwarz Criterion (SC).</p>
+<p>Failure to reject the null hypothesis means we have no evidence against good agreement between observed and predicted values based on the model.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="fit-statistics-1" class="slide level2">
+<h2>Fit Statistics</h2>
+<p>The Akaike Infomation Criterion (AIC) and the Bayesian Information Criterion (BIC)/Schwarz Criterion (SC) can also be used to assess model fit. Lower values of these criteria indicate better model fit.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -461,18 +448,16 @@ OR = \frac{odds_{mj}}{odds_{mi}} = e^{\eta_{mj}}/e^{\eta_{mi}} = e^{\eta_{mj}-\e
 </div>
 <div class="callout-content">
 <p>AIC predicts estimation error based on the provided model. BIC also predicts estimation error but uses a different penalization scheme for errors.</p>
+<p>The AIC (or BIC) for the full model (intercept + covariates) should be lower than the AIC (or BIC) of the intercept-only model if the covariates are associated with the response.</p>
 </div>
 </div>
 </div>
-<ul>
-<li>The AIC (or BIC) for the full model (intercept + covariates) should be lower than the AIC (or BIC) of the intercept-only model.</li>
-</ul>
 </section>
 <section id="the-main-effect-model" class="slide level2">
 <h2>The Main Effect Model</h2>
 <p>Recall that the linear predictor can be written as:</p>
 <p><span class="math display">\[
-\eta_i = \alpha + \beta_1x_{i1} + \beta_2x_{i2} + ...
+\eta_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + ...
 \]</span></p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -483,7 +468,7 @@ OR = \frac{odds_{mj}}{odds_{mi}} = e^{\eta_{mj}}/e^{\eta_{mi}} = e^{\eta_{mj}-\e
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(\alpha\)</span> is the intercept of the linear model</p>
+<p><span class="math inline">\(\beta_0\)</span> is the intercept of the linear model</p>
 </div>
 </div>
 </div>
@@ -503,13 +488,20 @@ OR = \frac{odds_{mj}}{odds_{mi}} = e^{\eta_{mj}}/e^{\eta_{mi}} = e^{\eta_{mj}-\e
 </section>
 <section id="the-main-effect-model-1" class="slide level2">
 <h2>The Main Effect Model</h2>
-<ul>
-<li>The current form of the linear predictor assumes the explanatory variables are in quantitative form.</li>
-<li>When the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.
-<ul>
-<li>The case <span class="math inline">\(x_{ik}=0\)</span> is called the reference level of the variables. When all <span class="math inline">\(x_{ik}=0\)</span> the linear predictor collapses to the intercept <span class="math inline">\(\alpha\)</span>.</li>
-</ul></li>
-</ul>
+<p>The current form of the linear predictor assumes the explanatory variables are in quantitative form. When the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The case <span class="math inline">\(x_{ik}=0\)</span> is called the reference level of the variables. When all <span class="math inline">\(x_{ik}=0\)</span> the linear predictor collapses to the intercept <span class="math inline">\(\beta_0\)</span>.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -540,16 +532,16 @@ OR = \frac{odds_{mj}}{odds_{mi}} = e^{\eta_{mj}}/e^{\eta_{mi}} = e^{\eta_{mj}-\e
 </div>
 </div>
 </section>
-<section id="the-logistic-procedure" class="slide level2">
-<h2>The LOGISTIC Procedure</h2>
+<section id="sas-the-logistic-procedure" class="slide level2">
+<h2><code>SAS</code>: The LOGISTIC Procedure</h2>
 <p>The LOGISTIC procedure can perform logistic regression in SAS.</p>
 <ul>
 <li>Can take both categorical and continuous explanatory variable</li>
 <li>Syntax is slightly different from the FREQ procedure.</li>
 </ul>
 </section>
-<section id="the-logistic-procedure-1" class="slide level2">
-<h2>The LOGISTIC Procedure</h2>
+<section id="sas-the-logistic-procedure-1" class="slide level2">
+<h2><code>SAS</code>: The LOGISTIC Procedure</h2>
 <p>The LOGISTIC procedure provides estimates for <span class="math inline">\(\beta\)</span> as in regression analysis.</p>
 <h3 id="sample-syntax">Sample Syntax</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a>proc logistic data<span class="ot">=</span>data;</span>
