@@ -542,22 +542,22 @@ MF= min\left\{\sum_{h=1}^K [m_{h11} - max(0,n_{h1+}-n_{h+2})], \sum_{h=1}^K [min
 <p><img data-src="img/health_C3.png"></p>
 </div>
 <div id="tabset-1-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3" data-code-line-numbers="11,12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>data stress;</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>input region <span class="sc">$</span> stress <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a>datalines;</span>
-<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a>urban low f <span class="dv">48</span> urban low u <span class="dv">12</span></span>
-<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a>urban high f <span class="dv">96</span> urban high u <span class="dv">94</span></span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>rural low f <span class="dv">55</span> rural low u <span class="dv">135</span></span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a>rural high f <span class="dv">7</span> rural high u <span class="dv">53</span></span>
-<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a>;</span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>stress;</span>
-<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11"></a>tables region<span class="sc">*</span>stress<span class="sc">*</span>outcome <span class="sc">/</span> all chisq <span class="fu">cmh</span> (mf) nocol nopct;</span>
-<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4" data-code-line-numbers="11,12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>data stress;</span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>input region <span class="sc">$</span> stress <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a>datalines;</span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>urban low f <span class="dv">48</span> urban low u <span class="dv">12</span></span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>urban high f <span class="dv">96</span> urban high u <span class="dv">94</span></span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>rural low f <span class="dv">55</span> rural low u <span class="dv">135</span></span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>rural high f <span class="dv">7</span> rural high u <span class="dv">53</span></span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a>;</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>stress;</span>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-11" class="code-annotation-target"><a href="#annotated-cell-4-11"></a>tables region<span class="sc">*</span>stress<span class="sc">*</span>outcome <span class="sc">/</span> all chisq <span class="fu">cmh</span> (mf) nocol nopct;</span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="1"><code>CMH</code> includes the Mantel-Haenszel statistics. <code>MF</code> gives the Mantel-Fleiss condition;</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="11" data-code-annotation="1"><code>CMH</code> includes the Mantel-Haenszel statistics. <code>MF</code> gives the Mantel-Fleiss condition;</span>
 </dd>
 </dl>
 </div>
@@ -840,9 +840,9 @@ cor        Nonzero correlation 18.411  1 1.7807e-05</code></pre>
 <h2>Homogeneity of Odds Ratios</h2>
 <p>The Breslow-Day test or the Zelen’s test can be used to test if the homogeneous association is satisfied.</p>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Breslow-Day test</a></li><li><a href="#tabset-6-2">Zelen’s Test</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Breslow-Day test</a></li><li><a href="#tabset-3-2">Zelen’s Test</a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
+<div id="tabset-3-1">
 <p>The null hypothesis associated with the Breslow-Day test is that there is homogeneous association between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -862,7 +862,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 \]</span></p>
 <p>which approximately follows a chi-square distribution with <span class="math inline">\((n-1)\)</span> degrees of freedom.</p>
 </div>
-<div id="tabset-6-2">
+<div id="tabset-3-2">
 <p>Zelen’s test is similar to the Breslow-Day test, but uses exact methods.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -877,6 +877,11 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
 <section id="measures-of-association" class="title-slide slide level1 center">
 <h1>Measures of Association</h1>
 
@@ -908,15 +913,15 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 <h2>Common Odds Ratio: Confidence Intervals</h2>
 <p>There are two confidence intervals for the common odds ratios provided by SAS: The Mantel-Haenszel and Logit confidence limits.</p>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Mantel-Haenszel</a></li><li><a href="#tabset-3-2">Logit</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Mantel-Haenszel</a></li><li><a href="#tabset-4-2">Logit</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
+<div id="tabset-4-1">
 <ul>
 <li>based on an estimate of the variance of <span class="math inline">\(\log \psi_{MH}\)</span></li>
 <li>Not sensitive to small sample sizes</li>
 </ul>
 </div>
-<div id="tabset-3-2">
+<div id="tabset-4-2">
 <ul>
 <li>based on weighted regression estimates</li>
 <li>reasonable but requires adequate sample sizes, i.e.&nbsp;<span class="math inline">\(n_{hij} \geq 5\)</span></li>
@@ -952,12 +957,12 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 <h2>Example</h2>
 <p>The table shows the data from a study on coronary artery disease. Investigators were interested in whether electrocardiogram (ECG) measurement was associated with disease status. Gender was thought to be associated with disease status, so investigators post-stratified the data into male and female groups. In addition, there was interest in examining the odds ratios.</p>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Data</a></li><li><a href="#tabset-4-2">SAS Code</a></li><li><a href="#tabset-4-3">R Code</a></li><li><a href="#tabset-4-4">Answer</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Data</a></li><li><a href="#tabset-5-2">SAS Code</a></li><li><a href="#tabset-5-3">R Code</a></li><li><a href="#tabset-5-4">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-5-1">
 <p><img data-src="img/coronary_C3.png"></p>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-5-2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-24-1"><a href="#annotated-cell-24-1"></a>data ca;</span>
 <span id="annotated-cell-24-2"><a href="#annotated-cell-24-2"></a>input sex <span class="sc">$</span> ECG <span class="sc">$</span> disease <span class="sc">$</span> count;</span>
 <span id="annotated-cell-24-3"><a href="#annotated-cell-24-3"></a>datalines;</span>
@@ -986,7 +991,7 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 </dd>
 </dl>
 </div>
-<div id="tabset-4-3">
+<div id="tabset-5-3">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Sex =</span> <span class="fu">c</span>(<span class="st">"Female"</span>,<span class="st">"Male"</span>),</span>
 <span id="cb23-2"><a></a>                    <span class="at">ECG=</span><span class="fu">c</span>(<span class="st">"Less"</span>,<span class="st">"Greater"</span>),</span>
@@ -1034,7 +1039,8 @@ ECG       No Yes
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">breslow_day_test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">library</span>(vcdExtra)</span>
+<span id="cb29-2"><a></a><span class="fu">breslow_day_test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Breslow-Day Test on Homogeneity of Odds Ratios 
@@ -1069,7 +1075,7 @@ P = 1</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-4-4">
+<div id="tabset-5-4">
 <ul>
 <li>Sex was determined to be marginally associated with disease status (<span class="math inline">\(\chi^2=6.9, p=0.0084\)</span>).</li>
 <li>Controlling for sex, there is strong evidence that the ECG measurements is conditionally associated with disease status (<span class="math inline">\(\chi^2=4.5, p=0.03\)</span>).</li>
@@ -1101,9 +1107,9 @@ P = 1</code></pre>
 <li>Use Zelen’s test to test if the odds ratio is uniform in both locations</li>
 </ul>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">R Code</a></li><li><a href="#tabset-5-3">Answer</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">R Code</a></li><li><a href="#tabset-6-3">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-6-1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-37"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-37-1"><a href="#annotated-cell-37-1"></a>data exercise;</span>
 <span id="annotated-cell-37-2"><a href="#annotated-cell-37-2"></a>input location <span class="sc">$</span> program <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
 <span id="annotated-cell-37-3"><a href="#annotated-cell-37-3"></a>datalines;</span>
@@ -1129,7 +1135,7 @@ P = 1</code></pre>
 </dd>
 </dl>
 </div>
-<div id="tabset-5-2">
+<div id="tabset-6-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Location =</span> <span class="fu">c</span>(<span class="st">"D"</span>,<span class="st">"S"</span>),</span>
 <span id="cb35-2"><a></a>                    <span class="at">Program=</span><span class="fu">c</span>(<span class="st">"Office"</span>,<span class="st">"Home"</span>),</span>
@@ -1172,7 +1178,7 @@ P = 1</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-5-3">
+<div id="tabset-6-3">
 <ul>
 <li>Mantel-Fleiss criterion is not satisfied (MF=4.65), so be careful with using the asymptotic chi-square test for <span class="math inline">\(Q_{MH}\)</span>.
 <ul>
@@ -1188,11 +1194,6 @@ P = 1</code></pre>
 </div>
 
 
-</section>
-
-</div>
-</div>
-</div>
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
