@@ -15,6 +15,8 @@ format:
     echo: true
   pdf: 
     number-sections: true
+    echo: true
+    toc: true
 editor: 
   markdown: 
     wrap: 72
@@ -260,6 +262,42 @@ run;
     treat each unique combination of the explanatory variable values as
     a distinct group in computing the goodness-of-fit statistics.
 
+
+## `R`: `glm()`
+
+The `glm()` function in `R` can fit a logistic regression model in the generalized linear model framework.
+
+::: callout-note
+Because there are other distributions that work with `glm()`, we need to specify that we are dealing with a binomial distribution using the `family="binomial"` argument.
+
+```{r}
+#| eval: false
+
+mod_glm <- glm(dependent~independent+covariates,
+    data=dataset,
+    family="binomial")
+
+summary(mod_glm)
+```
+
+:::
+
+## `R`: Odds Ratios
+
+We can use `emmeans()` and `contrast()` from the `emmeans` package to estimate the probabilities and odds ratios based on the model provided by the `glm()` function.
+
+```{r}
+#| eval: false
+
+library(emmeans)
+
+emm <- emmeans(mod_glm,~independent, type="response",infer=T)
+emm
+contrast(emm,method="pairwise",type="response",infer=T)
+```
+
+
+
 ## Example
 
 The data shows people who visited a clinic and required a
@@ -283,6 +321,15 @@ datalines;
 1 1 0 6 1 1 1 21
 ;
 ```
+or refer to `ECG.csv` uploaded on Canvas. Sex=0 refers to female, while ECG=0 refers to
+lower segment depression.
+
+```{r}
+library(tidyverse)
+ecg <- read.csv("ECG.csv", stringsAsFactors = T)
+glimpse(ecg)
+```
+
 
 ## Example
 
@@ -303,9 +350,42 @@ model ca(event='1')=sex ecg / scale=none aggregate;
 run;
 ```
 
+### R Code
+
+```{r}
+library(emmeans)
+mod_glm <- glm(Disease~Sex+ECG,
+               data=ecg,
+               family="binomial")
+
+# intercept only model 
+mod1 <- glm(Disease~1,
+            data=ecg,
+            family="binomial")
+
+# comparing intercept only  model to intercept + variables model
+
+anova(mod1,mod_glm,test = "LRT")
+summary(mod1)
+summary(mod_glm)
+
+# Calculating probabilities and odds ratios.
+
+emm <- emmeans(mod_glm,~Sex,type="response")
+emm
+contrast(emm,method="pairwise",type="response",infer=T)
+contrast(emm,method="revpairwise",type="response",infer=T)
+
+emm_ecg <- emmeans(mod_glm,~ECG,type="response")
+emm_ecg
+contrast(emm_ecg,method="pairwise",type="response",infer=T)
+contrast(emm_ecg,method="revpairwise",type="response",infer=T)
+
+```
+
 ### Answer
 
-Both chi-square tests had p-values above 0.05, which meant there was no
+From `SAS` output: Both chi-square tests had p-values above 0.05, which meant there was no
 evidence that the errors were not random.
 
 The AIC values for the full model are lower than the intercept-only
@@ -316,7 +396,7 @@ Assuming the probability of developing CA is given by $\theta_CA$, the
 logistic model was estimated to be:
 
 $$
-logit~[\hat{\theta_{CA}}] = -1.17 + 1.28*SEX + 1.05*ECG
+logit~[\hat{\theta}_{CA}] = -1.17 + 1.28*SEX + 1.05*ECG
 $$
 
 There is a significant effect of sex ($\beta = 1.28$, p=0.01) and
