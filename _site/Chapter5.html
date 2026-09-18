@@ -777,7 +777,7 @@ general    General association 14.4030  8 0.0718470</code></pre>
 </div>
 <div id="tabset-4-4">
 <ul>
-<li><p>Use column 3 (Hours = 2) as cutoff. The use of the chi-square approximation is justified!</p></li>
+<li><p>Use column 2 (Hours = 1) as cutoff. The use of the chi-square approximation is justified!</p></li>
 <li><p>The integer scoring method is most appropriate.</p></li>
 <li><p><span class="math inline">\(Q_S\)</span> = 13.7, df=2, p=0.001. At <span class="math inline">\(\alpha=0.05\)</span>, there is sufficient evidence to conclude that at least one treatment group is different compared to the others.</p></li>
 </ul>
@@ -2391,7 +2391,7 @@ $ Severity  &lt;fct&gt; none, none, none, none, none, none, none, none, none, no
     Jonckheere-Terpstra test
 
 data:  Severity by Treatment
-JT = 35697, p-value = 0.0056
+JT = 35697, p-value = 0.0062
 alternative hypothesis: increasing</code></pre>
 </div>
 </div>
@@ -2767,7 +2767,7 @@ alternative hypothesis: increasing</code></pre>
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/MiguelFudolig\.github\.io\/EAB770-Slides-Website\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

@@ -459,7 +459,7 @@ CMHtest(dat_cc)
 
 ### Answer
 
--   Use column 3 (Hours = 2) as cutoff. The use of the chi-square approximation is justified!
+-   Use column 2 (Hours = 1) as cutoff. The use of the chi-square approximation is justified!
 
 -   The integer scoring method is most appropriate.
 

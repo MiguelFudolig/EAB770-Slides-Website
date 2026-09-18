@@ -424,6 +424,8 @@ asked about their caffeine and exercise habits.
 | Older Adult | Yes Caffeine | 44           | 132         |
 | Older Adult | No Caffeine  | 15           | 130         |
 
+It is also uploaded as line-level data as `exercise_caffeine.csv` on Canvas.
+
 ### Questions 
 
 -   Use logistic regression to estimate the logistic model for the data.
@@ -464,21 +466,59 @@ model exercise(event='1')=agegrp caffeine / scale=none aggregate;
 run;
 ```
 
+### R Code
+
+```{r}
+exercise <- read.csv("exercise_caffeine.csv")
+glimpse(exercise)
+
+
+```
+
+
+```{r}
+mod_glm <- glm(Exercise~AgeGrp+Caffeine,
+               data=exercise,
+               family="binomial")
+
+summary(mod_glm)
+
+library(emmeans)
+emm <- emmeans(mod_glm,~Caffeine,type="response",infer=T)
+emm
+
+contrast(emm,method='revpairwise', type="response",infer=T)
+
+
+emm_age <- emmeans(mod_glm,~AgeGrp,type="response",infer=T)
+emm_age
+
+contrast(emm_age,method='pairwise', type="response",infer=T)
+
+mod1 <- glm(Exercise~1,
+               data=exercise,
+               family="binomial")
+anova(mod1,mod_glm,test = "LRT")
+summary(mod1)
+summary(mod_glm)
+```
+
+
 ### Answer
 
-Suppose the probability of exercise is given by $\theta$,The estimated logistic regression model is: $logit (\theta) = -1.08 -0.93*AGEGRP + 0.84*CAFFEINE$.
+Suppose the probability of exercise is given by $\theta$,The estimated logistic regression model is: $logit (\theta) = -1.08 -0.93*AGEGRP + 0.84*CAFFEINE$. The AIC for the full model is lower than that of the intercept only model, indicating better model fit.
 
 There is a significant effect of age in the likelihood of exercising. The odds of an older participant reporting regular exercise is 0.39 (95% CI: 0.28, 0.56; p<0.001) times that of younger participants.
 
 There is a significant effect of caffeine intake on exercise. The odds of a participant reporting regular exercise when they consume caffeine is 2.3 (95% CI: 1.6,3.3; p<0.001) times that of those who do not consume caffeine.
 
-The deviance (p=0.39) and goodness-of-fit chi-square tests (p=0.40) showed no evidence against the randomness of errors, which indicates good model fit. The AIC and SC values also decreased after including covariates, also supporting good fit.
+`SAS`: The deviance (p=0.39) and goodness-of-fit chi-square tests (p=0.40) showed no evidence against the randomness of errors, which indicates good model fit. The AIC and SC values also decreased after including covariates, also supporting good fit.
 
 :::
 
 
 
-## CLASS statement
+## `SAS`: `CLASS` statement
 
 - The `class` statement can create dummy variable coding automatically through the LOGISTIC procedure.
   - The REF option allows us to set the reference level for each variable.
@@ -491,18 +531,22 @@ model y = x cat/scale=none aggregate;
 run;
 ```
 
-## Model parametrizations
+## `SAS`: Model parameterizations
 
 ::: callout-note
-**Effect parametrization** produces deviation from the _grand mean_. This is the default parametrization in the LOGISTIC procedure.
+**Effect parameterization** produces deviation from the _grand mean_. The reference level corresponds to $X=-1$.
 
-- The reference level corresponds to $X=-1$.
+- In `R`, this is established using `contr.sum()`
+- In `SAS`, this is the default parameterization in the `LOGISTIC` procedure.
 :::
 
 ::: callout-note
-**Reference cell parametrization** produces measureents based on reference level. This can be specified in the class statement as `param=ref` in the LOGISTIC procedure.
+**Reference cell parameterization** produces measurements based on reference level. The reference level corresponds to $X=0$.
 
-- The reference level corresponds to $X=0$.
+- In `R`, this is established using `contr.treatment()` or `contr.SAS()`. This is the default in `R`.
+- In `SAS`, this can be specified in the class statement as `param=ref` in the `LOGISTIC` procedure.
+
+
 :::
 
 ## Example
@@ -566,6 +610,55 @@ run;
 
 1. Default: effect parametrization
 2. Reference cell parametrization used after `param=ref` is specified.
+
+### R Code
+
+We can also use `glm()` for aggregated counts, but we don't need to create a contingency table.
+
+```{r}
+dat <- expand.grid(type = c("nonresidential","other"),
+                   prior = c("none","some"))
+dat$prison <- c(17,53,42,33)
+dat$noprison <- c(75,359,109,175)
+
+dat
+```
+
+**Reference Cell Parameterization**
+
+```{r}
+options(contrasts=c("contr.treatment","contr.poly"))
+mod_glm <- glm(cbind(prison,noprison)~type + prior,data=dat,family="binomial")
+summary(mod_glm)
+
+emm <- emmeans(mod_glm,~type,type="response",infer=T)
+emm
+contrast(emm,method="revpairwise",type="response",infer=T)
+
+emm_prior <- emmeans(mod_glm,~prior,type="response",infer=T)
+emm_prior
+contrast(emm_prior,method="revpairwise",type="response",infer=T)
+```
+::: callout-tip
+Try replacing "contr.treatment" with "contr.SAS". Which parts of the output change? Which parts do not change?
+:::
+
+**Effect parametrization**
+
+```{r}
+options(contrasts=c("contr.sum","contr.poly"))
+mod_glm <- glm(cbind(prison,noprison)~type + prior,data=dat,family="binomial")
+summary(mod_glm)
+
+emm <- emmeans(mod_glm,~type,type="response",infer=T)
+emm
+contrast(emm,method="pairwise",type="response",infer=T)
+
+emm_prior <- emmeans(mod_glm,~prior,type="response",infer=T)
+emm_prior
+contrast(emm_prior,method="pairwise",type="response",infer=T)
+```
+
 
 ### Answer
 
