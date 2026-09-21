@@ -14,511 +14,820 @@
     "href": "Chapter8.html#outline",
     "title": "EAB 770 - Chapter 8",
     "section": "Outline",
-    "text": "Outline\n\nDichotomous Explanatory Variables\nQualitative Explanatory Variables\nContinuous and Ordinal Explanatory Variables\nDiagnostics\nLikelihood methods"
+    "text": "Outline\n\nDichotomous Explanatory Variables\nQualitative Explanatory Variables\nContinuous and Ordinal Explanatory Variables\nDiagnostics\nLikelihood methods",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#review-mantel-haenszel-tests",
     "href": "Chapter8.html#review-mantel-haenszel-tests",
     "title": "EAB 770 - Chapter 8",
     "section": "Review: Mantel-Haenszel Tests",
-    "text": "Review: Mantel-Haenszel Tests\nMantel-Haenszel statistics investigate association between two variables with adjustment for a stratification variable. - General association - Location shifts for means - Linear/increasing trends\n\n\n\n\n\n\nNote\n\n\nMantel-Haenszel Tests do not involve statistical models, and therefore can’t be used for estimation for effect sizes or prediction. Furthermore, these tests cannot accommodate for continuous variables as predictors."
+    "text": "Review: Mantel-Haenszel Tests\nMantel-Haenszel statistics investigate association between two variables with adjustment for a stratification variable. - General association - Location shifts for means - Linear/increasing trends\n\n\n\n\n\n\nNote\n\n\nMantel-Haenszel Tests do not involve statistical models, and therefore can’t be used for estimation for effect sizes or prediction. Furthermore, these tests cannot accommodate for continuous variables as predictors.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#logistic-regression",
     "href": "Chapter8.html#logistic-regression",
     "title": "EAB 770 - Chapter 8",
     "section": "Logistic Regression",
-    "text": "Logistic Regression\nStatistical modeling method that enables us to make inferences, estimate/predict outcome variables, and describe the relationship between a categorical response variable and multiple explanatory variables. Possible applications include epidemiology, medical research, agronomy, and social science research.\n\n\n\n\n\n\nNote\n\n\nContinuous explanatory variables can be included in the analysis, unlike in Mantel-Haenszel tests. Responses can be dichotomous or polytomous (more than two levels)."
+    "text": "Logistic Regression\nStatistical modeling method that enables us to make inferences, estimate/predict outcome variables, and describe the relationship between a categorical response variable and multiple explanatory variables. Possible applications include epidemiology, medical research, agronomy, and social science research.\n\n\n\n\n\n\nNote\n\n\nContinuous explanatory variables can be included in the analysis, unlike in Mantel-Haenszel tests. Responses can be dichotomous or polytomous (more than two levels).",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#logistic-regression-model",
     "href": "Chapter8.html#logistic-regression-model",
     "title": "EAB 770 - Chapter 8",
     "section": "Logistic Regression: Model",
-    "text": "Logistic Regression: Model\nLogistic regression enables us to write a model for the probability of success for each group.\nLet \\(\\theta_{mi}\\) be the probability of success of the \\(i^{th}\\) group in the \\(m^{th}\\) strata.The logistic model can be used to describe the variation among {\\(\\theta_{mi}\\)}\n\\[\n\\theta_{mi} = \\frac{1}{1+\\exp[-\\eta_{mi}]}\n\\]"
+    "text": "Logistic Regression: Model\nLogistic regression enables us to write a model for the probability of success for each group.\nLet \\(\\theta_{mi}\\) be the probability of success of the \\(i^{th}\\) group in the \\(m^{th}\\) strata.The logistic model can be used to describe the variation among {\\(\\theta_{mi}\\)}\n\\[\n\\theta_{mi} = \\frac{1}{1+\\exp[-\\eta_{mi}]}\n\\]",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#logistic-regression-model-1",
     "href": "Chapter8.html#logistic-regression-model-1",
     "title": "EAB 770 - Chapter 8",
     "section": "Logistic Regression: Model",
-    "text": "Logistic Regression: Model\nWhere\n\\[\n\\eta_{mi} = \\alpha + \\sum_{k=1}^t \\beta_kx_{mik}\n\\]\nand \\(t\\) is the number of explanatory variables.\n\n\n\n\n\n\nNote\n\n\n\\(\\eta_{mi}\\) is referred to as the linear predictor of the model."
+    "text": "Logistic Regression: Model\nWhere\n\\[\n\\eta_{mi} = \\alpha + \\sum_{k=1}^t \\beta_kx_{mik}\n\\]\nand \\(t\\) is the number of explanatory variables.\n\n\n\n\n\n\nNote\n\n\n\\(\\eta_{mi}\\) is referred to as the linear predictor of the model.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#logistic-regression-model-2",
     "href": "Chapter8.html#logistic-regression-model-2",
     "title": "EAB 770 - Chapter 8",
     "section": "Logistic Regression: Model",
-    "text": "Logistic Regression: Model\nUsing algebra, we can invert the equation to the following form:\n\\[\n\\eta_{mi} = \\alpha + \\sum_{k=1}^t \\beta_kx_{mik} = \\log\\left[\\frac{\\theta_{mi}}{1-\\theta_{mi}}\\right]\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\log\\left[\\frac{\\theta_{mi}}{1-\\theta_{mi}}\\right]\\) is referred to as the logit transformation of \\(\\theta_{mi}\\), which is the logarithm of the odds.\nOther functions that can serve as a link function include the probit model and the complementary log-log model."
+    "text": "Logistic Regression: Model\nUsing algebra, we can invert the equation to the following form:\n\\[\n\\eta_{mi} = \\alpha + \\sum_{k=1}^t \\beta_kx_{mik} = \\log\\left[\\frac{\\theta_{mi}}{1-\\theta_{mi}}\\right]\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\log\\left[\\frac{\\theta_{mi}}{1-\\theta_{mi}}\\right]\\) is referred to as the logit transformation of \\(\\theta_{mi}\\), which is the logarithm of the odds.\nOther functions that can serve as a link function include the probit model and the complementary log-log model.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#odds-and-odds-ratios",
     "href": "Chapter8.html#odds-and-odds-ratios",
     "title": "EAB 770 - Chapter 8",
     "section": "Odds and Odds Ratios",
-    "text": "Odds and Odds Ratios\nThe odds of success for an individual in the \\(m^{th}\\) strata and \\(i^{th}\\) group can be calculated as\n\\[\n\\theta_{mi}/(1-\\theta_{mi}) = e^{\\eta_{mi}}\n\\]\nThe odds ratio between the \\(i^{th}\\) and \\(j^{th}\\) group in the \\(m^{th}\\) strata can easily be calculated.\n\\[\nOR = \\frac{odds_{mj}}{odds_{mi}} = e^{\\eta_{mj}}/e^{\\eta_{mi}} = e^{\\eta_{mj}-\\eta_{mi}}\n\\]"
+    "text": "Odds and Odds Ratios\nThe odds of success for an individual in the \\(m^{th}\\) strata and \\(i^{th}\\) group can be calculated as\n\\[\n\\theta_{mi}/(1-\\theta_{mi}) = e^{\\eta_{mi}}\n\\]\nThe odds ratio between the \\(i^{th}\\) and \\(j^{th}\\) group in the \\(m^{th}\\) strata can easily be calculated.\n\\[\nOR = \\frac{odds_{mj}}{odds_{mi}} = e^{\\eta_{mj}}/e^{\\eta_{mi}} = e^{\\eta_{mj}-\\eta_{mi}}\n\\]",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#advantages",
     "href": "Chapter8.html#advantages",
     "title": "EAB 770 - Chapter 8",
     "section": "Advantages",
-    "text": "Advantages\n\nThe logit transformation enables us to monitor the change in log odds.\nEasy to calculate odds ratio.\nThe linear predictor can take on values from \\((-\\infty,\\infty)\\), but the values of \\(\\theta_{mi}\\) will be constrained in [0,1].\n\n\n\n\n\n\n\nTip\n\n\nIf you used linear regression to model a proportion, it assumes that the response variable can be negative or above 1."
+    "text": "Advantages\n\nThe logit transformation enables us to monitor the change in log odds.\nEasy to calculate odds ratio.\nThe linear predictor can take on values from \\((-\\infty,\\infty)\\), but the values of \\(\\theta_{mi}\\) will be constrained in [0,1].\n\n\n\n\n\n\n\nTip\n\n\nIf you used linear regression to model a proportion, it assumes that the response variable can be negative or above 1.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#fit-statistics",
     "href": "Chapter8.html#fit-statistics",
     "title": "EAB 770 - Chapter 8",
     "section": "Fit Statistics",
-    "text": "Fit Statistics\n\nThe model performance can be measured using the deviance and goodness-of-fit statistics.\n\n\n\n\n\n\n\nNote\n\n\nBoth use chi-square statistics to assess model fit."
+    "text": "Fit Statistics\n\nThe model performance can be measured using the deviance and goodness-of-fit statistics.\n\n\n\n\n\n\n\nNote\n\n\nBoth use chi-square statistics to assess model fit.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#chi-square-statistics",
     "href": "Chapter8.html#chi-square-statistics",
     "title": "EAB 770 - Chapter 8",
     "section": "Chi-square statistics",
-    "text": "Chi-square statistics\n\n\n\n\n\n\nNote\n\n\nLikelihood ratio chi-square measures the difference between two models by using the ratio of the two likelihoods as a chi-square statistic.\n\n\n\n\n\n\n\n\n\nNote\n\n\nPearson chi-square goodness of fit uses observed and expected values to test for a goodness of fit."
+    "text": "Chi-square statistics\n\n\n\n\n\n\nNote\n\n\nLikelihood ratio chi-square measures the difference between two models by using the ratio of the two likelihoods as a chi-square statistic.\n\n\n\n\n\n\n\n\n\nNote\n\n\nPearson chi-square goodness of fit uses observed and expected values to test for a goodness of fit.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#chi-square-statistics-1",
     "href": "Chapter8.html#chi-square-statistics-1",
     "title": "EAB 770 - Chapter 8",
     "section": "Chi-square statistics",
-    "text": "Chi-square statistics\n\nIf the chi-square statistic divided by the degrees of freedom is higher than one, then the data has some variation that is unaccounted for in the model.\n\nThis is called overdispersion\n\nThe high ratio between the chi-square statistic and degrees of freedom can also mean that the data does not follow a binomial distribution well.\n\nHeterogeneity\n\nBoth cases are accounted for using generalized linear mixed models/generalized estimating equations."
+    "text": "Chi-square statistics\n\nIf the chi-square statistic divided by the degrees of freedom is higher than one, then the data has some variation that is unaccounted for in the model.\n\nThis is called overdispersion\n\nThe high ratio between the chi-square statistic and degrees of freedom can also mean that the data does not follow a binomial distribution well.\n\nHeterogeneity\n\nBoth cases are accounted for using generalized linear mixed models/generalized estimating equations.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#chi-square-statistics-sample-size",
     "href": "Chapter8.html#chi-square-statistics-sample-size",
     "title": "EAB 770 - Chapter 8",
     "section": "Chi-square statistics: Sample Size",
-    "text": "Chi-square statistics: Sample Size\nSample size guidelines for the chi-square assumption for these fit statistics include:\n\nEach group should have at least ten subjects.\n80% of the predicted counts should be at least 5.\nNo 0 counts, remaining 20% of the counts should be above 2.\nFailure to satisfy these assumptions means exact tests should be used."
+    "text": "Chi-square statistics: Sample Size\nSample size guidelines for the chi-square assumption for these fit statistics include:\n\nEach group should have at least ten subjects.\n80% of the predicted counts should be at least 5.\nNo 0 counts, remaining 20% of the counts should be above 2.\nFailure to satisfy these assumptions means exact tests should be used.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#chi-square-statistics-hypothesis-test",
     "href": "Chapter8.html#chi-square-statistics-hypothesis-test",
     "title": "EAB 770 - Chapter 8",
     "section": "Chi-square statistics: Hypothesis Test",
-    "text": "Chi-square statistics: Hypothesis Test\nThe null hypothesis for both deviance and goodness-of-fit tests is that the departures of the observed data from the predicted values based on the model are random.\n\n\n\n\n\n\nNote\n\n\nFailure to reject the null hypothesis means we have no evidence against good agreement between observed and predicted values based on the model."
+    "text": "Chi-square statistics: Hypothesis Test\nThe null hypothesis for both deviance and goodness-of-fit tests is that the departures of the observed data from the predicted values based on the model are random.\n\n\n\n\n\n\nNote\n\n\nFailure to reject the null hypothesis means we have no evidence against good agreement between observed and predicted values based on the model.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#fit-statistics-1",
     "href": "Chapter8.html#fit-statistics-1",
     "title": "EAB 770 - Chapter 8",
     "section": "Fit Statistics",
-    "text": "Fit Statistics\nThe Akaike Infomation Criterion (AIC) and the Bayesian Information Criterion (BIC)/Schwarz Criterion (SC) can also be used to assess model fit. Lower values of these criteria indicate better model fit.\n\n\n\n\n\n\nNote\n\n\nAIC predicts estimation error based on the provided model. BIC also predicts estimation error but uses a different penalization scheme for errors.\nThe AIC (or BIC) for the full model (intercept + covariates) should be lower than the AIC (or BIC) of the intercept-only model if the covariates are associated with the response."
+    "text": "Fit Statistics\nThe Akaike Infomation Criterion (AIC) and the Bayesian Information Criterion (BIC)/Schwarz Criterion (SC) can also be used to assess model fit. Lower values of these criteria indicate better model fit.\n\n\n\n\n\n\nNote\n\n\nAIC predicts estimation error based on the provided model. BIC also predicts estimation error but uses a different penalization scheme for errors.\nThe AIC (or BIC) for the full model (intercept + covariates) should be lower than the AIC (or BIC) of the intercept-only model if the covariates are associated with the response.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#the-main-effect-model",
     "href": "Chapter8.html#the-main-effect-model",
     "title": "EAB 770 - Chapter 8",
     "section": "The Main Effect Model",
-    "text": "The Main Effect Model\nRecall that the linear predictor can be written as:\n\\[\n\\eta_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + ...\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_0\\) is the intercept of the linear model\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_k\\) are the coefficients of the explanatory variables. These coefficients will tell us the effect of predictor \\(x_{ik}\\)."
+    "text": "The Main Effect Model\nRecall that the linear predictor can be written as:\n\\[\n\\eta_i = \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + ...\n\\]\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_0\\) is the intercept of the linear model\n\n\n\n\n\n\n\n\n\nNote\n\n\n\\(\\beta_k\\) are the coefficients of the explanatory variables. These coefficients will tell us the effect of predictor \\(x_{ik}\\).",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#the-main-effect-model-1",
     "href": "Chapter8.html#the-main-effect-model-1",
     "title": "EAB 770 - Chapter 8",
     "section": "The Main Effect Model",
-    "text": "The Main Effect Model\nThe current form of the linear predictor assumes the explanatory variables are in quantitative form. When the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.\n\n\n\n\n\n\nNote\n\n\nThe case \\(x_{ik}=0\\) is called the reference level of the variables. When all \\(x_{ik}=0\\) the linear predictor collapses to the intercept \\(\\beta_0\\).\n\n\n\n\n\n\n\n\n\nNote\n\n\nFor dummy dichotomous variables, odds ratios can be calculated as an effect size of association."
+    "text": "The Main Effect Model\nThe current form of the linear predictor assumes the explanatory variables are in quantitative form. When the explanatory variables are categorical, we need to create dichotomous dummy variables to denote each level of the variables.\n\n\n\n\n\n\nNote\n\n\nThe case \\(x_{ik}=0\\) is called the reference level of the variables. When all \\(x_{ik}=0\\) the linear predictor collapses to the intercept \\(\\beta_0\\).\n\n\n\n\n\n\n\n\n\nNote\n\n\nFor dummy dichotomous variables, odds ratios can be calculated as an effect size of association.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#the-main-effect-model-2",
     "href": "Chapter8.html#the-main-effect-model-2",
     "title": "EAB 770 - Chapter 8",
     "section": "The Main Effect Model",
-    "text": "The Main Effect Model\n\n\n\n\n\n\nNote\n\n\nThe main effect model follows a regression framework, which means we can use ANOVA to test for effect significance."
+    "text": "The Main Effect Model\n\n\n\n\n\n\nNote\n\n\nThe main effect model follows a regression framework, which means we can use ANOVA to test for effect significance.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#sas-the-logistic-procedure",
     "href": "Chapter8.html#sas-the-logistic-procedure",
     "title": "EAB 770 - Chapter 8",
     "section": "SAS: The LOGISTIC Procedure",
-    "text": "SAS: The LOGISTIC Procedure\nThe LOGISTIC procedure can perform logistic regression in SAS.\n\nCan take both categorical and continuous explanatory variable\nSyntax is slightly different from the FREQ procedure."
+    "text": "SAS: The LOGISTIC Procedure\nThe LOGISTIC procedure can perform logistic regression in SAS.\n\nCan take both categorical and continuous explanatory variable\nSyntax is slightly different from the FREQ procedure.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#sas-the-logistic-procedure-1",
     "href": "Chapter8.html#sas-the-logistic-procedure-1",
     "title": "EAB 770 - Chapter 8",
     "section": "SAS: The LOGISTIC Procedure",
-    "text": "SAS: The LOGISTIC Procedure\nThe LOGISTIC procedure provides estimates for \\(\\beta\\) as in regression analysis.\nSample Syntax\nproc logistic data=data;\n1freq count;\n2model y(event='Yes') = x1 x2 /scale=none aggregate;\nrun;\n\n1\n\nfreq functions similar to weight in the FREQ procedure. When the data consists of an observation for each row, this statement is not needed.\n\n2\n\nmodel specifies the model for the response y using the explanatory variables x1 and x2. event tells SAS what the “success” response level is. The scale option produces goodness-of-fit statistics. The aggregate option requests that SAS treat each unique combination of the explanatory variable values as a distinct group in computing the goodness-of-fit statistics."
+    "text": "SAS: The LOGISTIC Procedure\nThe LOGISTIC procedure provides estimates for \\(\\beta\\) as in regression analysis.\nSample Syntax\nproc logistic data=data;\n1freq count;\n2model y(event='Yes') = x1 x2 /scale=none aggregate;\nrun;\n\n1\n\nfreq functions similar to weight in the FREQ procedure. When the data consists of an observation for each row, this statement is not needed.\n\n2\n\nmodel specifies the model for the response y using the explanatory variables x1 and x2. event tells SAS what the “success” response level is. The scale option produces goodness-of-fit statistics. The aggregate option requests that SAS treat each unique combination of the explanatory variable values as a distinct group in computing the goodness-of-fit statistics.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#r-glm",
+    "href": "Chapter8.html#r-glm",
+    "title": "EAB 770 - Chapter 8",
+    "section": "R: glm()",
+    "text": "R: glm()\nThe glm() function in R can fit a logistic regression model in the generalized linear model framework.\n\n\n\n\n\n\nNote\n\n\nBecause there are other distributions that work with glm(), we need to specify that we are dealing with a binomial distribution using the family=\"binomial\" argument.\n\nmod_glm &lt;- glm(dependent~independent+covariates,\n    data=dataset,\n    family=\"binomial\")\n\nsummary(mod_glm)",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#r-odds-ratios",
+    "href": "Chapter8.html#r-odds-ratios",
+    "title": "EAB 770 - Chapter 8",
+    "section": "R: Odds Ratios",
+    "text": "R: Odds Ratios\nWe can use emmeans() and contrast() from the emmeans package to estimate the probabilities and odds ratios based on the model provided by the glm() function.\n\nlibrary(emmeans)\n\nemm &lt;- emmeans(mod_glm,~independent, type=\"response\",infer=T)\nemm\ncontrast(emm,method=\"pairwise\",type=\"response\",infer=T)",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example",
     "href": "Chapter8.html#example",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data shows people who visited a clinic and required a catheterization. The response is the presence of coronary artery disease. The explanatory variables are ECG segment depression and sex. Use logistic regression methods to obtain odds ratio estimates and create a logistic regression model to estimate the probability of developing CA disease based on sex and ECG segment depression.\n\nData Set\ndata coronary;\ninput sex ecg ca count @@;\ndatalines;\n0 0 0 11 0 0 1 4\n0 1 0 10 0 1 1 8\n1 0 0 9 1 0 1 9\n1 1 0 6 1 1 1 21\n;"
+    "text": "Example\nThe data shows people who visited a clinic and required a catheterization. The response is the presence of coronary artery disease. The explanatory variables are ECG segment depression and sex. Use logistic regression methods to obtain odds ratio estimates and create a logistic regression model to estimate the probability of developing CA disease based on sex and ECG segment depression.\n\nData Set\ndata coronary;\ninput sex ecg ca count @@;\ndatalines;\n0 0 0 11 0 0 1 4\n0 1 0 10 0 1 1 8\n1 0 0 9 1 0 1 9\n1 1 0 6 1 1 1 21\n;\nor refer to ECG.csv uploaded on Canvas. Sex=0 refers to female, while ECG=0 refers to lower segment depression.\n\nlibrary(tidyverse)\necg &lt;- read.csv(\"ECG.csv\", stringsAsFactors = T)\nglimpse(ecg)\n\nRows: 78\nColumns: 4\n$ ID      &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…\n$ Sex     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,…\n$ ECG     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,…\n$ Disease &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, No, No, No…",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-1",
     "href": "Chapter8.html#example-1",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data shows people who visited a clinic and required a catheterization. The response is the presence of coronary artery disease. The explanatory variables are ECG segment depression and sex. Use logistic regression methods to obtain odds ratio estimates and create a logistic regression model to estimate the probability of developing CA disease based on sex and ECG segment depression.\n\nSAS CodeAnswer\n\n\nproc logistic data=coronary ;\nfreq count;\nmodel ca(event='1')=sex ecg / scale=none aggregate;\nrun;\n\n\nBoth chi-square tests had p-values above 0.05, which meant there was no evidence that the errors were not random.\nThe AIC values for the full model are lower than the intercept-only model, which meant model performance increased after including our covariates.\nAssuming the probability of developing CA is given by \\(\\theta_CA\\), the logistic model was estimated to be:\n\\[\nlogit~[\\hat{\\theta_{CA}}] = -1.17 + 1.28*SEX + 1.05*ECG\n\\]\nThere is a significant effect of sex (\\(\\beta = 1.28\\), p=0.01) and segment depression (\\(\\beta = 1.05\\), p=0.03) on the probability of developing CA disease. In terms of odds ratios, the odds that males develop CA is 3.58 (95% CI: 1.35,9.52) times that of females. Additionally, the odds of developing CA with higher segment depression is 2.87 (95% CI: 1.08, 7.62) times that of patients with lower segment depression in their ECG."
+    "text": "Example\nThe data shows people who visited a clinic and required a catheterization. The response is the presence of coronary artery disease. The explanatory variables are ECG segment depression and sex. Use logistic regression methods to obtain odds ratio estimates and create a logistic regression model to estimate the probability of developing CA disease based on sex and ECG segment depression.\n\nSAS CodeR CodeAnswer\n\n\nproc logistic data=coronary ;\nfreq count;\nmodel ca(event='1')=sex ecg / scale=none aggregate;\nrun;\n\n\n\nlibrary(emmeans)\nmod_glm &lt;- glm(Disease~Sex+ECG,\n               data=ecg,\n               family=\"binomial\")\n\n# intercept only model \nmod1 &lt;- glm(Disease~1,\n            data=ecg,\n            family=\"binomial\")\n\n# comparing intercept only  model to intercept + variables model\n\nanova(mod1,mod_glm,test = \"LRT\")\n\nAnalysis of Deviance Table\n\nModel 1: Disease ~ 1\nModel 2: Disease ~ Sex + ECG\n  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)   \n1        77     107.67                        \n2        75      95.90  2   11.769 0.002782 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nsummary(mod1)\n\n\nCall:\nglm(formula = Disease ~ 1, family = \"binomial\", data = ecg)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept)   0.1542     0.2271   0.679    0.497\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 107.67  on 77  degrees of freedom\nResidual deviance: 107.67  on 77  degrees of freedom\nAIC: 109.67\n\nNumber of Fisher Scoring iterations: 3\n\nsummary(mod_glm)\n\n\nCall:\nglm(formula = Disease ~ Sex + ECG, family = \"binomial\", data = ecg)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)  \n(Intercept)  -1.1747     0.4854  -2.420   0.0155 *\nSex           1.2770     0.4980   2.564   0.0103 *\nECG           1.0545     0.4980   2.118   0.0342 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 107.67  on 77  degrees of freedom\nResidual deviance:  95.90  on 75  degrees of freedom\nAIC: 101.9\n\nNumber of Fisher Scoring iterations: 4\n\n# Calculating probabilities and odds ratios.\n\nemm &lt;- emmeans(mod_glm,~Sex,type=\"response\")\nemm\n\n Sex  prob     SE  df asymp.LCL asymp.UCL\n   0 0.344 0.0853 Inf     0.200     0.523\n   1 0.652 0.0740 Inf     0.497     0.781\n\nResults are averaged over the levels of: ECG \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \n\ncontrast(emm,method=\"pairwise\",type=\"response\",infer=T)\n\n contrast    odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio p.value\n Sex0 / Sex1      0.279 0.139 Inf     0.105      0.74    1  -2.564  0.0103\n\nResults are averaged over the levels of: ECG \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\ncontrast(emm,method=\"revpairwise\",type=\"response\",infer=T)\n\n contrast    odds.ratio   SE  df asymp.LCL asymp.UCL null z.ratio p.value\n Sex1 / Sex0       3.59 1.79 Inf      1.35      9.52    1   2.564  0.0103\n\nResults are averaged over the levels of: ECG \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nemm_ecg &lt;- emmeans(mod_glm,~ECG,type=\"response\")\nemm_ecg\n\n ECG  prob     SE  df asymp.LCL asymp.UCL\n   0 0.369 0.0880 Inf     0.218     0.551\n   1 0.627 0.0764 Inf     0.470     0.761\n\nResults are averaged over the levels of: Sex \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \n\ncontrast(emm_ecg,method=\"pairwise\",type=\"response\",infer=T)\n\n contrast    odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio p.value\n ECG0 / ECG1      0.348 0.173 Inf     0.131     0.924    1  -2.118  0.0342\n\nResults are averaged over the levels of: Sex \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\ncontrast(emm_ecg,method=\"revpairwise\",type=\"response\",infer=T)\n\n contrast    odds.ratio   SE  df asymp.LCL asymp.UCL null z.ratio p.value\n ECG1 / ECG0       2.87 1.43 Inf      1.08      7.62    1   2.118  0.0342\n\nResults are averaged over the levels of: Sex \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\n\n\n\nFrom SAS output: Both chi-square tests had p-values above 0.05, which meant there was no evidence that the errors were not random.\nThe AIC values for the full model are lower than the intercept-only model, which meant model performance increased after including our covariates.\nAssuming the probability of developing CA is given by \\(\\theta_CA\\), the logistic model was estimated to be:\n\\[\nlogit~[\\hat{\\theta}_{CA}] = -1.17 + 1.28*SEX + 1.05*ECG\n\\]\nThere is a significant effect of sex (\\(\\beta = 1.28\\), p=0.01) and segment depression (\\(\\beta = 1.05\\), p=0.03) on the probability of developing CA disease. In terms of odds ratios, the odds that males develop CA is 3.58 (95% CI: 1.35,9.52) times that of females. Additionally, the odds of developing CA with higher segment depression is 2.87 (95% CI: 1.08, 7.62) times that of patients with lower segment depression in their ECG.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#exercise",
     "href": "Chapter8.html#exercise",
     "title": "EAB 770 - Chapter 8",
     "section": "Exercise",
-    "text": "Exercise\nA simple random sample of individuals from different age groups were asked about their caffeine and exercise habits.\n\nDataQuestions\n\n\n\n\n\nAge Group\nCaffeine\nYes Exercise\nNo Exercise\n\n\nYoung Adult\nYes Caffeine\n121\n158\n\n\nYoung Adult\nNo Caffeine\n36\n97\n\n\nOlder Adult\nYes Caffeine\n44\n132\n\n\nOlder Adult\nNo Caffeine\n15\n130\n\n\n\n\n\n\nUse logistic regression to estimate the logistic model for the data. Use Young Adult and No caffeine as the reference levels.\nIs there a significant age group effect on exercise habits?\nIs there a significant effect of caffeine intake on exercise habits?\nCalculate and interpret the appropriate odds ratios for age group and caffeine intake.\nDoes the model fit the data well?"
+    "text": "Exercise\nA simple random sample of individuals from different age groups were asked about their caffeine and exercise habits.\n\nDataQuestions\n\n\n\n\n\nAge Group\nCaffeine\nYes Exercise\nNo Exercise\n\n\nYoung Adult\nYes Caffeine\n121\n158\n\n\nYoung Adult\nNo Caffeine\n36\n97\n\n\nOlder Adult\nYes Caffeine\n44\n132\n\n\nOlder Adult\nNo Caffeine\n15\n130\n\n\n\nIt is also uploaded as line-level data as exercise_caffeine.csv on Canvas.\n\nexercise &lt;- read.csv(\"exercise_caffeine.csv\")\nglimpse(exercise)\n\nRows: 733\nColumns: 3\n$ AgeGrp   &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ Caffeine &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ Exercise &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n\n\n\n\n\nUse logistic regression to estimate the logistic model for the data. Use Young Adult and No caffeine as the reference levels.\nIs there a significant age group effect on exercise habits?\nIs there a significant effect of caffeine intake on exercise habits?\nCalculate and interpret the appropriate odds ratios for age group and caffeine intake.\nDoes the model fit the data well?",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#exercise-1",
     "href": "Chapter8.html#exercise-1",
     "title": "EAB 770 - Chapter 8",
     "section": "Exercise",
-    "text": "Exercise\nA simple random sample of individuals from different age groups were asked about their caffeine and exercise habits.\n\nSAS CodeAnswer\n\n\ndata caf;\ninput agegrp  caffeine  exercise  count;\ndatalines;\n0 1 1 121\n0 1 0 158\n0 0 1 36\n0 0 0 97\n1 1 1 44\n1 1 0 132\n1 0 1 15\n1 0 0 130\n;\n\nproc logistic;\nfreq count;\nmodel exercise(event='1')=agegrp caffeine / scale=none aggregate;\nrun;\n\n\nSuppose the probability of exercise is given by \\(\\theta\\),The estimated logistic regression model is: \\(logit (\\theta) = -1.08 -0.93*AGEGRP + 0.84*CAFFEINE\\).\nThere is a significant effect of age in the likelihood of exercising. The odds of an older participant reporting regular exercise is 0.39 (95% CI: 0.28, 0.56; p&lt;0.001) times that of younger participants.\nThere is a significant effect of caffeine intake on exercise. The odds of a participant reporting regular exercise when they consume caffeine is 2.3 (95% CI: 1.6,3.3; p&lt;0.001) times that of those who do not consume caffeine.\nThe deviance (p=0.39) and goodness-of-fit chi-square tests (p=0.40) showed no evidence against the randomness of errors, which indicates good model fit. The AIC and SC values also decreased after including covariates, also supporting good fit."
+    "text": "Exercise\nA simple random sample of individuals from different age groups were asked about their caffeine and exercise habits.\n\nSAS CodeR CodeAnswer\n\n\ndata caf;\ninput agegrp  caffeine  exercise  count;\ndatalines;\n0 1 1 121\n0 1 0 158\n0 0 1 36\n0 0 0 97\n1 1 1 44\n1 1 0 132\n1 0 1 15\n1 0 0 130\n;\n\nproc logistic;\nfreq count;\nmodel exercise(event='1')=agegrp caffeine / scale=none aggregate;\nrun;\n\n\n\nexercise &lt;- read.csv(\"exercise_caffeine.csv\")\nglimpse(exercise)\n\nRows: 733\nColumns: 3\n$ AgeGrp   &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ Caffeine &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ Exercise &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n\n\n\nmod_glm &lt;- glm(Exercise~AgeGrp+Caffeine,\n               data=exercise,\n               family=\"binomial\")\n\nsummary(mod_glm)\n\n\nCall:\nglm(formula = Exercise ~ AgeGrp + Caffeine, family = \"binomial\", \n    data = exercise)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  -1.0759     0.1711  -6.288 3.22e-10 ***\nAgeGrp       -0.9308     0.1789  -5.203 1.96e-07 ***\nCaffeine      0.8409     0.1866   4.507 6.58e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 888.82  on 732  degrees of freedom\nResidual deviance: 832.30  on 730  degrees of freedom\nAIC: 838.3\n\nNumber of Fisher Scoring iterations: 4\n\nlibrary(emmeans)\nemm &lt;- emmeans(mod_glm,~Caffeine,type=\"response\",infer=T)\nemm\n\n Caffeine  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n        0 0.176 0.0231 Inf     0.136     0.226  0.5  -9.696 &lt;0.0001\n        1 0.332 0.0233 Inf     0.288     0.379  0.5  -6.676 &lt;0.0001\n\nResults are averaged over the levels of: AgeGrp \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm,method='revpairwise', type=\"response\",infer=T)\n\n contrast              odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio\n Caffeine1 / Caffeine0       2.32 0.433 Inf      1.61      3.34    1   4.507\n p.value\n &lt;0.0001\n\nResults are averaged over the levels of: AgeGrp \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nemm_age &lt;- emmeans(mod_glm,~AgeGrp,type=\"response\",infer=T)\nemm_age\n\n AgeGrp  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n      0 0.342 0.0252 Inf     0.294     0.393  0.5  -5.861 &lt;0.0001\n      1 0.170 0.0211 Inf     0.132     0.215  0.5 -10.607 &lt;0.0001\n\nResults are averaged over the levels of: Caffeine \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm_age,method='pairwise', type=\"response\",infer=T)\n\n contrast          odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio\n AgeGrp0 / AgeGrp1       2.54 0.454 Inf      1.79       3.6    1   5.203\n p.value\n &lt;0.0001\n\nResults are averaged over the levels of: Caffeine \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nmod1 &lt;- glm(Exercise~1,\n               data=exercise,\n               family=\"binomial\")\nanova(mod1,mod_glm,test = \"LRT\")\n\nAnalysis of Deviance Table\n\nModel 1: Exercise ~ 1\nModel 2: Exercise ~ AgeGrp + Caffeine\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1       732     888.82                          \n2       730     832.30  2   56.515 5.345e-13 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nsummary(mod1)\n\n\nCall:\nglm(formula = Exercise ~ 1, family = \"binomial\", data = exercise)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -0.87276    0.08102  -10.77   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 888.82  on 732  degrees of freedom\nResidual deviance: 888.82  on 732  degrees of freedom\nAIC: 890.82\n\nNumber of Fisher Scoring iterations: 4\n\nsummary(mod_glm)\n\n\nCall:\nglm(formula = Exercise ~ AgeGrp + Caffeine, family = \"binomial\", \n    data = exercise)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  -1.0759     0.1711  -6.288 3.22e-10 ***\nAgeGrp       -0.9308     0.1789  -5.203 1.96e-07 ***\nCaffeine      0.8409     0.1866   4.507 6.58e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 888.82  on 732  degrees of freedom\nResidual deviance: 832.30  on 730  degrees of freedom\nAIC: 838.3\n\nNumber of Fisher Scoring iterations: 4\n\n\n\n\nSuppose the probability of exercise is given by \\(\\theta\\),The estimated logistic regression model is: \\(logit (\\theta) = -1.08 -0.93*AGEGRP + 0.84*CAFFEINE\\). The AIC for the full model is lower than that of the intercept only model, indicating better model fit.\nThere is a significant effect of age in the likelihood of exercising. The odds of an older participant reporting regular exercise is 0.39 (95% CI: 0.28, 0.56; p&lt;0.001) times that of younger participants.\nThere is a significant effect of caffeine intake on exercise. The odds of a participant reporting regular exercise when they consume caffeine is 2.3 (95% CI: 1.6,3.3; p&lt;0.001) times that of those who do not consume caffeine.\nSAS: The deviance (p=0.39) and goodness-of-fit chi-square tests (p=0.40) showed no evidence against the randomness of errors, which indicates good model fit. The AIC and SC values also decreased after including covariates, also supporting good fit.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#class-statement",
-    "href": "Chapter8.html#class-statement",
+    "objectID": "Chapter8.html#sas-class-statement",
+    "href": "Chapter8.html#sas-class-statement",
     "title": "EAB 770 - Chapter 8",
-    "section": "CLASS statement",
-    "text": "CLASS statement\n\nThe class statement can create dummy variable coding automatically through the LOGISTIC procedure.\n\nThe REF option allows us to set the reference level for each variable.\n\n\nproc logistic;\nclass cat;\nmodel y = x cat/scale=none aggregate;\nrun;"
+    "section": "SAS: CLASS statement",
+    "text": "SAS: CLASS statement\n\nThe class statement can create dummy variable coding automatically through the LOGISTIC procedure.\n\nThe REF option allows us to set the reference level for each variable.\n\n\nproc logistic;\nclass cat;\nmodel y = x cat/scale=none aggregate;\nrun;",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#model-parametrizations",
-    "href": "Chapter8.html#model-parametrizations",
+    "objectID": "Chapter8.html#sas-model-parameterizations",
+    "href": "Chapter8.html#sas-model-parameterizations",
     "title": "EAB 770 - Chapter 8",
-    "section": "Model parametrizations",
-    "text": "Model parametrizations\n\n\n\n\n\n\nNote\n\n\nEffect parametrization produces deviation from the grand mean. This is the default parametrization in the LOGISTIC procedure.\n\nThe reference level corresponds to \\(X=-1\\).\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nReference cell parametrization produces measureents based on reference level. This can be specified in the class statement as param=ref in the LOGISTIC procedure.\n\nThe reference level corresponds to \\(X=0\\)."
+    "section": "SAS: Model parameterizations",
+    "text": "SAS: Model parameterizations\n\n\n\n\n\n\nNote\n\n\nEffect parameterization produces deviation from the grand mean. The reference level corresponds to \\(X=-1\\).\n\nIn R, this is established using contr.sum()\nIn SAS, this is the default parameterization in the LOGISTIC procedure.\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nReference cell parameterization produces measurements based on reference level. The reference level corresponds to \\(X=0\\).\n\nIn R, this is established using contr.treatment() or contr.SAS(). This is the default in R.\nIn SAS, this can be specified in the class statement as param=ref in the LOGISTIC procedure.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-2",
     "href": "Chapter8.html#example-2",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.\n\nDataQuestions\n\n\n\n\n\n\nPerform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.\nUsing effect parametrization\nUsing reference cell parametrization"
+    "text": "Example\nThe data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.\n\nDataQuestions\n\n\n\n\n\n\nPerform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.\nUsing effect parameterization\nUsing reference cell parameterization",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-3",
     "href": "Chapter8.html#example-3",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.\n\nPerform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.\nUsing effect parametrization\nUsing reference cell parametrization\n\n\nSAS CodeAnswer\n\n\ndata sentence;\ninput type $ prior $ sentence $ count @@;\ndatalines;\nnrb some y 42 nrb some n 109\nnrb none y 17 nrb none n 75\nother some y 33 other some n 175\nother none y 53 other none n 359\n;\n\nproc logistic data=sentence order=data;\ntitle \"effect\";\n1class type(ref=\"nrb\") prior(ref=\"none\") / ;\nfreq count;\nmodel sentence(event='y') = type prior / scale=none aggregate;\nrun;\n\n\nproc logistic data=sentence order=data;\ntitle \"reference\";\n2class type(ref=\"nrb\") prior(ref=\"none\") / param=ref;\nfreq count;\nmodel sentence(event='y') = type prior / scale=none aggregate;\nrun;\n\n\n1\n\nDefault: effect parametrization\n\n2\n\nReference cell parametrization used after param=ref is specified.\n\n\n\n\nEffect parametrization: \\(logit (\\theta_{ij}) = -1.48 - 0.30 * TYPE +0.17* PRIOR\\)\nReference Cell parametrization: \\(logit (\\theta_{ij}) = -1.36- 0.59 * TYPE +0.35* PRIOR\\)\nThe odds of sending an offender to prison after committing other crimes is 0.55 times (95% CI: 0.38, 0.81) that when committing non-residential crimes. There is strong evidence against the null hypothesis of no difference.\nThe odds of sending an offender with some prior arrests are 1.42 times (95% CI: 0.974, 2.06) times more likely to be sent to prison than those who have no prior arrests. There is moderate evidence against the null hypothesis of no difference."
-  },
-  {
-    "objectID": "Chapter8.html#exercise-2",
-    "href": "Chapter8.html#exercise-2",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nRecall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parametrization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI."
-  },
-  {
-    "objectID": "Chapter8.html#exercise-3",
-    "href": "Chapter8.html#exercise-3",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nRecall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parametrization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.\n\nSAS CodeAnswer\n\n\ntitle \"effect\";\nproc logistic data=caf;\nfreq count;\nclass agegrp (REF='0') caffeine (REF='0');\nmodel exercise(event='1')=agegrp caffeine / scale=none aggregate;\nrun;\n\ntitle \"ref cell\";\nproc logistic data=caf;\nfreq count;\nclass agegrp (REF='0') caffeine (REF='0')/param=ref;\nmodel exercise(event='1')=agegrp caffeine / scale=none aggregate;\nrun;\n\n\nEffect parametrization: \\(logit (\\theta_{ij}) = -1.12 - 0.47 * AGEGRP +0.42* CAFFEINE\\)\nReference Cell parametrization: \\(logit (\\theta_{ij}) = -1.08- 0.93 * AGEGRP +0.84* CAFFEINE\\)\nThere is strong evidence of an effect of age (p&lt;0.001). The odds of older adults reporting regular exercise is 0.39 (95% CI: 0.28, 0.56) times that of younger adults.\nThere is strong evidence of an association with caffeine consumption (p&lt;0.001). The odds of reporting regular exercise for participants who consumed caffeine is 2.32 times that of those who do not consume caffeine."
-  },
-  {
-    "objectID": "Chapter8.html#saturated-models",
-    "href": "Chapter8.html#saturated-models",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Saturated models",
-    "text": "Saturated models\n\nSaturated models often include an interaction term \\(A*B\\), which tests the difference of the effect of B in the different levels of \\(A\\).\n\n\n\n\n\n\n\n\nSimple Effects\n\n\nThe effect of \\(B\\) conditional on the level of \\(A\\) is referred to as simple effects."
-  },
-  {
-    "objectID": "Chapter8.html#interaction-models",
-    "href": "Chapter8.html#interaction-models",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Interaction Models",
-    "text": "Interaction Models\nThe interaction model in the logistic regression framework can be written as:\n\\[\nlogit(\\theta) = \\alpha + \\beta_1 x_1  + \\beta_2 x_2 + \\beta_{12}x_1x_2\n\\]\n\n\n\n\n\n\nTip\n\n\nInteraction terms should be tested first (\\(x_1x_2\\)). If the interaction is not significant, it can be dropped from the model, leaving you with a main effects model."
-  },
-  {
-    "objectID": "Chapter8.html#interaction-models-1",
-    "href": "Chapter8.html#interaction-models-1",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Interaction models",
-    "text": "Interaction models\n\nInteraction testsFigure\n\n\n\nInteraction tests are Wald chi-square tests with \\((a-1)(b-1)\\) degrees of freedom, where \\(a\\) is the number of levels of A and \\(b\\) is the number of levels of B.\nThe degrees of freedom is also equal to the number of coefficients that should be allotted to the interactions.\n\nInteractions can be visually recognized using interaction plots."
-  },
-  {
-    "objectID": "Chapter8.html#non-dichotomous-explanatory-variables",
-    "href": "Chapter8.html#non-dichotomous-explanatory-variables",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Non-Dichotomous Explanatory Variables",
-    "text": "Non-Dichotomous Explanatory Variables\n\nWhat if the explanatory variables have more than two levels?\n\nNominal\nOrdinal\nContinuous"
-  },
-  {
-    "objectID": "Chapter8.html#non-dichotomous-explanatory-variables-1",
-    "href": "Chapter8.html#non-dichotomous-explanatory-variables-1",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Non-Dichotomous Explanatory Variables",
-    "text": "Non-Dichotomous Explanatory Variables\n\nRecall: Regression models\n\nIf an explanatory variable has \\(n\\) levels, \\((n-1)\\) dichotomous dummy variables are needed to be produced to include the explanatory variable in the regression model.\nIn interaction models, this leads to more interaction terms.\n\n\nFor a variable with \\((a-1)\\) levels \\[\nlogit(\\theta) = \\alpha + \\beta_1x_{a1} + \\beta_2x_{a2} + ... + \\beta_{(a-1)}x_{a,a-1}\n\\]\n\nThe matrix form of the predictor variables is called the Design Matrix."
-  },
-  {
-    "objectID": "Chapter8.html#non-dichotomous-explanatory-variables-2",
-    "href": "Chapter8.html#non-dichotomous-explanatory-variables-2",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Non-Dichotomous Explanatory Variables",
-    "text": "Non-Dichotomous Explanatory Variables\nFor a model with two variables/factors: one with \\((a-1)\\) levels and the other with \\((b-1)\\) levels, the interaction model can be written as:\n\\[\nlogit(\\theta) = \\alpha + \\beta_{a1}x_{a1} + \\beta_{a2}x_{a2} + ... + \\beta_{a,(a-1)}x_{a,a-1} +  \\beta_{b1}x_{b1} + \\beta_{b2}x_{b2} + ... + \\beta_{b(b-1)}x_{b,b-1} + Interaction\n\\]\n\\[\nInteraction = \\beta_{a1b1}x_{a1}x_{b1} + \\beta_{a1b2}x_{a1}x_{b2} + \\beta_{a2b1}x_{a2}x_{b1} +... + \\beta_{a,a-1;b,b-1}x_{a,a-1}x_{b,b-1}\n\\]"
-  },
-  {
-    "objectID": "Chapter8.html#nominal-explanatory-variables",
-    "href": "Chapter8.html#nominal-explanatory-variables",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Nominal Explanatory Variables",
-    "text": "Nominal Explanatory Variables\nSince there is no order in the levels of explanatory variables, we might be interested in the difference between specific levels\n\nExample: How did the difference in placebo and test treatments compare between Hospital 1 and Hospital 2?\nExample: How did the difference in placebo and test treatments compare in Hospital 2?"
-  },
-  {
-    "objectID": "Chapter8.html#contrasts",
-    "href": "Chapter8.html#contrasts",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Contrasts",
-    "text": "Contrasts\n\nContrasts are used in performing a formal test for estimable effects\nThe null hypotheses for these tests are usually the hypothesis of no effect\n\n“There is no main effect of Variable/ Factor A”\n“There is no interaction”\n“The estimated treatment mean of the first level of Factor A and first level of Factor B is zero”"
-  },
-  {
-    "objectID": "Chapter8.html#contrasts-estimable-effects",
-    "href": "Chapter8.html#contrasts-estimable-effects",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Contrasts: Estimable Effects",
-    "text": "Contrasts: Estimable Effects\nSuppose we refer to \\(logit(\\theta_{ij})\\) as \\(\\eta_{ij}\\).\n\n\n\n\n\n\n\nEstimable Effects\n\n\nEstimable effects are effects that can be expressed as the sum or difference of linear predictors \\(\\eta_{ij}\\).\n\n\n\n\nExample: How did the difference in placebo and test treatments compare between Hospital 1 and Hospital 2?\n\nThe null hypothesis can be expressed as \\(\\eta_{t1}-\\eta_{p1} -(\\eta_{t2}-\\eta_{p2}) = 0\\). This effect is estimable!\nThe expression can be expressed in terms of \\(\\beta_i\\) by substituting the linear predictor expressions."
-  },
-  {
-    "objectID": "Chapter8.html#contrasts-joint-tests",
-    "href": "Chapter8.html#contrasts-joint-tests",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Contrasts: Joint Tests",
-    "text": "Contrasts: Joint Tests\nSuppose we have an explanatory variable/factor \\(A\\) with three levels, which requires two different dummy variables. The regression model can be expressed as:\n\\[\nlogit (\\theta) = \\eta = \\alpha + \\beta_1 X_{a1} + \\beta_2 X_{a2}\n\\]\nTo test for a main effect of \\(A\\), we need to test the following null hypotheses simultaneously: \\(\\beta_1=0\\) and \\(\\beta_2=0\\). These could be done using joint tests.\n\nThe joint tests use Wald statistics similar to an ANOVA."
-  },
-  {
-    "objectID": "Chapter8.html#contrasts-sas",
-    "href": "Chapter8.html#contrasts-sas",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Contrasts: SAS",
-    "text": "Contrasts: SAS\nWe use the contrast statement in the LOGISTIC procedure to test these contrasts.\n\n\n\n\n\n\nNote\n\n\nIn SAS, we focus on the coefficients of each term defined in the linear predictor. Each linear predictor is broken down into the effect and interaction terms and simplified. The resulting coefficients would then make it to the contrast statement."
+    "text": "Example\nRecall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parameterization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-4",
     "href": "Chapter8.html#example-4",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nSuppose we are interested in modeling the mortality rate of cardiothoracic surgery across 4 hospitals. The resulting logistic regression model would be:\n\\[\n\\eta = \\alpha + \\beta_1X_{h1} + \\beta_1X_{h2} + \\beta_3X_{h3}\n\\]\nSuppose we want to test for a difference in mortality between hospital 1 and hospital 4.\n\nReference CellEffect\n\n\nThe effect due to Hospital 1 corresponds to the case \\((X_{h1},X_{h2},X_{h3} = 1,0,0)\\) yields a regression model given by: \\(\\alpha + \\beta_1\\). Hospital 4 corresponds to the case \\((X_{h1},X_{h2},X_{h3} = 0,0,0)\\), which yields a regression model given by: \\(\\alpha\\).\nThen the difference between Hospital 1 and Hospital 4 can be calculated as \\[\\alpha +\\beta_1 - \\alpha = \\beta_1 \\]. T he corresponding null hypothesis of no difference can the be written as \\[ 1* \\beta_1 + 0*\\beta_2 + 0*\\beta_3 = 0\\]\nIn SAS, we can code this as:\ncontrast A 1 0 0 ;\n\n\nThe effect due to Hospital 1 corresponds to the case \\((X_{h1},X_{h2},X_{h3} = 1,0,0)\\) yields a regression model given by: \\(\\alpha + \\beta_1\\). Hospital 4 corresponds to the case \\((X_{h1},X_{h2},X_{h3} = -1,-1,-1)\\), which yields a regression model given by: \\(\\alpha -\\beta_1 - \\beta_2 - \\beta_3\\).\nThen the difference between Hospital 1 and Hospital 4 can be calculated as \\[\\alpha +\\beta_1 - [\\alpha -\\beta_1 - \\beta_2 - \\beta_3] = 2\\beta_1 +\\beta_2 + \\beta_3\\].\nThe corresponding null hypothesis of no difference can the be written as:\n\\[\n2\\beta_1 +1* \\beta_2 + 1*\\beta_3 = 0\n\\]\nIn SAS, we can code this as:\ncontrast A 2 1 1 ;"
-  },
-  {
-    "objectID": "Chapter8.html#exercise-4",
-    "href": "Chapter8.html#exercise-4",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\), with \\(A_3\\) as the reference level. Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrization.\n\nThere is no difference between the first and third levels of A.\nThe mean effect of \\(A_1\\) and \\(A_2\\) is equal to the effect of \\(A_3\\)."
-  },
-  {
-    "objectID": "Chapter8.html#exercise-5",
-    "href": "Chapter8.html#exercise-5",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\), with \\(A_3\\) as the reference level. Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrization.\n\nThere is no effect difference between the first and third levels of A.\nThe mean effect of \\(A_1\\) and \\(A_2\\) is equal to the effect of \\(A_3\\).\n\nThe logit model can be expressed as:\n\\[\n\\eta = \\alpha + \\beta_1 X_1 + \\beta_2 X_2\n\\]\n\nItem 1Item 2\n\n\nReference Cell: Effect \\(A_1 = \\alpha + \\beta_1\\) Effect \\(A_3 = \\alpha\\)\nNo effect difference between the first and third levels: \\(A_1-A_3 = 0 \\to \\beta_1=0\\)\ncontrast A 1 0;\nEffect parametrization: Effect \\(A_1 = \\alpha + \\beta_1\\) Effect \\(A_3 = \\alpha-\\beta_1 - \\beta_2\\)\nNo effect difference between the first and third levels: \\(A_1-A_3 = 0 \\to 2\\beta_1 +\\beta_2=0\\)\ncontrast A 2 1;\n\n\nReference Cell: Effect \\(A_1 = \\alpha + \\beta_1\\) Effect \\(A_2 = \\alpha + \\beta_2\\) Effect \\(A_3 = \\alpha\\)\nNo effect difference between the first and third levels: \\((A_1+A_2)/2-A_3 = 0 \\to \\beta_1+\\beta_2=0\\)\ncontrast A 1 1;\nEffect parametrization: Effect \\(A_1 = \\alpha + \\beta_1\\) Effect \\(A_2 = \\alpha + \\beta_2\\) Effect \\(A_3 = \\alpha-\\beta_1 - \\beta_2\\)\nNo effect difference between the first and third levels: \\((A_1+A_2)/2-A_3 = 0 \\to 1* \\beta_1 +1* \\beta_2=0\\)\ncontrast A 1 1;"
-  },
-  {
-    "objectID": "Chapter8.html#exercise-6",
-    "href": "Chapter8.html#exercise-6",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\) and Factor B with two levels \\((B_1,B_2)\\), with \\(A_3\\) and \\(B_2\\) as the reference level. Suppose \\(\\theta\\) is a probability of observing success for a dichotomous response variable \\(y\\).\n\nPlease write the saturated/interaction logistic model for \\(\\theta\\)\n\nProvide the corresponding null hypothesis and formulate the SAS contrast statements for both reference cell and effect parametrizations.\n\n“There is no interaction between A and B”."
-  },
-  {
-    "objectID": "Chapter8.html#exercise-7",
-    "href": "Chapter8.html#exercise-7",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\) and Factor B with two levels \\((B_1,B_2)\\), with \\(A_3\\) and \\(B_2\\) as the reference level. Suppose \\(\\theta\\) is a probability of observing success for a dichotomous response variable \\(y\\).\n\nPlease write the saturated/interaction logistic model for \\(\\theta\\)\n\n\\[\n\\eta = \\alpha + \\beta_{A1}x_{A1} + \\beta_{A2}x_{A2} +\n\\beta_{B1}x_{B1}  +  \\beta_{A1B1}x_{A1}x_{B1} + \\beta_{A2B1}x_{A2}x_{B1}\n\\]\nProvide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrizations.\n\n“There is no interaction between A and B”.\n\nThe joint tests of the following hypotheses should be tested: \\(\\beta_{A1B1} = 0\\) and \\(\\beta_{A2B1}=0\\).\n\n\ncontrast A*B 1 0,\n        A*B 0 1;"
-  },
-  {
-    "objectID": "Chapter8.html#implementing-qualitative-explanatory-variables-in-sas",
-    "href": "Chapter8.html#implementing-qualitative-explanatory-variables-in-sas",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Implementing Qualitative Explanatory Variables in SAS",
-    "text": "Implementing Qualitative Explanatory Variables in SAS\n\nUse the class statement in LOGISTIC procedure to identify qualitative variables.\nInteraction between Factors A and B are included in the model as \\(A*B\\)\n\nTo include the saturated model of Factors A and B, you can write (response variable)=A|B.\nYou can add more than two factors in these statements.\nThree-way interaction: A*B*C\nSaturated model for a three-factor model: A|B|C\n\nIf you wish to only include up to two-way interactions in a three-factor model: A|B|C@2\nYou can introduce contrasts in the contrast statement.\neffectplot can be used to create interaction plots.\noddsratio calculates odds ratios and graphs of confidence limits for odds ratios."
+    "text": "Example\nRecall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parameterization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.\n\nSAS CodeR CodeAnswer\n\n\ntitle \"effect\";\nproc logistic data=caf;\nfreq count;\nclass agegrp (REF='0') caffeine (REF='0');\nmodel exercise(event='1')=agegrp caffeine / scale=none aggregate;\nrun;\n\ntitle \"ref cell\";\nproc logistic data=caf;\nfreq count;\nclass agegrp (REF='0') caffeine (REF='0')/param=ref;\nmodel exercise(event='1')=agegrp caffeine / scale=none aggregate;\nrun;\n\n\n\nlibrary(tidyverse)\nexercise &lt;- read.csv(\"exercise_caffeine.csv\")\nglimpse(exercise)\n\nRows: 733\nColumns: 3\n$ AgeGrp   &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ Caffeine &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ Exercise &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n\n\nReference Cell parameterization\n\noptions(contrasts=c(\"contr.treatment\",\"contr.poly\"))\n\n\nmod_glm &lt;- glm(Exercise~AgeGrp+Caffeine,\n               data=exercise,\n               family=\"binomial\")\n\nsummary(mod_glm)\n\n\nCall:\nglm(formula = Exercise ~ AgeGrp + Caffeine, family = \"binomial\", \n    data = exercise)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  -1.0759     0.1711  -6.288 3.22e-10 ***\nAgeGrp       -0.9308     0.1789  -5.203 1.96e-07 ***\nCaffeine      0.8409     0.1866   4.507 6.58e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 888.82  on 732  degrees of freedom\nResidual deviance: 832.30  on 730  degrees of freedom\nAIC: 838.3\n\nNumber of Fisher Scoring iterations: 4\n\nlibrary(emmeans)\nemm &lt;- emmeans(mod_glm,~Caffeine,type=\"response\",infer=T)\nemm\n\n Caffeine  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n        0 0.176 0.0231 Inf     0.136     0.226  0.5  -9.696 &lt;0.0001\n        1 0.332 0.0233 Inf     0.288     0.379  0.5  -6.676 &lt;0.0001\n\nResults are averaged over the levels of: AgeGrp \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm,method='revpairwise', type=\"response\",infer=T)\n\n contrast              odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio\n Caffeine1 / Caffeine0       2.32 0.433 Inf      1.61      3.34    1   4.507\n p.value\n &lt;0.0001\n\nResults are averaged over the levels of: AgeGrp \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nemm_age &lt;- emmeans(mod_glm,~AgeGrp,type=\"response\",infer=T)\nemm_age\n\n AgeGrp  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n      0 0.342 0.0252 Inf     0.294     0.393  0.5  -5.861 &lt;0.0001\n      1 0.170 0.0211 Inf     0.132     0.215  0.5 -10.607 &lt;0.0001\n\nResults are averaged over the levels of: Caffeine \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm_age,method='pairwise', type=\"response\",infer=T)\n\n contrast          odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio\n AgeGrp0 / AgeGrp1       2.54 0.454 Inf      1.79       3.6    1   5.203\n p.value\n &lt;0.0001\n\nResults are averaged over the levels of: Caffeine \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nmod1 &lt;- glm(Exercise~1,\n               data=exercise,\n               family=\"binomial\")\nanova(mod1,mod_glm,test = \"LRT\")\n\nAnalysis of Deviance Table\n\nModel 1: Exercise ~ 1\nModel 2: Exercise ~ AgeGrp + Caffeine\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1       732     888.82                          \n2       730     832.30  2   56.515 5.345e-13 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nsummary(mod1)\n\n\nCall:\nglm(formula = Exercise ~ 1, family = \"binomial\", data = exercise)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -0.87276    0.08102  -10.77   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 888.82  on 732  degrees of freedom\nResidual deviance: 888.82  on 732  degrees of freedom\nAIC: 890.82\n\nNumber of Fisher Scoring iterations: 4\n\n\n\n\n\n\n\n\nWarning\n\n\nEffect parameterization can only be implemented in R if the predictors are inputted as factors.\n\n\n\n\noptions(contrasts=c(\"contr.sum\",\"contr.poly\"))\n\nexercise &lt;- exercise |&gt; \n  mutate(AgeGrp=as.factor(AgeGrp),\n         Caffeine = as.factor(Caffeine))\n\nmod_glm &lt;- glm(Exercise~AgeGrp+Caffeine,\n               data=exercise,\n               family=\"binomial\")\n\nsummary(mod_glm)\n\n\nCall:\nglm(formula = Exercise ~ AgeGrp + Caffeine, family = \"binomial\", \n    data = exercise)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.12090    0.09714 -11.539  &lt; 2e-16 ***\nAgeGrp1      0.46541    0.08944   5.203 1.96e-07 ***\nCaffeine1   -0.42046    0.09330  -4.507 6.58e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 888.82  on 732  degrees of freedom\nResidual deviance: 832.30  on 730  degrees of freedom\nAIC: 838.3\n\nNumber of Fisher Scoring iterations: 4\n\nlibrary(emmeans)\nemm &lt;- emmeans(mod_glm,~Caffeine,type=\"response\",infer=T)\nemm\n\n Caffeine  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n 0        0.176 0.0231 Inf     0.136     0.226  0.5  -9.696 &lt;0.0001\n 1        0.332 0.0233 Inf     0.288     0.379  0.5  -6.676 &lt;0.0001\n\nResults are averaged over the levels of: AgeGrp \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm,method='revpairwise', type=\"response\",infer=T)\n\n contrast              odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio\n Caffeine1 / Caffeine0       2.32 0.433 Inf      1.61      3.34    1   4.507\n p.value\n &lt;0.0001\n\nResults are averaged over the levels of: AgeGrp \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nemm_age &lt;- emmeans(mod_glm,~AgeGrp,type=\"response\",infer=T)\nemm_age\n\n AgeGrp  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n 0      0.342 0.0252 Inf     0.294     0.393  0.5  -5.861 &lt;0.0001\n 1      0.170 0.0211 Inf     0.132     0.215  0.5 -10.607 &lt;0.0001\n\nResults are averaged over the levels of: Caffeine \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm_age,method='pairwise', type=\"response\",infer=T)\n\n contrast          odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio\n AgeGrp0 / AgeGrp1       2.54 0.454 Inf      1.79       3.6    1   5.203\n p.value\n &lt;0.0001\n\nResults are averaged over the levels of: Caffeine \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nmod1 &lt;- glm(Exercise~1,\n               data=exercise,\n               family=\"binomial\")\nanova(mod1,mod_glm,test = \"LRT\")\n\nAnalysis of Deviance Table\n\nModel 1: Exercise ~ 1\nModel 2: Exercise ~ AgeGrp + Caffeine\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1       732     888.82                          \n2       730     832.30  2   56.515 5.345e-13 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nsummary(mod1)\n\n\nCall:\nglm(formula = Exercise ~ 1, family = \"binomial\", data = exercise)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -0.87276    0.08102  -10.77   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 888.82  on 732  degrees of freedom\nResidual deviance: 888.82  on 732  degrees of freedom\nAIC: 890.82\n\nNumber of Fisher Scoring iterations: 4\n\n\n\n\nEffect parameterization: \\(logit (\\theta_{ij}) = -1.12 - 0.47 * AGEGRP +0.42* CAFFEINE\\)\nReference Cell parameterization: \\(logit (\\theta_{ij}) = -1.08- 0.93 * AGEGRP +0.84* CAFFEINE\\)\nThere is strong evidence of an effect of age (p&lt;0.001). The odds of older adults reporting regular exercise is 0.39 (95% CI: 0.28, 0.56) times that of younger adults.\nThere is strong evidence of an association with caffeine consumption (p&lt;0.001). The odds of reporting regular exercise for participants who consumed caffeine is 2.32 times that of those who do not consume caffeine.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-5",
     "href": "Chapter8.html#example-5",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data set is from a cross-sectional prevalence study conducted to investigate textile worker complaints about respiratory symptoms experienced while working in the mills. Investigators were interested in whether occupational environment was related to prevalence of respiratory ailments associated with the disease byssinosis.\n\nUse logistic regression to model the probability of complaining based on workplace condition, years of employment, and smoking history. Include only up to two-way interaction effects.\nIs there evidence of any two-way interactions at a significance level of 0.10?\nGenerate an interaction plot for these cases.\nGenerate the main effects using contrast statements.\n\n\nTableSAS Data Set\n\n\n\n\n\ndata byss;\ninput work $ years $ smoke $ status $ count @@;\ndatalines ;\ndusty &lt;10 yes yes 30 dusty &lt;10 yes no 203\ndusty &lt;10 no yes 7 dusty &lt;10 no no 119\ndusty &gt;=10 yes yes 57 dusty &gt;=10 yes no 161\ndusty &gt;=10 no yes 11 dusty &gt;=10 no no 81\nnot &lt;10 yes yes 14 not &lt;10 yes no 1340\nnot &lt;10 no yes 12 not &lt;10 no no 1004\nnot &gt;=10 yes yes 24 not &gt;=10 yes no 1360\nnot &gt;=10 no yes 10 not &gt;=10 no no 986\n;"
+    "text": "Example\nThe data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.\n\nPerform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.\nUsing effect parameterization\nUsing reference cell parameterization\n\n\nSAS CodeR CodeAnswer\n\n\ndata sentence;\ninput type $ prior $ sentence $ count @@;\ndatalines;\nnrb some y 42 nrb some n 109\nnrb none y 17 nrb none n 75\nother some y 33 other some n 175\nother none y 53 other none n 359\n;\n\nproc logistic data=sentence order=data;\ntitle \"effect\";\n1class type(ref=\"nrb\") prior(ref=\"none\") / ;\nfreq count;\nmodel sentence(event='y') = type prior / scale=none aggregate;\nrun;\n\n\nproc logistic data=sentence order=data;\ntitle \"reference\";\n2class type(ref=\"nrb\") prior(ref=\"none\") / param=ref;\nfreq count;\nmodel sentence(event='y') = type prior / scale=none aggregate;\nrun;\n\n\n1\n\nDefault: effect parameterization\n\n2\n\nReference cell parameterization used after param=ref is specified.\n\n\n\n\nWe can also use glm() for aggregated counts, but we don’t need to create a contingency table.\n\ndat &lt;- expand.grid(type = c(\"nonresidential\",\"other\"),\n                   prior = c(\"none\",\"some\"))\ndat$prison &lt;- c(17,53,42,33)\ndat$noprison &lt;- c(75,359,109,175)\n\ndat\n\n            type prior prison noprison\n1 nonresidential  none     17       75\n2          other  none     53      359\n3 nonresidential  some     42      109\n4          other  some     33      175\n\n\nReference Cell Parameterization\n\noptions(contrasts=c(\"contr.treatment\",\"contr.poly\"))\nmod_glm &lt;- glm(cbind(prison,noprison)~type + prior,data=dat,family=\"binomial\")\nsummary(mod_glm)\n\n\nCall:\nglm(formula = cbind(prison, noprison) ~ type + prior, family = \"binomial\", \n    data = dat)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  -1.3603     0.1962  -6.933 4.13e-12 ***\ntypeother    -0.5920     0.1968  -3.008  0.00263 ** \npriorsome     0.3469     0.1906   1.820  0.06875 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 16.59755  on 3  degrees of freedom\nResidual deviance:  0.50763  on 1  degrees of freedom\nAIC: 27.079\n\nNumber of Fisher Scoring iterations: 3\n\nlibrary(emmeans)\nemm &lt;- emmeans(mod_glm,~type,type=\"response\",infer=T)\nemm\n\n type            prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n nonresidential 0.234 0.0274 Inf     0.184     0.292  0.5  -7.747 &lt;0.0001\n other          0.144 0.0146 Inf     0.118     0.175  0.5 -15.051 &lt;0.0001\n\nResults are averaged over the levels of: prior \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm,method=\"revpairwise\",type=\"response\",infer=T)\n\n contrast               odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio\n other / nonresidential      0.553 0.109 Inf     0.376     0.814    1  -3.008\n p.value\n  0.0026\n\nResults are averaged over the levels of: prior \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nemm_prior &lt;- emmeans(mod_glm,~prior,type=\"response\",infer=T)\nemm_prior\n\n prior  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n none  0.160 0.0186 Inf     0.127     0.200  0.5 -11.971 &lt;0.0001\n some  0.213 0.0219 Inf     0.173     0.259  0.5 -10.012 &lt;0.0001\n\nResults are averaged over the levels of: type \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm_prior,method=\"revpairwise\",type=\"response\",infer=T)\n\n contrast    odds.ratio   SE  df asymp.LCL asymp.UCL null z.ratio p.value\n some / none       1.41 0.27 Inf     0.974      2.06    1   1.820  0.0687\n\nResults are averaged over the levels of: type \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\n\n\n\n\n\n\n\nTip\n\n\nTry replacing “contr.treatment” with “contr.SAS”. Which parts of the output change? Which parts do not change?\n\n\n\nEffect parameterization\n\noptions(contrasts=c(\"contr.sum\",\"contr.poly\"))\nmod_glm &lt;- glm(cbind(prison,noprison)~type + prior,data=dat,family=\"binomial\")\nsummary(mod_glm)\n\n\nCall:\nglm(formula = cbind(prison, noprison) ~ type + prior, family = \"binomial\", \n    data = dat)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.48282    0.09507 -15.596  &lt; 2e-16 ***\ntype1        0.29598    0.09838   3.008  0.00263 ** \nprior1      -0.17347    0.09531  -1.820  0.06875 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 16.59755  on 3  degrees of freedom\nResidual deviance:  0.50763  on 1  degrees of freedom\nAIC: 27.079\n\nNumber of Fisher Scoring iterations: 3\n\nemm &lt;- emmeans(mod_glm,~type,type=\"response\",infer=T)\nemm\n\n type            prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n nonresidential 0.234 0.0274 Inf     0.184     0.292  0.5  -7.747 &lt;0.0001\n other          0.144 0.0146 Inf     0.118     0.175  0.5 -15.051 &lt;0.0001\n\nResults are averaged over the levels of: prior \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm,method=\"pairwise\",type=\"response\",infer=T)\n\n contrast               odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio\n nonresidential / other       1.81 0.356 Inf      1.23      2.66    1   3.008\n p.value\n  0.0026\n\nResults are averaged over the levels of: prior \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nemm_prior &lt;- emmeans(mod_glm,~prior,type=\"response\",infer=T)\nemm_prior\n\n prior  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n none  0.160 0.0186 Inf     0.127     0.200  0.5 -11.971 &lt;0.0001\n some  0.213 0.0219 Inf     0.173     0.259  0.5 -10.012 &lt;0.0001\n\nResults are averaged over the levels of: type \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm_prior,method=\"pairwise\",type=\"response\",infer=T)\n\n contrast    odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio p.value\n none / some      0.707 0.135 Inf     0.486      1.03    1  -1.820  0.0687\n\nResults are averaged over the levels of: type \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\n\n\n\nEffect parameterization: \\(logit (\\theta_{ij}) = -1.48 - 0.30 * TYPE +0.17* PRIOR\\)\nReference Cell parameterization: \\(logit (\\theta_{ij}) = -1.36- 0.59 * TYPE +0.35* PRIOR\\)\nThe odds of sending an offender to prison after committing other crimes is 0.55 times (95% CI: 0.38, 0.81) that when committing non-residential crimes. There is strong evidence against the null hypothesis of no difference.\nThe odds of sending an offender with some prior arrests are 1.42 times (95% CI: 0.974, 2.06) times more likely to be sent to prison than those who have no prior arrests. There is moderate evidence against the null hypothesis of no difference.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#saturated-models",
+    "href": "Chapter8.html#saturated-models",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Saturated models",
+    "text": "Saturated models\n\nSaturated models often include an interaction term \\(A*B\\), which tests the difference of the effect of B in the different levels of \\(A\\).\n\n\n\n\n\n\n\n\nSimple Effects\n\n\nThe effect of \\(B\\) conditional on the level of \\(A\\) is referred to as simple effects.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#interaction-models",
+    "href": "Chapter8.html#interaction-models",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Interaction Models",
+    "text": "Interaction Models\nThe interaction model in the logistic regression framework can be written as:\n\\[\nlogit(\\theta) = \\alpha + \\beta_1 x_1  + \\beta_2 x_2 + \\beta_{12}x_1x_2\n\\]\n\n\n\n\n\n\nTip\n\n\nInteraction terms should be tested first (\\(x_1x_2\\)). If the interaction is not significant, it can be dropped from the model, leaving you with a main effects model.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#interaction-models-1",
+    "href": "Chapter8.html#interaction-models-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Interaction models",
+    "text": "Interaction models\n\nInteraction testsFigure\n\n\n\nInteraction tests are Wald chi-square tests with \\((a-1)(b-1)\\) degrees of freedom, where \\(a\\) is the number of levels of A and \\(b\\) is the number of levels of B.\nThe degrees of freedom is also equal to the number of coefficients that should be allotted to the interactions.\n\nInteractions can be visually recognized using interaction plots.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#non-dichotomous-explanatory-variables",
+    "href": "Chapter8.html#non-dichotomous-explanatory-variables",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Non-Dichotomous Explanatory Variables",
+    "text": "Non-Dichotomous Explanatory Variables\n\nWhat if the explanatory variables have more than two levels?\n\nNominal\nOrdinal\nContinuous",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#non-dichotomous-explanatory-variables-1",
+    "href": "Chapter8.html#non-dichotomous-explanatory-variables-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Non-Dichotomous Explanatory Variables",
+    "text": "Non-Dichotomous Explanatory Variables\nIf an explanatory variable has \\(n\\) levels, \\((n-1)\\) dichotomous dummy variables are needed to be produced to include the explanatory variable in the regression model.\n\n\n\n\n\n\nNote\n\n\nIn interaction models, this leads to more interaction terms.\n\n\n\nFor a variable with \\((a-1)\\) levels \\[\nlogit(\\theta) = \\alpha + \\beta_1x_{a1} + \\beta_2x_{a2} + ... + \\beta_{(a-1)}x_{a,a-1}\n\\]\nThe matrix form of the predictor variables is called the Design Matrix.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#non-dichotomous-explanatory-variables-2",
+    "href": "Chapter8.html#non-dichotomous-explanatory-variables-2",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Non-Dichotomous Explanatory Variables",
+    "text": "Non-Dichotomous Explanatory Variables\nFor a model with two variables/factors: one with \\((a-1)\\) levels and the other with \\((b-1)\\) levels, the interaction model can be written as:\n\\[\nlogit(\\theta) = \\alpha + \\beta_{a1}x_{a1} + \\beta_{a2}x_{a2} + ... + \\beta_{a,(a-1)}x_{a,a-1} +  \\beta_{b1}x_{b1} + \\beta_{b2}x_{b2} + ... + \\beta_{b(b-1)}x_{b,b-1} + Interaction\n\\]\n\\[\nInteraction = \\beta_{a1b1}x_{a1}x_{b1} + \\beta_{a1b2}x_{a1}x_{b2} + \\beta_{a2b1}x_{a2}x_{b1} +... + \\beta_{a,a-1;b,b-1}x_{a,a-1}x_{b,b-1}\n\\]",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#nominal-explanatory-variables",
+    "href": "Chapter8.html#nominal-explanatory-variables",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Nominal Explanatory Variables",
+    "text": "Nominal Explanatory Variables\nSince there is no order in the levels of explanatory variables, we might be interested in the difference between specific levels\n\nExample: How did the difference in placebo and test treatments compare between Hospital 1 and Hospital 2?\nExample: How did the placebo and test treatments compare in Hospital 2?",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#contrasts",
+    "href": "Chapter8.html#contrasts",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Contrasts",
+    "text": "Contrasts\n\nContrasts are used in performing a formal test for estimable effects\nThe null hypotheses for these tests are usually the hypothesis of no effect\n\n“There is no main effect of Variable/ Factor A”\n“There is no interaction”\n“The estimated treatment mean of the first level of Factor A and first level of Factor B is zero”",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#contrasts-estimable-effects",
+    "href": "Chapter8.html#contrasts-estimable-effects",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Contrasts: Estimable Effects",
+    "text": "Contrasts: Estimable Effects\nSuppose we refer to \\(logit(\\theta_{ij})\\) as \\(\\eta_{ij}\\).\n\n\n\n\n\n\n\nEstimable Effects\n\n\nEstimable effects are effects that can be expressed as the sum or difference of linear predictors \\(\\eta_{ij}\\).\n\n\n\n\nExample: How did the difference in placebo and test treatments compare between Hospital 1 and Hospital 2?\n\nThe null hypothesis can be expressed as \\(\\eta_{t1}-\\eta_{p1} -(\\eta_{t2}-\\eta_{p2}) = 0\\). This effect is estimable!\nThe expression can be expressed in terms of \\(\\beta_i\\) by substituting the linear predictor expressions.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#contrasts-joint-tests",
+    "href": "Chapter8.html#contrasts-joint-tests",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Contrasts: Joint Tests",
+    "text": "Contrasts: Joint Tests\nSuppose we have an explanatory variable/factor \\(A\\) with three levels, which requires two different dummy variables. The regression model can be expressed as:\n\\[\nlogit (\\theta) = \\eta = \\alpha + \\beta_1 X_{a1} + \\beta_2 X_{a2}\n\\]\nTo test for a main effect of \\(A\\), we need to test the following null hypotheses simultaneously: \\(\\beta_1=0\\) and \\(\\beta_2=0\\). These could be done using joint tests.\n\nThe joint tests use Wald statistics similar to an ANOVA.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#contrasts-sas",
+    "href": "Chapter8.html#contrasts-sas",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Contrasts: SAS",
+    "text": "Contrasts: SAS\nWe use the contrast statement in the LOGISTIC procedure to test these contrasts.\n\n\n\n\n\n\nNote\n\n\nIn SAS, we focus on the coefficients of each term defined in the linear predictor. Each linear predictor is broken down into the effect and interaction terms and simplified. The resulting coefficients would then make it to the contrast statement.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#contrasts-r",
+    "href": "Chapter8.html#contrasts-r",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Contrasts: R",
+    "text": "Contrasts: R\nThe contrast() function in the emmeans package enables us to perform contrasts. There are preset contrasts like “pairwise” and “revpairwise” that do not need to specify coefficients. Complex contrasts and joint tests need to have the coefficient inputted in the function.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#example-sas",
+    "href": "Chapter8.html#example-sas",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Example: SAS",
+    "text": "Example: SAS\nSuppose we are interested in modeling the mortality rate of cardiothoracic surgery across 4 hospitals. The resulting logistic regression model would be:\n\\[\n\\eta = \\alpha + \\beta_1X_{h1} + \\beta_1X_{h2} + \\beta_3X_{h3}\n\\]\nSuppose we want to test for a difference in mortality between hospital 1 and hospital 4.\n\nReference CellEffect\n\n\nThe effect due to Hospital 1 corresponds to the case \\((X_{h1},X_{h2},X_{h3} = 1,0,0)\\) yields a regression model given by: \\(\\alpha + \\beta_1\\). Hospital 4 corresponds to the case \\((X_{h1},X_{h2},X_{h3} = 0,0,0)\\), which yields a regression model given by: \\(\\alpha\\).\nThen the difference between Hospital 1 and Hospital 4 can be calculated as \\[\\alpha +\\beta_1 - \\alpha = \\beta_1 \\]. T he corresponding null hypothesis of no difference can the be written as \\[ 1* \\beta_1 + 0*\\beta_2 + 0*\\beta_3 = 0\\]\nIn SAS, we can code this as:\ncontrast A 1 0 0 ;\n\n\nThe effect due to Hospital 1 corresponds to the case \\((X_{h1},X_{h2},X_{h3} = 1,0,0)\\) yields a regression model given by: \\(\\alpha + \\beta_1\\). Hospital 4 corresponds to the case \\((X_{h1},X_{h2},X_{h3} = -1,-1,-1)\\), which yields a regression model given by: \\(\\alpha -\\beta_1 - \\beta_2 - \\beta_3\\).\nThen the difference between Hospital 1 and Hospital 4 can be calculated as \\[\\alpha +\\beta_1 - [\\alpha -\\beta_1 - \\beta_2 - \\beta_3] = 2\\beta_1 +\\beta_2 + \\beta_3\\].\nThe corresponding null hypothesis of no difference can the be written as:\n\\[\n2\\beta_1 +1* \\beta_2 + 1*\\beta_3 = 0\n\\]\nIn SAS, we can code this as:\ncontrast A 2 1 1 ;\nIn R, we can code this as:\n\ncontrast_list &lt;- list(contrast1=c(2,1,1))\ncontrast(emm,method=contrast_list,type=\"response\")",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#example-r",
+    "href": "Chapter8.html#example-r",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Example: R",
+    "text": "Example: R\nSuppose we are interested in modeling the mortality rate of cardiothoracic surgery across 4 hospitals. The resulting logistic regression model would be:\n\\[\n\\eta = \\alpha + \\beta_1X_{h1} + \\beta_1X_{h2} + \\beta_3X_{h3}\n\\]\nThe contrast() function uses the coefficients of the marginal means to perform the contrast. Suppose we want to test for a difference in mortality between hospital 1 and hospital 4. This means we are testing the hypothesis \\(H_0: \\mu_1-\\mu_4=0\\), which can be interpreted as:\n\\[\n\\mu_1 + 0*\\mu_2 + 0*\\mu_3 -\\mu_4 =0\n\\]\nwhich yields the coefficients (1,0,0,-1). In R, we can code this as:\n\nemm &lt;- emmeans(mod_glm,~hospital,type=\"response\")\n\ncontrast_list &lt;- list(contrast1=c(1,0,0,-1))\ncontrast(emm,method=contrast_list,type=\"response\")",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#exercise-sas",
+    "href": "Chapter8.html#exercise-sas",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Exercise: SAS",
+    "text": "Exercise: SAS\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\), with \\(A_3\\) as the reference level. Provide the corresponding null hypotheses and formulate the contrast statements for both reference cell and effect parameterization.\n\nThere is no difference between the first and third levels of A.\nThe mean effect of \\(A_1\\) and \\(A_2\\) is equal to the effect of \\(A_3\\).",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#exercise-sas-1",
+    "href": "Chapter8.html#exercise-sas-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Exercise: SAS",
+    "text": "Exercise: SAS\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\), with \\(A_3\\) as the reference level. Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parameterization.\n\nThere is no effect difference between the first and third levels of A.\nThe mean effect of \\(A_1\\) and \\(A_2\\) is equal to the effect of \\(A_3\\).\n\nThe logit model can be expressed as:\n\\[\n\\eta = \\alpha + \\beta_1 X_1 + \\beta_2 X_2\n\\]\n\nItem 1Item 2\n\n\nReference Cell: Effect \\(A_1 = \\alpha + \\beta_1\\) Effect \\(A_3 = \\alpha\\)\nNo effect difference between the first and third levels: \\(A_1-A_3 = 0 \\to \\beta_1=0\\). Therefore, the contrast coefficients are \\((\\beta_1,\\beta_2) = (1,0)\\).\ncontrast A 1 0;\nEffect parameterization: Effect \\(A_1 = \\alpha + \\beta_1\\) Effect \\(A_3 = \\alpha-\\beta_1 - \\beta_2\\)\nNo effect difference between the first and third levels: \\(A_1-A_3 = 0 \\to 2\\beta_1 +\\beta_2=0\\). Therefore, the contrast coefficients are \\((\\beta_1,\\beta_2) = (2,1)\\).\ncontrast A 2 1;\n\n\nReference Cell: Effect \\(A_1 = \\alpha + \\beta_1\\) Effect \\(A_2 = \\alpha + \\beta_2\\) Effect \\(A_3 = \\alpha\\)\nNo effect difference between the first and third levels: \\((A_1+A_2)/2-A_3 = 0 \\to 1/2(\\beta_1+\\beta_2)=0\\). Therefore, the contrast coefficients are \\((\\beta_1,\\beta_2) = (0.5,0.5)\\).\ncontrast A 0.5 0.5;\nEffect parameterization: Effect \\(A_1 = \\alpha + \\beta_1\\) Effect \\(A_2 = \\alpha + \\beta_2\\) Effect \\(A_3 = \\alpha-\\beta_1 - \\beta_2\\)\nNo effect difference between the first and third levels: \\((A_1+A_2)/2-A_3 = 0 \\to 3/2(\\beta_1+\\beta_2)=0\\). Therefore, the contrast coefficients are \\((\\beta_1,\\beta_2) = (1.5,1.5)\\).\ncontrast A 1.5 1.5;",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#exercise-r",
+    "href": "Chapter8.html#exercise-r",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Exercise: R",
+    "text": "Exercise: R\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\), with \\(A_3\\) as the reference level. Provide the corresponding null hypotheses and formulate the contrast statements.\n\nQuestionsAnswer\n\n\n\nThere is no difference between the first and third levels of A.\nThe mean effect of \\(A_1\\) and \\(A_2\\) is equal to the effect of \\(A_3\\).\n\n\n\n\ncontrast1: There is no difference between the first and third levels of A. \\((\\mu_1-\\mu_3) = 0\\)\ncontrast2:The mean effect of \\(A_1\\) and \\(A_2\\) is equal to the effect of \\(A_3\\). \\(\\frac{\\mu_1+\\mu_2}{2}-\\mu_3=0\\).\n\n\ncontrast_list &lt;- list(contrast1 = c(1,0,-1),\n                      contrast2 = c(1/2,1/2,-1))\ncontrast(emm,method=contrast_list)",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-6",
     "href": "Chapter8.html#example-6",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data set is from a cross-sectional prevalence study conducted to investigate textile worker complaints about respiratory symptoms experienced while working in the mills. Investigators were interested in whether occupational environment was related to prevalence of respiratory ailments associated with the disease byssinosis.\n\nQuestionsSAS CodeAnswer\n\n\n\nUse logistic regression to model the probability of complaining based on workplace condition, years of employment, and smoking history. Include only up to two-way interaction effects.\nIs there evidence of any two-way interactions at a significance level of 0.10?\nGenerate an interaction plot for these cases.\nGenerate the main effects using contrast statements.\n\n\n\nproc logistic data=byss;\nfreq count;\nclass work years(ref=first) smoke(ref=first) /param=ref;\nmodel status(event=last) = work|years|smoke@2 /scale=none aggregate;\neffectplot interaction (x=work) / at(smoke=all years=all) link noobs;\noddsratios work;\ncontrast 'work' work 1;\ncontrast 'years' years 1;\ncontrast 'smoke' smoke 1;\nrun;\n\n\n\\(Work*Smoke\\) (p = 0.07) is significant at the 0.10 level."
+    "text": "Example\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\) and Factor B with two levels \\((B_1,B_2)\\), with \\(A_3\\) and \\(B_2\\) as the reference level. Suppose \\(\\theta\\) is a probability of observing success for a dichotomous response variable \\(y\\).\n\nPlease write the saturated/interaction logistic model for \\(\\theta\\)\n\nProvide the corresponding null hypothesis and formulate the contrast statements for both reference cell and effect parameterizations.\n\n“There is no interaction between A and B”.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#exercise-8",
-    "href": "Chapter8.html#exercise-8",
+    "objectID": "Chapter8.html#example-sas-1",
+    "href": "Chapter8.html#example-sas-1",
     "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nThe following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.\n\nAre we interested in main effects or interaction?\nIs there a significant interaction effect?\nCalculate the odds ratio between the diagnoses of UTI for different treatments.\nGenerate plots for the interaction and odds ratios.\n\n\nTableSAS Data Set\n\n\n\n\n\ndata uti;\ninput diagnosis : $13. treatment $ response $ count @@;\ndatalines;\ncomplicated A cured 78 complicated A not 28\ncomplicated B cured 101 complicated B not 11\ncomplicated C cured 68 complicated C not 46\nuncomplicated A cured 40 uncomplicated A not 5\nuncomplicated B cured 54 uncomplicated B not 5\nuncomplicated C cured 34 uncomplicated C not 6\n;"
+    "section": "Example: SAS",
+    "text": "Example: SAS\nConsider a Factor A with three levels \\((A_1,A_2,A_3)\\) and Factor B with two levels \\((B_1,B_2)\\), with \\(A_3\\) and \\(B_2\\) as the reference level. Suppose \\(\\theta\\) is a probability of observing success for a dichotomous response variable \\(y\\).\n\nWrite the saturated/interaction logistic model for \\(\\theta\\)\n\n\\[\n\\eta = \\alpha + \\beta_{A1}x_{A1} + \\beta_{A2}x_{A2} +\\\\\n\\beta_{B1}x_{B1}+ \\beta_{A1B1}x_{A1}x_{B1} + \\beta_{A2B1}x_{A2}x_{B1}\n\\]\nProvide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parameterizations.\n\n“There is no interaction between A and B”.\n\nThe joint tests of the following hypotheses should be tested: \\(\\beta_{A1B1} = 0\\) and \\(\\beta_{A2B1}=0\\), which corresponds to the following coefficients for A*B: (1,0) and (0,1).\n\n\ncontrast A*B 1 0,\n              0 1;",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#exercise-9",
-    "href": "Chapter8.html#exercise-9",
+    "objectID": "Chapter8.html#example-r-1",
+    "href": "Chapter8.html#example-r-1",
     "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nThe following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.\n\nAre we interested in main effects or interaction?\nIs there a significant interaction effect?\nCalculate the odds ratio between the diagnoses of UTI for different treatments.\nGenerate plots for the interaction and odds ratios.\n\n\nSAS CodeAnswer\n\n\ndata uti;\ninput diagnosis : $13. treatment $ response $ count @@;\ndatalines;\ncomplicated A cured 78 complicated A not 28\ncomplicated B cured 101 complicated B not 11\ncomplicated C cured 68 complicated C not 46\nuncomplicated A cured 40 uncomplicated A not 5\nuncomplicated B cured 54 uncomplicated B not 5\nuncomplicated C cured 34 uncomplicated C not 6\n;\n\nproc logistic data=uti order=data;\nfreq count;\nclass diagnosis treatment /param=ref;\nmodel response(event='cured') = diagnosis|treatment /scale=none aggregate;\neffectplot interaction (x=treatment) / at(treatment=all) link noobs;\noddsratios diagnosis;\nrun;\n\n\nWe are more interested in the interaction effect.\nThere is no significant interaction effect between diagnosis and treatment.\n\n\n\nOdds Ratios"
+    "section": "Example: R",
+    "text": "Example: R",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#continuous-and-ordinal-explanatory-variables",
-    "href": "Chapter8.html#continuous-and-ordinal-explanatory-variables",
+    "objectID": "Chapter8.html#implementing-qualitative-explanatory-variables-in-sas",
+    "href": "Chapter8.html#implementing-qualitative-explanatory-variables-in-sas",
     "title": "EAB 770 - Chapter 8",
-    "section": "Continuous and Ordinal Explanatory Variables",
-    "text": "Continuous and Ordinal Explanatory Variables\n\nSometimes, continuous explanatory variables are unique in the data set. The sample size requirements for the goodness-of-fit tests will not be satisfied.\n\nIncome\nAge\nYears in University\n\nThere should be at least 5 observations for the rarer outcome per parameter in the full model.\n\nIf there are 50 observations of the rarer outcome, then the maximum number of parameters supported is 10.\n\n\n\n\n\n\n\n\nNote\n\n\nContinuous variables should NOT be included in the class statement."
+    "section": "Implementing Qualitative Explanatory Variables in SAS",
+    "text": "Implementing Qualitative Explanatory Variables in SAS\n\nUse the class statement in LOGISTIC procedure to identify qualitative variables.\nInteraction between Factors A and B are included in the model as \\(A*B\\)\n\nTo include the saturated model of Factors A and B, you can write (response variable)=A|B.\nYou can add more than two factors in these statements.\nThree-way interaction: A*B*C\nSaturated model for a three-factor model: A|B|C\n\nIf you wish to only include up to two-way interactions in a three-factor model: A|B|C@2\nYou can introduce contrasts in the contrast statement.\neffectplot can be used to create interaction plots.\noddsratio calculates odds ratios and graphs of confidence limits for odds ratios.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#model-selection-logistic-regression",
-    "href": "Chapter8.html#model-selection-logistic-regression",
+    "objectID": "Chapter8.html#implementing-qualitative-explanatory-variables-in-r.",
+    "href": "Chapter8.html#implementing-qualitative-explanatory-variables-in-r.",
     "title": "EAB 770 - Chapter 8",
-    "section": "Model Selection: Logistic Regression",
-    "text": "Model Selection: Logistic Regression\n\nWe can use the residual score statistic 𝑄\\(Q_{RS}\\) to determine up to what extent does the residuals from the model are linearly associated with other potential explanatory variables.\n\nDF: difference in number of parameters between models\n\nThe SELECTION=FORWARD option should be included in the MODEL statement. The LOGISTIC procedure will then start from an intercept model and build it up to the most parsimonious model.\n\nThe INCLUDE option tells SAS how many of the variables listed should always be included in the model."
-  },
-  {
-    "objectID": "Chapter8.html#model-selection-logistic-regression-1",
-    "href": "Chapter8.html#model-selection-logistic-regression-1",
-    "title": "EAB 770 - Chapter 8",
-    "section": "Model Selection: Logistic Regression",
-    "text": "Model Selection: Logistic Regression\n\nSAS also provides the Hosmer and Lemeshow Goodness-of-Fit test that tests the adequacy for these data by including the lackfit option.\n\nNull hypothesis: The model is adequate, i.e., the residuals are explained by the model.\n\nThe UNITS option specifies at what increment of the continuous variable will SAS calculate the odds ratios."
+    "section": "Implementing Qualitative Explanatory Variables in R.",
+    "text": "Implementing Qualitative Explanatory Variables in R.\nIt would be ideal to change all character variables into factors using the mutate() function in the dplyr/tidyverse package in R before using it in the glm() function in R.\n\n\n\n\n\n\nNote\n\n\nInteractions are written as A:B. This can be extended to higher order interactions: A:B:C.\nWriting A*B means we are including the following terms: A + B + A:B.\n\n\n\n\n\n\n\n\n\nNote\n\n\nMarginal and conditional means can still be calculated using the emmeans() package. To create an interaction plot, we just use the plot() function.\nContrasts can be used to calculate odds ratios and confidence limits.\n\n\n\n\n\n\n\n\n\nNote\n\n\nType III tests of fixed effects should be used to test for interactions. This can be done by using the Anova() function in R.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-7",
     "href": "Chapter8.html#example-7",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.\n\nWhat is the resulting logistic model?\nCalculate the odds ratio for patients that differ in age by 10 years.\n\nSAS Data Set\n\ndata coronary;\ninput sex ecg age ca @@ ;\ndatalines;\n0 0 28 0 1 0 42 1 0 1 46 0 1 1 45 0\n0 0 34 0 1 0 44 1 0 1 48 1 1 1 45 1\n0 0 38 0 1 0 45 0 0 1 49 0 1 1 45 1\n0 0 41 1 1 0 46 0 0 1 49 0 1 1 46 1\n0 0 44 0 1 0 48 0 0 1 52 0 1 1 48 1\n0 0 45 1 1 0 50 0 0 1 53 1 1 1 57 1\n0 0 46 0 1 0 52 1 0 1 54 1 1 1 57 1\n0 0 47 0 1 0 52 1 0 1 55 0 1 1 59 1\n0 0 50 0 1 0 54 0 0 1 57 1 1 1 60 1\n0 0 51 0 1 0 55 0 0 2 46 1 1 1 63 1\n0 0 51 0 1 0 59 1 0 2 48 0 1 2 35 0\n0 0 53 0 1 0 59 1 0 2 57 1 1 2 37 1\n0 0 55 1 1 1 32 0 0 2 60 1 1 2 43 1\n0 0 59 0 1 1 37 0 1 0 30 0 1 2 47 1\n0 0 60 1 1 1 38 1 1 0 34 0 1 2 48 1\n0 1 32 1 1 1 38 1 1 0 36 1 1 2 49 0\n0 1 33 0 1 1 42 1 1 0 38 1 1 2 58 1\n0 1 35 0 1 1 43 0 1 0 39 0 1 2 59 1\n0 1 39 0 1 1 43 1 1 0 42 0 1 2 60 1\n0 1 40 0 1 1 44 1\n;"
+    "text": "Example\nThe data set is from a cross-sectional prevalence study conducted to investigate textile worker complaints about respiratory symptoms experienced while working in the mills. Investigators were interested in whether occupational environment was related to prevalence of respiratory ailments associated with the disease byssinosis.\n\nUse logistic regression to model the probability of complaining based on workplace condition, years of employment, and smoking history. Include only up to two-way interaction effects.\nIs there evidence of any two-way interactions at a significance level of 0.10?\nGenerate an interaction plot for these cases.\nGenerate the main effects using contrast statements.\n\n\nTableSAS Data SetR Data Set\n\n\n\n\n\ndata byss;\ninput work $ years $ smoke $ status $ count @@;\ndatalines ;\ndusty &lt;10 yes yes 30 dusty &lt;10 yes no 203\ndusty &lt;10 no yes 7 dusty &lt;10 no no 119\ndusty &gt;=10 yes yes 57 dusty &gt;=10 yes no 161\ndusty &gt;=10 no yes 11 dusty &gt;=10 no no 81\nnot &lt;10 yes yes 14 not &lt;10 yes no 1340\nnot &lt;10 no yes 12 not &lt;10 no no 1004\nnot &gt;=10 yes yes 24 not &gt;=10 yes no 1360\nnot &gt;=10 no yes 10 not &gt;=10 no no 986\n;\n\n\n\ndat &lt;- expand.grid(Smoking = c(\"No\",\"Yes\"),\n                   Years = c(\"Less10\",\"Greater10\"),\n                   Work= c(\"Not Dusty\",\"Dusty\"))\n\ndat$yes &lt;- c(12,14,10,24,7,30,11,57)\ndat$no &lt;- c(1004,1340,986,1360,119,203,81,161)\ndat\n\n  Smoking     Years      Work yes   no\n1      No    Less10 Not Dusty  12 1004\n2     Yes    Less10 Not Dusty  14 1340\n3      No Greater10 Not Dusty  10  986\n4     Yes Greater10 Not Dusty  24 1360\n5      No    Less10     Dusty   7  119\n6     Yes    Less10     Dusty  30  203\n7      No Greater10     Dusty  11   81\n8     Yes Greater10     Dusty  57  161",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-8",
     "href": "Chapter8.html#example-8",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nThe data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.\n\nSAS CodeAnswer\n\n\nproc logistic descending;\nmodel ca=sex ecg age ecg*ecg age*age\n1sex*ecg sex*age ecg*age /selection=forward include=3 details lackfit;\n2units age=10;\nrun;\n\n1\n\ninclude=3 indicates we are including the first three variables in the model. In this case, it’s sex, ecg, and age.\n\n2\n\nLooks at the odds ratio due to a 10-point difference in age.\n\n\n\n\nThe logistic model is as follows:\n\\[\nlogit(\\theta) = -5.64 + 1.35*Sex + 0.873*ECG +0.09*Age\n\\] The odds of developing a coronary artery disease in patients older than 10 years is 2.5 times higher."
+    "text": "Example\nThe data set is from a cross-sectional prevalence study conducted to investigate textile worker complaints about respiratory symptoms experienced while working in the mills. Investigators were interested in whether occupational environment was related to prevalence of respiratory ailments associated with the disease byssinosis.\n\nQuestionsR CodeSAS CodeAnswer\n\n\n\nUse logistic regression to model the probability of complaining based on workplace condition, years of employment, and smoking history. Include only up to two-way interaction effects.\nIs there evidence of any two-way interactions at a significance level of 0.10?\nGenerate an interaction plot for these cases.\nGenerate the main effects using contrast statements.\n\n\n\n\noptions(contrasts=c(\"contr.treatment\",\"contr.poly\"))\nlibrary(car)\nmod_glm &lt;- glm(cbind(yes,no)~Work*Years + Work*Smoking + Years*Smoking,\n               data=dat,family=\"binomial\")\nsummary(mod_glm)\n\n\nCall:\nglm(formula = cbind(yes, no) ~ Work * Years + Work * Smoking + \n    Years * Smoking, family = \"binomial\", data = dat)\n\nCoefficients:\n                          Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)               -4.52127    0.27984 -16.157  &lt; 2e-16 ***\nWorkDusty                  1.83929    0.37561   4.897 9.74e-07 ***\nYearsGreater10             0.03291    0.35754   0.092   0.9267    \nSmokingYes                 0.03433    0.34262   0.100   0.9202    \nWorkDusty:YearsGreater10   0.53710    0.35213   1.525   0.1272    \nWorkDusty:SmokingYes       0.69408    0.38654   1.796   0.0726 .  \nYearsGreater10:SmokingYes  0.37047    0.38834   0.954   0.3401    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 285.91881  on 7  degrees of freedom\nResidual deviance:   0.69434  on 1  degrees of freedom\nAIC: 51.212\n\nNumber of Fisher Scoring iterations: 4\n\nAnova(mod_glm,test.statistic = \"Wald\")\n\nAnalysis of Deviance Table (Type II tests)\n\nResponse: cbind(yes, no)\n              Df    Chisq Pr(&gt;Chisq)    \nWork           1 235.9077  &lt; 2.2e-16 ***\nYears          1  12.9074  0.0003273 ***\nSmoking        1   8.9631  0.0027549 ** \nWork:Years     1   2.3264  0.1271922    \nWork:Smoking   1   3.2242  0.0725566 .  \nYears:Smoking  1   0.9101  0.3400949    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nMain Effects\n\n\nlibrary(emmeans)\nemm_work &lt;- emmeans(mod_glm,~Work,type=\"response\",infer=T)\nemm_work\n\n Work        prob      SE  df asymp.LCL asymp.UCL null z.ratio p.value\n Not Dusty 0.0122 0.00163 Inf   0.00937    0.0158  0.5 -32.395 &lt;0.0001\n Dusty     0.1256 0.01520 Inf   0.09866    0.1587  0.5 -13.979 &lt;0.0001\n\nResults are averaged over the levels of: Years, Smoking \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\n# main effect\ncontrast_list &lt;- list(main.effect = c(-1,1))\ncontrast(emm_work,method=contrast_list,infer=T)\n\n contrast    odds.ratio   SE  df asymp.LCL asymp.UCL null z.ratio p.value\n main.effect       11.6 2.26 Inf      7.96        17    1  12.646 &lt;0.0001\n\nResults are averaged over the levels of: Years, Smoking \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nemm_years &lt;- emmeans(mod_glm,~Years,type=\"response\",infer=T)\nemm_years\n\n Years      prob      SE  df asymp.LCL asymp.UCL null z.ratio p.value\n Less10    0.032 0.00440 Inf    0.0244    0.0418  0.5 -23.974 &lt;0.0001\n Greater10 0.051 0.00627 Inf    0.0400    0.0648  0.5 -22.549 &lt;0.0001\n\nResults are averaged over the levels of: Work, Smoking \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\n# main effect\ncontrast_list &lt;- list(main.effect = c(-1,1))\ncontrast(emm_years,method=contrast_list,infer=T)\n\n contrast    odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio p.value\n main.effect       1.63 0.311 Inf      1.12      2.37    1   2.549  0.0108\n\nResults are averaged over the levels of: Work, Smoking \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\nemm_smoking &lt;- emmeans(mod_glm,~Smoking,type=\"response\",infer=T)\nemm_smoking\n\n Smoking   prob      SE  df asymp.LCL asymp.UCL null z.ratio p.value\n No      0.0307 0.00488 Inf    0.0225    0.0419  0.5 -21.086 &lt;0.0001\n Yes     0.0529 0.00523 Inf    0.0436    0.0642  0.5 -27.633 &lt;0.0001\n\nResults are averaged over the levels of: Work, Years \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\n# main effect\ncontrast_list &lt;- list(main.effect = c(-1,1))\ncontrast(emm_smoking,method=contrast_list,infer=T)\n\n contrast    odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio p.value\n main.effect       1.76 0.342 Inf       1.2      2.58    1   2.918  0.0035\n\nResults are averaged over the levels of: Work, Years \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\n\n\nInteraction\n\nThe Anova() function already has the Wald test. Let’s see if we can re-create one of the interactions using the contrast() and test() functions. Note that the interaction null hypothesis can be interpreted as\n\\[\nH_0: \\mu_{Dusty,No}-\\mu_{NDusty,No} - (\\mu_{Dusty,Yes}-\\mu_{NDusty,Yes}) = 0\n\\]\n\nemm_interaction &lt;- emmeans(mod_glm,~Work*Smoking,type=\"response\")\nemm_interaction\n\n Work      Smoking   prob      SE  df asymp.LCL asymp.UCL\n Not Dusty No      0.0109 0.00232 Inf   0.00721    0.0166\n Dusty     No      0.0834 0.01890 Inf   0.05307    0.1287\n Not Dusty Yes     0.0136 0.00223 Inf   0.00984    0.0187\n Dusty     Yes     0.1849 0.01880 Inf   0.15080    0.2247\n\nResults are averaged over the levels of: Years \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \n\nplot(emm_interaction)\n\n\n\n\n\n\n\ncontrast_list &lt;- list(interaction = c(-1,1,1,-1))\ncontrast(emm_interaction,method=contrast_list,infer=T,type=\"response\") |&gt; test(joint=T)\n\n df1 df2 F.ratio Chisq p.value\n   1 Inf   3.224 3.224  0.0726\n\n\n\n\nproc logistic data=byss;\nfreq count;\nclass work years(ref=first) smoke(ref=first) /param=ref;\nmodel status(event=last) = work|years|smoke@2 /scale=none aggregate;\neffectplot interaction (x=work) / at(smoke=all years=all) link noobs;\noddsratios work;\ncontrast 'work' work 1;\ncontrast 'years' years 1;\ncontrast 'smoke' smoke 1;\nrun;\n\n\nWe have evidence of an interaction between work conditions and smoking status (\\(Work*Smoke\\)) (\\(\\chi^2_1\\)=3.22,p = 0.07) at the 0.10 level of significance, which means we need to be careful in interpreting the main effect of work conditions and smoking status.\nWe can interpret the main effect of the years of employment. Those who work more than 10 years have odds of complaining about byssinosis disease that are 1.6 times that of those who worked less than 10 years.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#exercise-10",
-    "href": "Chapter8.html#exercise-10",
+    "objectID": "Chapter8.html#exercise-2",
+    "href": "Chapter8.html#exercise-2",
     "title": "EAB 770 - Chapter 8",
     "section": "Exercise",
-    "text": "Exercise\nChapter8-Corn.csv includes the data of 82 plants from a randomized controlled trial that tests the effect of a new formulation of pesticide as well as the effect of using cover crops in planting corn. The farmers are also interested if the yield (measured in kg) is associated to the plant discoloration.\n\nUse the forward selection approach to determine if an interaction term between cover crop and pesticide needs to be included in the model.\nWhat is the resulting logistic model?\nCalculate the odds ratio for corn plants that have a yield difference of 2 kg."
+    "text": "Exercise\nThe following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.\n\nAre we interested in main effects or interaction?\nIs there a significant interaction effect?\nCalculate the odds ratio between the diagnoses of UTI for different treatments.\nGenerate plots for the interaction and odds ratios.\n\n\nTableSAS Data SetR Data Set\n\n\n\n\n\ndata uti;\ninput diagnosis : $13. treatment $ response $ count @@;\ndatalines;\ncomplicated A cured 78 complicated A not 28\ncomplicated B cured 101 complicated B not 11\ncomplicated C cured 68 complicated C not 46\nuncomplicated A cured 40 uncomplicated A not 5\nuncomplicated B cured 54 uncomplicated B not 5\nuncomplicated C cured 34 uncomplicated C not 6\n;\n\n\n\nuti &lt;- expand.grid(Treatment=c(\"A\",\"B\",\"C\"),\n            Diagnosis=c(\"Complicated\",\"Uncomplicated\"))\n\nuti$yes=c(78,101,68,40,54,34)\nuti$no = c(28,11,46,5,5,6)\n\nuti\n\n  Treatment     Diagnosis yes no\n1         A   Complicated  78 28\n2         B   Complicated 101 11\n3         C   Complicated  68 46\n4         A Uncomplicated  40  5\n5         B Uncomplicated  54  5\n6         C Uncomplicated  34  6",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#exercise-11",
-    "href": "Chapter8.html#exercise-11",
+    "objectID": "Chapter8.html#exercise-3",
+    "href": "Chapter8.html#exercise-3",
     "title": "EAB 770 - Chapter 8",
     "section": "Exercise",
-    "text": "Exercise\nChapter8-Corn.csv includes the data of 82 plants from a randomized controlled trial that tests the effect of a new formulation of pesticide as well as the effect of using cover crops in planting corn. The farmers are also interested if the yield (measured in kg) is associated to the plant discoloration.\n\nSAS CodeAnswer\n\n\nproc logistic data=corn;\nclass pesticide (ref=\"No\") covercrop (ref=\"No\");\nmodel Discolored(event=\"Yes\") = pesticide covercrop yield pesticide*covercrop/selection=forward include=3 details lackfit;\nrun;\n\n\nThere was no evidence to indicate that a pesticide*covercrop interaction needed to be included (\\(Q_{RS} = 0.08, p=0.78\\)). The Hosmer-Lemeshow goodness-of-fit test also provides no evidence against model adequacy (\\(\\chi^2 = 6.9, p=0.55\\)).\nThe resulting logistic model is:\n\\[\nlogit(\\theta) = 0.38 - 0.68*Pesticide - 1.10 * CoverCrop - 0.27*Yield\n\\] The odds of discoloration decreases by 0.42 (1-0.58) times when the yield increases by 2 kg."
+    "text": "Exercise\nThe following data come from a study on urinary tract infections. Investigators applied three treatments to patients who had either a complicated or uncomplicated diagnosis of urinary tract infection. Since complicated cases of urinary tract infections are difficult to cure, investigators were interested in whether the pattern of treatment differences is the same across diagnoses.\n\nAre we interested in main effects or interaction?\nIs there a significant interaction effect?\nCalculate the odds ratio between the diagnoses of UTI for different treatments.\nGenerate plots for the interaction and odds ratios.\n\n\nSAS CodeR CodeAnswer\n\n\ndata uti;\ninput diagnosis : $13. treatment $ response $ count @@;\ndatalines;\ncomplicated A cured 78 complicated A not 28\ncomplicated B cured 101 complicated B not 11\ncomplicated C cured 68 complicated C not 46\nuncomplicated A cured 40 uncomplicated A not 5\nuncomplicated B cured 54 uncomplicated B not 5\nuncomplicated C cured 34 uncomplicated C not 6\n;\n\nproc logistic data=uti order=data;\nfreq count;\nclass diagnosis treatment /param=ref;\nmodel response(event='cured') = diagnosis|treatment /scale=none aggregate;\neffectplot interaction (x=treatment) / at(treatment=all) link noobs;\noddsratios diagnosis;\nrun;\n\n\n\nmod_glm &lt;- glm(cbind(yes,no)~Diagnosis*Treatment,\n               data=uti,\n               family=\"binomial\")\nsummary(mod_glm)\n\n\nCall:\nglm(formula = cbind(yes, no) ~ Diagnosis * Treatment, family = \"binomial\", \n    data = uti)\n\nCoefficients:\n                                  Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)                         1.0245     0.2203   4.650 3.31e-06 ***\nDiagnosisUncomplicated              1.0549     0.5230   2.017  0.04369 *  \nTreatmentB                          1.1927     0.3865   3.086  0.00203 ** \nTreatmentC                         -0.6336     0.2915  -2.174  0.02973 *  \nDiagnosisUncomplicated:TreatmentB  -0.8926     0.7700  -1.159  0.24634    \nDiagnosisUncomplicated:TreatmentC   0.2888     0.7114   0.406  0.68476    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 4.4473e+01  on 5  degrees of freedom\nResidual deviance: 1.1990e-14  on 0  degrees of freedom\nAIC: 36.423\n\nNumber of Fisher Scoring iterations: 3\n\nAnova(mod_glm)\n\nAnalysis of Deviance Table (Type II tests)\n\nResponse: cbind(yes, no)\n                    LR Chisq Df Pr(&gt;Chisq)    \nDiagnosis            11.7183  1  0.0006189 ***\nTreatment            28.1137  2  7.856e-07 ***\nDiagnosis:Treatment   2.5147  2  0.2844080    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nTo calculate the conditional odds ratios, we can manually add contrast statements:\n\nemm_interaction &lt;- emmeans(mod_glm,~Diagnosis*Treatment,type=\"response\",infer=T)\nemm_interaction\n\n Diagnosis     Treatment  prob     SE  df asymp.LCL asymp.UCL null z.ratio\n Complicated   A         0.736 0.0428 Inf     0.644     0.811  0.5   4.650\n Uncomplicated A         0.889 0.0468 Inf     0.759     0.953  0.5   4.384\n Complicated   B         0.902 0.0281 Inf     0.831     0.945  0.5   6.983\n Uncomplicated B         0.915 0.0363 Inf     0.812     0.964  0.5   5.090\n Complicated   C         0.596 0.0459 Inf     0.504     0.682  0.5   2.047\n Uncomplicated C         0.850 0.0565 Inf     0.704     0.931  0.5   3.917\n p.value\n &lt;0.0001\n &lt;0.0001\n &lt;0.0001\n &lt;0.0001\n  0.0406\n &lt;0.0001\n\nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast_list &lt;- list(OR.at.A = c(1,-1,0,0,0,0),\n                      OR.at.B=c(0,0,1,-1,0,0),\n                      OR.at.C = c(0,0,0,0,1,-1))\n\ncontrast(emm_interaction,method=contrast_list,infer=T,type=\"response\")\n\n contrast odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio p.value\n OR.at.A       0.348 0.182 Inf     0.125     0.971    1  -2.017  0.0437\n OR.at.B       0.850 0.480 Inf     0.281     2.573    1  -0.287  0.7739\n OR.at.C       0.261 0.126 Inf     0.101     0.671    1  -2.787  0.0053\n\nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\n\n\n\nWe are more interested in the interaction effect.\nThere is no significant interaction effect between diagnosis and treatment (\\(\\chi^2_2\\)=0.28, p=0.28).\n\n\n\nOdds Ratios",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#diagnostics",
-    "href": "Chapter8.html#diagnostics",
+    "objectID": "Chapter8.html#continuous-and-ordinal-explanatory-variables",
+    "href": "Chapter8.html#continuous-and-ordinal-explanatory-variables",
     "title": "EAB 770 - Chapter 8",
-    "section": "Diagnostics",
-    "text": "Diagnostics\n\nWe are interested in how a model fits our data and the lack of fit.\n\nLack of fit: Should we still consider other variables to include in the model?\n\nModel fit: Pearson chi-square and deviance chi-square tests\nLack of fit: Pearson residuals and deviance residuals\n\n\n\n\n\n\n\nNote\n\n\n\nPearson residuals look at the difference between the observed and expected occurrences in a group. A value of 2 is usually indicative of a lack of fit.\nDeviance residuals are the components that make up the deviance statistic\nLikelihood residuals: weighted average of standardized Pearson and Deviance residuals"
+    "section": "Continuous and Ordinal Explanatory Variables",
+    "text": "Continuous and Ordinal Explanatory Variables\nSometimes, continuous explanatory variables are unique in the data set. The sample size requirements for the goodness-of-fit tests will not be satisfied. - Income - Age - Years in University\n\n\n\n\n\n\nNote\n\n\nThere should be at least 5 observations for the rarer outcome per parameter in the full model. If there are 50 observations of the rarer outcome, then the maximum number of parameters supported is 10.\n\n\n\n\n\n\n\n\n\nNote\n\n\nIn SAS, continuous variables should NOT be included in the class statement.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#diagnostics-1",
-    "href": "Chapter8.html#diagnostics-1",
+    "objectID": "Chapter8.html#sas-model-selection-logistic-regression",
+    "href": "Chapter8.html#sas-model-selection-logistic-regression",
     "title": "EAB 770 - Chapter 8",
-    "section": "Diagnostics",
-    "text": "Diagnostics\n\nThese residuals can be viewed in graphical form.\n\n\n\n\n\n\n\nTip\n\n\nIn SAS, we can view the residual plots by specifying PLOTS=INFLUENCE in the PROC LOGISTIC statement. stdres specifies plots for standardized residuals\nproc logistic plots(label)=influence(unpack stdres);"
+    "section": "SAS Model Selection: Logistic Regression",
+    "text": "SAS Model Selection: Logistic Regression\n\nWe can use the residual score statistic \\(Q_{RS}\\) to determine up to what extent does the residuals from the model are linearly associated with other potential explanatory variables.\n\nDF: difference in number of parameters between models\n\nThe SELECTION=FORWARD option should be included in the MODEL statement. The LOGISTIC procedure will then start from an intercept model and build it up to the most parsimonious model.\n\nThe INCLUDE option tells SAS how many of the variables listed should always be included in the model.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#sas-model-selection-logistic-regression-1",
+    "href": "Chapter8.html#sas-model-selection-logistic-regression-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "`SAS Model Selection: Logistic Regression",
+    "text": "`SAS Model Selection: Logistic Regression\n\nSAS also provides the Hosmer and Lemeshow Goodness-of-Fit test that tests the adequacy for these data by including the lackfit option.\n\nNull hypothesis: The model is adequate, i.e., the residuals are explained by the model.\n\nThe UNITS option specifies at what increment of the continuous variable will SAS calculate the odds ratios.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#r-model-selection",
+    "href": "Chapter8.html#r-model-selection",
+    "title": "EAB 770 - Chapter 8",
+    "section": "R Model Selection",
+    "text": "R Model Selection\nThe function step() can perform forward selection, i.e. adding more predictors and interaction terms to the model until we reach the full model, in R. The model selection will be based on the Akaike Information Criteria (AIC), by default.\n\nbase_model &lt;- glm(dependent~independent1,data=sampledata,family=\"binomial\")\nfull_model &lt;- glm(dependent~independent1+independent2 + covariates,data=sampledata,family=\"binomial\")\n\nstep(base_model,full_model, direction=\"forward\")\nanova(base_model,full_model)",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#r-hosmer-and-lemeshow-test",
+    "href": "Chapter8.html#r-hosmer-and-lemeshow-test",
+    "title": "EAB 770 - Chapter 8",
+    "section": "R: Hosmer and Lemeshow test",
+    "text": "R: Hosmer and Lemeshow test\nThe Hosmer and Lemeshow goodness-of-fit test tests the adequacy of the model for the provided data.\n\n\n\n\n\n\nNote\n\n\nThe null hypothesis of the Hosmer and Lemeshow test is that the model is adequate, i.e. the residuals are explained by the current model.\n\n\n\nThe Hosmer and Lemeshow test can be performed using the performance_hosmer() function in the performance package in R.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-9",
     "href": "Chapter8.html#example-9",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nConsider a modified version of the UTI data set. Generate the standardized residual plot, likelihood residual plot, and the Pearson chi-square residual plot.\ndata uti2;\ninput diagnosis : $13. treatment $ response trials;\ndatalines;\ncomplicated A 78 106\ncomplicated B 101 112\ncomplicated C 68 114\nuncomplicated A 40 45\nuncomplicated B 54 59\nuncomplicated C 34 40\n;"
+    "text": "Example\nThe data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.\n\nWhat is the resulting logistic model?\nCalculate the odds ratio for patients that differ in age by 10 years.\n\nSAS Data Set\n\ndata coronary;\ninput sex ecg age ca @@ ;\ndatalines;\n0 0 28 0 1 0 42 1 0 1 46 0 1 1 45 0\n0 0 34 0 1 0 44 1 0 1 48 1 1 1 45 1\n0 0 38 0 1 0 45 0 0 1 49 0 1 1 45 1\n0 0 41 1 1 0 46 0 0 1 49 0 1 1 46 1\n0 0 44 0 1 0 48 0 0 1 52 0 1 1 48 1\n0 0 45 1 1 0 50 0 0 1 53 1 1 1 57 1\n0 0 46 0 1 0 52 1 0 1 54 1 1 1 57 1\n0 0 47 0 1 0 52 1 0 1 55 0 1 1 59 1\n0 0 50 0 1 0 54 0 0 1 57 1 1 1 60 1\n0 0 51 0 1 0 55 0 0 2 46 1 1 1 63 1\n0 0 51 0 1 0 59 1 0 2 48 0 1 2 35 0\n0 0 53 0 1 0 59 1 0 2 57 1 1 2 37 1\n0 0 55 1 1 1 32 0 0 2 60 1 1 2 43 1\n0 0 59 0 1 1 37 0 1 0 30 0 1 2 47 1\n0 0 60 1 1 1 38 1 1 0 34 0 1 2 48 1\n0 1 32 1 1 1 38 1 1 0 36 1 1 2 49 0\n0 1 33 0 1 1 42 1 1 0 38 1 1 2 58 1\n0 1 35 0 1 1 43 0 1 0 39 0 1 2 59 1\n0 1 39 0 1 1 43 1 1 0 42 0 1 2 60 1\n0 1 40 0 1 1 44 1\n;\nR Data Set\n\nlibrary(tidyverse)\necg &lt;- read.csv(\"ECG_withage.csv\")\nglimpse(ecg)\n\nRows: 78\nColumns: 4\n$ Sex &lt;int&gt; 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, …\n$ ECG &lt;int&gt; 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, …\n$ Age &lt;int&gt; 28, 42, 46, 45, 34, 44, 48, 45, 38, 45, 49, 45, 41, 46, 49, 46, 44…\n$ CA  &lt;int&gt; 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, …",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-10",
     "href": "Chapter8.html#example-10",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nConsider a modified version of the UTI data set. Generate the standardized residual plot, likelihood residual plot, and the Pearson chi-square residual plot.\n\nSAS CodeAnswer\n\n\nproc logistic data=uti2 \n1plots(label)=influence(unpack stdres);\nclass diagnosis treatment / param=ref;\n2model response/trials = diagnosis treatment;\nrun;\n\n1\n\nplots=influence yield all residual plots. stdres generates the standardized residual plot.\n\n2\n\nThe model can also be expressed in terms of # of success/sample size;\n\n\n\n\nResiduals did not exceed 2, which indicate good fit."
+    "text": "Example\nThe data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.\n\nSAS CodeR CodeAnswer\n\n\nproc logistic descending;\nmodel ca=sex ecg age ecg*ecg age*age\n1sex*ecg sex*age ecg*age /selection=forward include=3 details lackfit;\n2units age=10;\nrun;\n\n1\n\ninclude=3 indicates we are including the first three variables in the model. In this case, it’s sex, ecg, and age.\n\n2\n\nLooks at the odds ratio due to a 10-point difference in age.\n\n\n\n\n\nmod_glm &lt;- glm(CA~Sex+ECG+Age,data=ecg,family=\"binomial\")\nmod_full &lt;- glm(CA~Sex+ECG+Age + ECG:ECG + Age:Age + Sex:ECG + Sex:Age + ECG:Age,data=ecg,family=\"binomial\")\nstep(mod_glm,mod_full,direction=\"forward\")\n\nStart:  AIC=94.81\nCA ~ Sex + ECG + Age\n\n\n\nCall:  glm(formula = CA ~ Sex + ECG + Age, family = \"binomial\", data = ecg)\n\nCoefficients:\n(Intercept)          Sex          ECG          Age  \n   -5.64176      1.35643      0.87320      0.09285  \n\nDegrees of Freedom: 77 Total (i.e. Null);  74 Residual\nNull Deviance:      107.9 \nResidual Deviance: 86.81    AIC: 94.81\n\nanova(mod_glm,mod_full)\n\nAnalysis of Deviance Table\n\nModel 1: CA ~ Sex + ECG + Age\nModel 2: CA ~ Sex + ECG + Age + ECG:ECG + Age:Age + Sex:ECG + Sex:Age + \n    ECG:Age\n  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)\n1        74     86.811                     \n2        71     85.522  3   1.2891   0.7317\n\nsummary(mod_glm)\n\n\nCall:\nglm(formula = CA ~ Sex + ECG + Age, family = \"binomial\", data = ecg)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)   \n(Intercept) -5.64176    1.80614  -3.124  0.00179 **\nSex          1.35643    0.54645   2.482  0.01306 * \nECG          0.87320    0.38433   2.272  0.02309 * \nAge          0.09285    0.03509   2.646  0.00815 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 107.926  on 77  degrees of freedom\nResidual deviance:  86.811  on 74  degrees of freedom\nAIC: 94.811\n\nNumber of Fisher Scoring iterations: 4\n\nlibrary(performance)\nperformance_hosmer(mod_glm)\n\n# Hosmer-Lemeshow Goodness-of-Fit Test\n\n  Chi-squared: 4.421\n           df: 8    \n      p-value: 0.817\n\n\n\nlibrary(emmeans)\nemm_sex &lt;- emmeans(mod_glm,~Age,type=\"response\",at=list(Age=c(50,60)),infer=T)\nemm_sex\n\n Age  prob     SE  df asymp.LCL asymp.UCL null z.ratio p.value\n  50 0.581 0.0695 Inf     0.442     0.709  0.5   1.150  0.2503\n  60 0.778 0.0913 Inf     0.555     0.908  0.5   2.374  0.0176\n\nResults are averaged over the levels of: Sex \nConfidence level used: 0.95 \nIntervals are back-transformed from the logit scale \nTests are performed on the logit scale \n\ncontrast(emm_sex,method=\"revpairwise\",infer=T)\n\n contrast      odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio p.value\n Age60 / Age50       2.53 0.888 Inf      1.27      5.03    1   2.646  0.0081\n\nResults are averaged over the levels of: Sex \nConfidence level used: 0.95 \nIntervals are back-transformed from the log odds ratio scale \nTests are performed on the log odds ratio scale \n\n\n\n\nThe logistic model is as follows:\n\\[\nlogit(\\hat{\\theta}) = -5.64 + 1.35*Sex + 0.873*ECG +0.09*Age\n\\] The odds of developing a coronary artery disease in patients older than 10 years increases by 2.53 (95% CI: 1.27-5.03) times.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#alternative-estimation-methods",
-    "href": "Chapter8.html#alternative-estimation-methods",
+    "objectID": "Chapter8.html#exercise-4",
+    "href": "Chapter8.html#exercise-4",
     "title": "EAB 770 - Chapter 8",
-    "section": "Alternative Estimation Methods",
-    "text": "Alternative Estimation Methods\n\nWe have been using maximum likelihood (ML) estimation to estimate values of \\(\\beta\\), which leads to odds ratio estimates.\n\nWhat if there are no successes or failures in your data? (Complete separation)\nWhat if there is a small number of successes in the data?\nWhat if the sample size is small?\n\nThese conditions might yield non-converging solutions\n\nInfinite odds ratios\nNonsensical odds ratio estimates"
+    "section": "Exercise",
+    "text": "Exercise\nChapter8-Corn.csv includes the data of 82 plants from a randomized controlled trial that tests the effect of a new formulation of pesticide as well as the effect of using cover crops in planting corn. The farmers are also interested if the yield (measured in kg) is associated to the plant discoloration.\n\nUse the forward selection approach to determine if an interaction term between cover crop and pesticide needs to be included in the model.\nWhat is the resulting logistic model?\nCalculate the odds ratio for corn plants that have a yield difference of 2 kg.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#complete-separation",
-    "href": "Chapter8.html#complete-separation",
+    "objectID": "Chapter8.html#exercise-5",
+    "href": "Chapter8.html#exercise-5",
     "title": "EAB 770 - Chapter 8",
-    "section": "Complete Separation",
-    "text": "Complete Separation\n\nComplete Separation: One level includes all successes or all failures.\n\n\n\n\n\nNote\n\n\nIf nearly all the observations have a probability of 1 of being allocated to the correct response group, then the data configuration may be one of quasi-complete separation."
+    "section": "Exercise",
+    "text": "Exercise\nChapter8-Corn.csv includes the data of 82 plants from a randomized controlled trial that tests the effect of a new formulation of pesticide as well as the effect of using cover crops in planting corn. The farmers are also interested if the yield (measured in kg) is associated to the plant discoloration.\n\nSAS CodeR CodeAnswer\n\n\nproc logistic data=corn;\nclass pesticide (ref=\"No\") covercrop (ref=\"No\");\nmodel Discolored(event=\"Yes\") = pesticide covercrop yield pesticide*covercrop/selection=forward include=3 details lackfit;\nrun;\n\n\n\ncorn &lt;- read.csv(\"Chapter8-Corn.csv\",stringsAsFactors = TRUE)\nglimpse(corn)\n\nRows: 82\nColumns: 4\n$ Pesticide  &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes,…\n$ CoverCrop  &lt;fct&gt; Yes , Yes , Yes , Yes , Yes , Yes , Yes , Yes , Yes , Yes ,…\n$ Yield      &lt;dbl&gt; 2.3, 2.5, 2.0, 1.2, 2.5, 2.5, 1.0, 2.3, 1.9, 2.2, 1.2, 1.5,…\n$ Discolored &lt;fct&gt; Yes, No, Yes, No, No, No, No, No, No, Yes, Yes, Yes, No, No…\n\n\n\nmod_glm &lt;- glm(Discolored~Pesticide + CoverCrop + Yield, data=corn, family=\"binomial\")\nmod_interaction &lt;- glm(Discolored~Pesticide + CoverCrop + Yield + Pesticide:CoverCrop, data=corn, family=\"binomial\") \n\nstep(mod_glm,mod_interaction,direction=\"forward\")\n\nStart:  AIC=94.51\nDiscolored ~ Pesticide + CoverCrop + Yield\n\n\n\nCall:  glm(formula = Discolored ~ Pesticide + CoverCrop + Yield, family = \"binomial\", \n    data = corn)\n\nCoefficients:\n  (Intercept)   PesticideYes  CoverCropYes           Yield  \n       0.7951         1.3635        -2.2028        -0.2744  \n\nDegrees of Freedom: 81 Total (i.e. Null);  78 Residual\nNull Deviance:      113.5 \nResidual Deviance: 86.51    AIC: 94.51\n\nanova(mod_glm,mod_interaction)\n\nAnalysis of Deviance Table\n\nModel 1: Discolored ~ Pesticide + CoverCrop + Yield\nModel 2: Discolored ~ Pesticide + CoverCrop + Yield + Pesticide:CoverCrop\n  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)\n1        78     86.509                     \n2        77     86.432  1 0.077057   0.7813\n\nperformance_hosmer(mod_glm)\n\n# Hosmer-Lemeshow Goodness-of-Fit Test\n\n  Chi-squared: 6.544\n           df: 8    \n      p-value: 0.587\n\n\n\n\nThere was no evidence to indicate that a pesticide*covercrop interaction needed to be included (\\(Q_{RS} = 0.08, p=0.78\\)). The Hosmer-Lemeshow goodness-of-fit test also provides no evidence against model adequacy (\\(\\chi^2 = 6.9, p=0.55\\)).\nThe resulting logistic model is:\n\\[\nlogit(\\theta) = 0.38 - 0.68*Pesticide - 1.10 * CoverCrop - 0.27*Yield\n\\] The odds of discoloration decreases by 0.42 (1-0.58) times when the yield increases by 2 kg.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#dealing-with-non-convergence",
-    "href": "Chapter8.html#dealing-with-non-convergence",
+    "objectID": "Chapter8.html#diagnostics",
+    "href": "Chapter8.html#diagnostics",
     "title": "EAB 770 - Chapter 8",
-    "section": "Dealing with non-convergence",
-    "text": "Dealing with non-convergence\n\nExact tests\n\nNon-convergence due to small cell counts\nQuasi-complete separation\n\n\n\n\n\n\n\n\nTip\n\n\nThe EXACT statement calculates the exact p-values for each variable/factor. Adding a joint option performs joint tests for the variables included. We use the results of the joint probability tests as its results are analogous to the Fisher’s exact test.\n\n\n\n\n\n\n\n\n\nWarning\n\n\nThe output of the exact statement typically yields a one-sided p-value for median unbiased estimates and one-sided confidence intervals. To get a two-sided 95% confidence interval, we can use a one-sided 97.5% confidence interval by specifying alpha = 0.025.\n\n\n\n\nFirth’s penalized likelihood\n\nComplete separation/quasi-complete separation when there are continuous explanatory variables\nApplies a penalty in the likelihood function.\n\n\n\n\n\n\n\n\nTip\n\n\nAdding the FIRTH option to the model statement tells SAS to use the Firth penalized likelihood. CLPARM=PL uses the likelihood profile consistent with the Firth penalized likelihood method."
+    "section": "Diagnostics",
+    "text": "Diagnostics\n\nWe are interested in how a model fits our data and the lack of fit.\n\nLack of fit: Should we still consider other variables to include in the model?\n\nModel fit: Pearson chi-square and deviance chi-square tests (SAS)\nLack of fit: Pearson residuals and deviance residuals\n\n\n\n\n\n\n\nNote\n\n\n\nPearson residuals look at the difference between the observed and expected occurrences in a group. A value of 2 is usually indicative of a lack of fit.\nDeviance residuals are the components that make up the deviance statistic\nLikelihood residuals: weighted average of standardized Pearson and Deviance residuals",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#diagnostics-1",
+    "href": "Chapter8.html#diagnostics-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Diagnostics",
+    "text": "Diagnostics\n\nThese residuals can be viewed in graphical form.\n\n\n\n\n\n\n\nTip\n\n\nIn SAS, we can view the residual plots by specifying PLOTS=INFLUENCE in the PROC LOGISTIC statement. stdres specifies plots for standardized residuals\nproc logistic plots(label)=influence(unpack stdres);\n\n\n\n\n\n\n\n\n\nTip\n\n\nIn R, we can use the check_model function in the performance package.\n\nlibrary(performance)\ncheck_model(mod_glm,\n            check=c(\"pp_check\", \"binned_residuals\",\"vif\",\"outliers\"))",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-11",
     "href": "Chapter8.html#example-11",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nConsider the following data set:\n\nDoes this display complete separation, quasi-complete separation, or neither?\nCalculate exact p-values for the effect of treatments A and B as well as the joint tests.\nCalculate exact estimates for the odds ratio.\n\ndata preclinical;\ninput treatA $ treatB $ response $ count @@;\ndatalines;\nno no yes 0 no no no 0\nyes no yes 8 yes no no 0\nno yes yes 0 no yes no 2\nyes yes yes 21 yes yes no 6\n;"
+    "text": "Example\nConsider a modified version of the UTI data set. Generate the standardized residual plot, likelihood residual plot, and the Pearson chi-square residual plot.\ndata uti2;\ninput diagnosis : $13. treatment $ response trials;\ndatalines;\ncomplicated A 78 106\ncomplicated B 101 112\ncomplicated C 68 114\nuncomplicated A 40 45\nuncomplicated B 54 59\nuncomplicated C 34 40\n;\n\n\n\n\n\n\nNote\n\n\nIn R, the previous uti data set can still be used.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-12",
     "href": "Chapter8.html#example-12",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nConsider the following data set:\n\nDoes this display complete separation, quasi-complete separation, or neither?\nCalculate exact p-values for the effect of treatments A and B as well as the joint tests.\nCalculate exact estimates for the odds ratio.\n\n\nSAS CodeAnswer\n\n\nproc logistic data=preclinical;\nfreq count;\nclass treatA (ref=\"no\") treatB (ref=\"no\") /param=ref ;\nmodel response (event=\"yes\") = treatA treatB ;\nexact treatA treatB /joint estimate=both alpha=0.025;\nrun;\n\n\nThe data shows quasi-complete separation.\nThe odds of a successful response is for those who received Treatment A is 7.06 (CI: 0.52, \\(\\infty\\)) times that of those who did not receive Treatment A. The exact p-value is 0.07.\nThe odds of a successful response is for those who received Treatment B is 0.35 (CI: 0, 2.85) times that of those who did not receive Treatment B.The exact p-value is 0.18."
+    "text": "Example\nConsider a modified version of the UTI data set. Generate the standardized residual plot, likelihood residual plot, and the Pearson chi-square residual plot.\n\nSAS CodeR CodeAnswer\n\n\nproc logistic data=uti2 \n1plots(label)=influence(unpack stdres);\nclass diagnosis treatment / param=ref;\n2model response/trials = diagnosis treatment;\nrun;\n\n1\n\nplots=influence yield all residual plots. stdres generates the standardized residual plot.\n\n2\n\nThe model can also be expressed in terms of # of success/sample size;\n\n\n\n\n\nmod_glm &lt;- glm(cbind(yes,no)~Treatment+Diagnosis, \n               data=uti,\n               family=\"binomial\")\nlibrary(performance)\ncheck_model(mod_glm)\n\n\n\n\n\n\n\n\n\n\nThe plots indicate good fit and lack of multicollinearity.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#example-complete-separation",
-    "href": "Chapter8.html#example-complete-separation",
+    "objectID": "Chapter8.html#alternative-estimation-methods",
+    "href": "Chapter8.html#alternative-estimation-methods",
     "title": "EAB 770 - Chapter 8",
-    "section": "Example: Complete Separation",
-    "text": "Example: Complete Separation\nConsider the following data set:\n\nDoes this display complete separation, quasi-complete separation, or neither?\nCalculate exact p-values for the effect of treatments A and B as well as the joint tests.\nCalculate estimates for the odds ratio from the Firth penalized likelihood approach.\n\ndata complete;\ninput gender region count response @@;\ndatalines;\n0 0 0 1 0 0 5 0\n0 1 1 1 0 1 0 0\n1 0 0 1 1 0 175 0\n1 1 53 1 1 1 0 0\n;"
+    "section": "Alternative Estimation Methods",
+    "text": "Alternative Estimation Methods\n\nWe have been using maximum likelihood (ML) estimation to estimate values of \\(\\beta\\), which leads to odds ratio estimates.\n\nWhat if there are no successes or failures in your data? (Complete separation)\nWhat if there is a small number of successes in the data?\nWhat if the sample size is small?\n\nThese conditions might yield non-converging solutions\n\nInfinite odds ratios\nNonsensical odds ratio estimates",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#example-complete-separation-1",
-    "href": "Chapter8.html#example-complete-separation-1",
+    "objectID": "Chapter8.html#complete-separation",
+    "href": "Chapter8.html#complete-separation",
     "title": "EAB 770 - Chapter 8",
-    "section": "Example: Complete Separation",
-    "text": "Example: Complete Separation\nConsider the following data set:\n\nDoes this display complete separation, quasi-complete separation, or neither?\nCalculate exact p-values for the effect of treatments A and B as well as the joint tests.\nCalculate estimates for the odds ratio from the Firth penalized likelihood approach.\n\n\nSAS CodeAnswer\n\n\nproc logistic data=complete;\nfreq count;\nmodel response = gender region / firth clparm=pl;\nexact gender region/estimate=both;\nrun;\n\n\nBased on the exact tests, there appears to be no effect of gender (p=0.5). However, there is an effect of region.\nThere is complete separation in region. We can use the penalized likelihood approach to calculate odds ratio estimates. The estimated odds ratio between region=1 and region = 0 is 10.5 (95% CI: 7.55, 16.26)."
+    "section": "Complete Separation",
+    "text": "Complete Separation\n\nComplete Separation: One level includes all successes or all failures.\n\n\n\n\n\nNote\n\n\nIf nearly all the observations have a probability of 1 of being allocated to the correct response group, then the data configuration may be one of quasi-complete separation.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#the-genmod-procedure-1",
-    "href": "Chapter8.html#the-genmod-procedure-1",
+    "objectID": "Chapter8.html#dealing-with-non-convergence",
+    "href": "Chapter8.html#dealing-with-non-convergence",
     "title": "EAB 770 - Chapter 8",
-    "section": "The GENMOD procedure",
-    "text": "The GENMOD procedure\n\nThe GENMOD procedure uses generalized estimating equations in performing logistic regression when the responses are correlated.\n\nSimilar syntax as the LOGISTIC procedure.\n\nReference levels are included in the estimates, but are automatically zeroed out by the GENMOD procedure.\n\nYou can set the reference levels by applying the ref option to each variable in the class statement.\n\n\nSample Code\nproc genmod;\nfreq count;\nclass A B;\n1model response = A B A*B/link=logit dist=binomial type3 aggregate;\n2estimate '[NAME OF CONTRAST]' A 1 -1/exp cl;\nrun;\n\n1\n\nWe need to specify the link function and the distribution as GENMOD can be used to model other distributions like Poisson. type3 invokes the Type III tests of fixed effects, which looks at partial testing of each effect.\n\n2\n\nGENMOD does not output odds ratio by default. Hence, we use the estimate statement. The estimate statement follows the contrast statement, but since it calculates effect sizes, fractions cannot be eliminated by multiplying a factor unlike contrast statements."
+    "section": "Dealing with non-convergence",
+    "text": "Dealing with non-convergence\n\nExact tests\n\nNon-convergence due to small cell counts\nQuasi-complete separation\n\n\n\n\n\n\n\n\nTip\n\n\nThe EXACT statement calculates the exact p-values for each variable/factor. Adding a joint option performs joint tests for the variables included. We use the results of the joint probability tests as its results are analogous to the Fisher’s exact test.\n\n\n\n\n\n\n\n\n\nWarning\n\n\nThe output of the exact statement typically yields a one-sided p-value for median unbiased estimates and one-sided confidence intervals. To get a two-sided 95% confidence interval, we can use a one-sided 97.5% confidence interval by specifying alpha = 0.025.\n\n\n\n\nFirth’s penalized likelihood\n\nComplete separation/quasi-complete separation when there are continuous explanatory variables\nApplies a penalty in the likelihood function.\n\n\n\n\n\n\n\n\nTip\n\n\nAdding the FIRTH option to the model statement tells SAS to use the Firth penalized likelihood. CLPARM=PL uses the likelihood profile consistent with the Firth penalized likelihood method.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-13",
     "href": "Chapter8.html#example-13",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nConsider the UTI example. Perform a logistic regression analysis using PROC GENMOD."
+    "text": "Example\nConsider the following data set:\n\nDoes this display complete separation, quasi-complete separation, or neither?\nCalculate exact p-values for the effect of treatments A and B as well as the joint tests.\nCalculate exact estimates for the odds ratio.\n\ndata preclinical;\ninput treatA $ treatB $ response $ count @@;\ndatalines;\nno no yes 0 no no no 0\nyes no yes 8 yes no no 0\nno yes yes 0 no yes no 2\nyes yes yes 21 yes yes no 6\n;",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter8.html#example-14",
     "href": "Chapter8.html#example-14",
     "title": "EAB 770 - Chapter 8",
     "section": "Example",
-    "text": "Example\nConsider the UTI example. Perform a logistic regression analysis using PROC GENMOD.\nSAS Code\nproc genmod data=uti;\nfreq count;\nclass diagnosis treatment;\nmodel response = diagnosis treatment /link=logit dist=binomial type3 aggregate;\ncontrast 'treatment' treatment 1 0 -1 ,\n1                     treatment 0 1 -1;\ncontrast 'A-B' treatment 1 -1 0;\ncontrast 'A-C' treatment 1 0 -1;\nestimate 'odds ratio of diagnosis' diagnosis 1 -1/exp;\nrun;\n\n1\n\nThis contrast should yield the same values as that of the Type 3 test for treatment."
+    "text": "Example\nConsider the following data set:\n\nDoes this display complete separation, quasi-complete separation, or neither?\nCalculate exact p-values for the effect of treatments A and B as well as the joint tests.\nCalculate exact estimates for the odds ratio.\n\n\nSAS CodeAnswer\n\n\nproc logistic data=preclinical;\nfreq count;\nclass treatA (ref=\"no\") treatB (ref=\"no\") /param=ref ;\nmodel response (event=\"yes\") = treatA treatB ;\nexact treatA treatB /joint estimate=both alpha=0.025;\nrun;\n\n\nThe data shows quasi-complete separation.\nThe odds of a successful response is for those who received Treatment A is 7.06 (CI: 0.52, \\(\\infty\\)) times that of those who did not receive Treatment A. The exact p-value is 0.07.\nThe odds of a successful response is for those who received Treatment B is 0.35 (CI: 0, 2.85) times that of those who did not receive Treatment B.The exact p-value is 0.18.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#exercise-12",
-    "href": "Chapter8.html#exercise-12",
+    "objectID": "Chapter8.html#example-complete-separation",
+    "href": "Chapter8.html#example-complete-separation",
     "title": "EAB 770 - Chapter 8",
-    "section": "Exercise",
-    "text": "Exercise\nConsider the Byssinosis example. Perform a logistic regression analysis by applying an interaction model that includes up to two-way interactions in PROC GENMOD.\n\nTest for the main effect of workplace condition using contrasts. Compare the chi-square and p-values obtained through the Type 3 tests.\nTest for the interaction of years of employment and smoking for dusty workplace conditions.\nCalculate the odds ratio of developing byssinosis between the two work conditions.\n\nSAS Data Set\ndata byss;\ninput work $ years $ smoke $ status $ count @@;\ndatalines ;\ndusty &lt;10 yes yes 30 dusty &lt;10 yes no 203\ndusty &lt;10 no yes 7 dusty &lt;10 no no 119\ndusty &gt;=10 yes yes 57 dusty &gt;=10 yes no 161\ndusty &gt;=10 no yes 11 dusty &gt;=10 no no 81\nnot &lt;10 yes yes 14 not &lt;10 yes no 1340\nnot &lt;10 no yes 12 not &lt;10 no no 1004\nnot &gt;=10 yes yes 24 not &gt;=10 yes no 1360\nnot &gt;=10 no yes 10 not &gt;=10 no no 986\n;"
+    "section": "Example: Complete Separation",
+    "text": "Example: Complete Separation\nConsider the following data set:\n\nDoes this display complete separation, quasi-complete separation, or neither?\nCalculate exact p-values for the effect of treatments A and B as well as the joint tests.\nCalculate estimates for the odds ratio from the Firth penalized likelihood approach.\n\ndata complete;\ninput gender region count response @@;\ndatalines;\n0 0 0 1 0 0 5 0\n0 1 1 1 0 1 0 0\n1 0 0 1 1 0 175 0\n1 1 53 1 1 1 0 0\n;",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
-    "objectID": "Chapter8.html#exercise-13",
-    "href": "Chapter8.html#exercise-13",
+    "objectID": "Chapter8.html#example-complete-separation-1",
+    "href": "Chapter8.html#example-complete-separation-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Example: Complete Separation",
+    "text": "Example: Complete Separation\nConsider the following data set:\n\nDoes this display complete separation, quasi-complete separation, or neither?\nCalculate exact p-values for the effect of treatments A and B as well as the joint tests.\nCalculate estimates for the odds ratio from the Firth penalized likelihood approach.\n\n\nSAS CodeAnswer\n\n\nproc logistic data=complete;\nfreq count;\nmodel response = gender region / firth clparm=pl;\nexact gender region/estimate=both;\nrun;\n\n\nBased on the exact tests, there appears to be no effect of gender (p=0.5). However, there is an effect of region.\nThere is complete separation in region. We can use the penalized likelihood approach to calculate odds ratio estimates. The estimated odds ratio between region=1 and region = 0 is 10.5 (95% CI: 7.55, 16.26).",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#the-genmod-procedure-1",
+    "href": "Chapter8.html#the-genmod-procedure-1",
+    "title": "EAB 770 - Chapter 8",
+    "section": "The GENMOD procedure",
+    "text": "The GENMOD procedure\n\nThe GENMOD procedure uses generalized estimating equations in performing logistic regression when the responses are correlated.\n\nSimilar syntax as the LOGISTIC procedure.\n\nReference levels are included in the estimates, but are automatically zeroed out by the GENMOD procedure.\n\nYou can set the reference levels by applying the ref option to each variable in the class statement.\n\n\nSample Code\nproc genmod;\nfreq count;\nclass A B;\n1model response = A B A*B/link=logit dist=binomial type3 aggregate;\n2estimate '[NAME OF CONTRAST]' A 1 -1/exp cl;\nrun;\n\n1\n\nWe need to specify the link function and the distribution as GENMOD can be used to model other distributions like Poisson. type3 invokes the Type III tests of fixed effects, which looks at partial testing of each effect.\n\n2\n\nGENMOD does not output odds ratio by default. Hence, we use the estimate statement. The estimate statement follows the contrast statement, but since it calculates effect sizes, fractions cannot be eliminated by multiplying a factor unlike contrast statements.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#example-15",
+    "href": "Chapter8.html#example-15",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Example",
+    "text": "Example\nConsider the UTI example. Perform a logistic regression analysis using PROC GENMOD.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#example-16",
+    "href": "Chapter8.html#example-16",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Example",
+    "text": "Example\nConsider the UTI example. Perform a logistic regression analysis using PROC GENMOD.\nSAS Code\nproc genmod data=uti;\nfreq count;\nclass diagnosis treatment;\nmodel response = diagnosis treatment /link=logit dist=binomial type3 aggregate;\ncontrast 'treatment' treatment 1 0 -1 ,\n1                     treatment 0 1 -1;\ncontrast 'A-B' treatment 1 -1 0;\ncontrast 'A-C' treatment 1 0 -1;\nestimate 'odds ratio of diagnosis' diagnosis 1 -1/exp;\nrun;\n\n1\n\nThis contrast should yield the same values as that of the Type 3 test for treatment.",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#exercise-6",
+    "href": "Chapter8.html#exercise-6",
     "title": "EAB 770 - Chapter 8",
     "section": "Exercise",
-    "text": "Exercise\nConsider the Byssinosis example. Perform a logistic regression analysis by applying an interaction model that includes up to two-way interactions in PROC GENMOD.\n\nSAS CodeAnswer\n\n\nproc genmod data=byss;\nfreq count;\nclass work years smoke;\nmodel status(event='yes') = work years smoke work*years work*smoke years*smoke /link=logit dist=binomial type3 aggregate;\ncontrast 'work' work 1 -1; * same as the Type 3 Tests;\ncontrast 'interaction' work*years 1 -1 -1 1;\nestimate 'OR for work' work 1 -1/e exp;\nrun; \n\n\nThe workplace effect has a \\(\\chi^2\\) = 114.10, p&lt;.0001. There is sufficient evidence of a workplace main effect.\nThe interaction term between years of work and smoking yielded a \\(\\chi^2= 0.91\\), p=0.34. There is insufficient evidence of a workplace main effect.\nThe estimated odds of developing byssinosis for dusty work places is 11.6 (95% CI: 7.96, 17.03) times that of non-dusty places"
+    "text": "Exercise\nConsider the Byssinosis example. Perform a logistic regression analysis by applying an interaction model that includes up to two-way interactions in PROC GENMOD.\n\nTest for the main effect of workplace condition using contrasts. Compare the chi-square and p-values obtained through the Type 3 tests.\nTest for the interaction of years of employment and smoking for dusty workplace conditions.\nCalculate the odds ratio of developing byssinosis between the two work conditions.\n\nSAS Data Set\ndata byss;\ninput work $ years $ smoke $ status $ count @@;\ndatalines ;\ndusty &lt;10 yes yes 30 dusty &lt;10 yes no 203\ndusty &lt;10 no yes 7 dusty &lt;10 no no 119\ndusty &gt;=10 yes yes 57 dusty &gt;=10 yes no 161\ndusty &gt;=10 no yes 11 dusty &gt;=10 no no 81\nnot &lt;10 yes yes 14 not &lt;10 yes no 1340\nnot &lt;10 no yes 12 not &lt;10 no no 1004\nnot &gt;=10 yes yes 24 not &gt;=10 yes no 1360\nnot &gt;=10 no yes 10 not &gt;=10 no no 986\n;",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
+  },
+  {
+    "objectID": "Chapter8.html#exercise-7",
+    "href": "Chapter8.html#exercise-7",
+    "title": "EAB 770 - Chapter 8",
+    "section": "Exercise",
+    "text": "Exercise\nConsider the Byssinosis example. Perform a logistic regression analysis by applying an interaction model that includes up to two-way interactions in PROC GENMOD.\n\nSAS CodeAnswer\n\n\nproc genmod data=byss;\nfreq count;\nclass work years smoke;\nmodel status(event='yes') = work years smoke work*years work*smoke years*smoke /link=logit dist=binomial type3 aggregate;\ncontrast 'work' work 1 -1; * same as the Type 3 Tests;\ncontrast 'interaction' work*years 1 -1 -1 1;\nestimate 'OR for work' work 1 -1/e exp;\nrun; \n\n\nThe workplace effect has a \\(\\chi^2\\) = 114.10, p&lt;.0001. There is sufficient evidence of a workplace main effect.\nThe interaction term between years of work and smoking yielded a \\(\\chi^2= 0.91\\), p=0.34. There is insufficient evidence of a workplace main effect.\nThe estimated odds of developing byssinosis for dusty work places is 11.6 (95% CI: 7.96, 17.03) times that of non-dusty places",
+    "crumbs": [
+      "Chapter 8: Logistic Regression"
+    ]
   },
   {
     "objectID": "Chapter5.html#outline",
@@ -705,7 +1014,7 @@
     "href": "Chapter5.html#example-1",
     "title": "EAB 770 - Chapter 5",
     "section": "Example",
-    "text": "Example\nThe data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain\n\nQuestion + DataSAS CodeR CodeAnswer\n\n\n\nIs the chi-square approximation valid for this case?\nWhat kind of scoring method is most appropriate for this data set?\nMake the appropriate conclusion based on the result of the mean score tests using a significance level \\(\\alpha=0.05\\).\n\n\n\n\ndata pain;\ninput treatment $ hours count @@;\ndatalines;\nplacebo 0 6 placebo 1 9 placebo 2 6 placebo 3 3 placebo 4 1\nstandard 0 1 standard 1 4 standard 2 6 standard 3 6 standard 4 8\ntest 0 2 test 1 5 test 2 6 test 3 8 test 4 6\n;\n\nproc freq data=pain order=data;\nweight count;\ntables treatment*hours/ cmh nocol nopct;\nrun;\n\n\n\ndat &lt;- expand.grid(Treatment = c(\"Placebo\",\"Standard\",\"Test\"),\n                   Hours = 0:4)\n\ndat$Count &lt;- c(6,1,2,9,4,5,6,6,6,3,6,8,1,8,6)\n\ndat_cc &lt;- xtabs(Count~Treatment+Hours,data=dat)\ndat_cc\n\n          Hours\nTreatment  0 1 2 3 4\n  Placebo  6 9 6 3 1\n  Standard 1 4 6 6 8\n  Test     2 5 6 8 6\n\n\nNow we can perform the mean score test. The integer scoring method is most appropriate because of the equal distance between the ordinal column variable values.\n\nCMHtest(dat_cc)\n\nCochran-Mantel-Haenszel Statistics for Treatment by Hours \n\n                 AltHypothesis   Chisq Df      Prob\ncor        Nonzero correlation  8.0668  1 0.0045084\nrmeans  Row mean scores differ 13.7346  2 0.0010413\ncmeans  Col mean scores differ  8.4151  4 0.0775017\ngeneral    General association 14.4030  8 0.0718470\n\n\n\n\n\nUse column 3 (Hours = 2) as cutoff. The use of the chi-square approximation is justified!\nThe integer scoring method is most appropriate.\n\\(Q_S\\) = 13.7, df=2, p=0.001. At \\(\\alpha=0.05\\), there is sufficient evidence to conclude that at least one treatment group is different compared to the others.\n\n\n\n\n\n\n\nWarning\n\n\nIf we used the general association test, we would end up with p=0.07 and failing to reject the null hypothesis instead.",
+    "text": "Example\nThe data shown comes from a study on headache pain relief. A new treatment was compared with the standard treatment and a placebo. Researchers measured the number of hours of substantial relief from headache pain\n\nQuestion + DataSAS CodeR CodeAnswer\n\n\n\nIs the chi-square approximation valid for this case?\nWhat kind of scoring method is most appropriate for this data set?\nMake the appropriate conclusion based on the result of the mean score tests using a significance level \\(\\alpha=0.05\\).\n\n\n\n\ndata pain;\ninput treatment $ hours count @@;\ndatalines;\nplacebo 0 6 placebo 1 9 placebo 2 6 placebo 3 3 placebo 4 1\nstandard 0 1 standard 1 4 standard 2 6 standard 3 6 standard 4 8\ntest 0 2 test 1 5 test 2 6 test 3 8 test 4 6\n;\n\nproc freq data=pain order=data;\nweight count;\ntables treatment*hours/ cmh nocol nopct;\nrun;\n\n\n\ndat &lt;- expand.grid(Treatment = c(\"Placebo\",\"Standard\",\"Test\"),\n                   Hours = 0:4)\n\ndat$Count &lt;- c(6,1,2,9,4,5,6,6,6,3,6,8,1,8,6)\n\ndat_cc &lt;- xtabs(Count~Treatment+Hours,data=dat)\ndat_cc\n\n          Hours\nTreatment  0 1 2 3 4\n  Placebo  6 9 6 3 1\n  Standard 1 4 6 6 8\n  Test     2 5 6 8 6\n\n\nNow we can perform the mean score test. The integer scoring method is most appropriate because of the equal distance between the ordinal column variable values.\n\nCMHtest(dat_cc)\n\nCochran-Mantel-Haenszel Statistics for Treatment by Hours \n\n                 AltHypothesis   Chisq Df      Prob\ncor        Nonzero correlation  8.0668  1 0.0045084\nrmeans  Row mean scores differ 13.7346  2 0.0010413\ncmeans  Col mean scores differ  8.4151  4 0.0775017\ngeneral    General association 14.4030  8 0.0718470\n\n\n\n\n\nUse column 2 (Hours = 1) as cutoff. The use of the chi-square approximation is justified!\nThe integer scoring method is most appropriate.\n\\(Q_S\\) = 13.7, df=2, p=0.001. At \\(\\alpha=0.05\\), there is sufficient evidence to conclude that at least one treatment group is different compared to the others.\n\n\n\n\n\n\n\nWarning\n\n\nIf we used the general association test, we would end up with p=0.07 and failing to reject the null hypothesis instead.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
@@ -1185,7 +1494,7 @@
     "href": "Chapter5.html#example-7",
     "title": "EAB 770 - Chapter 5",
     "section": "Example",
-    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.\n\nSAS CodeR CodeAnswer\n\n\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;\n\nproc freq data=operate order=data;\nweight wt;\ntables trt*severity /  jt;\nrun;\n\n\n\nJonckheereTerpstraTest(Severity~Treatment,data=operate,alternative=\"increasing\",nperm=10000)\n\n\n    Jonckheere-Terpstra test\n\ndata:  Severity by Treatment\nJT = 35697, p-value = 0.0056\nalternative hypothesis: increasing\n\n\n\n\nThe JT statistic was estimated to be 35,697, corresponding to a one-sided p-value \\(p=0.005\\), which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.",
+    "text": "Example\nInvestigators conducted a randomized clinical trial in four hospitals, where patients were assigned to one of four surgical procedures for the treatment of severe duodenal ulcers. The treatments include:\n\nv + d: vagotomy and drainage\nv + a: vagotomy and antrectomy (removal of 25% of gastric tissue)\nv + h: vagatomy and hemigastrectomy (removal of 50% of gastric tissue)\ngre: gastric resection (removal of 75% of gastric tissue)\n\nThe response measured was the severity (none, slight, moderate) of symptoms, which is expected to increase directly with the proportion of gastric tissue removed. Investigators wanted to determine whether the distribution of the severity of duodenal ulcers is different across all treatments, ignoring the hospital effects.\n\nSAS CodeR CodeAnswer\n\n\ndata operate;\ninput hospital trt $ severity $ wt @@;\ndatalines;\n1 v+d none 23 1 v+d slight 7 1 v+d moderate 2\n1 v+a none 23 1 v+a slight 10 1 v+a moderate 5\n1 v+h none 20 1 v+h slight 13 1 v+h moderate 5\n1 gre none 24 1 gre slight 10 1 gre moderate 6\n2 v+d none 18 2 v+d slight 6 2 v+d moderate 1\n2 v+a none 18 2 v+a slight 6 2 v+a moderate 2\n2 v+h none 13 2 v+h slight 13 2 v+h moderate 2\n2 gre none 9 2 gre slight 15 2 gre moderate 2\n3 v+d none 8 3 v+d slight 6 3 v+d moderate 3\n3 v+a none 12 3 v+a slight 4 3 v+a moderate 4\n3 v+h none 11 3 v+h slight 6 3 v+h moderate 2\n3 gre none 7 3 gre slight 7 3 gre moderate 4\n4 v+d none 12 4 v+d slight 9 4 v+d moderate 1\n4 v+a none 15 4 v+a slight 3 4 v+a moderate 2\n4 v+h none 14 4 v+h slight 8 4 v+h moderate 3\n4 gre none 13 4 gre slight 6 4 gre moderate 4\n;\n\nproc freq data=operate order=data;\nweight wt;\ntables trt*severity /  jt;\nrun;\n\n\n\nJonckheereTerpstraTest(Severity~Treatment,data=operate,alternative=\"increasing\",nperm=10000)\n\n\n    Jonckheere-Terpstra test\n\ndata:  Severity by Treatment\nJT = 35697, p-value = 0.0062\nalternative hypothesis: increasing\n\n\n\n\nThe JT statistic was estimated to be 35,697, corresponding to a one-sided p-value \\(p=0.005\\), which is sufficient evidence to claim that the severity of the duodenal ulcer increases with the amount of gastric tissue removed.",
     "crumbs": [
       "Chapter 5: sxr tables"
     ]
