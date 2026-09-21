@@ -426,6 +426,13 @@ asked about their caffeine and exercise habits.
 
 It is also uploaded as line-level data as `exercise_caffeine.csv` on Canvas.
 
+```{r}
+exercise <- read.csv("exercise_caffeine.csv")
+glimpse(exercise)
+
+
+```
+
 ### Questions 
 
 -   Use logistic regression to estimate the logistic model for the data.
@@ -562,10 +569,127 @@ The data is based on a study on prison sentencing for persons convicted of a bur
 ### Questions
 
 -   Perform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
-  -   Using effect parametrization
-  -   Using reference cell parametrization
+  -   Using effect parameterization
+  -   Using reference cell parameterization
 
 :::
+
+## Example
+
+Recall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parameterization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
+
+
+## Example
+Recall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parameterization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
+
+:::{.panel-tabset}
+
+### SAS Code
+```{.r}
+title "effect";
+proc logistic data=caf;
+freq count;
+class agegrp (REF='0') caffeine (REF='0');
+model exercise(event='1')=agegrp caffeine / scale=none aggregate;
+run;
+
+title "ref cell";
+proc logistic data=caf;
+freq count;
+class agegrp (REF='0') caffeine (REF='0')/param=ref;
+model exercise(event='1')=agegrp caffeine / scale=none aggregate;
+run;
+```
+
+### R Code
+
+```{r}
+library(tidyverse)
+exercise <- read.csv("exercise_caffeine.csv")
+glimpse(exercise)
+```
+
+Reference Cell parameterization
+
+```{r}
+options(contrasts=c("contr.treatment","contr.poly"))
+
+
+mod_glm <- glm(Exercise~AgeGrp+Caffeine,
+               data=exercise,
+               family="binomial")
+
+summary(mod_glm)
+
+library(emmeans)
+emm <- emmeans(mod_glm,~Caffeine,type="response",infer=T)
+emm
+
+contrast(emm,method='revpairwise', type="response",infer=T)
+
+
+emm_age <- emmeans(mod_glm,~AgeGrp,type="response",infer=T)
+emm_age
+
+contrast(emm_age,method='pairwise', type="response",infer=T)
+
+mod1 <- glm(Exercise~1,
+               data=exercise,
+               family="binomial")
+anova(mod1,mod_glm,test = "LRT")
+summary(mod1)
+```
+
+
+::: callout-warning
+Effect parameterization can only be implemented in `R` if the predictors are inputted as factors.
+:::
+
+```{r}
+options(contrasts=c("contr.sum","contr.poly"))
+
+exercise <- exercise |> 
+  mutate(AgeGrp=as.factor(AgeGrp),
+         Caffeine = as.factor(Caffeine))
+
+mod_glm <- glm(Exercise~AgeGrp+Caffeine,
+               data=exercise,
+               family="binomial")
+
+summary(mod_glm)
+
+library(emmeans)
+emm <- emmeans(mod_glm,~Caffeine,type="response",infer=T)
+emm
+
+contrast(emm,method='revpairwise', type="response",infer=T)
+
+
+emm_age <- emmeans(mod_glm,~AgeGrp,type="response",infer=T)
+emm_age
+
+contrast(emm_age,method='pairwise', type="response",infer=T)
+
+mod1 <- glm(Exercise~1,
+               data=exercise,
+               family="binomial")
+anova(mod1,mod_glm,test = "LRT")
+summary(mod1)
+
+```
+
+
+### Answer
+
+Effect parameterization: $logit (\theta_{ij}) = -1.12 - 0.47 * AGEGRP +0.42* CAFFEINE$
+
+Reference Cell parameterization: $logit (\theta_{ij}) = -1.08- 0.93 * AGEGRP +0.84* CAFFEINE$
+
+There is strong evidence of an effect of age (p<0.001). The odds of older adults reporting regular exercise is 0.39 (95% CI: 0.28, 0.56) times that of younger adults.
+
+There is strong evidence of an association with caffeine consumption (p<0.001). The odds of reporting regular exercise for participants who consumed caffeine is 2.32 times that of those who do not consume caffeine.
+:::
+
 
 
 ## Example
@@ -573,8 +697,8 @@ The data is based on a study on prison sentencing for persons convicted of a bur
 The data is based on a study on prison sentencing for persons convicted of a burglary or larceny. The researchers wanted to test whether the type of crime (nonresidential or other) and prior arrests (some or none) affect whether the offender was sent to prison.
 
 -   Perform a logistic regression analysis to estimate the appropriate logistic model for the data. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
-  -   Using effect parametrization
-  -   Using reference cell parametrization
+  -   Using effect parameterization
+  -   Using reference cell parameterization
   
 :::{.panel-tabset}
 ### SAS Code
@@ -608,8 +732,8 @@ run;
 
 ```
 
-1. Default: effect parametrization
-2. Reference cell parametrization used after `param=ref` is specified.
+1. Default: effect parameterization
+2. Reference cell parameterization used after `param=ref` is specified.
 
 ### R Code
 
@@ -631,6 +755,7 @@ options(contrasts=c("contr.treatment","contr.poly"))
 mod_glm <- glm(cbind(prison,noprison)~type + prior,data=dat,family="binomial")
 summary(mod_glm)
 
+library(emmeans)
 emm <- emmeans(mod_glm,~type,type="response",infer=T)
 emm
 contrast(emm,method="revpairwise",type="response",infer=T)
@@ -643,7 +768,7 @@ contrast(emm_prior,method="revpairwise",type="response",infer=T)
 Try replacing "contr.treatment" with "contr.SAS". Which parts of the output change? Which parts do not change?
 :::
 
-**Effect parametrization**
+**Effect parameterization**
 
 ```{r}
 options(contrasts=c("contr.sum","contr.poly"))
@@ -662,9 +787,9 @@ contrast(emm_prior,method="pairwise",type="response",infer=T)
 
 ### Answer
 
-Effect parametrization: $logit (\theta_{ij}) = -1.48 - 0.30 * TYPE +0.17* PRIOR$
+Effect parameterization: $logit (\theta_{ij}) = -1.48 - 0.30 * TYPE +0.17* PRIOR$
 
-Reference Cell parametrization: $logit (\theta_{ij}) = -1.36- 0.59 * TYPE +0.35* PRIOR$
+Reference Cell parameterization: $logit (\theta_{ij}) = -1.36- 0.59 * TYPE +0.35* PRIOR$
 
 The odds of sending an offender to prison after committing other crimes is 0.55 times (95% CI: 0.38, 0.81) that when committing non-residential crimes. There is strong evidence against the null hypothesis of no difference.
 
@@ -673,44 +798,6 @@ The odds of sending an offender with some prior arrests are 1.42 times (95% CI: 
 :::
 
 
-## Exercise
-
-Recall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parametrization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
-
-
-## Exercise
-
-Recall the age x caffeine x exercise habits exercise. Use the class statement to perform logistic regression using effect and reference cell parametrization. Comment on the significance of the main effects and estimate the odds ratio and the 95% CI.
-
-:::{.panel-tabset}
-
-### SAS Code
-```{.r}
-title "effect";
-proc logistic data=caf;
-freq count;
-class agegrp (REF='0') caffeine (REF='0');
-model exercise(event='1')=agegrp caffeine / scale=none aggregate;
-run;
-
-title "ref cell";
-proc logistic data=caf;
-freq count;
-class agegrp (REF='0') caffeine (REF='0')/param=ref;
-model exercise(event='1')=agegrp caffeine / scale=none aggregate;
-run;
-```
-
-### Answer
-
-Effect parametrization: $logit (\theta_{ij}) = -1.12 - 0.47 * AGEGRP +0.42* CAFFEINE$
-
-Reference Cell parametrization: $logit (\theta_{ij}) = -1.08- 0.93 * AGEGRP +0.84* CAFFEINE$
-
-There is strong evidence of an effect of age (p<0.001). The odds of older adults reporting regular exercise is 0.39 (95% CI: 0.28, 0.56) times that of younger adults.
-
-There is strong evidence of an association with caffeine consumption (p<0.001). The odds of reporting regular exercise for participants who consumed caffeine is 2.32 times that of those who do not consume caffeine.
-:::
 
 ## Saturated models
 
@@ -756,16 +843,18 @@ Interaction terms should be tested first ($x_1x_2$). If the interaction is not s
 
 ## Non-Dichotomous Explanatory Variables
 
-- Recall: Regression models
-  - If an explanatory variable has $n$ levels, $(n-1)$ dichotomous dummy variables are needed to be produced to include the explanatory variable in the regression model.
-  - In interaction models, this leads to more interaction terms.
+If an explanatory variable has $n$ levels, $(n-1)$ dichotomous dummy variables are needed to be produced to include the explanatory variable in the regression model.
+
+::: callout-note
+In interaction models, this leads to more interaction terms.
+:::
 
 For a variable with $(a-1)$ levels
 $$
 logit(\theta) = \alpha + \beta_1x_{a1} + \beta_2x_{a2} + ... + \beta_{(a-1)}x_{a,a-1}
 $$
 
-- The matrix form of the predictor variables is called the Design Matrix.
+The matrix form of the predictor variables is called the **Design Matrix**.
 
 ## Non-Dichotomous Explanatory Variables
 
@@ -784,7 +873,7 @@ $$
 Since there is no order in the levels of explanatory variables, we might be interested in the difference between specific levels
 
 - Example: How did the difference in placebo and test treatments compare between Hospital 1 and Hospital 2?
-- Example: How did the difference in placebo and test treatments compare in Hospital 2?
+- Example: How did the placebo and test treatments compare in Hospital 2?
 
 ## Contrasts
 
@@ -827,7 +916,11 @@ We use the `contrast` statement in the `LOGISTIC` procedure to test these contra
 In SAS, we focus on the coefficients of each term defined in the linear predictor. Each linear predictor is broken down into the effect and interaction terms and simplified. The resulting **coefficients** would then make it to the contrast statement.
 :::
 
-## Example
+## Contrasts: `R`
+
+The `contrast()` function in the `emmeans` package enables us to perform contrasts. There are preset contrasts like "pairwise" and "revpairwise" that do not need to specify coefficients. Complex contrasts and joint tests need to have the coefficient inputted in the function.
+
+## Example: `SAS`
 
 Suppose we are interested in modeling the mortality rate of cardiothoracic surgery across 4 hospitals. The resulting logistic regression model would be:
 
@@ -872,18 +965,52 @@ In SAS, we can code this as:
 ```{.r}
 contrast A 2 1 1 ;
 ```
+
+In `R`, we can code this as:
+
+```{r}
+#| eval: false 
+contrast_list <- list(contrast1=c(2,1,1))
+contrast(emm,method=contrast_list,type="response")
+```
+
 :::
 
-## Exercise
+## Example: `R`
 
-Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrization.
+Suppose we are interested in modeling the mortality rate of cardiothoracic surgery across 4 hospitals. The resulting logistic regression model would be:
+
+
+$$
+\eta = \alpha + \beta_1X_{h1} + \beta_1X_{h2} + \beta_3X_{h3}
+$$
+
+The `contrast()` function uses the coefficients of the **marginal means** to perform the contrast. Suppose we want to test for a difference in mortality between hospital 1 and hospital 4. This means we are testing the hypothesis $H_0: \mu_1-\mu_4=0$, which can be interpreted as:
+
+$$
+\mu_1 + 0*\mu_2 + 0*\mu_3 -\mu_4 =0
+$$
+
+which yields the coefficients (1,0,0,-1). In `R`, we can code this as:
+
+```{r}
+#| eval: false 
+emm <- emmeans(mod_glm,~hospital,type="response")
+
+contrast_list <- list(contrast1=c(1,0,0,-1))
+contrast(emm,method=contrast_list,type="response")
+```
+
+## Exercise: `SAS`
+
+Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypotheses and formulate the contrast statements for both reference cell and effect parameterization.
 
   - There is no difference between the first and third levels of A.
   - The mean effect of $A_1$ and $A_2$ is equal to the effect of $A_3$.
 
-## Exercise
+## Exercise: `SAS`
 
-Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrization.
+Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parameterization.
 
   - There is no effect difference between the first and third levels of A.
   - The mean effect of $A_1$ and $A_2$ is equal to the effect of $A_3$.
@@ -902,17 +1029,18 @@ Reference Cell:
 Effect $A_1 = \alpha + \beta_1$
 Effect $A_3 = \alpha$
 
-No effect difference between the first and third levels: $A_1-A_3 = 0 \to \beta_1=0$
+No effect difference between the first and third levels: $A_1-A_3 = 0 \to \beta_1=0$. Therefore, the contrast coefficients are $(\beta_1,\beta_2) = (1,0)$.
 
 ```{.r}
 contrast A 1 0;
 ```
 
-Effect parametrization:
+
+Effect parameterization:
 Effect $A_1 = \alpha + \beta_1$
 Effect $A_3 = \alpha-\beta_1 - \beta_2$
 
-No effect difference between the first and third levels: $A_1-A_3 = 0 \to 2\beta_1 +\beta_2=0$
+No effect difference between the first and third levels: $A_1-A_3 = 0 \to 2\beta_1 +\beta_2=0$. Therefore, the contrast coefficients are $(\beta_1,\beta_2) = (2,1)$.
 
 ```{.r}
 contrast A 2 1;
@@ -925,58 +1053,84 @@ Effect $A_1 = \alpha + \beta_1$
 Effect $A_2 = \alpha + \beta_2$
 Effect $A_3 = \alpha$
 
-No effect difference between the first and third levels: $(A_1+A_2)/2-A_3 = 0 \to \beta_1+\beta_2=0$
+No effect difference between the first and third levels: $(A_1+A_2)/2-A_3 = 0 \to 1/2(\beta_1+\beta_2)=0$. Therefore, the contrast coefficients are $(\beta_1,\beta_2) = (0.5,0.5)$.
 
 ```{.r}
-contrast A 1 1;
+contrast A 0.5 0.5;
 ```
 
-Effect parametrization:
+Effect parameterization:
 Effect $A_1 = \alpha + \beta_1$
 Effect $A_2 = \alpha + \beta_2$
 Effect $A_3 = \alpha-\beta_1 - \beta_2$
 
-No effect difference between the first and third levels: $(A_1+A_2)/2-A_3 = 0 \to 1* \beta_1 +1* \beta_2=0$
+No effect difference between the first and third levels: $(A_1+A_2)/2-A_3 = 0 \to 3/2(\beta_1+\beta_2)=0$. Therefore, the contrast coefficients are $(\beta_1,\beta_2) = (1.5,1.5)$.
 
 ```{.r}
-contrast A 1 1;
+contrast A 1.5 1.5;
 ```
-
 :::
 
 
-## Exercise
+## Exercise: `R`
+
+Consider a Factor A with three levels $(A_1,A_2,A_3)$, with $A_3$ as the reference level. Provide the corresponding null hypotheses and formulate the contrast statements.
+
+::: panel-tabset
+### Questions
+
+  - There is no difference between the first and third levels of A.
+  - The mean effect of $A_1$ and $A_2$ is equal to the effect of $A_3$.
+
+### Answer
+- `contrast1`:  There is no difference between the first and third levels of A. $(\mu_1-\mu_3) = 0$
+- `contrast2`:The mean effect of $A_1$ and $A_2$ is equal to the effect of $A_3$. $\frac{\mu_1+\mu_2}{2}-\mu_3=0$.
+
+```{r}
+#| eval: false
+
+contrast_list <- list(contrast1 = c(1,0,-1),
+                      contrast2 = c(1/2,1/2,-1))
+contrast(emm,method=contrast_list)
+```
+
+:::  
+
+## Example
 
 Consider a Factor A with three levels $(A_1,A_2,A_3)$ and Factor B with two levels $(B_1,B_2)$, with $A_3$ and $B_2$ as the reference level. Suppose $\theta$ is a probability of observing success for a dichotomous response variable $y$.
 
   - Please write the saturated/interaction logistic model for $\theta$  
 
-Provide the corresponding null hypothesis and formulate the SAS contrast statements for both reference cell and effect parametrizations.
+Provide the corresponding null hypothesis and formulate the contrast statements for both reference cell and effect parameterizations.
 
   - "There is no interaction between A and B".
 
 
 
-## Exercise
+## Example: `SAS`
 
 Consider a Factor A with three levels $(A_1,A_2,A_3)$ and Factor B with two levels $(B_1,B_2)$, with $A_3$ and $B_2$ as the reference level. Suppose $\theta$ is a probability of observing success for a dichotomous response variable $y$.
 
-  - Please write the saturated/interaction logistic model for $\theta$  
+  - Write the saturated/interaction logistic model for $\theta$  
 
 $$
-\eta = \alpha + \beta_{A1}x_{A1} + \beta_{A2}x_{A2} + 
-\beta_{B1}x_{B1}  +  \beta_{A1B1}x_{A1}x_{B1} + \beta_{A2B1}x_{A2}x_{B1}
+\eta = \alpha + \beta_{A1}x_{A1} + \beta_{A2}x_{A2} +\\
+\beta_{B1}x_{B1}+ \beta_{A1B1}x_{A1}x_{B1} + \beta_{A2B1}x_{A2}x_{B1}
 $$
 
-Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parametrizations.
+Provide the corresponding null hypotheses and formulate the SAS contrast statements for both reference cell and effect parameterizations.
 
   - "There is no interaction between A and B".
-    - The joint tests of the following hypotheses should be tested: $\beta_{A1B1} = 0$ and $\beta_{A2B1}=0$.
-
+    - The joint tests of the following hypotheses should be tested: $\beta_{A1B1} = 0$ and $\beta_{A2B1}=0$, which corresponds to the following coefficients for A*B: (1,0) and (0,1).
+    
 ```{.r}
 contrast A*B 1 0,
-        A*B 0 1;
+              0 1;
 ```
+
+## Example: `R`
+
 
 
 ## Implementing Qualitative Explanatory Variables in SAS
@@ -991,6 +1145,26 @@ contrast A*B 1 0,
 - You can introduce contrasts in the `contrast` statement.
 - `effectplot` can be used to create interaction plots.
 - `oddsratio` calculates odds ratios and graphs of confidence limits for odds ratios.
+
+## Implementing Qualitative Explanatory Variables in `R`.
+
+It would be ideal to change all character variables into factors using the `mutate()` function in the `dplyr`/`tidyverse` package in `R` before using it in the `glm()` function in `R`.
+
+::: callout-note
+Interactions are written as `A:B`. This can be extended to higher order interactions: `A:B:C`.
+
+Writing `A*B` means we are including the following terms: `A + B + A:B`.
+:::
+
+::: callout-note
+Marginal and conditional means can still be calculated using the `emmeans()` package. To create an interaction plot, we just use the `plot()` function.
+
+Contrasts can be used to calculate odds ratios and confidence limits.
+:::
+
+::: callout-note
+Type III tests of fixed effects should be used to test for interactions. This can be done by using the `Anova()` function in `R`.
+:::
 
 ## Example
 
@@ -1021,6 +1195,20 @@ not >=10 yes yes 24 not >=10 yes no 1360
 not >=10 no yes 10 not >=10 no no 986
 ;
 ```
+
+### R Data Set
+
+```{r}
+dat <- expand.grid(Smoking = c("No","Yes"),
+                   Years = c("Less10","Greater10"),
+                   Work= c("Not Dusty","Dusty"))
+
+dat$yes <- c(12,14,10,24,7,30,11,57)
+dat$no <- c(1004,1340,986,1360,119,203,81,161)
+dat
+```
+
+
 :::
 
 ##  Example
@@ -1035,6 +1223,61 @@ The data set is from a cross-sectional prevalence study conducted to investigate
 - Is there evidence of any two-way interactions at a significance level of 0.10?
 - Generate an interaction plot for these cases.
 - Generate the main effects using contrast statements.
+
+### R Code
+
+```{r}
+options(contrasts=c("contr.treatment","contr.poly"))
+library(car)
+mod_glm <- glm(cbind(yes,no)~Work*Years + Work*Smoking + Years*Smoking,
+               data=dat,family="binomial")
+summary(mod_glm)
+Anova(mod_glm,test.statistic = "Wald")
+```
+
+- Main Effects
+
+```{r}
+library(emmeans)
+emm_work <- emmeans(mod_glm,~Work,type="response",infer=T)
+emm_work
+
+# main effect
+contrast_list <- list(main.effect = c(-1,1))
+contrast(emm_work,method=contrast_list,infer=T)
+
+emm_years <- emmeans(mod_glm,~Years,type="response",infer=T)
+emm_years
+
+# main effect
+contrast_list <- list(main.effect = c(-1,1))
+contrast(emm_years,method=contrast_list,infer=T)
+
+emm_smoking <- emmeans(mod_glm,~Smoking,type="response",infer=T)
+emm_smoking
+
+# main effect
+contrast_list <- list(main.effect = c(-1,1))
+contrast(emm_smoking,method=contrast_list,infer=T)
+```
+
+- Interaction
+
+The `Anova()` function already has the Wald test. Let's see if we can re-create one of the interactions using the `contrast()` and `test()` functions. Note that the interaction null hypothesis can be interpreted as 
+
+$$
+H_0: \mu_{Dusty,No}-\mu_{NDusty,No} - (\mu_{Dusty,Yes}-\mu_{NDusty,Yes}) = 0
+$$
+
+```{r}
+emm_interaction <- emmeans(mod_glm,~Work*Smoking,type="response")
+emm_interaction
+plot(emm_interaction)
+contrast_list <- list(interaction = c(-1,1,1,-1))
+contrast(emm_interaction,method=contrast_list,infer=T,type="response") |> test(joint=T)
+
+```
+
 
 
 ### SAS Code
@@ -1055,7 +1298,9 @@ run;
 
 ### Answer
 
-$Work*Smoke$ (p = 0.07) is significant at the 0.10 level.
+We have evidence of an interaction between work conditions and smoking status ($Work*Smoke$) ($\chi^2_1$=3.22,p = 0.07) at the 0.10 level of significance, which means we need to be careful in interpreting the main effect of work conditions and smoking status.
+
+We can interpret the main effect of the years of employment. Those who work more than 10 years have odds of complaining about byssinosis disease that are 1.6 times that of those who worked less than 10 years.
 :::
 
 ## Exercise
@@ -1088,6 +1333,19 @@ uncomplicated B cured 54 uncomplicated B not 5
 uncomplicated C cured 34 uncomplicated C not 6
 ;
 ```
+
+### R Data Set
+
+```{r}
+uti <- expand.grid(Treatment=c("A","B","C"),
+            Diagnosis=c("Complicated","Uncomplicated"))
+
+uti$yes=c(78,101,68,40,54,34)
+uti$no = c(28,11,46,5,5,6)
+
+uti
+```
+
 :::
 
 ## Exercise
@@ -1125,41 +1383,92 @@ oddsratios diagnosis;
 run;
 ```
 
+### R Code
+
+```{r}
+mod_glm <- glm(cbind(yes,no)~Diagnosis*Treatment,
+               data=uti,
+               family="binomial")
+summary(mod_glm)
+Anova(mod_glm)
+```
+To calculate the conditional odds ratios, we can manually add contrast statements:
+
+```{r}
+emm_interaction <- emmeans(mod_glm,~Diagnosis*Treatment,type="response",infer=T)
+emm_interaction
+
+contrast_list <- list(OR.at.A = c(1,-1,0,0,0,0),
+                      OR.at.B=c(0,0,1,-1,0,0),
+                      OR.at.C = c(0,0,0,0,1,-1))
+
+contrast(emm_interaction,method=contrast_list,infer=T,type="response")
+```
+
+
 ### Answer
 
 We are more interested in the interaction effect.
 
-There is no significant interaction effect between diagnosis and treatment.
+There is no significant interaction effect between diagnosis and treatment ($\chi^2_2$=0.28, p=0.28).
 
 ![Odds Ratios](img/odds_C8.png)
 :::
 
 ## Continuous and Ordinal Explanatory Variables
 
-- Sometimes, continuous explanatory variables are unique in the data set. The sample size requirements for the goodness-of-fit tests will not be satisfied.
+Sometimes, continuous explanatory variables are unique in the data set. The sample size requirements for the goodness-of-fit tests will not be satisfied.
   - Income
   - Age
   - Years in University
-- There should be at least 5 observations for the rarer outcome per parameter in the full model.
-  - If there are 50 observations of the rarer outcome, then the maximum number of parameters supported is 10.
 
-:::callout-note
-Continuous variables should **NOT** be included in the class statement.
+::: callout-note
+There should be at least 5 observations for the rarer outcome per parameter in the full model. If there are 50 observations of the rarer outcome, then the maximum number of parameters supported is 10.
 :::
 
-## Model Selection: Logistic Regression
+:::callout-note
+In `SAS`, continuous variables should **NOT** be included in the class statement.
+:::
 
-- We can use the residual score statistic 𝑄$Q_{RS}$ to determine up to what extent does the residuals from the model are linearly associated with other potential explanatory variables.
+## `SAS` Model Selection: Logistic Regression 
+
+- We can use the residual score statistic $Q_{RS}$ to determine up to what extent does the residuals from the model are linearly associated with other potential explanatory variables.
   - DF: difference in number of parameters between models
+  
 
 - The `SELECTION=FORWARD` option should be included in the `MODEL` statement. The `LOGISTIC` procedure will then start from an intercept model and build it up to the most parsimonious model.
   - The `INCLUDE` option tells SAS how many of the variables listed should always be included in the model.
 
-## Model Selection: Logistic Regression
+## `SAS Model Selection: Logistic Regression
 
 - SAS also provides the Hosmer and Lemeshow Goodness-of-Fit test that tests the adequacy for these data by including the `lackfit` option.
   - Null hypothesis: The model is adequate, i.e., the residuals are explained by the model.
 - The UNITS option specifies at what increment of the continuous variable will SAS calculate the odds ratios.
+
+## `R` Model Selection
+
+The function `step()` can perform forward selection, i.e. adding more predictors and interaction terms to the model until we reach the full model, in `R`. The model selection will be based on the Akaike Information Criteria (AIC), by default.
+
+```{r}
+#| eval: false
+
+base_model <- glm(dependent~independent1,data=sampledata,family="binomial")
+full_model <- glm(dependent~independent1+independent2 + covariates,data=sampledata,family="binomial")
+
+step(base_model,full_model, direction="forward")
+anova(base_model,full_model)
+```
+
+## `R`: Hosmer and Lemeshow test
+
+The Hosmer and Lemeshow goodness-of-fit test tests the adequacy of the model for the provided data. 
+
+::: callout-note
+The null hypothesis of the Hosmer and Lemeshow test is that the model is adequate, i.e. the residuals are explained by the current model.
+:::
+
+The Hosmer and Lemeshow test can be performed using the `performance_hosmer()` function in the `performance` package in `R`.
+
 
 ## Example
 
@@ -1198,6 +1507,16 @@ datalines;
 ;
 ```
 
+### R Data Set
+
+```{r}
+library(tidyverse)
+ecg <- read.csv("ECG_withage.csv")
+glimpse(ecg)
+```
+
+
+
 ## Example
 
 The data set CORONARY is from the same study on coronary artery disease as previously analyzed; in addition, the continuous variable AGE is an explanatory variable. The variable ECG is now treated as an ordinal variable, with values 0, 1, and 2. ECG is coded 0 if the ST segment depression is less than 0.1, 1 if it equals 0.1 or higher but less than 0.2, and 2 if the ST segment depression is greater than or equal to 0.2. The variable AGE is age in years.
@@ -1216,14 +1535,37 @@ run;
 1. `include=3` indicates we are including the first three variables in the model. In this case, it's sex, ecg, and age.
 2. Looks at the odds ratio due to a 10-point difference in age.
 
+### R Code
+
+```{r}
+mod_glm <- glm(CA~Sex+ECG+Age,data=ecg,family="binomial")
+mod_full <- glm(CA~Sex+ECG+Age + ECG:ECG + Age:Age + Sex:ECG + Sex:Age + ECG:Age,data=ecg,family="binomial")
+step(mod_glm,mod_full,direction="forward")
+anova(mod_glm,mod_full)
+summary(mod_glm)
+
+
+
+library(performance)
+performance_hosmer(mod_glm)
+```
+```{r}
+library(emmeans)
+emm_sex <- emmeans(mod_glm,~Age,type="response",at=list(Age=c(50,60)),infer=T)
+emm_sex
+
+contrast(emm_sex,method="revpairwise",infer=T)
+```
+
+
 ### Answer
 
 The logistic model is as follows:
 
 $$
-logit(\theta) = -5.64 + 1.35*Sex + 0.873*ECG +0.09*Age
+logit(\hat{\theta}) = -5.64 + 1.35*Sex + 0.873*ECG +0.09*Age
 $$
-The odds of developing a coronary artery disease in patients older than 10 years is 2.5 times higher.
+The odds of developing a coronary artery disease in patients older than 10 years increases by 2.53 (95% CI: 1.27-5.03) times.
 :::
 
 ## Exercise
@@ -1248,6 +1590,24 @@ model Discolored(event="Yes") = pesticide covercrop yield pesticide*covercrop/se
 run;
 ```
 
+### R Code
+
+```{r}
+corn <- read.csv("Chapter8-Corn.csv",stringsAsFactors = TRUE)
+glimpse(corn)
+```
+
+```{r}
+mod_glm <- glm(Discolored~Pesticide + CoverCrop + Yield, data=corn, family="binomial")
+mod_interaction <- glm(Discolored~Pesticide + CoverCrop + Yield + Pesticide:CoverCrop, data=corn, family="binomial") 
+
+step(mod_glm,mod_interaction,direction="forward")
+anova(mod_glm,mod_interaction)
+performance_hosmer(mod_glm)
+```
+
+
+
 ### Answer
 
 There was no evidence to indicate that a pesticide*covercrop interaction needed to be included ($Q_{RS} = 0.08, p=0.78$). The Hosmer-Lemeshow goodness-of-fit test also provides no evidence against model adequacy ($\chi^2 = 6.9, p=0.55$). 
@@ -1268,7 +1628,7 @@ The odds of discoloration decreases by 0.42 (1-0.58) times when the yield increa
 
   - Lack of fit: Should we still consider other variables to include in the model?
 
-- Model fit: Pearson chi-square and deviance chi-square tests
+- Model fit: Pearson chi-square and deviance chi-square tests (`SAS`)
 - Lack of fit: Pearson *residuals* and deviance *residuals*
 
 
@@ -1290,6 +1650,18 @@ proc logistic plots(label)=influence(unpack stdres);
 ```
 :::
 
+::: callout-tip
+In `R`, we can use the `check_model` function in the `performance` package.
+
+```{r}
+#| eval: false
+
+library(performance)
+check_model(mod_glm,
+            check=c("pp_check", "binned_residuals","vif","outliers"))
+```
+
+:::
 ## Example
 
 Consider a modified version of the UTI data set. Generate the standardized residual plot, likelihood residual plot, and the Pearson chi-square residual plot.
@@ -1307,6 +1679,9 @@ uncomplicated C 34 40
 ;
 ```
 
+::: callout-note
+In `R`, the previous `uti` data set can still be used.
+:::
 
 ## Example
 
@@ -1326,9 +1701,20 @@ run;
 1. `plots=influence` yield all residual plots. `stdres` generates the standardized residual plot.
 2. The model can also be expressed in terms of # of success/sample size;
 
+### R Code
+
+```{r}
+mod_glm <- glm(cbind(yes,no)~Treatment+Diagnosis, 
+               data=uti,
+               family="binomial")
+library(performance)
+check_model(mod_glm)
+```
+
+
 ### Answer
 
-Residuals did not exceed 2, which indicate good fit.
+The plots indicate good fit and lack of multicollinearity.
 :::
 
 ## Alternative Estimation Methods

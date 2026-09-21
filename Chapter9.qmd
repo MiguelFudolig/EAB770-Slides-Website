@@ -30,7 +30,7 @@ format:
   - Exact Methods: Generalized Logits Model
   
 
-# Ordinal Response Variable
+# Ordinal Response Variables
 
 ## Polytomous Variables?
 
@@ -148,6 +148,14 @@ $$
   - `ESTIMATE: EXP` option to get the estimated odds ratio, `ILINK` option to get the estimated cumulative probability $\theta$.
   - CL option is used to get the confidence limits for odds ratio or estimated probabilities.
 
+## Proportional Odds Model in `R`
+
+The `polr()` function in the `MASS` package in `R` performs the proportional odds model in `R`. Marginal/conditional means can still be calculated using `emmeans()` from the `emmeans` package.
+
+::: callout-note
+The `poTest()` function in `car` tests whether the proportional odds assumption holds.
+:::
+
 ## Example
 
 Male and female subjects received an active or placebo treatment for their arthritis pain, and the subsequent extent of improvement was recorded as marked, some, or none.
@@ -162,6 +170,32 @@ Male and female subjects received an active or placebo treatment for their arthr
 
 ### Data
 ![](img/arthritis_C9.png){width=200%}
+### R Data Set
+
+```{r}
+library(tidyverse)
+arthritis <- read.csv("arthritis_9.csv",stringsAsFactors = T)
+glimpse(arthritis)
+```
+
+It is important to check if the factor levels follow the order we want.
+
+```{r}
+levels(arthritis$Improvement)
+levels(arthritis$Treatment)
+```
+
+The code below fixes this.
+
+```{r}
+
+arthritis <- arthritis |>
+  mutate(Improvement = factor(Improvement, levels=c("Marked","Some","None"),ordered=T),
+         Treatment = factor(Treatment,levels=c("Placebo","Active"),ordered=T))
+
+
+```
+
 :::
 
 
@@ -170,9 +204,7 @@ Male and female subjects received an active or placebo treatment for their arthr
 Male and female subjects received an active or placebo treatment for their arthritis pain, and the subsequent extent of improvement was recorded as marked, some, or none.
 
 ::: {.panel-tabset}
-### Data Set
-
-
+### `SAS` Data Set
 ```{.r}
 data arthritis;
 input sex $ treatment $ improve $ count @@;
@@ -201,6 +233,31 @@ run;
 1. The polybar plot creates stacked bar plots showing probability and cumulative probability plots for each level dictated by x.
 2. `selection=forward include=2` tests whether the interaction is needed to be included in the model.
 3. The `ilink` option calculates the cumulative probability, while `exp` calculates odds ratios. The reason it returns the probability for marked is that the marked level was inputted as the lowest level.
+
+### R Code
+
+```{r}
+library(MASS)
+library(car)
+
+mod_po <- polr(Improvement~Treatment+Sex,data=arthritis)
+
+summary(mod_po)
+Anova(mod_po, test="Wald")
+poTest(mod_po)
+```
+
+```{r}
+library(emmeans)
+emm_po <- emmeans(mod_po,~Improvement|Treatment*Sex,mode="prob")
+emm_po
+pairs(emm_po,type="response")
+
+emm_sex <- emmeans(mod_po,~Sex)
+pairs(emm_sex,type="response")
+```
+
+
 
 ### Answer
 
