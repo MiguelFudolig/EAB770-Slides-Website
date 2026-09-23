@@ -160,6 +160,11 @@ The `polr()` function in the `MASS` package in `R` performs the proportional odd
 The `poTest()` function in `car` tests whether the proportional odds assumption holds. 
 :::
 
+
+::: callout-note
+Because the `polr()` function uses a slightly different link between the cumulative logits, the interpretation for these numbers will be different from that of `SAS`. Calculating odds ratios will provide the odds ratio of recording higher level of outcomes between the two predictor levels.
+:::
+
 ## Example
 
 Male and female subjects received an active or placebo treatment for their arthritis pain, and the subsequent extent of improvement was recorded as marked, some, or none.
@@ -195,10 +200,8 @@ The code below fixes this.
 ```{r}
 
 arthritis <- arthritis |>
-  mutate(Improvement = factor(Improvement, levels=c("None","Some","Marked"),ordered=T),
+  mutate(Improvement = factor(Improvement, levels = c("None","Some", "Marked"),ordered=T),
          Treatment = factor(Treatment,levels=c("Placebo","Active")))
-
-xtabs(~Treatment+Improvement+Sex,data=arthritis)
 ```
 
 :::
@@ -251,7 +254,7 @@ summary(mod_po)
 exp(coef(mod_po))
 poTest(mod_po)
 
-Anova(mod_po, test="Wald")
+Anova(mod_po)
 ```
 
 ```{r}
@@ -296,9 +299,9 @@ where $x_f = 1$ when the participant identifies as female, $x_a=1$ when the part
 
 Using the proportional odds model, we determine that there is a significant effect of sex ($\chi^2=6.2, p=0.01$) and treatment ($\chi^2=14.4, p=0.001$). 
 
-Females have 3.74 (95% CI: 1.33, 10.55) times higher odds of marked improvement compared to males.
+Females have 3.74 (95% CI: 1.33, 10.55) times the odds of marked improvement compared to males.
 
-The odds of improvement after undergoing active treatment is 6.03 (95% CI: 2.39, 15.2) times higher compared to the placebo group.
+The odds of improvement after undergoing active treatment is 6.03 (95% CI: 2.39, 15.2) times that of the placebo group.
 :::
 
 ## Exercise
@@ -345,6 +348,19 @@ high yes ex 3 4 high yes ex 4 2
 high yes cur 3 39 high yes cur 4 51
 ;
 ```
+
+A `csv` file is uploaded on Canvas as `air_pollution.csv`.
+
+```{r}
+library(tidyverse) 
+air_pollution <- read.csv("air_pollution.csv",stringsAsFactors = TRUE)
+air_pollution <- air_pollution |> 
+  mutate(Level = factor(Level, ordered=T))
+
+glimpse(air_pollution)
+```
+
+
 :::
 
 ## Exercise
@@ -365,11 +381,62 @@ estimate "probability of at most II level for ex smoker, high air pollution, job
 run;
 ```
 
+### R Code
+
+```{r}
+library(MASS)
+library(car)
+options(contrasts = c("contr.treatment", "contr.poly"))
+mod_po <- polr(Level~Air + Exposure + Smoking, data=air_pollution,Hess=TRUE)
+
+summary(mod_po)
+
+Anova(mod_po)
+poTest(mod_po)
+```
+
+```{r}
+library(emmeans)
+emm_cum <- emmeans(mod_po,~Air+Exposure+Smoking|cut,mode="cum.prob")
+emm_cum
+
+
+emm_prob <- emmeans(mod_po,~Air+Exposure+Smoking|Level,mode="prob")
+emm_prob
+
+```
+
+To calculate the odds ratio, we can use `contrast()` but we have to manually exponentiate the confidence limits.
+
+```{r}
+emm_Air <- emmeans(mod_po,~Air)
+contrast(emm_Air,method="revpairwise",infer=T) |> 
+  as.data.frame() |> 
+  mutate(OR = exp(estimate),
+         OR.LCL = exp(asymp.LCL),
+         OR.UCL = exp(asymp.UCL))
+
+emm_Ex <- emmeans(mod_po,~Exposure)
+contrast(emm_Ex,method="revpairwise",infer=T) |> 
+  as.data.frame() |> 
+  mutate(OR = exp(estimate),
+         OR.LCL = exp(asymp.LCL),
+         OR.UCL = exp(asymp.UCL))
+
+emm_Smoking <- emmeans(mod_po,~Smoking)
+contrast(emm_Smoking,method="pairwise",infer=T,adjust="tukey") |> 
+  as.data.frame() |> 
+  mutate(OR = exp(estimate),
+         OR.LCL = exp(asymp.LCL),
+         OR.UCL = exp(asymp.UCL))
+```
+
+
 ### Answer
 
-There is no evidence of an air pollution effect ($\chi^2 = 0.18, p=0.68$). Exposure ($\chi^2 = 82.1, p=<0.001$) and smoking history ($\chi^2 = 209.9, p<0.001$) are significant.
+There is no evidence of an air pollution effect ($\chi^2 = 0.18, p=0.68$). There is evidence of a strong association between exposure ($\chi^2 = 82.1, p=<0.001$) and smoking history ($\chi^2 = 209.9, p<0.001$).
 
-The odds of being assigned to Response Level III and lower for current smokers is 0.23 times the odds for ex-smokers.
+The odds of being assigned to Response Level III and lower for current smokers is 0.23 times the odds for ex-smokers. The odds of being assigned to Response Level 4 for current smokers is 4.27 times the odds for ex-smokers.
 
 The probability of receiving a response level III and below for an ex smoker, high air pollution, and with job exposure is 0.9351. The probability of receiving a response level II and below for an ex smoker, high air pollution, and with job exposure is 0.8512. Hence, the estimated probability of receiving a response level III is `r 0.9351-0.8512` .
 
@@ -400,6 +467,26 @@ where $x'_{hi}$ includes the explanatory variables with unequal slopes $\beta_k$
   - `LABEL`: TEST statements effectively labels the test.
   - If the test yields a significant result, there is sufficient evidence for unequal slopes for that explanatory variable.
   - If the test is not significant, we can assume the proportional odds model holds.
+
+## Partial Proportional Odds Model in `R`
+
+If the score test for the proportional odds assumption led to the rejection of the null hypothesis at the 0.10 level, we might need to use a partial proportional odds model.
+
+::: callout-note
+The `clm()` package in the `ordinal` package in `R` can be used to perform partial proportional odds model. Suppose we have two predictors, `x1` and `x2`, one of which did not satisfy the proportional odds model.
+
+```{r}
+#| eval: false
+
+mod_clm <- clm(y~x1,
+               nominal=~x2,
+               data=sample_data)
+summary(mod_clm)
+```
+
+
+It can also be used to estimate proportional odds models. 
+:::
 
 ## Example
 
@@ -470,11 +557,25 @@ equal_treatment: test treatmentactive_marked=treatmentactive_some;
 run;
 ```
 
+
+### R Code
+
+```{r}
+library(ordinal)
+mod1 <-clm(Improvement~1,nominal = ~ Sex + Treatment,data=arthritis)
+mod3 <- clm(Improvement~ Sex,nominal=~ Treatment,data=arthritis)
+mod4 <- clm(Improvement~ Treatment,nominal=~ Sex,data=arthritis)
+
+anova(mod1,mod3)
+anova(mod1,mod4)
+```
+
+
 ### Answer
 
 We suppose the slopes are unequal, then test whether there is evidence against the null hypothesis of equal slopes using `test`.
 
-There is insufficient evidence to claim that the $\beta$ for sex ($\chi^2 = 1.35, p=0.25$) and treatment ($\chi^2 = 0.03, p=0.86$).
+There is insufficient evidence to claim that the $\beta$ for sex ($\chi^2 = 1.35, p=0.25$) and treatment ($\chi^2 = 0.03, p=0.86$) are different across the different outcome levels.
 
 :::
 
