@@ -122,7 +122,7 @@ These are the same across all levels of the response variable. The difference be
 Another consequence of the proportional odds assumption is that the difference between the response levels does not depend on the strata or explanatory variables.
 
 ::: callout-note
-## Example
+### Example
 
 Consider comparing the first and second level of the response variable.
 
@@ -130,6 +130,10 @@ $$
 \eta_{hm1}-\eta_{hm2} = \alpha _ 1 - \alpha _2 +  (\mathbf{x'_{hm}\beta - x'_{hm}}\beta) = \alpha_1-\alpha_2
 $$
 
+:::
+
+::: callout-note
+The proportional odds assumption can be tested using the Brant test. The null hypothesis of the test is that the proportional odds assumption holds. For the proportional odds assumption to hold, we must fail to reject the null hypothesis.
 :::
 
 ## Solving for Individual Probabilities
@@ -153,7 +157,7 @@ $$
 The `polr()` function in the `MASS` package in `R` performs the proportional odds model in `R`. Marginal/conditional means can still be calculated using `emmeans()` from the `emmeans` package.
 
 ::: callout-note
-The `poTest()` function in `car` tests whether the proportional odds assumption holds.
+The `poTest()` function in `car` tests whether the proportional odds assumption holds. 
 :::
 
 ## Example
@@ -183,6 +187,7 @@ It is important to check if the factor levels follow the order we want.
 ```{r}
 levels(arthritis$Improvement)
 levels(arthritis$Treatment)
+levels(arthritis$Sex)
 ```
 
 The code below fixes this.
@@ -190,10 +195,10 @@ The code below fixes this.
 ```{r}
 
 arthritis <- arthritis |>
-  mutate(Improvement = factor(Improvement, levels=c("Marked","Some","None"),ordered=T),
-         Treatment = factor(Treatment,levels=c("Placebo","Active"),ordered=T))
+  mutate(Improvement = factor(Improvement, levels=c("None","Some","Marked"),ordered=T),
+         Treatment = factor(Treatment,levels=c("Placebo","Active")))
 
-
+xtabs(~Treatment+Improvement+Sex,data=arthritis)
 ```
 
 :::
@@ -239,24 +244,45 @@ run;
 ```{r}
 library(MASS)
 library(car)
-
-mod_po <- polr(Improvement~Treatment+Sex,data=arthritis)
-
+options(contrasts = c("contr.treatment", "contr.poly"))
+mod_po <- polr(Improvement~Treatment+Sex,data=arthritis,Hess = TRUE)
 summary(mod_po)
-Anova(mod_po, test="Wald")
+
+exp(coef(mod_po))
 poTest(mod_po)
+
+Anova(mod_po, test="Wald")
 ```
 
 ```{r}
 library(emmeans)
-emm_po <- emmeans(mod_po,~Improvement|Treatment*Sex,mode="prob")
-emm_po
-pairs(emm_po,type="response")
+emm_cum <- emmeans(mod_po,~Treatment*Sex|cut,mode="cum.prob")
+emm_cum
 
-emm_sex <- emmeans(mod_po,~Sex)
-pairs(emm_sex,type="response")
+
+emm_prob <- emmeans(mod_po,~Treatment*Sex|Improvement,mode="prob")
+emm_prob
+emm_prob |> plot()
+
 ```
 
+To calculate the odds ratio, we can use `contrast()` but we have to manually exponentiate the confidence limits.
+
+```{r}
+emm_treatment <- emmeans(mod_po,~Treatment)
+contrast(emm_treatment,method="revpairwise",infer=T) |> 
+  as.data.frame() |> 
+  mutate(OR = exp(estimate),
+         OR.LCL = exp(asymp.LCL),
+         OR.UCL = exp(asymp.UCL))
+
+emm_sex <- emmeans(mod_po,~Sex)
+contrast(emm_sex,method="pairwise",infer=T) |> 
+  as.data.frame() |> 
+  mutate(OR = exp(estimate),
+         OR.LCL = exp(asymp.LCL),
+         OR.UCL = exp(asymp.UCL))
+```
 
 
 ### Answer
@@ -337,7 +363,6 @@ estimate "odds between I+II+III vs. IV for current vs. ex smokers" smoking 1 -1 
 estimate "probability of at most III level for ex smoker, high air pollution, job exposure" intercept 1 air 1 smoking 0 1/ilink cl category='3';
 estimate "probability of at most II level for ex smoker, high air pollution, job exposure" intercept 1 air 1 smoking 0 1/ilink cl category='2'; 
 run;
-
 ```
 
 ### Answer
