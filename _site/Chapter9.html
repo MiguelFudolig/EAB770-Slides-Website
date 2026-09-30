@@ -462,6 +462,9 @@ logit(\theta_{hik}) = \log\left(\frac{\theta_{hik}}{1-\theta_{hik}}\right) = \lo
 <div id="tabset-1-2">
 <p><img data-src="img/arthritis_C9.png" style="width:200.0%"> ### R Data Set</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a>arthritis <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"arthritis_9.csv"</span>,<span class="at">stringsAsFactors =</span> T)</span>
+<span id="cb1-3"><a></a><span class="fu">glimpse</span>(arthritis)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 84
 Columns: 3
@@ -472,17 +475,25 @@ $ Improvement &lt;fct&gt; Marked, Marked, Marked, Marked, Marked, Marked, Marked
 </div>
 <p>It is important to check if the factor levels follow the order we want.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">levels</span>(arthritis<span class="sc">$</span>Improvement)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Marked" "None"   "Some"  </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">levels</span>(arthritis<span class="sc">$</span>Treatment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Active"  "Placebo"</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">levels</span>(arthritis<span class="sc">$</span>Sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Female" "Male"  </code></pre>
 </div>
 </div>
 <p>The code below fixes this.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>arthritis <span class="ot">&lt;-</span> arthritis <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a></a>  <span class="fu">mutate</span>(<span class="at">Improvement =</span> <span class="fu">factor</span>(Improvement, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"None"</span>,<span class="st">"Some"</span>, <span class="st">"Marked"</span>),<span class="at">ordered=</span>T),</span>
+<span id="cb9-3"><a></a>         <span class="at">Treatment =</span> <span class="fu">factor</span>(Treatment,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"Placebo"</span>,<span class="st">"Active"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </div>
@@ -494,42 +505,47 @@ $ Improvement &lt;fct&gt; Marked, Marked, Marked, Marked, Marked, Marked, Marked
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1"><code>SAS</code> Data Set</a></li><li><a href="#tabset-2-2">SAS Code</a></li><li><a href="#tabset-2-3">R Code</a></li><li><a href="#tabset-2-4">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data arthritis;</span>
-<span id="cb5-2"><a></a>input sex <span class="sc">$</span> treatment <span class="sc">$</span> improve <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb5-3"><a></a>datalines;</span>
-<span id="cb5-4"><a></a>female active marked <span class="dv">16</span> female active some <span class="dv">5</span> female active none <span class="dv">6</span></span>
-<span id="cb5-5"><a></a>female placebo marked <span class="dv">6</span> female placebo some <span class="dv">7</span> female placebo none <span class="dv">19</span></span>
-<span id="cb5-6"><a></a>male active marked <span class="dv">5</span> male active some <span class="dv">2</span> male active none <span class="dv">7</span></span>
-<span id="cb5-7"><a></a>male placebo marked <span class="dv">1</span> male placebo some <span class="dv">0</span> male placebo none <span class="dv">10</span></span>
-<span id="cb5-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data arthritis;</span>
+<span id="cb10-2"><a></a>input sex <span class="sc">$</span> treatment <span class="sc">$</span> improve <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb10-3"><a></a>datalines;</span>
+<span id="cb10-4"><a></a>female active marked <span class="dv">16</span> female active some <span class="dv">5</span> female active none <span class="dv">6</span></span>
+<span id="cb10-5"><a></a>female placebo marked <span class="dv">6</span> female placebo some <span class="dv">7</span> female placebo none <span class="dv">19</span></span>
+<span id="cb10-6"><a></a>male active marked <span class="dv">5</span> male active some <span class="dv">2</span> male active none <span class="dv">7</span></span>
+<span id="cb10-7"><a></a>male placebo marked <span class="dv">1</span> male placebo some <span class="dv">0</span> male placebo none <span class="dv">10</span></span>
+<span id="cb10-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1"></a>proc logistic data<span class="ot">=</span>arthritis order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>treatment<span class="sc">*</span>sex);</span>
-<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>freq count;</span>
-<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a>class treatment sex <span class="sc">/</span> param<span class="ot">=</span>ref; </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-4" class="code-annotation-target"><a href="#annotated-cell-7-4"></a>model improve <span class="ot">=</span> sex treatment sex<span class="sc">*</span>treatment<span class="sc">/</span> selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
-<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5"></a>estimate <span class="st">"odds between marked vs. some+no improvement for female in placebo group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span> <span class="sc">/</span>exp cl category<span class="ot">=</span><span class="st">'marked'</span>;</span>
-<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6"></a>estimate <span class="st">"odds between marked+some vs. no improvement for female in placebo group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span> <span class="sc">/</span>exp cl category<span class="ot">=</span><span class="st">'some'</span>;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-7-7" class="code-annotation-target"><a href="#annotated-cell-7-7"></a>estimate <span class="st">"probability of marked improvement for female in the placebo group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'marked'</span>;</span>
-<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8"></a>estimate <span class="st">"probability of marked improvement for female in the active trt group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span> treatment <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'marked'</span>;</span>
-<span id="annotated-cell-7-9"><a href="#annotated-cell-7-9"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-14"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1"></a>proc logistic data<span class="ot">=</span>arthritis order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>treatment<span class="sc">*</span>sex);</span>
+<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2"></a>freq count;</span>
+<span id="annotated-cell-14-3"><a href="#annotated-cell-14-3"></a>class treatment sex <span class="sc">/</span> param<span class="ot">=</span>ref; </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-14-4" class="code-annotation-target"><a href="#annotated-cell-14-4"></a>model improve <span class="ot">=</span> sex treatment sex<span class="sc">*</span>treatment<span class="sc">/</span> selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
+<span id="annotated-cell-14-5"><a href="#annotated-cell-14-5"></a>estimate <span class="st">"odds between marked vs. some+no improvement for female in placebo group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span> <span class="sc">/</span>exp cl category<span class="ot">=</span><span class="st">'marked'</span>;</span>
+<span id="annotated-cell-14-6"><a href="#annotated-cell-14-6"></a>estimate <span class="st">"odds between marked+some vs. no improvement for female in placebo group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span> <span class="sc">/</span>exp cl category<span class="ot">=</span><span class="st">'some'</span>;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-14-7" class="code-annotation-target"><a href="#annotated-cell-14-7"></a>estimate <span class="st">"probability of marked improvement for female in the placebo group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'marked'</span>;</span>
+<span id="annotated-cell-14-8"><a href="#annotated-cell-14-8"></a>estimate <span class="st">"probability of marked improvement for female in the active trt group"</span> intercept <span class="dv">1</span> sex <span class="dv">1</span> treatment <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'marked'</span>;</span>
+<span id="annotated-cell-14-9"><a href="#annotated-cell-14-9"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="1" data-code-annotation="1">The polybar plot creates stacked bar plots showing probability and cumulative probability plots for each level dictated by x.</span>
+<span data-code-cell="annotated-cell-14" data-code-lines="1" data-code-annotation="1">The polybar plot creates stacked bar plots showing probability and cumulative probability plots for each level dictated by x.</span>
 </dd>
-<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="4" data-code-annotation="2"><code>selection=forward include=2</code> tests whether the interaction is needed to be included in the model.</span>
+<span data-code-cell="annotated-cell-14" data-code-lines="4" data-code-annotation="2"><code>selection=forward include=2</code> tests whether the interaction is needed to be included in the model.</span>
 </dd>
-<dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="3">The <code>ilink</code> option calculates the cumulative probability, while <code>exp</code> calculates odds ratios. The reason it returns the probability for marked is that the marked level was inputted as the lowest level.</span>
+<span data-code-cell="annotated-cell-14" data-code-lines="7" data-code-annotation="3">The <code>ilink</code> option calculates the cumulative probability, while <code>exp</code> calculates odds ratios. The reason it returns the probability for marked is that the marked level was inputted as the lowest level.</span>
 </dd>
 </dl>
 </div>
 <div id="tabset-2-3">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(MASS)</span>
+<span id="cb11-2"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb11-3"><a></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.treatment"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb11-4"><a></a>mod_po <span class="ot">&lt;-</span> <span class="fu">polr</span>(Improvement<span class="sc">~</span>Treatment<span class="sc">+</span>Sex,<span class="at">data=</span>arthritis,<span class="at">Hess =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-5"><a></a><span class="fu">summary</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 polr(formula = Improvement ~ Treatment + Sex, data = arthritis, 
@@ -548,10 +564,12 @@ Some|Marked  1.3485  0.3667     3.6768
 Residual Deviance: 150.0294 
 AIC: 158.0294 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(mod_po))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>TreatmentActive         SexMale 
       6.0330950       0.2674786 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">poTest</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Tests for Proportional Odds
@@ -563,6 +581,7 @@ Overall                                         1.83  2       0.40
 TreatmentActive  1.79726  1.78168  1.81602      0.01  1       0.94
 SexMale         -1.31872 -1.46865 -0.93005      1.58  1       0.21</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">Anova</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -575,6 +594,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb19-2"><a></a>emm_cum <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Treatment<span class="sc">*</span>Sex<span class="sc">|</span>cut,<span class="at">mode=</span><span class="st">"cum.prob"</span>)</span>
+<span id="cb19-3"><a></a>emm_cum</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>cut = None|Some:
  Treatment Sex    cumprob     SE  df asymp.LCL asymp.UCL
@@ -592,6 +614,8 @@ cut = Some|Marked:
 
 Confidence level used: 0.95 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>emm_prob <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Treatment<span class="sc">*</span>Sex<span class="sc">|</span>Improvement,<span class="at">mode=</span><span class="st">"prob"</span>)</span>
+<span id="cb21-2"><a></a>emm_prob</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Improvement = None:
  Treatment Sex      prob     SE  df asymp.LCL asymp.UCL
@@ -616,6 +640,7 @@ Improvement = Marked:
 
 Confidence level used: 0.95 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>emm_prob <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -626,12 +651,24 @@ Confidence level used: 0.95 </code></pre>
 </div>
 <p>To calculate the odds ratio, we can use <code>contrast()</code> but we have to manually exponentiate the confidence limits.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>emm_treatment <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Treatment)</span>
+<span id="cb24-2"><a></a><span class="fu">contrast</span>(emm_treatment,<span class="at">method=</span><span class="st">"revpairwise"</span>,<span class="at">infer=</span>T) <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb24-4"><a></a>  <span class="fu">mutate</span>(<span class="at">OR =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb24-5"><a></a>         <span class="at">OR.LCL =</span> <span class="fu">exp</span>(asymp.LCL),</span>
+<span id="cb24-6"><a></a>         <span class="at">OR.UCL =</span> <span class="fu">exp</span>(asymp.UCL))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          contrast estimate        SE  df asymp.LCL asymp.UCL  z.ratio
 1 Active - Placebo  1.79726 0.4717993 Inf 0.8725504   2.72197 3.809374
        p.value       OR   OR.LCL   OR.UCL
 1 0.0001393191 6.033095 2.393006 15.21025</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>emm_sex <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Sex)</span>
+<span id="cb26-2"><a></a><span class="fu">contrast</span>(emm_sex,<span class="at">method=</span><span class="st">"pairwise"</span>,<span class="at">infer=</span>T) <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb26-4"><a></a>  <span class="fu">mutate</span>(<span class="at">OR =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb26-5"><a></a>         <span class="at">OR.LCL =</span> <span class="fu">exp</span>(asymp.LCL),</span>
+<span id="cb26-6"><a></a>         <span class="at">OR.UCL =</span> <span class="fu">exp</span>(asymp.UCL))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       contrast estimate        SE  df asymp.LCL asymp.UCL  z.ratio    p.value
 1 Female - Male 1.318716 0.5380997 Inf 0.2640599  2.373372 2.450691 0.01425824
@@ -666,36 +703,42 @@ Confidence level used: 0.95 </code></pre>
 </ul>
 </div>
 <div id="tabset-3-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>data respire;</span>
-<span id="cb14-2"><a></a>input air <span class="sc">$</span> exposure <span class="sc">$</span> smoking <span class="sc">$</span> level <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb14-3"><a></a>datalines;</span>
-<span id="cb14-4"><a></a>low no non <span class="dv">1</span> <span class="dv">158</span> low no non <span class="dv">2</span> <span class="dv">9</span></span>
-<span id="cb14-5"><a></a>low no ex <span class="dv">1</span> <span class="dv">167</span> low no ex <span class="dv">2</span> <span class="dv">19</span></span>
-<span id="cb14-6"><a></a>low no cur <span class="dv">1</span> <span class="dv">307</span> low no cur <span class="dv">2</span> <span class="dv">102</span></span>
-<span id="cb14-7"><a></a>low yes non <span class="dv">1</span> <span class="dv">26</span> low yes non <span class="dv">2</span> <span class="dv">5</span></span>
-<span id="cb14-8"><a></a>low yes ex <span class="dv">1</span> <span class="dv">38</span> low yes ex <span class="dv">2</span> <span class="dv">12</span></span>
-<span id="cb14-9"><a></a>low yes cur <span class="dv">1</span> <span class="dv">94</span> low yes cur <span class="dv">2</span> <span class="dv">48</span></span>
-<span id="cb14-10"><a></a>high no non <span class="dv">1</span> <span class="dv">94</span> high no non <span class="dv">2</span> <span class="dv">7</span></span>
-<span id="cb14-11"><a></a>high no ex <span class="dv">1</span> <span class="dv">67</span> high no ex <span class="dv">2</span> <span class="dv">8</span></span>
-<span id="cb14-12"><a></a>high no cur <span class="dv">1</span> <span class="dv">184</span> high no cur <span class="dv">2</span> <span class="dv">65</span></span>
-<span id="cb14-13"><a></a>high yes non <span class="dv">1</span> <span class="dv">32</span> high yes non <span class="dv">2</span> <span class="dv">3</span></span>
-<span id="cb14-14"><a></a>high yes ex <span class="dv">1</span> <span class="dv">39</span> high yes ex <span class="dv">2</span> <span class="dv">11</span></span>
-<span id="cb14-15"><a></a>high yes cur <span class="dv">1</span> <span class="dv">77</span> high yes cur <span class="dv">2</span> <span class="dv">48</span></span>
-<span id="cb14-16"><a></a>low no non <span class="dv">3</span> <span class="dv">5</span> low no non <span class="dv">4</span> <span class="dv">0</span></span>
-<span id="cb14-17"><a></a>low no ex <span class="dv">3</span> <span class="dv">5</span> low no ex <span class="dv">4</span> <span class="dv">3</span></span>
-<span id="cb14-18"><a></a>low no cur <span class="dv">3</span> <span class="dv">83</span> low no cur <span class="dv">4</span> <span class="dv">68</span></span>
-<span id="cb14-19"><a></a>low yes non <span class="dv">3</span> <span class="dv">5</span> low yes non <span class="dv">4</span> <span class="dv">1</span></span>
-<span id="cb14-20"><a></a>low yes ex <span class="dv">3</span> <span class="dv">4</span> low yes ex <span class="dv">4</span> <span class="dv">4</span></span>
-<span id="cb14-21"><a></a>low yes cur <span class="dv">3</span> <span class="dv">46</span> low yes cur <span class="dv">4</span> <span class="dv">60</span></span>
-<span id="cb14-22"><a></a>high no non <span class="dv">3</span> <span class="dv">5</span> high no non <span class="dv">4</span> <span class="dv">1</span></span>
-<span id="cb14-23"><a></a>high no ex <span class="dv">3</span> <span class="dv">4</span> high no ex <span class="dv">4</span> <span class="dv">3</span></span>
-<span id="cb14-24"><a></a>high no cur <span class="dv">3</span> <span class="dv">33</span> high no cur <span class="dv">4</span> <span class="dv">36</span></span>
-<span id="cb14-25"><a></a>high yes non <span class="dv">3</span> <span class="dv">6</span> high yes non <span class="dv">4</span> <span class="dv">1</span></span>
-<span id="cb14-26"><a></a>high yes ex <span class="dv">3</span> <span class="dv">4</span> high yes ex <span class="dv">4</span> <span class="dv">2</span></span>
-<span id="cb14-27"><a></a>high yes cur <span class="dv">3</span> <span class="dv">39</span> high yes cur <span class="dv">4</span> <span class="dv">51</span></span>
-<span id="cb14-28"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>data respire;</span>
+<span id="cb28-2"><a></a>input air <span class="sc">$</span> exposure <span class="sc">$</span> smoking <span class="sc">$</span> level <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb28-3"><a></a>datalines;</span>
+<span id="cb28-4"><a></a>low no non <span class="dv">1</span> <span class="dv">158</span> low no non <span class="dv">2</span> <span class="dv">9</span></span>
+<span id="cb28-5"><a></a>low no ex <span class="dv">1</span> <span class="dv">167</span> low no ex <span class="dv">2</span> <span class="dv">19</span></span>
+<span id="cb28-6"><a></a>low no cur <span class="dv">1</span> <span class="dv">307</span> low no cur <span class="dv">2</span> <span class="dv">102</span></span>
+<span id="cb28-7"><a></a>low yes non <span class="dv">1</span> <span class="dv">26</span> low yes non <span class="dv">2</span> <span class="dv">5</span></span>
+<span id="cb28-8"><a></a>low yes ex <span class="dv">1</span> <span class="dv">38</span> low yes ex <span class="dv">2</span> <span class="dv">12</span></span>
+<span id="cb28-9"><a></a>low yes cur <span class="dv">1</span> <span class="dv">94</span> low yes cur <span class="dv">2</span> <span class="dv">48</span></span>
+<span id="cb28-10"><a></a>high no non <span class="dv">1</span> <span class="dv">94</span> high no non <span class="dv">2</span> <span class="dv">7</span></span>
+<span id="cb28-11"><a></a>high no ex <span class="dv">1</span> <span class="dv">67</span> high no ex <span class="dv">2</span> <span class="dv">8</span></span>
+<span id="cb28-12"><a></a>high no cur <span class="dv">1</span> <span class="dv">184</span> high no cur <span class="dv">2</span> <span class="dv">65</span></span>
+<span id="cb28-13"><a></a>high yes non <span class="dv">1</span> <span class="dv">32</span> high yes non <span class="dv">2</span> <span class="dv">3</span></span>
+<span id="cb28-14"><a></a>high yes ex <span class="dv">1</span> <span class="dv">39</span> high yes ex <span class="dv">2</span> <span class="dv">11</span></span>
+<span id="cb28-15"><a></a>high yes cur <span class="dv">1</span> <span class="dv">77</span> high yes cur <span class="dv">2</span> <span class="dv">48</span></span>
+<span id="cb28-16"><a></a>low no non <span class="dv">3</span> <span class="dv">5</span> low no non <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb28-17"><a></a>low no ex <span class="dv">3</span> <span class="dv">5</span> low no ex <span class="dv">4</span> <span class="dv">3</span></span>
+<span id="cb28-18"><a></a>low no cur <span class="dv">3</span> <span class="dv">83</span> low no cur <span class="dv">4</span> <span class="dv">68</span></span>
+<span id="cb28-19"><a></a>low yes non <span class="dv">3</span> <span class="dv">5</span> low yes non <span class="dv">4</span> <span class="dv">1</span></span>
+<span id="cb28-20"><a></a>low yes ex <span class="dv">3</span> <span class="dv">4</span> low yes ex <span class="dv">4</span> <span class="dv">4</span></span>
+<span id="cb28-21"><a></a>low yes cur <span class="dv">3</span> <span class="dv">46</span> low yes cur <span class="dv">4</span> <span class="dv">60</span></span>
+<span id="cb28-22"><a></a>high no non <span class="dv">3</span> <span class="dv">5</span> high no non <span class="dv">4</span> <span class="dv">1</span></span>
+<span id="cb28-23"><a></a>high no ex <span class="dv">3</span> <span class="dv">4</span> high no ex <span class="dv">4</span> <span class="dv">3</span></span>
+<span id="cb28-24"><a></a>high no cur <span class="dv">3</span> <span class="dv">33</span> high no cur <span class="dv">4</span> <span class="dv">36</span></span>
+<span id="cb28-25"><a></a>high yes non <span class="dv">3</span> <span class="dv">6</span> high yes non <span class="dv">4</span> <span class="dv">1</span></span>
+<span id="cb28-26"><a></a>high yes ex <span class="dv">3</span> <span class="dv">4</span> high yes ex <span class="dv">4</span> <span class="dv">2</span></span>
+<span id="cb28-27"><a></a>high yes cur <span class="dv">3</span> <span class="dv">39</span> high yes cur <span class="dv">4</span> <span class="dv">51</span></span>
+<span id="cb28-28"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A <code>csv</code> file is uploaded on Canvas as <code>air_pollution.csv</code>.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb29-2"><a></a>air_pollution <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"air_pollution.csv"</span>,<span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-3"><a></a>air_pollution <span class="ot">&lt;-</span> air_pollution <span class="sc">|&gt;</span> </span>
+<span id="cb29-4"><a></a>  <span class="fu">mutate</span>(<span class="at">Level =</span> <span class="fu">factor</span>(Level, <span class="at">ordered=</span>T))</span>
+<span id="cb29-5"><a></a></span>
+<span id="cb29-6"><a></a><span class="fu">glimpse</span>(air_pollution)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2,089
 Columns: 4
@@ -716,17 +759,23 @@ $ Level    &lt;ord&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">R Code</a></li><li><a href="#tabset-4-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>proc logistic data<span class="ot">=</span>respire order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>air<span class="sc">*</span>exposure<span class="sc">*</span>smoking);; </span>
-<span id="cb16-2"><a></a>freq count;</span>
-<span id="cb16-3"><a></a>class air exposure smoking <span class="sc">/</span> param<span class="ot">=</span>reference;</span>
-<span id="cb16-4"><a></a>model level <span class="ot">=</span> air exposure smoking air<span class="sc">*</span>exposure exposure<span class="sc">*</span>smoking air<span class="sc">*</span>smoking air<span class="sc">*</span>exposure<span class="sc">*</span>smoking<span class="sc">/</span> selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">3</span> scale<span class="ot">=</span>none aggregate;</span>
-<span id="cb16-5"><a></a>estimate <span class="st">"odds between I+II+III vs. IV for current vs. ex smokers"</span> smoking <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span>exp cl category<span class="ot">=</span><span class="st">"3"</span>;</span>
-<span id="cb16-6"><a></a>estimate <span class="st">"probability of at most III level for ex smoker, high air pollution, job exposure"</span> intercept <span class="dv">1</span> air <span class="dv">1</span> smoking <span class="dv">0</span> <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'3'</span>;</span>
-<span id="cb16-7"><a></a>estimate <span class="st">"probability of at most II level for ex smoker, high air pollution, job exposure"</span> intercept <span class="dv">1</span> air <span class="dv">1</span> smoking <span class="dv">0</span> <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'2'</span>; </span>
-<span id="cb16-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>proc logistic data<span class="ot">=</span>respire order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>air<span class="sc">*</span>exposure<span class="sc">*</span>smoking);; </span>
+<span id="cb31-2"><a></a>freq count;</span>
+<span id="cb31-3"><a></a>class air exposure smoking <span class="sc">/</span> param<span class="ot">=</span>reference;</span>
+<span id="cb31-4"><a></a>model level <span class="ot">=</span> air exposure smoking air<span class="sc">*</span>exposure exposure<span class="sc">*</span>smoking air<span class="sc">*</span>smoking air<span class="sc">*</span>exposure<span class="sc">*</span>smoking<span class="sc">/</span> selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">3</span> scale<span class="ot">=</span>none aggregate;</span>
+<span id="cb31-5"><a></a>estimate <span class="st">"odds between I+II+III vs. IV for current vs. ex smokers"</span> smoking <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span>exp cl category<span class="ot">=</span><span class="st">"3"</span>;</span>
+<span id="cb31-6"><a></a>estimate <span class="st">"probability of at most III level for ex smoker, high air pollution, job exposure"</span> intercept <span class="dv">1</span> air <span class="dv">1</span> smoking <span class="dv">0</span> <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'3'</span>;</span>
+<span id="cb31-7"><a></a>estimate <span class="st">"probability of at most II level for ex smoker, high air pollution, job exposure"</span> intercept <span class="dv">1</span> air <span class="dv">1</span> smoking <span class="dv">0</span> <span class="dv">1</span><span class="sc">/</span>ilink cl category<span class="ot">=</span><span class="st">'2'</span>; </span>
+<span id="cb31-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">library</span>(MASS)</span>
+<span id="cb32-2"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb32-3"><a></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.treatment"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb32-4"><a></a>mod_po <span class="ot">&lt;-</span> <span class="fu">polr</span>(Level<span class="sc">~</span>Air <span class="sc">+</span> Exposure <span class="sc">+</span> Smoking, <span class="at">data=</span>air_pollution,<span class="at">Hess=</span><span class="cn">TRUE</span>)</span>
+<span id="cb32-5"><a></a></span>
+<span id="cb32-6"><a></a><span class="fu">summary</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 polr(formula = Level ~ Air + Exposure + Smoking, data = air_pollution, 
@@ -748,6 +797,7 @@ Intercepts:
 Residual Deviance: 4178.511 
 AIC: 4192.511 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">Anova</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -759,6 +809,7 @@ Smoking   255.541  2     &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">poTest</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Tests for Proportional Odds
@@ -776,6 +827,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb38-2"><a></a>emm_cum <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Air<span class="sc">+</span>Exposure<span class="sc">+</span>Smoking<span class="sc">|</span>cut,<span class="at">mode=</span><span class="st">"cum.prob"</span>)</span>
+<span id="cb38-3"><a></a>emm_cum</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>cut = 1|2:
  Air  Exposure Smoking cumprob      SE  df asymp.LCL asymp.UCL
@@ -824,6 +878,8 @@ cut = 3|4:
 
 Confidence level used: 0.95 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>emm_prob <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Air<span class="sc">+</span>Exposure<span class="sc">+</span>Smoking<span class="sc">|</span>Level,<span class="at">mode=</span><span class="st">"prob"</span>)</span>
+<span id="cb40-2"><a></a>emm_prob</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Level = 1:
  Air  Exposure Smoking   prob      SE  df asymp.LCL asymp.UCL
@@ -890,18 +946,36 @@ Confidence level used: 0.95 </code></pre>
 </div>
 <p>To calculate the odds ratio, we can use <code>contrast()</code> but we have to manually exponentiate the confidence limits.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>emm_Air <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Air)</span>
+<span id="cb42-2"><a></a><span class="fu">contrast</span>(emm_Air,<span class="at">method=</span><span class="st">"revpairwise"</span>,<span class="at">infer=</span>T) <span class="sc">|&gt;</span> </span>
+<span id="cb42-3"><a></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb42-4"><a></a>  <span class="fu">mutate</span>(<span class="at">OR =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb42-5"><a></a>         <span class="at">OR.LCL =</span> <span class="fu">exp</span>(asymp.LCL),</span>
+<span id="cb42-6"><a></a>         <span class="at">OR.UCL =</span> <span class="fu">exp</span>(asymp.UCL))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    contrast  estimate         SE  df  asymp.LCL asymp.UCL   z.ratio   p.value
 1 low - high 0.0392934 0.09384313 Inf -0.1446358 0.2232226 0.4187136 0.6754255
         OR    OR.LCL   OR.UCL
 1 1.040076 0.8653374 1.250099</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>emm_Ex <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Exposure)</span>
+<span id="cb44-2"><a></a><span class="fu">contrast</span>(emm_Ex,<span class="at">method=</span><span class="st">"revpairwise"</span>,<span class="at">infer=</span>T) <span class="sc">|&gt;</span> </span>
+<span id="cb44-3"><a></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb44-4"><a></a>  <span class="fu">mutate</span>(<span class="at">OR =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb44-5"><a></a>         <span class="at">OR.LCL =</span> <span class="fu">exp</span>(asymp.LCL),</span>
+<span id="cb44-6"><a></a>         <span class="at">OR.UCL =</span> <span class="fu">exp</span>(asymp.UCL))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  contrast  estimate         SE  df asymp.LCL asymp.UCL  z.ratio      p.value
 1 yes - no 0.8647616 0.09576341 Inf 0.6770688  1.052454 9.030189 1.713763e-19
        OR OR.LCL   OR.UCL
 1 2.37444 1.9681 2.864674</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>emm_Smoking <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>Smoking)</span>
+<span id="cb46-2"><a></a><span class="fu">contrast</span>(emm_Smoking,<span class="at">method=</span><span class="st">"pairwise"</span>,<span class="at">infer=</span>T,<span class="at">adjust=</span><span class="st">"tukey"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb46-3"><a></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb46-4"><a></a>  <span class="fu">mutate</span>(<span class="at">OR =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb46-5"><a></a>         <span class="at">OR.LCL =</span> <span class="fu">exp</span>(asymp.LCL),</span>
+<span id="cb46-6"><a></a>         <span class="at">OR.UCL =</span> <span class="fu">exp</span>(asymp.UCL))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   contrast  estimate        SE  df   asymp.LCL asymp.UCL   z.ratio
 1  cur - ex 1.4526828 0.1372496 Inf  1.13101079 1.7743549 10.584238
@@ -959,7 +1033,7 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 </section>
 <section id="partial-proportional-odds-model-in-r" class="slide level2">
 <h2>Partial Proportional Odds Model in <code>R</code></h2>
-<p>If the score test for the proportional odds assumption led to the rejection of the null hypothesis at the 0.10 level, we might need to use a partial proportional odds model.</p>
+<p>If the score test for the proportional odds assumption led to the rejection of the null hypothesis at the 0.10 level, we can use a partial proportional odds model.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -969,8 +1043,13 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The <code>clm()</code> package in the <code>ordinal</code> package in <code>R</code> can be used to perform partial proportional odds model. Suppose we have two predictors, <code>x1</code> and <code>x2</code>, one of which did not satisfy the proportional odds model.</p>
-<p>It can also be used to estimate proportional odds models.</p>
+<p>The <code>vglm</code> package in the <code>VGAM</code> package in <code>R</code> can be used to perform partial proportional odds model. Suppose we have two predictors, <code>x1</code> and <code>x2</code>, with <code>x2</code> not satisfying the proportional odds model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>mod_vglm <span class="ot">&lt;-</span> <span class="fu">vglm</span>(outcome<span class="sc">~</span>x1 <span class="sc">+</span> x2, </span>
+<span id="cb48-2"><a></a>                 <span class="at">data=</span> sample_data,</span>
+<span id="cb48-3"><a></a>                 <span class="at">family=</span><span class="fu">cumulative</span>(<span class="at">parallel=</span><span class="cn">FALSE</span><span class="sc">~</span>x2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>It can also be used to estimate proportional odds models. However, <code>vglm()</code> does not work with <code>emmeans</code> as of September 2026.</p>
 </div>
 </div>
 </div>
@@ -979,7 +1058,7 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 <h2>Example</h2>
 <p>The table contains data from a study by a bicycling clothing manufacturer who wanted to assess their test glove. It was designed to combat the hand problems experienced by cyclists dealing with carpal tunnel syndrome. Cyclists wore either the company’s standard gel glove or the new test glove for a week’s worth of their standard rides. Then they reported whether they experienced major, moderate, or no relief from their usual symptoms (numbness and nerve pain) on the bike.</p>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Questions</a></li><li><a href="#tabset-5-2">Data</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Questions</a></li><li><a href="#tabset-5-2">Data</a></li><li><a href="#tabset-5-3">R Data</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
 <ul>
@@ -988,7 +1067,27 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 </ul>
 </div>
 <div id="tabset-5-2">
-<p><img data-src="img/cycling_C9.png" style="width:200.0%"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>data wrist;</span>
+<span id="cb49-2"><a></a>input glove <span class="sc">$</span> gender <span class="sc">$</span> relief <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb49-3"><a></a>datalines;</span>
+<span id="cb49-4"><a></a>test female major <span class="dv">12</span> test female moderate <span class="dv">8</span> test female none <span class="dv">5</span></span>
+<span id="cb49-5"><a></a>test male major <span class="dv">8</span> test male moderate <span class="dv">14</span> test male none <span class="dv">15</span></span>
+<span id="cb49-6"><a></a>gel female major <span class="dv">15</span> gel female moderate <span class="dv">5</span> gel female none <span class="dv">9</span></span>
+<span id="cb49-7"><a></a>gel male major <span class="dv">8</span> gel male moderate <span class="dv">4</span> gel male none <span class="dv">20</span></span>
+<span id="cb49-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb50-2"><a></a>cycling <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Relief =</span> <span class="fu">c</span>(<span class="st">"Major"</span>,<span class="st">"Moderate"</span>,<span class="st">"None"</span>),</span>
+<span id="cb50-3"><a></a>                       <span class="at">Gender =</span> <span class="fu">c</span>(<span class="st">"Female"</span>,<span class="st">"Male"</span>),</span>
+<span id="cb50-4"><a></a>                       <span class="at">Type =</span> <span class="fu">c</span>(<span class="st">"Test"</span>,<span class="st">"Gel"</span>))</span>
+<span id="cb50-5"><a></a></span>
+<span id="cb50-6"><a></a>cycling<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">8</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">5</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">4</span>,<span class="dv">20</span>)</span>
+<span id="cb50-7"><a></a>cycling <span class="ot">&lt;-</span> cycling <span class="sc">|&gt;</span> </span>
+<span id="cb50-8"><a></a>  <span class="fu">mutate</span>(<span class="at">Relief =</span> <span class="fu">ordered</span>(Relief, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Major"</span>,<span class="st">"Moderate"</span>,<span class="st">"None"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb50-9"><a></a>  <span class="fu">uncount</span>(<span class="at">weights=</span>count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </div>
@@ -997,43 +1096,148 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 <h2>Example</h2>
 <p>The table contains data from a study by a bicycling clothing manufacturer who wanted to assess their test glove. It was designed to combat the hand problems experienced by cyclists dealing with carpal tunnel syndrome. Cyclists wore either the company’s standard gel glove or the new test glove for a week’s worth of their standard rides. Then they reported whether they experienced major, moderate, or no relief from their usual symptoms (numbness and nerve pain) on the bike.</p>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">Answer</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">R Code</a></li><li><a href="#tabset-6-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-27"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-27-1"><a href="#annotated-cell-27-1"></a>proc logistic order<span class="ot">=</span>data data<span class="ot">=</span>wrist;</span>
-<span id="annotated-cell-27-2"><a href="#annotated-cell-27-2"></a>freq count;</span>
-<span id="annotated-cell-27-3"><a href="#annotated-cell-27-3"></a>class glove gender <span class="sc">/</span> param<span class="ot">=</span>reference order<span class="ot">=</span>data;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-27-4" class="code-annotation-target"><a href="#annotated-cell-27-4"></a>model relief<span class="ot">=</span> glove gender <span class="sc">/</span> scale<span class="ot">=</span>none aggregate unequalslopes;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-27-5" class="code-annotation-target"><a href="#annotated-cell-27-5"></a>pogender<span class="sc">:</span> test genderfemale_major<span class="ot">=</span>genderfemale_moderate;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-27-6" class="code-annotation-target"><a href="#annotated-cell-27-6"></a>poglove<span class="sc">:</span> test glovetest_major<span class="ot">=</span>glovetest_moderate;</span>
-<span id="annotated-cell-27-7"><a href="#annotated-cell-27-7"></a>run;</span>
-<span id="annotated-cell-27-8"><a href="#annotated-cell-27-8"></a></span>
-<span id="annotated-cell-27-9"><a href="#annotated-cell-27-9"></a>proc logistic order<span class="ot">=</span>data data<span class="ot">=</span>wrist;</span>
-<span id="annotated-cell-27-10"><a href="#annotated-cell-27-10"></a>freq count;</span>
-<span id="annotated-cell-27-11"><a href="#annotated-cell-27-11"></a>class glove gender <span class="sc">/</span> param<span class="ot">=</span>reference order<span class="ot">=</span>data;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-27-12" class="code-annotation-target"><a href="#annotated-cell-27-12"></a>model relief<span class="ot">=</span> glove gender <span class="sc">/</span> scale<span class="ot">=</span>none aggregate unequalslopes<span class="ot">=</span>glove;</span>
-<span id="annotated-cell-27-13"><a href="#annotated-cell-27-13"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-55"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-55-1"><a href="#annotated-cell-55-1"></a>proc logistic order<span class="ot">=</span>data data<span class="ot">=</span>wrist;</span>
+<span id="annotated-cell-55-2"><a href="#annotated-cell-55-2"></a>freq count;</span>
+<span id="annotated-cell-55-3"><a href="#annotated-cell-55-3"></a>class glove gender <span class="sc">/</span> param<span class="ot">=</span>reference order<span class="ot">=</span>data;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-55" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-55-4" class="code-annotation-target"><a href="#annotated-cell-55-4"></a>model relief<span class="ot">=</span> glove gender <span class="sc">/</span> scale<span class="ot">=</span>none aggregate unequalslopes;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-55" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-55-5" class="code-annotation-target"><a href="#annotated-cell-55-5"></a>pogender<span class="sc">:</span> test genderfemale_major<span class="ot">=</span>genderfemale_moderate;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-55" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-55-6" class="code-annotation-target"><a href="#annotated-cell-55-6"></a>poglove<span class="sc">:</span> test glovetest_major<span class="ot">=</span>glovetest_moderate;</span>
+<span id="annotated-cell-55-7"><a href="#annotated-cell-55-7"></a>run;</span>
+<span id="annotated-cell-55-8"><a href="#annotated-cell-55-8"></a></span>
+<span id="annotated-cell-55-9"><a href="#annotated-cell-55-9"></a>proc logistic order<span class="ot">=</span>data data<span class="ot">=</span>wrist;</span>
+<span id="annotated-cell-55-10"><a href="#annotated-cell-55-10"></a>freq count;</span>
+<span id="annotated-cell-55-11"><a href="#annotated-cell-55-11"></a>class glove gender <span class="sc">/</span> param<span class="ot">=</span>reference order<span class="ot">=</span>data;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-55" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-55-12" class="code-annotation-target"><a href="#annotated-cell-55-12"></a>model relief<span class="ot">=</span> glove gender <span class="sc">/</span> scale<span class="ot">=</span>none aggregate unequalslopes<span class="ot">=</span>glove;</span>
+<span id="annotated-cell-55-13"><a href="#annotated-cell-55-13"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-27" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-55" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="4" data-code-annotation="1"><code>unequal slopes</code> tells SAS to provide unequal slopes for each explanatory level at all response levels.</span>
+<span data-code-cell="annotated-cell-55" data-code-lines="4" data-code-annotation="1"><code>unequal slopes</code> tells SAS to provide unequal slopes for each explanatory level at all response levels.</span>
 </dd>
-<dt data-target-cell="annotated-cell-27" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-55" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="5" data-code-annotation="2"><code>pogender</code> is the label for testing whether the slopes should be the same for different response levels for the gender explanatory variable</span>
+<span data-code-cell="annotated-cell-55" data-code-lines="5" data-code-annotation="2"><code>pogender</code> is the label for testing whether the slopes should be the same for different response levels for the gender explanatory variable</span>
 </dd>
-<dt data-target-cell="annotated-cell-27" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-55" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="6" data-code-annotation="3"><code>poglove</code> is the label for testing whether the slopes should be the same for different response levels for the glove explanatory variable</span>
+<span data-code-cell="annotated-cell-55" data-code-lines="6" data-code-annotation="3"><code>poglove</code> is the label for testing whether the slopes should be the same for different response levels for the glove explanatory variable</span>
 </dd>
-<dt data-target-cell="annotated-cell-27" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-55" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="12" data-code-annotation="4">Only assumes unequal slopes for glove, but proportional odds assumption holds for gender.</span>
+<span data-code-cell="annotated-cell-55" data-code-lines="12" data-code-annotation="4">Only assumes unequal slopes for glove, but proportional odds assumption holds for gender.</span>
 </dd>
 </dl>
 </div>
 <div id="tabset-6-2">
-<p>Using a partial proportional odds model, there is a significant effect of the type of glove and gender. the odds of experiencing major relief for females is 2.27 (95% CI: 1.10, 4.66) times that of males. The odds of major relief when using the test glove is 1.4 (0.60, 3.21) times that of gel. Additionally, the odds of moderate relief when using the test glove is 2.91 (1.33, 6.36) times that of gel.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="fu">library</span>(MASS)</span>
+<span id="cb51-2"><a></a><span class="fu">library</span>(ordinal)</span>
+<span id="cb51-3"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb51-4"><a></a>mod_po <span class="ot">&lt;-</span> <span class="fu">polr</span>(Relief<span class="sc">~</span>Gender<span class="sc">+</span>Type,<span class="at">data=</span>cycling)</span>
+<span id="cb51-5"><a></a><span class="fu">poTest</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Tests for Proportional Odds
+polr(formula = Relief ~ Gender + Type, data = cycling)
+
+           b[polr] b[&gt;Major] b[&gt;Moderate] Chisquare df Pr(&gt;Chisq)   
+Overall                                        6.85  2     0.0326 * 
+GenderMale  1.1766    1.1873       1.1747      0.00  1     0.9724   
+TypeGel     0.3504   -0.1683       0.7811      6.75  1     0.0094 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The proportional odds test shows that there is evidence of unequal slopes for type, but not for gender.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">library</span>(VGAM)</span>
+<span id="cb53-2"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb53-3"><a></a>modv<span class="ot">&lt;-</span> <span class="fu">vglm</span>(Relief<span class="sc">~</span>Gender<span class="sc">+</span>Type,</span>
+<span id="cb53-4"><a></a>    <span class="at">family =</span> <span class="fu">cumulative</span>(<span class="at">parallel=</span><span class="cn">FALSE</span><span class="sc">~</span> Type),</span>
+<span id="cb53-5"><a></a>    <span class="at">data=</span>cycling)</span>
+<span id="cb53-6"><a></a></span>
+<span id="cb53-7"><a></a><span class="fu">summary</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+vglm(formula = Relief ~ Gender + Type, family = cumulative(parallel = FALSE ~ 
+    Type), data = cycling)
+
+Coefficients: 
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept):1  -0.0826     0.3379  -0.244 0.806893    
+(Intercept):2   1.5170     0.3677   4.125  3.7e-05 ***
+GenderMale     -1.1819     0.3548  -3.331 0.000866 ***
+TypeGel:1       0.1485     0.3926   0.378 0.705225    
+TypeGel:2      -0.7952     0.3894  -2.042 0.041167 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Names of linear predictors: logitlink(P[Y&lt;=1]), logitlink(P[Y&lt;=2])
+
+Residual deviance: 247.0353 on 241 degrees of freedom
+
+Log-likelihood: -123.5177 on 241 degrees of freedom
+
+Number of Fisher scoring iterations: 4 
+
+
+Exponentiated coefficients:
+GenderMale  TypeGel:1  TypeGel:2 
+ 0.3067019  1.1600929  0.4515106 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">Anova</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II tests)
+
+Response: Relief
+       Df   Chisq Pr(&gt;Chisq)    
+Gender  1 11.0946  0.0008658 ***
+Type    2  7.7644  0.0206052 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Let’s calculate the probabilities and odds ratios.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="co"># Odds Ratio</span></span>
+<span id="cb57-2"><a></a></span>
+<span id="cb57-3"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept):1 (Intercept):2    GenderMale     TypeGel:1     TypeGel:2 
+    0.9207215     4.5584608     0.3067019     1.1600929     0.4515106 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a><span class="fu">exp</span>(<span class="fu">confint</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  2.5 %    97.5 %
+(Intercept):1 0.4747861 1.7854949
+(Intercept):2 2.2172362 9.3718316
+GenderMale    0.1529985 0.6148169
+TypeGel:1     0.5374483 2.5040837
+TypeGel:2     0.2104667 0.9686180</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="co"># For reverse pairwise order: (note that the limits are reversed.)</span></span>
+<span id="cb61-2"><a></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">coef</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept):1 (Intercept):2    GenderMale     TypeGel:1     TypeGel:2 
+    1.0861047     0.2193723     3.2604949     0.8619999     2.2147872 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">confint</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  2.5 %    97.5 %
+(Intercept):1 2.1062117 0.5600688
+(Intercept):2 0.4510119 0.1067027
+GenderMale    6.5360121 1.6265005
+TypeGel:1     1.8606441 0.3993477
+TypeGel:2     4.7513445 1.0323988</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-6-3">
+<p>Using a partial proportional odds model, there is a significant effect of the type of glove and gender. the odds of experiencing major relief for females is 3.26 (95% CI: 1.63, 6.54) times that of males. The odds of major relief when using the test glove is 1.16 (0.54, 2.50) times that of gel. Additionally, the odds of moderate relief when using the test glove is 2.22 (1.03, 4.75) times that of gel.</p>
 </div>
 </div>
 </div>
@@ -1049,43 +1253,33 @@ logit(\theta_{hik}) = \alpha_k + x'_{hi}\beta_k + x'_{h'i'} \gamma
 <ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">R Code</a></li><li><a href="#tabset-7-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>proc logistic data<span class="ot">=</span>arthritis order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>treatment<span class="sc">*</span>sex);; </span>
-<span id="cb25-2"><a></a>freq count;</span>
-<span id="cb25-3"><a></a>class treatment sex <span class="sc">/</span> param<span class="ot">=</span>reference;</span>
-<span id="cb25-4"><a></a>model improve <span class="ot">=</span> sex treatment <span class="sc">/</span> unequalslopes scale<span class="ot">=</span>none aggregate;</span>
-<span id="cb25-5"><a></a>equal_sex<span class="sc">:</span> test sexfemale_marked<span class="ot">=</span>sexfemale_some;</span>
-<span id="cb25-6"><a></a>equal_treatment<span class="sc">:</span> test treatmentactive_marked<span class="ot">=</span>treatmentactive_some;</span>
-<span id="cb25-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a>proc logistic data<span class="ot">=</span>arthritis order<span class="ot">=</span>data plots<span class="ot">=</span><span class="fu">effect</span>(polybar <span class="at">x=</span>treatment<span class="sc">*</span>sex);; </span>
+<span id="cb65-2"><a></a>freq count;</span>
+<span id="cb65-3"><a></a>class treatment sex <span class="sc">/</span> param<span class="ot">=</span>reference;</span>
+<span id="cb65-4"><a></a>model improve <span class="ot">=</span> sex treatment <span class="sc">/</span> unequalslopes scale<span class="ot">=</span>none aggregate;</span>
+<span id="cb65-5"><a></a>equal_sex<span class="sc">:</span> test sexfemale_marked<span class="ot">=</span>sexfemale_some;</span>
+<span id="cb65-6"><a></a>equal_treatment<span class="sc">:</span> test treatmentactive_marked<span class="ot">=</span>treatmentactive_some;</span>
+<span id="cb65-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>mod_po <span class="ot">&lt;-</span> <span class="fu">polr</span>(Improvement<span class="sc">~</span>Sex<span class="sc">+</span>Treatment,<span class="at">data=</span>arthritis)</span>
+<span id="cb66-2"><a></a><span class="fu">poTest</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Likelihood ratio tests of cumulative link models:
- 
-     formula:          nominal:         link: threshold:
-mod3 Improvement ~ Sex ~Treatment       logit flexible  
-mod1 Improvement ~ 1   ~Sex + Treatment logit flexible  
+<pre><code>
+Tests for Proportional Odds
+polr(formula = Improvement ~ Sex + Treatment, data = arthritis)
 
-     no.par    AIC  logLik LR.stat df Pr(&gt;Chisq)
-mod3      5 159.87 -74.936                      
-mod1      6 160.56 -74.280  1.3116  1     0.2521</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Likelihood ratio tests of cumulative link models:
- 
-     formula:                nominal:         link: threshold:
-mod4 Improvement ~ Treatment ~Sex             logit flexible  
-mod1 Improvement ~ 1         ~Sex + Treatment logit flexible  
-
-     no.par    AIC  logLik LR.stat df Pr(&gt;Chisq)
-mod4      5 158.59 -74.297                      
-mod1      6 160.56 -74.280  0.0331  1     0.8556</code></pre>
+                 b[polr] b[&gt;None] b[&gt;Some] Chisquare df Pr(&gt;Chisq)
+Overall                                         1.83  2       0.40
+SexMale         -1.31872 -1.46865 -0.93005      1.58  1       0.21
+TreatmentActive  1.79726  1.78168  1.81602      0.01  1       0.94</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-7-3">
 <p>We suppose the slopes are unequal, then test whether there is evidence against the null hypothesis of equal slopes using <code>test</code>.</p>
-<p>There is insufficient evidence to claim that the <span class="math inline">\(\beta\)</span> for sex (<span class="math inline">\(\chi^2 = 1.35, p=0.25\)</span>) and treatment (<span class="math inline">\(\chi^2 = 0.03, p=0.86\)</span>) are different across the different outcome levels.</p>
+<p><code>SAS</code>: There is insufficient evidence to claim that the <span class="math inline">\(\beta\)</span> for sex (<span class="math inline">\(\chi^2 = 1.35, p=0.25\)</span>) and treatment (<span class="math inline">\(\chi^2 = 0.03, p=0.86\)</span>) are different across the different outcome levels. <code>R</code>: There is insufficient evidence to claim that the <span class="math inline">\(\beta\)</span> for sex (<span class="math inline">\(\chi^2 = 1.58, p=0.21\)</span>) and treatment (<span class="math inline">\(\chi^2 = 0.01, p=0.94\)</span>) are different across the different outcome levels.</p>
 </div>
 </div>
 </div>
@@ -1181,6 +1375,15 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 </div>
 </div>
 </section>
+<section id="generalized-logits-model-r" class="slide level2">
+<h2>Generalized Logits Model: <code>R</code></h2>
+<p>The <code>vglm()</code> function in the <code>VGAM</code> package performs the generalized logits model using the <code>multinomial()</code> function to define the family of models.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a>modv <span class="ot">&lt;-</span> <span class="fu">vglm</span>(Outcome<span class="sc">~</span>x1 <span class="sc">+</span> x2,</span>
+<span id="cb68-2"><a></a>             <span class="at">data=</span>sample_data,</span>
+<span id="cb68-3"><a></a>             <span class="at">family=</span><span class="fu">multinomial</span>(<span class="at">parallel=</span><span class="cn">FALSE</span>, <span class="at">refLevel=</span><span class="dv">1</span>)) <span class="co">#reflevel=1 just specifies the reference level to be the first level.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
 <section id="example-6" class="slide level2">
 <h2>Example</h2>
 <p>Schoolchildren in experimental learning settings were surveyed to determine which learning style they preferred. Investigators were interested in whether response was associated with school and their program, which was either a standard school day or also included after-hours care.</p>
@@ -1191,39 +1394,122 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <p>Use logistic regression to test for program and school effects and calculate the relevant odds ratios.</p>
 </div>
 <div id="tabset-8-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>data school;</span>
-<span id="cb28-2"><a></a>input school program <span class="sc">$</span> style <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb28-3"><a></a>datalines;</span>
-<span id="cb28-4"><a></a><span class="dv">1</span> regular self <span class="dv">10</span> <span class="dv">1</span> regular team <span class="dv">17</span> <span class="dv">1</span> regular class <span class="dv">26</span></span>
-<span id="cb28-5"><a></a><span class="dv">1</span> after self <span class="dv">5</span> <span class="dv">1</span> after team <span class="dv">12</span> <span class="dv">1</span> after class <span class="dv">50</span></span>
-<span id="cb28-6"><a></a><span class="dv">2</span> regular self <span class="dv">21</span> <span class="dv">2</span> regular team <span class="dv">17</span> <span class="dv">2</span> regular class <span class="dv">26</span></span>
-<span id="cb28-7"><a></a><span class="dv">2</span> after self <span class="dv">16</span> <span class="dv">2</span> after team <span class="dv">12</span> <span class="dv">2</span> after class <span class="dv">36</span></span>
-<span id="cb28-8"><a></a><span class="dv">3</span> regular self <span class="dv">15</span> <span class="dv">3</span> regular team <span class="dv">15</span> <span class="dv">3</span> regular class <span class="dv">16</span></span>
-<span id="cb28-9"><a></a><span class="dv">3</span> after self <span class="dv">12</span> <span class="dv">3</span> after team <span class="dv">12</span> <span class="dv">3</span> after class <span class="dv">20</span></span>
-<span id="cb28-10"><a></a>;</span>
-<span id="cb28-11"><a></a></span>
-<span id="cb28-12"><a></a>proc freq data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
-<span id="cb28-13"><a></a>weight count;</span>
-<span id="cb28-14"><a></a>tables school<span class="sc">*</span>program<span class="sc">*</span>style<span class="sc">/</span> nocol norow nopct;</span>
-<span id="cb28-15"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a>data school;</span>
+<span id="cb69-2"><a></a>input school program <span class="sc">$</span> style <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb69-3"><a></a>datalines;</span>
+<span id="cb69-4"><a></a><span class="dv">1</span> regular self <span class="dv">10</span> <span class="dv">1</span> regular team <span class="dv">17</span> <span class="dv">1</span> regular class <span class="dv">26</span></span>
+<span id="cb69-5"><a></a><span class="dv">1</span> after self <span class="dv">5</span> <span class="dv">1</span> after team <span class="dv">12</span> <span class="dv">1</span> after class <span class="dv">50</span></span>
+<span id="cb69-6"><a></a><span class="dv">2</span> regular self <span class="dv">21</span> <span class="dv">2</span> regular team <span class="dv">17</span> <span class="dv">2</span> regular class <span class="dv">26</span></span>
+<span id="cb69-7"><a></a><span class="dv">2</span> after self <span class="dv">16</span> <span class="dv">2</span> after team <span class="dv">12</span> <span class="dv">2</span> after class <span class="dv">36</span></span>
+<span id="cb69-8"><a></a><span class="dv">3</span> regular self <span class="dv">15</span> <span class="dv">3</span> regular team <span class="dv">15</span> <span class="dv">3</span> regular class <span class="dv">16</span></span>
+<span id="cb69-9"><a></a><span class="dv">3</span> after self <span class="dv">12</span> <span class="dv">3</span> after team <span class="dv">12</span> <span class="dv">3</span> after class <span class="dv">20</span></span>
+<span id="cb69-10"><a></a>;</span>
+<span id="cb69-11"><a></a></span>
+<span id="cb69-12"><a></a>proc freq data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
+<span id="cb69-13"><a></a>weight count;</span>
+<span id="cb69-14"><a></a>tables school<span class="sc">*</span>program<span class="sc">*</span>style<span class="sc">/</span> nocol norow nopct;</span>
+<span id="cb69-15"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
+</div>
+<h3 id="r-data-set">R Data Set</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb70-2"><a></a>school <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Program =</span> <span class="fu">c</span>(<span class="st">"Regular"</span>,<span class="st">"After"</span>),</span>
+<span id="cb70-3"><a></a>                      <span class="at">Style =</span> <span class="fu">c</span>(<span class="st">"Self"</span>,<span class="st">"Team"</span>,<span class="st">"Class"</span>),</span>
+<span id="cb70-4"><a></a>                      <span class="at">School =</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>))</span>
+<span id="cb70-5"><a></a></span>
+<span id="cb70-6"><a></a>school<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">17</span>,<span class="dv">12</span>,<span class="dv">26</span>,<span class="dv">50</span>,<span class="dv">21</span>,<span class="dv">16</span>,<span class="dv">17</span>,<span class="dv">12</span>,<span class="dv">26</span>,<span class="dv">36</span>,<span class="dv">15</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">12</span>,<span class="dv">16</span>,<span class="dv">20</span>)</span>
+<span id="cb70-7"><a></a></span>
+<span id="cb70-8"><a></a>school <span class="ot">&lt;-</span> school <span class="sc">|&gt;</span> </span>
+<span id="cb70-9"><a></a>  <span class="fu">uncount</span>(<span class="at">weights =</span> Count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="example-7" class="slide level2">
 <h2>Example</h2>
 <p>Schoolchildren in experimental learning settings were surveyed to determine which learning style they preferred. Investigators were interested in whether response was associated with school and their program, which was either a standard school day or also included after-hours care. Use logistic regression to test for program and school effects and calculate the relevant odds ratios.</p>
 <div class="panel-tabset">
-<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">SAS Code</a></li><li><a href="#tabset-9-2">Answer</a></li></ul>
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">SAS Code</a></li><li><a href="#tabset-9-2">R Code</a></li><li><a href="#tabset-9-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>proc logistic data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
-<span id="cb29-2"><a></a>freq count;</span>
-<span id="cb29-3"><a></a>class <span class="fu">school</span> (<span class="at">ref=</span>first) <span class="fu">program</span> (<span class="at">ref=</span>last) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
-<span id="cb29-4"><a></a>model style<span class="ot">=</span> program school school<span class="sc">*</span>program <span class="sc">/</span> link<span class="ot">=</span>glogit selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
-<span id="cb29-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a>proc logistic data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
+<span id="cb71-2"><a></a>freq count;</span>
+<span id="cb71-3"><a></a>class <span class="fu">school</span> (<span class="at">ref=</span>first) <span class="fu">program</span> (<span class="at">ref=</span>last) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
+<span id="cb71-4"><a></a>model style<span class="ot">=</span> program school school<span class="sc">*</span>program <span class="sc">/</span> link<span class="ot">=</span>glogit selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
+<span id="cb71-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-9-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a>modv <span class="ot">&lt;-</span> <span class="fu">vglm</span>(Style<span class="sc">~</span>School <span class="sc">+</span> Program,</span>
+<span id="cb72-2"><a></a>             <span class="at">data=</span>school,</span>
+<span id="cb72-3"><a></a>             <span class="at">family=</span><span class="fu">multinomial</span>(<span class="at">parallel=</span><span class="cn">FALSE</span>, <span class="at">refLevel=</span><span class="dv">3</span>))</span>
+<span id="cb72-4"><a></a></span>
+<span id="cb72-5"><a></a><span class="fu">summary</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+vglm(formula = Style ~ School + Program, family = multinomial(parallel = FALSE, 
+    refLevel = 3), data = school)
+
+Coefficients: 
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept):1   -1.2233     0.3154  -3.879 0.000105 ***
+(Intercept):2   -0.5662     0.2586  -2.189 0.028593 *  
+School2:1        1.0828     0.3539   3.059 0.002218 ** 
+School2:2        0.1801     0.3172   0.568 0.570163    
+School3:1        1.3147     0.3839   3.424 0.000616 ***
+School3:2        0.6556     0.3395   1.931 0.053455 .  
+ProgramAfter:1  -0.7474     0.2820  -2.651 0.008028 ** 
+ProgramAfter:2  -0.7426     0.2706  -2.745 0.006057 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Names of linear predictors: log(mu[,1]/mu[,3]), log(mu[,2]/mu[,3])
+
+Residual deviance: 666.9339 on 668 degrees of freedom
+
+Log-likelihood: -333.4669 on 668 degrees of freedom
+
+Number of Fisher scoring iterations: 4 
+
+
+Reference group is level  3  of the response</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb74-2"><a></a><span class="fu">Anova</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II tests)
+
+Response: Style
+        Df  Chisq Pr(&gt;Chisq)   
+School   4 14.843   0.005039 **
+Program  2 10.916   0.004262 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a></a><span class="co"># Odds Ratio</span></span>
+<span id="cb76-2"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept):1  (Intercept):2      School2:1      School2:2      School3:1 
+     0.2942532      0.5676812      2.9530080      1.1973459      3.7236794 
+     School3:2 ProgramAfter:1 ProgramAfter:2 
+     1.9262906      0.4735774      0.4758599 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a></a><span class="fu">exp</span>(<span class="fu">confint</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   2.5 %    97.5 %
+(Intercept):1  0.1585883 0.5459732
+(Intercept):2  0.3419345 0.9424668
+School2:1      1.4757049 5.9092141
+School2:2      0.6430168 2.2295485
+School3:1      1.7545863 7.9025968
+School3:2      0.9902930 3.7469675
+ProgramAfter:1 0.2725131 0.8229898
+ProgramAfter:2 0.2800064 0.8087053</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-9-3">
 <p>There is sufficient evidence of a program (<span class="math inline">\(\chi^2 = 10.9, p=0.004\)</span>) and school (<span class="math inline">\(\chi^2=14.8, p=0.005\)</span>).</p>
 <p>The odds of preferring self-directed learning for those assigned to after-hours care is 0.47 (0.27-0.82) times that of those who assigned to regular class hours. The odds of students from school 2 preferring self-directed learning is 2.95 (1.48-5.91) times that of students from school 1. Similarly, the odds of students from school 3 preferring self-directed learning is 3.72 (1.76-7.90) times that of students from school 1.</p>
 <p>The odds of preferring team-based learning for those assigned to after-hours care is 0.48 (0.27-0.82) times that of those who assigned to regular class hours. The odds of students from school 2 preferring self-directed learning is 1.20 (0.64-2.23) times that of students from school 1. Similarly, the odds of students from school 3 preferring self-directed learning is 1.93 (0.99-3.75) times that of students from school 1.</p>
@@ -1235,35 +1521,46 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <h2>Exercise</h2>
 <p>The data set “firecracker” shows data of injuries due to firecrackers from three community health centers in rural Philippines. The age groups were coded as A: &lt;25 years of age, B: ≥25 years of age. Use a generalized logit main effect model to determine whether there is a significant effect of age and clinic in the occurrence of face and finger injury compared to other parts of the body.</p>
 <div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Question</a></li><li><a href="#tabset-10-2">Data</a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Question</a></li><li><a href="#tabset-10-2">Data</a></li><li><a href="#tabset-10-3">R Data</a></li></ul>
 <div class="tab-content">
 <div id="tabset-10-1">
 <p>Use the estimate statement to test and estimate the odds ratio between clinics 1 and 2 for fingers vs.&nbsp;other injury and face vs.&nbsp;other injury.</p>
 </div>
 <div id="tabset-10-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>data firecracker;</span>
-<span id="cb30-2"><a></a>input clinic <span class="sc">$</span> agegroup <span class="sc">$</span> injury <span class="sc">$</span> count;</span>
-<span id="cb30-3"><a></a>datalines;</span>
-<span id="cb30-4"><a></a><span class="dv">1</span> A Fingers <span class="dv">25</span></span>
-<span id="cb30-5"><a></a><span class="dv">1</span> A Face <span class="dv">18</span></span>
-<span id="cb30-6"><a></a><span class="dv">1</span> A Other <span class="dv">5</span></span>
-<span id="cb30-7"><a></a><span class="dv">1</span> B Fingers <span class="dv">13</span></span>
-<span id="cb30-8"><a></a><span class="dv">1</span> B Face <span class="dv">5</span></span>
-<span id="cb30-9"><a></a><span class="dv">1</span> B Other <span class="dv">3</span></span>
-<span id="cb30-10"><a></a><span class="dv">2</span> A Fingers <span class="dv">42</span></span>
-<span id="cb30-11"><a></a><span class="dv">2</span> A Face <span class="dv">7</span></span>
-<span id="cb30-12"><a></a><span class="dv">2</span> A Other <span class="dv">12</span></span>
-<span id="cb30-13"><a></a><span class="dv">2</span> B Fingers <span class="dv">23</span></span>
-<span id="cb30-14"><a></a><span class="dv">2</span> B Face <span class="dv">5</span></span>
-<span id="cb30-15"><a></a><span class="dv">2</span> B Other <span class="dv">5</span></span>
-<span id="cb30-16"><a></a><span class="dv">3</span> A Fingers <span class="dv">10</span></span>
-<span id="cb30-17"><a></a><span class="dv">3</span> A Face <span class="dv">4</span></span>
-<span id="cb30-18"><a></a><span class="dv">3</span> A Other <span class="dv">4</span></span>
-<span id="cb30-19"><a></a><span class="dv">3</span> B Fingers <span class="dv">9</span></span>
-<span id="cb30-20"><a></a><span class="dv">3</span> B Face <span class="dv">7</span></span>
-<span id="cb30-21"><a></a><span class="dv">3</span> B Other <span class="dv">5</span></span>
-<span id="cb30-22"><a></a>;</span>
-<span id="cb30-23"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a>data firecracker;</span>
+<span id="cb80-2"><a></a>input clinic <span class="sc">$</span> agegroup <span class="sc">$</span> injury <span class="sc">$</span> count;</span>
+<span id="cb80-3"><a></a>datalines;</span>
+<span id="cb80-4"><a></a><span class="dv">1</span> A Fingers <span class="dv">25</span></span>
+<span id="cb80-5"><a></a><span class="dv">1</span> A Face <span class="dv">18</span></span>
+<span id="cb80-6"><a></a><span class="dv">1</span> A Other <span class="dv">5</span></span>
+<span id="cb80-7"><a></a><span class="dv">1</span> B Fingers <span class="dv">13</span></span>
+<span id="cb80-8"><a></a><span class="dv">1</span> B Face <span class="dv">5</span></span>
+<span id="cb80-9"><a></a><span class="dv">1</span> B Other <span class="dv">3</span></span>
+<span id="cb80-10"><a></a><span class="dv">2</span> A Fingers <span class="dv">42</span></span>
+<span id="cb80-11"><a></a><span class="dv">2</span> A Face <span class="dv">7</span></span>
+<span id="cb80-12"><a></a><span class="dv">2</span> A Other <span class="dv">12</span></span>
+<span id="cb80-13"><a></a><span class="dv">2</span> B Fingers <span class="dv">23</span></span>
+<span id="cb80-14"><a></a><span class="dv">2</span> B Face <span class="dv">5</span></span>
+<span id="cb80-15"><a></a><span class="dv">2</span> B Other <span class="dv">5</span></span>
+<span id="cb80-16"><a></a><span class="dv">3</span> A Fingers <span class="dv">10</span></span>
+<span id="cb80-17"><a></a><span class="dv">3</span> A Face <span class="dv">4</span></span>
+<span id="cb80-18"><a></a><span class="dv">3</span> A Other <span class="dv">4</span></span>
+<span id="cb80-19"><a></a><span class="dv">3</span> B Fingers <span class="dv">9</span></span>
+<span id="cb80-20"><a></a><span class="dv">3</span> B Face <span class="dv">7</span></span>
+<span id="cb80-21"><a></a><span class="dv">3</span> B Other <span class="dv">5</span></span>
+<span id="cb80-22"><a></a>;</span>
+<span id="cb80-23"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-10-3">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a>firecracker <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Injury=</span><span class="fu">c</span>(<span class="st">"Fingers"</span>,<span class="st">"Face"</span>,<span class="st">"Other"</span>),</span>
+<span id="cb81-2"><a></a>                           <span class="at">Agegroup=</span><span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>),</span>
+<span id="cb81-3"><a></a>                           <span class="at">Clinic =</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>))</span>
+<span id="cb81-4"><a></a></span>
+<span id="cb81-5"><a></a>firecracker<span class="sc">$</span>Count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">18</span>,<span class="dv">5</span>,<span class="dv">13</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">42</span>,<span class="dv">7</span>,<span class="dv">12</span>,<span class="dv">23</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="dv">5</span>)</span>
+<span id="cb81-6"><a></a>firecracker <span class="ot">&lt;-</span> firecracker <span class="sc">|&gt;</span> </span>
+<span id="cb81-7"><a></a>  <span class="fu">uncount</span>(<span class="at">weights=</span>Count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </div>
@@ -1272,18 +1569,89 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <h2>Exercise</h2>
 <p>The data set “firecracker” shows data of injuries due to firecrackers from three community health centers in rural Philippines. The age groups were coded as A: &lt;25 years of age, B: ≥25 years of age. Use a generalized logit main effect model to determine whether there is a significant effect of age and clinic in the occurrence of face and finger injury compared to other parts of the body.</p>
 <div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">Answer</a></li></ul>
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">R Code</a></li><li><a href="#tabset-11-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-11-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>proc logistic data<span class="ot">=</span>firecracker order<span class="ot">=</span>data;</span>
-<span id="cb31-2"><a></a>freq count;</span>
-<span id="cb31-3"><a></a>class clinic agegroup;</span>
-<span id="cb31-4"><a></a>model injury<span class="ot">=</span> clinic agegroup clinic<span class="sc">*</span>agegroup<span class="sc">/</span>link<span class="ot">=</span>glogit selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
-<span id="cb31-5"><a></a>estimate <span class="st">"clinic 1 vs clinic 2 - face"</span> clinic <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp cl category<span class="ot">=</span><span class="st">"Face"</span>;</span>
-<span id="cb31-6"><a></a>estimate <span class="st">"clinic 1 vs clinic 2 - fingers"</span> clinic <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp cl category<span class="ot">=</span><span class="st">"Fingers"</span>;</span>
-<span id="cb31-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a></a>proc logistic data<span class="ot">=</span>firecracker order<span class="ot">=</span>data;</span>
+<span id="cb82-2"><a></a>freq count;</span>
+<span id="cb82-3"><a></a>class clinic agegroup;</span>
+<span id="cb82-4"><a></a>model injury<span class="ot">=</span> clinic agegroup clinic<span class="sc">*</span>agegroup<span class="sc">/</span>link<span class="ot">=</span>glogit selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> scale<span class="ot">=</span>none aggregate;</span>
+<span id="cb82-5"><a></a>estimate <span class="st">"clinic 1 vs clinic 2 - face"</span> clinic <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp cl category<span class="ot">=</span><span class="st">"Face"</span>;</span>
+<span id="cb82-6"><a></a>estimate <span class="st">"clinic 1 vs clinic 2 - fingers"</span> clinic <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp cl category<span class="ot">=</span><span class="st">"Fingers"</span>;</span>
+<span id="cb82-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-11-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a>modv <span class="ot">&lt;-</span> <span class="fu">vglm</span>(Injury<span class="sc">~</span>Clinic<span class="sc">+</span>Agegroup,</span>
+<span id="cb83-2"><a></a>             <span class="at">data=</span>firecracker,</span>
+<span id="cb83-3"><a></a>             <span class="at">family=</span><span class="fu">multinomial</span>(<span class="at">parallel=</span><span class="cn">FALSE</span>, <span class="at">refLevel=</span><span class="dv">3</span>))</span>
+<span id="cb83-4"><a></a></span>
+<span id="cb83-5"><a></a><span class="fu">summary</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+vglm(formula = Injury ~ Clinic + Agegroup, family = multinomial(parallel = FALSE, 
+    refLevel = 3), data = firecracker)
+
+Coefficients: 
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept):1  1.54406    0.40779   3.786 0.000153 ***
+(Intercept):2  1.05057    0.43512   2.414 0.015759 *  
+Clinic2:1     -0.21911    0.47524  -0.461 0.644763    
+Clinic2:2     -1.40520    0.55777  -2.519 0.011758 *  
+Clinic3:1     -0.82186    0.56949  -1.443 0.148976    
+Clinic3:2     -0.85967    0.61912  -1.389 0.164975    
+AgegroupB:1    0.04654    0.40891   0.114 0.909377    
+AgegroupB:2    0.01831    0.48319   0.038 0.969767    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Names of linear predictors: log(mu[,1]/mu[,3]), log(mu[,2]/mu[,3])
+
+Residual deviance: 367.3984 on 396 degrees of freedom
+
+Log-likelihood: -183.6992 on 396 degrees of freedom
+
+Number of Fisher scoring iterations: 4 
+
+
+Reference group is level  3  of the response</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb85-2"><a></a><span class="fu">Anova</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II tests)
+
+Response: Injury
+         Df   Chisq Pr(&gt;Chisq)  
+Clinic    4 11.9012     0.0181 *
+Agegroup  2  0.0154     0.9923  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a><span class="co"># Odds Ratio - note that the confidence interval limits are reversed.</span></span>
+<span id="cb87-2"><a></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">coef</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept):1 (Intercept):2     Clinic2:1     Clinic2:2     Clinic3:1 
+    0.2135119     0.3497396     1.2449671     4.0763280     2.2747209 
+    Clinic3:2   AgegroupB:1   AgegroupB:2 
+    2.3623847     0.9545231     0.9818537 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">confint</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   2.5 %     97.5 %
+(Intercept):1  0.4748214 0.09600943
+(Intercept):2  0.8205713 0.14906415
+Clinic2:1      3.1599718 0.49049272
+Clinic2:2     12.1629723 1.36615043
+Clinic3:1      6.9450478 0.74504244
+Clinic3:2      7.9496566 0.70202549
+AgegroupB:1    2.1274023 0.42827548
+AgegroupB:2    2.5312568 0.38085301</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-3">
 <p>There is a significant effect of clinic (<span class="math inline">\(\chi^2 = 11.9, p=0.02\)</span>), but no evidence of an age effect (<span class="math inline">\(\chi^2 = 0.02, p=0.99\)</span>).</p>
 <p>The odds of receiving patients with face injuries in clinic 1 is 4.08 (1.37-12.2) times that of clinic 2. Meanwhile, the odds of receiving patients with finger injuries in clinic 1 is 1.25 (0.49-3.16) times that of clinic 2.</p>
 </div>
@@ -1326,17 +1694,17 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <h2>Example</h2>
 <p>The following data come from a study in which a physical therapy practice experimented with different treatment modalities in a strengthening program. The therapists rotated patients through three programs for maintenance after basic strength had been attained. The strengthening programs included free weights, resistance bands, and weight machines. The therapists are interested in whether gender and age affect choice of strengthening programs.</p>
 <h3 id="data-set-1">Data Set</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>data pt;</span>
-<span id="cb32-2"><a></a>format therapy <span class="sc">$</span><span class="fl">11.</span>;</span>
-<span id="cb32-3"><a></a>input gender <span class="sc">$</span> age <span class="sc">$</span> therapy <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb32-4"><a></a>datalines;</span>
-<span id="cb32-5"><a></a>males adult machines <span class="dv">2</span> males senior machines <span class="dv">10</span></span>
-<span id="cb32-6"><a></a>males adult freeweights <span class="dv">13</span> males senior freeweights <span class="dv">9</span></span>
-<span id="cb32-7"><a></a>males adult bands <span class="dv">3</span> males senior bands <span class="dv">3</span></span>
-<span id="cb32-8"><a></a>females adult machines <span class="dv">3</span> females senior machines <span class="dv">8</span></span>
-<span id="cb32-9"><a></a>females adult freeweights <span class="dv">9</span> females senior freeweights <span class="dv">0</span></span>
-<span id="cb32-10"><a></a>females adult bands <span class="dv">1</span> females senior bands <span class="dv">1</span></span>
-<span id="cb32-11"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a></a>data pt;</span>
+<span id="cb91-2"><a></a>format therapy <span class="sc">$</span><span class="fl">11.</span>;</span>
+<span id="cb91-3"><a></a>input gender <span class="sc">$</span> age <span class="sc">$</span> therapy <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb91-4"><a></a>datalines;</span>
+<span id="cb91-5"><a></a>males adult machines <span class="dv">2</span> males senior machines <span class="dv">10</span></span>
+<span id="cb91-6"><a></a>males adult freeweights <span class="dv">13</span> males senior freeweights <span class="dv">9</span></span>
+<span id="cb91-7"><a></a>males adult bands <span class="dv">3</span> males senior bands <span class="dv">3</span></span>
+<span id="cb91-8"><a></a>females adult machines <span class="dv">3</span> females senior machines <span class="dv">8</span></span>
+<span id="cb91-9"><a></a>females adult freeweights <span class="dv">9</span> females senior freeweights <span class="dv">0</span></span>
+<span id="cb91-10"><a></a>females adult bands <span class="dv">1</span> females senior bands <span class="dv">1</span></span>
+<span id="cb91-11"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-9" class="slide level2">
 <h2>Example</h2>
@@ -1358,20 +1726,20 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
 <ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">SAS Code</a></li><li><a href="#tabset-12-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-12-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>proc logistic data<span class="ot">=</span>pt;</span>
-<span id="cb33-2"><a></a>title <span class="st">"asymptotic"</span>;</span>
-<span id="cb33-3"><a></a>freq count;</span>
-<span id="cb33-4"><a></a>class <span class="fu">gender</span>(<span class="at">ref=</span><span class="st">'females'</span>) <span class="fu">age</span>(<span class="at">ref=</span><span class="st">'senior'</span>) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
-<span id="cb33-5"><a></a>model <span class="fu">therapy</span>(<span class="at">ref=</span><span class="st">'machines'</span>) <span class="ot">=</span> gender age <span class="sc">/</span> link<span class="ot">=</span>glogit scale<span class="ot">=</span>none aggregate;</span>
-<span id="cb33-6"><a></a>run;</span>
-<span id="cb33-7"><a></a></span>
-<span id="cb33-8"><a></a>proc logistic data<span class="ot">=</span>pt;</span>
-<span id="cb33-9"><a></a>title <span class="st">"exact"</span>;</span>
-<span id="cb33-10"><a></a>freq count;</span>
-<span id="cb33-11"><a></a>class <span class="fu">gender</span>(<span class="at">ref=</span><span class="st">'females'</span>) <span class="fu">age</span>(<span class="at">ref=</span><span class="st">'senior'</span>) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
-<span id="cb33-12"><a></a>model <span class="fu">therapy</span>(<span class="at">ref=</span><span class="st">'machines'</span>) <span class="ot">=</span> gender age <span class="sc">/</span> link<span class="ot">=</span>glogit scale<span class="ot">=</span>none aggregate;</span>
-<span id="cb33-13"><a></a>exact gender age<span class="sc">/</span>joint estimate<span class="ot">=</span>both;</span>
-<span id="cb33-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a></a>proc logistic data<span class="ot">=</span>pt;</span>
+<span id="cb92-2"><a></a>title <span class="st">"asymptotic"</span>;</span>
+<span id="cb92-3"><a></a>freq count;</span>
+<span id="cb92-4"><a></a>class <span class="fu">gender</span>(<span class="at">ref=</span><span class="st">'females'</span>) <span class="fu">age</span>(<span class="at">ref=</span><span class="st">'senior'</span>) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
+<span id="cb92-5"><a></a>model <span class="fu">therapy</span>(<span class="at">ref=</span><span class="st">'machines'</span>) <span class="ot">=</span> gender age <span class="sc">/</span> link<span class="ot">=</span>glogit scale<span class="ot">=</span>none aggregate;</span>
+<span id="cb92-6"><a></a>run;</span>
+<span id="cb92-7"><a></a></span>
+<span id="cb92-8"><a></a>proc logistic data<span class="ot">=</span>pt;</span>
+<span id="cb92-9"><a></a>title <span class="st">"exact"</span>;</span>
+<span id="cb92-10"><a></a>freq count;</span>
+<span id="cb92-11"><a></a>class <span class="fu">gender</span>(<span class="at">ref=</span><span class="st">'females'</span>) <span class="fu">age</span>(<span class="at">ref=</span><span class="st">'senior'</span>) <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
+<span id="cb92-12"><a></a>model <span class="fu">therapy</span>(<span class="at">ref=</span><span class="st">'machines'</span>) <span class="ot">=</span> gender age <span class="sc">/</span> link<span class="ot">=</span>glogit scale<span class="ot">=</span>none aggregate;</span>
+<span id="cb92-13"><a></a>exact gender age<span class="sc">/</span>joint estimate<span class="ot">=</span>both;</span>
+<span id="cb92-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-12-2">
 <p>There is a marginal effect of gender ($ p=0.099<span class="math inline">\(), but there is a significant effect of age (\)</span>^2 = 12.2, p=0.003$).</p>
@@ -1386,7 +1754,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Chapter 9- <a href="https://madfudolig.quarto.pub/eab770slides/">Back to home</a></p>
+<p>Chapter 9- <a href="https://miguelfudolig.github.io/EAB770-Slides-Website/">Back to home</a></p>
 </div>
 </div></div>
 
@@ -1746,7 +2114,7 @@ logit \theta_j = \log \left(\frac{\pi_j}{\pi_r}\right) = \alpha_j + \sum_g \beta
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/MiguelFudolig\.github\.io\/EAB770-Slides-Website\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

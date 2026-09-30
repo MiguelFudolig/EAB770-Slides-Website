@@ -6,15 +6,18 @@ format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    footer: "Chapter 9- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
+    footer: "Chapter 9- [Back to home](https://miguelfudolig.github.io/EAB770-Slides-Website/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
+    echo: true
+    toc: true
 ---
 
 # Logistic Regression - Polytomous Response
@@ -470,22 +473,21 @@ where $x'_{hi}$ includes the explanatory variables with unequal slopes $\beta_k$
 
 ## Partial Proportional Odds Model in `R`
 
-If the score test for the proportional odds assumption led to the rejection of the null hypothesis at the 0.10 level, we might need to use a partial proportional odds model.
+If the score test for the proportional odds assumption led to the rejection of the null hypothesis at the 0.10 level, we can use a partial proportional odds model.
 
 ::: callout-note
-The `clm()` package in the `ordinal` package in `R` can be used to perform partial proportional odds model. Suppose we have two predictors, `x1` and `x2`, one of which did not satisfy the proportional odds model.
+The `vglm` package in the `VGAM` package in `R` can be used to perform partial proportional odds model. Suppose we have two predictors, `x1` and `x2`, with `x2` not satisfying the proportional odds model.
 
 ```{r}
 #| eval: false
 
-mod_clm <- clm(y~x1,
-               nominal=~x2,
-               data=sample_data)
-summary(mod_clm)
+mod_vglm <- vglm(outcome~x1 + x2, 
+                 data= sample_data,
+                 family=cumulative(parallel=FALSE~x2))
 ```
 
 
-It can also be used to estimate proportional odds models. 
+It can also be used to estimate proportional odds models. However, `vglm()` does not work with `emmeans` as of September 2026. 
 :::
 
 ## Example
@@ -568,50 +570,38 @@ poTest(mod_po)
 
 The proportional odds test shows that there is evidence of unequal slopes for type, but not for gender.
 ```{r}
-
+library(VGAM)
+library(car)
 modv<- vglm(Relief~Gender+Type,
-    family = cumulative(parallel=FALSE~ Type, reverse=FALSE),
+    family = cumulative(parallel=FALSE~ Type),
     data=cycling)
 
 summary(modv)
-mod3 <- clm(Relief~ Gender, nominal=~ Type,data=cycling)
-summary(mod3) # shows overall effect of Gender
-
-mod4 <- clm(Relief~Gender,data=cycling)
-anova(mod3,mod4) # shows overall effect of Type by comparing the models with and without Type.
+Anova(modv)
 ```
 
 Let's calculate the probabilities and odds ratios.
 
 ```{r}
-library(emmeans)
+# Odds Ratio
 
-prob_emm_type <- emmeans(mod3,~Type|Relief,mode="prob")
-prob_emm_type
+exp(coef(modv))
+exp(confint(modv))
 
-prob_emm_gender <- emmeans(mod3,~Gender|Relief,mode="prob")
-prob_emm_gender
-
-emm_gender <- emmeans(mod3,~Gender)
-contrast(emm_gender, method="pairwise",infer=T) |> 
-  as.data.frame() |> 
-  mutate(OR = exp(estimate),
-         OR.LCL = exp(asymp.LCL),
-         OR.UCL = exp(asymp.UCL))
-
-## emmeans does not have a good way to calculate odds ratios for the non-proportional odds model.
-
-OR <- exp(coef(mod3))
-OR
-confint(coef(mod3))
-
+# For reverse pairwise order: (note that the limits are reversed.)
+exp(-coef(modv))
+exp(-confint(modv))
 ```
+
+
+
 
 
 
 ### Answer
 
-Using a partial proportional odds model, there is a significant effect of the type of glove and gender. the odds of experiencing major relief for females is 3.26 (95% CI: 1.63, 6.54) times that of males. The odds of major relief when using the test glove is 1.4 (0.60, 3.21) times that of gel. Additionally, the odds of moderate relief when using the test glove is 2.91 (1.33, 6.36) times that of gel.
+Using a partial proportional odds model, there is a significant effect of the type of glove and gender. the odds of experiencing major relief for females is 3.26 (95% CI: 1.63, 6.54) times that of males. The odds of major relief when using the test glove is 1.16 (0.54, 2.50) times that of gel. Additionally, the odds of moderate relief when using the test glove is 2.22 (1.03, 4.75) times that of gel.
+
 :::
 
 
@@ -640,13 +630,8 @@ run;
 ### R Code
 
 ```{r}
-library(ordinal)
-mod1 <-clm(Improvement~1,nominal = ~ Sex + Treatment,data=arthritis)
-mod3 <- clm(Improvement~ Sex,nominal=~ Treatment,data=arthritis)
-mod4 <- clm(Improvement~ Treatment,nominal=~ Sex,data=arthritis)
-
-anova(mod1,mod3)
-anova(mod1,mod4)
+mod_po <- polr(Improvement~Sex+Treatment,data=arthritis)
+poTest(mod_po)
 ```
 
 
@@ -654,8 +639,8 @@ anova(mod1,mod4)
 
 We suppose the slopes are unequal, then test whether there is evidence against the null hypothesis of equal slopes using `test`.
 
-There is insufficient evidence to claim that the $\beta$ for sex ($\chi^2 = 1.35, p=0.25$) and treatment ($\chi^2 = 0.03, p=0.86$) are different across the different outcome levels.
-
+`SAS`: There is insufficient evidence to claim that the $\beta$ for sex ($\chi^2 = 1.35, p=0.25$) and treatment ($\chi^2 = 0.03, p=0.86$) are different across the different outcome levels.
+`R`: There is insufficient evidence to claim that the $\beta$ for sex ($\chi^2 = 1.58, p=0.21$) and treatment ($\chi^2 = 0.01, p=0.94$) are different across the different outcome levels.
 :::
 
 
@@ -698,7 +683,7 @@ with the constraint $\alpha_r=0, \beta_{rg} = 0$.
 ## Generalized Logits Model: SAS 
 
 ::: callout-note
-## Implementing generalized logit models in SAS
+### Implementing generalized logit models in SAS
 
 The `LOGISTIC` procedure will model the logit models for all levels simultaneously. If there are $r$ levels of the response variable, there will be $(r-1)$ degrees of freedom for a single logit model.
 :::
@@ -711,10 +696,23 @@ SAS does not know whether your response variable is ordinal or nominal. The gene
 
 :::
 ::: callout-tip
-## Syntax
+### Syntax
   - Unless specified, the last variable level based on the specified order in the `class` statement is set as the reference level.
   - Syntax is the same as the PO model, but the assumptions are different.
 :::
+
+## Generalized Logits Model: `R`
+
+The `vglm()` function in the `VGAM` package performs the generalized logits model using the `multinomial()` function to define the family of models.
+
+```{r}
+#| eval: false
+
+modv <- vglm(Outcome~x1 + x2,
+             data=sample_data,
+             family=multinomial(parallel=FALSE, refLevel=1)) #reflevel=1 just specifies the reference level to be the first level.
+```
+
 
 ## Example
 
@@ -748,6 +746,21 @@ run;
 ```
 :::
 
+### R Data Set
+
+```{r}
+library(tidyverse)
+school <- expand.grid(Program = c("Regular","After"),
+                      Style = c("Self","Team","Class"),
+                      School = c("1","2","3"))
+
+school$Count <- c(10,5,17,12,26,50,21,16,17,12,26,36,15,12,15,12,16,20)
+
+school <- school |> 
+  uncount(weights = Count)
+```
+
+
 ## Example
 
 Schoolchildren in experimental learning settings were surveyed to determine which learning style they preferred. Investigators were interested in whether response was associated with school and their program, which was either a standard school day or also included after-hours care. Use logistic regression to test for program and school effects and calculate the relevant odds ratios.
@@ -763,6 +776,21 @@ model style= program school school*program / link=glogit selection=forward inclu
 run;
 ```
 
+### R Code
+
+```{r}
+modv <- vglm(Style~School + Program,
+             data=school,
+             family=multinomial(parallel=FALSE, refLevel=3))
+
+summary(modv)
+library(car)
+Anova(modv)
+
+# Odds Ratio
+exp(coef(modv))
+exp(confint(modv))
+```
 
 
 ### Answer
@@ -812,6 +840,19 @@ datalines;
 run;
 
 ```
+
+### R Data
+
+```{r}
+firecracker <- expand.grid(Injury=c("Fingers","Face","Other"),
+                           Agegroup=c("A","B"),
+                           Clinic = c("1","2","3"))
+
+firecracker$Count <- c(25,18,5,13,5,3,42,7,12,23,5,5,10,4,4,9,7,5)
+firecracker <- firecracker |> 
+  uncount(weights=Count)
+```
+
 :::
 
 ## Exercise
@@ -830,6 +871,23 @@ estimate "clinic 1 vs clinic 2 - face" clinic 1 -1/ exp cl category="Face";
 estimate "clinic 1 vs clinic 2 - fingers" clinic 1 -1/ exp cl category="Fingers";
 run;
 ```
+
+### R Code
+
+```{r}
+modv <- vglm(Injury~Clinic+Agegroup,
+             data=firecracker,
+             family=multinomial(parallel=FALSE, refLevel=3))
+
+summary(modv)
+library(car)
+Anova(modv)
+
+# Odds Ratio - note that the confidence interval limits are reversed.
+exp(-coef(modv))
+exp(-confint(modv))
+```
+
 
 ### Answer
 
