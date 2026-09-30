@@ -499,7 +499,33 @@ The table contains data from a study by a bicycling clothing manufacturer who wa
 - Perform logistic regression and interpret the results.
 
 ### Data
-![](img/cycling_C9.png){width=200%}
+```{.r}
+data wrist;
+input glove $ gender $ relief $ count @@;
+datalines;
+test female major 12 test female moderate 8 test female none 5
+test male major 8 test male moderate 14 test male none 15
+gel female major 15 gel female moderate 5 gel female none 9
+gel male major 8 gel male moderate 4 gel male none 20
+;
+```
+
+
+### R Data
+
+```{r}
+library(tidyverse)
+cycling <- expand.grid(Relief = c("Major","Moderate","None"),
+                       Gender = c("Female","Male"),
+                       Type = c("Test","Gel"))
+
+cycling$count <- c(12,8,5,8,14,15,15,5,9,8,4,20)
+cycling <- cycling |> 
+  mutate(Relief = ordered(Relief, levels = c("Major","Moderate","None"))) |> 
+  uncount(weights=count)
+
+```
+
 :::
 
 ## Example
@@ -530,9 +556,62 @@ run;
 3. `poglove` is the label for testing whether the slopes should be the same for different response levels for the glove explanatory variable
 4. Only assumes unequal slopes for glove, but proportional odds assumption holds for gender.
 
+### R Code
+
+```{r}
+library(MASS)
+library(ordinal)
+library(car)
+mod_po <- polr(Relief~Gender+Type,data=cycling)
+poTest(mod_po)
+```
+
+The proportional odds test shows that there is evidence of unequal slopes for type, but not for gender.
+```{r}
+
+modv<- vglm(Relief~Gender+Type,
+    family = cumulative(parallel=FALSE~ Type, reverse=FALSE),
+    data=cycling)
+
+summary(modv)
+mod3 <- clm(Relief~ Gender, nominal=~ Type,data=cycling)
+summary(mod3) # shows overall effect of Gender
+
+mod4 <- clm(Relief~Gender,data=cycling)
+anova(mod3,mod4) # shows overall effect of Type by comparing the models with and without Type.
+```
+
+Let's calculate the probabilities and odds ratios.
+
+```{r}
+library(emmeans)
+
+prob_emm_type <- emmeans(mod3,~Type|Relief,mode="prob")
+prob_emm_type
+
+prob_emm_gender <- emmeans(mod3,~Gender|Relief,mode="prob")
+prob_emm_gender
+
+emm_gender <- emmeans(mod3,~Gender)
+contrast(emm_gender, method="pairwise",infer=T) |> 
+  as.data.frame() |> 
+  mutate(OR = exp(estimate),
+         OR.LCL = exp(asymp.LCL),
+         OR.UCL = exp(asymp.UCL))
+
+## emmeans does not have a good way to calculate odds ratios for the non-proportional odds model.
+
+OR <- exp(coef(mod3))
+OR
+confint(coef(mod3))
+
+```
+
+
+
 ### Answer
 
-Using a partial proportional odds model, there is a significant effect of the type of glove and gender. the odds of experiencing major relief for females is 2.27 (95% CI: 1.10, 4.66) times that of males. The odds of major relief when using the test glove is 1.4 (0.60, 3.21) times that of gel. Additionally, the odds of moderate relief when using the test glove is 2.91 (1.33, 6.36) times that of gel.
+Using a partial proportional odds model, there is a significant effect of the type of glove and gender. the odds of experiencing major relief for females is 3.26 (95% CI: 1.63, 6.54) times that of males. The odds of major relief when using the test glove is 1.4 (0.60, 3.21) times that of gel. Additionally, the odds of moderate relief when using the test glove is 2.91 (1.33, 6.36) times that of gel.
 :::
 
 
