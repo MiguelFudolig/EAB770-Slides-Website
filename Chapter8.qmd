@@ -926,7 +926,7 @@ Suppose we are interested in modeling the mortality rate of cardiothoracic surge
 
 
 $$
-\eta = \alpha + \beta_1X_{h1} + \beta_1X_{h2} + \beta_3X_{h3}
+\eta = \alpha + \beta_1X_{h1} + \beta_2X_{h2} + \beta_3X_{h3}
 $$
 
 Suppose we want to test for a difference in mortality between hospital 1 and hospital 4.
@@ -982,7 +982,7 @@ Suppose we are interested in modeling the mortality rate of cardiothoracic surge
 
 
 $$
-\eta = \alpha + \beta_1X_{h1} + \beta_1X_{h2} + \beta_3X_{h3}
+\eta = \alpha + \beta_1X_{h1} + \beta_2X_{h2} + \beta_3X_{h3}
 $$
 
 The `contrast()` function uses the coefficients of the **marginal means** to perform the contrast. Suppose we want to test for a difference in mortality between hospital 1 and hospital 4. This means we are testing the hypothesis $H_0: \mu_1-\mu_4=0$, which can be interpreted as:

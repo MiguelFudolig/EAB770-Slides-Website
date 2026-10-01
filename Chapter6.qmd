@@ -134,13 +134,14 @@ library(vcdExtra)
 
 CMHtest(dat_cc,
         rscores="midrank",
-        cscores="midrank")
+        cscores="midrank", 
+        overall=TRUE)
 ```
 
 
 ### Answer
 
-Both variables are ordinal, hence we can test for correlation using $Q_{CSMH}$. Using modridit scores, we get $Q_{CSMH}=6.64$, p=0.0100. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.
+Both variables are ordinal, hence we can test for correlation using $Q_{CSMH}$. Using ridit scores, we get $Q_{CSMH}=6.64$, p=0.0100. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.
 :::
 
 ## Exercise 
@@ -207,12 +208,13 @@ run;
 dat_cc <- xtabs(Count~CarSize+Usage+Area+Location,data=harness)
 CMHtest(dat_cc,
         rscores="midrank",
-        cscores="midrank")
+        cscores="midrank",
+        overall=TRUE)
 ```
 
 ### Answer
 
-Both variables are ordinal. We can use the extended correlation statistic $Q_{CSMH}$. Using ridit/rank-based scores, $Q_{CSMH}$ =6.44, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated after controlling for geographical area and location.
+Both variables are ordinal. We can use the extended correlation statistic $Q_{CSMH}$. Using ridit/rank-based scores, $Q_{CSMH}$ =6.64, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated after controlling for geographical area and location.
 
 :::
 
@@ -419,6 +421,7 @@ run;
 dat_cc<- xtabs(~Time+Response+Subject,data=pump)
 
 mantelhaen.test(dat_cc,correct=F)
+CMHtest(dat_cc,overall=TRUE)$ALL
 ```
 
 

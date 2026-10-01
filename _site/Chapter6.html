@@ -386,7 +386,8 @@ Treatment none slight moderate
 <span id="cb6-2"><a></a></span>
 <span id="cb6-3"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
 <span id="cb6-4"><a></a>        <span class="at">rscores=</span><span class="st">"midrank"</span>,</span>
-<span id="cb6-5"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-5"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>, </span>
+<span id="cb6-6"><a></a>        <span class="at">overall=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cochran-Mantel-Haenszel Statistics for Treatment by Severity 
 
@@ -399,7 +400,7 @@ general    General association 10.5166  6 0.1045146</code></pre>
 </div>
 </div>
 <div id="tabset-2-3">
-<p>Both variables are ordinal, hence we can test for correlation using <span class="math inline">\(Q_{CSMH}\)</span>. Using modridit scores, we get <span class="math inline">\(Q_{CSMH}=6.64\)</span>, p=0.0100. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.</p>
+<p>Both variables are ordinal, hence we can test for correlation using <span class="math inline">\(Q_{CSMH}\)</span>. Using ridit scores, we get <span class="math inline">\(Q_{CSMH}=6.64\)</span>, p=0.0100. Hence, we have sufficient evidence that the proportion of gastric tissue removed is associated with symptom severity in patients.</p>
 </div>
 </div>
 </div>
@@ -471,7 +472,8 @@ $ Count    &lt;int&gt; 174, 69, 134, 56, 150, 54, 52, 14, 31, 14, 25, 17, 127, 6
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Count<span class="sc">~</span>CarSize<span class="sc">+</span>Usage<span class="sc">+</span>Area<span class="sc">+</span>Location,<span class="at">data=</span>harness)</span>
 <span id="cb12-2"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
 <span id="cb12-3"><a></a>        <span class="at">rscores=</span><span class="st">"midrank"</span>,</span>
-<span id="cb12-4"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-4"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>,</span>
+<span id="cb12-5"><a></a>        <span class="at">overall=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Area:coast|Location:rural`
 Cochran-Mantel-Haenszel Statistics for CarSize by Usage 
@@ -536,12 +538,23 @@ Cochran-Mantel-Haenszel Statistics for CarSize by Usage
 cor        Nonzero correlation 6.4411  1 0.011151
 rmeans  Row mean scores differ 6.5068  2 0.038643
 cmeans  Col mean scores differ 6.4411  1 0.011151
-general    General association 6.5068  2 0.038643</code></pre>
+general    General association 6.5068  2 0.038643
+
+
+$ALL
+Cochran-Mantel-Haenszel Statistics for CarSize by Usage 
+    Overall tests, controlling for all strata 
+
+                 AltHypothesis  Chisq Df      Prob
+cor        Nonzero correlation 6.6398  1 0.0099725
+rmeans  Row mean scores differ 8.4226  2  0.014827
+cmeans  Col mean scores differ 6.6413  1 0.0099639
+general    General association 8.4258  2  0.014803</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-4-3">
-<p>Both variables are ordinal. We can use the extended correlation statistic <span class="math inline">\(Q_{CSMH}\)</span>. Using ridit/rank-based scores, <span class="math inline">\(Q_{CSMH}\)</span> =6.44, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated after controlling for geographical area and location.</p>
+<p>Both variables are ordinal. We can use the extended correlation statistic <span class="math inline">\(Q_{CSMH}\)</span>. Using ridit/rank-based scores, <span class="math inline">\(Q_{CSMH}\)</span> =6.64, p=0.01. There is sufficient evidence to conclude that car size and shoulder harness usage are correlated after controlling for geographical area and location.</p>
 </div>
 </div>
 </div>
@@ -806,6 +819,17 @@ sample estimates:
 common odds ratio 
         0.3333333 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">CMHtest</span>(dat_cc,<span class="at">overall=</span><span class="cn">TRUE</span>)<span class="sc">$</span>ALL</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for Time by Response 
+    Overall tests, controlling for all strata 
+
+                 AltHypothesis Chisq Df     Prob
+cor        Nonzero correlation     5  1 0.025347
+rmeans  Row mean scores differ     5  1 0.025347
+cmeans  Col mean scores differ     5  1 0.025347
+general    General association     5  1 0.025347</code></pre>
+</div>
 </div>
 </div>
 <div id="tabset-5-3">
@@ -816,26 +840,26 @@ common odds ratio
 </ul>
 </div>
 <div id="tabset-5-4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>data shoes;</span>
-<span id="cb20-2"><a></a>input before <span class="sc">$</span> after <span class="sc">$</span> count;</span>
-<span id="cb20-3"><a></a>datalines;</span>
-<span id="cb20-4"><a></a>yes yes <span class="dv">19</span></span>
-<span id="cb20-5"><a></a>yes no <span class="dv">5</span></span>
-<span id="cb20-6"><a></a>no yes <span class="dv">15</span></span>
-<span id="cb20-7"><a></a>no no <span class="dv">48</span></span>
-<span id="cb20-8"><a></a>;</span>
-<span id="cb20-9"><a></a></span>
-<span id="cb20-10"><a></a>proc freq data<span class="ot">=</span>shoes order<span class="ot">=</span>data;</span>
-<span id="cb20-11"><a></a>weight count;</span>
-<span id="cb20-12"><a></a>tables before<span class="sc">*</span>after<span class="sc">/</span>agree;</span>
-<span id="cb20-13"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>data shoes;</span>
+<span id="cb22-2"><a></a>input before <span class="sc">$</span> after <span class="sc">$</span> count;</span>
+<span id="cb22-3"><a></a>datalines;</span>
+<span id="cb22-4"><a></a>yes yes <span class="dv">19</span></span>
+<span id="cb22-5"><a></a>yes no <span class="dv">5</span></span>
+<span id="cb22-6"><a></a>no yes <span class="dv">15</span></span>
+<span id="cb22-7"><a></a>no no <span class="dv">48</span></span>
+<span id="cb22-8"><a></a>;</span>
+<span id="cb22-9"><a></a></span>
+<span id="cb22-10"><a></a>proc freq data<span class="ot">=</span>shoes order<span class="ot">=</span>data;</span>
+<span id="cb22-11"><a></a>weight count;</span>
+<span id="cb22-12"><a></a>tables before<span class="sc">*</span>after<span class="sc">/</span>agree;</span>
+<span id="cb22-13"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In <code>R</code>, we can create a repeated measures table and apply the McNemar’s test.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>dat2 <span class="ot">&lt;-</span> pump <span class="sc">|&gt;</span> </span>
-<span id="cb21-2"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>Time,<span class="at">values_from=</span>Response) </span>
-<span id="cb21-3"><a></a>dat_cc2 <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>before<span class="sc">+</span>after,<span class="at">data=</span>dat2)</span>
-<span id="cb21-4"><a></a></span>
-<span id="cb21-5"><a></a><span class="fu">mcnemar.test</span>(dat_cc2,<span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>dat2 <span class="ot">&lt;-</span> pump <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>Time,<span class="at">values_from=</span>Response) </span>
+<span id="cb23-3"><a></a>dat_cc2 <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>before<span class="sc">+</span>after,<span class="at">data=</span>dat2)</span>
+<span id="cb23-4"><a></a></span>
+<span id="cb23-5"><a></a><span class="fu">mcnemar.test</span>(dat_cc2,<span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     McNemar's Chi-squared test
@@ -860,37 +884,37 @@ McNemar's chi-squared = 5, df = 1, p-value = 0.02535</code></pre>
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Data</a></li><li><a href="#tabset-6-2">R Data</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23" data-code-line-numbers="14-23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>data drug;</span>
-<span id="cb23-2"><a></a>input druga <span class="sc">$</span> drugb <span class="sc">$</span> drugc <span class="sc">$</span> count;</span>
-<span id="cb23-3"><a></a>datalines;</span>
-<span id="cb23-4"><a></a>F F F <span class="dv">6</span></span>
-<span id="cb23-5"><a></a>F F U <span class="dv">16</span></span>
-<span id="cb23-6"><a></a>F U F <span class="dv">2</span></span>
-<span id="cb23-7"><a></a>F U U <span class="dv">4</span></span>
-<span id="cb23-8"><a></a>U F F <span class="dv">2</span></span>
-<span id="cb23-9"><a></a>U F U <span class="dv">4</span></span>
-<span id="cb23-10"><a></a>U U F <span class="dv">6</span></span>
-<span id="cb23-11"><a></a>U U U <span class="dv">6</span></span>
-<span id="cb23-12"><a></a>;</span>
-<span id="cb23-13"><a></a>run;</span>
-<span id="cb23-14"><a></a>data drug2; set drug;</span>
-<span id="cb23-15"><a></a>keep patient drug response;</span>
-<span id="cb23-16"><a></a>retain patient <span class="dv">0</span>;</span>
-<span id="cb23-17"><a></a>do i<span class="ot">=</span><span class="dv">1</span> to count;</span>
-<span id="cb23-18"><a></a>patient<span class="ot">=</span>patient<span class="sc">+</span><span class="dv">1</span>;</span>
-<span id="cb23-19"><a></a>drug<span class="ot">=</span><span class="st">'A'</span>; response<span class="ot">=</span>druga; output;</span>
-<span id="cb23-20"><a></a>drug<span class="ot">=</span><span class="st">'B'</span>; response<span class="ot">=</span>drugb; output;</span>
-<span id="cb23-21"><a></a>drug<span class="ot">=</span><span class="st">'C'</span>; response<span class="ot">=</span>drugc; output;</span>
-<span id="cb23-22"><a></a>end;</span>
-<span id="cb23-23"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25" data-code-line-numbers="14-23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>data drug;</span>
+<span id="cb25-2"><a></a>input druga <span class="sc">$</span> drugb <span class="sc">$</span> drugc <span class="sc">$</span> count;</span>
+<span id="cb25-3"><a></a>datalines;</span>
+<span id="cb25-4"><a></a>F F F <span class="dv">6</span></span>
+<span id="cb25-5"><a></a>F F U <span class="dv">16</span></span>
+<span id="cb25-6"><a></a>F U F <span class="dv">2</span></span>
+<span id="cb25-7"><a></a>F U U <span class="dv">4</span></span>
+<span id="cb25-8"><a></a>U F F <span class="dv">2</span></span>
+<span id="cb25-9"><a></a>U F U <span class="dv">4</span></span>
+<span id="cb25-10"><a></a>U U F <span class="dv">6</span></span>
+<span id="cb25-11"><a></a>U U U <span class="dv">6</span></span>
+<span id="cb25-12"><a></a>;</span>
+<span id="cb25-13"><a></a>run;</span>
+<span id="cb25-14"><a></a>data drug2; set drug;</span>
+<span id="cb25-15"><a></a>keep patient drug response;</span>
+<span id="cb25-16"><a></a>retain patient <span class="dv">0</span>;</span>
+<span id="cb25-17"><a></a>do i<span class="ot">=</span><span class="dv">1</span> to count;</span>
+<span id="cb25-18"><a></a>patient<span class="ot">=</span>patient<span class="sc">+</span><span class="dv">1</span>;</span>
+<span id="cb25-19"><a></a>drug<span class="ot">=</span><span class="st">'A'</span>; response<span class="ot">=</span>druga; output;</span>
+<span id="cb25-20"><a></a>drug<span class="ot">=</span><span class="st">'B'</span>; response<span class="ot">=</span>drugb; output;</span>
+<span id="cb25-21"><a></a>drug<span class="ot">=</span><span class="st">'C'</span>; response<span class="ot">=</span>drugc; output;</span>
+<span id="cb25-22"><a></a>end;</span>
+<span id="cb25-23"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-2">
 <p>Please refer to <code>drug.csv</code> uploaded on Canvas.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>drug <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"drug.csv"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb24-2"><a></a>  <span class="fu">mutate</span>(<span class="at">Patient=</span><span class="fu">as.factor</span>(Patient),</span>
-<span id="cb24-3"><a></a>         <span class="at">Outcome=</span><span class="fu">factor</span>(Outcome,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"U"</span>,<span class="st">"F"</span>)))</span>
-<span id="cb24-4"><a></a><span class="fu">glimpse</span>(drug)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>drug <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"drug.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a></a>  <span class="fu">mutate</span>(<span class="at">Patient=</span><span class="fu">as.factor</span>(Patient),</span>
+<span id="cb26-3"><a></a>         <span class="at">Outcome=</span><span class="fu">factor</span>(Outcome,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"U"</span>,<span class="st">"F"</span>)))</span>
+<span id="cb26-4"><a></a><span class="fu">glimpse</span>(drug)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 138
 Columns: 3
@@ -913,15 +937,15 @@ $ Outcome &lt;fct&gt; F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F
 <ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">R Code</a></li><li><a href="#tabset-7-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>proc freq data<span class="ot">=</span>drug2 order<span class="ot">=</span>data;</span>
-<span id="cb26-2"><a></a>tables patient<span class="sc">*</span>drug<span class="sc">*</span>response<span class="sc">/</span>cmh noprint;</span>
-<span id="cb26-3"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>proc freq data<span class="ot">=</span>drug2 order<span class="ot">=</span>data;</span>
+<span id="cb28-2"><a></a>tables patient<span class="sc">*</span>drug<span class="sc">*</span>response<span class="sc">/</span>cmh noprint;</span>
+<span id="cb28-3"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>Drug<span class="sc">+</span>Outcome<span class="sc">+</span>Patient,<span class="at">data=</span>drug)</span>
-<span id="cb27-2"><a></a></span>
-<span id="cb27-3"><a></a><span class="fu">CMHtest</span>(dat_cc,<span class="at">overall=</span>T)<span class="sc">$</span>ALL</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>Drug<span class="sc">+</span>Outcome<span class="sc">+</span>Patient,<span class="at">data=</span>drug)</span>
+<span id="cb29-2"><a></a></span>
+<span id="cb29-3"><a></a><span class="fu">CMHtest</span>(dat_cc,<span class="at">overall=</span>T)<span class="sc">$</span>ALL</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cochran-Mantel-Haenszel Statistics for Drug by Outcome 
     Overall tests, controlling for all strata 
