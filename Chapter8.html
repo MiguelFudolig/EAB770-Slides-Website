@@ -1812,7 +1812,7 @@ logit (\theta) = \eta = \alpha + \beta_1 X_{a1} + \beta_2 X_{a2}
 <h2>Example: <code>SAS</code></h2>
 <p>Suppose we are interested in modeling the mortality rate of cardiothoracic surgery across 4 hospitals. The resulting logistic regression model would be:</p>
 <p><span class="math display">\[
-\eta = \alpha + \beta_1X_{h1} + \beta_1X_{h2} + \beta_3X_{h3}
+\eta = \alpha + \beta_1X_{h1} + \beta_2X_{h2} + \beta_3X_{h3}
 \]</span></p>
 <p>Suppose we want to test for a difference in mortality between hospital 1 and hospital 4.</p>
 <div class="panel-tabset">
@@ -1846,7 +1846,7 @@ logit (\theta) = \eta = \alpha + \beta_1 X_{a1} + \beta_2 X_{a2}
 <h2>Example: <code>R</code></h2>
 <p>Suppose we are interested in modeling the mortality rate of cardiothoracic surgery across 4 hospitals. The resulting logistic regression model would be:</p>
 <p><span class="math display">\[
-\eta = \alpha + \beta_1X_{h1} + \beta_1X_{h2} + \beta_3X_{h3}
+\eta = \alpha + \beta_1X_{h1} + \beta_2X_{h2} + \beta_3X_{h3}
 \]</span></p>
 <p>The <code>contrast()</code> function uses the coefficients of the <strong>marginal means</strong> to perform the contrast. Suppose we want to test for a difference in mortality between hospital 1 and hospital 4. This means we are testing the hypothesis <span class="math inline">\(H_0: \mu_1-\mu_4=0\)</span>, which can be interpreted as:</p>
 <p><span class="math display">\[
