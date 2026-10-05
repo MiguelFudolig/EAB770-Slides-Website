@@ -23,23 +23,23 @@ format:
 
 - Paired Observations and Crossover Design Studies
 - General Conditional Logistic Regression
-  - 1:1 Conditional Logistic Regression
-  - 1:m Conditional Logistic Regression
 - Exact Conditional Logistic Regression
 
 ## Conditional Logistic Regression
 
-- When data is highly stratified and each strata contain small numbers of subjects, logistic regression may not be appropriate
-  - Maximum likelihood estimates need a large sample size relative to the parameter number.
-- Highly stratified data come from a cluster sampling design
-  - Example: paired observations, matched case control studies in epidemiology.
-- Conditional Logistic Regression accounts for stratification by basing the maximum likelihood estimation on a conditional likelihood.
+When data is highly stratified and each strata contain small numbers of subjects, logistic regression may not be appropriate. Maximum likelihood estimates need a large sample size relative to the parameter number.
+
+::: callout-note
+Highly stratified data such as paired observations, matched case control studies in epidemiology come from a cluster sampling design. Conditional Logistic Regression accounts for stratification by basing the maximum likelihood estimation on a conditional likelihood.
+:::
 
 ## Conditional Logistic Regression
 
-- Consider a highly stratified cohort study where there are $q$ centers randomly selected. At each center, one randomly selected patient is placed on treatment and another randomly selected patient is assigned to a placebo. 
-  - Response: y_{hi}=1 if there is improvement, 0 otherwise.
-  - Two patients per center: leads to biased estimate
+Consider a highly stratified cohort study where there are $q$ centers randomly selected. At each center, one randomly selected patient is placed on treatment and another randomly selected patient is assigned to a placebo. 
+
+::: callout-note
+The response variable is y_{hi}=1 if there is improvement, 0 otherwise. With two patients per center, this could lead to biased estimates of the effect size.
+:::
   
 ## Likelihood
 
@@ -88,20 +88,40 @@ Performing the mathematical calculations, we will end up with a likelihood indep
 
 ## Conditional vs. Unconditional Logistic Regression
 
-- The conditional likelihood has the same form as that of the unconditional likelihood, but the intercept term is now $\beta$, which is related to the treatment effect.
-  - The nuisance parameters $\alpha_h$ do not affect the likelihood.
+The conditional likelihood has the same form as that of the unconditional likelihood, but the intercept term is now $\beta$, which is related to the treatment effect.
+
 
 ::: callout-note
-The conditional likelihood applies to paired data can be written as a simple case of the Cox proportional hazards model, which is used in the analysis of survival times.
+The nuisance parameters $\alpha_h$ do not affect the likelihood. The conditional likelihood applies to paired data can be written as a simple case of the Cox proportional hazards model, which is used in the analysis of survival times.
 :::
 
-## Conditional Logistic Regression: SAS
+## Conditional Logistic Regression: `SAS`
 
 - The `STRATA` statement allows us to add the stratification variables when there is a small sample size per strata. 
 
 
 ::: callout-note
 You should establish which variables are stratification variables and which ones are covariates.
+:::
+
+## Conditional Logistic Regression: `R`
+
+The `clogit()` function in the `survival` package in `R` can be used to perform conditional logistic regression by applying the Cox proportional hazards model.
+
+::: callout-important
+The `strata()` function is used to indicate which variable is the stratification variable. Forward selection can be implemented using the `stepAIC` function in `MASS`.
+
+```{r}
+#| eval: false
+
+library(survival)
+library(MASS)
+full_model <- clogit(response~treatment + covariate + strata(stratificationvariable),data=sample_data,model=TRUE)
+base_model <- clogit(response~treatment + covariate + strata(stratificationvariable),data=sample_data,model=TRUE)
+selected_model <- stepAIC(base_model,list(upper=full_model),direction="forward")
+```
+
+The Type 3 Tests of Fixed Effects can be implemented using the `Anova()` function in the `car` package.
 :::
 
 ## Example
@@ -158,6 +178,19 @@ datalines;
 ;
 ```
 
+### R Data Set
+
+```{r}
+library(tidyverse)
+trial <- read.csv("trial.csv")
+
+trial <- trial |> 
+  mutate(Center = as.factor(Center),
+         Initial=as.factor(Initial))
+glimpse(trial)
+```
+
+
 ### SAS Code
 
 #### Without Covariates
@@ -181,6 +214,29 @@ selection=forward include=1 details;
 run;
 ```
 
+### R Code
+
+without covariates,
+
+```{r}
+library(survival)
+mod_cond <- clogit(Improvement~Treatment + strata(Center), data=trial,model=TRUE)
+summary(mod_cond)
+```
+With covariates,
+
+```{r}
+
+mod_cov <- clogit(Improvement~Treatment + Initial + Age + strata(Center), data=trial,model=TRUE)
+library(MASS)
+library(car)
+mod_step <- stepAIC(mod_cond,list(upper=mod_cov),direction="forward")
+mod_step
+Anova(mod_step)
+
+```
+
+
 ### Answer
 
 After adding the covariates, only the initial skin condition rating was added to the model. There is a significant effect of initial skin condition ($\chi^2$ = 10.57, p=0.0143), and a marginal effect of treatment ($\chi^2 $= 2.93, p=0.09). The odds of improvement in the treatment group is 1.87 (0.914, 3.82) times that of the placebo group. The odds of improvement for severe initial skin condition is 26.5 (2.4, 292) times that of mild initial skin condition.
@@ -192,6 +248,7 @@ Note that the answers will be different if you treated the initial skin conditio
 
 The dataset CORRECT includes data from a study that asked pairs of individuals to interpret a visual infographic regarding health disparities arising from the COVID-19 pandemic. Each participant was asked about their occupations. The response variable was whether they correctly interpreted the infographic (1) or not (0). Implement a conditional logistic regression analysis to determine whether occupation affects the accuracy of interpretation of visual infographics.
 
+::: panel-tabset
 ### SAS Data Set
 
 ```{.r}
@@ -303,6 +360,18 @@ datalines;
 
 ```
 
+### R Data Set
+
+```{r}
+correct <- read.csv("correct.csv")
+
+correct <- correct |> 
+  mutate(Pair = as.factor(Pair))
+glimpse(correct)
+```
+
+:::
+
 ## Exercise
 
 The dataset CORRECT includes data from a study that asked pairs of individuals to interpret a visual infographic regarding health disparities arising from the COVID-19 pandemic. Each participant was asked about their occupations. The response variable was whether they correctly interpreted the infographic (1) or not (0). Implement a conditional logistic regression analysis to determine whether occupation affects the accuracy of interpretation of visual infographics.
@@ -318,9 +387,18 @@ model correct(event="1")=occupation/details;
 run;
 ```
 
+### R Code
+
+```{r}
+mod1 <- clogit(Correct~Occupation + strata(Pair),data=correct,model=TRUE)
+mod1
+Anova(mod1)
+```
+
+
 ### Answer
 
-There was no significant effect of occupation on the accuracy of interpretation of visual infographics.
+There was no significant effect of occupation on the accuracy of interpretation of visual infographics ($\chi^2_2=1.96,p=0.38$).
 :::
 
 ## Crossover Designs
