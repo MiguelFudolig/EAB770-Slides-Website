@@ -415,14 +415,14 @@ There was no significant effect of occupation on the accuracy of interpretation 
 
 ## Example
 
-Patients were stratified according to two age groups and then assigned to one of three treatment sequences. Responses were measured as favorable (F) or unfavorable (U); thus, FF indicates a favorable response in both Period 1 and Period 2. The data is included in the SAS file as CROSS2.
+Patients were stratified according to two age groups and then assigned to one of three treatment sequences. Responses were measured as favorable (F) or unfavorable (U); thus, FF indicates a favorable response in both Period 1 and Period 2. The data is included in the SAS file as CROSS2 and `crossover.csv`.
 
 ::: {.panel-tabset}
 ### Contingency Table
 
 ![](img/crossover_C10.png)
 
-### Data Set
+### `SAS` Data Set
 
 ```{.r}
 data cross1 (drop=count);
@@ -473,6 +473,19 @@ output;
 run;
 ```
 
+### R Data Set
+
+```{r}
+library(tidyverse)
+crossover <-read.csv("crossover.csv", stringsAsFactors = TRUE)
+crossover <- crossover |> 
+  mutate(Subject= as.factor(Subject),
+         period = as.factor(period),
+         response = ifelse(response=="F",1,0)) 
+glimpse(crossover)
+```
+
+
 ### SAS Code
 
 ```{.r}
@@ -500,6 +513,45 @@ oddsratio drug;
 run;
 
 ```
+
+### R Code
+
+::: callout-important
+Because age dictates the sequence of treatments, age by itself is confounded by the other variables in the model. What we can test for is the interaction between period and age-- do the age groups behave differently across age.
+
+However, because of the nesting, there are some coefficients that are non-estimable as shown below.
+:::
+```{r}
+library(survival)
+
+mod_c <- clogit(response~period+drug +period:age+ carry + strata(Subject), 
+                data=crossover,
+                model=TRUE)
+summary(mod_c)
+```
+
+Because of this, we cannot use `Anova()` in `car`. We will have to do the joint test manually using `anova()`.
+
+```{r}
+mod_main <- clogit(response~period+drug + carry + strata(Subject), 
+                data=crossover,
+                model=TRUE)
+
+mod_nocarry <- clogit(response~period + drug + period:age+ strata(Subject), 
+                data=crossover,
+                model=TRUE)
+summary(mod_c)
+anova(mod_main,mod_c) # period:age effect
+anova(mod_nocarry,mod_c) # carryover effect
+```
+
+Because there is no evidence of a carryover effect, we can interpret the results of the model without the carryover effect.
+
+```{r}
+summary(mod_nocarry)
+```
+
+
 ### Answer
 
 There is no significant carryover effect. At a significance level of 0.05, there is no significant interaction effect. There is a significant drug effect ($\chi^2$ = 18.7, p=0.001). The odds of a favorable response with drug A is 3.84 (2.02, 7.32) times that for the placebo and 2.95 (1.55, 5.59) times that for drug B.
@@ -531,7 +583,7 @@ There is no significant carryover effect. At a significance level of 0.05, there
 - Use conditional logistic regression to determine the association between gallbladder disease and endometrial cancer after controlling for hypertension.
 
 ::: {.panel-tabset}
-### SAS Code
+### SAS Data Set
 
 ```{.r}
 data endo;
@@ -559,6 +611,15 @@ data endo;
 
 ```
 
+### R Data Set
+
+```{r}
+endo <- read.csv("endo.csv")
+endo <- endo |> 
+  mutate(ID = as.factor(ID))
+glimpse(endo)
+```
+
 ### SAS Code
 
 ```{.r}
@@ -567,6 +628,31 @@ proc logistic data=endo;
    model outcome(event='1')=Gall hyper Gall*hyper/selection=forward include=2 details;
 run;
 ```
+
+### R Code
+
+First, let's explore the interaction model to see if there is evidence of an interaction between the two comorbidities.
+
+```{r}
+mod_c <- clogit(Outcome~Gall + Hyper + Gall:Hyper + strata(ID), 
+                data=endo,
+                model=TRUE)
+summary(mod_c)
+library(car)
+Anova(mod_c)
+```
+
+Because the interaction, we can take it out of the model.
+
+```{r}
+mod_main <- clogit(Outcome~Gall + Hyper  + strata(ID), 
+                data=endo,
+                model=TRUE)
+
+summary(mod_main)
+Anova(mod_main)
+```
+
 
 ### Answer
 

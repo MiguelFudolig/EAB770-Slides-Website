@@ -29,8 +29,8 @@ website:
             text: "Chapter 8: Logistic Regression"
           - href: Chapter9.qmd
             text: "Chapter 9: Polytomous Logistic Regression"
-          # - href: Chapter10.qmd
-          #   text: "Chapter 10: Conditional Logistic Regression"
+          - href: Chapter10.qmd
+            text: "Chapter 10: Conditional Logistic Regression"
           # - href: Chapter12.qmd
           #   text: "Chapter 12: Poisson Regression and Other Loglinear Models"
           # - href: Chapter13.qmd
