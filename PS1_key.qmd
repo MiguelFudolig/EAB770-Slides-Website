@@ -168,7 +168,7 @@ It is recommended to use the Fisher's Exact test because of the low expected cou
 ```{r}
 fisher.test(dat_cc)
 ```
-The resulting p-value is 0.002. We reject the null hypothesis at 0.05 level of significance. There is sufficient evidence to conclude that there is an association between pseudocyst development and degree of injuries.
+The resulting p-value is 0.002. We reject the null hypothesis at 0.10 level of significance. There is sufficient evidence to conclude that there is an association between pseudocyst development and degree of injuries.
 :::
 
 # Problem 5
@@ -200,7 +200,7 @@ dat_marginal <- xtabs(Count~Work+SelfEmployment,data=dat)
 CMHtest(dat_marginal)
 ```
 
-At 0.05 level of significance, we reject the null hypothesis ($\chi^2_1=29.4,p<0.0001). We have sufficient evidence of marginal association between work and self-employment.
+At 0.05 level of significance, we reject the null hypothesis ($\chi^2_1=29.4$,p<0.0001). We have sufficient evidence of marginal association between work and self-employment.
 :::
 
 ## 5b
@@ -216,7 +216,7 @@ Conditional association means we have association between work schedule and self
 CMHtest(dat_cc,overall=T)$ALL
 ```
 
-At 0.05 level of significance, we reject the null hypothesis ($\chi^2_1=41.29,p<0.0001). We have sufficient evidence of conditional association between work and self-employment after controlling for gender.
+At 0.05 level of significance, we reject the null hypothesis ($\chi^2_1=41.29$,p<0.0001). We have sufficient evidence of conditional association between work and self-employment after controlling for gender.
 :::
 
 ## 5c

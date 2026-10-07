@@ -30,12 +30,15 @@ format:
 
 ## Poisson Regression
 
-- Recall: We have discussed how to model different categorical responses
+We have discussed how to model different categorical responses
   - Mantel-Haenszel: associations between ordinal and nominal variables
   - Logistic Regression: dichotomous and polytomous responses
-- Counts are also a discrete variable
-  - Typically assumed to be a normal distribution, but its discreteness means it’s not a perfect fit to a continuous distribution like the normal distribution
-- Often, we use the Poisson distribution. Sometimes, we use the negative binomial distribution. 
+
+::: callout-note  
+Counts are also a discrete variable. Typically assumed to be a normal distribution, but its discreteness means it’s not a perfect fit to a continuous distribution like the normal distribution.
+We use the Poisson distribution to model counts.
+
+:::
 
 ## Poisson Regression: Applications
 
@@ -71,7 +74,7 @@ The link function $\eta$ is logarithmic in nature, which means a 1-unit increase
 Sometimes, counts are measured for an interval of time (seconds, hours, weeks) or space (inches, kilometers, miles), which we designate as $N$.
 
 ::: callout-note
-## Poisson Rates
+### Poisson Rates
 
 The ratio $Y/N$ can be interpreted as the rate of counts per unit time. Examples include:
 
@@ -134,7 +137,7 @@ $$
 $$
 
 ::: callout-note
-The estimated differences in the linear predictor estimates the logarithm of the ratio of the two incidence rates. These differences can be tested using `CONTRAST` statements OR estimated using the `ESTIMATE` statement.
+The estimated differences in the linear predictor estimates the logarithm of the ratio of the two incidence rates. 
 :::
 
 
@@ -147,7 +150,7 @@ Exponentiating the differences in the linear predictors will provide an estimate
 :::
 
 
-## Poisson Regression: SAS
+## Poisson Regression: `SAS`
 
 The `GENMOD`, `GLM`, and `GLIMMIX` procedures can perform Poisson regression in SAS.
 
@@ -161,14 +164,29 @@ as `DIST=POISSON`.
 - Joint tests can also be displayed by adding the `TYPE3` option to the `MODEL` statement.
 - Interaction plots can be created using the `EFFECTPLOT` statement.
 - The estimated means can be calculated using the `LSMEANS` statement.
-:::
 
-## Is the Poisson Regression appropriate?
+The linear predictor differences and incidence rate ratios can be tested using `CONTRAST` statements OR estimated using the `ESTIMATE` statement.
+:::
 
 ::: callout-warning
 The criteria for assessing goodness of fit in Poisson regression is the Pearson $\chi^2$/DF, where DF is the degrees of freedom. This value is included in the goodness of fit table in the “Scaled Pearson X2” row. The Value/DF should be close to 1.
 
 :::
+
+
+## Poisson Regression: `R`
+
+The `glm()` function can be used to estimate a Poisson GLM. The `family` should be specified as `family="poisson"`. 
+
+::: callout-tip
+`emmeans`, `contrast` and `Anova` also works with Poisson GLMs in a similar way as the logistic regression models created using `glm()`.
+:::
+
+::: callout-warning
+The criteria for assessing goodness of fit in Poisson regression is the Pearson $\chi^2$/DF, where DF is the degrees of freedom. This value is included in the output of the `check_overdispersion()` function in the `performance` package in `R` as the `dispersion ratio`.
+:::
+
+
 
 ## Example
 
@@ -193,6 +211,16 @@ B 207 B 210 B 214 B 216 B 218
 ;
 ```
 
+### R Data Set
+
+```{r}
+library(tidyverse)
+salmonella <- read.csv("salmonella.csv")
+glimpse(salmonella)
+```
+
+
+
 ### SAS Code
 
 ```{.r}
@@ -204,9 +232,28 @@ estimate "incidence ratio lab A/lab B" lab 1 -1/ exp alpha=0.05  ;
 run;
 ```
 
+### R Code
+
+```{r}
+mod1 <- glm(counts~lab,data=salmonella,family="poisson")
+summary(mod1)
+
+library(car)
+Anova(mod1)
+
+library(performance)
+check_overdispersion(mod1)
+
+library(emmeans)
+emm_mod1 <- emmeans(mod1,~lab,type="response", infer=T)
+emm_mod1
+contrast(emm_mod1,method="pairwise",infer=T)
+```
+
+
 ### Answer
 
-The scaled Pearson chi-square Value/DF = 1.11, which is close to 1. This supports the use of the Poisson distribution to modle the salmonella counts.
+The scaled Pearson chi-square Value/DF = 1.11, which is close to 1. This supports the use of the Poisson distribution to model the salmonella counts.
 
 There is strong evidence of a difference in counts between the two labs ($\chi^2$ = 1007, p < 0.0001). The incidence rate ratio is 0.39 (95% CI: 0.37, 0.42), which means there is 61% less counts in Lab A compared to Lab B.
 
@@ -218,7 +265,7 @@ The file urgentcare_queue.csv includes simulated queueing data from urgent care 
 
 - Use an interaction model to test whether the location and Medicaid acceptance affect the length of the queue of urgent care clinics at the start of the workday. Is the Poisson distribution a good fit for the data? Is the interaction significant at the 0.10 level?
 
-- If the interaction is non-significant, remove the interaction term and re-run the analysis to estimate the incidence rate ratios between the queues in urgent care clinics in City A and B.
+- If the interaction is non-significant, remove the interaction term and re-run the analysis to estimate the incidence rate ratios between the queues in urgent care clinics in City A and B. Use 0.05 as the significance level.
 
 
 ## Exercise
@@ -227,7 +274,7 @@ The file urgentcare_queue.csv includes simulated queueing data from urgent care 
 
 - Use an interaction model to test whether the location and Medicaid acceptance affect the length of the queue of urgent care clinics at the start of the workday. Is the Poisson distribution a good fit for the data? Is the interaction significant at the 0.10 level?
 
-- If the interaction is non-significant, remove the interaction term and re-run the analysis to estimate the incidence rate ratios between the queues in urgent care clinics in City A and B.
+- If the interaction is non-significant, remove the interaction term and re-run the analysis to estimate the incidence rate ratios between the queues in urgent care clinics in City A and B. Use 0.05 as the significance level.
 
 :::{.panel-tabset}
 ### SAS Code
@@ -249,11 +296,48 @@ estimate "IRR between City A and B" city 1 -1;
 run;
 ```
 
+### R Code
+
+```{r}
+urgent <- read.csv("urgentcare_queue.csv",stringsAsFactors = TRUE)
+glimpse(urgent)
+```
+
+```{r}
+library(performance)
+library(car)
+library(emmeans)
+
+mod_interaction <- glm(queue~city * medicaid, data=urgent, family="poisson")
+
+check_overdispersion(mod_interaction)
+Anova(mod_interaction)
+
+
+mod1 <- glm(queue~city + medicaid, data=urgent, family="poisson")
+summary(mod1)
+
+
+check_overdispersion(mod1)
+Anova(mod1)
+
+emm_city <- emmeans(mod1,~city,type="response",infer=T)
+
+emm_city
+contrast(emm_city, method="pairwise",infer=T)
+
+emm_med <- emmeans(mod1,~medicaid,type="response",infer=T)
+emm_med
+contrast(emm_city, method="pairwise",infer=T)
+
+```
+
+
 ### Answer
 
-The Value/DF of the Scaled Pearson $\chi^2$ (Interaction Model: 0.9105 ) is close to 1, which means the Poisson distribution assumption is appropriate. There is no evidence of an interaction between city and medicaid ($\chi^2$ = 0.61, p=0.43) at the 0.10 level.
+The Value/DF of the Scaled Pearson $\chi^2$ (Interaction Model: 0.911 ) is close to 1, which means the Poisson distribution assumption is appropriate. There is no evidence of an interaction between city and medicaid ($\chi^2$ = 0.61, p=0.43) at the 0.10 level.
 
-The Value/DF of the Scaled Pearson $\chi^2$ for the main effects model is also close to 1 (0.9108). The estimated incidence rate of queues in City A is 60% less than that in City B (IRR = 0.40 (95% CI: 0.34, 0.47))
+The Value/DF of the Scaled Pearson $\chi^2$ for the main effects model is also close to 1 (0.911). The estimated incidence rate of queues in City A is 60% less than that in City B (IRR = 0.40 (95% CI: 0.34, 0.47))
 
 :::
 
