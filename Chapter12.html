@@ -501,6 +501,9 @@ Y_i \sim Poisson(\lambda_i)
 </div>
 <div id="tabset-1-3">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a></a>salmonella <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"salmonella.csv"</span>)</span>
+<span id="cb2-3"><a></a><span class="fu">glimpse</span>(salmonella)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 38
 Columns: 2
@@ -510,15 +513,17 @@ $ counts &lt;int&gt; 63, 64, 65, 68, 69, 70, 72, 73, 75, 80, 82, 83, 83, 84, 84,
 </div>
 </div>
 <div id="tabset-1-4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>proc genmod data<span class="ot">=</span>salmonella;</span>
-<span id="cb3-2"><a></a>class lab; </span>
-<span id="cb3-3"><a></a>model counts <span class="ot">=</span> lab <span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log type3  ;</span>
-<span id="cb3-4"><a></a>lsmeans lab<span class="sc">/</span>diff<span class="ot">=</span>all ilink cl;</span>
-<span id="cb3-5"><a></a>estimate <span class="st">"incidence ratio lab A/lab B"</span> lab <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp alpha<span class="ot">=</span><span class="fl">0.05</span>  ;</span>
-<span id="cb3-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>proc genmod data<span class="ot">=</span>salmonella;</span>
+<span id="cb4-2"><a></a>class lab; </span>
+<span id="cb4-3"><a></a>model counts <span class="ot">=</span> lab <span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log type3  ;</span>
+<span id="cb4-4"><a></a>lsmeans lab<span class="sc">/</span>diff<span class="ot">=</span>all ilink cl;</span>
+<span id="cb4-5"><a></a>estimate <span class="st">"incidence ratio lab A/lab B"</span> lab <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span> exp alpha<span class="ot">=</span><span class="fl">0.05</span>  ;</span>
+<span id="cb4-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-5">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(counts<span class="sc">~</span>lab,<span class="at">data=</span>salmonella,<span class="at">family=</span><span class="st">"poisson"</span>)</span>
+<span id="cb5-2"><a></a><span class="fu">summary</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -539,6 +544,8 @@ AIC: 297.69
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb7-2"><a></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -548,6 +555,8 @@ lab   1007.2  1  &lt; 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb9-2"><a></a><span class="fu">check_overdispersion</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Overdispersion test
 
@@ -555,6 +564,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   Pearson's Chi-Squared = 40.008
                 p-value =  0.297</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb11-2"><a></a>emm_mod1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>lab,<span class="at">type=</span><span class="st">"response"</span>, <span class="at">infer=</span>T)</span>
+<span id="cb11-3"><a></a>emm_mod1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> lab  rate   SE  df asymp.LCL asymp.UCL null z.ratio p.value
  A    76.7 2.06 Inf      72.8      80.9    1 161.289 &lt;0.0001
@@ -564,6 +576,7 @@ Confidence level used: 0.95
 Intervals are back-transformed from the log scale 
 Tests are performed on the log scale </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">contrast</span>(emm_mod1,<span class="at">method=</span><span class="st">"pairwise"</span>,<span class="at">infer=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast ratio     SE  df asymp.LCL asymp.UCL null z.ratio p.value
  A / B    0.393 0.0123 Inf     0.369     0.417    1 -29.872 &lt;0.0001
@@ -600,23 +613,25 @@ Tests are performed on the log scale </code></pre>
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">R Code</a></li><li><a href="#tabset-2-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>proc genmod data<span class="ot">=</span>work.urgent ;</span>
-<span id="cb9-2"><a></a>class city medicaid; </span>
-<span id="cb9-3"><a></a>model queue <span class="ot">=</span> city<span class="sc">|</span>medicaid <span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log type3  ;</span>
-<span id="cb9-4"><a></a>lsmeans city<span class="sc">*</span>medicaid<span class="sc">/</span>ilink cl ;</span>
-<span id="cb9-5"><a></a>effectplot <span class="fu">interaction</span> (<span class="at">sliceby=</span>city);</span>
-<span id="cb9-6"><a></a>run;</span>
-<span id="cb9-7"><a></a></span>
-<span id="cb9-8"><a></a>proc genmod data<span class="ot">=</span>work.urgent;</span>
-<span id="cb9-9"><a></a>class city medicaid; </span>
-<span id="cb9-10"><a></a>model queue <span class="ot">=</span> city medicaid <span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log type3  ;</span>
-<span id="cb9-11"><a></a>lsmeans city <span class="sc">/</span> diff<span class="ot">=</span>all ilink cl;</span>
-<span id="cb9-12"><a></a>lsmeans medicaid<span class="sc">/</span> diff<span class="ot">=</span>all exp cl;</span>
-<span id="cb9-13"><a></a>estimate <span class="st">"IRR between City A and B"</span> city <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span>;</span>
-<span id="cb9-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>proc genmod data<span class="ot">=</span>work.urgent ;</span>
+<span id="cb15-2"><a></a>class city medicaid; </span>
+<span id="cb15-3"><a></a>model queue <span class="ot">=</span> city<span class="sc">|</span>medicaid <span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log type3  ;</span>
+<span id="cb15-4"><a></a>lsmeans city<span class="sc">*</span>medicaid<span class="sc">/</span>ilink cl ;</span>
+<span id="cb15-5"><a></a>effectplot <span class="fu">interaction</span> (<span class="at">sliceby=</span>city);</span>
+<span id="cb15-6"><a></a>run;</span>
+<span id="cb15-7"><a></a></span>
+<span id="cb15-8"><a></a>proc genmod data<span class="ot">=</span>work.urgent;</span>
+<span id="cb15-9"><a></a>class city medicaid; </span>
+<span id="cb15-10"><a></a>model queue <span class="ot">=</span> city medicaid <span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log type3  ;</span>
+<span id="cb15-11"><a></a>lsmeans city <span class="sc">/</span> diff<span class="ot">=</span>all ilink cl;</span>
+<span id="cb15-12"><a></a>lsmeans medicaid<span class="sc">/</span> diff<span class="ot">=</span>all exp cl;</span>
+<span id="cb15-13"><a></a>estimate <span class="st">"IRR between City A and B"</span> city <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span>;</span>
+<span id="cb15-14"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>urgent <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"urgentcare_queue.csv"</span>,<span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a></a><span class="fu">glimpse</span>(urgent)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 80
 Columns: 3
@@ -626,6 +641,13 @@ $ queue    &lt;int&gt; 4, 6, 4, 4, 6, 3, 6, 2, 3, 3, 3, 2, 6, 8, 7, 7, 5, 4, 7, 
 </div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb18-2"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb18-3"><a></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a>mod_interaction <span class="ot">&lt;-</span> <span class="fu">glm</span>(queue<span class="sc">~</span>city <span class="sc">*</span> medicaid, <span class="at">data=</span>urgent, <span class="at">family=</span><span class="st">"poisson"</span>)</span>
+<span id="cb18-6"><a></a></span>
+<span id="cb18-7"><a></a><span class="fu">check_overdispersion</span>(mod_interaction)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Overdispersion test
 
@@ -633,6 +655,7 @@ $ queue    &lt;int&gt; 4, 6, 4, 4, 6, 3, 6, 2, 3, 3, 3, 2, 6, 8, 7, 7, 5, 4, 7, 
   Pearson's Chi-Squared = 69.200
                 p-value =  0.697</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">Anova</span>(mod_interaction)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -644,6 +667,8 @@ city:medicaid    0.613  1     0.4336
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(queue<span class="sc">~</span>city <span class="sc">+</span> medicaid, <span class="at">data=</span>urgent, <span class="at">family=</span><span class="st">"poisson"</span>)</span>
+<span id="cb22-2"><a></a><span class="fu">summary</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -665,6 +690,7 @@ AIC: 384.42
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">check_overdispersion</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Overdispersion test
 
@@ -672,6 +698,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   Pearson's Chi-Squared = 70.132
                 p-value =  0.697</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -682,6 +709,9 @@ medicaid    1.332  1     0.2485
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>emm_city <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>city,<span class="at">type=</span><span class="st">"response"</span>,<span class="at">infer=</span>T)</span>
+<span id="cb28-2"><a></a></span>
+<span id="cb28-3"><a></a>emm_city</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> city rate    SE  df asymp.LCL asymp.UCL null z.ratio p.value
  A     5.1 0.392 Inf      4.38      5.93    1  21.198 &lt;0.0001
@@ -692,6 +722,7 @@ Confidence level used: 0.95
 Intervals are back-transformed from the log scale 
 Tests are performed on the log scale </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">contrast</span>(emm_city, <span class="at">method=</span><span class="st">"pairwise"</span>,<span class="at">infer=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast ratio     SE  df asymp.LCL asymp.UCL null z.ratio p.value
  A / B    0.397 0.0335 Inf     0.337     0.469    1 -10.953 &lt;0.0001
@@ -701,6 +732,8 @@ Confidence level used: 0.95
 Intervals are back-transformed from the log scale 
 Tests are performed on the log scale </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>emm_med <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>medicaid,<span class="at">type=</span><span class="st">"response"</span>,<span class="at">infer=</span>T)</span>
+<span id="cb32-2"><a></a>emm_med</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> medicaid rate    SE  df asymp.LCL asymp.UCL null z.ratio p.value
  No       8.54 0.728 Inf      7.22     10.09    1  25.159 &lt;0.0001
@@ -711,6 +744,7 @@ Confidence level used: 0.95
 Intervals are back-transformed from the log scale 
 Tests are performed on the log scale </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">contrast</span>(emm_city, <span class="at">method=</span><span class="st">"pairwise"</span>,<span class="at">infer=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast ratio     SE  df asymp.LCL asymp.UCL null z.ratio p.value
  A / B    0.397 0.0335 Inf     0.337     0.469    1 -10.953 &lt;0.0001
@@ -743,32 +777,38 @@ Tests are performed on the log scale </code></pre>
 <p><img data-src="img/melanoma_C12.png"></p>
 </div>
 <div id="tabset-3-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-20"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-20-1"><a href="#annotated-cell-20-1"></a>data melanoma;</span>
-<span id="annotated-cell-20-2"><a href="#annotated-cell-20-2"></a>input age <span class="sc">$</span> region <span class="sc">$</span> cases total;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-20-3" class="code-annotation-target"><a href="#annotated-cell-20-3"></a>ltotal<span class="ot">=</span><span class="fu">log</span>(total); <span class="sc">*</span>calculates the logarithm of the total;</span>
-<span id="annotated-cell-20-4"><a href="#annotated-cell-20-4"></a>datalines;</span>
-<span id="annotated-cell-20-5"><a href="#annotated-cell-20-5"></a><span class="dv">35-44</span> south <span class="dv">75</span> <span class="dv">220407</span></span>
-<span id="annotated-cell-20-6"><a href="#annotated-cell-20-6"></a><span class="dv">45-54</span> south <span class="dv">68</span> <span class="dv">198119</span></span>
-<span id="annotated-cell-20-7"><a href="#annotated-cell-20-7"></a><span class="dv">55-64</span> south <span class="dv">63</span> <span class="dv">134084</span></span>
-<span id="annotated-cell-20-8"><a href="#annotated-cell-20-8"></a><span class="dv">65-74</span> south <span class="dv">45</span> <span class="dv">70708</span></span>
-<span id="annotated-cell-20-9"><a href="#annotated-cell-20-9"></a><span class="dv">75</span><span class="sc">+</span> south <span class="dv">27</span> <span class="dv">34233</span></span>
-<span id="annotated-cell-20-10"><a href="#annotated-cell-20-10"></a><span class="sc">&lt;</span><span class="dv">35</span> south <span class="dv">64</span> <span class="dv">1074246</span></span>
-<span id="annotated-cell-20-11"><a href="#annotated-cell-20-11"></a><span class="dv">35-44</span> north <span class="dv">76</span> <span class="dv">564535</span></span>
-<span id="annotated-cell-20-12"><a href="#annotated-cell-20-12"></a><span class="dv">45-54</span> north <span class="dv">98</span> <span class="dv">592983</span></span>
-<span id="annotated-cell-20-13"><a href="#annotated-cell-20-13"></a><span class="dv">55-64</span> north <span class="dv">104</span> <span class="dv">450740</span></span>
-<span id="annotated-cell-20-14"><a href="#annotated-cell-20-14"></a><span class="dv">65-74</span> north <span class="dv">63</span> <span class="dv">270908</span></span>
-<span id="annotated-cell-20-15"><a href="#annotated-cell-20-15"></a><span class="dv">75</span><span class="sc">+</span> north <span class="dv">80</span> <span class="dv">161850</span></span>
-<span id="annotated-cell-20-16"><a href="#annotated-cell-20-16"></a><span class="sc">&lt;</span><span class="dv">35</span> north <span class="dv">61</span> <span class="dv">2880262</span></span>
-<span id="annotated-cell-20-17"><a href="#annotated-cell-20-17"></a>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-36"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-36-1"><a href="#annotated-cell-36-1"></a>data melanoma;</span>
+<span id="annotated-cell-36-2"><a href="#annotated-cell-36-2"></a>input age <span class="sc">$</span> region <span class="sc">$</span> cases total;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-36" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-36-3" class="code-annotation-target"><a href="#annotated-cell-36-3"></a>ltotal<span class="ot">=</span><span class="fu">log</span>(total); <span class="sc">*</span>calculates the logarithm of the total;</span>
+<span id="annotated-cell-36-4"><a href="#annotated-cell-36-4"></a>datalines;</span>
+<span id="annotated-cell-36-5"><a href="#annotated-cell-36-5"></a><span class="dv">35-44</span> south <span class="dv">75</span> <span class="dv">220407</span></span>
+<span id="annotated-cell-36-6"><a href="#annotated-cell-36-6"></a><span class="dv">45-54</span> south <span class="dv">68</span> <span class="dv">198119</span></span>
+<span id="annotated-cell-36-7"><a href="#annotated-cell-36-7"></a><span class="dv">55-64</span> south <span class="dv">63</span> <span class="dv">134084</span></span>
+<span id="annotated-cell-36-8"><a href="#annotated-cell-36-8"></a><span class="dv">65-74</span> south <span class="dv">45</span> <span class="dv">70708</span></span>
+<span id="annotated-cell-36-9"><a href="#annotated-cell-36-9"></a><span class="dv">75</span><span class="sc">+</span> south <span class="dv">27</span> <span class="dv">34233</span></span>
+<span id="annotated-cell-36-10"><a href="#annotated-cell-36-10"></a><span class="sc">&lt;</span><span class="dv">35</span> south <span class="dv">64</span> <span class="dv">1074246</span></span>
+<span id="annotated-cell-36-11"><a href="#annotated-cell-36-11"></a><span class="dv">35-44</span> north <span class="dv">76</span> <span class="dv">564535</span></span>
+<span id="annotated-cell-36-12"><a href="#annotated-cell-36-12"></a><span class="dv">45-54</span> north <span class="dv">98</span> <span class="dv">592983</span></span>
+<span id="annotated-cell-36-13"><a href="#annotated-cell-36-13"></a><span class="dv">55-64</span> north <span class="dv">104</span> <span class="dv">450740</span></span>
+<span id="annotated-cell-36-14"><a href="#annotated-cell-36-14"></a><span class="dv">65-74</span> north <span class="dv">63</span> <span class="dv">270908</span></span>
+<span id="annotated-cell-36-15"><a href="#annotated-cell-36-15"></a><span class="dv">75</span><span class="sc">+</span> north <span class="dv">80</span> <span class="dv">161850</span></span>
+<span id="annotated-cell-36-16"><a href="#annotated-cell-36-16"></a><span class="sc">&lt;</span><span class="dv">35</span> north <span class="dv">61</span> <span class="dv">2880262</span></span>
+<span id="annotated-cell-36-17"><a href="#annotated-cell-36-17"></a>;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-36" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-20" data-code-lines="3" data-code-annotation="1">The <code>ltotal</code> variable performs the logarithmic transformation of the offset variable, which is the total number of tests.</span>
+<span data-code-cell="annotated-cell-36" data-code-lines="3" data-code-annotation="1">The <code>ltotal</code> variable performs the logarithmic transformation of the offset variable, which is the total number of tests.</span>
 </dd>
 </dl>
 </div>
 <div id="tabset-3-3">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>melanoma <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Age_Group =</span> <span class="fu">c</span>(<span class="st">"&lt;35"</span>,<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"&gt;75"</span>),</span>
+<span id="cb36-2"><a></a>                        <span class="at">Region =</span> <span class="fu">c</span>(<span class="st">"Northern"</span>,<span class="st">"Southern"</span>))</span>
+<span id="cb36-3"><a></a></span>
+<span id="cb36-4"><a></a>melanoma<span class="sc">$</span>Cases <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">61</span>,<span class="dv">76</span>,<span class="dv">98</span>,<span class="dv">104</span>,<span class="dv">63</span>,<span class="dv">80</span>,<span class="dv">64</span>,<span class="dv">75</span>,<span class="dv">68</span>,<span class="dv">63</span>,<span class="dv">45</span>,<span class="dv">27</span>)</span>
+<span id="cb36-5"><a></a>melanoma<span class="sc">$</span>Total <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2880262</span>,<span class="dv">564535</span>,<span class="dv">592983</span>,<span class="dv">450740</span>,<span class="dv">270908</span>,<span class="dv">161850</span>,<span class="dv">1074246</span>,<span class="dv">220407</span>,<span class="dv">198119</span>,<span class="dv">134084</span>,<span class="dv">70708</span>,<span class="dv">34233</span>)</span>
+<span id="cb36-6"><a></a>melanoma</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Age_Group   Region Cases   Total
 1        &lt;35 Northern    61 2880262
@@ -787,17 +827,19 @@ Tests are performed on the log scale </code></pre>
 </div>
 </div>
 <div id="tabset-3-4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>proc genmod data<span class="ot">=</span>melanoma;</span>
-<span id="cb21-2"><a></a>class <span class="fu">region</span> (<span class="at">ref=</span><span class="st">'north'</span>) <span class="fu">age</span> (<span class="at">ref=</span><span class="st">'&lt;35'</span>);</span>
-<span id="cb21-3"><a></a>model cases <span class="ot">=</span> age region </span>
-<span id="cb21-4"><a></a><span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>ltotal type3 cl ; <span class="sc">*</span>the offset should be <span class="cf">in</span> the LOGARITHMIC SCALE;</span>
-<span id="cb21-5"><a></a>estimate <span class="st">"75+ vs &lt;35"</span> age <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>exp;</span>
-<span id="cb21-6"><a></a>lsmeans age<span class="sc">/</span> ilink cl diff <span class="ot">=</span> all  adjust<span class="ot">=</span>tukey;</span>
-<span id="cb21-7"><a></a>lsmeans region <span class="sc">/</span>ilink cl diff <span class="ot">=</span> all ;</span>
-<span id="cb21-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>proc genmod data<span class="ot">=</span>melanoma;</span>
+<span id="cb38-2"><a></a>class <span class="fu">region</span> (<span class="at">ref=</span><span class="st">'north'</span>) <span class="fu">age</span> (<span class="at">ref=</span><span class="st">'&lt;35'</span>);</span>
+<span id="cb38-3"><a></a>model cases <span class="ot">=</span> age region </span>
+<span id="cb38-4"><a></a><span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>ltotal type3 cl ; <span class="sc">*</span>the offset should be <span class="cf">in</span> the LOGARITHMIC SCALE;</span>
+<span id="cb38-5"><a></a>estimate <span class="st">"75+ vs &lt;35"</span> age <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>exp;</span>
+<span id="cb38-6"><a></a>lsmeans age<span class="sc">/</span> ilink cl diff <span class="ot">=</span> all  adjust<span class="ot">=</span>tukey;</span>
+<span id="cb38-7"><a></a>lsmeans region <span class="sc">/</span>ilink cl diff <span class="ot">=</span> all ;</span>
+<span id="cb38-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-5">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Cases<span class="sc">~</span>Age_Group <span class="sc">+</span> Region, <span class="at">data=</span>melanoma,<span class="at">family=</span><span class="st">"poisson"</span>,<span class="at">offset=</span><span class="fu">log</span>(Total))</span>
+<span id="cb39-2"><a></a><span class="fu">summary</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -824,6 +866,7 @@ AIC: 92.44
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">check_overdispersion</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Overdispersion test
 
@@ -831,6 +874,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   Pearson's Chi-Squared = 6.115
                 p-value = 0.295</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -841,6 +885,8 @@ Region      124.22  1  &lt; 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>emm_age <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>Age_Group, <span class="at">infer=</span>T, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb45-2"><a></a>emm_age</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Age_Group  rate     SE  df asymp.LCL asymp.UCL null z.ratio p.value
  &lt;35        10.1  0.904 Inf      8.48      12.0    1  25.841 &lt;0.0001
@@ -855,6 +901,9 @@ Confidence level used: 0.95
 Intervals are back-transformed from the log scale 
 Tests are performed on the log scale </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>contrast_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">contrast1 =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb47-2"><a></a></span>
+<span id="cb47-3"><a></a><span class="fu">contrast</span>(emm_age,<span class="at">method=</span>contrast_list, <span class="at">infer=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast  ratio   SE  df asymp.LCL asymp.UCL null z.ratio p.value
  contrast1    19 2.51 Inf      14.7      24.6    1  22.300 &lt;0.0001
@@ -902,17 +951,19 @@ Tests are performed on the log scale </code></pre>
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Code</a></li><li><a href="#tabset-4-2">R Code</a></li><li><a href="#tabset-4-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>proc genmod data<span class="ot">=</span>resident;</span>
-<span id="cb27-2"><a></a>class year;</span>
-<span id="cb27-3"><a></a>model counts <span class="ot">=</span> year</span>
-<span id="cb27-4"><a></a><span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>ltime type3 cl; <span class="sc">*</span>the offset should be <span class="cf">in</span> the LOGARITHMIC SCALE;</span>
-<span id="cb27-5"><a></a>lsmeans year<span class="sc">/</span> ilink cl diff<span class="ot">=</span>all adjust<span class="ot">=</span>bonferroni;</span>
-<span id="cb27-6"><a></a>estimate <span class="st">"2021 vs 2022"</span> year <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>; </span>
-<span id="cb27-7"><a></a>estimate <span class="st">"2022 vs 2023"</span> year <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> ;</span>
-<span id="cb27-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>proc genmod data<span class="ot">=</span>resident;</span>
+<span id="cb49-2"><a></a>class year;</span>
+<span id="cb49-3"><a></a>model counts <span class="ot">=</span> year</span>
+<span id="cb49-4"><a></a><span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>ltime type3 cl; <span class="sc">*</span>the offset should be <span class="cf">in</span> the LOGARITHMIC SCALE;</span>
+<span id="cb49-5"><a></a>lsmeans year<span class="sc">/</span> ilink cl diff<span class="ot">=</span>all adjust<span class="ot">=</span>bonferroni;</span>
+<span id="cb49-6"><a></a>estimate <span class="st">"2021 vs 2022"</span> year <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>; </span>
+<span id="cb49-7"><a></a>estimate <span class="st">"2022 vs 2023"</span> year <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> ;</span>
+<span id="cb49-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>resident <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"resident_hours.csv"</span>)</span>
+<span id="cb50-2"><a></a><span class="fu">glimpse</span>(resident)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 38
 Columns: 4
@@ -921,8 +972,12 @@ $ counts &lt;int&gt; 2864, 2907, 2901, 2890, 2966, 2896, 2934, 2924, 2912, 2889,
 $ time   &lt;int&gt; 3086, 3145, 3163, 3049, 3136, 3093, 3137, 3089, 3089, 3109, 313…
 $ ltime  &lt;dbl&gt; 8.034631, 8.053569, 8.059276, 8.022569, 8.050703, 8.036897, 8.0…</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>resident <span class="ot">&lt;-</span> resident <span class="sc">|&gt;</span> </span>
+<span id="cb52-2"><a></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.factor</span>(year))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(counts<span class="sc">~</span>year, <span class="at">data=</span>resident, <span class="at">family=</span><span class="st">"poisson"</span>,<span class="at">offset=</span><span class="fu">log</span>(time))</span>
+<span id="cb53-2"><a></a><span class="fu">summary</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -945,6 +1000,7 @@ AIC: 383.2
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">check_overdispersion</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Overdispersion test
 
@@ -952,6 +1008,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
   Pearson's Chi-Squared = 27.838
                 p-value =    0.8</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -961,6 +1018,8 @@ year    15891  2  &lt; 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>emm_year <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>year,<span class="at">type=</span><span class="st">"response"</span>,<span class="at">infer=</span>T)</span>
+<span id="cb59-2"><a></a>emm_year</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> year rate    SE  df asymp.LCL asymp.UCL null  z.ratio p.value
  2021 2914 17.10 Inf      2881      2948    1 1360.439 &lt;0.0001
@@ -971,6 +1030,10 @@ Confidence level used: 0.95
 Intervals are back-transformed from the log scale 
 Tests are performed on the log scale </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a>contrast_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">contrast_2021v2022 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb61-2"><a></a>                      <span class="at">contrast_2022v2023 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb61-3"><a></a></span>
+<span id="cb61-4"><a></a><span class="fu">contrast</span>(emm_year,<span class="at">method=</span>contrast_list,<span class="at">infer=</span>T,<span class="at">adjust=</span><span class="st">"bonferroni"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast           ratio     SE  df asymp.LCL asymp.UCL null z.ratio p.value
  contrast_2021v2022  1.45 0.0124 Inf      1.43      1.48    1  43.831 &lt;0.0001
@@ -1094,41 +1157,43 @@ Tests are performed on the log scale </code></pre>
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Data Set</a></li><li><a href="#tabset-6-2">R Data Set</a></li><li><a href="#tabset-6-3">SAS Codes</a></li><li><a href="#tabset-6-4">R Code</a></li><li><a href="#tabset-6-5">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>data overdispersion;</span>
-<span id="cb34-2"><a></a> input location trt count;</span>
-<span id="cb34-3"><a></a>datalines;</span>
-<span id="cb34-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span></span>
-<span id="cb34-5"><a></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></span>
-<span id="cb34-6"><a></a><span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span></span>
-<span id="cb34-7"><a></a><span class="dv">1</span> <span class="dv">4</span> <span class="dv">2</span></span>
-<span id="cb34-8"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">26</span></span>
-<span id="cb34-9"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">14</span></span>
-<span id="cb34-10"><a></a><span class="dv">2</span> <span class="dv">5</span> <span class="dv">51</span></span>
-<span id="cb34-11"><a></a><span class="dv">2</span> <span class="dv">6</span> <span class="dv">16</span></span>
-<span id="cb34-12"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">76</span></span>
-<span id="cb34-13"><a></a><span class="dv">3</span> <span class="dv">3</span> <span class="dv">44</span></span>
-<span id="cb34-14"><a></a><span class="dv">3</span> <span class="dv">5</span> <span class="dv">77</span></span>
-<span id="cb34-15"><a></a><span class="dv">3</span> <span class="dv">7</span> <span class="dv">3</span></span>
-<span id="cb34-16"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">0</span></span>
-<span id="cb34-17"><a></a><span class="dv">4</span> <span class="dv">4</span> <span class="dv">3</span></span>
-<span id="cb34-18"><a></a><span class="dv">4</span> <span class="dv">6</span> <span class="dv">5</span></span>
-<span id="cb34-19"><a></a><span class="dv">4</span> <span class="dv">7</span> <span class="dv">12</span></span>
-<span id="cb34-20"><a></a><span class="dv">5</span> <span class="dv">2</span> <span class="dv">12</span></span>
-<span id="cb34-21"><a></a><span class="dv">5</span> <span class="dv">3</span> <span class="dv">13</span></span>
-<span id="cb34-22"><a></a><span class="dv">5</span> <span class="dv">6</span> <span class="dv">22</span></span>
-<span id="cb34-23"><a></a><span class="dv">5</span> <span class="dv">7</span> <span class="dv">1</span></span>
-<span id="cb34-24"><a></a><span class="dv">6</span> <span class="dv">2</span> <span class="dv">49</span></span>
-<span id="cb34-25"><a></a><span class="dv">6</span> <span class="dv">4</span> <span class="dv">54</span></span>
-<span id="cb34-26"><a></a><span class="dv">6</span> <span class="dv">5</span> <span class="dv">205</span></span>
-<span id="cb34-27"><a></a><span class="dv">6</span> <span class="dv">7</span> <span class="dv">23</span></span>
-<span id="cb34-28"><a></a><span class="dv">7</span> <span class="dv">3</span> <span class="dv">3</span></span>
-<span id="cb34-29"><a></a><span class="dv">7</span> <span class="dv">4</span> <span class="dv">4</span></span>
-<span id="cb34-30"><a></a><span class="dv">7</span> <span class="dv">5</span> <span class="dv">15</span></span>
-<span id="cb34-31"><a></a><span class="dv">7</span> <span class="dv">6</span> <span class="dv">3</span></span>
-<span id="cb34-32"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a>data overdispersion;</span>
+<span id="cb63-2"><a></a> input location trt count;</span>
+<span id="cb63-3"><a></a>datalines;</span>
+<span id="cb63-4"><a></a><span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span></span>
+<span id="cb63-5"><a></a><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></span>
+<span id="cb63-6"><a></a><span class="dv">1</span> <span class="dv">3</span> <span class="dv">0</span></span>
+<span id="cb63-7"><a></a><span class="dv">1</span> <span class="dv">4</span> <span class="dv">2</span></span>
+<span id="cb63-8"><a></a><span class="dv">2</span> <span class="dv">1</span> <span class="dv">26</span></span>
+<span id="cb63-9"><a></a><span class="dv">2</span> <span class="dv">2</span> <span class="dv">14</span></span>
+<span id="cb63-10"><a></a><span class="dv">2</span> <span class="dv">5</span> <span class="dv">51</span></span>
+<span id="cb63-11"><a></a><span class="dv">2</span> <span class="dv">6</span> <span class="dv">16</span></span>
+<span id="cb63-12"><a></a><span class="dv">3</span> <span class="dv">1</span> <span class="dv">76</span></span>
+<span id="cb63-13"><a></a><span class="dv">3</span> <span class="dv">3</span> <span class="dv">44</span></span>
+<span id="cb63-14"><a></a><span class="dv">3</span> <span class="dv">5</span> <span class="dv">77</span></span>
+<span id="cb63-15"><a></a><span class="dv">3</span> <span class="dv">7</span> <span class="dv">3</span></span>
+<span id="cb63-16"><a></a><span class="dv">4</span> <span class="dv">1</span> <span class="dv">0</span></span>
+<span id="cb63-17"><a></a><span class="dv">4</span> <span class="dv">4</span> <span class="dv">3</span></span>
+<span id="cb63-18"><a></a><span class="dv">4</span> <span class="dv">6</span> <span class="dv">5</span></span>
+<span id="cb63-19"><a></a><span class="dv">4</span> <span class="dv">7</span> <span class="dv">12</span></span>
+<span id="cb63-20"><a></a><span class="dv">5</span> <span class="dv">2</span> <span class="dv">12</span></span>
+<span id="cb63-21"><a></a><span class="dv">5</span> <span class="dv">3</span> <span class="dv">13</span></span>
+<span id="cb63-22"><a></a><span class="dv">5</span> <span class="dv">6</span> <span class="dv">22</span></span>
+<span id="cb63-23"><a></a><span class="dv">5</span> <span class="dv">7</span> <span class="dv">1</span></span>
+<span id="cb63-24"><a></a><span class="dv">6</span> <span class="dv">2</span> <span class="dv">49</span></span>
+<span id="cb63-25"><a></a><span class="dv">6</span> <span class="dv">4</span> <span class="dv">54</span></span>
+<span id="cb63-26"><a></a><span class="dv">6</span> <span class="dv">5</span> <span class="dv">205</span></span>
+<span id="cb63-27"><a></a><span class="dv">6</span> <span class="dv">7</span> <span class="dv">23</span></span>
+<span id="cb63-28"><a></a><span class="dv">7</span> <span class="dv">3</span> <span class="dv">3</span></span>
+<span id="cb63-29"><a></a><span class="dv">7</span> <span class="dv">4</span> <span class="dv">4</span></span>
+<span id="cb63-30"><a></a><span class="dv">7</span> <span class="dv">5</span> <span class="dv">15</span></span>
+<span id="cb63-31"><a></a><span class="dv">7</span> <span class="dv">6</span> <span class="dv">3</span></span>
+<span id="cb63-32"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a>over <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"overdispersion.csv"</span>)</span>
+<span id="cb64-2"><a></a><span class="fu">glimpse</span>(over)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 28
 Columns: 3
@@ -1136,42 +1201,51 @@ $ location &lt;int&gt; 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 
 $ trt      &lt;int&gt; 1, 2, 3, 4, 1, 2, 5, 6, 1, 3, 5, 7, 1, 4, 6, 7, 2, 3, 6, 7, 2…
 $ count    &lt;int&gt; 2, 3, 0, 2, 26, 14, 51, 16, 76, 44, 77, 3, 0, 3, 5, 12, 12, 1…</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>over <span class="ot">&lt;-</span> over <span class="sc">|&gt;</span> </span>
+<span id="cb66-2"><a></a>  <span class="fu">mutate</span>(<span class="at">location =</span> <span class="fu">as.factor</span>(location),</span>
+<span id="cb66-3"><a></a>         <span class="at">trt =</span> <span class="fu">as.factor</span>(trt))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div id="tabset-6-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a></span>
-<span id="cb36-2"><a></a><span class="sc">/</span><span class="er">*</span>Example of overdispersion<span class="sc">*</span><span class="er">/</span></span>
-<span id="cb36-3"><a></a>proc genmod data<span class="ot">=</span>overdispersion;</span>
-<span id="cb36-4"><a></a>class location trt;</span>
-<span id="cb36-5"><a></a>model count<span class="ot">=</span>trt location<span class="sc">/</span>type3 dist<span class="ot">=</span>poisson;</span>
-<span id="cb36-6"><a></a>lsmeans trt<span class="sc">/</span>ilink cl;</span>
-<span id="cb36-7"><a></a>lsmeans location<span class="sc">/</span>ilink cl;</span>
-<span id="cb36-8"><a></a>estimate <span class="st">"trt 2 vs trt 4"</span> trt <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
-<span id="cb36-9"><a></a>run;</span>
-<span id="cb36-10"><a></a></span>
-<span id="cb36-11"><a></a><span class="sc">/</span><span class="er">*</span>Pearson adjustment<span class="sc">*</span><span class="er">/</span></span>
-<span id="cb36-12"><a></a>proc genmod data<span class="ot">=</span>overdispersion;</span>
-<span id="cb36-13"><a></a>class location trt;</span>
-<span id="cb36-14"><a></a>model count<span class="ot">=</span>trt location<span class="sc">/</span>type3 dist<span class="ot">=</span>poisson scale<span class="ot">=</span>pearson;</span>
-<span id="cb36-15"><a></a>lsmeans trt<span class="sc">/</span>ilink cl;</span>
-<span id="cb36-16"><a></a>lsmeans location<span class="sc">/</span>ilink cl;</span>
-<span id="cb36-17"><a></a>estimate <span class="st">"trt 2 vs trt 6"</span> trt <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
-<span id="cb36-18"><a></a>run;</span>
-<span id="cb36-19"><a></a></span>
-<span id="cb36-20"><a></a></span>
-<span id="cb36-21"><a></a><span class="sc">/</span><span class="er">*</span>Negative Binomial<span class="sc">*</span><span class="er">/</span></span>
-<span id="cb36-22"><a></a>proc genmod data<span class="ot">=</span>overdispersion;</span>
-<span id="cb36-23"><a></a>class location trt;</span>
-<span id="cb36-24"><a></a>model count<span class="ot">=</span>trt location<span class="sc">/</span>type3 dist<span class="ot">=</span>nb ;</span>
-<span id="cb36-25"><a></a>lsmeans trt<span class="sc">/</span>ilink cl;</span>
-<span id="cb36-26"><a></a>lsmeans location<span class="sc">/</span>ilink cl;</span>
-<span id="cb36-27"><a></a>estimate <span class="st">"trt 2 vs trt 6"</span> trt <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
-<span id="cb36-28"><a></a>run;</span>
-<span id="cb36-29"><a></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a></span>
+<span id="cb67-2"><a></a><span class="sc">/</span><span class="er">*</span>Example of overdispersion<span class="sc">*</span><span class="er">/</span></span>
+<span id="cb67-3"><a></a>proc genmod data<span class="ot">=</span>overdispersion;</span>
+<span id="cb67-4"><a></a>class location trt;</span>
+<span id="cb67-5"><a></a>model count<span class="ot">=</span>trt location<span class="sc">/</span>type3 dist<span class="ot">=</span>poisson;</span>
+<span id="cb67-6"><a></a>lsmeans trt<span class="sc">/</span>ilink cl;</span>
+<span id="cb67-7"><a></a>lsmeans location<span class="sc">/</span>ilink cl;</span>
+<span id="cb67-8"><a></a>estimate <span class="st">"trt 2 vs trt 4"</span> trt <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
+<span id="cb67-9"><a></a>run;</span>
+<span id="cb67-10"><a></a></span>
+<span id="cb67-11"><a></a><span class="sc">/</span><span class="er">*</span>Pearson adjustment<span class="sc">*</span><span class="er">/</span></span>
+<span id="cb67-12"><a></a>proc genmod data<span class="ot">=</span>overdispersion;</span>
+<span id="cb67-13"><a></a>class location trt;</span>
+<span id="cb67-14"><a></a>model count<span class="ot">=</span>trt location<span class="sc">/</span>type3 dist<span class="ot">=</span>poisson scale<span class="ot">=</span>pearson;</span>
+<span id="cb67-15"><a></a>lsmeans trt<span class="sc">/</span>ilink cl;</span>
+<span id="cb67-16"><a></a>lsmeans location<span class="sc">/</span>ilink cl;</span>
+<span id="cb67-17"><a></a>estimate <span class="st">"trt 2 vs trt 6"</span> trt <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
+<span id="cb67-18"><a></a>run;</span>
+<span id="cb67-19"><a></a></span>
+<span id="cb67-20"><a></a></span>
+<span id="cb67-21"><a></a><span class="sc">/</span><span class="er">*</span>Negative Binomial<span class="sc">*</span><span class="er">/</span></span>
+<span id="cb67-22"><a></a>proc genmod data<span class="ot">=</span>overdispersion;</span>
+<span id="cb67-23"><a></a>class location trt;</span>
+<span id="cb67-24"><a></a>model count<span class="ot">=</span>trt location<span class="sc">/</span>type3 dist<span class="ot">=</span>nb ;</span>
+<span id="cb67-25"><a></a>lsmeans trt<span class="sc">/</span>ilink cl;</span>
+<span id="cb67-26"><a></a>lsmeans location<span class="sc">/</span>ilink cl;</span>
+<span id="cb67-27"><a></a>estimate <span class="st">"trt 2 vs trt 6"</span> trt <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
+<span id="cb67-28"><a></a>run;</span>
+<span id="cb67-29"><a></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-4">
 <p>We start with the Poisson model first and check for overdispersion</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a>mod_poisson <span class="ot">&lt;-</span> <span class="fu">glm</span>(count<span class="sc">~</span>trt<span class="sc">+</span>location,</span>
+<span id="cb68-2"><a></a>            <span class="at">data=</span>over,</span>
+<span id="cb68-3"><a></a>            <span class="at">family=</span><span class="st">"poisson"</span>)</span>
+<span id="cb68-4"><a></a></span>
+<span id="cb68-5"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb68-6"><a></a><span class="fu">Anova</span>(mod_poisson)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -1182,6 +1256,9 @@ location   598.14  6  &lt; 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb70-2"><a></a>emm_pois <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_poisson,<span class="sc">~</span>trt,<span class="at">type=</span><span class="st">"response"</span>,<span class="at">infer=</span>T)</span>
+<span id="cb70-3"><a></a>emm_pois</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> trt  rate    SE  df asymp.LCL asymp.UCL null z.ratio p.value
  1   20.34 2.460 Inf     16.04     25.78    1  24.897 &lt;0.0001
@@ -1197,6 +1274,9 @@ Confidence level used: 0.95
 Intervals are back-transformed from the log scale 
 Tests are performed on the log scale </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb72-2"><a></a></span>
+<span id="cb72-3"><a></a><span class="fu">check_overdispersion</span>(mod_poisson)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Overdispersion test
 
@@ -1207,6 +1287,11 @@ Tests are performed on the log scale </code></pre>
 </div>
 <p>Overdispersion is detected. First, we check whether the overdispersion is due to excess zeroes by creating a histogram of counts.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a>over <span class="sc">|&gt;</span> </span>
+<span id="cb74-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>count)) <span class="sc">+</span> </span>
+<span id="cb74-3"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">40</span>) <span class="sc">+</span> </span>
+<span id="cb74-4"><a></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb74-5"><a></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Count"</span>, <span class="at">y=</span><span class="st">"Frequency"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -1217,6 +1302,10 @@ Tests are performed on the log scale </code></pre>
 </div>
 <p>While there are a lot of zeroes, there are also nonzero values that can be driving the overdispersion.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(count<span class="sc">~</span>trt<span class="sc">+</span>location,</span>
+<span id="cb75-2"><a></a>            <span class="at">data=</span>over,</span>
+<span id="cb75-3"><a></a>            <span class="at">family=</span><span class="st">"quasipoisson"</span>)</span>
+<span id="cb75-4"><a></a><span class="fu">summary</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1249,6 +1338,7 @@ AIC: NA
 
 Number of Fisher Scoring iterations: 6</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -1259,6 +1349,7 @@ location   82.449  6  1.114e-15 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a><span class="fu">emmeans</span>(mod1,<span class="sc">~</span>trt,<span class="at">infer=</span>T,<span class="at">type=</span><span class="st">"response"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> trt  rate   SE  df asymp.LCL asymp.UCL null z.ratio p.value
  1   20.34 6.63 Inf     10.74     38.52    1   9.244 &lt;0.0001
@@ -1290,6 +1381,14 @@ Tests are performed on the log scale </code></pre>
 </div>
 <p>For the negative binomial model,</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a><span class="fu">library</span>(MASS)</span>
+<span id="cb81-2"><a></a></span>
+<span id="cb81-3"><a></a>mod_nb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(count<span class="sc">~</span>trt<span class="sc">+</span>location,</span>
+<span id="cb81-4"><a></a>            <span class="at">data=</span>over,</span>
+<span id="cb81-5"><a></a>            <span class="at">control =</span> <span class="fu">glm.control</span>(<span class="at">maxit =</span> <span class="dv">1000</span>)) <span class="co"># for convergence issues</span></span>
+<span id="cb81-6"><a></a></span>
+<span id="cb81-7"><a></a></span>
+<span id="cb81-8"><a></a><span class="fu">summary</span>(mod_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1327,6 +1426,11 @@ Number of Fisher Scoring iterations: 1
 
  2 x log-likelihood:  -185.735 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a><span class="co"># Recreates SAS output</span></span>
+<span id="cb83-2"><a></a>mod_nb_loc <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(count<span class="sc">~</span>location,</span>
+<span id="cb83-3"><a></a>            <span class="at">data=</span>over,</span>
+<span id="cb83-4"><a></a>            <span class="at">control =</span> <span class="fu">glm.control</span>(<span class="at">maxit =</span> <span class="dv">1000</span>))</span>
+<span id="cb83-5"><a></a><span class="fu">anova</span>(mod_nb_loc,mod_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio tests of Negative Binomial Models
 
@@ -1358,26 +1462,28 @@ Response: count
 <ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">R Code</a></li><li><a href="#tabset-7-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>proc genmod data<span class="ot">=</span>adverse;</span>
-<span id="cb45-2"><a></a>class clinic treatment;</span>
-<span id="cb45-3"><a></a>model count <span class="ot">=</span> clinic treatment<span class="sc">/</span> type3 dist<span class="ot">=</span>poisson;</span>
-<span id="cb45-4"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
-<span id="cb45-5"><a></a>run;</span>
-<span id="cb45-6"><a></a></span>
-<span id="cb45-7"><a></a>proc genmod data<span class="ot">=</span>adverse;</span>
-<span id="cb45-8"><a></a>class clinic treatment;</span>
-<span id="cb45-9"><a></a>model count <span class="ot">=</span> clinic treatment<span class="sc">/</span> type3 dist<span class="ot">=</span>poisson scale<span class="ot">=</span>pearson;</span>
-<span id="cb45-10"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
-<span id="cb45-11"><a></a>run;</span>
-<span id="cb45-12"><a></a></span>
-<span id="cb45-13"><a></a>proc genmod data<span class="ot">=</span>adverse;</span>
-<span id="cb45-14"><a></a>class clinic treatment;</span>
-<span id="cb45-15"><a></a>model count <span class="ot">=</span> clinic treatment<span class="sc">/</span> type3 dist<span class="ot">=</span>nb;</span>
-<span id="cb45-16"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
-<span id="cb45-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a></a>proc genmod data<span class="ot">=</span>adverse;</span>
+<span id="cb85-2"><a></a>class clinic treatment;</span>
+<span id="cb85-3"><a></a>model count <span class="ot">=</span> clinic treatment<span class="sc">/</span> type3 dist<span class="ot">=</span>poisson;</span>
+<span id="cb85-4"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
+<span id="cb85-5"><a></a>run;</span>
+<span id="cb85-6"><a></a></span>
+<span id="cb85-7"><a></a>proc genmod data<span class="ot">=</span>adverse;</span>
+<span id="cb85-8"><a></a>class clinic treatment;</span>
+<span id="cb85-9"><a></a>model count <span class="ot">=</span> clinic treatment<span class="sc">/</span> type3 dist<span class="ot">=</span>poisson scale<span class="ot">=</span>pearson;</span>
+<span id="cb85-10"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
+<span id="cb85-11"><a></a>run;</span>
+<span id="cb85-12"><a></a></span>
+<span id="cb85-13"><a></a>proc genmod data<span class="ot">=</span>adverse;</span>
+<span id="cb85-14"><a></a>class clinic treatment;</span>
+<span id="cb85-15"><a></a>model count <span class="ot">=</span> clinic treatment<span class="sc">/</span> type3 dist<span class="ot">=</span>nb;</span>
+<span id="cb85-16"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
+<span id="cb85-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a></a>adverse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"adverse.csv"</span>)</span>
+<span id="cb86-2"><a></a><span class="fu">glimpse</span>(adverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 12
 Columns: 3
@@ -1385,8 +1491,14 @@ $ Clinic    &lt;int&gt; 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3
 $ Treatment &lt;chr&gt; "a", "a", "a", "b", "b", "b", "c", "c", "c", "d", "d", "d"
 $ Count     &lt;int&gt; 9, 4, 12, 24, 11, 17, 2, 14, 8, 15, 5, 23</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a>adverse <span class="ot">&lt;-</span> adverse <span class="sc">|&gt;</span> </span>
+<span id="cb88-2"><a></a>  <span class="fu">mutate</span>(<span class="at">Clinic =</span> <span class="fu">as.factor</span>(Clinic))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a><span class="co"># Poisson model</span></span>
+<span id="cb89-2"><a></a></span>
+<span id="cb89-3"><a></a>mod_poisson <span class="ot">&lt;-</span> <span class="fu">glm</span>(Count<span class="sc">~</span>Treatment <span class="sc">+</span> Clinic, <span class="at">data=</span>adverse,<span class="at">family=</span><span class="st">"poisson"</span>)</span>
+<span id="cb89-4"><a></a><span class="fu">check_overdispersion</span>(mod_poisson)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Overdispersion test
 
@@ -1394,6 +1506,7 @@ $ Count     &lt;int&gt; 9, 4, 12, 24, 11, 17, 2, 14, 8, 15, 5, 23</code></pre>
   Pearson's Chi-Squared =  25.487
                 p-value = &lt; 0.001</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a></a><span class="fu">Anova</span>(mod_poisson)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -1406,6 +1519,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a></a><span class="co"># quasiPoisson model</span></span>
+<span id="cb93-2"><a></a></span>
+<span id="cb93-3"><a></a>mod_q<span class="ot">&lt;-</span> <span class="fu">glm</span>(Count<span class="sc">~</span>Treatment <span class="sc">+</span> Clinic, <span class="at">data=</span>adverse,<span class="at">family=</span><span class="st">"quasipoisson"</span>)</span>
+<span id="cb93-4"><a></a><span class="fu">Anova</span>(mod_q)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -1416,6 +1533,12 @@ Clinic      1.7445  2     0.4180</code></pre>
 </div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a></a><span class="co"># Negative Binomial</span></span>
+<span id="cb95-2"><a></a>mod_nb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Count<span class="sc">~</span>Treatment <span class="sc">+</span> Clinic,</span>
+<span id="cb95-3"><a></a>                 <span class="at">data=</span>adverse,</span>
+<span id="cb95-4"><a></a>                 <span class="at">control =</span> <span class="fu">glm.control</span>(<span class="at">maxit =</span> <span class="dv">1000</span>))</span>
+<span id="cb95-5"><a></a></span>
+<span id="cb95-6"><a></a><span class="fu">summary</span>(mod_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1447,12 +1570,24 @@ Number of Fisher Scoring iterations: 1
 
  2 x log-likelihood:  -71.807 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a></a><span class="fu">check_overdispersion</span>(mod_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Overdispersion test (using simulated residuals)
 
  dispersion ratio = 0.886
           p-value = 0.944</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a></a><span class="co"># recreating SAS tests</span></span>
+<span id="cb99-2"><a></a></span>
+<span id="cb99-3"><a></a>mod_nb_trt <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Count<span class="sc">~</span>Treatment ,</span>
+<span id="cb99-4"><a></a>                 <span class="at">data=</span>adverse,</span>
+<span id="cb99-5"><a></a>                 <span class="at">control =</span> <span class="fu">glm.control</span>(<span class="at">maxit =</span> <span class="dv">1000</span>))</span>
+<span id="cb99-6"><a></a></span>
+<span id="cb99-7"><a></a>mod_nb_cli <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Count<span class="sc">~</span>Clinic,</span>
+<span id="cb99-8"><a></a>                 <span class="at">data=</span>adverse,</span>
+<span id="cb99-9"><a></a>                 <span class="at">control =</span> <span class="fu">glm.control</span>(<span class="at">maxit =</span> <span class="dv">1000</span>))</span>
+<span id="cb99-10"><a></a></span>
+<span id="cb99-11"><a></a><span class="fu">anova</span>(mod_nb,mod_nb_trt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio tests of Negative Binomial Models
 
@@ -1464,6 +1599,7 @@ Response: Count
 1          
 2 0.2852503</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a></a><span class="fu">anova</span>(mod_nb,mod_nb_cli)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio tests of Negative Binomial Models
 
@@ -1511,33 +1647,33 @@ Response: Count
 <p><img data-src="img/rotavirus_C12.png"></p>
 </div>
 <div id="tabset-8-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>data rotavirus;</span>
-<span id="cb54-2"><a></a>input region <span class="sc">$</span> treatment <span class="sc">$</span> counts years_risk <span class="sc">@</span><span class="er">@</span> ;</span>
-<span id="cb54-3"><a></a>log_risk<span class="ot">=</span><span class="fu">log</span>(years_risk);</span>
-<span id="cb54-4"><a></a>datalines;</span>
-<span id="cb54-5"><a></a>US Vaccine <span class="dv">3</span> <span class="dv">7500</span> US Placebo <span class="dv">58</span> <span class="dv">7250</span></span>
-<span id="cb54-6"><a></a>LA Vaccine <span class="dv">1</span> <span class="dv">1250</span> LA Placebo <span class="dv">10</span> <span class="dv">1250</span></span>
-<span id="cb54-7"><a></a>;</span>
-<span id="cb54-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a>data rotavirus;</span>
+<span id="cb103-2"><a></a>input region <span class="sc">$</span> treatment <span class="sc">$</span> counts years_risk <span class="sc">@</span><span class="er">@</span> ;</span>
+<span id="cb103-3"><a></a>log_risk<span class="ot">=</span><span class="fu">log</span>(years_risk);</span>
+<span id="cb103-4"><a></a>datalines;</span>
+<span id="cb103-5"><a></a>US Vaccine <span class="dv">3</span> <span class="dv">7500</span> US Placebo <span class="dv">58</span> <span class="dv">7250</span></span>
+<span id="cb103-6"><a></a>LA Vaccine <span class="dv">1</span> <span class="dv">1250</span> LA Placebo <span class="dv">10</span> <span class="dv">1250</span></span>
+<span id="cb103-7"><a></a>;</span>
+<span id="cb103-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-8-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="sc">/</span><span class="er">*</span>Not Exact<span class="sc">*</span><span class="er">/</span></span>
-<span id="cb55-2"><a></a>proc genmod data<span class="ot">=</span>rotavirus;</span>
-<span id="cb55-3"><a></a>class region treatment;</span>
-<span id="cb55-4"><a></a>model counts <span class="ot">=</span> treatment region <span class="sc">/</span> dist<span class="ot">=</span>poisson offset<span class="ot">=</span> log_risk type3;</span>
-<span id="cb55-5"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
-<span id="cb55-6"><a></a></span>
-<span id="cb55-7"><a></a>estimate <span class="st">'Placebo vs Vaccine'</span> treatment <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span>exp;</span>
-<span id="cb55-8"><a></a></span>
-<span id="cb55-9"><a></a></span>
-<span id="cb55-10"><a></a><span class="sc">/</span><span class="er">*</span>Exact<span class="sc">*</span><span class="er">/</span></span>
-<span id="cb55-11"><a></a>proc genmod data<span class="ot">=</span>rotavirus;</span>
-<span id="cb55-12"><a></a>class region treatment <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
-<span id="cb55-13"><a></a>model counts <span class="ot">=</span> treatment region <span class="sc">/</span> dist<span class="ot">=</span>poisson offset<span class="ot">=</span> log_risk type3;</span>
-<span id="cb55-14"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
-<span id="cb55-15"><a></a>estimate <span class="st">'Placebo vs Vaccine'</span> treatment <span class="dv">1</span> <span class="sc">/</span>exp;</span>
-<span id="cb55-16"><a></a>exact treatment <span class="sc">/</span> estimate<span class="ot">=</span>odds cltype<span class="ot">=</span>exact;</span>
-<span id="cb55-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a></a><span class="sc">/</span><span class="er">*</span>Not Exact<span class="sc">*</span><span class="er">/</span></span>
+<span id="cb104-2"><a></a>proc genmod data<span class="ot">=</span>rotavirus;</span>
+<span id="cb104-3"><a></a>class region treatment;</span>
+<span id="cb104-4"><a></a>model counts <span class="ot">=</span> treatment region <span class="sc">/</span> dist<span class="ot">=</span>poisson offset<span class="ot">=</span> log_risk type3;</span>
+<span id="cb104-5"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
+<span id="cb104-6"><a></a></span>
+<span id="cb104-7"><a></a>estimate <span class="st">'Placebo vs Vaccine'</span> treatment <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span>exp;</span>
+<span id="cb104-8"><a></a></span>
+<span id="cb104-9"><a></a></span>
+<span id="cb104-10"><a></a><span class="sc">/</span><span class="er">*</span>Exact<span class="sc">*</span><span class="er">/</span></span>
+<span id="cb104-11"><a></a>proc genmod data<span class="ot">=</span>rotavirus;</span>
+<span id="cb104-12"><a></a>class region treatment <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
+<span id="cb104-13"><a></a>model counts <span class="ot">=</span> treatment region <span class="sc">/</span> dist<span class="ot">=</span>poisson offset<span class="ot">=</span> log_risk type3;</span>
+<span id="cb104-14"><a></a>lsmeans treatment<span class="sc">/</span>ilink cl;</span>
+<span id="cb104-15"><a></a>estimate <span class="st">'Placebo vs Vaccine'</span> treatment <span class="dv">1</span> <span class="sc">/</span>exp;</span>
+<span id="cb104-16"><a></a>exact treatment <span class="sc">/</span> estimate<span class="ot">=</span>odds cltype<span class="ot">=</span>exact;</span>
+<span id="cb104-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-8-4">
 <p>It would be advisable to use the exact incidence rate ratio confidence limits and p-values because of the low count of events in the vaccine group. The incidence rate in the placebo group was 17.5 <strong>Exact 95% CI: (6.53, 66.05)</strong> times that of the vaccine group.</p>
@@ -1753,36 +1889,38 @@ P(Y=y) = \begin{cases}
 <ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Data Set</a></li><li><a href="#tabset-9-2">R Code</a></li><li><a href="#tabset-9-3">SAS Code</a></li><li><a href="#tabset-9-4">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>data counts;</span>
-<span id="cb56-2"><a></a>   input ni <span class="sc">@</span><span class="er">@</span>; </span>
-<span id="cb56-3"><a></a>   site <span class="ot">=</span> _n_;</span>
-<span id="cb56-4"><a></a>   do sample_id<span class="ot">=</span><span class="dv">1</span> to ni;</span>
-<span id="cb56-5"><a></a>     input exposure_level toxin_count <span class="sc">@</span><span class="er">@</span>; output;</span>
-<span id="cb56-6"><a></a>   end;</span>
-<span id="cb56-7"><a></a>   datalines;</span>
-<span id="cb56-8"><a></a>  <span class="dv">6</span>  <span class="dv">2</span> <span class="dv">0</span> <span class="dv">82</span> <span class="dv">5</span> <span class="dv">33</span> <span class="dv">0</span> <span class="dv">15</span> <span class="dv">2</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">79</span> <span class="dv">1</span> </span>
-<span id="cb56-9"><a></a>  <span class="dv">9</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">64</span> <span class="dv">0</span> <span class="dv">80</span> <span class="dv">2</span>  <span class="dv">0</span> <span class="dv">0</span> <span class="dv">58</span> <span class="dv">0</span>  <span class="dv">7</span> <span class="dv">0</span> <span class="dv">81</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">3</span> <span class="dv">50</span> <span class="dv">0</span> </span>
-<span id="cb56-10"><a></a>  <span class="dv">2</span> <span class="dv">34</span> <span class="dv">0</span> <span class="dv">95</span> <span class="dv">0</span> </span>
-<span id="cb56-11"><a></a> <span class="dv">13</span> <span class="dv">28</span> <span class="dv">1</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">63</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">0</span> <span class="dv">74</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">75</span> <span class="dv">3</span> <span class="dv">65</span> <span class="dv">0</span> <span class="dv">74</span> <span class="dv">1</span> <span class="dv">84</span> <span class="dv">5</span> <span class="dv">57</span> <span class="dv">0</span> <span class="dv">29</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> </span>
-<span id="cb56-12"><a></a>  <span class="dv">9</span> <span class="dv">42</span> <span class="dv">0</span>  <span class="dv">8</span> <span class="dv">0</span> <span class="dv">91</span> <span class="dv">0</span> <span class="dv">20</span> <span class="dv">0</span> <span class="dv">23</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">0</span> <span class="dv">96</span> <span class="dv">4</span> <span class="dv">83</span> <span class="dv">3</span> <span class="dv">56</span> <span class="dv">0</span> </span>
-<span id="cb56-13"><a></a>  <span class="dv">3</span> <span class="dv">64</span> <span class="dv">0</span> <span class="dv">64</span> <span class="dv">1</span> <span class="dv">15</span> <span class="dv">0</span> </span>
-<span id="cb56-14"><a></a>  <span class="dv">4</span>  <span class="dv">5</span> <span class="dv">0</span> <span class="dv">73</span> <span class="dv">2</span> <span class="dv">50</span> <span class="dv">2</span> <span class="dv">13</span> <span class="dv">1</span> </span>
-<span id="cb56-15"><a></a>  <span class="dv">2</span>  <span class="dv">0</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> </span>
-<span id="cb56-16"><a></a>  <span class="dv">5</span> <span class="dv">83</span> <span class="dv">7</span> <span class="dv">98</span> <span class="dv">1</span> <span class="dv">11</span> <span class="dv">1</span> <span class="dv">28</span> <span class="dv">0</span> <span class="dv">18</span> <span class="dv">0</span> </span>
-<span id="cb56-17"><a></a>  <span class="dv">7</span> <span class="dv">91</span> <span class="dv">0</span> <span class="dv">25</span> <span class="dv">1</span> <span class="dv">51</span> <span class="dv">4</span> <span class="dv">20</span> <span class="dv">0</span> <span class="dv">61</span> <span class="dv">1</span> <span class="dv">34</span> <span class="dv">0</span> <span class="dv">33</span> <span class="dv">2</span> </span>
-<span id="cb56-18"><a></a> <span class="dv">14</span> <span class="dv">60</span> <span class="dv">0</span> <span class="dv">87</span> <span class="dv">0</span> <span class="dv">94</span> <span class="dv">0</span> <span class="dv">29</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">78</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">15</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">0</span> <span class="dv">82</span> <span class="dv">0</span> <span class="dv">93</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> </span>
-<span id="cb56-19"><a></a> <span class="dv">12</span> <span class="dv">68</span> <span class="dv">0</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">19</span> <span class="dv">0</span> <span class="dv">60</span> <span class="dv">1</span> <span class="dv">93</span> <span class="dv">3</span> <span class="dv">65</span> <span class="dv">0</span> <span class="dv">16</span> <span class="dv">0</span> <span class="dv">79</span> <span class="dv">0</span> <span class="dv">14</span> <span class="dv">0</span>  <span class="dv">3</span> <span class="dv">1</span> <span class="dv">90</span> <span class="dv">0</span> <span class="dv">28</span> <span class="dv">3</span></span>
-<span id="cb56-20"><a></a>  <span class="dv">8</span> <span class="dv">34</span> <span class="dv">1</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">62</span> <span class="dv">3</span> <span class="dv">21</span> <span class="dv">0</span>  <span class="dv">7</span> <span class="dv">0</span> <span class="dv">17</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">2</span> <span class="dv">49</span> <span class="dv">0</span> </span>
-<span id="cb56-21"><a></a> <span class="dv">13</span> <span class="dv">11</span> <span class="dv">0</span> <span class="dv">27</span> <span class="dv">2</span> <span class="dv">16</span> <span class="dv">1</span> <span class="dv">12</span> <span class="dv">3</span> <span class="dv">52</span> <span class="dv">1</span> <span class="dv">55</span> <span class="dv">0</span>  <span class="dv">2</span> <span class="dv">6</span> <span class="dv">89</span> <span class="dv">5</span> <span class="dv">31</span> <span class="dv">5</span> <span class="dv">28</span> <span class="dv">3</span> <span class="dv">51</span> <span class="dv">5</span> <span class="dv">54</span> <span class="dv">13</span> <span class="dv">64</span> <span class="dv">0</span> </span>
-<span id="cb56-22"><a></a>  <span class="dv">9</span>  <span class="dv">3</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">0</span> <span class="dv">57</span> <span class="dv">0</span> <span class="dv">77</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">55</span> <span class="dv">0</span> <span class="dv">57</span> <span class="dv">0</span> <span class="dv">88</span> <span class="dv">1</span> </span>
-<span id="cb56-23"><a></a>  <span class="dv">7</span>  <span class="dv">2</span> <span class="dv">0</span> <span class="dv">80</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">20</span> <span class="dv">0</span>  <span class="dv">2</span> <span class="dv">0</span> <span class="dv">27</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">0</span> </span>
-<span id="cb56-24"><a></a> <span class="dv">13</span> <span class="dv">59</span> <span class="dv">0</span> <span class="dv">96</span> <span class="dv">2</span> <span class="dv">47</span> <span class="dv">1</span> <span class="dv">64</span> <span class="dv">0</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">69</span> <span class="dv">0</span> <span class="dv">78</span> <span class="dv">1</span> <span class="dv">47</span> <span class="dv">1</span> <span class="dv">86</span> <span class="dv">0</span> <span class="dv">88</span> <span class="dv">0</span> </span>
-<span id="cb56-25"><a></a> <span class="dv">12</span> <span class="dv">84</span> <span class="dv">6</span> <span class="dv">60</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">1</span> <span class="dv">92</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">4</span>  <span class="dv">6</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">3</span> <span class="dv">13</span> <span class="dv">2</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">51</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">4</span> <span class="dv">68</span> <span class="dv">0</span></span>
-<span id="cb56-26"><a></a> ;</span>
-<span id="cb56-27"><a></a> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a>data counts;</span>
+<span id="cb105-2"><a></a>   input ni <span class="sc">@</span><span class="er">@</span>; </span>
+<span id="cb105-3"><a></a>   site <span class="ot">=</span> _n_;</span>
+<span id="cb105-4"><a></a>   do sample_id<span class="ot">=</span><span class="dv">1</span> to ni;</span>
+<span id="cb105-5"><a></a>     input exposure_level toxin_count <span class="sc">@</span><span class="er">@</span>; output;</span>
+<span id="cb105-6"><a></a>   end;</span>
+<span id="cb105-7"><a></a>   datalines;</span>
+<span id="cb105-8"><a></a>  <span class="dv">6</span>  <span class="dv">2</span> <span class="dv">0</span> <span class="dv">82</span> <span class="dv">5</span> <span class="dv">33</span> <span class="dv">0</span> <span class="dv">15</span> <span class="dv">2</span> <span class="dv">35</span> <span class="dv">0</span> <span class="dv">79</span> <span class="dv">1</span> </span>
+<span id="cb105-9"><a></a>  <span class="dv">9</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">64</span> <span class="dv">0</span> <span class="dv">80</span> <span class="dv">2</span>  <span class="dv">0</span> <span class="dv">0</span> <span class="dv">58</span> <span class="dv">0</span>  <span class="dv">7</span> <span class="dv">0</span> <span class="dv">81</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">3</span> <span class="dv">50</span> <span class="dv">0</span> </span>
+<span id="cb105-10"><a></a>  <span class="dv">2</span> <span class="dv">34</span> <span class="dv">0</span> <span class="dv">95</span> <span class="dv">0</span> </span>
+<span id="cb105-11"><a></a> <span class="dv">13</span> <span class="dv">28</span> <span class="dv">1</span> <span class="dv">31</span> <span class="dv">0</span> <span class="dv">63</span> <span class="dv">2</span> <span class="dv">14</span> <span class="dv">0</span> <span class="dv">74</span> <span class="dv">0</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">75</span> <span class="dv">3</span> <span class="dv">65</span> <span class="dv">0</span> <span class="dv">74</span> <span class="dv">1</span> <span class="dv">84</span> <span class="dv">5</span> <span class="dv">57</span> <span class="dv">0</span> <span class="dv">29</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> </span>
+<span id="cb105-12"><a></a>  <span class="dv">9</span> <span class="dv">42</span> <span class="dv">0</span>  <span class="dv">8</span> <span class="dv">0</span> <span class="dv">91</span> <span class="dv">0</span> <span class="dv">20</span> <span class="dv">0</span> <span class="dv">23</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">0</span> <span class="dv">96</span> <span class="dv">4</span> <span class="dv">83</span> <span class="dv">3</span> <span class="dv">56</span> <span class="dv">0</span> </span>
+<span id="cb105-13"><a></a>  <span class="dv">3</span> <span class="dv">64</span> <span class="dv">0</span> <span class="dv">64</span> <span class="dv">1</span> <span class="dv">15</span> <span class="dv">0</span> </span>
+<span id="cb105-14"><a></a>  <span class="dv">4</span>  <span class="dv">5</span> <span class="dv">0</span> <span class="dv">73</span> <span class="dv">2</span> <span class="dv">50</span> <span class="dv">2</span> <span class="dv">13</span> <span class="dv">1</span> </span>
+<span id="cb105-15"><a></a>  <span class="dv">2</span>  <span class="dv">0</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> </span>
+<span id="cb105-16"><a></a>  <span class="dv">5</span> <span class="dv">83</span> <span class="dv">7</span> <span class="dv">98</span> <span class="dv">1</span> <span class="dv">11</span> <span class="dv">1</span> <span class="dv">28</span> <span class="dv">0</span> <span class="dv">18</span> <span class="dv">0</span> </span>
+<span id="cb105-17"><a></a>  <span class="dv">7</span> <span class="dv">91</span> <span class="dv">0</span> <span class="dv">25</span> <span class="dv">1</span> <span class="dv">51</span> <span class="dv">4</span> <span class="dv">20</span> <span class="dv">0</span> <span class="dv">61</span> <span class="dv">1</span> <span class="dv">34</span> <span class="dv">0</span> <span class="dv">33</span> <span class="dv">2</span> </span>
+<span id="cb105-18"><a></a> <span class="dv">14</span> <span class="dv">60</span> <span class="dv">0</span> <span class="dv">87</span> <span class="dv">0</span> <span class="dv">94</span> <span class="dv">0</span> <span class="dv">29</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">78</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">15</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">22</span> <span class="dv">0</span> <span class="dv">82</span> <span class="dv">0</span> <span class="dv">93</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> </span>
+<span id="cb105-19"><a></a> <span class="dv">12</span> <span class="dv">68</span> <span class="dv">0</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">19</span> <span class="dv">0</span> <span class="dv">60</span> <span class="dv">1</span> <span class="dv">93</span> <span class="dv">3</span> <span class="dv">65</span> <span class="dv">0</span> <span class="dv">16</span> <span class="dv">0</span> <span class="dv">79</span> <span class="dv">0</span> <span class="dv">14</span> <span class="dv">0</span>  <span class="dv">3</span> <span class="dv">1</span> <span class="dv">90</span> <span class="dv">0</span> <span class="dv">28</span> <span class="dv">3</span></span>
+<span id="cb105-20"><a></a>  <span class="dv">8</span> <span class="dv">34</span> <span class="dv">1</span> <span class="dv">44</span> <span class="dv">0</span> <span class="dv">62</span> <span class="dv">3</span> <span class="dv">21</span> <span class="dv">0</span>  <span class="dv">7</span> <span class="dv">0</span> <span class="dv">17</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">2</span> <span class="dv">49</span> <span class="dv">0</span> </span>
+<span id="cb105-21"><a></a> <span class="dv">13</span> <span class="dv">11</span> <span class="dv">0</span> <span class="dv">27</span> <span class="dv">2</span> <span class="dv">16</span> <span class="dv">1</span> <span class="dv">12</span> <span class="dv">3</span> <span class="dv">52</span> <span class="dv">1</span> <span class="dv">55</span> <span class="dv">0</span>  <span class="dv">2</span> <span class="dv">6</span> <span class="dv">89</span> <span class="dv">5</span> <span class="dv">31</span> <span class="dv">5</span> <span class="dv">28</span> <span class="dv">3</span> <span class="dv">51</span> <span class="dv">5</span> <span class="dv">54</span> <span class="dv">13</span> <span class="dv">64</span> <span class="dv">0</span> </span>
+<span id="cb105-22"><a></a>  <span class="dv">9</span>  <span class="dv">3</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">0</span> <span class="dv">57</span> <span class="dv">0</span> <span class="dv">77</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">0</span> <span class="dv">39</span> <span class="dv">0</span> <span class="dv">55</span> <span class="dv">0</span> <span class="dv">57</span> <span class="dv">0</span> <span class="dv">88</span> <span class="dv">1</span> </span>
+<span id="cb105-23"><a></a>  <span class="dv">7</span>  <span class="dv">2</span> <span class="dv">0</span> <span class="dv">80</span> <span class="dv">0</span> <span class="dv">41</span> <span class="dv">1</span> <span class="dv">20</span> <span class="dv">0</span>  <span class="dv">2</span> <span class="dv">0</span> <span class="dv">27</span> <span class="dv">0</span> <span class="dv">40</span> <span class="dv">0</span> </span>
+<span id="cb105-24"><a></a> <span class="dv">13</span> <span class="dv">59</span> <span class="dv">0</span> <span class="dv">96</span> <span class="dv">2</span> <span class="dv">47</span> <span class="dv">1</span> <span class="dv">64</span> <span class="dv">0</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">0</span> <span class="dv">37</span> <span class="dv">0</span> <span class="dv">36</span> <span class="dv">1</span> <span class="dv">69</span> <span class="dv">0</span> <span class="dv">78</span> <span class="dv">1</span> <span class="dv">47</span> <span class="dv">1</span> <span class="dv">86</span> <span class="dv">0</span> <span class="dv">88</span> <span class="dv">0</span> </span>
+<span id="cb105-25"><a></a> <span class="dv">12</span> <span class="dv">84</span> <span class="dv">6</span> <span class="dv">60</span> <span class="dv">1</span> <span class="dv">33</span> <span class="dv">1</span> <span class="dv">92</span> <span class="dv">0</span> <span class="dv">38</span> <span class="dv">4</span>  <span class="dv">6</span> <span class="dv">0</span> <span class="dv">43</span> <span class="dv">3</span> <span class="dv">13</span> <span class="dv">2</span> <span class="dv">18</span> <span class="dv">0</span> <span class="dv">51</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">4</span> <span class="dv">68</span> <span class="dv">0</span></span>
+<span id="cb105-26"><a></a> ;</span>
+<span id="cb105-27"><a></a> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-9-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a>counts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"counts.csv"</span>)</span>
+<span id="cb106-2"><a></a><span class="fu">glimpse</span>(counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 148
 Columns: 5
@@ -1794,6 +1932,9 @@ $ toxin_count    &lt;int&gt; 0, 5, 0, 2, 0, 1, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 
 </div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a></a>mod_poisson <span class="ot">&lt;-</span> <span class="fu">glm</span>(toxin_count<span class="sc">~</span>exposure_level,<span class="at">data=</span>counts,<span class="at">family=</span><span class="st">"poisson"</span>)</span>
+<span id="cb108-2"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb108-3"><a></a><span class="fu">check_zeroinflation</span>(mod_poisson)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Check for zero-inflation
 
@@ -1804,6 +1945,11 @@ $ toxin_count    &lt;int&gt; 0, 5, 0, 2, 0, 1, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 
 </div>
 <p>There is evidence of unaccounted zeroes, hence we need to use zero-inflated models.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a></a><span class="fu">library</span>(pscl)</span>
+<span id="cb110-2"><a></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb110-3"><a></a></span>
+<span id="cb110-4"><a></a>mod_zip <span class="ot">&lt;-</span> <span class="fu">zeroinfl</span>(toxin_count<span class="sc">~</span>exposure_level<span class="sc">|</span><span class="dv">1</span>,<span class="at">data=</span>counts,<span class="at">dist=</span><span class="st">"poisson"</span>)</span>
+<span id="cb110-5"><a></a><span class="fu">summary</span>(mod_zip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1827,6 +1973,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Number of iterations in BFGS optimization: 8 
 Log-likelihood: -202.3 on 3 Df</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a></a><span class="fu">lrtest</span>(mod_zip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio test
 
@@ -1838,6 +1985,7 @@ Model 2: toxin_count ~ 1
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a></a><span class="fu">emmeans</span>(mod_zip,<span class="sc">~</span>exposure_level,<span class="at">mode=</span><span class="st">"count"</span>,<span class="at">infer=</span>T, <span class="at">at=</span><span class="fu">list</span>(<span class="at">exposure_level =</span> <span class="fu">c</span>(<span class="dv">40</span>,<span class="dv">50</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> exposure_level emmean    SE  df asymp.LCL asymp.UCL z.ratio p.value
              40   2.07 0.236 Inf       1.6      2.53   8.771 &lt;0.0001
@@ -1845,16 +1993,26 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 
 Confidence level used: 0.95 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a></a><span class="co"># because the zero-inflated probability does not have any predictors, we need to compute the probability manually.</span></span>
+<span id="cb116-2"><a></a></span>
+<span id="cb116-3"><a></a><span class="fu">coef</span>(mod_zip)[<span class="dv">3</span>] <span class="sc">|&gt;</span> <span class="fu">plogis</span>() <span class="co">#inverse logit transformation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>zero_(Intercept) 
        0.5675204 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a></a><span class="fu">confint</span>(mod_zip)[<span class="dv">3</span>,] <span class="sc">|&gt;</span> <span class="fu">plogis</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5 %    97.5 % 
 0.4728355 0.6575168 </code></pre>
 </div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a></a><span class="fu">library</span>(pscl)</span>
+<span id="cb120-2"><a></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb120-3"><a></a></span>
+<span id="cb120-4"><a></a><span class="co"># Zero-Inflated Negative Binomial</span></span>
+<span id="cb120-5"><a></a>mod_zinb <span class="ot">&lt;-</span> <span class="fu">zeroinfl</span>(toxin_count<span class="sc">~</span>exposure_level<span class="sc">|</span><span class="dv">1</span>,<span class="at">data=</span>counts,<span class="at">dist=</span><span class="st">"negbin"</span>)</span>
+<span id="cb120-6"><a></a><span class="fu">summary</span>(mod_zinb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1880,6 +2038,7 @@ Theta = 0.7778
 Number of iterations in BFGS optimization: 19 
 Log-likelihood: -192.4 on 4 Df</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a></a><span class="fu">lrtest</span>(mod_zinb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio test
 
@@ -1891,6 +2050,7 @@ Model 2: toxin_count ~ 1
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a></a><span class="fu">emmeans</span>(mod_zinb,<span class="sc">~</span>exposure_level,<span class="at">mode=</span><span class="st">"count"</span>,<span class="at">infer=</span>T, <span class="at">at=</span><span class="fu">list</span>(<span class="at">exposure_level =</span> <span class="fu">c</span>(<span class="dv">40</span>,<span class="dv">50</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> exposure_level emmean    SE  df asymp.LCL asymp.UCL z.ratio p.value
              40   1.24 0.499 Inf     0.267      2.22   2.496  0.0126
@@ -1898,10 +2058,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 
 Confidence level used: 0.95 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a></a><span class="co"># because the zero-inflated probability does not have any predictors, we need to compute the probability manually.</span></span>
+<span id="cb126-2"><a></a></span>
+<span id="cb126-3"><a></a><span class="fu">coef</span>(mod_zinb)[<span class="dv">3</span>] <span class="sc">|&gt;</span> <span class="fu">plogis</span>() <span class="co">#inverse logit transformation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>zero_(Intercept) 
        0.2930427 </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a></a><span class="fu">confint</span>(mod_zinb)[<span class="dv">3</span>,] <span class="sc">|&gt;</span> <span class="fu">plogis</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     2.5 %     97.5 % 
 0.03302496 0.83418815 </code></pre>
@@ -1909,11 +2073,11 @@ Confidence level used: 0.95 </code></pre>
 </div>
 </div>
 <div id="tabset-9-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a>proc genmod data<span class="ot">=</span>counts;</span>
-<span id="cb69-2"><a></a> model toxin_count <span class="ot">=</span>  exposure_level <span class="sc">/</span> dist<span class="ot">=</span>zip;</span>
-<span id="cb69-3"><a></a> zeromodel <span class="sc">/</span>link<span class="ot">=</span>logit;</span>
-<span id="cb69-4"><a></a> estimate <span class="st">' '</span> <span class="sc">@</span>zero int <span class="dv">1</span>;</span>
-<span id="cb69-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb130"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a></a>proc genmod data<span class="ot">=</span>counts;</span>
+<span id="cb130-2"><a></a> model toxin_count <span class="ot">=</span>  exposure_level <span class="sc">/</span> dist<span class="ot">=</span>zip;</span>
+<span id="cb130-3"><a></a> zeromodel <span class="sc">/</span>link<span class="ot">=</span>logit;</span>
+<span id="cb130-4"><a></a> estimate <span class="st">' '</span> <span class="sc">@</span>zero int <span class="dv">1</span>;</span>
+<span id="cb130-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-9-4">
 <p>The analysis of the zero-inflated shows that there is weak evidence of zero-inflation in the data. There is evidence of association between toxin count and exposure level (<span class="math inline">\(\chi^2_1\)</span>=5.50,p=0.02).</p>
@@ -1929,6 +2093,9 @@ Confidence level used: 0.95 </code></pre>
 <div class="tab-content">
 <div id="tabset-10-1">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a></a><span class="fu">library</span>(pscl)</span>
+<span id="cb131-2"><a></a><span class="fu">data</span>(<span class="st">"bioChemists"</span>)</span>
+<span id="cb131-3"><a></a><span class="fu">glimpse</span>(bioChemists)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 915
 Columns: 6
@@ -1943,6 +2110,9 @@ $ ment &lt;int&gt; 7, 6, 6, 3, 26, 2, 3, 4, 6, 0, 14, 13, 3, 4, 0, 1, 7, 13, 7, 
 </div>
 <div id="tabset-10-2">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb133"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a></a>mod_poisson <span class="ot">&lt;-</span> <span class="fu">glm</span>(art<span class="sc">~</span>fem<span class="sc">+</span>mar,<span class="at">data=</span>bioChemists,<span class="at">family=</span><span class="st">"poisson"</span>)</span>
+<span id="cb133-2"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb133-3"><a></a><span class="fu">check_zeroinflation</span>(mod_poisson)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Check for zero-inflation
 
@@ -1953,6 +2123,8 @@ $ ment &lt;int&gt; 7, 6, 6, 3, 26, 2, 3, 4, 6, 0, 14, 13, 3, 4, 0, 1, 7, 13, 7, 
 </div>
 <p>The difference in observed and predicted zeros is large, hence there might be zero-inflation. Note that the zero counts indicate that the student has published a manuscript. Once a student publishes a manuscript, it is impossible for them to record a zero count for articles published. This is why we need a hurdle model.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb135"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a></a>mod_hurdle <span class="ot">&lt;-</span> <span class="fu">hurdle</span>(art<span class="sc">~</span>fem<span class="sc">+</span>mar<span class="sc">|</span>fem<span class="sc">+</span>mar,<span class="at">data=</span>bioChemists,<span class="at">dist=</span><span class="st">"poisson"</span>)</span>
+<span id="cb135-2"><a></a><span class="fu">summary</span>(mod_hurdle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1978,6 +2150,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Number of iterations in BFGS optimization: 9 
 Log-likelihood: -1670 on 6 Df</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a></a><span class="co">#let's test each variable</span></span>
+<span id="cb137-2"><a></a>mod_fem <span class="ot">&lt;-</span> <span class="fu">update</span>(mod_hurdle,.<span class="sc">~</span>fem)<span class="co"># gender only model</span></span>
+<span id="cb137-3"><a></a>mod_mar <span class="ot">&lt;-</span> <span class="fu">update</span>(mod_hurdle,.<span class="sc">~</span>mar) <span class="co"># marital status only model</span></span>
+<span id="cb137-4"><a></a><span class="fu">lrtest</span>(mod_hurdle,mod_fem)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio test
 
@@ -1987,6 +2163,7 @@ Model 2: art ~ fem
 1   6 -1670.1                     
 2   4 -1670.2 -2 0.2659     0.8755</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb139"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a></a><span class="fu">lrtest</span>(mod_hurdle,mod_mar)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio test
 
