@@ -13,8 +13,10 @@ format:
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
+    echo: true
 ---
 
 # Conditional Logistic Regression

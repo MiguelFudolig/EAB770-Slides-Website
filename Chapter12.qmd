@@ -13,8 +13,10 @@ format:
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
+    echo: true
 ---
 
 # Poisson Regression
@@ -255,7 +257,7 @@ contrast(emm_mod1,method="pairwise",infer=T)
 
 The scaled Pearson chi-square Value/DF = 1.11, which is close to 1. This supports the use of the Poisson distribution to model the salmonella counts.
 
-There is strong evidence of a difference in counts between the two labs ($\chi^2$ = 1007, p < 0.0001). The incidence rate ratio is 0.39 (95% CI: 0.37, 0.42), which means there is 61% less counts in Lab A compared to Lab B.
+There is strong evidence of a difference in counts between the two labs ($\chi^2$ = 1007, p < 0.0001). The incidence rate ratio is 0.39 (95% CI: 0.37, 0.42), which means there is 61% lower average counts in Lab A compared to Lab B.
 
 :::
 
@@ -378,6 +380,18 @@ datalines;
 
 1. The `ltotal` variable performs the logarithmic transformation of the offset variable, which is the total number of tests.
 
+### R Data Set
+
+```{r}
+melanoma <- expand.grid(Age_Group = c("<35","35-44","45-54","55-64","65-74",">75"),
+                        Region = c("Northern","Southern"))
+
+melanoma$Cases <- c(61,76,98,104,63,80,64,75,68,63,45,27)
+melanoma$Total <- c(2880262,564535,592983,450740,270908,161850,1074246,220407,198119,134084,70708,34233)
+melanoma
+```
+
+
 ### SAS Code
 ```{.r}
 proc genmod data=melanoma;
@@ -390,9 +404,25 @@ lsmeans region /ilink cl diff = all ;
 run;
 ```
 
+### R Code
+
+```{r}
+mod1 <- glm(Cases~Age_Group + Region, data=melanoma,family="poisson",offset=log(Total))
+summary(mod1)
+check_overdispersion(mod1)
+Anova(mod1)
+
+emm_age <- emmeans(mod1,~Age_Group, infer=T, type="response")
+emm_age
+contrast_list <- list(contrast1 = c(-1,0,0,0,0,1))
+
+contrast(emm_age,method=contrast_list, infer=T)
+```
+
+
 ### Answer
 
-Note that the Scaled Pearson Chi-Square is 1.24, which is slightly further away from 1 and should be examined more closely using methods we will discuss later in the chapter.
+Note that the Scaled Pearson Chi-Square is 1.24, which is slightly further away from 1 and should be examined more closely using methods we will discuss later in the chapter. The overdispersion test using the `performance` package yielded a p-value of 0.295, which indicates there is no evidence of overdispersion. This result suggests we can continue analyzing the data using the Poisson distribution.
 
 There is strong evidence of an age effect ($\chi^2$ = 797, p <0.0001) and region ($\chi^2$ = 124.22, p < 0.001).
 
@@ -406,7 +436,11 @@ The incidence rate of Melanoma in the 75+ age group is 19 times (95% CI: 14.67, 
 The file resident_hours.csv contains the annual count of patients assisted by medical residents at a hospital in Asia. Researchers wanted to test whether the patient assistance rate (#patients per hour) has decreased throughout the years. The number of hours spent on duty is listed as the “time” variable--- with “ltime” being the logarithm of the time variable.
 
 - Is there an overall effect of year?
-- Use the `estimate` statement to calculate the change in assistance rate from 2021 to 2022, and from 2022 to 2023.
+- Calculate the change in assistance rate from 2021 to 2022, and from 2022 to 2023.
+
+::: callout-note
+Because we are performing multiple contrasts simultaneously, we need to account for Type I error inflation. Use the BOnferroni correction.
+:::
 
 
 
@@ -422,19 +456,44 @@ proc genmod data=resident;
 class year;
 model counts = year
 / dist=poisson link=log offset=ltime type3 cl; *the offset should be in the LOGARITHMIC SCALE;
-lsmeans year/ ilink cl diff=all adjust=tukey;
+lsmeans year/ ilink cl diff=all adjust=bonferroni;
 estimate "2021 vs 2022" year 1 -1 0; 
 estimate "2022 vs 2023" year 0 1 -1 ;
 run;
 ```
 
+### R Code
+
+```{r}
+resident <- read.csv("resident_hours.csv")
+glimpse(resident)
+
+resident <- resident |> 
+  mutate(year = as.factor(year))
+```
+
+```{r}
+mod1 <- glm(counts~year, data=resident, family="poisson",offset=log(time))
+summary(mod1)
+check_overdispersion(mod1)
+Anova(mod1)
+
+emm_year <- emmeans(mod1,~year,type="response",infer=T)
+emm_year
+contrast_list <- list(contrast_2021v2022 = c(1,-1,0),
+                      contrast_2022v2023 = c(0,1,-1))
+
+contrast(emm_year,method=contrast_list,infer=T,adjust="bonferroni")
+```
+
+
 ### Answer
 
-The Scaled Pearson $\chi^2$ is 0.8, which is slightly lower than 1. At this point, we are only concerned if the Scaled Pearson X2 is above 1, so we can say that the Poisson distribution is appropriate to use.
+The Scaled Pearson $\chi^2$ is 0.8, which is slightly lower than 1. In this course, we are only concerned if the Scaled Pearson X2 is above 1, so we can say that the Poisson distribution is appropriate to use.
 
-There is an overall effect of year ($\chi^2 = 15890, p < 0.0001). 
+There is an overall effect of year ($\chi^2 = 15891, p < 0.0001). 
 
-When looking at multiple pairwise differences, it is important to adjust for multiplicity, hence we added `adjust=tukey`. After applying the Tukey-Kramer adjustment, we estimate that the patient assistance rate is 45% times higher than that in 2021 compared to 2022 (95% CI: 1.42, 1.48). Additionally, the patient assistance rate is 141% higher in 2022 compared to 2023.
+When looking at multiple pairwise differences, it is important to adjust for multiplicity, hence we added `adjust=bonferroni`. After applying the Tukey-Kramer adjustment, we estimate that the patient assistance rate is 45% times higher than that in 2021 compared to 2022 (95% CI: 43%, 48%). Additionally, the patient assistance rate is 141% (95% CI: 136%, 147%) higher in 2022 compared to 2023.
 
 :::
 
@@ -449,16 +508,36 @@ When looking at multiple pairwise differences, it is important to adjust for mul
 
 ## Overdispersion: What to do?
 
-- We use alternative distributions like the negative binomial distribution.
-- If we want to continue using the Poisson distribution, we can introduce a scaling factor $\phi$ such that the variance is assumed to be $\phi \mu$.
-  - Difference between negative binomial and Poisson reparametrization: the scaling factor is a function of the mean for the negative binomial distribution. Specifically, $\phi (1+k\mu)$ where $k$ is the negative binomial dispersion parameter.
+
+::: panel-tabset
+### Quasi-Poisson Approximation
+
+If we want to continue using the Poisson distribution, we can introduce a scaling factor $\phi$ such that the variance is assumed to be $\phi \mu$. $\phi$ is then approximated using the data.
+
+### Negative Binomial Model
+
+We can use alternative distributions like the negative binomial distribution. The negative binomial can be reparameterized by multiplying a scaling factor to account for additional dispersion in the data. Specifically, the variance is assumed to be $\phi (1+k\mu)$.
+
+### Mixed models
+
+Adding random effects to the model can account for the excess variability that is unaccounted for by the current model.
+
+### Zero-Inflation
+
+A potential cause for overdispersion is the presence of excess zeroes. These zeroes can exist due to the nature of the process, method of measurement, or to external factors. Zero-inflated Poisson, Zero-inflated Negative Binomial, and hurdle models are used to account for these zeroes. The approach taken depends on the cause of excess zeroes.
+
+:::
   
-  
-::: callout-note
+
 ## Negative Binomial Model
 
+The negative binomial model arises as a continuous mixture of Poisson distributions where the rate parameters follow a Gamma distribution. Hence, using the negative binomial model is also referred to as the Poisson-Gamma reparameterization.
+
+
+::: callout-tip
 Biological processes tend to agree with negative binomial models more than Poisson regression. Rule of thumb is to use Poisson unless the data is overdispersed, in which you use the negative binomial model.
 :::
+
   
 
 ## Overdispersion: SAS
@@ -467,6 +546,18 @@ Biological processes tend to agree with negative binomial models more than Poiss
   - DIST=NB specifies a negative binomial distribution.
   - Dispersion now replaces Scale in the output
   - We can also adjust the scale using the option `scale=pearson` in the `MODEL` statement (Quasi-Poisson approach).
+
+## Overdispersion: `R`
+
+Once `check_overdispersion()` yields a significant result for overdispersion, we can modify the distribution used by `glm()` to analyze the data.
+
+::: callout-note
+ `family="quasipoisson"` uses the quasi-Poisson distribution. 
+:::
+
+::: callout-important
+The negative binomial GLM can be implemented using the `glm.nb()` function in the `MASS` package.
+:::
 
 
 ## Example
@@ -512,6 +603,17 @@ datalines;
 
 ```
 
+### R Data Set
+
+```{r}
+over <- read.csv("overdispersion.csv")
+glimpse(over)
+
+over <- over |> 
+  mutate(location = as.factor(location),
+         trt = as.factor(trt))
+```
+
 ### SAS Codes
 
 ```{.r}
@@ -547,11 +649,79 @@ run;
 
 ```
 
+### R Code
+
+We start with the Poisson model first and check for overdispersion
+
+```{r}
+mod_poisson <- glm(count~trt+location,
+            data=over,
+            family="poisson")
+
+library(car)
+Anova(mod_poisson)
+
+library(emmeans)
+emm_pois <- emmeans(mod_poisson,~trt,type="response",infer=T)
+emm_pois
+
+library(performance)
+
+check_overdispersion(mod_poisson)
+```
+
+Overdispersion is detected. First, we check whether the overdispersion is due to excess zeroes by creating a histogram of counts.
+
+```{r}
+over |> 
+  ggplot(aes(x=count)) + 
+  geom_histogram(bins=40) + 
+  theme_bw() + 
+  labs(x="Count", y="Frequency")
+```
+
+While there are a lot of zeroes, there are also nonzero values that can be driving the overdispersion.
+
+
+```{r}
+mod1 <- glm(count~trt+location,
+            data=over,
+            family="quasipoisson")
+summary(mod1)
+Anova(mod1)
+
+emmeans(mod1,~trt,infer=T,type="response")
+```
+::: callout-note
+The dispersion parameter of the quasiPoisson model is the same as the dispersion ratio in the overdispersion test.
+:::
+
+For the negative binomial model,
+
+```{r}
+library(MASS)
+
+mod_nb <- glm.nb(count~trt+location,
+            data=over,
+            control = glm.control(maxit = 1000)) # for convergence issues
+
+
+summary(mod_nb)
+
+
+# Recreates SAS output
+mod_nb_loc <- glm.nb(count~location,
+            data=over,
+            control = glm.control(maxit = 1000))
+anova(mod_nb_loc,mod_nb)
+```
+
+
 ### Answer
 
-In the Naive Poisson approach, the Scaled Pearson X2 Value/DF was 7.25, which is significantly higher than 1. We can choose to add `scale=Pearson` to include a scale factor, making the distribution a quasi-Poisson distribution. The Poisson and quasi-Poisson have the same Least Squares Means (LSMeans) estimates, but have different standard errors. Note that the scale introduces a scaling factor to the variance estimate, which affects the standard errors. For both models, there is a significant treatment effect ( Likelihood Ratio Chi-square test: p < 0.0001)
+In the Naive Poisson approach, the Scaled Pearson X2 Value/DF was 7.25, which is significantly higher than 1. We can choose to add `scale=Pearson` to include a scale factor, making the distribution a quasi-Poisson distribution. The Poisson and quasi-Poisson have the same Least Squares Means (LSMeans) estimates, but have different standard errors. Note that the scale introduces a scaling factor to the variance estimate in the form of the dispersion parameter, which affects the standard errors. For both models, there is a significant treatment effect ($\chi^2_6$=45.26, p < 0.0001)
 
-The negative binomial model also includes the dispersion parameter in the results, and has different LSMeans estimates as the Poisson. (LR $\chi^2$ = 15.33, p=0.0178).
+The negative binomial model also includes the dispersion parameter in the results, and has different LSMeans estimates as the Poisson. (LR $\chi^2_6$ = 15.33, p=0.0178).
 :::
 
 ## Exercise
@@ -586,16 +756,69 @@ lsmeans treatment/ilink cl;
 run;
 ```
 
+### R Code
+
+```{r}
+adverse <- read.csv("adverse.csv")
+glimpse(adverse)
+
+adverse <- adverse |> 
+  mutate(Clinic = as.factor(Clinic))
+```
+
+```{r}
+# Poisson model
+
+mod_poisson <- glm(Count~Treatment + Clinic, data=adverse,family="poisson")
+check_overdispersion(mod_poisson)
+Anova(mod_poisson)
+```
+```{r}
+# quasiPoisson model
+
+mod_q<- glm(Count~Treatment + Clinic, data=adverse,family="quasipoisson")
+Anova(mod_q)
+```
+
+
+```{r}
+# Negative Binomial
+mod_nb <- glm.nb(Count~Treatment + Clinic,
+                 data=adverse,
+                 control = glm.control(maxit = 1000))
+
+summary(mod_nb)
+check_overdispersion(mod_nb)
+
+
+# recreating SAS tests
+
+mod_nb_trt <- glm.nb(Count~Treatment ,
+                 data=adverse,
+                 control = glm.control(maxit = 1000))
+
+mod_nb_cli <- glm.nb(Count~Clinic,
+                 data=adverse,
+                 control = glm.control(maxit = 1000))
+
+anova(mod_nb,mod_nb_trt)
+anova(mod_nb,mod_nb_cli)
+
+```
+
+
+
 ### Answer
 
-After implementing the Naive Poisson model, the scaled Pearson X2 Value/DF is 1.65, which is a sign of overdispersion. Implementing the negative binomial led to convergence issues. The most viable option is setting the `scale=Pearson` to fix the scaled Pearson X2 Value/DF to 1.
+After implementing the Naive Poisson model, the scaled Pearson X2 Value/DF is 4.25, which is a sign that there is overdispersion. There was no convergence issues in implementing the quasiPoisson and the negative binomial model/
 
-There is no significant effect of clinic ($\chi^2$ = 0.92, p = 0.63).
+Quasipoisson: There is no significant effect of clinic ($\chi^2_2$ = 1.74, p = 0.42) and treatment ($\chi^2_3$ = 3.73, p = 0.29).
 
+Negative Binomial: There is no significant effect of clinic ($\chi^2_2$ = 2.51, p = 0.29) and treatment ($\chi^2_3$ = 5.13, p = 0.16).
 
 :::
 
-## Exact Poisson Regression
+## Exact Poisson Regression: `SAS`
 
 ::: callout-tip
 For rare events with small number of observed counts, exact methods may be more appropriate. The `GENMOD` procedure can also implement exact Poisson regression analysis using the `exact` statement.
@@ -732,21 +955,33 @@ P(Y=y) = \begin{cases}
 $$
 
 
-## Zero Inflated Modeling in SAS
+## Zero Inflated Modeling in `SAS`
 
 The `GENMOD` procedure has ZIP and ZINB capabilities, though limited.
 
 ::: callout-note
-Specifying `dist=zip` and `dist=zinb` in the `model` statement will implement zero-inflated Poisson and Negative Binomial analyses, respectively.
+Specifying `dist=zip` and `dist=zinb` in the `model` statement will implement zero-inflated Poisson and Negative Binomial analyses, respectively. 
 :::
 
 ::: callout-tip
 The `zeromodel` statement includes variables that can introduce group-specific zero inflation.
 :::
 
+::: callout-warning
+The `GENMOD` procedure cannot implement the Hurdle model.
+:::
+
+## Zero-Inflated Modeling in `R`
+
+The `pscl` package includes the `zeroinfl()` function that can implement zero-inflated Poisson and Negative Binomial models. The `hurdle()` function can be used to implement hurdle models.
+
+::: callout-note
+To perform the likelihood ratio test, we use the `lrtest()` function from the `lmtest()` package. `anova()` does not work with `zeroinfl()`.
+:::
+
 ## Example
 
-The data set `counts` contain simulated data from an experiment investigating the association between exposure level and toxin counts. There were $n_i$ samples taken at the $i^{th}$ sites, ranging from 2 to 14 samples, at 18 sites. Determine if there is evidence of zero-inflation. Test for an association between exposure level and toxin counts.
+The data set `counts` contain simulated data from an experiment investigating the association between exposure level and toxin counts (also in `counts.csv`. There were $n_i$ samples taken at the $i^{th}$ sites, ranging from 2 to 14 samples, at 18 sites. Determine if there is evidence of zero-inflation. Test for an association between exposure level and toxin counts.
 
 ::: panel-tabset
 ### Data Set
@@ -781,6 +1016,55 @@ data counts;
  
 ```
 
+
+### R Code
+
+```{r}
+counts <- read.csv("counts.csv")
+glimpse(counts)
+```
+
+```{r}
+mod_poisson <- glm(toxin_count~exposure_level,data=counts,family="poisson")
+library(performance)
+check_zeroinflation(mod_poisson)
+```
+There is evidence of unaccounted zeroes, hence we need to use zero-inflated models.
+
+```{r}
+library(pscl)
+library(lmtest)
+
+mod_zip <- zeroinfl(toxin_count~exposure_level|1,data=counts,dist="poisson")
+summary(mod_zip)
+
+lrtest(mod_zip)
+
+emmeans(mod_zip,~exposure_level,mode="count",infer=T, at=list(exposure_level = c(40,50)))
+
+# because the zero-inflated probability does not have any predictors, we need to compute the probability manually.
+
+coef(mod_zip)[3] |> plogis() #inverse logit transformation
+confint(mod_zip)[3,] |> plogis()
+```
+```{r}
+library(pscl)
+library(lmtest)
+
+# Zero-Inflated Negative Binomial
+mod_zinb <- zeroinfl(toxin_count~exposure_level|1,data=counts,dist="negbin")
+summary(mod_zinb)
+
+lrtest(mod_zinb)
+
+emmeans(mod_zinb,~exposure_level,mode="count",infer=T, at=list(exposure_level = c(40,50)))
+
+# because the zero-inflated probability does not have any predictors, we need to compute the probability manually.
+
+coef(mod_zinb)[3] |> plogis() #inverse logit transformation
+confint(mod_zinb)[3,] |> plogis()
+```
+
 ### SAS Code
 
 ```{.r}
@@ -791,7 +1075,50 @@ proc genmod data=counts;
 run;
 ```
 
-The analysis of the zero-inflated shows that there is weak evidence of zero-inflation in the data. There is evidence of association between toxin count and exposure level (log IRR = 0.008,p=0.0195).
+### Answer
+
+The analysis of the zero-inflated shows that there is weak evidence of zero-inflation in the data. There is evidence of association between toxin count and exposure level ($\chi^2_1$=5.50,p=0.02).
+
+
+:::
+
+## Example: Hurdle Models (`R`)
+
+The data set `bioChemists` contains a sample of 915 biochemistry graduate students. Suppose we want to test whether there is an association between the count of articles produced during the last 3 years of Ph.D. (`art`) and the gender (`fem`) and marital status (`mar`) of the student. Is there zero-inflation?
+
+::: panel-tabset
+### `R` Data Set
+
+```{r}
+library(pscl)
+data("bioChemists")
+glimpse(bioChemists)
+```
+### R Code
+
+```{r}
+mod_poisson <- glm(art~fem+mar,data=bioChemists,family="poisson")
+library(performance)
+check_zeroinflation(mod_poisson)
+```
+The difference in observed and predicted zeros is large, hence there might be zero-inflation. Note that the zero counts indicate that the student has published a manuscript. Once a student publishes a manuscript, it is impossible for them to record a zero count for articles published. This is why we need a hurdle model.
+
+```{r}
+mod_hurdle <- hurdle(art~fem+mar|fem+mar,data=bioChemists,dist="poisson")
+summary(mod_hurdle)
+
+#let's test each variable
+mod_fem <- update(mod_hurdle,.~fem)# gender only model
+mod_mar <- update(mod_hurdle,.~mar) # marital status only model
+lrtest(mod_hurdle,mod_fem)
+lrtest(mod_hurdle,mod_mar)
+
+
+```
+
+### Answer
+
+There is strong evidence of association between the count of published articles in the final 3 years of Ph.D. and marital status ($\chi^2_2$ = 16.6, p=0.0002), but not with gender ($\chi^2_2$=0.266, p=0.8755).
 
 
 :::
