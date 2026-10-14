@@ -1,0 +1,301 @@
+---
+title: "EAB 770 Problem Set 2 Key"
+author: "Miguel Fudolig"
+format: 
+  html: 
+    engine: knitr
+    embed-resources: true
+  pdf:
+    number-sections: true
+---
+
+```{r setup}
+library(tidyverse)
+library(vcdExtra)
+library(vcd)
+library(DescTools)
+```
+
+
+
+# Problem 1 
+
+The table below shows data from a survey of first- and second-generation Filipinos from California, Nevada, and New Jersey about their preferred language to use at home.
+
+```{r}
+p1 <- expand.grid(Score = c("All F","More F","Equal","More E","All E"),
+                  Generation=c("First","Second"),
+                  State = c("Nevada","California","New Jersey"))
+
+p1$Count <- c(17,112,80,25,16,
+              8,23,50,79,140,
+              13,85,90,31,31,
+              5,34,43,123,45,
+              6,50,107,64,73,
+              10,47,89,52,102)
+
+p1_cc <- xtabs(Count~Generation+Score + State,data=p1) 
+p1_cc
+```
+
+## Problem 1a 
+
+What is the appropriate extended Mantel-Haenszel statistic to use in testing for a difference in preferred language at home between generations?
+
+::: callout-note
+### Solution
+
+The appropriate MH statistics are the correlation statistic and the mean score statistic.
+:::
+
+## Problem 1b 
+
+Is there sufficient evidence to conclude that there is a difference in preferred language to use at home between the two generations?
+
+::: callout-note
+### Solution
+
+```{r}
+CMHtest(p1_cc)
+```
+
+At the 0.05 level of significance, there is evidence of a difference in preferred language between two generations for Nevada and California (p<0.0001), but not New Jersey (p=0.144).
+:::
+
+## Problem 1c
+
+Is there sufficient evidence to conclude that there is a difference in preferred language of Filipinos to use at home between generations after controlling for location?
+
+::: callout-note
+### Solution
+
+```{r}
+CMHtest(p1_cc,
+        overall=TRUE)$ALL
+```
+
+At the 0.05 level of significance, there is evidence of a difference in preferred language between two generations after controlling for state ($\chi^2_1=168.35$,p<0.0001).
+:::
+
+## Problem 1d
+
+Generation can also be interpreted as ordinal. We can use Somers' Delta or Stuart's tau
+
+### Nevada
+
+```{r}
+SomersDelta(p1_cc[,,1],
+            direction="column",
+            conf.level = 0.95)
+StuartTauC(p1_cc[,,1],
+            conf.level = 0.95)
+```
+
+### California
+
+```{r}
+SomersDelta(p1_cc[,,2],
+            direction="column",
+            conf.level = 0.95)
+StuartTauC(p1_cc[,,2],
+            conf.level = 0.95)
+```
+
+### New Jersey
+
+```{r}
+SomersDelta(p1_cc[,,3],
+            direction="column",
+            conf.level = 0.95)
+StuartTauC(p1_cc[,,3],
+            conf.level = 0.95)
+```
+
+# Problem 2
+
+The data shown below comes from a pilot study investigating visual perception of a mean shift in a data set. The participants were asked to identify plots with a mean shift among a lineup of “null plots”, i.e., plots with no shifts. The researchers then recorded if the participants were able to correctly identify the plot with the mean shift for different shift magnitudes and direction.
+
+```{r}
+p2 <- expand.grid(Correct=c("Yes","No"),
+                  Magnitude = c("Low","Medium","High"),
+                  Direction = c("Positive","Negative")
+                  )
+p2$Count <- c(4,4,5,1,6,0,3,4,3,3,6,3)
+
+p2_cc <- xtabs(Count~Magnitude + Correct + Direction, data=p2)
+p2_cc
+```
+
+
+
+## 2a
+
+Provide an estimate and asymptotic 95% confidence interval for the following measures of association between shift magnitude and correct identification for positive and negative shifts:
+
+### Somers' Delta
+
+::: callout-note
+### Solution
+
+```{r}
+# Positive
+SomersDelta(p2_cc[,,1],
+            direction="column",
+            conf.level = 0.95)
+
+# Negative
+SomersDelta(p2_cc[,,2],
+            direction="column",
+            conf.level = 0.95)
+```
+:::
+
+
+## 2b
+
+At $\alpha$=0.05, what is your conclusion regarding correlation of the level of shift magnitudes and correct identification?
+
+
+
+
+::: callout-note
+### Solution
+
+
+```{r}
+CMHtest(p2_cc, overall=T)
+```
+
+There is strong evidence of a correlation between magnitude and correct identification for positive shifts ($\chi^2_1=4.50$, p=0.03), but no evidence for negative shifts ($\chi^2_1 = 0.89$,p=0.35). Overall, there is strong evidence of a conditional association between magnitude and correct identification after controlling for shift direction ($\chi^2_1=4.28$, p=0.04).
+:::
+
+## 2c
+
+
+Perform an exact test to determine whether the level of shift magnitude is correlated with correct identification. 
+
+::: callout-note
+### Solution
+
+We can use Fisher's Exact Test to test the marginal association between shift magnitude and identification accuracy.
+
+```{r}
+p2_marg <- xtabs(Count~Magnitude+Correct,data=p2)
+fisher.test(p2_marg)
+```
+
+Note that we cannot do an exact test of conditional association in `R`, but we can do it in `SAS`.
+:::
+
+## 2d
+
+Which results should we use in reporting the relationship between shift magnitude and correct identification: asymptotic or exact? Justify in at most two sentences.
+
+::: callout-note
+### Solution
+
+The total number of samples at each strata is greater than 20, which means the asymptotic chi-square distribution assumption holds (correlation statistic sample size requirement). We don't need to perform an exact test even if we have small cell counts.
+:::
+
+# Problem 3
+
+350 graduate students and 85 professors were asked about their favorite graph type and programming language. The data is in PS2_3.csv, which can be downloaded on Canvas.
+
+```{r}
+p3 <- read.csv("PS2_3.csv")
+glimpse(p3)
+```
+
+## 3a
+
+What is the appropriate extended Mantel-Haenszel statistic to use in testing for an association between favorite graph type and programming language?
+
+::: callout-note
+### Solution
+
+The variables are both nominal, hence the appropriate MH statistic is the general association statistic.
+:::
+
+## 3b
+
+Provide an appropriate measure of association between preferred graph type and programming language.
+
+::: callout-note
+### Solution
+
+The variables are both nominal. We should report Lambda or the uncertainty coefficient.
+
+```{r}
+p3_cc <- xtabs(~program+graph,data=p3)
+Lambda(p3_cc, direction="symmetric",conf.level = 0.95)
+UncertCoef(p3_cc, direction="symmetric",conf.level = 0.95)
+
+```
+
+You can also choose to report the asymmetric values.
+:::
+
+## 3c
+
+Is there evidence of an association between favorite graph type and programming language? 
+
+::: callout-note
+### Solution
+
+You need to indicate whether we're testing for a marginal association or conditional association.
+
+Marginal association ignores professor classification.
+
+```{r}
+CMHtest(p3_cc)
+```
+
+There is no evidence of a marginal association between programming language and favorite graph type ($\chi^2_{15}=12.26, p=0.66).
+
+Conditional association controls for professor classification.
+
+```{r}
+p3_cc_3 <- xtabs(~program+graph+Class,data=p3)
+
+CMHtest(p3_cc_3,overall=T)$ALL
+```
+
+There is no evidence of a conditional association between programming language and favorite graph type ($\chi^2_{15}=12.51, p=0.64).
+
+:::
+
+# Problem 4
+
+Two dentists were tasked with rating the bites of 25 children. The ratings for all the children can be found in PS2_4.csv
+
+```{r}
+p4 <- read.csv("PS2_4.csv")
+glimpse(p4)
+```
+
+
+## 4a
+
+Calculate the estimate and 95% confidence interval of the Fleiss-Cohen weighted kappa.
+
+::: callout-note
+### Solution
+
+```{r}
+p4_cc <- xtabs(~Bite1+Bite2,data=p4)
+p4_cc
+Kappa(p4_cc, weight="Fleiss-Cohen")
+```
+:::
+
+## 4b 
+
+Describe the strength of rating agreement between the two dentists.
+
+::: callout-note
+### Solution
+
+The agreement is weak based on the weighted $\kappa$, which means there might be a lot of high discordance in the ratings.
+
+:::
+

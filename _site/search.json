@@ -5198,5 +5198,103 @@
     "crumbs": [
       "Problem Sets"
     ]
+  },
+  {
+    "objectID": "PS2_key.html",
+    "href": "PS2_key.html",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.1     ✔ readr     2.2.0\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.3     ✔ tibble    3.3.1\n✔ lubridate 1.9.5     ✔ tidyr     1.3.2\n✔ purrr     1.2.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(vcdExtra)\n\nWarning: package 'vcdExtra' was built under R version 4.6.1\n\n\nLoading required package: vcd\n\n\nWarning: package 'vcd' was built under R version 4.6.1\n\n\nLoading required package: grid\nLoading required package: gnm\n\n\nWarning: package 'gnm' was built under R version 4.6.1\n\n\nRegistered S3 methods overwritten by 'vcdExtra':\n  method      from\n  pairs.table vcd \n  print.Kappa vcd \n\nAttaching package: 'vcdExtra'\n\nThe following objects are masked from 'package:vcd':\n\n    pairs_diagonal_mosaic, woolf_test\n\nlibrary(vcd)\nlibrary(DescTools)\n\nWarning: package 'DescTools' was built under R version 4.6.1"
+  },
+  {
+    "objectID": "PS2_key.html#problem-1a",
+    "href": "PS2_key.html#problem-1a",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "Problem 1a",
+    "text": "Problem 1a\nWhat is the appropriate extended Mantel-Haenszel statistic to use in testing for a difference in preferred language at home between generations?\n\n\n\n\n\n\nNoteSolution\n\n\n\nThe appropriate MH statistics are the correlation statistic and the mean score statistic."
+  },
+  {
+    "objectID": "PS2_key.html#problem-1b",
+    "href": "PS2_key.html#problem-1b",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "Problem 1b",
+    "text": "Problem 1b\nIs there sufficient evidence to conclude that there is a difference in preferred language to use at home between the two generations?\n\n\n\n\n\n\nNoteSolution\n\n\n\n\nCMHtest(p1_cc)\n\n$`State:Nevada`\nCochran-Mantel-Haenszel Statistics for Generation by Score \n    in stratum State:Nevada \n\n                 AltHypothesis  Chisq Df       Prob\ncor        Nonzero correlation 174.97  1 6.0709e-40\nrmeans  Row mean scores differ 174.97  1 6.0709e-40\ncmeans  Col mean scores differ 192.14  4 1.8428e-40\ngeneral    General association 192.14  4 1.8428e-40\n\n\n$`State:California`\nCochran-Mantel-Haenszel Statistics for Generation by Score \n    in stratum State:California \n\n                 AltHypothesis  Chisq Df       Prob\ncor        Nonzero correlation 57.838  1 2.8468e-14\nrmeans  Row mean scores differ 57.838  1 2.8468e-14\ncmeans  Col mean scores differ 99.363  4 1.3444e-20\ngeneral    General association 99.363  4 1.3444e-20\n\n\n$`State:New Jersey`\nCochran-Mantel-Haenszel Statistics for Generation by Score \n    in stratum State:New Jersey \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 2.1305  1 0.144398\nrmeans  Row mean scores differ 2.1305  1 0.144398\ncmeans  Col mean scores differ 8.7783  4 0.066887\ngeneral    General association 8.7783  4 0.066887\n\n\nAt the 0.05 level of significance, there is evidence of a difference in preferred language between two generations for Nevada and California (p&lt;0.0001), but not New Jersey (p=0.144)."
+  },
+  {
+    "objectID": "PS2_key.html#problem-1c",
+    "href": "PS2_key.html#problem-1c",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "Problem 1c",
+    "text": "Problem 1c\nIs there sufficient evidence to conclude that there is a difference in preferred language of Filipinos to use at home between generations after controlling for location?\n\n\n\n\n\n\nNoteSolution\n\n\n\n\nCMHtest(p1_cc,\n        overall=TRUE)$ALL\n\nCochran-Mantel-Haenszel Statistics for Generation by Score \n    Overall tests, controlling for all strata \n\n                 AltHypothesis  Chisq Df       Prob\ncor        Nonzero correlation 168.35  1 1.7001e-38\nrmeans  Row mean scores differ 168.35  1 1.7001e-38\ncmeans  Col mean scores differ 196.97  4 1.6865e-41\ngeneral    General association 196.97  4 1.6865e-41\n\n\nAt the 0.05 level of significance, there is evidence of a difference in preferred language between two generations after controlling for state (\\(\\chi^2_1=168.35\\),p&lt;0.0001)."
+  },
+  {
+    "objectID": "PS2_key.html#problem-1d",
+    "href": "PS2_key.html#problem-1d",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "Problem 1d",
+    "text": "Problem 1d\nGeneration can also be interpreted as ordinal. We can use Somers’ Delta or Stuart’s tau\n\nNevada\n\nSomersDelta(p1_cc[,,1],\n            direction=\"column\",\n            conf.level = 0.95)\n\n   somers    lwr.ci    upr.ci \n0.6420133 0.5724808 0.7115459 \n\nStuartTauC(p1_cc[,,1],\n            conf.level = 0.95)\n\n     tauc    lwr.ci    upr.ci \n0.6367074 0.5670685 0.7063463 \n\n\n\n\nCalifornia\n\nSomersDelta(p1_cc[,,2],\n            direction=\"column\",\n            conf.level = 0.95)\n\n   somers    lwr.ci    upr.ci \n0.3968480 0.3054616 0.4882344 \n\nStuartTauC(p1_cc[,,2],\n            conf.level = 0.95)\n\n     tauc    lwr.ci    upr.ci \n0.3968480 0.3054616 0.4882344 \n\n\n\n\nNew Jersey\n\nSomersDelta(p1_cc[,,3],\n            direction=\"column\",\n            conf.level = 0.95)\n\n     somers      lwr.ci      upr.ci \n 0.07221111 -0.01683079  0.16125301 \n\nStuartTauC(p1_cc[,,3],\n            conf.level = 0.95)\n\n       tauc      lwr.ci      upr.ci \n 0.07221111 -0.01683079  0.16125301"
+  },
+  {
+    "objectID": "PS2_key.html#a",
+    "href": "PS2_key.html#a",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "2a",
+    "text": "2a\nProvide an estimate and asymptotic 95% confidence interval for the following measures of association between shift magnitude and correct identification for positive and negative shifts:\n\nSomers’ Delta\n\n\n\n\n\n\nNoteSolution\n\n\n\n\n# Positive\nSomersDelta(p2_cc[,,1],\n            direction=\"column\",\n            conf.level = 0.95)\n\n     somers      lwr.ci      upr.ci \n-0.34848485 -0.60804938 -0.08892031 \n\n# Negative\nSomersDelta(p2_cc[,,2],\n            direction=\"column\",\n            conf.level = 0.95)\n\n    somers     lwr.ci     upr.ci \n-0.1698113 -0.5039340  0.1643114"
+  },
+  {
+    "objectID": "PS2_key.html#b",
+    "href": "PS2_key.html#b",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "2b",
+    "text": "2b\nAt \\(\\alpha\\)=0.05, what is your conclusion regarding correlation of the level of shift magnitudes and correct identification?\n\n\n\n\n\n\nNoteSolution\n\n\n\n\nCMHtest(p2_cc, overall=T)\n\n$`Direction:Positive`\nCochran-Mantel-Haenszel Statistics for Magnitude by Correct \n    in stratum Direction:Positive \n\n                 AltHypothesis  Chisq Df     Prob\ncor        Nonzero correlation 4.4976  1 0.033943\nrmeans  Row mean scores differ 4.6444  2 0.098055\ncmeans  Col mean scores differ 4.4976  1 0.033943\ngeneral    General association 4.6444  2 0.098055\n\n\n$`Direction:Negative`\nCochran-Mantel-Haenszel Statistics for Magnitude by Correct \n    in stratum Direction:Negative \n\n                 AltHypothesis   Chisq Df    Prob\ncor        Nonzero correlation 0.88707  1 0.34627\nrmeans  Row mean scores differ 0.92500  2 0.62971\ncmeans  Col mean scores differ 0.88707  1 0.34627\ngeneral    General association 0.92500  2 0.62971\n\n\n$ALL\nCochran-Mantel-Haenszel Statistics for Magnitude by Correct \n    Overall tests, controlling for all strata \n\n                 AltHypothesis  Chisq Df    Prob\ncor        Nonzero correlation 4.2823  1 0.03851\nrmeans  Row mean scores differ 4.3131  2 0.11572\ncmeans  Col mean scores differ 4.2823  1 0.03851\ngeneral    General association 4.3131  2 0.11572\n\n\nThere is strong evidence of a correlation between magnitude and correct identification for positive shifts (\\(\\chi^2_1=4.50\\), p=0.03), but no evidence for negative shifts (\\(\\chi^2_1 = 0.89\\),p=0.35). Overall, there is strong evidence of a conditional association between magnitude and correct identification after controlling for shift direction (\\(\\chi^2_1=4.28\\), p=0.04)."
+  },
+  {
+    "objectID": "PS2_key.html#c",
+    "href": "PS2_key.html#c",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "2c",
+    "text": "2c\nPerform an exact test to determine whether the level of shift magnitude is correlated with correct identification.\n\n\n\n\n\n\nNoteSolution\n\n\n\nWe can use Fisher’s Exact Test to test the marginal association between shift magnitude and identification accuracy.\n\np2_marg &lt;- xtabs(Count~Magnitude+Correct,data=p2)\nfisher.test(p2_marg)\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  p2_marg\np-value = 0.1734\nalternative hypothesis: two.sided\n\n\nNote that we cannot do an exact test of conditional association in R, but we can do it in SAS."
+  },
+  {
+    "objectID": "PS2_key.html#d",
+    "href": "PS2_key.html#d",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "2d",
+    "text": "2d\nWhich results should we use in reporting the relationship between shift magnitude and correct identification: asymptotic or exact? Justify in at most two sentences.\n\n\n\n\n\n\nNoteSolution\n\n\n\nThe total number of samples at each strata is greater than 20, which means the asymptotic chi-square distribution assumption holds (correlation statistic sample size requirement). We don’t need to perform an exact test even if we have small cell counts."
+  },
+  {
+    "objectID": "PS2_key.html#a-1",
+    "href": "PS2_key.html#a-1",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "3a",
+    "text": "3a\nWhat is the appropriate extended Mantel-Haenszel statistic to use in testing for an association between favorite graph type and programming language?\n\n\n\n\n\n\nNoteSolution\n\n\n\nThe variables are both nominal, hence the appropriate MH statistic is the general association statistic."
+  },
+  {
+    "objectID": "PS2_key.html#b-1",
+    "href": "PS2_key.html#b-1",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "3b",
+    "text": "3b\nProvide an appropriate measure of association between preferred graph type and programming language.\n\n\n\n\n\n\nNoteSolution\n\n\n\nThe variables are both nominal. We should report Lambda or the uncertainty coefficient.\n\np3_cc &lt;- xtabs(~program+graph,data=p3)\nLambda(p3_cc, direction=\"symmetric\",conf.level = 0.95)\n\n    lambda     lwr.ci     upr.ci \n0.01475410 0.00000000 0.05260101 \n\nUncertCoef(p3_cc, direction=\"symmetric\",conf.level = 0.95)\n\n          uc       lwr.ci       upr.ci \n 0.009181104 -0.001078617  0.019440824 \n\n\nYou can also choose to report the asymmetric values."
+  },
+  {
+    "objectID": "PS2_key.html#c-1",
+    "href": "PS2_key.html#c-1",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "3c",
+    "text": "3c\nIs there evidence of an association between favorite graph type and programming language?\n\n\n\n\n\n\nNoteSolution\n\n\n\nYou need to indicate whether we’re testing for a marginal association or conditional association.\nMarginal association ignores professor classification.\n\nCMHtest(p3_cc)\n\nCochran-Mantel-Haenszel Statistics for program by graph \n\n                 AltHypothesis     Chisq Df    Prob\ncor        Nonzero correlation  0.035842  1 0.84984\nrmeans  Row mean scores differ  0.065410  3 0.99564\ncmeans  Col mean scores differ  2.608232  5 0.76011\ngeneral    General association 12.259688 15 0.65928\n\n\nThere is no evidence of a marginal association between programming language and favorite graph type ($^2_{15}=12.26, p=0.66).\nConditional association controls for professor classification.\n\np3_cc_3 &lt;- xtabs(~program+graph+Class,data=p3)\n\nCMHtest(p3_cc_3,overall=T)$ALL\n\nCochran-Mantel-Haenszel Statistics for program by graph \n    Overall tests, controlling for all strata \n\n                 AltHypothesis     Chisq Df    Prob\ncor        Nonzero correlation 0.0039985  1 0.94958\nrmeans  Row mean scores differ  0.042299  3 0.99772\ncmeans  Col mean scores differ    2.8881  5 0.71723\ngeneral    General association    12.506 15 0.64037\n\n\nThere is no evidence of a conditional association between programming language and favorite graph type ($^2_{15}=12.51, p=0.64)."
+  },
+  {
+    "objectID": "PS2_key.html#a-2",
+    "href": "PS2_key.html#a-2",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "4a",
+    "text": "4a\nCalculate the estimate and 95% confidence interval of the Fleiss-Cohen weighted kappa.\n\n\n\n\n\n\nNoteSolution\n\n\n\n\np4_cc &lt;- xtabs(~Bite1+Bite2,data=p4)\np4_cc\n\n     Bite2\nBite1 I II III\n  I   5  3   2\n  II  0  5   2\n  III 3  0   5\n\nKappa(p4_cc, weight=\"Fleiss-Cohen\")\n\n            value    ASE     z\nUnweighted 0.4005 0.1470 2.725\nWeighted   0.2890 0.2104 1.373"
+  },
+  {
+    "objectID": "PS2_key.html#b-2",
+    "href": "PS2_key.html#b-2",
+    "title": "EAB 770 Problem Set 2 Key",
+    "section": "4b",
+    "text": "4b\nDescribe the strength of rating agreement between the two dentists.\n\n\n\n\n\n\nNoteSolution\n\n\n\nThe agreement is weak based on the weighted \\(\\kappa\\), which means there might be a lot of high discordance in the ratings."
   }
 ]
