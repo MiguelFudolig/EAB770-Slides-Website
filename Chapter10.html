@@ -456,13 +456,25 @@ P((y_{h1},y_{h2}) = (1,0) | y_{h1}+y_{h2}=1) = \frac{P(y_{h1}=1)P(y_{h2}=0)}{P(y
 </div>
 <div id="tabset-1-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-2"><a></a>trial <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"trial.csv"</span>)</span>
-<span id="cb3-3"><a></a></span>
-<span id="cb3-4"><a></a>trial <span class="ot">&lt;-</span> trial <span class="sc">|&gt;</span> </span>
-<span id="cb3-5"><a></a>  <span class="fu">mutate</span>(<span class="at">Center =</span> <span class="fu">as.factor</span>(Center),</span>
-<span id="cb3-6"><a></a>         <span class="at">Initial=</span><span class="fu">as.factor</span>(Initial))</span>
-<span id="cb3-7"><a></a><span class="fu">glimpse</span>(trial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>trial <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"trial.csv"</span>)</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a>trial <span class="ot">&lt;-</span> trial <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a></a>  <span class="fu">mutate</span>(<span class="at">Center =</span> <span class="fu">as.factor</span>(Center),</span>
+<span id="cb5-5"><a></a>         <span class="at">Initial=</span><span class="fu">as.factor</span>(Initial))</span>
+<span id="cb5-6"><a></a><span class="fu">glimpse</span>(trial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 158
 Columns: 6
@@ -477,31 +489,31 @@ $ Initial     &lt;fct&gt; 1, 2, 2, 3, 3, 1, 1, 3, 4, 4, 3, 3, 1, 3, 3, 2, 4, 2, 
 </div>
 <div id="tabset-1-3">
 <h4 id="without-covariates">Without Covariates</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a>proc logistic data<span class="ot">=</span>trial;</span>
-<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a>class <span class="fu">treatment</span>(<span class="at">ref=</span><span class="st">"p"</span>) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3"></a>strata center;</span>
-<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4"></a>model <span class="fu">improve</span>(<span class="at">event=</span><span class="st">"1"</span>)<span class="ot">=</span> treatment;</span>
-<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>proc logistic data<span class="ot">=</span>trial;</span>
+<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>class <span class="fu">treatment</span>(<span class="at">ref=</span><span class="st">"p"</span>) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3"></a>strata center;</span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4"></a>model <span class="fu">improve</span>(<span class="at">event=</span><span class="st">"1"</span>)<span class="ot">=</span> treatment;</span>
+<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="1">The strata argument lets SAS know that conditional logistic regression should be performed.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="1">The strata argument lets SAS know that conditional logistic regression should be performed.</span>
 </dd>
 </dl>
 <h4 id="with-covariates">With Covariates</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>proc logistic data<span class="ot">=</span>trial;</span>
-<span id="cb5-2"><a></a>class <span class="fu">sex</span> (<span class="at">ref=</span><span class="st">"f"</span>) <span class="fu">treatment</span>(<span class="at">ref=</span><span class="st">"p"</span>) <span class="fu">initial</span>(<span class="at">ref=</span><span class="st">"1"</span>) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
-<span id="cb5-3"><a></a>strata center;</span>
-<span id="cb5-4"><a></a>model <span class="fu">improve</span>(<span class="at">event=</span><span class="st">"1"</span>) <span class="ot">=</span> treatment initial sex age<span class="sc">/</span></span>
-<span id="cb5-5"><a></a>selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">1</span> details;</span>
-<span id="cb5-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>proc logistic data<span class="ot">=</span>trial;</span>
+<span id="cb7-2"><a></a>class <span class="fu">sex</span> (<span class="at">ref=</span><span class="st">"f"</span>) <span class="fu">treatment</span>(<span class="at">ref=</span><span class="st">"p"</span>) <span class="fu">initial</span>(<span class="at">ref=</span><span class="st">"1"</span>) <span class="sc">/</span>param<span class="ot">=</span>ref;</span>
+<span id="cb7-3"><a></a>strata center;</span>
+<span id="cb7-4"><a></a>model <span class="fu">improve</span>(<span class="at">event=</span><span class="st">"1"</span>) <span class="ot">=</span> treatment initial sex age<span class="sc">/</span></span>
+<span id="cb7-5"><a></a>selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">1</span> details;</span>
+<span id="cb7-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-4">
 <p>without covariates,</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(survival)</span>
-<span id="cb6-2"><a></a>mod_cond <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Improvement<span class="sc">~</span>Treatment <span class="sc">+</span> <span class="fu">strata</span>(Center), <span class="at">data=</span>trial,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb6-3"><a></a><span class="fu">summary</span>(mod_cond)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(survival)</span>
+<span id="cb8-2"><a></a>mod_cond <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Improvement<span class="sc">~</span>Treatment <span class="sc">+</span> <span class="fu">strata</span>(Center), <span class="at">data=</span>trial,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb8-3"><a></a><span class="fu">summary</span>(mod_cond)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(rep(1, 158L), Improvement) ~ Treatment + 
@@ -525,10 +537,36 @@ Score (logrank) test = 3.63  on 1 df,   p=0.06</code></pre>
 </div>
 <p>With covariates,</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>mod_cov <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Improvement<span class="sc">~</span>Treatment <span class="sc">+</span> Initial <span class="sc">+</span> Age <span class="sc">+</span> <span class="fu">strata</span>(Center), <span class="at">data=</span>trial,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb8-2"><a></a><span class="fu">library</span>(MASS)</span>
-<span id="cb8-3"><a></a><span class="fu">library</span>(car)</span>
-<span id="cb8-4"><a></a>mod_step <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(mod_cond,<span class="fu">list</span>(<span class="at">upper=</span>mod_cov),<span class="at">direction=</span><span class="st">"forward"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>mod_cov <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Improvement<span class="sc">~</span>Treatment <span class="sc">+</span> Initial <span class="sc">+</span> Age <span class="sc">+</span> <span class="fu">strata</span>(Center), <span class="at">data=</span>trial,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a></a><span class="fu">library</span>(MASS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">library</span>(car)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'car'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    recode</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    some</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>mod_step <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(mod_cond,<span class="fu">list</span>(<span class="at">upper=</span>mod_cov),<span class="at">direction=</span><span class="st">"forward"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Start:  AIC=73.19
 Surv(rep(1, 158L), Improvement) ~ Treatment + strata(Center)
@@ -546,7 +584,7 @@ Surv(rep(1, 158L), Improvement) ~ Treatment + strata(Center) +
 &lt;none&gt;    57.227
 + Age   1 57.952</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>mod_step</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>mod_step</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(rep(1, 158L), Improvement) ~ Treatment + 
@@ -561,7 +599,14 @@ Initial4    3.2769   26.4925   1.2254 2.674 0.00749
 Likelihood ratio test=25.63  on 4 df, p=3.752e-05
 n= 158, number of events= 90 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">Anova</span>(mod_step)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">Anova</span>(mod_step)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in Anova.coxph(mod_step): LR tests not supported for models with clusters or strata
+ Wald tests substituted</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>skipping term strata(Center)</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -588,119 +633,119 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Data Set</a></li><li><a href="#tabset-2-2">R Data Set</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>data correct;</span>
-<span id="cb14-2"><a></a>format occupation <span class="sc">$</span><span class="fl">10.</span>;</span>
-<span id="cb14-3"><a></a>input pair Occupation <span class="sc">$</span> Correct;</span>
-<span id="cb14-4"><a></a>datalines;</span>
-<span id="cb14-5"><a></a><span class="dv">1</span> STEM <span class="dv">0</span></span>
-<span id="cb14-6"><a></a><span class="dv">1</span> Other <span class="dv">0</span></span>
-<span id="cb14-7"><a></a><span class="dv">2</span> Other <span class="dv">0</span></span>
-<span id="cb14-8"><a></a><span class="dv">2</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-9"><a></a><span class="dv">3</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-10"><a></a><span class="dv">3</span> Other <span class="dv">0</span></span>
-<span id="cb14-11"><a></a><span class="dv">4</span> Other <span class="dv">0</span></span>
-<span id="cb14-12"><a></a><span class="dv">4</span> STEM <span class="dv">0</span></span>
-<span id="cb14-13"><a></a><span class="dv">5</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-14"><a></a><span class="dv">5</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-15"><a></a><span class="dv">6</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-16"><a></a><span class="dv">6</span> STEM <span class="dv">0</span></span>
-<span id="cb14-17"><a></a><span class="dv">7</span> STEM <span class="dv">0</span></span>
-<span id="cb14-18"><a></a><span class="dv">7</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-19"><a></a><span class="dv">8</span> STEM <span class="dv">0</span></span>
-<span id="cb14-20"><a></a><span class="dv">8</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-21"><a></a><span class="dv">9</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-22"><a></a><span class="dv">9</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-23"><a></a><span class="dv">10</span> Other <span class="dv">0</span></span>
-<span id="cb14-24"><a></a><span class="dv">10</span> STEM <span class="dv">0</span></span>
-<span id="cb14-25"><a></a><span class="dv">11</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-26"><a></a><span class="dv">11</span> STEM <span class="dv">1</span></span>
-<span id="cb14-27"><a></a><span class="dv">12</span> Other <span class="dv">0</span></span>
-<span id="cb14-28"><a></a><span class="dv">12</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-29"><a></a><span class="dv">13</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-30"><a></a><span class="dv">13</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-31"><a></a><span class="dv">14</span> STEM <span class="dv">0</span></span>
-<span id="cb14-32"><a></a><span class="dv">14</span> STEM <span class="dv">0</span></span>
-<span id="cb14-33"><a></a><span class="dv">15</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-34"><a></a><span class="dv">15</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-35"><a></a><span class="dv">16</span> Other <span class="dv">0</span></span>
-<span id="cb14-36"><a></a><span class="dv">16</span> STEM <span class="dv">0</span></span>
-<span id="cb14-37"><a></a><span class="dv">17</span> Other <span class="dv">0</span></span>
-<span id="cb14-38"><a></a><span class="dv">17</span> STEM <span class="dv">0</span></span>
-<span id="cb14-39"><a></a><span class="dv">18</span> STEM <span class="dv">0</span></span>
-<span id="cb14-40"><a></a><span class="dv">18</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-41"><a></a><span class="dv">19</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-42"><a></a><span class="dv">19</span> Other <span class="dv">1</span></span>
-<span id="cb14-43"><a></a><span class="dv">20</span> Other <span class="dv">0</span></span>
-<span id="cb14-44"><a></a><span class="dv">20</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-45"><a></a><span class="dv">21</span> Other <span class="dv">0</span></span>
-<span id="cb14-46"><a></a><span class="dv">21</span> Other <span class="dv">0</span></span>
-<span id="cb14-47"><a></a><span class="dv">22</span> Other <span class="dv">1</span></span>
-<span id="cb14-48"><a></a><span class="dv">22</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-49"><a></a><span class="dv">23</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-50"><a></a><span class="dv">23</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-51"><a></a><span class="dv">24</span> Other <span class="dv">0</span></span>
-<span id="cb14-52"><a></a><span class="dv">24</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-53"><a></a><span class="dv">25</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-54"><a></a><span class="dv">25</span> STEM <span class="dv">0</span></span>
-<span id="cb14-55"><a></a><span class="dv">26</span> STEM <span class="dv">0</span></span>
-<span id="cb14-56"><a></a><span class="dv">26</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-57"><a></a><span class="dv">27</span> Other <span class="dv">1</span></span>
-<span id="cb14-58"><a></a><span class="dv">27</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-59"><a></a><span class="dv">28</span> Other <span class="dv">1</span></span>
-<span id="cb14-60"><a></a><span class="dv">28</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-61"><a></a><span class="dv">29</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-62"><a></a><span class="dv">29</span> STEM <span class="dv">0</span></span>
-<span id="cb14-63"><a></a><span class="dv">30</span> Other <span class="dv">0</span></span>
-<span id="cb14-64"><a></a><span class="dv">30</span> Other <span class="dv">0</span></span>
-<span id="cb14-65"><a></a><span class="dv">31</span> Other <span class="dv">1</span></span>
-<span id="cb14-66"><a></a><span class="dv">31</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-67"><a></a><span class="dv">32</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-68"><a></a><span class="dv">32</span> Other <span class="dv">1</span></span>
-<span id="cb14-69"><a></a><span class="dv">33</span> STEM <span class="dv">0</span></span>
-<span id="cb14-70"><a></a><span class="dv">33</span> Other <span class="dv">0</span></span>
-<span id="cb14-71"><a></a><span class="dv">34</span> Other <span class="dv">0</span></span>
-<span id="cb14-72"><a></a><span class="dv">34</span> STEM <span class="dv">1</span></span>
-<span id="cb14-73"><a></a><span class="dv">35</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-74"><a></a><span class="dv">35</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-75"><a></a><span class="dv">36</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-76"><a></a><span class="dv">36</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-77"><a></a><span class="dv">37</span> Other <span class="dv">0</span></span>
-<span id="cb14-78"><a></a><span class="dv">37</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-79"><a></a><span class="dv">38</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-80"><a></a><span class="dv">38</span> Other <span class="dv">1</span></span>
-<span id="cb14-81"><a></a><span class="dv">39</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-82"><a></a><span class="dv">39</span> Other <span class="dv">0</span></span>
-<span id="cb14-83"><a></a><span class="dv">40</span> Other <span class="dv">0</span></span>
-<span id="cb14-84"><a></a><span class="dv">40</span> Other <span class="dv">1</span></span>
-<span id="cb14-85"><a></a><span class="dv">41</span> Healthcare <span class="dv">1</span></span>
-<span id="cb14-86"><a></a><span class="dv">41</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-87"><a></a><span class="dv">42</span> Other <span class="dv">0</span></span>
-<span id="cb14-88"><a></a><span class="dv">42</span> Other <span class="dv">0</span></span>
-<span id="cb14-89"><a></a><span class="dv">43</span> Other <span class="dv">1</span></span>
-<span id="cb14-90"><a></a><span class="dv">43</span> STEM <span class="dv">0</span></span>
-<span id="cb14-91"><a></a><span class="dv">44</span> Other <span class="dv">1</span></span>
-<span id="cb14-92"><a></a><span class="dv">44</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-93"><a></a><span class="dv">45</span> STEM <span class="dv">0</span></span>
-<span id="cb14-94"><a></a><span class="dv">45</span> STEM <span class="dv">0</span></span>
-<span id="cb14-95"><a></a><span class="dv">46</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-96"><a></a><span class="dv">46</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-97"><a></a><span class="dv">47</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-98"><a></a><span class="dv">47</span> Other <span class="dv">1</span></span>
-<span id="cb14-99"><a></a><span class="dv">48</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-100"><a></a><span class="dv">48</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-101"><a></a><span class="dv">49</span> Other <span class="dv">0</span></span>
-<span id="cb14-102"><a></a><span class="dv">49</span> STEM <span class="dv">1</span></span>
-<span id="cb14-103"><a></a><span class="dv">50</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-104"><a></a><span class="dv">50</span> Healthcare <span class="dv">0</span></span>
-<span id="cb14-105"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>data correct;</span>
+<span id="cb26-2"><a></a>format occupation <span class="sc">$</span><span class="fl">10.</span>;</span>
+<span id="cb26-3"><a></a>input pair Occupation <span class="sc">$</span> Correct;</span>
+<span id="cb26-4"><a></a>datalines;</span>
+<span id="cb26-5"><a></a><span class="dv">1</span> STEM <span class="dv">0</span></span>
+<span id="cb26-6"><a></a><span class="dv">1</span> Other <span class="dv">0</span></span>
+<span id="cb26-7"><a></a><span class="dv">2</span> Other <span class="dv">0</span></span>
+<span id="cb26-8"><a></a><span class="dv">2</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-9"><a></a><span class="dv">3</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-10"><a></a><span class="dv">3</span> Other <span class="dv">0</span></span>
+<span id="cb26-11"><a></a><span class="dv">4</span> Other <span class="dv">0</span></span>
+<span id="cb26-12"><a></a><span class="dv">4</span> STEM <span class="dv">0</span></span>
+<span id="cb26-13"><a></a><span class="dv">5</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-14"><a></a><span class="dv">5</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-15"><a></a><span class="dv">6</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-16"><a></a><span class="dv">6</span> STEM <span class="dv">0</span></span>
+<span id="cb26-17"><a></a><span class="dv">7</span> STEM <span class="dv">0</span></span>
+<span id="cb26-18"><a></a><span class="dv">7</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-19"><a></a><span class="dv">8</span> STEM <span class="dv">0</span></span>
+<span id="cb26-20"><a></a><span class="dv">8</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-21"><a></a><span class="dv">9</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-22"><a></a><span class="dv">9</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-23"><a></a><span class="dv">10</span> Other <span class="dv">0</span></span>
+<span id="cb26-24"><a></a><span class="dv">10</span> STEM <span class="dv">0</span></span>
+<span id="cb26-25"><a></a><span class="dv">11</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-26"><a></a><span class="dv">11</span> STEM <span class="dv">1</span></span>
+<span id="cb26-27"><a></a><span class="dv">12</span> Other <span class="dv">0</span></span>
+<span id="cb26-28"><a></a><span class="dv">12</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-29"><a></a><span class="dv">13</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-30"><a></a><span class="dv">13</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-31"><a></a><span class="dv">14</span> STEM <span class="dv">0</span></span>
+<span id="cb26-32"><a></a><span class="dv">14</span> STEM <span class="dv">0</span></span>
+<span id="cb26-33"><a></a><span class="dv">15</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-34"><a></a><span class="dv">15</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-35"><a></a><span class="dv">16</span> Other <span class="dv">0</span></span>
+<span id="cb26-36"><a></a><span class="dv">16</span> STEM <span class="dv">0</span></span>
+<span id="cb26-37"><a></a><span class="dv">17</span> Other <span class="dv">0</span></span>
+<span id="cb26-38"><a></a><span class="dv">17</span> STEM <span class="dv">0</span></span>
+<span id="cb26-39"><a></a><span class="dv">18</span> STEM <span class="dv">0</span></span>
+<span id="cb26-40"><a></a><span class="dv">18</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-41"><a></a><span class="dv">19</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-42"><a></a><span class="dv">19</span> Other <span class="dv">1</span></span>
+<span id="cb26-43"><a></a><span class="dv">20</span> Other <span class="dv">0</span></span>
+<span id="cb26-44"><a></a><span class="dv">20</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-45"><a></a><span class="dv">21</span> Other <span class="dv">0</span></span>
+<span id="cb26-46"><a></a><span class="dv">21</span> Other <span class="dv">0</span></span>
+<span id="cb26-47"><a></a><span class="dv">22</span> Other <span class="dv">1</span></span>
+<span id="cb26-48"><a></a><span class="dv">22</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-49"><a></a><span class="dv">23</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-50"><a></a><span class="dv">23</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-51"><a></a><span class="dv">24</span> Other <span class="dv">0</span></span>
+<span id="cb26-52"><a></a><span class="dv">24</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-53"><a></a><span class="dv">25</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-54"><a></a><span class="dv">25</span> STEM <span class="dv">0</span></span>
+<span id="cb26-55"><a></a><span class="dv">26</span> STEM <span class="dv">0</span></span>
+<span id="cb26-56"><a></a><span class="dv">26</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-57"><a></a><span class="dv">27</span> Other <span class="dv">1</span></span>
+<span id="cb26-58"><a></a><span class="dv">27</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-59"><a></a><span class="dv">28</span> Other <span class="dv">1</span></span>
+<span id="cb26-60"><a></a><span class="dv">28</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-61"><a></a><span class="dv">29</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-62"><a></a><span class="dv">29</span> STEM <span class="dv">0</span></span>
+<span id="cb26-63"><a></a><span class="dv">30</span> Other <span class="dv">0</span></span>
+<span id="cb26-64"><a></a><span class="dv">30</span> Other <span class="dv">0</span></span>
+<span id="cb26-65"><a></a><span class="dv">31</span> Other <span class="dv">1</span></span>
+<span id="cb26-66"><a></a><span class="dv">31</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-67"><a></a><span class="dv">32</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-68"><a></a><span class="dv">32</span> Other <span class="dv">1</span></span>
+<span id="cb26-69"><a></a><span class="dv">33</span> STEM <span class="dv">0</span></span>
+<span id="cb26-70"><a></a><span class="dv">33</span> Other <span class="dv">0</span></span>
+<span id="cb26-71"><a></a><span class="dv">34</span> Other <span class="dv">0</span></span>
+<span id="cb26-72"><a></a><span class="dv">34</span> STEM <span class="dv">1</span></span>
+<span id="cb26-73"><a></a><span class="dv">35</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-74"><a></a><span class="dv">35</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-75"><a></a><span class="dv">36</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-76"><a></a><span class="dv">36</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-77"><a></a><span class="dv">37</span> Other <span class="dv">0</span></span>
+<span id="cb26-78"><a></a><span class="dv">37</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-79"><a></a><span class="dv">38</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-80"><a></a><span class="dv">38</span> Other <span class="dv">1</span></span>
+<span id="cb26-81"><a></a><span class="dv">39</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-82"><a></a><span class="dv">39</span> Other <span class="dv">0</span></span>
+<span id="cb26-83"><a></a><span class="dv">40</span> Other <span class="dv">0</span></span>
+<span id="cb26-84"><a></a><span class="dv">40</span> Other <span class="dv">1</span></span>
+<span id="cb26-85"><a></a><span class="dv">41</span> Healthcare <span class="dv">1</span></span>
+<span id="cb26-86"><a></a><span class="dv">41</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-87"><a></a><span class="dv">42</span> Other <span class="dv">0</span></span>
+<span id="cb26-88"><a></a><span class="dv">42</span> Other <span class="dv">0</span></span>
+<span id="cb26-89"><a></a><span class="dv">43</span> Other <span class="dv">1</span></span>
+<span id="cb26-90"><a></a><span class="dv">43</span> STEM <span class="dv">0</span></span>
+<span id="cb26-91"><a></a><span class="dv">44</span> Other <span class="dv">1</span></span>
+<span id="cb26-92"><a></a><span class="dv">44</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-93"><a></a><span class="dv">45</span> STEM <span class="dv">0</span></span>
+<span id="cb26-94"><a></a><span class="dv">45</span> STEM <span class="dv">0</span></span>
+<span id="cb26-95"><a></a><span class="dv">46</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-96"><a></a><span class="dv">46</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-97"><a></a><span class="dv">47</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-98"><a></a><span class="dv">47</span> Other <span class="dv">1</span></span>
+<span id="cb26-99"><a></a><span class="dv">48</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-100"><a></a><span class="dv">48</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-101"><a></a><span class="dv">49</span> Other <span class="dv">0</span></span>
+<span id="cb26-102"><a></a><span class="dv">49</span> STEM <span class="dv">1</span></span>
+<span id="cb26-103"><a></a><span class="dv">50</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-104"><a></a><span class="dv">50</span> Healthcare <span class="dv">0</span></span>
+<span id="cb26-105"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>correct <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"correct.csv"</span>)</span>
-<span id="cb15-2"><a></a></span>
-<span id="cb15-3"><a></a>correct <span class="ot">&lt;-</span> correct <span class="sc">|&gt;</span> </span>
-<span id="cb15-4"><a></a>  <span class="fu">mutate</span>(<span class="at">Pair =</span> <span class="fu">as.factor</span>(Pair))</span>
-<span id="cb15-5"><a></a><span class="fu">glimpse</span>(correct)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>correct <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"correct.csv"</span>)</span>
+<span id="cb27-2"><a></a></span>
+<span id="cb27-3"><a></a>correct <span class="ot">&lt;-</span> correct <span class="sc">|&gt;</span> </span>
+<span id="cb27-4"><a></a>  <span class="fu">mutate</span>(<span class="at">Pair =</span> <span class="fu">as.factor</span>(Pair))</span>
+<span id="cb27-5"><a></a><span class="fu">glimpse</span>(correct)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 3
@@ -720,16 +765,16 @@ $ Correct    &lt;int&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Code</a></li><li><a href="#tabset-3-2">R Code</a></li><li><a href="#tabset-3-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>proc logistic data<span class="ot">=</span>correct;</span>
-<span id="cb17-2"><a></a>strata pair;</span>
-<span id="cb17-3"><a></a>class <span class="fu">occupation</span>(<span class="at">ref=</span><span class="st">"Other"</span>)<span class="sc">/</span>param<span class="ot">=</span>ref;</span>
-<span id="cb17-4"><a></a>model <span class="fu">correct</span>(<span class="at">event=</span><span class="st">"1"</span>)<span class="ot">=</span>occupation<span class="sc">/</span>details;</span>
-<span id="cb17-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>proc logistic data<span class="ot">=</span>correct;</span>
+<span id="cb29-2"><a></a>strata pair;</span>
+<span id="cb29-3"><a></a>class <span class="fu">occupation</span>(<span class="at">ref=</span><span class="st">"Other"</span>)<span class="sc">/</span>param<span class="ot">=</span>ref;</span>
+<span id="cb29-4"><a></a>model <span class="fu">correct</span>(<span class="at">event=</span><span class="st">"1"</span>)<span class="ot">=</span>occupation<span class="sc">/</span>details;</span>
+<span id="cb29-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>mod1 <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Correct<span class="sc">~</span>Occupation <span class="sc">+</span> <span class="fu">strata</span>(Pair),<span class="at">data=</span>correct,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb18-2"><a></a>mod1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>mod1 <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Correct<span class="sc">~</span>Occupation <span class="sc">+</span> <span class="fu">strata</span>(Pair),<span class="at">data=</span>correct,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb30-2"><a></a>mod1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 clogit(Correct ~ Occupation + strata(Pair), data = correct, model = TRUE)
@@ -741,7 +786,14 @@ OccupationSTEM  -0.6531    0.5204   0.8844 -0.738 0.460
 Likelihood ratio test=2.22  on 2 df, p=0.3293
 n= 100, number of events= 29 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in Anova.coxph(mod1): LR tests not supported for models with clusters or strata
+ Wald tests substituted</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>skipping term strata(Pair)</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -786,62 +838,62 @@ Occupation  2 1.9604     0.3752</code></pre>
 <p><img data-src="img/crossover_C10.png"></p>
 </div>
 <div id="tabset-4-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>data <span class="fu">cross1</span> (<span class="at">drop=</span>count);</span>
-<span id="cb22-2"><a></a>input age <span class="sc">$</span> sequence <span class="sc">$</span> time1 <span class="sc">$</span> time2 <span class="sc">$</span> count;</span>
-<span id="cb22-3"><a></a>do i<span class="ot">=</span><span class="dv">1</span> to count;</span>
-<span id="cb22-4"><a></a>output;</span>
-<span id="cb22-5"><a></a>end;</span>
-<span id="cb22-6"><a></a>datalines;</span>
-<span id="cb22-7"><a></a>older AB F F <span class="dv">12</span></span>
-<span id="cb22-8"><a></a>older AB F U <span class="dv">12</span></span>
-<span id="cb22-9"><a></a>older AB U F <span class="dv">6</span></span>
-<span id="cb22-10"><a></a>older AB U U <span class="dv">20</span></span>
-<span id="cb22-11"><a></a>older BP F F <span class="dv">8</span></span>
-<span id="cb22-12"><a></a>older BP F U <span class="dv">5</span></span>
-<span id="cb22-13"><a></a>older BP U F <span class="dv">6</span></span>
-<span id="cb22-14"><a></a>older BP U U <span class="dv">31</span></span>
-<span id="cb22-15"><a></a>older PA F F <span class="dv">5</span></span>
-<span id="cb22-16"><a></a>older PA F U <span class="dv">3</span></span>
-<span id="cb22-17"><a></a>older PA U F <span class="dv">22</span></span>
-<span id="cb22-18"><a></a>older PA U U <span class="dv">20</span></span>
-<span id="cb22-19"><a></a>younger BA F F <span class="dv">19</span></span>
-<span id="cb22-20"><a></a>younger BA F U <span class="dv">3</span></span>
-<span id="cb22-21"><a></a>younger BA U F <span class="dv">25</span></span>
-<span id="cb22-22"><a></a>younger BA U U <span class="dv">3</span></span>
-<span id="cb22-23"><a></a>younger AP F F <span class="dv">25</span></span>
-<span id="cb22-24"><a></a>younger AP F U <span class="dv">6</span></span>
-<span id="cb22-25"><a></a>younger AP U F <span class="dv">6</span></span>
-<span id="cb22-26"><a></a>younger AP U U <span class="dv">13</span></span>
-<span id="cb22-27"><a></a>younger PB F F <span class="dv">13</span></span>
-<span id="cb22-28"><a></a>younger PB F U <span class="dv">5</span></span>
-<span id="cb22-29"><a></a>younger PB U F <span class="dv">21</span></span>
-<span id="cb22-30"><a></a>younger PB U U <span class="dv">11</span></span>
-<span id="cb22-31"><a></a>;</span>
-<span id="cb22-32"><a></a></span>
-<span id="cb22-33"><a></a>data cross2; set cross1;</span>
-<span id="cb22-34"><a></a>subject<span class="ot">=</span>_n_;</span>
-<span id="cb22-35"><a></a>period<span class="ot">=</span><span class="dv">1</span>;</span>
-<span id="cb22-36"><a></a>drug <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">1</span>, <span class="dv">1</span>);</span>
-<span id="cb22-37"><a></a>carry<span class="ot">=</span><span class="st">'none'</span>;</span>
-<span id="cb22-38"><a></a>response <span class="ot">=</span>time1;</span>
-<span id="cb22-39"><a></a>output;</span>
-<span id="cb22-40"><a></a>period<span class="ot">=</span><span class="dv">2</span>;</span>
-<span id="cb22-41"><a></a>drug <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">2</span>, <span class="dv">1</span>);</span>
-<span id="cb22-42"><a></a>carry <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">1</span>, <span class="dv">1</span>);</span>
-<span id="cb22-43"><a></a><span class="cf">if</span> carry<span class="ot">=</span><span class="st">'P'</span> then carry<span class="ot">=</span><span class="st">'none'</span>;</span>
-<span id="cb22-44"><a></a>response <span class="ot">=</span>time2;</span>
-<span id="cb22-45"><a></a>output;</span>
-<span id="cb22-46"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>data <span class="fu">cross1</span> (<span class="at">drop=</span>count);</span>
+<span id="cb36-2"><a></a>input age <span class="sc">$</span> sequence <span class="sc">$</span> time1 <span class="sc">$</span> time2 <span class="sc">$</span> count;</span>
+<span id="cb36-3"><a></a>do i<span class="ot">=</span><span class="dv">1</span> to count;</span>
+<span id="cb36-4"><a></a>output;</span>
+<span id="cb36-5"><a></a>end;</span>
+<span id="cb36-6"><a></a>datalines;</span>
+<span id="cb36-7"><a></a>older AB F F <span class="dv">12</span></span>
+<span id="cb36-8"><a></a>older AB F U <span class="dv">12</span></span>
+<span id="cb36-9"><a></a>older AB U F <span class="dv">6</span></span>
+<span id="cb36-10"><a></a>older AB U U <span class="dv">20</span></span>
+<span id="cb36-11"><a></a>older BP F F <span class="dv">8</span></span>
+<span id="cb36-12"><a></a>older BP F U <span class="dv">5</span></span>
+<span id="cb36-13"><a></a>older BP U F <span class="dv">6</span></span>
+<span id="cb36-14"><a></a>older BP U U <span class="dv">31</span></span>
+<span id="cb36-15"><a></a>older PA F F <span class="dv">5</span></span>
+<span id="cb36-16"><a></a>older PA F U <span class="dv">3</span></span>
+<span id="cb36-17"><a></a>older PA U F <span class="dv">22</span></span>
+<span id="cb36-18"><a></a>older PA U U <span class="dv">20</span></span>
+<span id="cb36-19"><a></a>younger BA F F <span class="dv">19</span></span>
+<span id="cb36-20"><a></a>younger BA F U <span class="dv">3</span></span>
+<span id="cb36-21"><a></a>younger BA U F <span class="dv">25</span></span>
+<span id="cb36-22"><a></a>younger BA U U <span class="dv">3</span></span>
+<span id="cb36-23"><a></a>younger AP F F <span class="dv">25</span></span>
+<span id="cb36-24"><a></a>younger AP F U <span class="dv">6</span></span>
+<span id="cb36-25"><a></a>younger AP U F <span class="dv">6</span></span>
+<span id="cb36-26"><a></a>younger AP U U <span class="dv">13</span></span>
+<span id="cb36-27"><a></a>younger PB F F <span class="dv">13</span></span>
+<span id="cb36-28"><a></a>younger PB F U <span class="dv">5</span></span>
+<span id="cb36-29"><a></a>younger PB U F <span class="dv">21</span></span>
+<span id="cb36-30"><a></a>younger PB U U <span class="dv">11</span></span>
+<span id="cb36-31"><a></a>;</span>
+<span id="cb36-32"><a></a></span>
+<span id="cb36-33"><a></a>data cross2; set cross1;</span>
+<span id="cb36-34"><a></a>subject<span class="ot">=</span>_n_;</span>
+<span id="cb36-35"><a></a>period<span class="ot">=</span><span class="dv">1</span>;</span>
+<span id="cb36-36"><a></a>drug <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">1</span>, <span class="dv">1</span>);</span>
+<span id="cb36-37"><a></a>carry<span class="ot">=</span><span class="st">'none'</span>;</span>
+<span id="cb36-38"><a></a>response <span class="ot">=</span>time1;</span>
+<span id="cb36-39"><a></a>output;</span>
+<span id="cb36-40"><a></a>period<span class="ot">=</span><span class="dv">2</span>;</span>
+<span id="cb36-41"><a></a>drug <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">2</span>, <span class="dv">1</span>);</span>
+<span id="cb36-42"><a></a>carry <span class="ot">=</span> <span class="fu">substr</span>(sequence, <span class="dv">1</span>, <span class="dv">1</span>);</span>
+<span id="cb36-43"><a></a><span class="cf">if</span> carry<span class="ot">=</span><span class="st">'P'</span> then carry<span class="ot">=</span><span class="st">'none'</span>;</span>
+<span id="cb36-44"><a></a>response <span class="ot">=</span>time2;</span>
+<span id="cb36-45"><a></a>output;</span>
+<span id="cb36-46"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-3">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb23-2"><a></a>crossover <span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"crossover.csv"</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-3"><a></a>crossover <span class="ot">&lt;-</span> crossover <span class="sc">|&gt;</span> </span>
-<span id="cb23-4"><a></a>  <span class="fu">mutate</span>(<span class="at">Subject=</span> <span class="fu">as.factor</span>(Subject),</span>
-<span id="cb23-5"><a></a>         <span class="at">period =</span> <span class="fu">as.factor</span>(period),</span>
-<span id="cb23-6"><a></a>         <span class="at">response =</span> <span class="fu">ifelse</span>(response<span class="sc">==</span><span class="st">"F"</span>,<span class="dv">1</span>,<span class="dv">0</span>)) </span>
-<span id="cb23-7"><a></a><span class="fu">glimpse</span>(crossover)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb37-2"><a></a>crossover <span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"crossover.csv"</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb37-3"><a></a>crossover <span class="ot">&lt;-</span> crossover <span class="sc">|&gt;</span> </span>
+<span id="cb37-4"><a></a>  <span class="fu">mutate</span>(<span class="at">Subject=</span> <span class="fu">as.factor</span>(Subject),</span>
+<span id="cb37-5"><a></a>         <span class="at">period =</span> <span class="fu">as.factor</span>(period),</span>
+<span id="cb37-6"><a></a>         <span class="at">response =</span> <span class="fu">ifelse</span>(response<span class="sc">==</span><span class="st">"F"</span>,<span class="dv">1</span>,<span class="dv">0</span>)) </span>
+<span id="cb37-7"><a></a><span class="fu">glimpse</span>(crossover)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 600
 Columns: 6
@@ -855,27 +907,27 @@ $ response &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
 </div>
 </div>
 <div id="tabset-4-4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-26"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-26-1"><a href="#annotated-cell-26-1"></a>proc logistic data<span class="ot">=</span>cross2;</span>
-<span id="annotated-cell-26-2"><a href="#annotated-cell-26-2"></a>class drug period age carry <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
-<span id="annotated-cell-26-3"><a href="#annotated-cell-26-3"></a>strata subject;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-26" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-26-4" class="code-annotation-target"><a href="#annotated-cell-26-4"></a>model response <span class="ot">=</span> period drug period<span class="sc">*</span>age carry;</span>
-<span id="annotated-cell-26-5"><a href="#annotated-cell-26-5"></a>A_B<span class="sc">:</span> test drugA<span class="ot">=</span>drugB;</span>
-<span id="annotated-cell-26-6"><a href="#annotated-cell-26-6"></a>oddsratio drug;</span>
-<span id="annotated-cell-26-7"><a href="#annotated-cell-26-7"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-40"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-40-1"><a href="#annotated-cell-40-1"></a>proc logistic data<span class="ot">=</span>cross2;</span>
+<span id="annotated-cell-40-2"><a href="#annotated-cell-40-2"></a>class drug period age carry <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
+<span id="annotated-cell-40-3"><a href="#annotated-cell-40-3"></a>strata subject;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-40" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-40-4" class="code-annotation-target"><a href="#annotated-cell-40-4"></a>model response <span class="ot">=</span> period drug period<span class="sc">*</span>age carry;</span>
+<span id="annotated-cell-40-5"><a href="#annotated-cell-40-5"></a>A_B<span class="sc">:</span> test drugA<span class="ot">=</span>drugB;</span>
+<span id="annotated-cell-40-6"><a href="#annotated-cell-40-6"></a>oddsratio drug;</span>
+<span id="annotated-cell-40-7"><a href="#annotated-cell-40-7"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-26" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-40" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-26" data-code-lines="4" data-code-annotation="1">Carryover effect is accounted for with <code>carry</code>.</span>
+<span data-code-cell="annotated-cell-40" data-code-lines="4" data-code-annotation="1">Carryover effect is accounted for with <code>carry</code>.</span>
 </dd>
 </dl>
 <p>Since there is no significant carryover effect, we can remove it from the model.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>proc logistic data<span class="ot">=</span>cross2;</span>
-<span id="cb25-2"><a></a>class drug period age carry <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
-<span id="cb25-3"><a></a>strata subject;</span>
-<span id="cb25-4"><a></a>model response <span class="ot">=</span> period drug period<span class="sc">*</span>age;</span>
-<span id="cb25-5"><a></a>A_B<span class="sc">:</span> test drugA<span class="ot">=</span>drugB;</span>
-<span id="cb25-6"><a></a>oddsratio drug;</span>
-<span id="cb25-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>proc logistic data<span class="ot">=</span>cross2;</span>
+<span id="cb39-2"><a></a>class drug period age carry <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
+<span id="cb39-3"><a></a>strata subject;</span>
+<span id="cb39-4"><a></a>model response <span class="ot">=</span> period drug period<span class="sc">*</span>age;</span>
+<span id="cb39-5"><a></a>A_B<span class="sc">:</span> test drugA<span class="ot">=</span>drugB;</span>
+<span id="cb39-6"><a></a>oddsratio drug;</span>
+<span id="cb39-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-5">
 <div class="callout callout-important callout-titled callout-style-default">
@@ -893,12 +945,12 @@ $ response &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">library</span>(survival)</span>
-<span id="cb26-2"><a></a></span>
-<span id="cb26-3"><a></a>mod_c <span class="ot">&lt;-</span> <span class="fu">clogit</span>(response<span class="sc">~</span>period<span class="sc">+</span>drug <span class="sc">+</span>period<span class="sc">:</span>age<span class="sc">+</span> carry <span class="sc">+</span> <span class="fu">strata</span>(Subject), </span>
-<span id="cb26-4"><a></a>                <span class="at">data=</span>crossover,</span>
-<span id="cb26-5"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb26-6"><a></a><span class="fu">summary</span>(mod_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">library</span>(survival)</span>
+<span id="cb40-2"><a></a></span>
+<span id="cb40-3"><a></a>mod_c <span class="ot">&lt;-</span> <span class="fu">clogit</span>(response<span class="sc">~</span>period<span class="sc">+</span>drug <span class="sc">+</span>period<span class="sc">:</span>age<span class="sc">+</span> carry <span class="sc">+</span> <span class="fu">strata</span>(Subject), </span>
+<span id="cb40-4"><a></a>                <span class="at">data=</span>crossover,</span>
+<span id="cb40-5"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb40-6"><a></a><span class="fu">summary</span>(mod_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(rep(1, 600L), response) ~ period + drug + 
@@ -935,14 +987,14 @@ Score (logrank) test = 43.66  on 6 df,   p=9e-08</code></pre>
 </div>
 <p>Because of this, we cannot use <code>Anova()</code> in <code>car</code>. We will have to do the joint test manually using <code>anova()</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>mod_main <span class="ot">&lt;-</span> <span class="fu">clogit</span>(response<span class="sc">~</span>period<span class="sc">+</span>drug <span class="sc">+</span> carry <span class="sc">+</span> <span class="fu">strata</span>(Subject), </span>
-<span id="cb28-2"><a></a>                <span class="at">data=</span>crossover,</span>
-<span id="cb28-3"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb28-4"><a></a></span>
-<span id="cb28-5"><a></a>mod_nocarry <span class="ot">&lt;-</span> <span class="fu">clogit</span>(response<span class="sc">~</span>period <span class="sc">+</span> drug <span class="sc">+</span> period<span class="sc">:</span>age<span class="sc">+</span> <span class="fu">strata</span>(Subject), </span>
-<span id="cb28-6"><a></a>                <span class="at">data=</span>crossover,</span>
-<span id="cb28-7"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb28-8"><a></a><span class="fu">summary</span>(mod_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>mod_main <span class="ot">&lt;-</span> <span class="fu">clogit</span>(response<span class="sc">~</span>period<span class="sc">+</span>drug <span class="sc">+</span> carry <span class="sc">+</span> <span class="fu">strata</span>(Subject), </span>
+<span id="cb42-2"><a></a>                <span class="at">data=</span>crossover,</span>
+<span id="cb42-3"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb42-4"><a></a></span>
+<span id="cb42-5"><a></a>mod_nocarry <span class="ot">&lt;-</span> <span class="fu">clogit</span>(response<span class="sc">~</span>period <span class="sc">+</span> drug <span class="sc">+</span> period<span class="sc">:</span>age<span class="sc">+</span> <span class="fu">strata</span>(Subject), </span>
+<span id="cb42-6"><a></a>                <span class="at">data=</span>crossover,</span>
+<span id="cb42-7"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb42-8"><a></a><span class="fu">summary</span>(mod_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(rep(1, 600L), response) ~ period + drug + 
@@ -976,7 +1028,7 @@ Likelihood ratio test= 48.78  on 6 df,   p=8e-09
 Wald test            = 32.85  on 6 df,   p=1e-05
 Score (logrank) test = 43.66  on 6 df,   p=9e-08</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">anova</span>(mod_main,mod_c) <span class="co"># period:age effect</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">anova</span>(mod_main,mod_c) <span class="co"># period:age effect</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table
  Cox model: response is  Surv(rep(1, 600L), response)
@@ -986,7 +1038,7 @@ Score (logrank) test = 43.66  on 6 df,   p=9e-08</code></pre>
 1 -59.89                     
 2 -58.79 2.2005  1      0.138</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">anova</span>(mod_nocarry,mod_c) <span class="co"># carryover effect</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">anova</span>(mod_nocarry,mod_c) <span class="co"># carryover effect</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table
  Cox model: response is  Surv(rep(1, 600L), response)
@@ -999,7 +1051,7 @@ Score (logrank) test = 43.66  on 6 df,   p=9e-08</code></pre>
 </div>
 <p>Because there is no evidence of a carryover effect, we can interpret the results of the model without the carryover effect.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">summary</span>(mod_nocarry)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">summary</span>(mod_nocarry)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(rep(1, 600L), response) ~ period + drug + 
@@ -1084,35 +1136,35 @@ Score (logrank) test = 43.14  on 4 df,   p=1e-08</code></pre>
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Data Set</a></li><li><a href="#tabset-5-2">R Data Set</a></li><li><a href="#tabset-5-3">SAS Code</a></li><li><a href="#tabset-5-4">R Code</a></li><li><a href="#tabset-5-5">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>data endo;</span>
-<span id="cb36-2"><a></a>   do ID<span class="ot">=</span><span class="dv">1</span> to <span class="dv">63</span>;</span>
-<span id="cb36-3"><a></a>      do Outcome <span class="ot">=</span> <span class="dv">1</span> to <span class="dv">0</span> by <span class="sc">-</span><span class="dv">1</span>;</span>
-<span id="cb36-4"><a></a>         input Gall Hyper <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb36-5"><a></a>         output;</span>
-<span id="cb36-6"><a></a>      end;</span>
-<span id="cb36-7"><a></a>   end;</span>
-<span id="cb36-8"><a></a>   datalines;</span>
-<span id="cb36-9"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span></span>
-<span id="cb36-10"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-11"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span></span>
-<span id="cb36-12"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-13"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-14"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-15"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">1</span></span>
-<span id="cb36-16"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-17"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-18"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span></span>
-<span id="cb36-19"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-20"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-21"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
-<span id="cb36-22"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>data endo;</span>
+<span id="cb50-2"><a></a>   do ID<span class="ot">=</span><span class="dv">1</span> to <span class="dv">63</span>;</span>
+<span id="cb50-3"><a></a>      do Outcome <span class="ot">=</span> <span class="dv">1</span> to <span class="dv">0</span> by <span class="sc">-</span><span class="dv">1</span>;</span>
+<span id="cb50-4"><a></a>         input Gall Hyper <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb50-5"><a></a>         output;</span>
+<span id="cb50-6"><a></a>      end;</span>
+<span id="cb50-7"><a></a>   end;</span>
+<span id="cb50-8"><a></a>   datalines;</span>
+<span id="cb50-9"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb50-10"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-11"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb50-12"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-13"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-14"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-15"><a></a><span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">1</span></span>
+<span id="cb50-16"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-17"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-18"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span></span>
+<span id="cb50-19"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">1</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-20"><a></a><span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-21"><a></a><span class="dv">1</span> <span class="dv">0</span>  <span class="dv">1</span> <span class="dv">0</span>    <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">0</span>    <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="dv">0</span></span>
+<span id="cb50-22"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>endo <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"endo.csv"</span>)</span>
-<span id="cb37-2"><a></a>endo <span class="ot">&lt;-</span> endo <span class="sc">|&gt;</span> </span>
-<span id="cb37-3"><a></a>  <span class="fu">mutate</span>(<span class="at">ID =</span> <span class="fu">as.factor</span>(ID))</span>
-<span id="cb37-4"><a></a><span class="fu">glimpse</span>(endo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>endo <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"endo.csv"</span>)</span>
+<span id="cb51-2"><a></a>endo <span class="ot">&lt;-</span> endo <span class="sc">|&gt;</span> </span>
+<span id="cb51-3"><a></a>  <span class="fu">mutate</span>(<span class="at">ID =</span> <span class="fu">as.factor</span>(ID))</span>
+<span id="cb51-4"><a></a><span class="fu">glimpse</span>(endo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 126
 Columns: 4
@@ -1124,18 +1176,18 @@ $ Hyper   &lt;int&gt; 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0
 </div>
 </div>
 <div id="tabset-5-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>proc logistic data<span class="ot">=</span>endo;</span>
-<span id="cb39-2"><a></a>   strata ID;</span>
-<span id="cb39-3"><a></a>   model <span class="fu">outcome</span>(<span class="at">event=</span><span class="st">'1'</span>)<span class="ot">=</span>Gall hyper Gall<span class="sc">*</span>hyper<span class="sc">/</span>selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> details;</span>
-<span id="cb39-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>proc logistic data<span class="ot">=</span>endo;</span>
+<span id="cb53-2"><a></a>   strata ID;</span>
+<span id="cb53-3"><a></a>   model <span class="fu">outcome</span>(<span class="at">event=</span><span class="st">'1'</span>)<span class="ot">=</span>Gall hyper Gall<span class="sc">*</span>hyper<span class="sc">/</span>selection<span class="ot">=</span>forward include<span class="ot">=</span><span class="dv">2</span> details;</span>
+<span id="cb53-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-4">
 <p>First, let’s explore the interaction model to see if there is evidence of an interaction between the two comorbidities.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>mod_c <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Outcome<span class="sc">~</span>Gall <span class="sc">+</span> Hyper <span class="sc">+</span> Gall<span class="sc">:</span>Hyper <span class="sc">+</span> <span class="fu">strata</span>(ID), </span>
-<span id="cb40-2"><a></a>                <span class="at">data=</span>endo,</span>
-<span id="cb40-3"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb40-4"><a></a><span class="fu">summary</span>(mod_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>mod_c <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Outcome<span class="sc">~</span>Gall <span class="sc">+</span> Hyper <span class="sc">+</span> Gall<span class="sc">:</span>Hyper <span class="sc">+</span> <span class="fu">strata</span>(ID), </span>
+<span id="cb54-2"><a></a>                <span class="at">data=</span>endo,</span>
+<span id="cb54-3"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb54-4"><a></a><span class="fu">summary</span>(mod_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(rep(1, 126L), Outcome) ~ Gall + Hyper + 
@@ -1160,8 +1212,15 @@ Likelihood ratio test= 6.5  on 3 df,   p=0.09
 Wald test            = 5.56  on 3 df,   p=0.1
 Score (logrank) test = 6.17  on 3 df,   p=0.1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">library</span>(car)</span>
-<span id="cb42-2"><a></a><span class="fu">Anova</span>(mod_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb56-2"><a></a><span class="fu">Anova</span>(mod_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in Anova.coxph(mod_c): LR tests not supported for models with clusters or strata
+ Wald tests substituted</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>skipping term strata(ID)</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -1176,11 +1235,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Because the interaction, we can take it out of the model.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>mod_main <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Outcome<span class="sc">~</span>Gall <span class="sc">+</span> Hyper  <span class="sc">+</span> <span class="fu">strata</span>(ID), </span>
-<span id="cb44-2"><a></a>                <span class="at">data=</span>endo,</span>
-<span id="cb44-3"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb44-4"><a></a></span>
-<span id="cb44-5"><a></a><span class="fu">summary</span>(mod_main)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>mod_main <span class="ot">&lt;-</span> <span class="fu">clogit</span>(Outcome<span class="sc">~</span>Gall <span class="sc">+</span> Hyper  <span class="sc">+</span> <span class="fu">strata</span>(ID), </span>
+<span id="cb60-2"><a></a>                <span class="at">data=</span>endo,</span>
+<span id="cb60-3"><a></a>                <span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb60-4"><a></a></span>
+<span id="cb60-5"><a></a><span class="fu">summary</span>(mod_main)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(rep(1, 126L), Outcome) ~ Gall + Hyper + 
@@ -1203,7 +1262,14 @@ Likelihood ratio test= 4.55  on 2 df,   p=0.1
 Wald test            = 4.01  on 2 df,   p=0.1
 Score (logrank) test = 4.36  on 2 df,   p=0.1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">Anova</span>(mod_main)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">Anova</span>(mod_main)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in Anova.coxph(mod_main): LR tests not supported for models with clusters or strata
+ Wald tests substituted</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>skipping term strata(ID)</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -1240,35 +1306,35 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Data Set</a></li><li><a href="#tabset-6-2">SAS Code</a></li><li><a href="#tabset-6-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>data cardio;</span>
-<span id="cb48-2"><a></a>input animal treatment <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
-<span id="cb48-3"><a></a><span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'S'</span> then delete;</span>
-<span id="cb48-4"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'C'</span> then ordtreat<span class="ot">=</span><span class="dv">1</span>;</span>
-<span id="cb48-5"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'DA'</span> then ordtreat<span class="ot">=</span><span class="dv">2</span>;</span>
-<span id="cb48-6"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'D1'</span> then ordtreat<span class="ot">=</span><span class="dv">3</span>;</span>
-<span id="cb48-7"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'D2'</span> then ordtreat<span class="ot">=</span><span class="dv">4</span>;</span>
-<span id="cb48-8"><a></a>datalines;</span>
-<span id="cb48-9"><a></a><span class="dv">1</span> S no <span class="dv">1</span> C no <span class="dv">1</span> C no <span class="dv">1</span> D2 yes <span class="dv">1</span> D1 yes</span>
-<span id="cb48-10"><a></a><span class="dv">2</span> S no <span class="dv">2</span> D2 yes <span class="dv">2</span> C no <span class="dv">2</span> D1 yes</span>
-<span id="cb48-11"><a></a><span class="dv">3</span> S no <span class="dv">3</span> C yes <span class="dv">3</span> D1 yes <span class="dv">3</span> DA no <span class="dv">3</span> C no</span>
-<span id="cb48-12"><a></a><span class="dv">4</span> S no <span class="dv">4</span> C no <span class="dv">4</span> D1 yes <span class="dv">4</span> DA no <span class="dv">4</span> C no</span>
-<span id="cb48-13"><a></a><span class="dv">5</span> S yes <span class="dv">5</span> C no <span class="dv">5</span> DA no <span class="dv">5</span> D1 no <span class="dv">5</span> C no</span>
-<span id="cb48-14"><a></a><span class="dv">6</span> S no <span class="dv">6</span> C no <span class="dv">6</span> D1 yes <span class="dv">6</span> DA no <span class="dv">6</span> C no</span>
-<span id="cb48-15"><a></a><span class="dv">7</span> S no <span class="dv">7</span> C no <span class="dv">7</span> D1 yes <span class="dv">7</span> DA no <span class="dv">7</span> C no</span>
-<span id="cb48-16"><a></a><span class="dv">8</span> S yes <span class="dv">8</span> C yes <span class="dv">8</span> D1 yes</span>
-<span id="cb48-17"><a></a>;</span>
-<span id="cb48-18"><a></a></span>
-<span id="cb48-19"><a></a>data cardio;</span>
-<span id="cb48-20"><a></a>set cardio;</span>
-<span id="cb48-21"><a></a>drop treatment;</span>
-<span id="cb48-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>data cardio;</span>
+<span id="cb66-2"><a></a>input animal treatment <span class="sc">$</span> response <span class="sc">$</span> <span class="er">@@</span>;</span>
+<span id="cb66-3"><a></a><span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'S'</span> then delete;</span>
+<span id="cb66-4"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'C'</span> then ordtreat<span class="ot">=</span><span class="dv">1</span>;</span>
+<span id="cb66-5"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'DA'</span> then ordtreat<span class="ot">=</span><span class="dv">2</span>;</span>
+<span id="cb66-6"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'D1'</span> then ordtreat<span class="ot">=</span><span class="dv">3</span>;</span>
+<span id="cb66-7"><a></a><span class="cf">else</span> <span class="cf">if</span> treatment<span class="ot">=</span><span class="st">'D2'</span> then ordtreat<span class="ot">=</span><span class="dv">4</span>;</span>
+<span id="cb66-8"><a></a>datalines;</span>
+<span id="cb66-9"><a></a><span class="dv">1</span> S no <span class="dv">1</span> C no <span class="dv">1</span> C no <span class="dv">1</span> D2 yes <span class="dv">1</span> D1 yes</span>
+<span id="cb66-10"><a></a><span class="dv">2</span> S no <span class="dv">2</span> D2 yes <span class="dv">2</span> C no <span class="dv">2</span> D1 yes</span>
+<span id="cb66-11"><a></a><span class="dv">3</span> S no <span class="dv">3</span> C yes <span class="dv">3</span> D1 yes <span class="dv">3</span> DA no <span class="dv">3</span> C no</span>
+<span id="cb66-12"><a></a><span class="dv">4</span> S no <span class="dv">4</span> C no <span class="dv">4</span> D1 yes <span class="dv">4</span> DA no <span class="dv">4</span> C no</span>
+<span id="cb66-13"><a></a><span class="dv">5</span> S yes <span class="dv">5</span> C no <span class="dv">5</span> DA no <span class="dv">5</span> D1 no <span class="dv">5</span> C no</span>
+<span id="cb66-14"><a></a><span class="dv">6</span> S no <span class="dv">6</span> C no <span class="dv">6</span> D1 yes <span class="dv">6</span> DA no <span class="dv">6</span> C no</span>
+<span id="cb66-15"><a></a><span class="dv">7</span> S no <span class="dv">7</span> C no <span class="dv">7</span> D1 yes <span class="dv">7</span> DA no <span class="dv">7</span> C no</span>
+<span id="cb66-16"><a></a><span class="dv">8</span> S yes <span class="dv">8</span> C yes <span class="dv">8</span> D1 yes</span>
+<span id="cb66-17"><a></a>;</span>
+<span id="cb66-18"><a></a></span>
+<span id="cb66-19"><a></a>data cardio;</span>
+<span id="cb66-20"><a></a>set cardio;</span>
+<span id="cb66-21"><a></a>drop treatment;</span>
+<span id="cb66-22"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>proc logistic data<span class="ot">=</span>cardio descending exactonly;</span>
-<span id="cb49-2"><a></a>strata animal;</span>
-<span id="cb49-3"><a></a>model response <span class="ot">=</span> ordtreat;</span>
-<span id="cb49-4"><a></a>exact ordtreat <span class="sc">/</span> estimate<span class="ot">=</span>both;</span>
-<span id="cb49-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a>proc logistic data<span class="ot">=</span>cardio descending exactonly;</span>
+<span id="cb67-2"><a></a>strata animal;</span>
+<span id="cb67-3"><a></a>model response <span class="ot">=</span> ordtreat;</span>
+<span id="cb67-4"><a></a>exact ordtreat <span class="sc">/</span> estimate<span class="ot">=</span>both;</span>
+<span id="cb67-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-6-3">
 <p>We treat the treatments as an ordinal variable with equal separation. Based on the exact analysis, there is a significant effect of treatment (p=0.0017). The odds of an adverse event becomes seven times higher with each unit change in treatment level.</p>
@@ -1281,7 +1347,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Chapter 10- <a href="https://madfudolig.quarto.pub/eab770slides/">Back to home</a></p>
+<p>Chapter 10- <a href="https://miguelfudolig.github.io/EAB770-Slides-Website/">Back to home</a></p>
 </div>
 </div></div>
 
@@ -1495,82 +1561,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
         ]
       });
     </script>
-    
-
-    <script>
-
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-      // slide changes (different for each slide format).
-
-      (function () {
-
-        // dispatch for htmlwidgets
-
-        function fireSlideEnter() {
-
-          const event = window.document.createEvent("Event");
-
-          event.initEvent("slideenter", true, true);
-
-          window.document.dispatchEvent(event);
-
-        }
-
-    
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          fireSlideEnter();
-
-    
-
-          // dispatch for shiny
-
-          if (window.jQuery) {
-
-            if (previousSlide) {
-
-              window.jQuery(previousSlide).trigger("hidden");
-
-            }
-
-            if (currentSlide) {
-
-              window.jQuery(currentSlide).trigger("shown");
-
-            }
-
-          }
-
-        }
-
-    
-
-        // hookup for slidy
-
-        if (window.w3c_slidy) {
-
-          window.w3c_slidy.add_observer(function (slide_num) {
-
-            // slide_num starts at position 1
-
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-          });
-
-        }
-
-    
-
-      })();
-
-    </script>
-
-    
-
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
