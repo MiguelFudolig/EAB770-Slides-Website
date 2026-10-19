@@ -44,7 +44,8 @@ website:
         contents:
           - href: PS1_key.qmd
             text: Problem Set 1 Key
-
+          - href: PS2_key.qmd
+            text: Problem Set 2 Key
 format:
   html:
     theme: 
