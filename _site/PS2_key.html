@@ -5070,7 +5070,7 @@ cmeans  Col mean scores differ    2.8881  5 0.71723
 general    General association    12.506 15 0.64037</code></pre>
 </div>
 </div>
-<p>There is no evidence of a conditional association between programming language and favorite graph type ($^2_{15}=12.51, p=0.64).</p>
+<p>There is no evidence of a conditional association between programming language and favorite graph type (<span class="math inline">\(\chi^2_{15}=12.51\)</span>, p=0.64).</p>
 </div>
 </div>
 </section>
@@ -5120,7 +5120,15 @@ Bite1 I II III
 Unweighted 0.4005 0.1470 2.725
 Weighted   0.2890 0.2104 1.373</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">Kappa</span>(p4_cc, <span class="at">weight=</span><span class="st">&quot;Fleiss-Cohen&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+Kappa               lwr       upr
+  Unweighted  0.1124291 0.6885302
+  Weighted   -0.1234353 0.7013648</code></pre>
 </div>
+</div>
+<p>The Fleiss-Cohen weighted kappa estimate is 0.2890 (95% CI: -0.12-0.70).</p>
 </div>
 </div>
 </section>
@@ -5232,7 +5240,7 @@ Weighted   0.2890 0.2104 1.373</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/MiguelFudolig\.github\.io\/EAB770-Slides-Website\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

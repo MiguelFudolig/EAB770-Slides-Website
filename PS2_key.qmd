@@ -260,7 +260,7 @@ p3_cc_3 <- xtabs(~program+graph+Class,data=p3)
 CMHtest(p3_cc_3,overall=T)$ALL
 ```
 
-There is no evidence of a conditional association between programming language and favorite graph type ($\chi^2_{15}=12.51, p=0.64).
+There is no evidence of a conditional association between programming language and favorite graph type ($\chi^2_{15}=12.51$, p=0.64).
 
 :::
 
@@ -285,7 +285,10 @@ Calculate the estimate and 95% confidence interval of the Fleiss-Cohen weighted 
 p4_cc <- xtabs(~Bite1+Bite2,data=p4)
 p4_cc
 Kappa(p4_cc, weight="Fleiss-Cohen")
+confint(Kappa(p4_cc, weight="Fleiss-Cohen"))
 ```
+
+The Fleiss-Cohen weighted kappa estimate is 0.2890 (95% CI: -0.12-0.70).
 :::
 
 ## 4b 
