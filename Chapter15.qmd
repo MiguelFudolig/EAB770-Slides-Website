@@ -162,11 +162,11 @@ GEE methods are robust to an assigned correlation structure!
 
 ## GEE: Marginal Model
 
-GEEs produce marginal model, which yields estimates that are **population averaged**
+GEEs produce marginal model, which yields estimates that are **population-averaged**
 
 - Conditional models, such as the conditional logistic regression and generalized linear mixed models (`GLIMMIX`), focus on individual-based predictions.
 
-## GEE in SAS
+## GEE in `SAS`
 
 - The `GENMOD` procedure can perform GEE using the `REPEATED` statement.
 - The `REPEATED` statement includes a `SUBJECT` option that sets the clustering variable.
@@ -181,6 +181,28 @@ GEEs produce marginal model, which yields estimates that are **population averag
 ::: callout-tip
 The `GLIMMIX` procedure can also perform a GEE-type analysis by adding `_residual_` to all random effects.
 :::
+
+## GEE in `R`
+
+The `R` package `geepack` includes the `geeglm()` function. The correlation structures can be defined using the `corstr` argument.
+
+```{r}
+#| eval: false
+
+library(geepack)
+geeglm(dependent~independent,
+       data=sample_data, 
+       id=ID_col,
+       family=c("binomial","poisson"),
+       corstr = c("independence","exchangeable","ar1","unstructured"))
+```
+
+::: callout-note
+The correlation structure can be user defined (`corstr="userdefined"`). The structure can be provided as an input using `zcor`.
+
+The `id` pertains to what column pertains to the cluster/subject identification variable.
+:::
+
 ## Example
 
 The data shown is from a hypothetical study of the effects of air pollution children. Researchers followed 25 children and recorded whether they were exhibiting wheezing symptoms during the periods of evaluation at ages 8, 9, 10, and 11. The response is recorded as 1 for symptoms and 0 for no symptoms. Explanatory variables included age, city, and a passive smoking index with values 0, 1, and 2 that reflected the degree of smoking in the home.
