@@ -37,8 +37,8 @@ website:
           #   text: "Chapter 13: Categorized Time-to-Event Data"
           # - href: Chapter14.qmd
           #   text: "Chapter 14: Weighted Least Squares"
-          # - href: Chapter15.qmd
-          #   text: "Chapter 15: Generalized Estimating Equations"
+          - href: Chapter15.qmd
+            text: "Chapter 15: Generalized Estimating Equations"
       - section: "Problem Sets"
         href: problemsets.qmd
         contents:

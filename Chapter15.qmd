@@ -13,8 +13,10 @@ format:
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
+    echo: true
 ---
 
 # Generalized Estimating Equations
@@ -203,6 +205,18 @@ The correlation structure can be user defined (`corstr="userdefined"`). The stru
 The `id` pertains to what column pertains to the cluster/subject identification variable.
 :::
 
+The Type III Wald statistics can be calculated using the `joint_tests()` function found in the `emmeans` package.
+
+::: callout-tip
+`joint_tests()` provide a F-ratio which can be derived from the Chi-Square in SAS.
+
+$$
+F= \chi^2/df
+$$
+:::
+
+The QIC can be calculated using the `QIC` function in `geepack`.
+
 ## Example
 
 The data shown is from a hypothetical study of the effects of air pollution children. Researchers followed 25 children and recorded whether they were exhibiting wheezing symptoms during the periods of evaluation at ages 8, 9, 10, and 11. The response is recorded as 1 for symptoms and 0 for no symptoms. Explanatory variables included age, city, and a passive smoking index with values 0, 1, and 2 that reflected the degree of smoking in the home.
@@ -246,24 +260,68 @@ data children;
 ; 
 ```
 
+### R Data Set
+
+```{r}
+library(tidyverse)
+children <- read.csv("children.csv")
+glimpse(children)
+children <- children |> 
+  # across applies the same function to multiple columns.
+  mutate(across(c(id,timepoint,age,smoke),~as.factor(.x)))
+glimpse(children)
+```
+
+
 ### SAS Code
 
 ```{.r}
-proc genmod data=children descending;
-   class id city;
+proc genmod data=children descending ;
+   class id city smoke age;
    model symptom = city age smoke  / 
-                   link=logit dist=bin type3;
+                   link=logit dist=bin type3 wald;
    repeated subject=id / type=exch covb corrw ;
-   estimate 'age' age 1/exp;
+	lsmeans smoke/diff=all adjust=tukey ilink  exp cl;
 run;
 
 ```
 
+### R Code
+
+```{r}
+library(geepack)
+library(emmeans)
+
+mod_gee <- geeglm(symptom~city +age+smoke, 
+       family=binomial(link="logit"),
+       data=children,
+       id=id,
+       corstr="exchangeable")
+
+summary(mod_gee)
+QIC(mod_gee)
+joint_tests(mod_gee)
+
+
+
+emm_smoke <- emmeans(mod_gee,~smoke,type="response", infer=T)
+emm_smoke
+contrast(emm_smoke,method="revpairwise", infer=T)
+
+```
+
+
 ### Answer
 
-Age is the "time" factor. There is no effect of city ($\chi^2$ = 0.01. p=0.94) and there is moderate evidence of a smoking index effect ($\chi^2$ = 3.59. p=0.06). There is moderate evidence of an age effect ($\chi^2$ = 2.74. p=0.10), which means there is moderate evidence of changes in incidence of wheezing as age changes. The odds of wheezing is estimated to decrease by 27% when the child turns a year older.
+::: callout-warning
+The results of `geepack` might not match the result of `GENMOD`.
+:::
 
+The working correlation for the exchangeable correlation structure is 0.08. 
 
+Age is the "time" factor. There is evidence of an association between wheezing and smoking ($\chi^2$=10.4, p=0.006). Applying the Tukey-Kramer adjustment, we observe strong evidence of a difference in wheezing between those with the highest smoking exposure (Smoking=2) compared to the lower values (Smoking=1,0). Those who recorded the highest smoking exposure where 6.15 (1.41-26.8) times as likely to exhibit wheezing compared to children with smoking index of 1 and 6.30 (1.37-28.9) times as likely to exhibit wheezing compared to children with smoking index of 0.
+
+There is no evidence of an association between wheezing and city ($\chi^2$ = 0.01. p=0.93), as well as age ($\chi^2$=3.51, p=0.32).
 
 :::
 
@@ -272,7 +330,8 @@ Age is the "time" factor. There is no effect of city ($\chi^2$ = 0.01. p=0.94) a
 
 The DIAGNOS2 dataset includes the data from a one population observational study involving 793 subjects. For each subject, two diagnostic procedures (standard and test) were carried out at each of two times. The results of the four evaluations were classified as positive or negative. Use an interaction model and GEE techniques to determine whether there is a significant between-group (procedure) effect and within-group (time) effect.
 
--Hint: The response variable is binary.
+- Hint: The response variable is binary.
+
 - Use an exchangeable (compound symmetry) working covariance matrix
 
 
@@ -318,11 +377,23 @@ data diagnos2;
 run;
 ```
 
+### R Data Set
+
+```{r}
+diagnos2 <- read.csv("diagnos2.csv")
+diagnos2 <- diagnos2 |> 
+  mutate(across(c(subject,time),~as.factor(.x)))
+
+glimpse(diagnos2)
+
+```
+
+
 :::
 
 ## Exercise
 
-The DIAGNOS2 dataset includes the data from a one population observational study involving 793 subjects. For each subject, two diagnostic procedures (standard and test) were carried out at each of two times. The results of the four evaluations were classified as positive or negative. Use an interaction model and GEE techniques to determine whether there is a significant between-group (procedure) effect and within-group (time) effect.
+The DIAGNOS2 (`diagnos2.csv`) dataset includes the data from a one population observational study involving 793 subjects. For each subject, two diagnostic procedures (standard and test) were carried out at each of two times. The results of the four evaluations were classified as positive or negative. Use an interaction model and GEE techniques to determine whether there is a significant between-group (procedure) effect and within-group (time) effect.
 
 ::: {.panel-tabset}
 ### SAS Code
@@ -331,17 +402,38 @@ The DIAGNOS2 dataset includes the data from a one population observational study
 proc genmod data=diagnos2 descending;
    class procedure time subject;
    model response = procedure time procedure*time  / 
-                   link=logit dist=bin type3;
+                   link=logit dist=bin type3 wald;
    repeated subject=subject / type=exch covb corrw ;
    lsmeans procedure/diff exp cl ilink;
 run;
 ```
 
+### R Code
+
+```{r}
+library(geepack)
+library(emmeans)
+
+mod_gee <- geeglm(response ~ procedure + time + procedure:time, 
+       family=binomial(link="logit"),
+       data=diagnos2,
+       id=subject,
+       corstr="exchangeable")
+QIC(mod_gee)
+summary(mod_gee)
+joint_tests(mod_gee)
+
+emm_procedure <- emmeans(mod_gee,~procedure,type="response", infer=T)
+emm_procedure
+contrast(emm_procedure,method="pairwise", infer=T)
+
+```
+
 ### Answer
 
-The correlation between time points is approximately 0.8.
+The working exchangeable correlation between time points is approximately 0.8.
 
-There is no significant interaction effect between procedure and time ($\chi^2$=2.49, p=0.11). There is strong evidence of a procedure effect ($\chi^2 = 8.17, p=0.0043). The odds of a positive response is 13% (OR = 1.1265, 95% CI: 1.04, 1.22) higher in the standard procedure compared to the test procedure.
+There is no significant interaction effect between procedure and time ($\chi^2$=2.50, p=0.11). There is no evidence of any changes in time ($\chi^2$=0.85, p=0.36) There is strong evidence of a procedure effect ($\chi^2 $= 8.17, p=0.0043). The odds of a positive response is 13% (OR = 1.13, 95% CI: 1.04, 1.22) higher in the standard procedure compared to the test procedure.
 
 :::
 
@@ -442,6 +534,16 @@ run;
 
 ```
 
+### R Data Set
+
+```{r}
+fracture2 <- read.csv("fracture2.csv")
+fracture2 <- fracture2 |> 
+  mutate(year=as.factor(year))
+glimpse(fracture2)
+```
+
+
 ### SAS Code
 
 ```{.r}
@@ -454,10 +556,44 @@ proc genmod data=fracture2;
 run;
 ```
 
-### Answer
-The correlation between time points is estimated to be 0.13.
+### R Code
 
-There is no significant interaction between treatment and time ($\chi^2$ = 3.15, p=0.21), which means the effect of the treatment does not change in time. There is a significant main effect of the treatment ($\chi^2$ = 4.59, p=0.03) and year ($\chi^2$ = 7.64, p=0.02), which implies significant between- and within-group differences. The fracture rate in the placebo group is expected to be 105% higher than that of the treatment group.
+Note that `ID` is not unique to each participant. To identify the participant, we need the center too. Therefore, we need to define a new column that combines these columns.
+
+```{r}
+fracture2 <- fracture2 |> 
+  unite("StudyID",ID,center,sep="",remove=FALSE) |> 
+  mutate(StudyID = as.factor(StudyID))
+
+glimpse(fracture2)
+```
+
+
+```{r}
+library(geepack)
+library(emmeans)
+
+mod_gee <- geeglm(fractures ~ center + treatment + age + year + treatment*year, 
+       family=poisson(link="log"),
+       offset=lmonths,
+       data=fracture2,
+       id=StudyID,
+       corstr="exchangeable")
+
+summary(mod_gee)
+QIC(mod_gee)
+joint_tests(mod_gee)
+
+emm_trt <- emmeans(mod_gee,~treatment,type="response", infer=T)
+emm_trt
+contrast(emm_trt,method="pairwise", infer=T)
+```
+
+
+### Answer
+The correlation between time points is estimated to be 0.127.
+
+There is no significant interaction between treatment and time ($\chi^2$ = 3.15, p=0.21), which means the effect of the treatment does not change in time. There is a significant main effect of the treatment ($\chi^2$ = 4.59, p=0.03) and year ($\chi^2$ = 7.64, p=0.02), which implies significant between- and within-group differences. The fracture rate in the placebo group is expected to be 105% (5%-298%) higher than that of the treatment group.
 
 :::
 
@@ -476,19 +612,62 @@ Implement a GEE analysis for the FRACTURE2 data set using an unstructured workin
 proc genmod data=fracture2; 
    class id treatment center year;
    model fractures = center treatment age year treatment*year  / 
-                     dist=poisson type3 offset=lmonths;
+                     dist=poisson type3 offset=lmonths wald;
   repeated subject=id(center) / type=unstr corrw; 
   lsmeans treatment/diff exp cl ilink;
   estimate "fracture rate increase" treatment 1 -1/exp;
 run;
 ```
 
+### R Code
+
+Note that `ID` is not unique to each participant. To identify the participant, we need the center too. Therefore, we need to define a new column that combines these columns.
+
+```{r}
+fracture2 <- fracture2 |> 
+  unite("StudyID",ID,center,sep="",remove=FALSE) |> 
+  mutate(StudyID = as.factor(StudyID))
+
+glimpse(fracture2)
+```
+
+
+```{r}
+library(geepack)
+library(emmeans)
+
+mod_gee <- geeglm(fractures ~ center + treatment + age + year + treatment*year, 
+       family=poisson(link="log"),
+       offset=lmonths,
+       data=fracture2,
+       id=StudyID,
+       corstr="unstructured")
+
+summary(mod_gee)
+QIC(mod_gee)
+joint_tests(mod_gee)
+
+emm_trt <- emmeans(mod_gee,~treatment,type="response", infer=T)
+emm_trt
+contrast(emm_trt,method="pairwise", infer=T)
+```
+
 ### Answer
 
-Using the unstructured form, there is no significant interaction between treatment and time ($\chi^2$ = 3.13, p=0.21), which means the effect of the treatment does not change in time. There is a significant main effect of the treatment ($\chi^2$ = 4.60, p=0.03) and year ($\chi^2$ = 7.68, p=0.02), which implies significant between- and within-group differences. The fracture rate in the placebo group is expected to be 105% higher than that of the treatment group.
+::: callout-note
+### `SAS`
+Using the unstructured form, there is no significant interaction between treatment and time ($\chi^2$ = 2.94, p=0.23), which means the effect of the treatment does not change in time. There is a significant main effect of the treatment ($\chi^2$ = 4.47, p=0.03) and year ($\chi^2$ = 7.50, p=0.02), which implies significant between- and within-group differences. The fracture rate in the placebo group is expected to be 105% (5%-297%) higher than that of the treatment group.
 
 The QIC for the unstructured structure was 368.2, while the QIC for the exchangeable/compound symmetry was 367.2. Thus, the exchangeable structure fits the data better.
+:::
 
+::: callout-note
+### `R`
+
+Using the unstructured form, there is no significant interaction between treatment and time (F(2,634)=1.47, p=0.23), which means the effect of the treatment does not change in time. There is a significant main effect of the treatment (F(1,634) = 4.47, p=0.03) and year (F(2,634)=7.50, p=0.02), which implies significant between- and within-group differences. The fracture rate in the placebo group is expected to be 105% (5%-298%) higher than that of the treatment group.
+
+The QIC for the unstructured structure was 432.61, while the QIC for the exchangeable/compound symmetry was 432.62. The models are comparable based on QIC, but the exchangeable structure has a simpler form. Hence, we choose the exchangeable structure. 
+:::
 :::
 
 ## Overdispersion in GEE
@@ -502,7 +681,7 @@ A negative binomial GEE can also be implemented to account for overdispersion.
 
 ## Example
 
-Researchers studying the incidence of lower respiratory illness in infants took repeated observations of infants over one year. They studied 284 children and examined them every two weeks. Explanatory variables evaluated included passive smoking (one or more smokers in the household), socioeconomic status, and crowding. One outcome of interest was the total number of times, or counts, of lower respiratory infection recorded for the year. The data set LRI includes all the data from the study.
+Researchers studying the incidence of lower respiratory illness in infants took repeated observations of infants over one year. They studied 284 children and examined them every two weeks. Explanatory variables evaluated included passive smoking (one or more smokers in the household), socioeconomic status, and crowding. One outcome of interest was the total number of times, or counts, of lower respiratory infection recorded for the year. The data set LRI (`lri.csv`) includes all the data from the study.
 
 - Compare the standard errors from a naive Poisson GLM, quasi-Poisson GLM (scale=Pearson), and GEE.
 
@@ -613,6 +792,18 @@ data lri;
 
 ```
 
+### R Data Set
+
+```{r}
+lri <- read.csv("lri.csv")
+
+
+lri <- lri |> 
+  mutate(across(c(id,ses,race,agegroup),~as.factor(.x)))
+glimpse(lri)
+```
+
+
 ### SAS Code
 
 ```{.r}
@@ -641,17 +832,66 @@ run;
 2. Quasi-Poisson approach
 3. GEE approach
 
+### R Code
+
+Poisson
+
+```{r}
+mod_poi <- glm(count~passive +crowding +ses+ race + agegroup,
+            data=lri,
+            family="poisson",
+            offset=log(risk))
+summary(mod_poi)
+
+```
+
+
+Quasi-poisson
+
+```{r}
+mod_quasi <- glm(count~passive +crowding +ses+ race + agegroup,
+            data=lri,
+            family="quasipoisson",
+            offset=log(risk))
+summary(mod_quasi)
+
+
+```
+
+
+GEE
+
+```{r}
+library(geepack)
+
+mod_gee <- geeglm(count~passive +crowding +ses+ race + agegroup,
+            data=lri, 
+       family=poisson(link="log"),
+       offset=logrisk,
+       id=id,
+       corstr="independence")
+
+summary(mod_gee)
+
+```
+
+
 ### Answer
 
 Both the quasi-Poisson and GEE approach addressed the overdispersion issue, but the GEE approach yielded lower standard errors compared to the quasi-Poisson approach.
 
 :::
 
-## GEE: Other distributions
+## GEE: Other distributions 
 
 The GEE can also analyze multinomial distributions for ordinal polytomous response variables using the proportional odds model.
 
-## Example: Proportional Odds Model
+
+## Example: Proportional Odds Model (`SAS` only)
+
+::: callout-warning
+`geeglm()` is currently not equipped to handle proportional odds models.
+:::
 
 A clinical trial compared two treatments for a respiratory illness (Koch et al. 1990). In each of two centers, eligible patients were randomly assigned to active treatment or placebo. During treatment, respiratory status was determined at baseline and four visits and recorded on a five-point scale of 0 for terrible to 4 for excellent. Potential explanatory variables were center, sex, and baseline respiratory status, as well as age (in years) at the time of study entry. There were 111 patients (54 active, 57 placebo), with no missing data for responses or covariates. The data is given in the RESP data set.
 
@@ -749,6 +989,10 @@ There is a significant interaction between treatment and visit ($\chi^2$ =10.47,
 ## Missing Data
 
 Recall: GEE can handle missing data that is missing completely at random (MCAR). The GEE can still calculate usable statistics and p-values for statistical inference.
+
+::: callout-tip
+Currently, `geeglm()` can only handle complete cases. It will omit missing values in the data set.
+:::
 
 ## Example: Missing Data
 
