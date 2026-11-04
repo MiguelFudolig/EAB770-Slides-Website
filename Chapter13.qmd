@@ -6,7 +6,7 @@ format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    footer: "Chapter 10- [Back to home](https://madfudolig.quarto.pub/eab770slides/)"
+    footer: "Chapter 11- [Back to home](https://miguelfudolig.github.io/EAB770-Slides-Website/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
@@ -52,21 +52,33 @@ The survival status of subjects who withdrew is unknown, hence the data ends up 
 
 ## Survival Rates
 
-We are often interested in estimating the survival rates for each method. The survival rate can be expressed as
+We are often interested in estimating the survival rates for each method. 
+
+::: callout-note
+The survival rate is the proportion of individuals in a study who have not experienced the event of interest.
+:::
+
+The survivor function $S(y)$, defined to be the probability that the survival time is greater than or equal to $y$, can be expressed as
 
 $$
 S(y) = 1-F(y) = P(Y \geq y)
 $$
 
-where $Y$ is the random variable that denotes the continuous lifetime of a subject and $F(y)$ is the cumulative distribution function.
+where $Y$ is the random variable that denotes the continuous lifetime of a subject and $F(y)$ is the cumulative incidence function.
 
 ::: callout-note
-The cumulative distribution function is commonly chosen to be the Weibull distribution, but there are other functions that people can use.
+The cumulative incidence function is defined as the cumulative probability of an event occurring before time $y$. This function is commonly chosen to be the Weibull distribution, but there are other functions that people can use.
 :::
 
 ## Hazard Function
 
-The hazard function, $h(y)$ is related to the survival rate through the following equation:
+::: callout-note
+The hazard function expresses the risk or hazard of the event in question occurring at some time $y$. This function is often referred to as $h(y)$. 
+
+The cumulative hazard function is the cumulative risk of an event occurring by time $y$. This function is often referred to as $H(y)$.
+:::
+
+The hazard function is related to the survival rate through the following equation:
 
 $$
 S(y) = \exp \left(-\int_0^y h(t) dt\right) = \exp [-H(y)]
@@ -75,7 +87,7 @@ $$
 where $H(y)$ is the cumulative hazard function.
 
 ::: callout-note
-$H(y)$ is the negative logarithm of the survival probability.
+$H(y)$ is the negative logarithm of the survivor function.
 :::
 
 ## Life Table
@@ -142,7 +154,7 @@ $$
 :::
 
 
-## SAS Implementation
+## `SAS` Implementation
 
 The `LIFETEST` procedure provides life table analysis for categorized time-to-event data.
 
@@ -160,7 +172,7 @@ time interval*censor(1);
 run;
 ```
 
-## Comparison across strata
+## `SAS`: Comparison across strata
 
 Survival curves are commonly compared across strata (treatment). SAS provides three different tests to test for a difference between the curves across the strata. This is found in the "Test of Equality over Strata" table
 
@@ -182,6 +194,63 @@ The **Likelihood Ratio** (-2LogLR) test is a parametric test that works best und
 ### Modified Peto-Peto Test
 
 The Modified Peto-Peto Test can be used when survival curves cross. This test is a variation of the log-rank test that assumes weights that detect earlier event differences. This can be specified in the `STRATA` statement using `test=modpeto`.
+:::
+
+## `R` Implementation
+
+Survival analysis in `R` is geared towards the Kaplan-Meier method compared to life tables. The `survival` and the `KMsurv` packages can be used to implement the life table analysis and create Kaplan-Meier curves like `SAS` with the following caveats:
+
+::: panel-tabset
+### Kaplan-Meier Curves
+
+- The data needs to be disaggregated, i.e. we need to use `uncount()` to get "individual-level" data, to create survival curves from the `survfit()` function in the `survival` package.
+
+- The `event` and `time` variables need to be defined as the following: the `time` variable should correspond to the mid point of each interval, while the `event` variable is defined as `1-censor`.
+
+```{r}
+#| eval: false
+
+library(survival)
+
+data$time <- data$interval+0.5
+data$event <- 1-data$censor
+
+fit <- survfit(Surv(time, event) ~ group, data = data)
+plot(fit, lty = 1:2, xlab = "Interval", ylab = "Survival")
+```
+
+### Life Table
+
+The aggregated counts have to be introduced using the `lifetab()` function in the `KMsurv` package in `R`.
+
+```{r}
+#| eval: false
+
+library(KMsurv)
+lifetab(tis, # Time points that will be used as intervals
+        ninit, # Initial value for the group
+        nlost, # Vector of censored for different intervals
+        nevent # Vector of all events for different intervals
+        ) 
+```
+
+### Equality Tests for Strata
+
+The function `survdiff()` can do a log-rank test and the modified Peto-Peto test.
+
+::: callout-warning
+`R` cannot perform the Wilcoxon and LR tests using a specific function in the `survival` and `KMsurv` packages.
+:::
+
+```{r}
+#| eval: false
+
+library(survival)
+survdiff(Surv(time,event)~group,data=data,rho=0) # Log-rank
+survdiff(Surv(time,event)~group,data=data,rho=1) # Log-rank
+
+```
+
 :::
 
 
@@ -209,6 +278,22 @@ datalines;
 ;
 ```
 
+### R Data Set
+
+```{r}
+library(tidyverse)
+medical <- data.frame(
+  interval  = c(0, 0, 1, 1, 2, 2, 3,  0, 0, 1, 1, 2, 2, 3),
+  treatment = rep(c("control", "active"), each = 7),
+  censor    = c(1, 0, 1, 0, 1, 0, 1,  1, 0, 1, 0, 1, 0, 1),
+  count     = c(9, 15, 7, 13, 6, 7, 17,  9, 12, 3, 7, 4, 10, 45)
+) |> 
+  uncount(weights = count)
+
+
+medical$time  <- medical$interval + 0.5
+medical$event <- 1 - medical$censor
+```
 
 
 ### SAS Code
@@ -220,6 +305,38 @@ strata treatment/test=(logrank lr modpeto wilcoxon);
 time interval*censor(1);
 run;
 ```
+
+### R Code
+
+```{r}
+
+library(survival)
+library(KMsurv)
+
+# Kaplan-Meier curves (SAS plots=(s,ls))
+fit <- survfit(Surv(time, event) ~ treatment, data = medical)
+summary(fit)
+plot(fit, lty = 1:2, xlab = "Interval", ylab = "Survival")
+legend("topright", legend = c("Active", "Control"), lty = 2:1)
+
+# Actuarial life-table estimates (SAS method=lt, intervals=0 to 3 by 1)
+lt_control <- lifetab(tis = 0:4, ninit = 74,
+                      nlost = c(9, 7, 6, 17), nevent = c(15, 13, 7, 0))
+lt_active  <- lifetab(tis = 0:4, ninit = 90,
+                      nlost = c(9, 3, 4, 45), nevent = c(12, 7, 10, 0))
+lt_control
+lt_active
+
+# Log-rank Test
+
+survdiff(Surv(time, event) ~ treatment, data = medical, rho = 0)
+
+# Modified Peto Test
+
+survdiff(Surv(time, event) ~ treatment, data = medical, rho = 1)
+
+```
+
 
 ### Answer
 
