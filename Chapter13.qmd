@@ -1,20 +1,22 @@
 ---
-title: "EAB 770 - Chapter 11"
+title: "EAB 770 - Chapter 13"
 author: "Miguel Fudolig"
 engine: knitr
 format:
   revealjs:
     theme: clean.scss
     scrollable: true
-    footer: "Chapter 11- [Back to home](https://miguelfudolig.github.io/EAB770-Slides-Website/)"
+    footer: "Chapter 13- [Back to home](https://miguelfudolig.github.io/EAB770-Slides-Website/)"
     code-block-bg: true
     code-block-border-left: "#31BAE9"
     slide-number: true
     menu: true
     code-annotations: true
     chalkboard: true
+    echo: true
   pdf: 
     number-sections: true
+    echo: true
 ---
 
 # Categorized Time-to-Event Data
@@ -282,12 +284,14 @@ datalines;
 
 ```{r}
 library(tidyverse)
-medical <- data.frame(
+medical_counts <- data.frame(
   interval  = c(0, 0, 1, 1, 2, 2, 3,  0, 0, 1, 1, 2, 2, 3),
   treatment = rep(c("control", "active"), each = 7),
   censor    = c(1, 0, 1, 0, 1, 0, 1,  1, 0, 1, 0, 1, 0, 1),
   count     = c(9, 15, 7, 13, 6, 7, 17,  9, 12, 3, 7, 4, 10, 45)
-) |> 
+) 
+
+medical<- medical_counts|> 
   uncount(weights = count)
 
 
@@ -313,11 +317,17 @@ run;
 library(survival)
 library(KMsurv)
 
+medical_counts |> 
+  group_by(treatment) |>
+  summarize(sum=sum(count))
+
 # Kaplan-Meier curves (SAS plots=(s,ls))
 fit <- survfit(Surv(time, event) ~ treatment, data = medical)
 summary(fit)
+
 plot(fit, lty = 1:2, xlab = "Interval", ylab = "Survival")
 legend("topright", legend = c("Active", "Control"), lty = 2:1)
+dev.off()
 
 # Actuarial life-table estimates (SAS method=lt, intervals=0 to 3 by 1)
 lt_control <- lifetab(tis = 0:4, ninit = 74,
@@ -349,12 +359,14 @@ Based on the survival curves, the log-rank test might be preferred ($\chi^2$ = 5
 
 ## Exercise
 
-A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the life table method to test if there is a difference between the survival curves of the two profiles.
+A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the Modified Peto-Peto test and the life table method to test if there is a difference between the survival curves of the two profiles.
+
+The variable `INTERVAL` takes the value 0, 1, 2, corresponding to the following intervals: <6 months, 6-12 months, >12 months (no occurrence at the end of the study). and the variable `CENSOR` takes the value 1 for censored subjects and 0 otherwise. The variable `PROFILE` reflects whether the subjects are part of the group that presented with mental health sequelae (MH) and those that did not (NoMH), and the variable `COUNT` contains the frequency counts.
 
 ::: panel-tabset
 ### SAS Data Set
 
-The variable `INTERVAL` takes the value 0, 1, 2, corresponding to the following intervals: <6 months, 6-12 months, >12 months (no occurrence at the end of the study). and the variable `CENSOR` takes the value 1 for censored subjects and 0 otherwise. The variable `PROFILE` reflects whether the subjects are part of the group that presented with mental health sequelae (MH) and those that did not (NoMH), and the variable `COUNT` contains the frequency counts.
+
 
 ```{.r}
 data mTBI;
@@ -369,6 +381,29 @@ datalines;
 ;
 ```
 
+### R Data Set
+
+```{r}
+library(tidyverse)
+mTBI_counts <- data.frame(
+  interval = c(0, 0, 1, 1, 2, 0, 0, 1, 1, 2),
+  profile  = c("NoMH", "NoMH", "NoMH", "NoMH", "NoMH", 
+                      "MH", "MH", "MH", "MH", "MH"),
+  censor   = c(1, 0, 1, 0, 1, 1, 0, 1, 0, 1),
+  count    = c(1, 17, 6, 9, 20, 8, 15, 2, 7, 10)
+)
+
+mTBI_counts
+
+mTBI <- mTBI_counts |> 
+  uncount(weights=count)
+
+mTBI$time  <- mTBI$interval + 0.5
+mTBI$event <- 1 - mTBI$censor
+```
+
+
+
 ### SAS Code
 
 ```{.r}
@@ -378,6 +413,42 @@ freq count;
 strata profile/test=(logrank lr modpeto wilcoxon);
 time interval*censor(1);
 run;
+```
+
+### R Code
+
+```{r}
+
+library(survival)
+library(KMsurv)
+
+# Initial Counts
+
+mTBI_counts |> 
+  group_by(profile) |>
+  summarize(sum=sum(count))
+
+# Kaplan-Meier curves (SAS plots=(s,ls))
+fit <- survfit(Surv(time, event) ~ profile, data = mTBI)
+summary(fit)
+plot(fit, lty = 1:2, xlab = "Interval", ylab = "Survival")
+legend("topright",legend = c("NoMH", "MH"), lty = 2:1)
+
+lt_NoMH <- lifetab(tis = 0:3, ninit = 53,
+                      nlost = c(1,6,20), nevent = c(17,9,0))
+lt_MH  <- lifetab(tis = 0:3, ninit = 42,
+                      nlost = c(8,2,10), nevent = c(15,7,0))
+lt_NoMH
+lt_MH
+
+# Log-rank Test
+
+survdiff(Surv(time, event) ~ profile, data = mTBI, rho = 0)
+
+# Modified Peto Test
+
+survdiff(Surv(time, event) ~ profile, data = mTBI, rho = 1)
+
 ```
 
 ### Answer
@@ -397,7 +468,6 @@ The treatment/groups define the rows, recurrence status define the columns, and 
 :::
 
 ::: callout-note
-
 The Mantel-Cox test for grouped data is equivalent to the log-rank test for comparing survival curves for ungrouped data.
 :::
 
@@ -424,6 +494,19 @@ datalines;
 ;
 ```
 
+### R Data Set
+
+```{r}
+medical_mc <- data.frame(
+  time      = c("0-1", "0-1", "0-1", "0-1", "1-2", "1-2", "1-2", "1-2", "2-3", "2-3", "2-3", "2-3"),
+  treatment = c("control", "control", "active", "active", "control", "control", "active", "active", "control", "control", "active", "active"),
+  status    = c("recur", "not", "recur", "not", "recur", "not", "recur", "not", "recur", "not", "recur", "not"),
+  count     = c(15, 50, 12, 69, 13, 30, 7, 59, 7, 17, 10, 45)
+)
+
+```
+
+
 ### SAS Code
 
 ```{.r}
@@ -432,6 +515,19 @@ weight count;
 tables time*treatment*status / cmh;
 run;
 ```
+
+### R Code
+
+```{r}
+library(vcdExtra)
+med_cc <- xtabs(count~treatment+status+time,data=medical_mc)
+med_cc
+CMHtest(med_cc,
+        strata="time",
+        overall=T)$ALL
+
+```
+
 
 ### Answer
 
@@ -461,6 +557,18 @@ datalines;
 ;
 ```
 
+### R Data Set
+
+```{r}
+mTBI_mc <- data.frame(
+  time    = c("0-6", "0-6", "0-6", "0-6", "6-12", "6-12", "6-12", "6-12"),
+  profile = c("NoMH", "NoMH", "MH", "MH", "NoMH", "NoMH", "MH", "MH"),
+  status  = c("recur", "not", "recur", "not", "recur", "not", "recur", "not"),
+  count   = c(17, 35, 15, 19, 9, 20, 7, 10)
+)
+```
+
+
 ### SAS Code
 
 ```{.r}
@@ -469,6 +577,19 @@ weight count;
 tables time*profile*status / cmh;
 run;
 ```
+
+### R Code
+
+```{r}
+library(vcdExtra)
+mtbi_cc <- xtabs(count~profile+status+time,data=mTBI_mc)
+mtbi_cc
+CMHtest(mtbi_cc,
+        strata="time",
+        overall=T)$ALL
+
+```
+
 
 ### Answer
 
@@ -524,13 +645,18 @@ $$
 This is similar to the proportional hazards model.
 :::
 
-## SAS Implementation
+## `R` Implementation
 
 Both `LOGISTIC` and `GENMOD` can implement the piecewise exponential model analyses.
 
 ::: callout-important
-The `GENMOD` procedure uses the Poisson likelihood to estimate failure rates, while `LOGISTIC` uses the response `failure/trials`.
+The `GENMOD` procedure uses the Poisson likelihood to estimate failure rates, while `LOGISTIC` uses the response `failure/trials`. When using `LOGISTIC`, you need to rescale the exposure factor by a large number (at least 10,000 depending on the exposure variable) to scale the exposure from aggregate to individual.
 :::
+
+
+## `R` Implementation
+
+The `glm()` function can implement the piecewise exponential model analyses. The Poisson (family="Poisson") is used to approximate the incidence rates, while the offset is commonly taken as the logarithm of the observation time.
 
 ## Example
 
@@ -554,6 +680,18 @@ vh 25-60 10 10440
 ;
 ```
 
+### R Data Set
+
+```{r}
+vda <- data.frame(
+  treatment = c("vda", "vda", "vda", "vh", "vh", "vh"),
+  time      = factor(c("0-6", "7-24", "25-60", "0-6", "7-24", "25-60"), levels=c("0-6", "7-24", "25-60")),
+  failure   = c(23, 32, 45, 9, 5, 10),
+  months    = c(3894, 10872, 18720, 2016, 5724, 10440)
+)
+```
+
+
 ### `GENMOD`
 
 ```{.r}
@@ -566,27 +704,21 @@ estimate "failure rate 25-60 VDA" int 1 time 1 0 0 treatment 1 0/exp;
 run;
 ```
 
-### `LOGISTIC`
+### R Code
 
-```{.r}
-data vda;
-input treatment time $ failure months;
-smonths=100000*months;
-datalines;
-1 _0-6 23 3894
-1 7-24 32 10872
-1 25-60 45 18720
-0 _0-6 9 2016
-0 7-24 5 5724
-0 25-60 10 10440
-;
+```{r}
+mod1 <- glm(failure~time + treatment, 
+            data=vda,
+            family="poisson",
+            offset = log(months))
+summary(mod1)
 
-proc logistic;
-class time/param=ref;
-model failure/smonths = time treatment time*treatment /
-scale=none include=2 selection=forward;
-run;
+library(emmeans)
+
+emmeans(mod1,~treatment*time,offset = 0,type="response")
+
 ```
+
 
 ### Results
 

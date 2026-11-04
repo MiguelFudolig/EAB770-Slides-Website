@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 3</title>
@@ -20,10 +20,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -204,7 +207,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Miguel Fudolig 
+Miguel Fudolig
 </div>
 </div>
 </div>
@@ -514,19 +517,19 @@ MF= min\left\{\sum_{h=1}^K [m_{h11} - max(0,n_{h1+}-n_{h+2})], \sum_{h=1}^K [min
 <h2>Cochran-Mantel-Haenszel Test: <code>R</code></h2>
 <p>Just like the previous chapter, we can use the <code>mantelhaen.test()</code> function in <code>R</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>row_var<span class="sc">+</span>column_var<span class="sc">+</span>strata_var, <span class="at">data=</span>dat)</span>
-<span id="cb1-2"><a></a><span class="co"># OR</span></span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span> row_var<span class="sc">+</span>column_var<span class="sc">+</span>strata_var, <span class="at">data=</span>dat) <span class="co"># for non-aggregated data</span></span>
-<span id="cb1-5"><a></a></span>
-<span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="fu">mantelhaen.test</span>(contingency_table, <span class="at">correct =</span> <span class="cn">FALSE</span>) <span class="co">#no correction gives the same result as SAS and CMHtest</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>row_var<span class="sc">+</span>column_var<span class="sc">+</span>strata_var, <span class="at">data=</span>dat)</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="co"># OR</span></span>
+<span id="cb1-3"><a aria-label="3"></a></span>
+<span id="cb1-4"><a aria-label="4"></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span> row_var<span class="sc">+</span>column_var<span class="sc">+</span>strata_var, <span class="at">data=</span>dat) <span class="co"># for non-aggregated data</span></span>
+<span id="cb1-5"><a aria-label="5"></a></span>
+<span id="cb1-6"><a aria-label="6"></a></span>
+<span id="cb1-7"><a aria-label="7"></a><span class="fu">mantelhaen.test</span>(contingency_table, <span class="at">correct =</span> <span class="cn">FALSE</span>) <span class="co">#no correction gives the same result as SAS and CMHtest</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>To explore conditional associations, we can use the <code>CMHtest()</code> function in the <code>vcdExtra</code> package in <code>R</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">CMHtest</span>(contingency_table,</span>
-<span id="cb2-2"><a></a>        <span class="at">strata=</span>strata_var,</span>
-<span id="cb2-3"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">CMHtest</span>(contingency_table,</span>
+<span id="cb2-2"><a aria-label="2"></a>        <span class="at">strata=</span>strata_var,</span>
+<span id="cb2-3"><a aria-label="3"></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="example" class="slide level2">
@@ -542,18 +545,18 @@ MF= min\left\{\sum_{h=1}^K [m_{h11} - max(0,n_{h1+}-n_{h+2})], \sum_{h=1}^K [min
 <p><img data-src="img/health_C3.png"></p>
 </div>
 <div id="tabset-1-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4" data-code-line-numbers="11,12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>data stress;</span>
-<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>input region <span class="sc">$</span> stress <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a>datalines;</span>
-<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>urban low f <span class="dv">48</span> urban low u <span class="dv">12</span></span>
-<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>urban high f <span class="dv">96</span> urban high u <span class="dv">94</span></span>
-<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>rural low f <span class="dv">55</span> rural low u <span class="dv">135</span></span>
-<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>rural high f <span class="dv">7</span> rural high u <span class="dv">53</span></span>
-<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a>;</span>
-<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>stress;</span>
-<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-11" class="code-annotation-target"><a href="#annotated-cell-4-11"></a>tables region<span class="sc">*</span>stress<span class="sc">*</span>outcome <span class="sc">/</span> all chisq <span class="fu">cmh</span> (mf) nocol nopct;</span>
-<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4" data-code-line-numbers="11,12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-label="1"></a>data stress;</span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-label="2"></a>input region <span class="sc">$</span> stress <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-label="3"></a>datalines;</span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-label="4"></a>urban low f <span class="dv">48</span> urban low u <span class="dv">12</span></span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5" aria-label="5"></a>urban high f <span class="dv">96</span> urban high u <span class="dv">94</span></span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-label="6"></a>rural low f <span class="dv">55</span> rural low u <span class="dv">135</span></span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7" aria-label="7"></a>rural high f <span class="dv">7</span> rural high u <span class="dv">53</span></span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8" aria-label="8"></a>;</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-label="9"></a>proc freq order<span class="ot">=</span>data data<span class="ot">=</span>stress;</span>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10" aria-label="10"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-11" class="code-annotation-target"><a href="#annotated-cell-4-11" aria-label="11"></a>tables region<span class="sc">*</span>stress<span class="sc">*</span>outcome <span class="sc">/</span> all chisq <span class="fu">cmh</span> (mf) nocol nopct;</span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12" aria-label="12"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
@@ -563,15 +566,15 @@ MF= min\left\{\sum_{h=1}^K [m_{h11} - max(0,n_{h1+}-n_{h+2})], \sum_{h=1}^K [min
 </div>
 <div id="tabset-1-3">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(vcdExtra)</span>
-<span id="cb3-2"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Favorable"</span>,<span class="st">"Unfavorable"</span>),</span>
-<span id="cb3-3"><a></a>                    <span class="at">Residence=</span><span class="fu">c</span>(<span class="st">"Urban"</span>,<span class="st">"Rural"</span>),</span>
-<span id="cb3-4"><a></a>                    <span class="at">Stress =</span> <span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"High"</span>)</span>
-<span id="cb3-5"><a></a>                  ) </span>
-<span id="cb3-6"><a></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">48</span>,<span class="dv">12</span>,<span class="dv">55</span>,<span class="dv">135</span>,<span class="dv">96</span>,<span class="dv">94</span>,<span class="dv">7</span>,<span class="dv">53</span>)</span>
-<span id="cb3-7"><a></a></span>
-<span id="cb3-8"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Stress <span class="sc">+</span> Outcome <span class="sc">+</span> Residence  ,<span class="at">data=</span>dat)</span>
-<span id="cb3-9"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="fu">library</span>(vcdExtra)</span>
+<span id="cb3-2"><a aria-label="2"></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Favorable"</span>,<span class="st">"Unfavorable"</span>),</span>
+<span id="cb3-3"><a aria-label="3"></a>                    <span class="at">Residence=</span><span class="fu">c</span>(<span class="st">"Urban"</span>,<span class="st">"Rural"</span>),</span>
+<span id="cb3-4"><a aria-label="4"></a>                    <span class="at">Stress =</span> <span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"High"</span>)</span>
+<span id="cb3-5"><a aria-label="5"></a>                  ) </span>
+<span id="cb3-6"><a aria-label="6"></a>dat<span class="sc">$</span>count <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">48</span>,<span class="dv">12</span>,<span class="dv">55</span>,<span class="dv">135</span>,<span class="dv">96</span>,<span class="dv">94</span>,<span class="dv">7</span>,<span class="dv">53</span>)</span>
+<span id="cb3-7"><a aria-label="7"></a></span>
+<span id="cb3-8"><a aria-label="8"></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Stress <span class="sc">+</span> Outcome <span class="sc">+</span> Residence  ,<span class="at">data=</span>dat)</span>
+<span id="cb3-9"><a aria-label="9"></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , Residence = Urban
 
@@ -587,7 +590,7 @@ Stress Favorable Unfavorable
   Low         55         135
   High         7          53</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">mantelhaen.test</span>(dat_cc,<span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">mantelhaen.test</span>(dat_cc,<span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Mantel-Haenszel chi-squared test without continuity correction
@@ -601,9 +604,9 @@ sample estimates:
 common odds ratio 
          3.541726 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
-<span id="cb7-2"><a></a>        <span class="at">strata=</span><span class="st">"Residence"</span>,</span>
-<span id="cb7-3"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb7-2"><a aria-label="2"></a>        <span class="at">strata=</span><span class="st">"Residence"</span>,</span>
+<span id="cb7-3"><a aria-label="3"></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Residence:Urban`
 Cochran-Mantel-Haenszel Statistics for Stress by Outcome 
@@ -640,24 +643,24 @@ general    General association 23.05  1 1.5783e-06</code></pre>
 </div>
 <p>Calculating the Mantel-Fleiss manually. The function below uses the <code>mantel_fleiss(contingencytable,k)</code> function where <code>contingencytable</code> corresponds to the contingency table in the problem and <code>k</code> is the number of strata.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>mantel_fleiss <span class="ot">&lt;-</span> <span class="cf">function</span>(cc,k){</span>
-<span id="cb9-2"><a></a>  sum_expected <span class="ot">=</span><span class="dv">0</span></span>
-<span id="cb9-3"><a></a>  sum_max <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb9-4"><a></a>  sum_min <span class="ot">=</span><span class="dv">0</span></span>
-<span id="cb9-5"><a></a>  <span class="cf">for</span> (h <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k){</span>
-<span id="cb9-6"><a></a>    nh1p <span class="ot">=</span> <span class="fu">rowSums</span>(cc[,,h])[<span class="dv">1</span>]</span>
-<span id="cb9-7"><a></a>    nhp2 <span class="ot">=</span> <span class="fu">colSums</span>(cc[,,h])[<span class="dv">2</span>]</span>
-<span id="cb9-8"><a></a>    nhp1 <span class="ot">=</span> <span class="fu">colSums</span>(cc[,,h])[<span class="dv">1</span>]</span>
-<span id="cb9-9"><a></a>    m11 <span class="ot">=</span> nh1p<span class="sc">*</span>nhp1<span class="sc">/</span><span class="fu">sum</span>(cc[,,h])</span>
-<span id="cb9-10"><a></a>    sum_expected <span class="ot">=</span> sum_expected <span class="sc">+</span> m11</span>
-<span id="cb9-11"><a></a>    sum_max <span class="ot">=</span> sum_max <span class="sc">+</span> <span class="fu">max</span>(<span class="dv">0</span>,nh1p<span class="sc">-</span>nhp2)</span>
-<span id="cb9-12"><a></a>    sum_min <span class="ot">=</span> sum_min <span class="sc">+</span> <span class="fu">min</span>(nhp1,nh1p)</span>
-<span id="cb9-13"><a></a>    </span>
-<span id="cb9-14"><a></a>  }</span>
-<span id="cb9-15"><a></a>  <span class="fu">min</span>(sum_expected<span class="sc">-</span>sum_max,sum_min<span class="sc">-</span>sum_expected)</span>
-<span id="cb9-16"><a></a>}</span>
-<span id="cb9-17"><a></a></span>
-<span id="cb9-18"><a></a><span class="fu">mantel_fleiss</span>(dat_cc,<span class="at">k=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a>mantel_fleiss <span class="ot">&lt;-</span> <span class="cf">function</span>(cc,k){</span>
+<span id="cb9-2"><a aria-label="2"></a>  sum_expected <span class="ot">=</span><span class="dv">0</span></span>
+<span id="cb9-3"><a aria-label="3"></a>  sum_max <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb9-4"><a aria-label="4"></a>  sum_min <span class="ot">=</span><span class="dv">0</span></span>
+<span id="cb9-5"><a aria-label="5"></a>  <span class="cf">for</span> (h <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k){</span>
+<span id="cb9-6"><a aria-label="6"></a>    nh1p <span class="ot">=</span> <span class="fu">rowSums</span>(cc[,,h])[<span class="dv">1</span>]</span>
+<span id="cb9-7"><a aria-label="7"></a>    nhp2 <span class="ot">=</span> <span class="fu">colSums</span>(cc[,,h])[<span class="dv">2</span>]</span>
+<span id="cb9-8"><a aria-label="8"></a>    nhp1 <span class="ot">=</span> <span class="fu">colSums</span>(cc[,,h])[<span class="dv">1</span>]</span>
+<span id="cb9-9"><a aria-label="9"></a>    m11 <span class="ot">=</span> nh1p<span class="sc">*</span>nhp1<span class="sc">/</span><span class="fu">sum</span>(cc[,,h])</span>
+<span id="cb9-10"><a aria-label="10"></a>    sum_expected <span class="ot">=</span> sum_expected <span class="sc">+</span> m11</span>
+<span id="cb9-11"><a aria-label="11"></a>    sum_max <span class="ot">=</span> sum_max <span class="sc">+</span> <span class="fu">max</span>(<span class="dv">0</span>,nh1p<span class="sc">-</span>nhp2)</span>
+<span id="cb9-12"><a aria-label="12"></a>    sum_min <span class="ot">=</span> sum_min <span class="sc">+</span> <span class="fu">min</span>(nhp1,nh1p)</span>
+<span id="cb9-13"><a aria-label="13"></a>    </span>
+<span id="cb9-14"><a aria-label="14"></a>  }</span>
+<span id="cb9-15"><a aria-label="15"></a>  <span class="fu">min</span>(sum_expected<span class="sc">-</span>sum_max,sum_min<span class="sc">-</span>sum_expected)</span>
+<span id="cb9-16"><a aria-label="16"></a>}</span>
+<span id="cb9-17"><a aria-label="17"></a></span>
+<span id="cb9-18"><a aria-label="18"></a><span class="fu">mantel_fleiss</span>(dat_cc,<span class="at">k=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 40.32</code></pre>
 </div>
@@ -723,37 +726,37 @@ Treatment Yes No
 </div>
 </div>
 <div id="tabset-2-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a></span>
-<span id="cb13-2"><a></a>data resp;</span>
-<span id="cb13-3"><a></a>length treatment <span class="sc">$</span><span class="fl">7.</span>;</span>
-<span id="cb13-4"><a></a>input treatment <span class="sc">$</span> improvement <span class="sc">$</span> center <span class="sc">$</span> count;</span>
-<span id="cb13-5"><a></a>datalines;</span>
-<span id="cb13-6"><a></a>Test Yes <span class="dv">1</span> <span class="dv">29</span></span>
-<span id="cb13-7"><a></a>Placebo Yes <span class="dv">1</span> <span class="dv">14</span></span>
-<span id="cb13-8"><a></a>Test No <span class="dv">1</span> <span class="dv">16</span></span>
-<span id="cb13-9"><a></a>Placebo No <span class="dv">1</span> <span class="dv">31</span></span>
-<span id="cb13-10"><a></a>Test Yes <span class="dv">2</span> <span class="dv">37</span></span>
-<span id="cb13-11"><a></a>Placebo Yes <span class="dv">2</span> <span class="dv">24</span></span>
-<span id="cb13-12"><a></a>Test No <span class="dv">2</span> <span class="dv">8</span></span>
-<span id="cb13-13"><a></a>Placebo No <span class="dv">2</span> <span class="dv">21</span></span>
-<span id="cb13-14"><a></a>;</span>
-<span id="cb13-15"><a></a></span>
-<span id="cb13-16"><a></a></span>
-<span id="cb13-17"><a></a>proc freq data<span class="ot">=</span>resp order<span class="ot">=</span>data;</span>
-<span id="cb13-18"><a></a>weight count;</span>
-<span id="cb13-19"><a></a>tables center<span class="sc">*</span>treatment<span class="sc">*</span>improvement <span class="sc">/</span> <span class="fu">cmh</span> (MF) nocol norow nopct;</span>
-<span id="cb13-20"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a></span>
+<span id="cb13-2"><a aria-label="2"></a>data resp;</span>
+<span id="cb13-3"><a aria-label="3"></a>length treatment <span class="sc">$</span><span class="fl">7.</span>;</span>
+<span id="cb13-4"><a aria-label="4"></a>input treatment <span class="sc">$</span> improvement <span class="sc">$</span> center <span class="sc">$</span> count;</span>
+<span id="cb13-5"><a aria-label="5"></a>datalines;</span>
+<span id="cb13-6"><a aria-label="6"></a>Test Yes <span class="dv">1</span> <span class="dv">29</span></span>
+<span id="cb13-7"><a aria-label="7"></a>Placebo Yes <span class="dv">1</span> <span class="dv">14</span></span>
+<span id="cb13-8"><a aria-label="8"></a>Test No <span class="dv">1</span> <span class="dv">16</span></span>
+<span id="cb13-9"><a aria-label="9"></a>Placebo No <span class="dv">1</span> <span class="dv">31</span></span>
+<span id="cb13-10"><a aria-label="10"></a>Test Yes <span class="dv">2</span> <span class="dv">37</span></span>
+<span id="cb13-11"><a aria-label="11"></a>Placebo Yes <span class="dv">2</span> <span class="dv">24</span></span>
+<span id="cb13-12"><a aria-label="12"></a>Test No <span class="dv">2</span> <span class="dv">8</span></span>
+<span id="cb13-13"><a aria-label="13"></a>Placebo No <span class="dv">2</span> <span class="dv">21</span></span>
+<span id="cb13-14"><a aria-label="14"></a>;</span>
+<span id="cb13-15"><a aria-label="15"></a></span>
+<span id="cb13-16"><a aria-label="16"></a></span>
+<span id="cb13-17"><a aria-label="17"></a>proc freq data<span class="ot">=</span>resp order<span class="ot">=</span>data;</span>
+<span id="cb13-18"><a aria-label="18"></a>weight count;</span>
+<span id="cb13-19"><a aria-label="19"></a>tables center<span class="sc">*</span>treatment<span class="sc">*</span>improvement <span class="sc">/</span> <span class="fu">cmh</span> (MF) nocol norow nopct;</span>
+<span id="cb13-20"><a aria-label="20"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-3">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Improvement =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>),</span>
-<span id="cb14-2"><a></a>                    <span class="at">Center=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
-<span id="cb14-3"><a></a>                    <span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">"Test"</span>,<span class="st">"Placebo"</span>)</span>
-<span id="cb14-4"><a></a>                  )  </span>
-<span id="cb14-5"><a></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">16</span>,<span class="dv">37</span>,<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">31</span>,<span class="dv">24</span>,<span class="dv">21</span>)</span>
-<span id="cb14-6"><a></a></span>
-<span id="cb14-7"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Treatment<span class="sc">+</span>Improvement <span class="sc">+</span> Center, <span class="at">data=</span>dat) </span>
-<span id="cb14-8"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-label="1"></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Improvement =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>,<span class="st">"No"</span>),</span>
+<span id="cb14-2"><a aria-label="2"></a>                    <span class="at">Center=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb14-3"><a aria-label="3"></a>                    <span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">"Test"</span>,<span class="st">"Placebo"</span>)</span>
+<span id="cb14-4"><a aria-label="4"></a>                  )  </span>
+<span id="cb14-5"><a aria-label="5"></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">29</span>,<span class="dv">16</span>,<span class="dv">37</span>,<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">31</span>,<span class="dv">24</span>,<span class="dv">21</span>)</span>
+<span id="cb14-6"><a aria-label="6"></a></span>
+<span id="cb14-7"><a aria-label="7"></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Treatment<span class="sc">+</span>Improvement <span class="sc">+</span> Center, <span class="at">data=</span>dat) </span>
+<span id="cb14-8"><a aria-label="8"></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , Center = 1
 
@@ -769,8 +772,8 @@ Treatment Yes No
   Test     37  8
   Placebo  24 21</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">mantelhaen.test</span>(dat_cc,</span>
-<span id="cb16-2"><a></a>                <span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-label="1"></a><span class="fu">mantelhaen.test</span>(dat_cc,</span>
+<span id="cb16-2"><a aria-label="2"></a>                <span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Mantel-Haenszel chi-squared test without continuity correction
@@ -784,10 +787,10 @@ sample estimates:
 common odds ratio 
          4.028846 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
-<span id="cb18-2"><a></a>        <span class="at">strata=</span><span class="st">"Center"</span>,</span>
-<span id="cb18-3"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<span id="cb18-4"><a></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-label="1"></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb18-2"><a aria-label="2"></a>        <span class="at">strata=</span><span class="st">"Center"</span>,</span>
+<span id="cb18-3"><a aria-label="3"></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
+<span id="cb18-4"><a aria-label="4"></a>        <span class="at">overall=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Center:1`
 Cochran-Mantel-Haenszel Statistics for Treatment by Improvement 
@@ -821,7 +824,7 @@ rmeans  Row mean scores differ 18.411  1 1.7807e-05
 cmeans  Col mean scores differ 18.411  1 1.7807e-05
 cor        Nonzero correlation 18.411  1 1.7807e-05</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">mantel_fleiss</span>(dat_cc,<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a><span class="fu">mantel_fleiss</span>(dat_cc,<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 36</code></pre>
 </div>
@@ -942,10 +945,10 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 <li>The <code>comor</code> and <code>eqor</code> options in the <code>exact</code> statement yield the exact common odds ratio and the Zelen’s test results, respectively.</li>
 </ul>
 <p>Sample SAS code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" data-code-line-numbers="2,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>proc freq;</span>
-<span id="cb22-2"><a></a>tables a<span class="sc">*</span>b<span class="sc">*</span>c<span class="sc">/</span>cmh measures;</span>
-<span id="cb22-3"><a></a>exact comor eqor;</span>
-<span id="cb22-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" data-code-line-numbers="2,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a>proc freq;</span>
+<span id="cb22-2"><a aria-label="2"></a>tables a<span class="sc">*</span>b<span class="sc">*</span>c<span class="sc">/</span>cmh measures;</span>
+<span id="cb22-3"><a aria-label="3"></a>exact comor eqor;</span>
+<span id="cb22-4"><a aria-label="4"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="common-odds-ratios-r" class="slide level2">
 <h2>Common Odds Ratios: <code>R</code></h2>
@@ -963,23 +966,23 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 <p><img data-src="img/coronary_C3.png"></p>
 </div>
 <div id="tabset-5-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-24-1"><a href="#annotated-cell-24-1"></a>data ca;</span>
-<span id="annotated-cell-24-2"><a href="#annotated-cell-24-2"></a>input sex <span class="sc">$</span> ECG <span class="sc">$</span> disease <span class="sc">$</span> count;</span>
-<span id="annotated-cell-24-3"><a href="#annotated-cell-24-3"></a>datalines;</span>
-<span id="annotated-cell-24-4"><a href="#annotated-cell-24-4"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">4</span></span>
-<span id="annotated-cell-24-5"><a href="#annotated-cell-24-5"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> no <span class="dv">11</span></span>
-<span id="annotated-cell-24-6"><a href="#annotated-cell-24-6"></a>female <span class="sc">&gt;=</span><span class="fl">0.1</span> yes <span class="dv">8</span></span>
-<span id="annotated-cell-24-7"><a href="#annotated-cell-24-7"></a>female <span class="sc">&gt;=</span><span class="fl">0.1</span> no <span class="dv">10</span></span>
-<span id="annotated-cell-24-8"><a href="#annotated-cell-24-8"></a>male <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">9</span></span>
-<span id="annotated-cell-24-9"><a href="#annotated-cell-24-9"></a>male <span class="sc">&lt;</span><span class="fl">0.1</span> no <span class="dv">9</span></span>
-<span id="annotated-cell-24-10"><a href="#annotated-cell-24-10"></a>male <span class="sc">&gt;=</span><span class="fl">0.1</span> yes <span class="dv">21</span></span>
-<span id="annotated-cell-24-11"><a href="#annotated-cell-24-11"></a>male <span class="sc">&gt;=</span><span class="fl">0.1</span> no <span class="dv">6</span></span>
-<span id="annotated-cell-24-12"><a href="#annotated-cell-24-12"></a>;</span>
-<span id="annotated-cell-24-13"><a href="#annotated-cell-24-13"></a>proc freq data<span class="ot">=</span>ca ;</span>
-<span id="annotated-cell-24-14"><a href="#annotated-cell-24-14"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-24-15" class="code-annotation-target"><a href="#annotated-cell-24-15"></a>tables sex<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct chisq measures;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-24-16" class="code-annotation-target"><a href="#annotated-cell-24-16"></a>tables sex<span class="sc">*</span>ECG<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct cmh measures;</span>
-<span id="annotated-cell-24-17"><a href="#annotated-cell-24-17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-24-1"><a href="#annotated-cell-24-1" aria-label="1"></a>data ca;</span>
+<span id="annotated-cell-24-2"><a href="#annotated-cell-24-2" aria-label="2"></a>input sex <span class="sc">$</span> ECG <span class="sc">$</span> disease <span class="sc">$</span> count;</span>
+<span id="annotated-cell-24-3"><a href="#annotated-cell-24-3" aria-label="3"></a>datalines;</span>
+<span id="annotated-cell-24-4"><a href="#annotated-cell-24-4" aria-label="4"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">4</span></span>
+<span id="annotated-cell-24-5"><a href="#annotated-cell-24-5" aria-label="5"></a>female <span class="sc">&lt;</span><span class="fl">0.1</span> no <span class="dv">11</span></span>
+<span id="annotated-cell-24-6"><a href="#annotated-cell-24-6" aria-label="6"></a>female <span class="sc">&gt;=</span><span class="fl">0.1</span> yes <span class="dv">8</span></span>
+<span id="annotated-cell-24-7"><a href="#annotated-cell-24-7" aria-label="7"></a>female <span class="sc">&gt;=</span><span class="fl">0.1</span> no <span class="dv">10</span></span>
+<span id="annotated-cell-24-8"><a href="#annotated-cell-24-8" aria-label="8"></a>male <span class="sc">&lt;</span><span class="fl">0.1</span> yes <span class="dv">9</span></span>
+<span id="annotated-cell-24-9"><a href="#annotated-cell-24-9" aria-label="9"></a>male <span class="sc">&lt;</span><span class="fl">0.1</span> no <span class="dv">9</span></span>
+<span id="annotated-cell-24-10"><a href="#annotated-cell-24-10" aria-label="10"></a>male <span class="sc">&gt;=</span><span class="fl">0.1</span> yes <span class="dv">21</span></span>
+<span id="annotated-cell-24-11"><a href="#annotated-cell-24-11" aria-label="11"></a>male <span class="sc">&gt;=</span><span class="fl">0.1</span> no <span class="dv">6</span></span>
+<span id="annotated-cell-24-12"><a href="#annotated-cell-24-12" aria-label="12"></a>;</span>
+<span id="annotated-cell-24-13"><a href="#annotated-cell-24-13" aria-label="13"></a>proc freq data<span class="ot">=</span>ca ;</span>
+<span id="annotated-cell-24-14"><a href="#annotated-cell-24-14" aria-label="14"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-24-15" class="code-annotation-target"><a href="#annotated-cell-24-15" aria-label="15"></a>tables sex<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct chisq measures;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-24-16" class="code-annotation-target"><a href="#annotated-cell-24-16" aria-label="16"></a>tables sex<span class="sc">*</span>ECG<span class="sc">*</span>disease <span class="sc">/</span> nocol nopct cmh measures;</span>
+<span id="annotated-cell-24-17"><a href="#annotated-cell-24-17" aria-label="17"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
 <dd>
@@ -993,21 +996,21 @@ Q_{BD}  = \sum_{h=1}^{q} \sum_{i=1}^{2} \sum_{j=1}^{2} \frac{(n_{hij}-m_{hij})^2
 </div>
 <div id="tabset-5-3">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Sex =</span> <span class="fu">c</span>(<span class="st">"Female"</span>,<span class="st">"Male"</span>),</span>
-<span id="cb23-2"><a></a>                    <span class="at">ECG=</span><span class="fu">c</span>(<span class="st">"Less"</span>,<span class="st">"Greater"</span>),</span>
-<span id="cb23-3"><a></a>                    <span class="at">Disease =</span> <span class="fu">c</span>(<span class="st">"No"</span>,<span class="st">"Yes"</span>)</span>
-<span id="cb23-4"><a></a>                  )  </span>
-<span id="cb23-5"><a></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">21</span>)</span>
-<span id="cb23-6"><a></a></span>
-<span id="cb23-7"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Disease<span class="sc">+</span>Sex, <span class="at">data=</span>dat) </span>
-<span id="cb23-8"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Sex =</span> <span class="fu">c</span>(<span class="st">"Female"</span>,<span class="st">"Male"</span>),</span>
+<span id="cb23-2"><a aria-label="2"></a>                    <span class="at">ECG=</span><span class="fu">c</span>(<span class="st">"Less"</span>,<span class="st">"Greater"</span>),</span>
+<span id="cb23-3"><a aria-label="3"></a>                    <span class="at">Disease =</span> <span class="fu">c</span>(<span class="st">"No"</span>,<span class="st">"Yes"</span>)</span>
+<span id="cb23-4"><a aria-label="4"></a>                  )  </span>
+<span id="cb23-5"><a aria-label="5"></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">21</span>)</span>
+<span id="cb23-6"><a aria-label="6"></a></span>
+<span id="cb23-7"><a aria-label="7"></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Disease<span class="sc">+</span>Sex, <span class="at">data=</span>dat) </span>
+<span id="cb23-8"><a aria-label="8"></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Sex
 Disease Female Male
     No      21   15
     Yes     12   30</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">CMHtest</span>(dat_cc, <span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-label="1"></a><span class="fu">CMHtest</span>(dat_cc, <span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cochran-Mantel-Haenszel Statistics for Disease by Sex 
 
@@ -1020,8 +1023,8 @@ general    General association 6.9444  1 0.008408</code></pre>
 </div>
 <p>Accounting for partial tables,</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  ECG<span class="sc">+</span>Disease<span class="sc">+</span>Sex, <span class="at">data=</span>dat) </span>
-<span id="cb27-2"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-label="1"></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  ECG<span class="sc">+</span>Disease<span class="sc">+</span>Sex, <span class="at">data=</span>dat) </span>
+<span id="cb27-2"><a aria-label="2"></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , Sex = Female
 
@@ -1039,8 +1042,8 @@ ECG       No Yes
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">library</span>(vcdExtra)</span>
-<span id="cb29-2"><a></a><span class="fu">breslow_day_test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-label="1"></a><span class="fu">library</span>(vcdExtra)</span>
+<span id="cb29-2"><a aria-label="2"></a><span class="fu">breslow_day_test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Breslow-Day Test on Homogeneity of Odds Ratios 
@@ -1052,7 +1055,7 @@ Common OR:     2.847
 
 X-squared = 0.2155, df = 1, p-value = 0.6425</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">mantelhaen.test</span>(dat_cc, <span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-label="1"></a><span class="fu">mantelhaen.test</span>(dat_cc, <span class="at">correct=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Mantel-Haenszel chi-squared test without continuity correction
@@ -1066,8 +1069,8 @@ sample estimates:
 common odds ratio 
          2.846734 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">library</span>(NSM3)</span>
-<span id="cb33-2"><a></a><span class="fu">zelen.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-label="1"></a><span class="fu">library</span>(NSM3)</span>
+<span id="cb33-2"><a aria-label="2"></a><span class="fu">zelen.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Zelen's test:
@@ -1110,20 +1113,20 @@ P = 1</code></pre>
 <ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Code</a></li><li><a href="#tabset-6-2">R Code</a></li><li><a href="#tabset-6-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-37"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-37-1"><a href="#annotated-cell-37-1"></a>data exercise;</span>
-<span id="annotated-cell-37-2"><a href="#annotated-cell-37-2"></a>input location <span class="sc">$</span> program <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-37-3"><a href="#annotated-cell-37-3"></a>datalines;</span>
-<span id="annotated-cell-37-4"><a href="#annotated-cell-37-4"></a>downtown office good <span class="dv">12</span> downtown office not <span class="dv">5</span></span>
-<span id="annotated-cell-37-5"><a href="#annotated-cell-37-5"></a>downtown home good <span class="dv">3</span> downtown home not <span class="dv">5</span></span>
-<span id="annotated-cell-37-6"><a href="#annotated-cell-37-6"></a>satellite office good <span class="dv">6</span> satellite office not <span class="dv">1</span></span>
-<span id="annotated-cell-37-7"><a href="#annotated-cell-37-7"></a>satellite home good <span class="dv">1</span> satellite home not <span class="dv">3</span></span>
-<span id="annotated-cell-37-8"><a href="#annotated-cell-37-8"></a>;</span>
-<span id="annotated-cell-37-9"><a href="#annotated-cell-37-9"></a></span>
-<span id="annotated-cell-37-10"><a href="#annotated-cell-37-10"></a>proc freq order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-37-11"><a href="#annotated-cell-37-11"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-37" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-37-12" class="code-annotation-target"><a href="#annotated-cell-37-12"></a>tables location<span class="sc">*</span>program<span class="sc">*</span>outcome <span class="sc">/</span><span class="fu">cmh</span>(mf);</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-37" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-37-13" class="code-annotation-target"><a href="#annotated-cell-37-13"></a>exact comor eqor;</span>
-<span id="annotated-cell-37-14"><a href="#annotated-cell-37-14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-37"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-37-1"><a href="#annotated-cell-37-1" aria-label="1"></a>data exercise;</span>
+<span id="annotated-cell-37-2"><a href="#annotated-cell-37-2" aria-label="2"></a>input location <span class="sc">$</span> program <span class="sc">$</span> outcome <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-37-3"><a href="#annotated-cell-37-3" aria-label="3"></a>datalines;</span>
+<span id="annotated-cell-37-4"><a href="#annotated-cell-37-4" aria-label="4"></a>downtown office good <span class="dv">12</span> downtown office not <span class="dv">5</span></span>
+<span id="annotated-cell-37-5"><a href="#annotated-cell-37-5" aria-label="5"></a>downtown home good <span class="dv">3</span> downtown home not <span class="dv">5</span></span>
+<span id="annotated-cell-37-6"><a href="#annotated-cell-37-6" aria-label="6"></a>satellite office good <span class="dv">6</span> satellite office not <span class="dv">1</span></span>
+<span id="annotated-cell-37-7"><a href="#annotated-cell-37-7" aria-label="7"></a>satellite home good <span class="dv">1</span> satellite home not <span class="dv">3</span></span>
+<span id="annotated-cell-37-8"><a href="#annotated-cell-37-8" aria-label="8"></a>;</span>
+<span id="annotated-cell-37-9"><a href="#annotated-cell-37-9" aria-label="9"></a></span>
+<span id="annotated-cell-37-10"><a href="#annotated-cell-37-10" aria-label="10"></a>proc freq order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-37-11"><a href="#annotated-cell-37-11" aria-label="11"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-37" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-37-12" class="code-annotation-target"><a href="#annotated-cell-37-12" aria-label="12"></a>tables location<span class="sc">*</span>program<span class="sc">*</span>outcome <span class="sc">/</span><span class="fu">cmh</span>(mf);</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-37" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-37-13" class="code-annotation-target"><a href="#annotated-cell-37-13" aria-label="13"></a>exact comor eqor;</span>
+<span id="annotated-cell-37-14"><a href="#annotated-cell-37-14" aria-label="14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-37" data-target-annotation="1">1</dt>
 <dd>
@@ -1137,14 +1140,14 @@ P = 1</code></pre>
 </div>
 <div id="tabset-6-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Location =</span> <span class="fu">c</span>(<span class="st">"D"</span>,<span class="st">"S"</span>),</span>
-<span id="cb35-2"><a></a>                    <span class="at">Program=</span><span class="fu">c</span>(<span class="st">"Office"</span>,<span class="st">"Home"</span>),</span>
-<span id="cb35-3"><a></a>                    <span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Good"</span>,<span class="st">"Not Good"</span>)</span>
-<span id="cb35-4"><a></a>                  )  </span>
-<span id="cb35-5"><a></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
-<span id="cb35-6"><a></a></span>
-<span id="cb35-7"><a></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Program<span class="sc">+</span>Outcome<span class="sc">+</span>Location, <span class="at">data=</span>dat) </span>
-<span id="cb35-8"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-label="1"></a>dat  <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Location =</span> <span class="fu">c</span>(<span class="st">"D"</span>,<span class="st">"S"</span>),</span>
+<span id="cb35-2"><a aria-label="2"></a>                    <span class="at">Program=</span><span class="fu">c</span>(<span class="st">"Office"</span>,<span class="st">"Home"</span>),</span>
+<span id="cb35-3"><a aria-label="3"></a>                    <span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">"Good"</span>,<span class="st">"Not Good"</span>)</span>
+<span id="cb35-4"><a aria-label="4"></a>                  )  </span>
+<span id="cb35-5"><a aria-label="5"></a>dat<span class="sc">$</span>count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb35-6"><a aria-label="6"></a></span>
+<span id="cb35-7"><a aria-label="7"></a>dat_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count <span class="sc">~</span>  Program<span class="sc">+</span>Outcome<span class="sc">+</span>Location, <span class="at">data=</span>dat) </span>
+<span id="cb35-8"><a aria-label="8"></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , Location = D
 
@@ -1163,14 +1166,14 @@ Program  Good Not Good
 </div>
 <p>Check the Mantel-Fleiss Criterion first.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">mantel_fleiss</span>(dat_cc,<span class="at">k=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-label="1"></a><span class="fu">mantel_fleiss</span>(dat_cc,<span class="at">k=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.654545</code></pre>
 </div>
 </div>
 <p>Because MF is less than 5, we need to use Zelen’s test.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">zelen.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-label="1"></a><span class="fu">zelen.test</span>(dat_cc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Zelen's test:

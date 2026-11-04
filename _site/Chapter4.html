@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 4</title>
@@ -20,10 +20,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -204,7 +207,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Miguel Fudolig 
+Miguel Fudolig
 </div>
 </div>
 </div>
@@ -386,16 +389,16 @@ Q_S = \frac{(\bar{f}_1 - \mu_1)^2}{V}
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Code</a></li><li><a href="#tabset-1-2">R Code</a></li><li><a href="#tabset-1-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data arth;</span>
-<span id="cb1-2"><a></a>input treat <span class="sc">$</span> response <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb1-3"><a></a>datalines;</span>
-<span id="cb1-4"><a></a>active none <span class="dv">13</span> active some <span class="dv">7</span> active marked <span class="dv">21</span></span>
-<span id="cb1-5"><a></a>placebo none <span class="dv">29</span> placebo some <span class="dv">7</span> placebo marked <span class="dv">7</span></span>
-<span id="cb1-6"><a></a>;</span>
-<span id="cb1-7"><a></a>proc freq data<span class="ot">=</span>arth order<span class="ot">=</span>data;</span>
-<span id="cb1-8"><a></a>weight count;</span>
-<span id="cb1-9"><a></a>tables treat<span class="sc">*</span>response <span class="sc">/</span> cmh chisq nocol nopct;</span>
-<span id="cb1-10"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a>data arth;</span>
+<span id="cb1-2"><a aria-label="2"></a>input treat <span class="sc">$</span> response <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb1-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb1-4"><a aria-label="4"></a>active none <span class="dv">13</span> active some <span class="dv">7</span> active marked <span class="dv">21</span></span>
+<span id="cb1-5"><a aria-label="5"></a>placebo none <span class="dv">29</span> placebo some <span class="dv">7</span> placebo marked <span class="dv">7</span></span>
+<span id="cb1-6"><a aria-label="6"></a>;</span>
+<span id="cb1-7"><a aria-label="7"></a>proc freq data<span class="ot">=</span>arth order<span class="ot">=</span>data;</span>
+<span id="cb1-8"><a aria-label="8"></a>weight count;</span>
+<span id="cb1-9"><a aria-label="9"></a>tables treat<span class="sc">*</span>response <span class="sc">/</span> cmh chisq nocol nopct;</span>
+<span id="cb1-10"><a aria-label="10"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2">
 <div class="cell">
@@ -445,17 +448,17 @@ Smokers Very Unlikely Unlikely Likely Very Likely
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Code</a></li><li><a href="#tabset-2-2">R Code</a></li><li><a href="#tabset-2-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data smoke;</span>
-<span id="cb5-2"><a></a>input treat <span class="sc">$</span> response <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb5-3"><a></a>datalines;</span>
-<span id="cb5-4"><a></a>heavy vu <span class="dv">36</span> heavy u <span class="dv">75</span> heavy l <span class="dv">56</span> heavy vl <span class="dv">17</span></span>
-<span id="cb5-5"><a></a>light vu <span class="dv">38</span> light u <span class="dv">59</span> light l <span class="dv">64</span> light vl <span class="dv">23</span></span>
-<span id="cb5-6"><a></a>;</span>
-<span id="cb5-7"><a></a></span>
-<span id="cb5-8"><a></a>proc freq data<span class="ot">=</span>smoke order<span class="ot">=</span>data;</span>
-<span id="cb5-9"><a></a>weight count;</span>
-<span id="cb5-10"><a></a>tables treat<span class="sc">*</span>response <span class="sc">/</span> cmh chisq nocol nopct;</span>
-<span id="cb5-11"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>data smoke;</span>
+<span id="cb5-2"><a aria-label="2"></a>input treat <span class="sc">$</span> response <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb5-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb5-4"><a aria-label="4"></a>heavy vu <span class="dv">36</span> heavy u <span class="dv">75</span> heavy l <span class="dv">56</span> heavy vl <span class="dv">17</span></span>
+<span id="cb5-5"><a aria-label="5"></a>light vu <span class="dv">38</span> light u <span class="dv">59</span> light l <span class="dv">64</span> light vl <span class="dv">23</span></span>
+<span id="cb5-6"><a aria-label="6"></a>;</span>
+<span id="cb5-7"><a aria-label="7"></a></span>
+<span id="cb5-8"><a aria-label="8"></a>proc freq data<span class="ot">=</span>smoke order<span class="ot">=</span>data;</span>
+<span id="cb5-9"><a aria-label="9"></a>weight count;</span>
+<span id="cb5-10"><a aria-label="10"></a>tables treat<span class="sc">*</span>response <span class="sc">/</span> cmh chisq nocol nopct;</span>
+<span id="cb5-11"><a aria-label="11"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
 <div class="cell">
@@ -652,9 +655,9 @@ Q_H = \sum_{h=1}^q (g_h-\tilde{g})^2/v_h
 <li>Difference in mean scores: “Row means differ”</li>
 </ul></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>proc freq;</span>
-<span id="cb7-2"><a></a>tables A<span class="sc">*</span>B<span class="sc">/</span>scores<span class="ot">=</span>MODRIDIT;</span>
-<span id="cb7-3"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a>proc freq;</span>
+<span id="cb7-2"><a aria-label="2"></a>tables A<span class="sc">*</span>B<span class="sc">/</span>scores<span class="ot">=</span>MODRIDIT;</span>
+<span id="cb7-3"><a aria-label="3"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="somers-d-sas" class="slide level2">
 <h2>Somers’ D: SAS</h2>
@@ -663,45 +666,45 @@ Q_H = \sum_{h=1}^q (g_h-\tilde{g})^2/v_h
 <li>The Mann-Whitney rank-sum statistic can be calculated using PROC IML.</li>
 <li>The <code>cl</code> option calculates confidence intervals for Somers’ D</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc freq;</span>
-<span id="cb8-2"><a></a>tables A<span class="sc">*</span>B<span class="sc">/</span>scores<span class="ot">=</span>MODRIDIT measures cl;</span>
-<span id="cb8-3"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a>proc freq;</span>
+<span id="cb8-2"><a aria-label="2"></a>tables A<span class="sc">*</span>B<span class="sc">/</span>scores<span class="ot">=</span>MODRIDIT measures cl;</span>
+<span id="cb8-3"><a aria-label="3"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="mann-whitney-sas-optional" class="slide level2">
 <h2>Mann-Whitney: SAS (optional)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>proc freq ;</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>weight count;</span>
-<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a>tables S<span class="sc">*</span>A<span class="sc">*</span>B<span class="sc">/</span> measures scores<span class="ot">=</span>modridit;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>output out<span class="ot">=</span>somerout smdcr;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a>ods output CrosstabFreqs<span class="ot">=</span>myFreqs;</span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>run;</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a>data ns;</span>
-<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a>set myFreqs; where _type_<span class="ot">=</span><span class="st">"110"</span>;</span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a>run;</span>
-<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a></span>
-<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11"></a>proc iml;</span>
-<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12"></a>use somerout var{_SMDCR_ E_SMDCR};</span>
-<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13"></a>read all into combined;</span>
-<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14"></a>use ns var{Frequency};</span>
-<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15"></a>read all into total;</span>
-<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16"></a>print total;</span>
-<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17"></a>WH<span class="ot">=</span>(total[<span class="dv">1</span>,]<span class="co">#total[2,]) / (total[1,]+total[2,]) //</span></span>
-<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18"></a>(total[<span class="dv">3</span>,]<span class="co">#total[4,]) / (total[3,]+total[4,]);</span></span>
-<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19"></a>print wh;</span>
-<span id="annotated-cell-3-20"><a href="#annotated-cell-3-20"></a><span class="at">GH=</span>(combined[,<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>;</span>
-<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21"></a><span class="at">SEGH=</span>(combined[,<span class="dv">2</span>])<span class="sc">/</span><span class="dv">2</span>;</span>
-<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22"></a>print wh GH SEGH;</span>
-<span id="annotated-cell-3-23"><a href="#annotated-cell-3-23"></a><span class="at">QH=</span> (GH[<span class="dv">1</span>] <span class="sc">-</span> GH[<span class="dv">2</span>])<span class="sc">**</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">SSQ</span>(SEGH);</span>
-<span id="annotated-cell-3-24"><a href="#annotated-cell-3-24"></a><span class="at">pvalue=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">probchi</span>(QH,<span class="dv">1</span>);</span>
-<span id="annotated-cell-3-25"><a href="#annotated-cell-3-25"></a>print GH SEGH QH pvalue;</span>
-<span id="annotated-cell-3-26"><a href="#annotated-cell-3-26"></a><span class="at">gtilde1=</span><span class="fu">sum</span>(GH <span class="co"># WH);</span></span>
-<span id="annotated-cell-3-27"><a href="#annotated-cell-3-27"></a><span class="at">gtilde2=</span><span class="fu">sum</span>(WH);</span>
-<span id="annotated-cell-3-28"><a href="#annotated-cell-3-28"></a><span class="at">gtilde=</span>gtilde1<span class="sc">/</span>gtilde2;</span>
-<span id="annotated-cell-3-29"><a href="#annotated-cell-3-29"></a><span class="at">gtildevar=</span>(<span class="fu">sum</span>(WH<span class="do">##2 # SEGH##2)) /((sum(WH))**2);</span></span>
-<span id="annotated-cell-3-30"><a href="#annotated-cell-3-30"></a><span class="at">segtilde=</span><span class="fu">sqrt</span>(gtildevar);</span>
-<span id="annotated-cell-3-31"><a href="#annotated-cell-3-31"></a><span class="at">qgtilde=</span>(gtilde<span class="fl">-.5</span>)<span class="sc">**</span><span class="dv">2</span><span class="sc">/</span>gtildevar;</span>
-<span id="annotated-cell-3-32"><a href="#annotated-cell-3-32"></a>print gtilde gtildevar qgtilde;</span>
-<span id="annotated-cell-3-33"><a href="#annotated-cell-3-33"></a>quit;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-label="1"></a>proc freq ;</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-label="2"></a>weight count;</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-label="3"></a>tables S<span class="sc">*</span>A<span class="sc">*</span>B<span class="sc">/</span> measures scores<span class="ot">=</span>modridit;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-label="4"></a>output out<span class="ot">=</span>somerout smdcr;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-label="5"></a>ods output CrosstabFreqs<span class="ot">=</span>myFreqs;</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-label="6"></a>run;</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-label="7"></a>data ns;</span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-label="8"></a>set myFreqs; where _type_<span class="ot">=</span><span class="st">"110"</span>;</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-label="9"></a>run;</span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-label="10"></a></span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-label="11"></a>proc iml;</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-label="12"></a>use somerout var{_SMDCR_ E_SMDCR};</span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-label="13"></a>read all into combined;</span>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-label="14"></a>use ns var{Frequency};</span>
+<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-label="15"></a>read all into total;</span>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-label="16"></a>print total;</span>
+<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-label="17"></a>WH<span class="ot">=</span>(total[<span class="dv">1</span>,]<span class="co">#total[2,]) / (total[1,]+total[2,]) //</span></span>
+<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-label="18"></a>(total[<span class="dv">3</span>,]<span class="co">#total[4,]) / (total[3,]+total[4,]);</span></span>
+<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-label="19"></a>print wh;</span>
+<span id="annotated-cell-3-20"><a href="#annotated-cell-3-20" aria-label="20"></a><span class="at">GH=</span>(combined[,<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>;</span>
+<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21" aria-label="21"></a><span class="at">SEGH=</span>(combined[,<span class="dv">2</span>])<span class="sc">/</span><span class="dv">2</span>;</span>
+<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22" aria-label="22"></a>print wh GH SEGH;</span>
+<span id="annotated-cell-3-23"><a href="#annotated-cell-3-23" aria-label="23"></a><span class="at">QH=</span> (GH[<span class="dv">1</span>] <span class="sc">-</span> GH[<span class="dv">2</span>])<span class="sc">**</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">SSQ</span>(SEGH);</span>
+<span id="annotated-cell-3-24"><a href="#annotated-cell-3-24" aria-label="24"></a><span class="at">pvalue=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">probchi</span>(QH,<span class="dv">1</span>);</span>
+<span id="annotated-cell-3-25"><a href="#annotated-cell-3-25" aria-label="25"></a>print GH SEGH QH pvalue;</span>
+<span id="annotated-cell-3-26"><a href="#annotated-cell-3-26" aria-label="26"></a><span class="at">gtilde1=</span><span class="fu">sum</span>(GH <span class="co"># WH);</span></span>
+<span id="annotated-cell-3-27"><a href="#annotated-cell-3-27" aria-label="27"></a><span class="at">gtilde2=</span><span class="fu">sum</span>(WH);</span>
+<span id="annotated-cell-3-28"><a href="#annotated-cell-3-28" aria-label="28"></a><span class="at">gtilde=</span>gtilde1<span class="sc">/</span>gtilde2;</span>
+<span id="annotated-cell-3-29"><a href="#annotated-cell-3-29" aria-label="29"></a><span class="at">gtildevar=</span>(<span class="fu">sum</span>(WH<span class="do">##2 # SEGH##2)) /((sum(WH))**2);</span></span>
+<span id="annotated-cell-3-30"><a href="#annotated-cell-3-30" aria-label="30"></a><span class="at">segtilde=</span><span class="fu">sqrt</span>(gtildevar);</span>
+<span id="annotated-cell-3-31"><a href="#annotated-cell-3-31" aria-label="31"></a><span class="at">qgtilde=</span>(gtilde<span class="fl">-.5</span>)<span class="sc">**</span><span class="dv">2</span><span class="sc">/</span>gtildevar;</span>
+<span id="annotated-cell-3-32"><a href="#annotated-cell-3-32" aria-label="32"></a>print gtilde gtildevar qgtilde;</span>
+<span id="annotated-cell-3-33"><a href="#annotated-cell-3-33" aria-label="33"></a>quit;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
@@ -741,20 +744,20 @@ Q_H = \sum_{h=1}^q (g_h-\tilde{g})^2/v_h
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Code</a></li><li><a href="#tabset-5-2">R Code</a></li><li><a href="#tabset-5-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>data arth;</span>
-<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>input gender <span class="sc">$</span> treat <span class="sc">$</span> response <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a>datalines;</span>
-<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>female active none <span class="dv">6</span> female active some <span class="dv">5</span> female active marked <span class="dv">16</span></span>
-<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>female placebo none <span class="dv">19</span> female placebo some <span class="dv">7</span> female placebo marked <span class="dv">6</span></span>
-<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a>male active none <span class="dv">7</span> male active some <span class="dv">2</span> male active marked <span class="dv">5</span></span>
-<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>male placebo none <span class="dv">10</span> male placebo some <span class="dv">0</span> male placebo marked <span class="dv">1</span></span>
-<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>;</span>
-<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a></span>
-<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10"></a>proc freq data<span class="ot">=</span>arth order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-12-11"><a href="#annotated-cell-12-11"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-12" class="code-annotation-target"><a href="#annotated-cell-12-12"></a>tables gender<span class="sc">*</span>treat<span class="sc">*</span>response <span class="sc">/</span> cmh nocol nopct;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-13" class="code-annotation-target"><a href="#annotated-cell-12-13"></a>tables gender<span class="sc">*</span>treat<span class="sc">*</span>response <span class="sc">/</span> cmh nocol nopct scores<span class="ot">=</span>modridit;</span>
-<span id="annotated-cell-12-14"><a href="#annotated-cell-12-14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-label="1"></a>data arth;</span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-label="2"></a>input gender <span class="sc">$</span> treat <span class="sc">$</span> response <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3" aria-label="3"></a>datalines;</span>
+<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4" aria-label="4"></a>female active none <span class="dv">6</span> female active some <span class="dv">5</span> female active marked <span class="dv">16</span></span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5" aria-label="5"></a>female placebo none <span class="dv">19</span> female placebo some <span class="dv">7</span> female placebo marked <span class="dv">6</span></span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6" aria-label="6"></a>male active none <span class="dv">7</span> male active some <span class="dv">2</span> male active marked <span class="dv">5</span></span>
+<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7" aria-label="7"></a>male placebo none <span class="dv">10</span> male placebo some <span class="dv">0</span> male placebo marked <span class="dv">1</span></span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8" aria-label="8"></a>;</span>
+<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9" aria-label="9"></a></span>
+<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10" aria-label="10"></a>proc freq data<span class="ot">=</span>arth order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-12-11"><a href="#annotated-cell-12-11" aria-label="11"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-12" class="code-annotation-target"><a href="#annotated-cell-12-12" aria-label="12"></a>tables gender<span class="sc">*</span>treat<span class="sc">*</span>response <span class="sc">/</span> cmh nocol nopct;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-13" class="code-annotation-target"><a href="#annotated-cell-12-13" aria-label="13"></a>tables gender<span class="sc">*</span>treat<span class="sc">*</span>response <span class="sc">/</span> cmh nocol nopct scores<span class="ot">=</span>modridit;</span>
+<span id="annotated-cell-12-14"><a href="#annotated-cell-12-14" aria-label="14"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
@@ -768,23 +771,23 @@ Q_H = \sum_{h=1}^q (g_h-\tilde{g})^2/v_h
 </div>
 <div id="tabset-5-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Improvement=</span><span class="fu">c</span>(<span class="st">"None"</span>,<span class="st">"Some"</span>,<span class="st">"Marked"</span>),</span>
-<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2"></a>            <span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">"Active"</span>,<span class="st">"Placebo"</span>),</span>
-<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a>            <span class="at">gender=</span><span class="fu">c</span>(<span class="st">"Female"</span>,<span class="st">"Male"</span>)</span>
-<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4"></a>            ) <span class="sc">|&gt;</span> </span>
-<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5"></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">16</span>,<span class="dv">19</span>,<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6"></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  Treatment <span class="sc">+</span> Improvement <span class="sc">+</span> gender  ,<span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
-<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7"></a>dat_cc</span>
-<span id="annotated-cell-13-8"><a href="#annotated-cell-13-8"></a><span class="fu">CMHtest</span>(dat_cc,</span>
-<span id="annotated-cell-13-9"><a href="#annotated-cell-13-9"></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-10" class="code-annotation-target"><a href="#annotated-cell-13-10"></a>        <span class="at">cscores =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(dat_cc),</span>
-<span id="annotated-cell-13-11"><a href="#annotated-cell-13-11"></a>        <span class="at">overall=</span>T, <span class="at">strata=</span><span class="st">"gender"</span>)</span>
-<span id="annotated-cell-13-12"><a href="#annotated-cell-13-12"></a></span>
-<span id="annotated-cell-13-13"><a href="#annotated-cell-13-13"></a><span class="fu">CMHtest</span>(dat_cc,</span>
-<span id="annotated-cell-13-14"><a href="#annotated-cell-13-14"></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<span id="annotated-cell-13-15"><a href="#annotated-cell-13-15"></a>        <span class="at">overall=</span>T,</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-13-16" class="code-annotation-target"><a href="#annotated-cell-13-16"></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>,</span>
-<span id="annotated-cell-13-17"><a href="#annotated-cell-13-17"></a>        <span class="at">strata=</span><span class="st">"gender"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-label="1"></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Improvement=</span><span class="fu">c</span>(<span class="st">"None"</span>,<span class="st">"Some"</span>,<span class="st">"Marked"</span>),</span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-label="2"></a>            <span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">"Active"</span>,<span class="st">"Placebo"</span>),</span>
+<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3" aria-label="3"></a>            <span class="at">gender=</span><span class="fu">c</span>(<span class="st">"Female"</span>,<span class="st">"Male"</span>)</span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-label="4"></a>            ) <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5" aria-label="5"></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">16</span>,<span class="dv">19</span>,<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6" aria-label="6"></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  Treatment <span class="sc">+</span> Improvement <span class="sc">+</span> gender  ,<span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
+<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7" aria-label="7"></a>dat_cc</span>
+<span id="annotated-cell-13-8"><a href="#annotated-cell-13-8" aria-label="8"></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="annotated-cell-13-9"><a href="#annotated-cell-13-9" aria-label="9"></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-10" class="code-annotation-target"><a href="#annotated-cell-13-10" aria-label="10"></a>        <span class="at">cscores =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(dat_cc),</span>
+<span id="annotated-cell-13-11"><a href="#annotated-cell-13-11" aria-label="11"></a>        <span class="at">overall=</span>T, <span class="at">strata=</span><span class="st">"gender"</span>)</span>
+<span id="annotated-cell-13-12"><a href="#annotated-cell-13-12" aria-label="12"></a></span>
+<span id="annotated-cell-13-13"><a href="#annotated-cell-13-13" aria-label="13"></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="annotated-cell-13-14"><a href="#annotated-cell-13-14" aria-label="14"></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
+<span id="annotated-cell-13-15"><a href="#annotated-cell-13-15" aria-label="15"></a>        <span class="at">overall=</span>T,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-13-16" class="code-annotation-target"><a href="#annotated-cell-13-16" aria-label="16"></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>,</span>
+<span id="annotated-cell-13-17"><a href="#annotated-cell-13-17" aria-label="17"></a>        <span class="at">strata=</span><span class="st">"gender"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
@@ -900,14 +903,14 @@ cor        Nonzero correlation 15.004  1 0.00010728</code></pre>
 <p><img data-src="img/pisa_C4.png"></p>
 </div>
 <div id="tabset-6-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data school;</span>
-<span id="cb10-2"><a></a>input gender <span class="sc">$</span> location <span class="sc">$</span> response <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb10-3"><a></a>datalines;</span>
-<span id="cb10-4"><a></a>female US sd <span class="dv">1253</span> female US d <span class="dv">1227</span> female US a <span class="dv">125</span> female US sa <span class="dv">38</span></span>
-<span id="cb10-5"><a></a>female korea sd <span class="dv">578</span> female korea d <span class="dv">1415</span> female korea a <span class="dv">199</span> female korea sa <span class="dv">26</span></span>
-<span id="cb10-6"><a></a>male US sd <span class="dv">922</span> male US d <span class="dv">1369</span> male US a <span class="dv">249</span> male US sa <span class="dv">102</span></span>
-<span id="cb10-7"><a></a>male korea sd <span class="dv">897</span> male korea d <span class="dv">1942</span> male korea a <span class="dv">281</span> male korea sa <span class="dv">58</span></span>
-<span id="cb10-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a>data school;</span>
+<span id="cb10-2"><a aria-label="2"></a>input gender <span class="sc">$</span> location <span class="sc">$</span> response <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb10-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb10-4"><a aria-label="4"></a>female US sd <span class="dv">1253</span> female US d <span class="dv">1227</span> female US a <span class="dv">125</span> female US sa <span class="dv">38</span></span>
+<span id="cb10-5"><a aria-label="5"></a>female korea sd <span class="dv">578</span> female korea d <span class="dv">1415</span> female korea a <span class="dv">199</span> female korea sa <span class="dv">26</span></span>
+<span id="cb10-6"><a aria-label="6"></a>male US sd <span class="dv">922</span> male US d <span class="dv">1369</span> male US a <span class="dv">249</span> male US sa <span class="dv">102</span></span>
+<span id="cb10-7"><a aria-label="7"></a>male korea sd <span class="dv">897</span> male korea d <span class="dv">1942</span> male korea a <span class="dv">281</span> male korea sa <span class="dv">58</span></span>
+<span id="cb10-8"><a aria-label="8"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -923,21 +926,21 @@ cor        Nonzero correlation 15.004  1 0.00010728</code></pre>
 <ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Code</a></li><li><a href="#tabset-7-2">R Code</a></li><li><a href="#tabset-7-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>proc freq data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
-<span id="cb11-2"><a></a>weight count;</span>
-<span id="cb11-3"><a></a>tables gender<span class="sc">*</span>location<span class="sc">*</span>response<span class="sc">/</span>all nocol nopct measures cl;</span>
-<span id="cb11-4"><a></a>tables gender<span class="sc">*</span>location<span class="sc">*</span>response<span class="sc">/</span>all nocol nopct measures scores<span class="ot">=</span>modridit cl;</span>
-<span id="cb11-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-label="1"></a>proc freq data<span class="ot">=</span>school order<span class="ot">=</span>data;</span>
+<span id="cb11-2"><a aria-label="2"></a>weight count;</span>
+<span id="cb11-3"><a aria-label="3"></a>tables gender<span class="sc">*</span>location<span class="sc">*</span>response<span class="sc">/</span>all nocol nopct measures cl;</span>
+<span id="cb11-4"><a aria-label="4"></a>tables gender<span class="sc">*</span>location<span class="sc">*</span>response<span class="sc">/</span>all nocol nopct measures scores<span class="ot">=</span>modridit cl;</span>
+<span id="cb11-5"><a aria-label="5"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-7-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Rating=</span><span class="fu">c</span>(<span class="st">"StD"</span>,<span class="st">"D"</span>,<span class="st">"A"</span>,<span class="st">"StA"</span>),</span>
-<span id="cb12-2"><a></a>            <span class="at">gender=</span><span class="fu">c</span>(<span class="st">"Female"</span>,<span class="st">"Male"</span>), </span>
-<span id="cb12-3"><a></a>            <span class="at">country =</span> <span class="fu">c</span>(<span class="st">"US"</span>,<span class="st">"Korea"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb12-4"><a></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">1253</span>,<span class="dv">1227</span>,<span class="dv">125</span>,<span class="dv">38</span>,<span class="dv">922</span>,<span class="dv">1369</span>,<span class="dv">249</span>,<span class="dv">102</span>,<span class="dv">578</span>,<span class="dv">1415</span>,<span class="dv">199</span>,<span class="dv">26</span>,<span class="dv">897</span>,<span class="dv">1942</span>,<span class="dv">281</span>,<span class="dv">58</span>))</span>
-<span id="cb12-5"><a></a></span>
-<span id="cb12-6"><a></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  country <span class="sc">+</span>Rating <span class="sc">+</span> gender  ,<span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
-<span id="cb12-7"><a></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a>dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Rating=</span><span class="fu">c</span>(<span class="st">"StD"</span>,<span class="st">"D"</span>,<span class="st">"A"</span>,<span class="st">"StA"</span>),</span>
+<span id="cb12-2"><a aria-label="2"></a>            <span class="at">gender=</span><span class="fu">c</span>(<span class="st">"Female"</span>,<span class="st">"Male"</span>), </span>
+<span id="cb12-3"><a aria-label="3"></a>            <span class="at">country =</span> <span class="fu">c</span>(<span class="st">"US"</span>,<span class="st">"Korea"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-4"><a aria-label="4"></a><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">c</span>(<span class="dv">1253</span>,<span class="dv">1227</span>,<span class="dv">125</span>,<span class="dv">38</span>,<span class="dv">922</span>,<span class="dv">1369</span>,<span class="dv">249</span>,<span class="dv">102</span>,<span class="dv">578</span>,<span class="dv">1415</span>,<span class="dv">199</span>,<span class="dv">26</span>,<span class="dv">897</span>,<span class="dv">1942</span>,<span class="dv">281</span>,<span class="dv">58</span>))</span>
+<span id="cb12-5"><a aria-label="5"></a></span>
+<span id="cb12-6"><a aria-label="6"></a><span class="fu">xtabs</span>(count <span class="sc">~</span>  country <span class="sc">+</span>Rating <span class="sc">+</span> gender  ,<span class="at">data=</span>dat) <span class="ot">-&gt;</span> dat_cc</span>
+<span id="cb12-7"><a aria-label="7"></a>dat_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , gender = Female
 
@@ -953,10 +956,10 @@ country  StD    D    A  StA
   US     922 1369  249  102
   Korea  897 1942  281   58</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
-<span id="cb14-2"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<span id="cb14-3"><a></a>        <span class="at">cscores =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(dat_cc), </span>
-<span id="cb14-4"><a></a>        <span class="at">overall=</span>T, <span class="at">strata=</span><span class="st">"gender"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-label="1"></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb14-2"><a aria-label="2"></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
+<span id="cb14-3"><a aria-label="3"></a>        <span class="at">cscores =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(dat_cc), </span>
+<span id="cb14-4"><a aria-label="4"></a>        <span class="at">overall=</span>T, <span class="at">strata=</span><span class="st">"gender"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`gender:Female`
 Cochran-Mantel-Haenszel Statistics for country by Rating 
@@ -990,11 +993,11 @@ rmeans  Row mean scores differ 91.317  1  1.224e-21
 cmeans  Col mean scores differ 246.36  3 4.0051e-53
 cor        Nonzero correlation 91.317  1  1.224e-21</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">CMHtest</span>(dat_cc,</span>
-<span id="cb16-2"><a></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
-<span id="cb16-3"><a></a>        <span class="at">overall=</span>T,</span>
-<span id="cb16-4"><a></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>,</span>
-<span id="cb16-5"><a></a>        <span class="at">strata=</span><span class="st">"gender"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-label="1"></a><span class="fu">CMHtest</span>(dat_cc,</span>
+<span id="cb16-2"><a aria-label="2"></a>        <span class="at">types=</span><span class="st">"ALL"</span>,</span>
+<span id="cb16-3"><a aria-label="3"></a>        <span class="at">overall=</span>T,</span>
+<span id="cb16-4"><a aria-label="4"></a>        <span class="at">cscores=</span><span class="st">"midrank"</span>,</span>
+<span id="cb16-5"><a aria-label="5"></a>        <span class="at">strata=</span><span class="st">"gender"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`gender:Female`
 Cochran-Mantel-Haenszel Statistics for country by Rating 
@@ -1143,10 +1146,10 @@ z^2 = Q_{CS} \left[\frac{n}{n-1}\right]
 <li>SAS can also perform the Cochran-Armitage trend test by including the <code>trend</code> option in the <code>tables</code> statement.</li>
 <li>The Pearson correlation coefficient and the Somers’ D(C|R) are of particular interest in the <code>measures</code> output since both metrics account for ordinality.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>proc freq;</span>
-<span id="cb18-2"><a></a>weight count;</span>
-<span id="cb18-3"><a></a>tables a<span class="sc">*</span>b<span class="sc">/</span>trend chisq measures;</span>
-<span id="cb18-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-label="1"></a>proc freq;</span>
+<span id="cb18-2"><a aria-label="2"></a>weight count;</span>
+<span id="cb18-3"><a aria-label="3"></a>tables a<span class="sc">*</span>b<span class="sc">/</span>trend chisq measures;</span>
+<span id="cb18-4"><a aria-label="4"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-4" class="slide level2">
 <h2>Example</h2>
@@ -1176,19 +1179,19 @@ education   At most 3 More than 3
 <ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">SAS Code</a></li><li><a href="#tabset-8-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-24-1"><a href="#annotated-cell-24-1"></a>data educ;</span>
-<span id="annotated-cell-24-2"><a href="#annotated-cell-24-2"></a>input education <span class="sc">$</span> kids3 <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-24-3"><a href="#annotated-cell-24-3"></a>datalines;</span>
-<span id="annotated-cell-24-4"><a href="#annotated-cell-24-4"></a>secondary leq <span class="dv">51</span> secondary g <span class="dv">32</span></span>
-<span id="annotated-cell-24-5"><a href="#annotated-cell-24-5"></a>college leq <span class="dv">61</span> college g <span class="dv">17</span></span>
-<span id="annotated-cell-24-6"><a href="#annotated-cell-24-6"></a>graduate leq <span class="dv">29</span> graduate g <span class="dv">10</span></span>
-<span id="annotated-cell-24-7"><a href="#annotated-cell-24-7"></a>;</span>
-<span id="annotated-cell-24-8"><a href="#annotated-cell-24-8"></a>run;</span>
-<span id="annotated-cell-24-9"><a href="#annotated-cell-24-9"></a></span>
-<span id="annotated-cell-24-10"><a href="#annotated-cell-24-10"></a>proc freq data<span class="ot">=</span> educ order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-24-11"><a href="#annotated-cell-24-11"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-24-12" class="code-annotation-target"><a href="#annotated-cell-24-12"></a>tables education<span class="sc">*</span>kids3<span class="sc">/</span>chisq measures trend cl;</span>
-<span id="annotated-cell-24-13"><a href="#annotated-cell-24-13"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-24-1"><a href="#annotated-cell-24-1" aria-label="1"></a>data educ;</span>
+<span id="annotated-cell-24-2"><a href="#annotated-cell-24-2" aria-label="2"></a>input education <span class="sc">$</span> kids3 <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-24-3"><a href="#annotated-cell-24-3" aria-label="3"></a>datalines;</span>
+<span id="annotated-cell-24-4"><a href="#annotated-cell-24-4" aria-label="4"></a>secondary leq <span class="dv">51</span> secondary g <span class="dv">32</span></span>
+<span id="annotated-cell-24-5"><a href="#annotated-cell-24-5" aria-label="5"></a>college leq <span class="dv">61</span> college g <span class="dv">17</span></span>
+<span id="annotated-cell-24-6"><a href="#annotated-cell-24-6" aria-label="6"></a>graduate leq <span class="dv">29</span> graduate g <span class="dv">10</span></span>
+<span id="annotated-cell-24-7"><a href="#annotated-cell-24-7" aria-label="7"></a>;</span>
+<span id="annotated-cell-24-8"><a href="#annotated-cell-24-8" aria-label="8"></a>run;</span>
+<span id="annotated-cell-24-9"><a href="#annotated-cell-24-9" aria-label="9"></a></span>
+<span id="annotated-cell-24-10"><a href="#annotated-cell-24-10" aria-label="10"></a>proc freq data<span class="ot">=</span> educ order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-24-11"><a href="#annotated-cell-24-11" aria-label="11"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-24-12" class="code-annotation-target"><a href="#annotated-cell-24-12" aria-label="12"></a>tables education<span class="sc">*</span>kids3<span class="sc">/</span>chisq measures trend cl;</span>
+<span id="annotated-cell-24-13"><a href="#annotated-cell-24-13" aria-label="13"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
 <dd>
@@ -1240,22 +1243,22 @@ education   At most 3 More than 3
 <p><img data-src="img/tobaccoset_C4.png"></p>
 </div>
 <div id="tabset-9-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>data tobacco;</span>
-<span id="cb20-2"><a></a>length risk <span class="sc">$</span><span class="fl">11.</span> ;</span>
-<span id="cb20-3"><a></a>input f_usage <span class="sc">$</span> risk <span class="sc">$</span> usage <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb20-4"><a></a>datalines;</span>
-<span id="cb20-5"><a></a>no minimal no <span class="dv">59</span> no minimal yes <span class="dv">25</span></span>
-<span id="cb20-6"><a></a>no moderate no <span class="dv">169</span> no moderate yes <span class="dv">29</span></span>
-<span id="cb20-7"><a></a>no substantial no <span class="dv">196</span> no substantial yes <span class="dv">9</span></span>
-<span id="cb20-8"><a></a>yes minimal no <span class="dv">11</span> yes minimal yes <span class="dv">8</span></span>
-<span id="cb20-9"><a></a>yes moderate no <span class="dv">33</span> yes moderate yes <span class="dv">11</span></span>
-<span id="cb20-10"><a></a>yes substantial no <span class="dv">22</span> yes substantial yes <span class="dv">2</span></span>
-<span id="cb20-11"><a></a>;</span>
-<span id="cb20-12"><a></a>proc freq;</span>
-<span id="cb20-13"><a></a>weight count;</span>
-<span id="cb20-14"><a></a>tables f_usage<span class="sc">*</span>risk<span class="sc">*</span>usage <span class="sc">/</span>cmh chisq measures trend;</span>
-<span id="cb20-15"><a></a>tables f_usage<span class="sc">*</span>risk<span class="sc">*</span>usage <span class="sc">/</span>cmh scores<span class="ot">=</span>modridit;</span>
-<span id="cb20-16"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a>data tobacco;</span>
+<span id="cb20-2"><a aria-label="2"></a>length risk <span class="sc">$</span><span class="fl">11.</span> ;</span>
+<span id="cb20-3"><a aria-label="3"></a>input f_usage <span class="sc">$</span> risk <span class="sc">$</span> usage <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb20-4"><a aria-label="4"></a>datalines;</span>
+<span id="cb20-5"><a aria-label="5"></a>no minimal no <span class="dv">59</span> no minimal yes <span class="dv">25</span></span>
+<span id="cb20-6"><a aria-label="6"></a>no moderate no <span class="dv">169</span> no moderate yes <span class="dv">29</span></span>
+<span id="cb20-7"><a aria-label="7"></a>no substantial no <span class="dv">196</span> no substantial yes <span class="dv">9</span></span>
+<span id="cb20-8"><a aria-label="8"></a>yes minimal no <span class="dv">11</span> yes minimal yes <span class="dv">8</span></span>
+<span id="cb20-9"><a aria-label="9"></a>yes moderate no <span class="dv">33</span> yes moderate yes <span class="dv">11</span></span>
+<span id="cb20-10"><a aria-label="10"></a>yes substantial no <span class="dv">22</span> yes substantial yes <span class="dv">2</span></span>
+<span id="cb20-11"><a aria-label="11"></a>;</span>
+<span id="cb20-12"><a aria-label="12"></a>proc freq;</span>
+<span id="cb20-13"><a aria-label="13"></a>weight count;</span>
+<span id="cb20-14"><a aria-label="14"></a>tables f_usage<span class="sc">*</span>risk<span class="sc">*</span>usage <span class="sc">/</span>cmh chisq measures trend;</span>
+<span id="cb20-15"><a aria-label="15"></a>tables f_usage<span class="sc">*</span>risk<span class="sc">*</span>usage <span class="sc">/</span>cmh scores<span class="ot">=</span>modridit;</span>
+<span id="cb20-16"><a aria-label="16"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-9-3">
 <p>When the father is not a tobacco user, <span class="math inline">\(Q_{CS}=34.3, p&lt;0.001\)</span>, which means there is sufficient evidence of an association between risk perception and participant tobacco use.</p>
@@ -1289,10 +1292,10 @@ education   At most 3 More than 3
 <li><code>scorout</code> outputs the scores used in the exact analysis</li>
 </ul></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>proc freq;</span>
-<span id="cb21-2"><a></a>tables a<span class="sc">*</span>b <span class="sc">/</span>scorout;</span>
-<span id="cb21-3"><a></a>exact mhchi;</span>
-<span id="cb21-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-label="1"></a>proc freq;</span>
+<span id="cb21-2"><a aria-label="2"></a>tables a<span class="sc">*</span>b <span class="sc">/</span>scorout;</span>
+<span id="cb21-3"><a aria-label="3"></a>exact mhchi;</span>
+<span id="cb21-4"><a aria-label="4"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="example-8" class="slide level2">
 <h2>Example</h2>
@@ -1304,19 +1307,19 @@ education   At most 3 More than 3
 <p><img data-src="img/mice_C4.png"></p>
 </div>
 <div id="tabset-10-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>data mice;</span>
-<span id="cb22-2"><a></a>input LogRank Treatment <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb22-3"><a></a>datalines;</span>
-<span id="cb22-4"><a></a><span class="fl">0.909</span> Ca <span class="dv">1</span> <span class="fl">0.909</span> Ce <span class="dv">1</span></span>
-<span id="cb22-5"><a></a><span class="fl">0.709</span> Ca <span class="dv">3</span> <span class="fl">0.709</span> Ce <span class="dv">1</span></span>
-<span id="cb22-6"><a></a><span class="fl">0.334</span> Ca <span class="dv">5</span> <span class="fl">0.334</span> Ce <span class="dv">1</span></span>
-<span id="cb22-7"><a></a><span class="fl">0.234</span> Ca <span class="dv">1</span> <span class="fl">0.234</span> Ce <span class="dv">0</span></span>
-<span id="cb22-8"><a></a><span class="sc">-</span><span class="fl">0.099</span> Ca <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.099</span> Ce <span class="dv">2</span></span>
-<span id="cb22-9"><a></a><span class="sc">-</span><span class="fl">0.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">0.433</span> Ce <span class="dv">2</span></span>
-<span id="cb22-10"><a></a><span class="sc">-</span><span class="fl">0.933</span> Ca <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.933</span> Ce <span class="dv">1</span></span>
-<span id="cb22-11"><a></a><span class="sc">-</span><span class="fl">1.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">1.433</span> Ce <span class="dv">1</span></span>
-<span id="cb22-12"><a></a><span class="sc">-</span><span class="fl">2.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">2.433</span> Ce <span class="dv">1</span></span>
-<span id="cb22-13"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a>data mice;</span>
+<span id="cb22-2"><a aria-label="2"></a>input LogRank Treatment <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb22-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb22-4"><a aria-label="4"></a><span class="fl">0.909</span> Ca <span class="dv">1</span> <span class="fl">0.909</span> Ce <span class="dv">1</span></span>
+<span id="cb22-5"><a aria-label="5"></a><span class="fl">0.709</span> Ca <span class="dv">3</span> <span class="fl">0.709</span> Ce <span class="dv">1</span></span>
+<span id="cb22-6"><a aria-label="6"></a><span class="fl">0.334</span> Ca <span class="dv">5</span> <span class="fl">0.334</span> Ce <span class="dv">1</span></span>
+<span id="cb22-7"><a aria-label="7"></a><span class="fl">0.234</span> Ca <span class="dv">1</span> <span class="fl">0.234</span> Ce <span class="dv">0</span></span>
+<span id="cb22-8"><a aria-label="8"></a><span class="sc">-</span><span class="fl">0.099</span> Ca <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.099</span> Ce <span class="dv">2</span></span>
+<span id="cb22-9"><a aria-label="9"></a><span class="sc">-</span><span class="fl">0.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">0.433</span> Ce <span class="dv">2</span></span>
+<span id="cb22-10"><a aria-label="10"></a><span class="sc">-</span><span class="fl">0.933</span> Ca <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.933</span> Ce <span class="dv">1</span></span>
+<span id="cb22-11"><a aria-label="11"></a><span class="sc">-</span><span class="fl">1.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">1.433</span> Ce <span class="dv">1</span></span>
+<span id="cb22-12"><a aria-label="12"></a><span class="sc">-</span><span class="fl">2.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">2.433</span> Ce <span class="dv">1</span></span>
+<span id="cb22-13"><a aria-label="13"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1328,26 +1331,26 @@ education   At most 3 More than 3
 <ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">SAS Code</a></li><li><a href="#tabset-11-2">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-11-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-27"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-27-1"><a href="#annotated-cell-27-1"></a>data mice;</span>
-<span id="annotated-cell-27-2"><a href="#annotated-cell-27-2"></a>input LogRank Treatment <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="annotated-cell-27-3"><a href="#annotated-cell-27-3"></a>datalines;</span>
-<span id="annotated-cell-27-4"><a href="#annotated-cell-27-4"></a><span class="fl">0.909</span> Ca <span class="dv">1</span> <span class="fl">0.909</span> Ce <span class="dv">1</span></span>
-<span id="annotated-cell-27-5"><a href="#annotated-cell-27-5"></a><span class="fl">0.709</span> Ca <span class="dv">3</span> <span class="fl">0.709</span> Ce <span class="dv">1</span></span>
-<span id="annotated-cell-27-6"><a href="#annotated-cell-27-6"></a><span class="fl">0.334</span> Ca <span class="dv">5</span> <span class="fl">0.334</span> Ce <span class="dv">1</span></span>
-<span id="annotated-cell-27-7"><a href="#annotated-cell-27-7"></a><span class="fl">0.234</span> Ca <span class="dv">1</span> <span class="fl">0.234</span> Ce <span class="dv">0</span></span>
-<span id="annotated-cell-27-8"><a href="#annotated-cell-27-8"></a><span class="sc">-</span><span class="fl">0.099</span> Ca <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.099</span> Ce <span class="dv">2</span></span>
-<span id="annotated-cell-27-9"><a href="#annotated-cell-27-9"></a><span class="sc">-</span><span class="fl">0.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">0.433</span> Ce <span class="dv">2</span></span>
-<span id="annotated-cell-27-10"><a href="#annotated-cell-27-10"></a><span class="sc">-</span><span class="fl">0.933</span> Ca <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.933</span> Ce <span class="dv">1</span></span>
-<span id="annotated-cell-27-11"><a href="#annotated-cell-27-11"></a><span class="sc">-</span><span class="fl">1.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">1.433</span> Ce <span class="dv">1</span></span>
-<span id="annotated-cell-27-12"><a href="#annotated-cell-27-12"></a><span class="sc">-</span><span class="fl">2.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">2.433</span> Ce <span class="dv">1</span></span>
-<span id="annotated-cell-27-13"><a href="#annotated-cell-27-13"></a>;</span>
-<span id="annotated-cell-27-14"><a href="#annotated-cell-27-14"></a></span>
-<span id="annotated-cell-27-15"><a href="#annotated-cell-27-15"></a>proc freq order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-27-16"><a href="#annotated-cell-27-16"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-27-17" class="code-annotation-target"><a href="#annotated-cell-27-17"></a>tables LogRank<span class="sc">*</span>Treatment <span class="sc">/</span> norow nocol nopct scorout chisq;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-27-18" class="code-annotation-target"><a href="#annotated-cell-27-18"></a>tables LogRank<span class="sc">*</span>Treatment <span class="sc">/</span> noprint scores<span class="ot">=</span>rank scorout chisq;</span>
-<span id="annotated-cell-27-19"><a href="#annotated-cell-27-19"></a>exact mhchi;</span>
-<span id="annotated-cell-27-20"><a href="#annotated-cell-27-20"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-27"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-27-1"><a href="#annotated-cell-27-1" aria-label="1"></a>data mice;</span>
+<span id="annotated-cell-27-2"><a href="#annotated-cell-27-2" aria-label="2"></a>input LogRank Treatment <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="annotated-cell-27-3"><a href="#annotated-cell-27-3" aria-label="3"></a>datalines;</span>
+<span id="annotated-cell-27-4"><a href="#annotated-cell-27-4" aria-label="4"></a><span class="fl">0.909</span> Ca <span class="dv">1</span> <span class="fl">0.909</span> Ce <span class="dv">1</span></span>
+<span id="annotated-cell-27-5"><a href="#annotated-cell-27-5" aria-label="5"></a><span class="fl">0.709</span> Ca <span class="dv">3</span> <span class="fl">0.709</span> Ce <span class="dv">1</span></span>
+<span id="annotated-cell-27-6"><a href="#annotated-cell-27-6" aria-label="6"></a><span class="fl">0.334</span> Ca <span class="dv">5</span> <span class="fl">0.334</span> Ce <span class="dv">1</span></span>
+<span id="annotated-cell-27-7"><a href="#annotated-cell-27-7" aria-label="7"></a><span class="fl">0.234</span> Ca <span class="dv">1</span> <span class="fl">0.234</span> Ce <span class="dv">0</span></span>
+<span id="annotated-cell-27-8"><a href="#annotated-cell-27-8" aria-label="8"></a><span class="sc">-</span><span class="fl">0.099</span> Ca <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.099</span> Ce <span class="dv">2</span></span>
+<span id="annotated-cell-27-9"><a href="#annotated-cell-27-9" aria-label="9"></a><span class="sc">-</span><span class="fl">0.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">0.433</span> Ce <span class="dv">2</span></span>
+<span id="annotated-cell-27-10"><a href="#annotated-cell-27-10" aria-label="10"></a><span class="sc">-</span><span class="fl">0.933</span> Ca <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.933</span> Ce <span class="dv">1</span></span>
+<span id="annotated-cell-27-11"><a href="#annotated-cell-27-11" aria-label="11"></a><span class="sc">-</span><span class="fl">1.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">1.433</span> Ce <span class="dv">1</span></span>
+<span id="annotated-cell-27-12"><a href="#annotated-cell-27-12" aria-label="12"></a><span class="sc">-</span><span class="fl">2.433</span> Ca <span class="dv">0</span> <span class="sc">-</span><span class="fl">2.433</span> Ce <span class="dv">1</span></span>
+<span id="annotated-cell-27-13"><a href="#annotated-cell-27-13" aria-label="13"></a>;</span>
+<span id="annotated-cell-27-14"><a href="#annotated-cell-27-14" aria-label="14"></a></span>
+<span id="annotated-cell-27-15"><a href="#annotated-cell-27-15" aria-label="15"></a>proc freq order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-27-16"><a href="#annotated-cell-27-16" aria-label="16"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-27-17" class="code-annotation-target"><a href="#annotated-cell-27-17" aria-label="17"></a>tables LogRank<span class="sc">*</span>Treatment <span class="sc">/</span> norow nocol nopct scorout chisq;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-27-18" class="code-annotation-target"><a href="#annotated-cell-27-18" aria-label="18"></a>tables LogRank<span class="sc">*</span>Treatment <span class="sc">/</span> noprint scores<span class="ot">=</span>rank scorout chisq;</span>
+<span id="annotated-cell-27-19"><a href="#annotated-cell-27-19" aria-label="19"></a>exact mhchi;</span>
+<span id="annotated-cell-27-20"><a href="#annotated-cell-27-20" aria-label="20"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-27" data-target-annotation="1">1</dt>
 <dd>
