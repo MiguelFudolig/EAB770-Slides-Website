@@ -6,11 +6,11 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Miguel Fudolig">
-  <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 11</title>
+  <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 13</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -20,10 +20,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -199,12 +202,12 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">EAB 770 - Chapter 11</h1>
+  <h1 class="title">EAB 770 - Chapter 13</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Miguel Fudolig 
+Miguel Fudolig
 </div>
 </div>
 </div>
@@ -279,11 +282,7 @@ Miguel Fudolig
 </section>
 <section id="survival-rates" class="slide level2">
 <h2>Survival Rates</h2>
-<p>We are often interested in estimating the survival rates for each method. The survival rate can be expressed as</p>
-<p><span class="math display">\[
-S(y) = 1-F(y) = P(Y \geq y)
-\]</span></p>
-<p>where <span class="math inline">\(Y\)</span> is the random variable that denotes the continuous lifetime of a subject and <span class="math inline">\(F(y)\)</span> is the cumulative distribution function.</p>
+<p>We are often interested in estimating the survival rates for each method.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -293,14 +292,46 @@ S(y) = 1-F(y) = P(Y \geq y)
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The cumulative distribution function is commonly chosen to be the Weibull distribution, but there are other functions that people can use.</p>
+<p>The survival rate is the proportion of individuals in a study who have not experienced the event of interest.</p>
+</div>
+</div>
+</div>
+<p>The survivor function <span class="math inline">\(S(y)\)</span>, defined to be the probability that the survival time is greater than or equal to <span class="math inline">\(y\)</span>, can be expressed as</p>
+<p><span class="math display">\[
+S(y) = 1-F(y) = P(Y \geq y)
+\]</span></p>
+<p>where <span class="math inline">\(Y\)</span> is the random variable that denotes the continuous lifetime of a subject and <span class="math inline">\(F(y)\)</span> is the cumulative incidence function.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The cumulative incidence function is defined as the cumulative probability of an event occurring before time <span class="math inline">\(y\)</span>. This function is commonly chosen to be the Weibull distribution, but there are other functions that people can use.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="hazard-function" class="slide level2">
 <h2>Hazard Function</h2>
-<p>The hazard function, <span class="math inline">\(h(y)\)</span> is related to the survival rate through the following equation:</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The hazard function expresses the risk or hazard of the event in question occurring at some time <span class="math inline">\(y\)</span>. This function is often referred to as <span class="math inline">\(h(y)\)</span>.</p>
+<p>The cumulative hazard function is the cumulative risk of an event occurring by time <span class="math inline">\(y\)</span>. This function is often referred to as <span class="math inline">\(H(y)\)</span>.</p>
+</div>
+</div>
+</div>
+<p>The hazard function is related to the survival rate through the following equation:</p>
 <p><span class="math display">\[
 S(y) = \exp \left(-\int_0^y h(t) dt\right) = \exp [-H(y)]
 \]</span></p>
@@ -314,7 +345,7 @@ S(y) = \exp \left(-\int_0^y h(t) dt\right) = \exp [-H(y)]
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(H(y)\)</span> is the negative logarithm of the survival probability.</p>
+<p><span class="math inline">\(H(y)\)</span> is the negative logarithm of the survivor function.</p>
 </div>
 </div>
 </div>
@@ -412,7 +443,7 @@ se(G_{ik}) = G_{ik} \sqrt{\sum_{g=1}^k \left[\frac{(1-p_{ig})}{n_{i0g} + 0.5 n_{
 </div>
 </section>
 <section id="sas-implementation" class="slide level2">
-<h2>SAS Implementation</h2>
+<h2><code>SAS</code> Implementation</h2>
 <p>The <code>LIFETEST</code> procedure provides life table analysis for categorized time-to-event data.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -428,14 +459,14 @@ se(G_{ik}) = G_{ik} \sqrt{\sum_{g=1}^k \left[\frac{(1-p_{ig})}{n_{i0g} + 0.5 n_{
 </div>
 </div>
 <p>Shown below is the sample code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>proc lifetest data<span class="ot">=</span>data method<span class="ot">=</span>lt plots<span class="ot">=</span>(s,ls) intervals<span class="ot">=</span><span class="dv">0</span> to k by <span class="dv">1</span>;</span>
-<span id="cb1-2"><a></a>freq count;</span>
-<span id="cb1-3"><a></a>strata treatment;</span>
-<span id="cb1-4"><a></a>time interval<span class="sc">*</span><span class="fu">censor</span>(<span class="dv">1</span>);</span>
-<span id="cb1-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a>proc lifetest data<span class="ot">=</span>data method<span class="ot">=</span>lt plots<span class="ot">=</span>(s,ls) intervals<span class="ot">=</span><span class="dv">0</span> to k by <span class="dv">1</span>;</span>
+<span id="cb1-2"><a aria-label="2"></a>freq count;</span>
+<span id="cb1-3"><a aria-label="3"></a>strata treatment;</span>
+<span id="cb1-4"><a aria-label="4"></a>time interval<span class="sc">*</span><span class="fu">censor</span>(<span class="dv">1</span>);</span>
+<span id="cb1-5"><a aria-label="5"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="comparison-across-strata" class="slide level2">
-<h2>Comparison across strata</h2>
+<section id="sas-comparison-across-strata" class="slide level2">
+<h2><code>SAS</code>: Comparison across strata</h2>
 <p>Survival curves are commonly compared across strata (treatment). SAS provides three different tests to test for a difference between the curves across the strata. This is found in the “Test of Equality over Strata” table</p>
 <div class="panel-tabset">
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Log-Rank</a></li><li><a href="#tabset-2-2">Wilcoxon</a></li><li><a href="#tabset-2-3">LR</a></li><li><a href="#tabset-2-4">Modified Peto-Peto Test</a></li></ul>
@@ -455,35 +486,217 @@ se(G_{ik}) = G_{ik} \sqrt{\sum_{g=1}^k \left[\frac{(1-p_{ig})}{n_{i0g} + 0.5 n_{
 </div>
 </div>
 </section>
+<section id="r-implementation" class="slide level2">
+<h2><code>R</code> Implementation</h2>
+<p>Survival analysis in <code>R</code> is geared towards the Kaplan-Meier method compared to life tables. The <code>survival</code> and the <code>KMsurv</code> packages can be used to implement the life table analysis and create Kaplan-Meier curves like <code>SAS</code> with the following caveats:</p>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Kaplan-Meier Curves</a></li><li><a href="#tabset-3-2">Life Table</a></li><li><a href="#tabset-3-3">Equality Tests for Strata</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<ul>
+<li><p>The data needs to be disaggregated, i.e.&nbsp;we need to use <code>uncount()</code> to get “individual-level” data, to create survival curves from the <code>survfit()</code> function in the <code>survival</code> package.</p></li>
+<li><p>The <code>event</code> and <code>time</code> variables need to be defined as the following: the <code>time</code> variable should correspond to the mid point of each interval, while the <code>event</code> variable is defined as <code>1-censor</code>.</p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a>data<span class="sc">$</span>time <span class="ot">&lt;-</span> data<span class="sc">$</span>interval<span class="fl">+0.5</span></span>
+<span id="cb2-4"><a aria-label="4"></a>data<span class="sc">$</span>event <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>data<span class="sc">$</span>censor</span>
+<span id="cb2-5"><a aria-label="5"></a></span>
+<span id="cb2-6"><a aria-label="6"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> group, <span class="at">data =</span> data)</span>
+<span id="cb2-7"><a aria-label="7"></a><span class="fu">plot</span>(fit, <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">"Interval"</span>, <span class="at">ylab =</span> <span class="st">"Survival"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-3-2">
+<p>The aggregated counts have to be introduced using the <code>lifetab()</code> function in the <code>KMsurv</code> package in <code>R</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="fu">library</span>(KMsurv)</span>
+<span id="cb3-2"><a aria-label="2"></a><span class="fu">lifetab</span>(tis, <span class="co"># Time points that will be used as intervals</span></span>
+<span id="cb3-3"><a aria-label="3"></a>        ninit, <span class="co"># Initial value for the group</span></span>
+<span id="cb3-4"><a aria-label="4"></a>        nlost, <span class="co"># Vector of censored for different intervals</span></span>
+<span id="cb3-5"><a aria-label="5"></a>        nevent <span class="co"># Vector of all events for different intervals</span></span>
+<span id="cb3-6"><a aria-label="6"></a>        ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-3-3">
+<p>The function <code>survdiff()</code> can do a log-rank test and the modified Peto-Peto test.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p><code>R</code> cannot perform the Wilcoxon and LR tests using a specific function in the <code>survival</code> and <code>KMsurv</code> packages.</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb4-2"><a aria-label="2"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time,event)<span class="sc">~</span>group,<span class="at">data=</span>data,<span class="at">rho=</span><span class="dv">0</span>) <span class="co"># Log-rank</span></span>
+<span id="cb4-3"><a aria-label="3"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time,event)<span class="sc">~</span>group,<span class="at">data=</span>data,<span class="at">rho=</span><span class="dv">1</span>) <span class="co"># Log-rank</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
 <p>Investigators were interested in comparing an active and control treatment to prevent the recurrence of a medical condition that had been healed. They applied a diagnostic procedure at the end of the first, second, and third years to determine whether there was a recurrence. Use the life table method to test if there is a difference in survival curves between the active and control treatments.</p>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Data Set</a></li><li><a href="#tabset-3-2">SAS Code</a></li><li><a href="#tabset-3-3">Answer</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Data Set</a></li><li><a href="#tabset-4-2">R Data Set</a></li><li><a href="#tabset-4-3">SAS Code</a></li><li><a href="#tabset-4-4">R Code</a></li><li><a href="#tabset-4-5">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
+<div id="tabset-4-1">
 <p>The variable <code>INTERVAL</code> takes the value 0, 1, 2, or 3, corresponding to the following intervals: &lt;1 Year, 1-2 Year, 2-3 Years, &gt;3 Years (no recurrence at the end of the study). and the variable <code>CENSOR</code> takes the value 1 for censored subjects and 0 otherwise. The variable <code>TREATMENT</code> reflects whether the subjects received the active treatment or acted as controls, and the variable <code>COUNT</code> contains the frequency counts.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>data medical;</span>
-<span id="cb2-2"><a></a>input interval treatment <span class="sc">$</span> censor count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb2-3"><a></a>datalines;</span>
-<span id="cb2-4"><a></a><span class="dv">0</span> control <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> control <span class="dv">0</span> <span class="dv">15</span></span>
-<span id="cb2-5"><a></a><span class="dv">1</span> control <span class="dv">1</span> <span class="dv">7</span> <span class="dv">1</span> control <span class="dv">0</span> <span class="dv">13</span></span>
-<span id="cb2-6"><a></a><span class="dv">2</span> control <span class="dv">1</span> <span class="dv">6</span> <span class="dv">2</span> control <span class="dv">0</span> <span class="dv">7</span></span>
-<span id="cb2-7"><a></a><span class="dv">3</span> control <span class="dv">1</span> <span class="dv">17</span></span>
-<span id="cb2-8"><a></a><span class="dv">0</span> active <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> active <span class="dv">0</span> <span class="dv">12</span></span>
-<span id="cb2-9"><a></a><span class="dv">1</span> active <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span> active <span class="dv">0</span> <span class="dv">7</span></span>
-<span id="cb2-10"><a></a><span class="dv">2</span> active <span class="dv">1</span> <span class="dv">4</span> <span class="dv">2</span> active <span class="dv">0</span> <span class="dv">10</span></span>
-<span id="cb2-11"><a></a><span class="dv">3</span> active <span class="dv">1</span> <span class="dv">45</span></span>
-<span id="cb2-12"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>data medical;</span>
+<span id="cb5-2"><a aria-label="2"></a>input interval treatment <span class="sc">$</span> censor count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb5-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb5-4"><a aria-label="4"></a><span class="dv">0</span> control <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> control <span class="dv">0</span> <span class="dv">15</span></span>
+<span id="cb5-5"><a aria-label="5"></a><span class="dv">1</span> control <span class="dv">1</span> <span class="dv">7</span> <span class="dv">1</span> control <span class="dv">0</span> <span class="dv">13</span></span>
+<span id="cb5-6"><a aria-label="6"></a><span class="dv">2</span> control <span class="dv">1</span> <span class="dv">6</span> <span class="dv">2</span> control <span class="dv">0</span> <span class="dv">7</span></span>
+<span id="cb5-7"><a aria-label="7"></a><span class="dv">3</span> control <span class="dv">1</span> <span class="dv">17</span></span>
+<span id="cb5-8"><a aria-label="8"></a><span class="dv">0</span> active <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> active <span class="dv">0</span> <span class="dv">12</span></span>
+<span id="cb5-9"><a aria-label="9"></a><span class="dv">1</span> active <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span> active <span class="dv">0</span> <span class="dv">7</span></span>
+<span id="cb5-10"><a aria-label="10"></a><span class="dv">2</span> active <span class="dv">1</span> <span class="dv">4</span> <span class="dv">2</span> active <span class="dv">0</span> <span class="dv">10</span></span>
+<span id="cb5-11"><a aria-label="11"></a><span class="dv">3</span> active <span class="dv">1</span> <span class="dv">45</span></span>
+<span id="cb5-12"><a aria-label="12"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-3-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>proc lifetest data<span class="ot">=</span>medical method<span class="ot">=</span>lt plots<span class="ot">=</span>(s,ls) intervals<span class="ot">=</span><span class="dv">0</span> to <span class="dv">3</span> by <span class="dv">1</span>;</span>
-<span id="cb3-2"><a></a>freq count;</span>
-<span id="cb3-3"><a></a>strata treatment<span class="sc">/</span>test<span class="ot">=</span>(logrank lr modpeto wilcoxon);</span>
-<span id="cb3-4"><a></a>time interval<span class="sc">*</span><span class="fu">censor</span>(<span class="dv">1</span>);</span>
-<span id="cb3-5"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-4-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-2"><a aria-label="2"></a>medical_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-3"><a aria-label="3"></a>  <span class="at">interval  =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>,  <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb6-4"><a aria-label="4"></a>  <span class="at">treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"active"</span>), <span class="at">each =</span> <span class="dv">7</span>),</span>
+<span id="cb6-5"><a aria-label="5"></a>  <span class="at">censor    =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>,  <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb6-6"><a aria-label="6"></a>  <span class="at">count     =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">15</span>, <span class="dv">7</span>, <span class="dv">13</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">17</span>,  <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">45</span>)</span>
+<span id="cb6-7"><a aria-label="7"></a>) </span>
+<span id="cb6-8"><a aria-label="8"></a></span>
+<span id="cb6-9"><a aria-label="9"></a>medical<span class="ot">&lt;-</span> medical_counts<span class="sc">|&gt;</span> </span>
+<span id="cb6-10"><a aria-label="10"></a>  <span class="fu">uncount</span>(<span class="at">weights =</span> count)</span>
+<span id="cb6-11"><a aria-label="11"></a></span>
+<span id="cb6-12"><a aria-label="12"></a></span>
+<span id="cb6-13"><a aria-label="13"></a>medical<span class="sc">$</span>time  <span class="ot">&lt;-</span> medical<span class="sc">$</span>interval <span class="sc">+</span> <span class="fl">0.5</span></span>
+<span id="cb6-14"><a aria-label="14"></a>medical<span class="sc">$</span>event <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> medical<span class="sc">$</span>censor</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-3-3">
+</div>
+<div id="tabset-4-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a>proc lifetest data<span class="ot">=</span>medical method<span class="ot">=</span>lt plots<span class="ot">=</span>(s,ls) intervals<span class="ot">=</span><span class="dv">0</span> to <span class="dv">3</span> by <span class="dv">1</span>;</span>
+<span id="cb7-2"><a aria-label="2"></a>freq count;</span>
+<span id="cb7-3"><a aria-label="3"></a>strata treatment<span class="sc">/</span>test<span class="ot">=</span>(logrank lr modpeto wilcoxon);</span>
+<span id="cb7-4"><a aria-label="4"></a>time interval<span class="sc">*</span><span class="fu">censor</span>(<span class="dv">1</span>);</span>
+<span id="cb7-5"><a aria-label="5"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-4">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb8-2"><a aria-label="2"></a><span class="fu">library</span>(KMsurv)</span>
+<span id="cb8-3"><a aria-label="3"></a></span>
+<span id="cb8-4"><a aria-label="4"></a>medical_counts <span class="sc">|&gt;</span> </span>
+<span id="cb8-5"><a aria-label="5"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a aria-label="6"></a>  <span class="fu">summarize</span>(<span class="at">sum=</span><span class="fu">sum</span>(count))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  treatment   sum
+  &lt;chr&gt;     &lt;dbl&gt;
+1 active       90
+2 control      74</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a><span class="co"># Kaplan-Meier curves (SAS plots=(s,ls))</span></span>
+<span id="cb10-2"><a aria-label="2"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> treatment, <span class="at">data =</span> medical)</span>
+<span id="cb10-3"><a aria-label="3"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(time, event) ~ treatment, data = medical)
+
+                treatment=active 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  0.5     90      12    0.867  0.0358        0.799        0.940
+  1.5     69       7    0.779  0.0450        0.695        0.872
+  2.5     59      10    0.647  0.0534        0.550        0.760
+
+                treatment=control 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  0.5     74      15    0.797  0.0467        0.711        0.894
+  1.5     50      13    0.590  0.0603        0.483        0.721
+  2.5     30       7    0.452  0.0649        0.341        0.599</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a><span class="fu">plot</span>(fit, <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">"Interval"</span>, <span class="at">ylab =</span> <span class="st">"Survival"</span>)</span>
+<span id="cb12-2"><a aria-label="2"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Active"</span>, <span class="st">"Control"</span>), <span class="at">lty =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Chapter13_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>null device 
+          1 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Actuarial life-table estimates (SAS method=lt, intervals=0 to 3 by 1)</span></span>
+<span id="cb15-2"><a aria-label="2"></a>lt_control <span class="ot">&lt;-</span> <span class="fu">lifetab</span>(<span class="at">tis =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">ninit =</span> <span class="dv">74</span>,</span>
+<span id="cb15-3"><a aria-label="3"></a>                      <span class="at">nlost =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">17</span>), <span class="at">nevent =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">13</span>, <span class="dv">7</span>, <span class="dv">0</span>))</span>
+<span id="cb15-4"><a aria-label="4"></a>lt_active  <span class="ot">&lt;-</span> <span class="fu">lifetab</span>(<span class="at">tis =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">ninit =</span> <span class="dv">90</span>,</span>
+<span id="cb15-5"><a aria-label="5"></a>                      <span class="at">nlost =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">45</span>), <span class="at">nevent =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">0</span>))</span>
+<span id="cb15-6"><a aria-label="6"></a>lt_control</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    nsubs nlost nrisk nevent      surv       pdf    hazard    se.surv
+0-1    74     9  69.5     15 1.0000000 0.2158273 0.2419355 0.00000000
+1-2    50     7  46.5     13 0.7841727 0.2192311 0.3250000 0.04934767
+2-3    30     6  27.0      7 0.5649416 0.1464663 0.2978723 0.06266907
+3-4    17    17   8.5      0 0.4184753        NA        NA 0.06652107
+        se.pdf  se.hazard
+0-1 0.04934767 0.06200874
+1-2 0.05342128 0.08894071
+2-3 0.05033961 0.11132948
+3-4         NA         NA</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-label="1"></a>lt_active</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    nsubs nlost nrisk nevent      surv       pdf    hazard    se.surv
+0-1    90     9  85.5     12 1.0000000 0.1403509 0.1509434 0.00000000
+1-2    69     3  67.5      7 0.8596491 0.0891488 0.1093750 0.03756515
+2-3    59     4  57.0     10 0.7705003 0.1351755 0.1923077 0.04638160
+3-4    45    45  22.5      0 0.6353248        NA        NA 0.05449140
+        se.pdf  se.hazard
+0-1 0.03756515 0.04344933
+1-2 0.03213710 0.04127800
+2-3 0.03965962 0.06053125
+3-4         NA         NA</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-label="1"></a><span class="co"># Log-rank Test</span></span>
+<span id="cb19-2"><a aria-label="2"></a></span>
+<span id="cb19-3"><a aria-label="3"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> treatment, <span class="at">data =</span> medical, <span class="at">rho =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+survdiff(formula = Surv(time, event) ~ treatment, data = medical, 
+    rho = 0)
+
+                   N Observed Expected (O-E)^2/E (O-E)^2/V
+treatment=active  90       29     37.7      2.00      5.88
+treatment=control 74       35     26.3      2.87      5.88
+
+ Chisq= 5.9  on 1 degrees of freedom, p= 0.02 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-label="1"></a><span class="co"># Modified Peto Test</span></span>
+<span id="cb21-2"><a aria-label="2"></a></span>
+<span id="cb21-3"><a aria-label="3"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> treatment, <span class="at">data =</span> medical, <span class="at">rho =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+survdiff(formula = Surv(time, event) ~ treatment, data = medical, 
+    rho = 1)
+
+                   N Observed Expected (O-E)^2/E (O-E)^2/V
+treatment=active  90     24.8     32.3      1.76       5.7
+treatment=control 74     30.7     23.2      2.45       5.7
+
+ Chisq= 5.7  on 1 degrees of freedom, p= 0.02 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-5">
 <p>Based on the survival curves, the log-rank test might be preferred (<span class="math inline">\(\chi^2\)</span> = 5.88, p=0.015). At a significance level of 0.05, there is sufficient evidence of a difference between the survival curves between the two treatments.</p>
 </div>
 </div>
@@ -491,32 +704,162 @@ se(G_{ik}) = G_{ik} \sqrt{\sum_{g=1}^k \left[\frac{(1-p_{ig})}{n_{i0g} + 0.5 n_{
 </section>
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
-<p>A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the life table method to test if there is a difference between the survival curves of the two profiles.</p>
-<div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Data Set</a></li><li><a href="#tabset-4-2">SAS Code</a></li><li><a href="#tabset-4-3">Answer</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1">
+<p>A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the Modified Peto-Peto test and the life table method to test if there is a difference between the survival curves of the two profiles.</p>
 <p>The variable <code>INTERVAL</code> takes the value 0, 1, 2, corresponding to the following intervals: &lt;6 months, 6-12 months, &gt;12 months (no occurrence at the end of the study). and the variable <code>CENSOR</code> takes the value 1 for censored subjects and 0 otherwise. The variable <code>PROFILE</code> reflects whether the subjects are part of the group that presented with mental health sequelae (MH) and those that did not (NoMH), and the variable <code>COUNT</code> contains the frequency counts.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>data mTBI;</span>
-<span id="cb4-2"><a></a>input interval profile <span class="sc">$</span> censor count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb4-3"><a></a>datalines;</span>
-<span id="cb4-4"><a></a><span class="dv">0</span> NoMH <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> NoMH <span class="dv">0</span> <span class="dv">17</span></span>
-<span id="cb4-5"><a></a><span class="dv">1</span> NoMH <span class="dv">1</span> <span class="dv">6</span> <span class="dv">1</span> NoMH <span class="dv">0</span> <span class="dv">9</span></span>
-<span id="cb4-6"><a></a><span class="dv">2</span> NoMH <span class="dv">1</span> <span class="dv">20</span> </span>
-<span id="cb4-7"><a></a><span class="dv">0</span> MH <span class="dv">1</span> <span class="dv">8</span> <span class="dv">0</span> MH <span class="dv">0</span> <span class="dv">15</span></span>
-<span id="cb4-8"><a></a><span class="dv">1</span> MH <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> MH <span class="dv">0</span> <span class="dv">7</span></span>
-<span id="cb4-9"><a></a><span class="dv">2</span> MH <span class="dv">1</span> <span class="dv">10</span> </span>
-<span id="cb4-10"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Data Set</a></li><li><a href="#tabset-5-2">R Data Set</a></li><li><a href="#tabset-5-3">SAS Code</a></li><li><a href="#tabset-5-4">R Code</a></li><li><a href="#tabset-5-5">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a>data mTBI;</span>
+<span id="cb23-2"><a aria-label="2"></a>input interval profile <span class="sc">$</span> censor count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb23-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb23-4"><a aria-label="4"></a><span class="dv">0</span> NoMH <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> NoMH <span class="dv">0</span> <span class="dv">17</span></span>
+<span id="cb23-5"><a aria-label="5"></a><span class="dv">1</span> NoMH <span class="dv">1</span> <span class="dv">6</span> <span class="dv">1</span> NoMH <span class="dv">0</span> <span class="dv">9</span></span>
+<span id="cb23-6"><a aria-label="6"></a><span class="dv">2</span> NoMH <span class="dv">1</span> <span class="dv">20</span> </span>
+<span id="cb23-7"><a aria-label="7"></a><span class="dv">0</span> MH <span class="dv">1</span> <span class="dv">8</span> <span class="dv">0</span> MH <span class="dv">0</span> <span class="dv">15</span></span>
+<span id="cb23-8"><a aria-label="8"></a><span class="dv">1</span> MH <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> MH <span class="dv">0</span> <span class="dv">7</span></span>
+<span id="cb23-9"><a aria-label="9"></a><span class="dv">2</span> MH <span class="dv">1</span> <span class="dv">10</span> </span>
+<span id="cb23-10"><a aria-label="10"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-4-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>proc lifetest data<span class="ot">=</span>mTBI method<span class="ot">=</span>lt plots<span class="ot">=</span>(s,ls)</span>
-<span id="cb5-2"><a></a>intervals<span class="ot">=</span><span class="dv">0</span> to <span class="dv">2</span> by <span class="dv">1</span>;</span>
-<span id="cb5-3"><a></a>freq count;</span>
-<span id="cb5-4"><a></a>strata profile<span class="sc">/</span>test<span class="ot">=</span>(logrank lr modpeto wilcoxon);</span>
-<span id="cb5-5"><a></a>time interval<span class="sc">*</span><span class="fu">censor</span>(<span class="dv">1</span>);</span>
-<span id="cb5-6"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-5-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb24-2"><a aria-label="2"></a>mTBI_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb24-3"><a aria-label="3"></a>  <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb24-4"><a aria-label="4"></a>  <span class="at">profile  =</span> <span class="fu">c</span>(<span class="st">"NoMH"</span>, <span class="st">"NoMH"</span>, <span class="st">"NoMH"</span>, <span class="st">"NoMH"</span>, <span class="st">"NoMH"</span>, </span>
+<span id="cb24-5"><a aria-label="5"></a>                      <span class="st">"MH"</span>, <span class="st">"MH"</span>, <span class="st">"MH"</span>, <span class="st">"MH"</span>, <span class="st">"MH"</span>),</span>
+<span id="cb24-6"><a aria-label="6"></a>  <span class="at">censor   =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb24-7"><a aria-label="7"></a>  <span class="at">count    =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">17</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">20</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">10</span>)</span>
+<span id="cb24-8"><a aria-label="8"></a>)</span>
+<span id="cb24-9"><a aria-label="9"></a></span>
+<span id="cb24-10"><a aria-label="10"></a>mTBI_counts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   interval profile censor count
+1         0    NoMH      1     1
+2         0    NoMH      0    17
+3         1    NoMH      1     6
+4         1    NoMH      0     9
+5         2    NoMH      1    20
+6         0      MH      1     8
+7         0      MH      0    15
+8         1      MH      1     2
+9         1      MH      0     7
+10        2      MH      1    10</code></pre>
 </div>
-<div id="tabset-4-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-label="1"></a>mTBI <span class="ot">&lt;-</span> mTBI_counts <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a aria-label="2"></a>  <span class="fu">uncount</span>(<span class="at">weights=</span>count)</span>
+<span id="cb26-3"><a aria-label="3"></a></span>
+<span id="cb26-4"><a aria-label="4"></a>mTBI<span class="sc">$</span>time  <span class="ot">&lt;-</span> mTBI<span class="sc">$</span>interval <span class="sc">+</span> <span class="fl">0.5</span></span>
+<span id="cb26-5"><a aria-label="5"></a>mTBI<span class="sc">$</span>event <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> mTBI<span class="sc">$</span>censor</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-5-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-label="1"></a>proc lifetest data<span class="ot">=</span>mTBI method<span class="ot">=</span>lt plots<span class="ot">=</span>(s,ls)</span>
+<span id="cb27-2"><a aria-label="2"></a>intervals<span class="ot">=</span><span class="dv">0</span> to <span class="dv">2</span> by <span class="dv">1</span>;</span>
+<span id="cb27-3"><a aria-label="3"></a>freq count;</span>
+<span id="cb27-4"><a aria-label="4"></a>strata profile<span class="sc">/</span>test<span class="ot">=</span>(logrank lr modpeto wilcoxon);</span>
+<span id="cb27-5"><a aria-label="5"></a>time interval<span class="sc">*</span><span class="fu">censor</span>(<span class="dv">1</span>);</span>
+<span id="cb27-6"><a aria-label="6"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-4">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-label="1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb28-2"><a aria-label="2"></a><span class="fu">library</span>(KMsurv)</span>
+<span id="cb28-3"><a aria-label="3"></a></span>
+<span id="cb28-4"><a aria-label="4"></a><span class="co"># Initial Counts</span></span>
+<span id="cb28-5"><a aria-label="5"></a></span>
+<span id="cb28-6"><a aria-label="6"></a>mTBI_counts <span class="sc">|&gt;</span> </span>
+<span id="cb28-7"><a aria-label="7"></a>  <span class="fu">group_by</span>(profile) <span class="sc">|&gt;</span></span>
+<span id="cb28-8"><a aria-label="8"></a>  <span class="fu">summarize</span>(<span class="at">sum=</span><span class="fu">sum</span>(count))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  profile   sum
+  &lt;chr&gt;   &lt;dbl&gt;
+1 MH         42
+2 NoMH       53</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-label="1"></a><span class="co"># Kaplan-Meier curves (SAS plots=(s,ls))</span></span>
+<span id="cb30-2"><a aria-label="2"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> profile, <span class="at">data =</span> mTBI)</span>
+<span id="cb30-3"><a aria-label="3"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(time, event) ~ profile, data = mTBI)
+
+                profile=MH 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  0.5     42      15    0.643  0.0739        0.513        0.805
+  1.5     19       7    0.406  0.0851        0.269        0.612
+
+                profile=NoMH 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  0.5     53      17    0.679  0.0641        0.565        0.817
+  1.5     35       9    0.505  0.0692        0.386        0.660</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-label="1"></a><span class="fu">plot</span>(fit, <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">"Interval"</span>, <span class="at">ylab =</span> <span class="st">"Survival"</span>)</span>
+<span id="cb32-2"><a aria-label="2"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,<span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"NoMH"</span>, <span class="st">"MH"</span>), <span class="at">lty =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Chapter13_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-label="1"></a>lt_NoMH <span class="ot">&lt;-</span> <span class="fu">lifetab</span>(<span class="at">tis =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">ninit =</span> <span class="dv">53</span>,</span>
+<span id="cb33-2"><a aria-label="2"></a>                      <span class="at">nlost =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">20</span>), <span class="at">nevent =</span> <span class="fu">c</span>(<span class="dv">17</span>,<span class="dv">9</span>,<span class="dv">0</span>))</span>
+<span id="cb33-3"><a aria-label="3"></a>lt_MH  <span class="ot">&lt;-</span> <span class="fu">lifetab</span>(<span class="at">tis =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">ninit =</span> <span class="dv">42</span>,</span>
+<span id="cb33-4"><a aria-label="4"></a>                      <span class="at">nlost =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">10</span>), <span class="at">nevent =</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">7</span>,<span class="dv">0</span>))</span>
+<span id="cb33-5"><a aria-label="5"></a>lt_NoMH</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    nsubs nlost nrisk nevent      surv       pdf    hazard    se.surv
+0-1    53     1  52.5     17 1.0000000 0.3238095 0.3863636 0.00000000
+1-2    35     6  32.0      9 0.6761905 0.1901786 0.3272727 0.06458024
+2-3    20    20  10.0      0 0.4860119        NA        NA 0.07101373
+        se.pdf  se.hazard
+0-1 0.06458024 0.09194179
+1-2 0.05673015 0.10762044
+2-3         NA         NA</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-label="1"></a>lt_MH</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    nsubs nlost nrisk nevent      surv       pdf    hazard    se.surv
+0-1    42     8    38     15 1.0000000 0.3947368 0.4918033 0.00000000
+1-2    19     2    18      7 0.6052632 0.2353801 0.4827586 0.07929287
+2-3    10    10     5      0 0.3698830        NA        NA 0.08476377
+        se.pdf se.hazard
+0-1 0.07929287 0.1230840
+1-2 0.07607697 0.1770703
+2-3         NA        NA</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-label="1"></a><span class="co"># Log-rank Test</span></span>
+<span id="cb37-2"><a aria-label="2"></a></span>
+<span id="cb37-3"><a aria-label="3"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> profile, <span class="at">data =</span> mTBI, <span class="at">rho =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+survdiff(formula = Surv(time, event) ~ profile, data = mTBI, 
+    rho = 0)
+
+              N Observed Expected (O-E)^2/E (O-E)^2/V
+profile=MH   42       22     19.8     0.250     0.625
+profile=NoMH 53       26     28.2     0.175     0.625
+
+ Chisq= 0.6  on 1 degrees of freedom, p= 0.4 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-label="1"></a><span class="co"># Modified Peto Test</span></span>
+<span id="cb39-2"><a aria-label="2"></a></span>
+<span id="cb39-3"><a aria-label="3"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> profile, <span class="at">data =</span> mTBI, <span class="at">rho =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+survdiff(formula = Surv(time, event) ~ profile, data = mTBI, 
+    rho = 1)
+
+              N Observed Expected (O-E)^2/E (O-E)^2/V
+profile=MH   42     19.6     17.9     0.174     0.482
+profile=NoMH 53     23.0     24.7     0.125     0.482
+
+ Chisq= 0.5  on 1 degrees of freedom, p= 0.5 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-5">
 <p>There is insufficient evidence of a difference between the survival curves of the two groups based on the modified Peto-Peto test (<span class="math inline">\(\chi^2\)</span> = 0.5012, p=0.48) and the Wilcoxon test (<span class="math inline">\(\chi^2\)</span> = 0.4339, p=0.51) .</p>
 </div>
 </div>
@@ -556,28 +899,80 @@ se(G_{ik}) = G_{ik} \sqrt{\sum_{g=1}^k \left[\frac{(1-p_{ig})}{n_{i0g} + 0.5 n_{
 <h2>Example</h2>
 <p>Investigators were interested in comparing an active and control treatment to prevent the recurrence of a medical condition that had been healed. They applied a diagnostic procedure at the end of the first, second, and third years to determine whether there was a recurrence. Use the Mantel-Cox method to test if there is a difference in survival rates between the active and control treatments.</p>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Data Set</a></li><li><a href="#tabset-5-2">SAS Code</a></li><li><a href="#tabset-5-3">Answer</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Data Set</a></li><li><a href="#tabset-6-2">R Data Set</a></li><li><a href="#tabset-6-3">SAS Code</a></li><li><a href="#tabset-6-4">R Code</a></li><li><a href="#tabset-6-5">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-6-1">
 <p>The data set excludes censored data.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data medical_mc;</span>
-<span id="cb6-2"><a></a>input time <span class="sc">$</span> treatment <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb6-3"><a></a>datalines;</span>
-<span id="cb6-4"><a></a><span class="dv">0-1</span> control recur <span class="dv">15</span> <span class="dv">0-1</span> control not <span class="dv">50</span></span>
-<span id="cb6-5"><a></a><span class="dv">0-1</span> active recur <span class="dv">12</span> <span class="dv">0-1</span> active not <span class="dv">69</span></span>
-<span id="cb6-6"><a></a><span class="dv">1-2</span> control recur <span class="dv">13</span> <span class="dv">1-2</span> control not <span class="dv">30</span></span>
-<span id="cb6-7"><a></a><span class="dv">1-2</span> active recur <span class="dv">7</span> <span class="dv">1-2</span> active not <span class="dv">59</span></span>
-<span id="cb6-8"><a></a><span class="dv">2-3</span> control recur <span class="dv">7</span> <span class="dv">2-3</span> control not <span class="dv">17</span></span>
-<span id="cb6-9"><a></a><span class="dv">2-3</span> active recur <span class="dv">10</span> <span class="dv">2-3</span> active not <span class="dv">45</span></span>
-<span id="cb6-10"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-label="1"></a>data medical_mc;</span>
+<span id="cb41-2"><a aria-label="2"></a>input time <span class="sc">$</span> treatment <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb41-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb41-4"><a aria-label="4"></a><span class="dv">0-1</span> control recur <span class="dv">15</span> <span class="dv">0-1</span> control not <span class="dv">50</span></span>
+<span id="cb41-5"><a aria-label="5"></a><span class="dv">0-1</span> active recur <span class="dv">12</span> <span class="dv">0-1</span> active not <span class="dv">69</span></span>
+<span id="cb41-6"><a aria-label="6"></a><span class="dv">1-2</span> control recur <span class="dv">13</span> <span class="dv">1-2</span> control not <span class="dv">30</span></span>
+<span id="cb41-7"><a aria-label="7"></a><span class="dv">1-2</span> active recur <span class="dv">7</span> <span class="dv">1-2</span> active not <span class="dv">59</span></span>
+<span id="cb41-8"><a aria-label="8"></a><span class="dv">2-3</span> control recur <span class="dv">7</span> <span class="dv">2-3</span> control not <span class="dv">17</span></span>
+<span id="cb41-9"><a aria-label="9"></a><span class="dv">2-3</span> active recur <span class="dv">10</span> <span class="dv">2-3</span> active not <span class="dv">45</span></span>
+<span id="cb41-10"><a aria-label="10"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-5-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>proc freq data<span class="ot">=</span>medical_mc order<span class="ot">=</span>data;</span>
-<span id="cb7-2"><a></a>weight count;</span>
-<span id="cb7-3"><a></a>tables time<span class="sc">*</span>treatment<span class="sc">*</span>status <span class="sc">/</span> cmh;</span>
-<span id="cb7-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-6-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-label="1"></a>medical_mc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb42-2"><a aria-label="2"></a>  <span class="at">time      =</span> <span class="fu">c</span>(<span class="st">"0-1"</span>, <span class="st">"0-1"</span>, <span class="st">"0-1"</span>, <span class="st">"0-1"</span>, <span class="st">"1-2"</span>, <span class="st">"1-2"</span>, <span class="st">"1-2"</span>, <span class="st">"1-2"</span>, <span class="st">"2-3"</span>, <span class="st">"2-3"</span>, <span class="st">"2-3"</span>, <span class="st">"2-3"</span>),</span>
+<span id="cb42-3"><a aria-label="3"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"control"</span>, <span class="st">"active"</span>, <span class="st">"active"</span>, <span class="st">"control"</span>, <span class="st">"control"</span>, <span class="st">"active"</span>, <span class="st">"active"</span>, <span class="st">"control"</span>, <span class="st">"control"</span>, <span class="st">"active"</span>, <span class="st">"active"</span>),</span>
+<span id="cb42-4"><a aria-label="4"></a>  <span class="at">status    =</span> <span class="fu">c</span>(<span class="st">"recur"</span>, <span class="st">"not"</span>, <span class="st">"recur"</span>, <span class="st">"not"</span>, <span class="st">"recur"</span>, <span class="st">"not"</span>, <span class="st">"recur"</span>, <span class="st">"not"</span>, <span class="st">"recur"</span>, <span class="st">"not"</span>, <span class="st">"recur"</span>, <span class="st">"not"</span>),</span>
+<span id="cb42-5"><a aria-label="5"></a>  <span class="at">count     =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">50</span>, <span class="dv">12</span>, <span class="dv">69</span>, <span class="dv">13</span>, <span class="dv">30</span>, <span class="dv">7</span>, <span class="dv">59</span>, <span class="dv">7</span>, <span class="dv">17</span>, <span class="dv">10</span>, <span class="dv">45</span>)</span>
+<span id="cb42-6"><a aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-5-3">
+</div>
+<div id="tabset-6-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-label="1"></a>proc freq data<span class="ot">=</span>medical_mc order<span class="ot">=</span>data;</span>
+<span id="cb43-2"><a aria-label="2"></a>weight count;</span>
+<span id="cb43-3"><a aria-label="3"></a>tables time<span class="sc">*</span>treatment<span class="sc">*</span>status <span class="sc">/</span> cmh;</span>
+<span id="cb43-4"><a aria-label="4"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-6-4">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a aria-label="1"></a><span class="fu">library</span>(vcdExtra)</span>
+<span id="cb44-2"><a aria-label="2"></a>med_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>treatment<span class="sc">+</span>status<span class="sc">+</span>time,<span class="at">data=</span>medical_mc)</span>
+<span id="cb44-3"><a aria-label="3"></a>med_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , time = 0-1
+
+         status
+treatment not recur
+  active   69    12
+  control  50    15
+
+, , time = 1-2
+
+         status
+treatment not recur
+  active   59     7
+  control  30    13
+
+, , time = 2-3
+
+         status
+treatment not recur
+  active   45    10
+  control  17     7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a aria-label="1"></a><span class="fu">CMHtest</span>(med_cc,</span>
+<span id="cb46-2"><a aria-label="2"></a>        <span class="at">strata=</span><span class="st">"time"</span>,</span>
+<span id="cb46-3"><a aria-label="3"></a>        <span class="at">overall=</span>T)<span class="sc">$</span>ALL</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for treatment by status 
+    Overall tests, controlling for all strata 
+
+                 AltHypothesis  Chisq Df      Prob
+cor        Nonzero correlation 8.0294  1 0.0046024
+rmeans  Row mean scores differ 8.0294  1 0.0046024
+cmeans  Col mean scores differ 8.0294  1 0.0046024
+general    General association 8.0294  1 0.0046024</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-6-5">
 <p>The Cochran-Mantel-Haenszel test shows sufficient evidence of a treatment effect on survival rates (Q=8.03,p=0.0046).</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -600,25 +995,70 @@ se(G_{ik}) = G_{ik} \sqrt{\sum_{g=1}^k \left[\frac{(1-p_{ig})}{n_{i0g} + 0.5 n_{
 <h2>Exercise</h2>
 <p>A study about mild traumatic brain injuries (mTBI) investigated the persistence of headaches for those who presented with mental health related sequelae and those who did not. Use the Mantel-Cox method to test if there is a difference in survival rates between the the two profiles.</p>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">SAS Data Set</a></li><li><a href="#tabset-6-2">SAS Code</a></li><li><a href="#tabset-6-3">Answer</a></li></ul>
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Data Set</a></li><li><a href="#tabset-7-2">R Data Set</a></li><li><a href="#tabset-7-3">SAS Code</a></li><li><a href="#tabset-7-4">R Code</a></li><li><a href="#tabset-7-5">Answer</a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data mTBI_mc;</span>
-<span id="cb8-2"><a></a>input time <span class="sc">$</span> profile <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb8-3"><a></a>datalines;</span>
-<span id="cb8-4"><a></a><span class="dv">0-6</span> NoMH recur <span class="dv">17</span> <span class="dv">0-6</span> NoMH not <span class="dv">35</span></span>
-<span id="cb8-5"><a></a><span class="dv">0-6</span> MH recur <span class="dv">15</span> <span class="dv">0-6</span> MH not <span class="dv">19</span></span>
-<span id="cb8-6"><a></a><span class="dv">6-12</span> NoMH recur <span class="dv">9</span> <span class="dv">6-12</span> NoMH not <span class="dv">20</span></span>
-<span id="cb8-7"><a></a><span class="dv">6-12</span> MH recur <span class="dv">7</span> <span class="dv">6-12</span> MH not <span class="dv">10</span></span>
-<span id="cb8-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-7-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a aria-label="1"></a>data mTBI_mc;</span>
+<span id="cb48-2"><a aria-label="2"></a>input time <span class="sc">$</span> profile <span class="sc">$</span> status <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb48-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb48-4"><a aria-label="4"></a><span class="dv">0-6</span> NoMH recur <span class="dv">17</span> <span class="dv">0-6</span> NoMH not <span class="dv">35</span></span>
+<span id="cb48-5"><a aria-label="5"></a><span class="dv">0-6</span> MH recur <span class="dv">15</span> <span class="dv">0-6</span> MH not <span class="dv">19</span></span>
+<span id="cb48-6"><a aria-label="6"></a><span class="dv">6-12</span> NoMH recur <span class="dv">9</span> <span class="dv">6-12</span> NoMH not <span class="dv">20</span></span>
+<span id="cb48-7"><a aria-label="7"></a><span class="dv">6-12</span> MH recur <span class="dv">7</span> <span class="dv">6-12</span> MH not <span class="dv">10</span></span>
+<span id="cb48-8"><a aria-label="8"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-6-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>proc freq data<span class="ot">=</span>mTBI_mc order<span class="ot">=</span>data;</span>
-<span id="cb9-2"><a></a>weight count;</span>
-<span id="cb9-3"><a></a>tables time<span class="sc">*</span>profile<span class="sc">*</span>status <span class="sc">/</span> cmh;</span>
-<span id="cb9-4"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-7-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a aria-label="1"></a>mTBI_mc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb49-2"><a aria-label="2"></a>  <span class="at">time    =</span> <span class="fu">c</span>(<span class="st">"0-6"</span>, <span class="st">"0-6"</span>, <span class="st">"0-6"</span>, <span class="st">"0-6"</span>, <span class="st">"6-12"</span>, <span class="st">"6-12"</span>, <span class="st">"6-12"</span>, <span class="st">"6-12"</span>),</span>
+<span id="cb49-3"><a aria-label="3"></a>  <span class="at">profile =</span> <span class="fu">c</span>(<span class="st">"NoMH"</span>, <span class="st">"NoMH"</span>, <span class="st">"MH"</span>, <span class="st">"MH"</span>, <span class="st">"NoMH"</span>, <span class="st">"NoMH"</span>, <span class="st">"MH"</span>, <span class="st">"MH"</span>),</span>
+<span id="cb49-4"><a aria-label="4"></a>  <span class="at">status  =</span> <span class="fu">c</span>(<span class="st">"recur"</span>, <span class="st">"not"</span>, <span class="st">"recur"</span>, <span class="st">"not"</span>, <span class="st">"recur"</span>, <span class="st">"not"</span>, <span class="st">"recur"</span>, <span class="st">"not"</span>),</span>
+<span id="cb49-5"><a aria-label="5"></a>  <span class="at">count   =</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">35</span>, <span class="dv">15</span>, <span class="dv">19</span>, <span class="dv">9</span>, <span class="dv">20</span>, <span class="dv">7</span>, <span class="dv">10</span>)</span>
+<span id="cb49-6"><a aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-6-3">
+</div>
+<div id="tabset-7-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-label="1"></a>proc freq data<span class="ot">=</span>mTBI_mc order<span class="ot">=</span>data;</span>
+<span id="cb50-2"><a aria-label="2"></a>weight count;</span>
+<span id="cb50-3"><a aria-label="3"></a>tables time<span class="sc">*</span>profile<span class="sc">*</span>status <span class="sc">/</span> cmh;</span>
+<span id="cb50-4"><a aria-label="4"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-7-4">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a aria-label="1"></a><span class="fu">library</span>(vcdExtra)</span>
+<span id="cb51-2"><a aria-label="2"></a>mtbi_cc <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(count<span class="sc">~</span>profile<span class="sc">+</span>status<span class="sc">+</span>time,<span class="at">data=</span>mTBI_mc)</span>
+<span id="cb51-3"><a aria-label="3"></a>mtbi_cc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , time = 0-6
+
+       status
+profile not recur
+   MH    19    15
+   NoMH  35    17
+
+, , time = 6-12
+
+       status
+profile not recur
+   MH    10     7
+   NoMH  20     9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a aria-label="1"></a><span class="fu">CMHtest</span>(mtbi_cc,</span>
+<span id="cb53-2"><a aria-label="2"></a>        <span class="at">strata=</span><span class="st">"time"</span>,</span>
+<span id="cb53-3"><a aria-label="3"></a>        <span class="at">overall=</span>T)<span class="sc">$</span>ALL</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cochran-Mantel-Haenszel Statistics for profile by status 
+    Overall tests, controlling for all strata 
+
+                 AltHypothesis  Chisq Df    Prob
+cor        Nonzero correlation 1.6072  1 0.20489
+rmeans  Row mean scores differ 1.6072  1 0.20489
+cmeans  Col mean scores differ 1.6072  1 0.20489
+general    General association 1.6072  1 0.20489</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-5">
 <p>There is insufficient evidence of a difference between the survival rates of the two groups based on the Mantel-Cox test (<span class="math inline">\(Q\)</span> = 1.6072, p=0.20).</p>
 </div>
 </div>
@@ -703,8 +1143,8 @@ N_{ik} = a_k(n_{i0k} + 0.5n_{i1k} + 0.5n_{i2k})
 </div>
 </div>
 </section>
-<section id="sas-implementation-1" class="slide level2">
-<h2>SAS Implementation</h2>
+<section id="r-implementation-1" class="slide level2">
+<h2><code>R</code> Implementation</h2>
 <p>Both <code>LOGISTIC</code> and <code>GENMOD</code> can implement the piecewise exponential model analyses.</p>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -715,59 +1155,101 @@ N_{ik} = a_k(n_{i0k} + 0.5n_{i1k} + 0.5n_{i2k})
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>The <code>GENMOD</code> procedure uses the Poisson likelihood to estimate failure rates, while <code>LOGISTIC</code> uses the response <code>failure/trials</code>.</p>
+<p>The <code>GENMOD</code> procedure uses the Poisson likelihood to estimate failure rates, while <code>LOGISTIC</code> uses the response <code>failure/trials</code>. When using <code>LOGISTIC</code>, you need to rescale the exposure factor by a large number (at least 10,000 depending on the exposure variable) to scale the exposure from aggregate to individual.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="r-implementation-2" class="slide level2">
+<h2><code>R</code> Implementation</h2>
+<p>The <code>glm()</code> function can implement the piecewise exponential model analyses. The Poisson (family=“Poisson”) is used to approximate the incidence rates, while the offset is commonly taken as the logarithm of the observation time.</p>
 </section>
 <section id="example-2" class="slide level2">
 <h2>Example</h2>
 <p>The data includes information pertaining to the experience of patients undergoing treatment for duodenal ulcers. types of surgeries was randomly assigned: vagotomy and drainage or antrectomy (VDA), or vagotomy and hemigastrectomy (VH). The patients were evaluated at 6 months, 24 months, and 60 months. Use the piecewise exponential model to test for a treatment effect and if there is a difference in failure rates in time.</p>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">SAS Data Set</a></li><li><a href="#tabset-7-2"><code>GENMOD</code></a></li><li><a href="#tabset-7-3"><code>LOGISTIC</code></a></li><li><a href="#tabset-7-4">Results</a></li></ul>
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">SAS Data Set</a></li><li><a href="#tabset-8-2">R Data Set</a></li><li><a href="#tabset-8-3"><code>GENMOD</code></a></li><li><a href="#tabset-8-4">R Code</a></li><li><a href="#tabset-8-5">Results</a></li></ul>
 <div class="tab-content">
-<div id="tabset-7-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data vda;</span>
-<span id="cb10-2"><a></a>input treatment <span class="sc">$</span> time <span class="sc">$</span> failure months;</span>
-<span id="cb10-3"><a></a>nmonths<span class="ot">=</span><span class="fu">log</span>(months);</span>
-<span id="cb10-4"><a></a>datalines;</span>
-<span id="cb10-5"><a></a>vda _0<span class="dv">-6</span> <span class="dv">23</span> <span class="dv">3894</span></span>
-<span id="cb10-6"><a></a>vda <span class="dv">7-24</span> <span class="dv">32</span> <span class="dv">10872</span></span>
-<span id="cb10-7"><a></a>vda <span class="dv">25-60</span> <span class="dv">45</span> <span class="dv">18720</span></span>
-<span id="cb10-8"><a></a>vh _0<span class="dv">-6</span> <span class="dv">9</span> <span class="dv">2016</span></span>
-<span id="cb10-9"><a></a>vh <span class="dv">7-24</span> <span class="dv">5</span> <span class="dv">5724</span></span>
-<span id="cb10-10"><a></a>vh <span class="dv">25-60</span> <span class="dv">10</span> <span class="dv">10440</span></span>
-<span id="cb10-11"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-8-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a aria-label="1"></a>data vda;</span>
+<span id="cb55-2"><a aria-label="2"></a>input treatment <span class="sc">$</span> time <span class="sc">$</span> failure months;</span>
+<span id="cb55-3"><a aria-label="3"></a>nmonths<span class="ot">=</span><span class="fu">log</span>(months);</span>
+<span id="cb55-4"><a aria-label="4"></a>datalines;</span>
+<span id="cb55-5"><a aria-label="5"></a>vda _0<span class="dv">-6</span> <span class="dv">23</span> <span class="dv">3894</span></span>
+<span id="cb55-6"><a aria-label="6"></a>vda <span class="dv">7-24</span> <span class="dv">32</span> <span class="dv">10872</span></span>
+<span id="cb55-7"><a aria-label="7"></a>vda <span class="dv">25-60</span> <span class="dv">45</span> <span class="dv">18720</span></span>
+<span id="cb55-8"><a aria-label="8"></a>vh _0<span class="dv">-6</span> <span class="dv">9</span> <span class="dv">2016</span></span>
+<span id="cb55-9"><a aria-label="9"></a>vh <span class="dv">7-24</span> <span class="dv">5</span> <span class="dv">5724</span></span>
+<span id="cb55-10"><a aria-label="10"></a>vh <span class="dv">25-60</span> <span class="dv">10</span> <span class="dv">10440</span></span>
+<span id="cb55-11"><a aria-label="11"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-7-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>proc genmod data<span class="ot">=</span>vda;</span>
-<span id="cb11-2"><a></a>class treatment time;</span>
-<span id="cb11-3"><a></a>model failure <span class="ot">=</span> time treatment</span>
-<span id="cb11-4"><a></a><span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>nmonths;</span>
-<span id="cb11-5"><a></a>estimate <span class="st">"failure rate 25-60 VH"</span> int <span class="dv">1</span> time <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> treatment <span class="dv">0</span> <span class="dv">1</span><span class="sc">/</span>exp;</span>
-<span id="cb11-6"><a></a>estimate <span class="st">"failure rate 25-60 VDA"</span> int <span class="dv">1</span> time <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> treatment <span class="dv">1</span> <span class="dv">0</span><span class="sc">/</span>exp;</span>
-<span id="cb11-7"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tabset-8-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a aria-label="1"></a>vda <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb56-2"><a aria-label="2"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">"vda"</span>, <span class="st">"vda"</span>, <span class="st">"vda"</span>, <span class="st">"vh"</span>, <span class="st">"vh"</span>, <span class="st">"vh"</span>),</span>
+<span id="cb56-3"><a aria-label="3"></a>  <span class="at">time      =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"0-6"</span>, <span class="st">"7-24"</span>, <span class="st">"25-60"</span>, <span class="st">"0-6"</span>, <span class="st">"7-24"</span>, <span class="st">"25-60"</span>), <span class="at">levels=</span><span class="fu">c</span>(<span class="st">"0-6"</span>, <span class="st">"7-24"</span>, <span class="st">"25-60"</span>)),</span>
+<span id="cb56-4"><a aria-label="4"></a>  <span class="at">failure   =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">32</span>, <span class="dv">45</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">10</span>),</span>
+<span id="cb56-5"><a aria-label="5"></a>  <span class="at">months    =</span> <span class="fu">c</span>(<span class="dv">3894</span>, <span class="dv">10872</span>, <span class="dv">18720</span>, <span class="dv">2016</span>, <span class="dv">5724</span>, <span class="dv">10440</span>)</span>
+<span id="cb56-6"><a aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-7-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data vda;</span>
-<span id="cb12-2"><a></a>input treatment time <span class="sc">$</span> failure months;</span>
-<span id="cb12-3"><a></a>smonths<span class="ot">=</span><span class="dv">100000</span><span class="sc">*</span>months;</span>
-<span id="cb12-4"><a></a>datalines;</span>
-<span id="cb12-5"><a></a><span class="dv">1</span> _0<span class="dv">-6</span> <span class="dv">23</span> <span class="dv">3894</span></span>
-<span id="cb12-6"><a></a><span class="dv">1</span> <span class="dv">7-24</span> <span class="dv">32</span> <span class="dv">10872</span></span>
-<span id="cb12-7"><a></a><span class="dv">1</span> <span class="dv">25-60</span> <span class="dv">45</span> <span class="dv">18720</span></span>
-<span id="cb12-8"><a></a><span class="dv">0</span> _0<span class="dv">-6</span> <span class="dv">9</span> <span class="dv">2016</span></span>
-<span id="cb12-9"><a></a><span class="dv">0</span> <span class="dv">7-24</span> <span class="dv">5</span> <span class="dv">5724</span></span>
-<span id="cb12-10"><a></a><span class="dv">0</span> <span class="dv">25-60</span> <span class="dv">10</span> <span class="dv">10440</span></span>
-<span id="cb12-11"><a></a>;</span>
-<span id="cb12-12"><a></a></span>
-<span id="cb12-13"><a></a>proc logistic;</span>
-<span id="cb12-14"><a></a>class time<span class="sc">/</span>param<span class="ot">=</span>ref;</span>
-<span id="cb12-15"><a></a>model failure<span class="sc">/</span>smonths <span class="ot">=</span> time treatment time<span class="sc">*</span>treatment <span class="sc">/</span></span>
-<span id="cb12-16"><a></a>scale<span class="ot">=</span>none include<span class="ot">=</span><span class="dv">2</span> selection<span class="ot">=</span>forward;</span>
-<span id="cb12-17"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-7-4">
+<div id="tabset-8-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a aria-label="1"></a>proc genmod data<span class="ot">=</span>vda;</span>
+<span id="cb57-2"><a aria-label="2"></a>class treatment time;</span>
+<span id="cb57-3"><a aria-label="3"></a>model failure <span class="ot">=</span> time treatment</span>
+<span id="cb57-4"><a aria-label="4"></a><span class="sc">/</span> dist<span class="ot">=</span>poisson link<span class="ot">=</span>log offset<span class="ot">=</span>nmonths;</span>
+<span id="cb57-5"><a aria-label="5"></a>estimate <span class="st">"failure rate 25-60 VH"</span> int <span class="dv">1</span> time <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> treatment <span class="dv">0</span> <span class="dv">1</span><span class="sc">/</span>exp;</span>
+<span id="cb57-6"><a aria-label="6"></a>estimate <span class="st">"failure rate 25-60 VDA"</span> int <span class="dv">1</span> time <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> treatment <span class="dv">1</span> <span class="dv">0</span><span class="sc">/</span>exp;</span>
+<span id="cb57-7"><a aria-label="7"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-8-4">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a aria-label="1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(failure<span class="sc">~</span>time <span class="sc">+</span> treatment, </span>
+<span id="cb58-2"><a aria-label="2"></a>            <span class="at">data=</span>vda,</span>
+<span id="cb58-3"><a aria-label="3"></a>            <span class="at">family=</span><span class="st">"poisson"</span>,</span>
+<span id="cb58-4"><a aria-label="4"></a>            <span class="at">offset =</span> <span class="fu">log</span>(months))</span>
+<span id="cb58-5"><a aria-label="5"></a><span class="fu">summary</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = failure ~ time + treatment, family = "poisson", 
+    data = vda, offset = log(months))
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -5.0093     0.1818 -27.546  &lt; 2e-16 ***
+time7-24     -0.8847     0.2414  -3.665 0.000247 ***
+time25-60    -1.0429     0.2223  -4.691 2.72e-06 ***
+treatmentvh  -0.8071     0.2273  -3.551 0.000384 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 37.3229  on 5  degrees of freedom
+Residual deviance:  2.5529  on 2  degrees of freedom
+AIC: 38.182
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a aria-label="1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb60-2"><a aria-label="2"></a></span>
+<span id="cb60-3"><a aria-label="3"></a><span class="fu">emmeans</span>(mod1,<span class="sc">~</span>treatment<span class="sc">*</span>time,<span class="at">offset =</span> <span class="dv">0</span>,<span class="at">type=</span><span class="st">"response"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> treatment time     rate       SE  df asymp.LCL asymp.UCL
+ vda       0-6   0.00668 0.001210 Inf  0.004674   0.00953
+ vh        0-6   0.00298 0.000761 Inf  0.001805   0.00492
+ vda       7-24  0.00276 0.000468 Inf  0.001975   0.00385
+ vh        7-24  0.00123 0.000303 Inf  0.000758   0.00199
+ vda       25-60 0.00235 0.000335 Inf  0.001780   0.00311
+ vh        25-60 0.00105 0.000238 Inf  0.000673   0.00164
+
+Confidence level used: 0.95 
+Intervals are back-transformed from the log scale </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-8-5">
 <p>From the <code>GENMOD</code> results, the failure rates for the VDA treatment decreases across time. (<span class="math inline">\(\beta\)</span> = -0.88,-1.04; p = &lt;0.0001, 0.0002) The failure rate is higher for VDA compared to VH (<span class="math inline">\(\beta\)</span>=0.8071, p=0.004)</p>
 <p>The failure rates can be estimated using the <code>estimate</code> statement.The failure rate of VDA at 25-60 months is 0.0024 (0.0018,0.0031), while VH has a failure rate of 0.0010 (0.0007,0.0016).</p>
 </div>
@@ -779,7 +1261,7 @@ N_{ik} = a_k(n_{i0k} + 0.5n_{i1k} + 0.5n_{i2k})
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Chapter 10- <a href="https://madfudolig.quarto.pub/eab770slides/">Back to home</a></p>
+<p>Chapter 13- <a href="https://miguelfudolig.github.io/EAB770-Slides-Website/">Back to home</a></p>
 </div>
 </div></div>
 

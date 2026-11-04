@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Miguel Fudolig">
   <title>EAB770: Applied Statistical Methods for Categorical Data – EAB 770 - Chapter 14</title>
@@ -20,10 +20,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -204,7 +207,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Miguel Fudolig 
+Miguel Fudolig
 </div>
 </div>
 </div>
@@ -347,25 +350,25 @@ p_{ij} = n_{ij}/n_{i+}
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">SAS Data Set</a></li><li><a href="#tabset-1-2">SAS Code</a></li><li><a href="#tabset-1-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>data colds;</span>
-<span id="cb1-2"><a></a>   input sex <span class="sc">$</span> residence <span class="sc">$</span> periods count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb1-3"><a></a>   datalines;  </span>
-<span id="cb1-4"><a></a>female rural <span class="dv">0</span> <span class="dv">45</span> female rural <span class="dv">1</span> <span class="dv">64</span>  female rural <span class="dv">2</span> <span class="dv">71</span></span>
-<span id="cb1-5"><a></a>female urban <span class="dv">0</span> <span class="dv">80</span> female urban <span class="dv">1</span> <span class="dv">104</span> female urban <span class="dv">2</span> <span class="dv">116</span></span>
-<span id="cb1-6"><a></a>male rural   <span class="dv">0</span> <span class="dv">84</span> male   rural <span class="dv">1</span> <span class="dv">124</span> male   rural <span class="dv">2</span> <span class="dv">82</span></span>
-<span id="cb1-7"><a></a>male urban   <span class="dv">0</span> <span class="dv">106</span> male  urban <span class="dv">1</span> <span class="dv">117</span> male   urban <span class="dv">2</span> <span class="dv">87</span></span>
-<span id="cb1-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a>data colds;</span>
+<span id="cb1-2"><a aria-label="2"></a>   input sex <span class="sc">$</span> residence <span class="sc">$</span> periods count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb1-3"><a aria-label="3"></a>   datalines;  </span>
+<span id="cb1-4"><a aria-label="4"></a>female rural <span class="dv">0</span> <span class="dv">45</span> female rural <span class="dv">1</span> <span class="dv">64</span>  female rural <span class="dv">2</span> <span class="dv">71</span></span>
+<span id="cb1-5"><a aria-label="5"></a>female urban <span class="dv">0</span> <span class="dv">80</span> female urban <span class="dv">1</span> <span class="dv">104</span> female urban <span class="dv">2</span> <span class="dv">116</span></span>
+<span id="cb1-6"><a aria-label="6"></a>male rural   <span class="dv">0</span> <span class="dv">84</span> male   rural <span class="dv">1</span> <span class="dv">124</span> male   rural <span class="dv">2</span> <span class="dv">82</span></span>
+<span id="cb1-7"><a aria-label="7"></a>male urban   <span class="dv">0</span> <span class="dv">106</span> male  urban <span class="dv">1</span> <span class="dv">117</span> male   urban <span class="dv">2</span> <span class="dv">87</span></span>
+<span id="cb1-8"><a aria-label="8"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a>proc catmod data<span class="ot">=</span>colds;</span>
-<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>   population sex residence; </span>
-<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a>   weight count;</span>
-<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4"></a>   response means;</span>
-<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5"></a>   model periods <span class="ot">=</span> sex residence sex<span class="sc">*</span>residence<span class="sc">/</span>freq prob design;     </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6"></a>   contrast <span class="st">"male vs. female in urban"</span> sex <span class="dv">2</span> sex<span class="sc">*</span>residence <span class="sc">-</span><span class="dv">2</span>;</span>
-<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7"></a>   contrast <span class="st">"male vs. female in urban"</span> all_parms <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">2</span>;</span>
-<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8"></a>   contrast <span class="st">"female: rural vs urban"</span> residence <span class="dv">2</span> sex<span class="sc">*</span>residence <span class="dv">2</span>;</span>
-<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9"></a>run; </span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-label="1"></a>proc catmod data<span class="ot">=</span>colds;</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-label="2"></a>   population sex residence; </span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-label="3"></a>   weight count;</span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-label="4"></a>   response means;</span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-label="5"></a>   model periods <span class="ot">=</span> sex residence sex<span class="sc">*</span>residence<span class="sc">/</span>freq prob design;     </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-label="6"></a>   contrast <span class="st">"male vs. female in urban"</span> sex <span class="dv">2</span> sex<span class="sc">*</span>residence <span class="sc">-</span><span class="dv">2</span>;</span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-label="7"></a>   contrast <span class="st">"male vs. female in urban"</span> all_parms <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">2</span>;</span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-label="8"></a>   contrast <span class="st">"female: rural vs urban"</span> residence <span class="dv">2</span> sex<span class="sc">*</span>residence <span class="dv">2</span>;</span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-label="9"></a>run; </span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
@@ -389,26 +392,26 @@ p_{ij} = n_{ij}/n_{i+}
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">SAS Data Set</a></li><li><a href="#tabset-2-2">SAS Code</a></li><li><a href="#tabset-2-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>data selection_confidence;</span>
-<span id="cb2-2"><a></a>input stem <span class="sc">$</span> graduate <span class="sc">$</span> confidence <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
-<span id="cb2-3"><a></a>datalines;</span>
-<span id="cb2-4"><a></a>yes yes NC <span class="dv">28</span> yes yes N <span class="dv">30</span> yes yes C <span class="dv">43</span></span>
-<span id="cb2-5"><a></a>yes no NC <span class="dv">17</span> yes no N <span class="dv">25</span> yes no C <span class="dv">15</span></span>
-<span id="cb2-6"><a></a>no yes NC <span class="dv">30</span> no yes N <span class="dv">10</span> no yes C <span class="dv">17</span></span>
-<span id="cb2-7"><a></a>no no NC <span class="dv">8</span> no no N <span class="dv">10</span> no no C <span class="dv">38</span></span>
-<span id="cb2-8"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a>data selection_confidence;</span>
+<span id="cb2-2"><a aria-label="2"></a>input stem <span class="sc">$</span> graduate <span class="sc">$</span> confidence <span class="sc">$</span> count <span class="sc">@</span><span class="er">@</span>;</span>
+<span id="cb2-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb2-4"><a aria-label="4"></a>yes yes NC <span class="dv">28</span> yes yes N <span class="dv">30</span> yes yes C <span class="dv">43</span></span>
+<span id="cb2-5"><a aria-label="5"></a>yes no NC <span class="dv">17</span> yes no N <span class="dv">25</span> yes no C <span class="dv">15</span></span>
+<span id="cb2-6"><a aria-label="6"></a>no yes NC <span class="dv">30</span> no yes N <span class="dv">10</span> no yes C <span class="dv">17</span></span>
+<span id="cb2-7"><a aria-label="7"></a>no no NC <span class="dv">8</span> no no N <span class="dv">10</span> no no C <span class="dv">38</span></span>
+<span id="cb2-8"><a aria-label="8"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>proc catmod data<span class="ot">=</span>selection_confidence order<span class="ot">=</span>data;</span>
-<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>population stem graduate;</span>
-<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a>weight count;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4"></a>response <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span>;</span>
-<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>model confidence<span class="ot">=</span> stem graduate stem<span class="sc">*</span>graduate<span class="sc">/</span>freq prob design;</span>
-<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>contrast <span class="st">"graduate level: stem vs non-stem"</span> all_parms <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">2</span>;</span>
-<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>contrast <span class="st">"non-graduate: stem vs non-stem"</span> all_parms <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">2</span>; </span>
-<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a>contrast <span class="st">"STEM: graduate degree vs. non-grad"</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span>; </span>
-<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a>contrast <span class="st">"non-STEM: graduate degree vs. non-grad"</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="sc">-</span><span class="dv">2</span>; </span>
-<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-label="1"></a>proc catmod data<span class="ot">=</span>selection_confidence order<span class="ot">=</span>data;</span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-label="2"></a>population stem graduate;</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-label="3"></a>weight count;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4" aria-label="4"></a>response <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span>;</span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5" aria-label="5"></a>model confidence<span class="ot">=</span> stem graduate stem<span class="sc">*</span>graduate<span class="sc">/</span>freq prob design;</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-label="6"></a>contrast <span class="st">"graduate level: stem vs non-stem"</span> all_parms <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">2</span>;</span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7" aria-label="7"></a>contrast <span class="st">"non-graduate: stem vs non-stem"</span> all_parms <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">2</span>; </span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8" aria-label="8"></a>contrast <span class="st">"STEM: graduate degree vs. non-grad"</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">2</span>; </span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-label="9"></a>contrast <span class="st">"non-STEM: graduate degree vs. non-grad"</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="sc">-</span><span class="dv">2</span>; </span>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10" aria-label="10"></a>run;</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
@@ -441,55 +444,55 @@ p_{ij} = n_{ij}/n_{i+}
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">SAS Data Set</a></li><li><a href="#tabset-3-2">SAS Code</a></li><li><a href="#tabset-3-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data <span class="fu">wbeing</span>(<span class="at">type=</span>est);</span>
-<span id="cb3-2"><a></a>   input   b1<span class="sc">-</span>b5   _type_ <span class="sc">$</span>  _name_ <span class="sc">$</span>  b6<span class="sc">-</span>b10 <span class="co">#2;</span></span>
-<span id="cb3-3"><a></a>   datalines;</span>
-<span id="cb3-4"><a></a> <span class="fl">7.93726</span>   <span class="fl">7.92509</span>   <span class="fl">7.82815</span>   <span class="fl">7.73696</span>   <span class="fl">8.16791</span>  parms    .</span>
-<span id="cb3-5"><a></a> <span class="fl">7.24978</span>   <span class="fl">7.18991</span>   <span class="fl">7.35960</span>   <span class="fl">7.31937</span>   <span class="fl">7.55184</span></span>
-<span id="cb3-6"><a></a> <span class="fl">0.00739</span>   <span class="fl">0.00019</span>   <span class="fl">0.00146</span>  <span class="sc">-</span><span class="fl">0.00082</span>   <span class="fl">0.00076</span>  cov      b1</span>
-<span id="cb3-7"><a></a> <span class="fl">0.00189</span>   <span class="fl">0.00118</span>   <span class="fl">0.00140</span>  <span class="sc">-</span><span class="fl">0.00140</span>   <span class="fl">0.00039</span></span>
-<span id="cb3-8"><a></a> <span class="fl">0.00019</span>   <span class="fl">0.01172</span>   <span class="fl">0.00183</span>   <span class="fl">0.00029</span>   <span class="fl">0.00083</span>  cov      b2</span>
-<span id="cb3-9"><a></a><span class="sc">-</span><span class="fl">0.00123</span>  <span class="sc">-</span><span class="fl">0.00629</span>  <span class="sc">-</span><span class="fl">0.00088</span>  <span class="sc">-</span><span class="fl">0.00232</span>   <span class="fl">0.00034</span> </span>
-<span id="cb3-10"><a></a> <span class="fl">0.00146</span>   <span class="fl">0.00183</span>   <span class="fl">0.01050</span>  <span class="sc">-</span><span class="fl">0.00173</span>   <span class="fl">0.00011</span>  cov      b3</span>
-<span id="cb3-11"><a></a> <span class="fl">0.00434</span>  <span class="sc">-</span><span class="fl">0.00059</span>  <span class="sc">-</span><span class="fl">0.00055</span>   <span class="fl">0.00023</span>  <span class="sc">-</span><span class="fl">0.00013</span></span>
-<span id="cb3-12"><a></a><span class="sc">-</span><span class="fl">0.00082</span>   <span class="fl">0.00029</span>  <span class="sc">-</span><span class="fl">0.00173</span>   <span class="fl">0.01335</span>   <span class="fl">0.00140</span>  cov      b4</span>
-<span id="cb3-13"><a></a> <span class="fl">0.00158</span>   <span class="fl">0.00212</span>   <span class="fl">0.00211</span>   <span class="fl">0.00066</span>   <span class="fl">0.00240</span></span>
-<span id="cb3-14"><a></a> <span class="fl">0.00076</span>   <span class="fl">0.00083</span>   <span class="fl">0.00011</span>   <span class="fl">0.00140</span>   <span class="fl">0.01430</span>  cov      b5</span>
-<span id="cb3-15"><a></a><span class="sc">-</span><span class="fl">0.00050</span>  <span class="sc">-</span><span class="fl">0.00098</span>   <span class="fl">0.00239</span>  <span class="sc">-</span><span class="fl">0.00010</span>   <span class="fl">0.00213</span></span>
-<span id="cb3-16"><a></a> <span class="fl">0.00189</span>  <span class="sc">-</span><span class="fl">0.00123</span>   <span class="fl">0.00434</span>   <span class="fl">0.00158</span>  <span class="sc">-</span><span class="fl">0.00050</span>  cov      b6</span>
-<span id="cb3-17"><a></a> <span class="fl">0.01110</span>   <span class="fl">0.00101</span>   <span class="fl">0.00177</span>  <span class="sc">-</span><span class="fl">0.00018</span>  <span class="sc">-</span><span class="fl">0.00082</span></span>
-<span id="cb3-18"><a></a> <span class="fl">0.00118</span>  <span class="sc">-</span><span class="fl">0.00629</span>  <span class="sc">-</span><span class="fl">0.00059</span>   <span class="fl">0.00212</span>  <span class="sc">-</span><span class="fl">0.00098</span>  cov      b7</span>
-<span id="cb3-19"><a></a> <span class="fl">0.00101</span>   <span class="fl">0.02342</span>   <span class="fl">0.00144</span>   <span class="fl">0.00369</span>   <span class="fl">0.00253</span></span>
-<span id="cb3-20"><a></a> <span class="fl">0.00140</span>  <span class="sc">-</span><span class="fl">0.00088</span>  <span class="sc">-</span><span class="fl">0.00055</span>   <span class="fl">0.00211</span>   <span class="fl">0.00239</span>  cov      b8</span>
-<span id="cb3-21"><a></a> <span class="fl">0.00177</span>   <span class="fl">0.00144</span>   <span class="fl">0.01060</span>   <span class="fl">0.00157</span>   <span class="fl">0.00226</span></span>
-<span id="cb3-22"><a></a><span class="sc">-</span><span class="fl">0.00140</span>  <span class="sc">-</span><span class="fl">0.00232</span>   <span class="fl">0.00023</span>   <span class="fl">0.00066</span>  <span class="sc">-</span><span class="fl">0.00010</span>  cov      b9</span>
-<span id="cb3-23"><a></a><span class="sc">-</span><span class="fl">0.00018</span>   <span class="fl">0.00369</span>   <span class="fl">0.00157</span>   <span class="fl">0.02298</span>   <span class="fl">0.00918</span></span>
-<span id="cb3-24"><a></a> <span class="fl">0.00039</span>   <span class="fl">0.00034</span>  <span class="sc">-</span><span class="fl">0.00013</span>   <span class="fl">0.00240</span>   <span class="fl">0.00213</span>  cov     b10</span>
-<span id="cb3-25"><a></a><span class="sc">-</span><span class="fl">0.00082</span>   <span class="fl">0.00253</span>   <span class="fl">0.00226</span>   <span class="fl">0.00918</span>   <span class="fl">0.01921</span></span>
-<span id="cb3-26"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a>data <span class="fu">wbeing</span>(<span class="at">type=</span>est);</span>
+<span id="cb3-2"><a aria-label="2"></a>   input   b1<span class="sc">-</span>b5   _type_ <span class="sc">$</span>  _name_ <span class="sc">$</span>  b6<span class="sc">-</span>b10 <span class="co">#2;</span></span>
+<span id="cb3-3"><a aria-label="3"></a>   datalines;</span>
+<span id="cb3-4"><a aria-label="4"></a> <span class="fl">7.93726</span>   <span class="fl">7.92509</span>   <span class="fl">7.82815</span>   <span class="fl">7.73696</span>   <span class="fl">8.16791</span>  parms    .</span>
+<span id="cb3-5"><a aria-label="5"></a> <span class="fl">7.24978</span>   <span class="fl">7.18991</span>   <span class="fl">7.35960</span>   <span class="fl">7.31937</span>   <span class="fl">7.55184</span></span>
+<span id="cb3-6"><a aria-label="6"></a> <span class="fl">0.00739</span>   <span class="fl">0.00019</span>   <span class="fl">0.00146</span>  <span class="sc">-</span><span class="fl">0.00082</span>   <span class="fl">0.00076</span>  cov      b1</span>
+<span id="cb3-7"><a aria-label="7"></a> <span class="fl">0.00189</span>   <span class="fl">0.00118</span>   <span class="fl">0.00140</span>  <span class="sc">-</span><span class="fl">0.00140</span>   <span class="fl">0.00039</span></span>
+<span id="cb3-8"><a aria-label="8"></a> <span class="fl">0.00019</span>   <span class="fl">0.01172</span>   <span class="fl">0.00183</span>   <span class="fl">0.00029</span>   <span class="fl">0.00083</span>  cov      b2</span>
+<span id="cb3-9"><a aria-label="9"></a><span class="sc">-</span><span class="fl">0.00123</span>  <span class="sc">-</span><span class="fl">0.00629</span>  <span class="sc">-</span><span class="fl">0.00088</span>  <span class="sc">-</span><span class="fl">0.00232</span>   <span class="fl">0.00034</span> </span>
+<span id="cb3-10"><a aria-label="10"></a> <span class="fl">0.00146</span>   <span class="fl">0.00183</span>   <span class="fl">0.01050</span>  <span class="sc">-</span><span class="fl">0.00173</span>   <span class="fl">0.00011</span>  cov      b3</span>
+<span id="cb3-11"><a aria-label="11"></a> <span class="fl">0.00434</span>  <span class="sc">-</span><span class="fl">0.00059</span>  <span class="sc">-</span><span class="fl">0.00055</span>   <span class="fl">0.00023</span>  <span class="sc">-</span><span class="fl">0.00013</span></span>
+<span id="cb3-12"><a aria-label="12"></a><span class="sc">-</span><span class="fl">0.00082</span>   <span class="fl">0.00029</span>  <span class="sc">-</span><span class="fl">0.00173</span>   <span class="fl">0.01335</span>   <span class="fl">0.00140</span>  cov      b4</span>
+<span id="cb3-13"><a aria-label="13"></a> <span class="fl">0.00158</span>   <span class="fl">0.00212</span>   <span class="fl">0.00211</span>   <span class="fl">0.00066</span>   <span class="fl">0.00240</span></span>
+<span id="cb3-14"><a aria-label="14"></a> <span class="fl">0.00076</span>   <span class="fl">0.00083</span>   <span class="fl">0.00011</span>   <span class="fl">0.00140</span>   <span class="fl">0.01430</span>  cov      b5</span>
+<span id="cb3-15"><a aria-label="15"></a><span class="sc">-</span><span class="fl">0.00050</span>  <span class="sc">-</span><span class="fl">0.00098</span>   <span class="fl">0.00239</span>  <span class="sc">-</span><span class="fl">0.00010</span>   <span class="fl">0.00213</span></span>
+<span id="cb3-16"><a aria-label="16"></a> <span class="fl">0.00189</span>  <span class="sc">-</span><span class="fl">0.00123</span>   <span class="fl">0.00434</span>   <span class="fl">0.00158</span>  <span class="sc">-</span><span class="fl">0.00050</span>  cov      b6</span>
+<span id="cb3-17"><a aria-label="17"></a> <span class="fl">0.01110</span>   <span class="fl">0.00101</span>   <span class="fl">0.00177</span>  <span class="sc">-</span><span class="fl">0.00018</span>  <span class="sc">-</span><span class="fl">0.00082</span></span>
+<span id="cb3-18"><a aria-label="18"></a> <span class="fl">0.00118</span>  <span class="sc">-</span><span class="fl">0.00629</span>  <span class="sc">-</span><span class="fl">0.00059</span>   <span class="fl">0.00212</span>  <span class="sc">-</span><span class="fl">0.00098</span>  cov      b7</span>
+<span id="cb3-19"><a aria-label="19"></a> <span class="fl">0.00101</span>   <span class="fl">0.02342</span>   <span class="fl">0.00144</span>   <span class="fl">0.00369</span>   <span class="fl">0.00253</span></span>
+<span id="cb3-20"><a aria-label="20"></a> <span class="fl">0.00140</span>  <span class="sc">-</span><span class="fl">0.00088</span>  <span class="sc">-</span><span class="fl">0.00055</span>   <span class="fl">0.00211</span>   <span class="fl">0.00239</span>  cov      b8</span>
+<span id="cb3-21"><a aria-label="21"></a> <span class="fl">0.00177</span>   <span class="fl">0.00144</span>   <span class="fl">0.01060</span>   <span class="fl">0.00157</span>   <span class="fl">0.00226</span></span>
+<span id="cb3-22"><a aria-label="22"></a><span class="sc">-</span><span class="fl">0.00140</span>  <span class="sc">-</span><span class="fl">0.00232</span>   <span class="fl">0.00023</span>   <span class="fl">0.00066</span>  <span class="sc">-</span><span class="fl">0.00010</span>  cov      b9</span>
+<span id="cb3-23"><a aria-label="23"></a><span class="sc">-</span><span class="fl">0.00018</span>   <span class="fl">0.00369</span>   <span class="fl">0.00157</span>   <span class="fl">0.02298</span>   <span class="fl">0.00918</span></span>
+<span id="cb3-24"><a aria-label="24"></a> <span class="fl">0.00039</span>   <span class="fl">0.00034</span>  <span class="sc">-</span><span class="fl">0.00013</span>   <span class="fl">0.00240</span>   <span class="fl">0.00213</span>  cov     b10</span>
+<span id="cb3-25"><a aria-label="25"></a><span class="sc">-</span><span class="fl">0.00082</span>   <span class="fl">0.00253</span>   <span class="fl">0.00226</span>   <span class="fl">0.00918</span>   <span class="fl">0.01921</span></span>
+<span id="cb3-26"><a aria-label="26"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a></span>
-<span id="cb4-2"><a></a>proc catmod data<span class="ot">=</span>wbeing;</span>
-<span id="cb4-3"><a></a>response read b1<span class="sc">-</span>b10;</span>
-<span id="cb4-4"><a></a>factors sex <span class="sc">$</span> <span class="dv">2</span>, age <span class="sc">$</span> <span class="dv">5</span> <span class="sc">/</span></span>
-<span id="cb4-5"><a></a>_response_ <span class="ot">=</span> sex age </span>
-<span id="cb4-6"><a></a>profile <span class="ot">=</span> (male <span class="st">'25-34'</span> ,</span>
-<span id="cb4-7"><a></a>male <span class="st">'35-44'</span>,</span>
-<span id="cb4-8"><a></a>male <span class="st">'45-54'</span> ,</span>
-<span id="cb4-9"><a></a>male <span class="st">'55-64'</span>,</span>
-<span id="cb4-10"><a></a>male <span class="st">'65-74'</span> ,</span>
-<span id="cb4-11"><a></a>female <span class="st">'25-34'</span>,</span>
-<span id="cb4-12"><a></a>female <span class="st">'35-44'</span>,</span>
-<span id="cb4-13"><a></a>female <span class="st">'45-54'</span>,</span>
-<span id="cb4-14"><a></a>female <span class="st">'55-64'</span> ,</span>
-<span id="cb4-15"><a></a>female <span class="st">'65-74'</span>);</span>
-<span id="cb4-16"><a></a>model _f_ <span class="ot">=</span> _response_<span class="sc">/</span>design;</span>
-<span id="cb4-17"><a></a>contrast <span class="st">'25-34 vs. 35-44'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span>;</span>
-<span id="cb4-18"><a></a>contrast <span class="st">'25-34 vs. 45-54'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
-<span id="cb4-19"><a></a>contrast <span class="st">'25-34 vs. 55-64'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span>;</span>
-<span id="cb4-20"><a></a>contrast <span class="st">'25-34 vs. 65-74'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span>;</span>
-<span id="cb4-21"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a></span>
+<span id="cb4-2"><a aria-label="2"></a>proc catmod data<span class="ot">=</span>wbeing;</span>
+<span id="cb4-3"><a aria-label="3"></a>response read b1<span class="sc">-</span>b10;</span>
+<span id="cb4-4"><a aria-label="4"></a>factors sex <span class="sc">$</span> <span class="dv">2</span>, age <span class="sc">$</span> <span class="dv">5</span> <span class="sc">/</span></span>
+<span id="cb4-5"><a aria-label="5"></a>_response_ <span class="ot">=</span> sex age </span>
+<span id="cb4-6"><a aria-label="6"></a>profile <span class="ot">=</span> (male <span class="st">'25-34'</span> ,</span>
+<span id="cb4-7"><a aria-label="7"></a>male <span class="st">'35-44'</span>,</span>
+<span id="cb4-8"><a aria-label="8"></a>male <span class="st">'45-54'</span> ,</span>
+<span id="cb4-9"><a aria-label="9"></a>male <span class="st">'55-64'</span>,</span>
+<span id="cb4-10"><a aria-label="10"></a>male <span class="st">'65-74'</span> ,</span>
+<span id="cb4-11"><a aria-label="11"></a>female <span class="st">'25-34'</span>,</span>
+<span id="cb4-12"><a aria-label="12"></a>female <span class="st">'35-44'</span>,</span>
+<span id="cb4-13"><a aria-label="13"></a>female <span class="st">'45-54'</span>,</span>
+<span id="cb4-14"><a aria-label="14"></a>female <span class="st">'55-64'</span> ,</span>
+<span id="cb4-15"><a aria-label="15"></a>female <span class="st">'65-74'</span>);</span>
+<span id="cb4-16"><a aria-label="16"></a>model _f_ <span class="ot">=</span> _response_<span class="sc">/</span>design;</span>
+<span id="cb4-17"><a aria-label="17"></a>contrast <span class="st">'25-34 vs. 35-44'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span>;</span>
+<span id="cb4-18"><a aria-label="18"></a>contrast <span class="st">'25-34 vs. 45-54'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span> <span class="dv">0</span>;</span>
+<span id="cb4-19"><a aria-label="19"></a>contrast <span class="st">'25-34 vs. 55-64'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span>;</span>
+<span id="cb4-20"><a aria-label="20"></a>contrast <span class="st">'25-34 vs. 65-74'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span>;</span>
+<span id="cb4-21"><a aria-label="21"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-3-3">
 <p>There is a significant effect of sex (<span class="math inline">\(\chi^2 = 47.1\)</span>, p&lt;0.001) and moderate evidence of an effect of age (<span class="math inline">\(\chi^2\)</span> = 9.21, p=0.06).</p>
@@ -551,28 +554,28 @@ p_{ij} = n_{ij}/n_{i+}
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">SAS Data Set</a></li><li><a href="#tabset-4-2">SAS Code</a></li><li><a href="#tabset-4-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data drug;</span>
-<span id="cb5-2"><a></a>input druga <span class="sc">$</span> drugb <span class="sc">$</span> drugc <span class="sc">$</span> count;</span>
-<span id="cb5-3"><a></a>datalines;</span>
-<span id="cb5-4"><a></a>F F F <span class="dv">6</span></span>
-<span id="cb5-5"><a></a>F F U <span class="dv">16</span></span>
-<span id="cb5-6"><a></a>F U F <span class="dv">2</span></span>
-<span id="cb5-7"><a></a>F U U <span class="dv">4</span></span>
-<span id="cb5-8"><a></a>U F F <span class="dv">2</span></span>
-<span id="cb5-9"><a></a>U F U <span class="dv">4</span></span>
-<span id="cb5-10"><a></a>U U F <span class="dv">6</span></span>
-<span id="cb5-11"><a></a>U U U <span class="dv">6</span></span>
-<span id="cb5-12"><a></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>data drug;</span>
+<span id="cb5-2"><a aria-label="2"></a>input druga <span class="sc">$</span> drugb <span class="sc">$</span> drugc <span class="sc">$</span> count;</span>
+<span id="cb5-3"><a aria-label="3"></a>datalines;</span>
+<span id="cb5-4"><a aria-label="4"></a>F F F <span class="dv">6</span></span>
+<span id="cb5-5"><a aria-label="5"></a>F F U <span class="dv">16</span></span>
+<span id="cb5-6"><a aria-label="6"></a>F U F <span class="dv">2</span></span>
+<span id="cb5-7"><a aria-label="7"></a>F U U <span class="dv">4</span></span>
+<span id="cb5-8"><a aria-label="8"></a>U F F <span class="dv">2</span></span>
+<span id="cb5-9"><a aria-label="9"></a>U F U <span class="dv">4</span></span>
+<span id="cb5-10"><a aria-label="10"></a>U U F <span class="dv">6</span></span>
+<span id="cb5-11"><a aria-label="11"></a>U U U <span class="dv">6</span></span>
+<span id="cb5-12"><a aria-label="12"></a>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>proc catmod data<span class="ot">=</span>drug;</span>
-<span id="cb6-2"><a></a>weight count;</span>
-<span id="cb6-3"><a></a>response marginals;</span>
-<span id="cb6-4"><a></a>model druga<span class="sc">*</span>drugb<span class="sc">*</span>drugc<span class="ot">=</span>_response_ <span class="sc">/</span> design oneway cov; <span class="sc">*</span>oneway displays the one<span class="sc">-</span>way frequency table, cov shows the covariance matrix;</span>
-<span id="cb6-5"><a></a>repeated drug <span class="dv">3</span> <span class="sc">/</span> _response_<span class="ot">=</span>drug;</span>
-<span id="cb6-6"><a></a>contrast <span class="st">'A versus B'</span> all_parms <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span>;</span>
-<span id="cb6-7"><a></a>contrast <span class="st">'A versus C'</span> all_parms <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>;</span>
-<span id="cb6-8"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a>proc catmod data<span class="ot">=</span>drug;</span>
+<span id="cb6-2"><a aria-label="2"></a>weight count;</span>
+<span id="cb6-3"><a aria-label="3"></a>response marginals;</span>
+<span id="cb6-4"><a aria-label="4"></a>model druga<span class="sc">*</span>drugb<span class="sc">*</span>drugc<span class="ot">=</span>_response_ <span class="sc">/</span> design oneway cov; <span class="sc">*</span>oneway displays the one<span class="sc">-</span>way frequency table, cov shows the covariance matrix;</span>
+<span id="cb6-5"><a aria-label="5"></a>repeated drug <span class="dv">3</span> <span class="sc">/</span> _response_<span class="ot">=</span>drug;</span>
+<span id="cb6-6"><a aria-label="6"></a>contrast <span class="st">'A versus B'</span> all_parms <span class="dv">0</span> <span class="dv">1</span> <span class="sc">-</span><span class="dv">1</span>;</span>
+<span id="cb6-7"><a aria-label="7"></a>contrast <span class="st">'A versus C'</span> all_parms <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>;</span>
+<span id="cb6-8"><a aria-label="8"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-4-3">
 <p>There is strong evidence of a drug effect (<span class="math inline">\(\chi^2\)</span> = 6.58, p=0.04). Upon further investigation, there is no significant difference between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, but there is strong evidence of a difference between the rate of favorable response in drugs A and C (<span class="math inline">\(\chi^2\)</span>= 5.79, p=0.02).</p>
@@ -587,55 +590,55 @@ p_{ij} = n_{ij}/n_{i+}
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">SAS Data Set</a></li><li><a href="#tabset-5-2">SAS Code</a></li><li><a href="#tabset-5-3">Answer</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>   data vision;</span>
-<span id="cb7-2"><a></a>      input gender <span class="sc">$</span> right left count;</span>
-<span id="cb7-3"><a></a>      datalines;</span>
-<span id="cb7-4"><a></a>   F <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1520</span></span>
-<span id="cb7-5"><a></a>   F <span class="dv">1</span> <span class="dv">2</span>  <span class="dv">266</span></span>
-<span id="cb7-6"><a></a>   F <span class="dv">1</span> <span class="dv">3</span>  <span class="dv">124</span></span>
-<span id="cb7-7"><a></a>   F <span class="dv">1</span> <span class="dv">4</span>   <span class="dv">66</span></span>
-<span id="cb7-8"><a></a>   F <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">234</span></span>
-<span id="cb7-9"><a></a>   F <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1512</span></span>
-<span id="cb7-10"><a></a>   F <span class="dv">2</span> <span class="dv">3</span>  <span class="dv">432</span></span>
-<span id="cb7-11"><a></a>   F <span class="dv">2</span> <span class="dv">4</span>   <span class="dv">78</span></span>
-<span id="cb7-12"><a></a>   F <span class="dv">3</span> <span class="dv">1</span>  <span class="dv">117</span></span>
-<span id="cb7-13"><a></a>   F <span class="dv">3</span> <span class="dv">2</span>  <span class="dv">362</span></span>
-<span id="cb7-14"><a></a>   F <span class="dv">3</span> <span class="dv">3</span> <span class="dv">1772</span></span>
-<span id="cb7-15"><a></a>   F <span class="dv">3</span> <span class="dv">4</span>  <span class="dv">205</span></span>
-<span id="cb7-16"><a></a>   F <span class="dv">4</span> <span class="dv">1</span>   <span class="dv">36</span></span>
-<span id="cb7-17"><a></a>   F <span class="dv">4</span> <span class="dv">2</span>   <span class="dv">82</span></span>
-<span id="cb7-18"><a></a>   F <span class="dv">4</span> <span class="dv">3</span>  <span class="dv">179</span></span>
-<span id="cb7-19"><a></a>   F <span class="dv">4</span> <span class="dv">4</span>  <span class="dv">492</span></span>
-<span id="cb7-20"><a></a>   M <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">821</span></span>
-<span id="cb7-21"><a></a>   M <span class="dv">1</span> <span class="dv">2</span>  <span class="dv">112</span></span>
-<span id="cb7-22"><a></a>   M <span class="dv">1</span> <span class="dv">3</span>   <span class="dv">85</span></span>
-<span id="cb7-23"><a></a>   M <span class="dv">1</span> <span class="dv">4</span>   <span class="dv">35</span></span>
-<span id="cb7-24"><a></a>   M <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">116</span></span>
-<span id="cb7-25"><a></a>   M <span class="dv">2</span> <span class="dv">2</span>  <span class="dv">494</span></span>
-<span id="cb7-26"><a></a>   M <span class="dv">2</span> <span class="dv">3</span>  <span class="dv">145</span></span>
-<span id="cb7-27"><a></a>   M <span class="dv">2</span> <span class="dv">4</span>   <span class="dv">27</span></span>
-<span id="cb7-28"><a></a>   M <span class="dv">3</span> <span class="dv">1</span>   <span class="dv">72</span></span>
-<span id="cb7-29"><a></a>   M <span class="dv">3</span> <span class="dv">2</span>  <span class="dv">151</span></span>
-<span id="cb7-30"><a></a>   M <span class="dv">3</span> <span class="dv">3</span>  <span class="dv">583</span></span>
-<span id="cb7-31"><a></a>   M <span class="dv">3</span> <span class="dv">4</span>   <span class="dv">87</span></span>
-<span id="cb7-32"><a></a>   M <span class="dv">4</span> <span class="dv">1</span>   <span class="dv">43</span></span>
-<span id="cb7-33"><a></a>   M <span class="dv">4</span> <span class="dv">2</span>   <span class="dv">34</span></span>
-<span id="cb7-34"><a></a>   M <span class="dv">4</span> <span class="dv">3</span>  <span class="dv">106</span></span>
-<span id="cb7-35"><a></a>   M <span class="dv">4</span> <span class="dv">4</span>  <span class="dv">331</span></span>
-<span id="cb7-36"><a></a>   ;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a>   data vision;</span>
+<span id="cb7-2"><a aria-label="2"></a>      input gender <span class="sc">$</span> right left count;</span>
+<span id="cb7-3"><a aria-label="3"></a>      datalines;</span>
+<span id="cb7-4"><a aria-label="4"></a>   F <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1520</span></span>
+<span id="cb7-5"><a aria-label="5"></a>   F <span class="dv">1</span> <span class="dv">2</span>  <span class="dv">266</span></span>
+<span id="cb7-6"><a aria-label="6"></a>   F <span class="dv">1</span> <span class="dv">3</span>  <span class="dv">124</span></span>
+<span id="cb7-7"><a aria-label="7"></a>   F <span class="dv">1</span> <span class="dv">4</span>   <span class="dv">66</span></span>
+<span id="cb7-8"><a aria-label="8"></a>   F <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">234</span></span>
+<span id="cb7-9"><a aria-label="9"></a>   F <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1512</span></span>
+<span id="cb7-10"><a aria-label="10"></a>   F <span class="dv">2</span> <span class="dv">3</span>  <span class="dv">432</span></span>
+<span id="cb7-11"><a aria-label="11"></a>   F <span class="dv">2</span> <span class="dv">4</span>   <span class="dv">78</span></span>
+<span id="cb7-12"><a aria-label="12"></a>   F <span class="dv">3</span> <span class="dv">1</span>  <span class="dv">117</span></span>
+<span id="cb7-13"><a aria-label="13"></a>   F <span class="dv">3</span> <span class="dv">2</span>  <span class="dv">362</span></span>
+<span id="cb7-14"><a aria-label="14"></a>   F <span class="dv">3</span> <span class="dv">3</span> <span class="dv">1772</span></span>
+<span id="cb7-15"><a aria-label="15"></a>   F <span class="dv">3</span> <span class="dv">4</span>  <span class="dv">205</span></span>
+<span id="cb7-16"><a aria-label="16"></a>   F <span class="dv">4</span> <span class="dv">1</span>   <span class="dv">36</span></span>
+<span id="cb7-17"><a aria-label="17"></a>   F <span class="dv">4</span> <span class="dv">2</span>   <span class="dv">82</span></span>
+<span id="cb7-18"><a aria-label="18"></a>   F <span class="dv">4</span> <span class="dv">3</span>  <span class="dv">179</span></span>
+<span id="cb7-19"><a aria-label="19"></a>   F <span class="dv">4</span> <span class="dv">4</span>  <span class="dv">492</span></span>
+<span id="cb7-20"><a aria-label="20"></a>   M <span class="dv">1</span> <span class="dv">1</span>  <span class="dv">821</span></span>
+<span id="cb7-21"><a aria-label="21"></a>   M <span class="dv">1</span> <span class="dv">2</span>  <span class="dv">112</span></span>
+<span id="cb7-22"><a aria-label="22"></a>   M <span class="dv">1</span> <span class="dv">3</span>   <span class="dv">85</span></span>
+<span id="cb7-23"><a aria-label="23"></a>   M <span class="dv">1</span> <span class="dv">4</span>   <span class="dv">35</span></span>
+<span id="cb7-24"><a aria-label="24"></a>   M <span class="dv">2</span> <span class="dv">1</span>  <span class="dv">116</span></span>
+<span id="cb7-25"><a aria-label="25"></a>   M <span class="dv">2</span> <span class="dv">2</span>  <span class="dv">494</span></span>
+<span id="cb7-26"><a aria-label="26"></a>   M <span class="dv">2</span> <span class="dv">3</span>  <span class="dv">145</span></span>
+<span id="cb7-27"><a aria-label="27"></a>   M <span class="dv">2</span> <span class="dv">4</span>   <span class="dv">27</span></span>
+<span id="cb7-28"><a aria-label="28"></a>   M <span class="dv">3</span> <span class="dv">1</span>   <span class="dv">72</span></span>
+<span id="cb7-29"><a aria-label="29"></a>   M <span class="dv">3</span> <span class="dv">2</span>  <span class="dv">151</span></span>
+<span id="cb7-30"><a aria-label="30"></a>   M <span class="dv">3</span> <span class="dv">3</span>  <span class="dv">583</span></span>
+<span id="cb7-31"><a aria-label="31"></a>   M <span class="dv">3</span> <span class="dv">4</span>   <span class="dv">87</span></span>
+<span id="cb7-32"><a aria-label="32"></a>   M <span class="dv">4</span> <span class="dv">1</span>   <span class="dv">43</span></span>
+<span id="cb7-33"><a aria-label="33"></a>   M <span class="dv">4</span> <span class="dv">2</span>   <span class="dv">34</span></span>
+<span id="cb7-34"><a aria-label="34"></a>   M <span class="dv">4</span> <span class="dv">3</span>  <span class="dv">106</span></span>
+<span id="cb7-35"><a aria-label="35"></a>   M <span class="dv">4</span> <span class="dv">4</span>  <span class="dv">331</span></span>
+<span id="cb7-36"><a aria-label="36"></a>   ;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>proc catmod data<span class="ot">=</span>vision;</span>
-<span id="cb8-2"><a></a>   weight count;</span>
-<span id="cb8-3"><a></a>   population gender;</span>
-<span id="cb8-4"><a></a>   response marginals;</span>
-<span id="cb8-5"><a></a>   model right<span class="sc">*</span>left<span class="ot">=</span>gender <span class="fu">_response_</span>(<span class="at">gender=</span><span class="st">'F'</span>)</span>
-<span id="cb8-6"><a></a>                           <span class="fu">_response_</span>(<span class="at">gender=</span><span class="st">'M'</span>) <span class="sc">/</span> design; <span class="sc">*</span><span class="fu">_response_</span>(<span class="at">gender=</span><span class="st">'F'</span>) means the response is nested within gender.;</span>
-<span id="cb8-7"><a></a>   repeated eye <span class="dv">2</span>;</span>
-<span id="cb8-8"><a></a>contrast <span class="st">'Interaction'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span>  <span class="dv">0</span>  <span class="dv">0</span>,</span>
-<span id="cb8-9"><a></a>                       all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span>  <span class="dv">0</span>,</span>
-<span id="cb8-10"><a></a>                       all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span>  <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span>;</span>
-<span id="cb8-11"><a></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a>proc catmod data<span class="ot">=</span>vision;</span>
+<span id="cb8-2"><a aria-label="2"></a>   weight count;</span>
+<span id="cb8-3"><a aria-label="3"></a>   population gender;</span>
+<span id="cb8-4"><a aria-label="4"></a>   response marginals;</span>
+<span id="cb8-5"><a aria-label="5"></a>   model right<span class="sc">*</span>left<span class="ot">=</span>gender <span class="fu">_response_</span>(<span class="at">gender=</span><span class="st">'F'</span>)</span>
+<span id="cb8-6"><a aria-label="6"></a>                           <span class="fu">_response_</span>(<span class="at">gender=</span><span class="st">'M'</span>) <span class="sc">/</span> design; <span class="sc">*</span><span class="fu">_response_</span>(<span class="at">gender=</span><span class="st">'F'</span>) means the response is nested within gender.;</span>
+<span id="cb8-7"><a aria-label="7"></a>   repeated eye <span class="dv">2</span>;</span>
+<span id="cb8-8"><a aria-label="8"></a>contrast <span class="st">'Interaction'</span> all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span>  <span class="dv">0</span>  <span class="dv">0</span>,</span>
+<span id="cb8-9"><a aria-label="9"></a>                       all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span>  <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span>  <span class="dv">0</span>,</span>
+<span id="cb8-10"><a aria-label="10"></a>                       all_parms <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>  <span class="dv">0</span>  <span class="dv">0</span> <span class="sc">-</span><span class="dv">1</span>;</span>
+<span id="cb8-11"><a aria-label="11"></a>run;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-5-3">
 <p>There is a significant nested effect of the eye location (right/left) in the vision of the female group (<span class="math inline">\(\chi^2\)</span> = 11.98, p=0.008), but not for males (<span class="math inline">\(\chi^2\)</span> = 3.68, p=0.30). The vision levels also differ between genders (<span class="math inline">\(\chi^2\)</span> = 142, p&lt;0.001).</p>
