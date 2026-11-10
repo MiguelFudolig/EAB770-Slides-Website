@@ -1,0 +1,195 @@
+---
+title: "EAB 770 Problem Set 3 Key"
+author: "Miguel Fudolig"
+format: 
+  html: 
+    engine: knitr
+    embed-resources: true
+  pdf:
+    number-sections: true
+---
+
+```{r setup}
+library(tidyverse)
+library(emmeans)
+library(car)
+library(MASS)
+library(VGAM)
+library(survival)
+```
+
+# Problem 1
+
+CHD.csv includes data from a cardiovascular study on residents from the town of Framingham, Massachusetts. The researchers intend to pinpoint the most relevant risk factors of the disease. The response variable is TenYearCHD, which is the ten-year risk of coronary heart disease (CHD). A value TenYearCHD=1 means that there is a risk of CHD. 
+
+Test if there is sufficient evidence of an association between the ten-year risk of coronary heart disease and diabetes and prevalent hypertension accounting for age, number of cigarettes smoked daily, and sex. Interpret the resulting odds ratios in the context of the problem. You will be graded based on the interpretation and completeness of the results. 
+
+::: callout-note
+### Solution
+
+```{r}
+chd <- read.csv("CHD.csv")
+glimpse(chd)
+```
+
+
+We use logistic regression to model the ten-year risk of coronary heart disease.
+
+```{r}
+mod1 <- glm(TenYearCHD~diabetes + prevalentHyp + age + cigsPerDay + male,
+            data=chd,
+            family="binomial")
+
+summary(mod1)
+
+Anova(mod1)
+```
+
+There is strong evidence of associations with the ten-year risk of CHD for those with diabetes ($\chi^2_1$=15.3,p<0.001), and prevalent hypertension ($\chi^2_1$=51.925, p<0.0001) after accounting for age, number of cigarettes smoked per day, and sex.
+
+To calculate odds ratios, we use `emmeans`.
+
+```{r}
+emm_diabetes <- emmeans(mod1,~diabetes,type="response",infer=T)
+contrast(emm_diabetes, method="revpairwise",infer=T)
+```
+
+The odds of reporting a ten-year risk of CHD for patients with diabetes is 2.38 (95% CI:1.57-3.62) times that of patients without diabetes after accounting for age, number of cigarettes smoked per day, and sex.
+
+```{r}
+emm_hyp <- emmeans(mod1,~prevalentHyp,type="response",infer=T)
+contrast(emm_hyp, method="revpairwise",infer=T)
+```
+
+The odds of reporting a ten-year risk of CHD for patients with hypertension is 1.96 (95% CI:1.64-2.36) times that of patients without hypertension after accounting for age, number of cigarettes smoked per day, and sex.
+
+:::
+
+# Problem 2
+
+The file clinics.csv features data from a multi-clinic trial that tests Treatment 1 to a placebo treatment (Treatment 0) and a positive control (Treatment 2). The response recorded was the severity of symptoms after treatment (Slight, Moderate, Severe). Use the proportional odds model to test for a treatment effect after accounting for the multiple hospital sites. Calculate and interpret the relevant odds ratios.
+
+```{r}
+clinics <- read.csv('clinics.csv')
+glimpse(clinics)
+```
+
+::: callout-note
+### Solution
+
+We implement the proportional odds model in `R` using `polr()` from the `MASS` package.
+
+```{r}
+clinics <- clinics |> 
+  uncount(weights=count) 
+
+clinics <- clinics |> 
+  mutate(response = factor(response,levels=c("slight","moderate","severe")),
+         trt = as.factor(trt),
+         hospital = as.factor(hospital))
+
+mod_po <- polr(response~trt + hospital,
+               data=clinics)
+
+poTest(mod_po)
+```
+
+The proportional odds assumption holds for both treatment (p=0.77) and hospital (p=0.12).
+
+```{r}
+Anova(mod_po)
+```
+
+There is strong evidence of a treatment effect ($\chi^2_1$=35.7, p<0.001). We now investigate the relevant odds ratios.
+
+```{r}
+emm_treatment <- emmeans(mod_po,~trt)
+contrast(emm_treatment,method="pairwise",infer=T) |> 
+  as.data.frame() |> 
+  mutate(OR = exp(estimate),
+         OR.LCL = exp(asymp.LCL),
+         OR.UCL = exp(asymp.UCL))
+```
+
+There is no evidence of a difference between the treatment and the negative control (OR=1.16, 95%CI: 0.62-2.17, p=0.83). However, there is strong evidence of a difference between the treatment and the positive control (OR=3.37, 95%CI: 1.88-6.04, p<0.0001). The odds of reporting a more severe response in the treatment is 3.37 times that of the positive control and 1.16 times that of the negative control 
+:::
+
+# Problem 3
+
+The presence of sprouted or diseased kernels in wheat can reduce the value of a wheat producer’s entire crop. A study was conducted examining numerous physical properties of kernels—hardness, size, weight, and moisture content—measured on a sample of wheat kernels from two different classes of wheat, hard red winter (hrw) and soft red winter (srw). Each kernel’s condition was also classified as “Healthy,” “Sprout,” or “Scab” by human visual inspection. The data is included in the file wheat.csv. Use the generalized logits model to create a main effects model that tests the effect of the class and physical properties of the wheat kernels on the kernel’s condition.
+
+
+```{r}
+wheat <- read.csv("wheat.csv")
+glimpse(wheat)
+```
+
+::: callout-note
+### Solution
+
+```{r}
+
+wheat <- wheat |> 
+  mutate(condition = factor(condition, levels = c("Sprout","Healthy","Scab")),
+         hardness = factor(hardness,levels= c("Soft","Hard")))
+modv <- vglm(condition~hardness + class + size + weight + moisture,
+             data=wheat,
+             family=multinomial(parallel=FALSE, refLevel=1))
+
+summary(modv)
+Anova(modv)
+```
+
+```{r}
+exp(coef(modv))
+exp(confint(modv))
+```
+
+There is strong evidence of an association with hardness ($\chi^2_2$=8.08, p=0.017) and weight ($\chi^2_2$=34.3,p<0.001). 
+
+The odds of observing healthy vs. sprouted kernels for hard kernels is estimated to be 2.841 (95%CI: 1.37, 5.88) times that of soft kernels. The odds of observing scabbed vs. sprouted kernels for hard kernels is 1.25 (95%CI: 0.50,3.15) times that of soft kernels.
+
+The odds ratio of observing healthy vs. sprouted kernels for the kernels that are heavier by one unit in weight is 1.03 (95%CI: 0.97, 1.09). The odds ratio of observing scabbed vs. sprouted kernels for the kernels that are heavier by one unit in weight is 0.77 (95%CI: 0.69,0.85).
+
+:::
+
+# Problem 4
+
+The infert data set in R, also loaded in as infert.csv for SAS users, includes data from a matched case-control study that investigated infertility after spontaneous and induced abortion. The strata are given by the variable “stratum”. The number of prior induced abortions are encoded as the “induced” variable (0=zero induced abortions, 1 = 1 induced abortion, 2=2+ induced abortions), while the number of prior spontaneous abortions are encoded as the “spontaneous variable” (0=zero spontaneous abortions, 1 = 1 spontaneous abortion, 2=2+ spontaneous abortions). The “case” variable is the outcome variable, where 1 = case, 0 = control.
+
+```{r}
+glimpse(infert)
+infert <- infert |> 
+  mutate(across(c(parity,induced,spontaneous,stratum,pooled.stratum),~as.factor(.x)))
+```
+
+## Problem 4a
+Use the forward selection method with conditional logistic regression to find the most appropriate model. Treat “stratum” as the stratification variable. Use the base and full models with predictors shown below:
+
+- Base model: spontaneous+ induced
+
+- Full model: spontaneous + induced + age + Education + parity 
+
+::: callout-note
+### Solution
+
+```{r}
+
+base_model <- clogit(case ~spontaneous+ induced + strata(stratum),data=infert,model=TRUE)
+full_model <- clogit(case~ spontaneous + induced + age + education + parity + strata(stratum),data= infert,model=TRUE)
+selected_model <- stepAIC(base_model,list(upper=full_model),direction="forward")
+```
+:::
+
+
+b.	Using your model in (a), interpret the results of the conditional logistic regression. (HINT: induced and spontaneous are technically categorical variables. Ensure that this is accounted for in your analysis.)
+
+::: callout-note
+### Solution
+
+```{r}
+Anova(selected_model)
+```
+
+There is strong evidence of an association between infertility and prior spontaneous abortions ($\chi^2_2$=31.86,p<0.001) and prior induced abortions ($\chi^2_2$=15.15, p=0.0005).
+:::
