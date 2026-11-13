@@ -5028,6 +5028,33 @@ induced      2 15.150  0.0005131 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(selected_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(rep(1, 248L), case) ~ spontaneous + induced + 
+    strata(stratum), data = infert, model = TRUE, method = &quot;exact&quot;)
+
+  n= 248, number of events= 83 
+
+                coef exp(coef) se(coef)     z Pr(&gt;|z|)    
+spontaneous1  2.0438    7.7195   0.4529 4.512 6.41e-06 ***
+spontaneous2  3.9350   51.1631   0.7246 5.430 5.63e-08 ***
+induced1      1.3865    4.0007   0.4634 2.992 0.002770 ** 
+induced2      2.8193   16.7654   0.7353 3.834 0.000126 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+             exp(coef) exp(-coef) lower .95 upper .95
+spontaneous1     7.720    0.12954     3.177    18.755
+spontaneous2    51.163    0.01955    12.363   211.727
+induced1         4.001    0.24996     1.613     9.921
+induced2        16.765    0.05965     3.968    70.838
+
+Concordance= 0.776  (se = 0.044 )
+Likelihood ratio test= 53.21  on 4 df,   p=8e-11
+Wald test            = 31.97  on 4 df,   p=2e-06
+Score (logrank) test = 48.47  on 4 df,   p=8e-10</code></pre>
+</div>
 </div>
 <p>There is strong evidence of an association between infertility and prior spontaneous abortions (<span class="math inline">\(\chi^2_2\)</span>=31.86,p&lt;0.001) and prior induced abortions (<span class="math inline">\(\chi^2_2\)</span>=15.15, p=0.0005).</p>
 </div>
