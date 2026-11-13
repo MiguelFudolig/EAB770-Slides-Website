@@ -4560,14 +4560,25 @@ window.Quarto = {
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Warning: package &#39;emmeans&#39; was built under R version 4.6.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>Welcome to emmeans.
 Caution: You lose important information if you filter this package&#39;s results.
 See &#39;? untidy&#39;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: carData
-
+<pre><code>Warning: package &#39;car&#39; was built under R version 4.6.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package &#39;carData&#39; was built under R version 4.6.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
 Attaching package: &#39;car&#39;
 
 The following object is masked from &#39;package:dplyr&#39;:
@@ -4578,7 +4589,7 @@ The following object is masked from &#39;package:purrr&#39;:
 
     some</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: &#39;MASS&#39;
@@ -4587,7 +4598,7 @@ The following object is masked from &#39;package:dplyr&#39;:
 
     select</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VGAM)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VGAM)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package &#39;VGAM&#39; was built under R version 4.6.1</code></pre>
 </div>
@@ -4595,7 +4606,7 @@ The following object is masked from &#39;package:dplyr&#39;:
 <pre><code>Loading required package: stats4
 Loading required package: splines</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="problem-1" class="level1">
 <h1>Problem 1</h1>
@@ -4612,8 +4623,8 @@ Loading required package: splines</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>chd <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;CHD.csv&quot;</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(chd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>chd <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;CHD.csv&quot;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(chd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 4,238
 Columns: 16
@@ -4637,11 +4648,11 @@ $ TenYearCHD      &lt;int&gt; 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
 </div>
 <p>We use logistic regression to model the ten-year risk of coronary heart disease.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(TenYearCHD<span class="sc">~</span>diabetes <span class="sc">+</span> prevalentHyp <span class="sc">+</span> age <span class="sc">+</span> cigsPerDay <span class="sc">+</span> male,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>chd,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(TenYearCHD<span class="sc">~</span>diabetes <span class="sc">+</span> prevalentHyp <span class="sc">+</span> age <span class="sc">+</span> cigsPerDay <span class="sc">+</span> male,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>chd,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -4668,7 +4679,7 @@ AIC: 3254.1
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -4686,8 +4697,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>There is strong evidence of associations with the ten-year risk of CHD for those with diabetes (<span class="math inline">\(\chi^2_1\)</span>=15.3,p&lt;0.001), and prevalent hypertension (<span class="math inline">\(\chi^2_1\)</span>=51.925, p&lt;0.0001) after accounting for age, number of cigarettes smoked per day, and sex.</p>
 <p>To calculate odds ratios, we use <code>emmeans</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>emm_diabetes <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>diabetes,<span class="at">type=</span><span class="st">&quot;response&quot;</span>,<span class="at">infer=</span>T)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm_diabetes, <span class="at">method=</span><span class="st">&quot;revpairwise&quot;</span>,<span class="at">infer=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>emm_diabetes <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>diabetes,<span class="at">type=</span><span class="st">&quot;response&quot;</span>,<span class="at">infer=</span>T)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm_diabetes, <span class="at">method=</span><span class="st">&quot;revpairwise&quot;</span>,<span class="at">infer=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast              odds.ratio    SE  df asymp.LCL asymp.UCL null z.ratio
  diabetes1 / diabetes0       2.38 0.509 Inf      1.57      3.62    1   4.066
@@ -4702,8 +4713,8 @@ Tests are performed on the log odds ratio scale </code></pre>
 </div>
 <p>The odds of reporting a ten-year risk of CHD for patients with diabetes is 2.38 (95% CI:1.57-3.62) times that of patients without diabetes after accounting for age, number of cigarettes smoked per day, and sex.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>emm_hyp <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>prevalentHyp,<span class="at">type=</span><span class="st">&quot;response&quot;</span>,<span class="at">infer=</span>T)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm_hyp, <span class="at">method=</span><span class="st">&quot;revpairwise&quot;</span>,<span class="at">infer=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>emm_hyp <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod1,<span class="sc">~</span>prevalentHyp,<span class="at">type=</span><span class="st">&quot;response&quot;</span>,<span class="at">infer=</span>T)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm_hyp, <span class="at">method=</span><span class="st">&quot;revpairwise&quot;</span>,<span class="at">infer=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast                      odds.ratio    SE  df asymp.LCL asymp.UCL null
  prevalentHyp1 / prevalentHyp0       1.96 0.183 Inf      1.64      2.36    1
@@ -4724,8 +4735,8 @@ Tests are performed on the log odds ratio scale </code></pre>
 <h1>Problem 2</h1>
 <p>The file clinics.csv features data from a multi-clinic trial that tests Treatment 1 to a placebo treatment (Treatment 0) and a positive control (Treatment 2). The response recorded was the severity of symptoms after treatment (Slight, Moderate, Severe). Use the proportional odds model to test for a treatment effect after accounting for the multiple hospital sites. Calculate and interpret the relevant odds ratios.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>clinics <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;clinics.csv&#39;</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(clinics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>clinics <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;clinics.csv&#39;</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(clinics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 45
 Columns: 4
@@ -4747,18 +4758,18 @@ $ count    &lt;int&gt; 1, 4, 23, 2, 7, 23, 4, 7, 18, 3, 6, 11, 5, 9, 15, 9, 5, 1
 <div class="callout-body-container callout-body">
 <p>We implement the proportional odds model in <code>R</code> using <code>polr()</code> from the <code>MASS</code> package.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>clinics <span class="ot">&lt;-</span> clinics <span class="sc">|&gt;</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">uncount</span>(<span class="at">weights=</span>count) </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>clinics <span class="ot">&lt;-</span> clinics <span class="sc">|&gt;</span> </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">response =</span> <span class="fu">factor</span>(response,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;slight&quot;</span>,<span class="st">&quot;moderate&quot;</span>,<span class="st">&quot;severe&quot;</span>)),</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> <span class="fu">as.factor</span>(trt),</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">hospital =</span> <span class="fu">as.factor</span>(hospital))</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>mod_po <span class="ot">&lt;-</span> <span class="fu">polr</span>(response<span class="sc">~</span>trt <span class="sc">+</span> hospital,</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">data=</span>clinics)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">poTest</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>clinics <span class="ot">&lt;-</span> clinics <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">uncount</span>(<span class="at">weights=</span>count) </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>clinics <span class="ot">&lt;-</span> clinics <span class="sc">|&gt;</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">response =</span> <span class="fu">factor</span>(response,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;slight&quot;</span>,<span class="st">&quot;moderate&quot;</span>,<span class="st">&quot;severe&quot;</span>)),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> <span class="fu">as.factor</span>(trt),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">hospital =</span> <span class="fu">as.factor</span>(hospital))</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>mod_po <span class="ot">&lt;-</span> <span class="fu">polr</span>(response<span class="sc">~</span>trt <span class="sc">+</span> hospital,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">data=</span>clinics)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">poTest</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Tests for Proportional Odds
@@ -4774,9 +4785,9 @@ hospital4 -0.61436   -0.33660     -0.69771      0.49  1       0.49
 hospital5 -0.36988    0.04388     -0.49909      0.87  1       0.35</code></pre>
 </div>
 </div>
-<p>The proportional odds assumption holds for both treatment (p=0.77) and hospital (p=0.12).</p>
+<p>The proportional odds assumption holds for the model (p=0.72).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod_po)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -4790,16 +4801,16 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <p>There is strong evidence of a treatment effect (<span class="math inline">\(\chi^2_1\)</span>=35.7, p&lt;0.001). We now investigate the relevant odds ratios.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>emm_treatment <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>trt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>emm_treatment <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_po,<span class="sc">~</span>trt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Re-fitting to get Hessian</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm_treatment,<span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>,<span class="at">infer=</span>T) <span class="sc">|&gt;</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">OR =</span> <span class="fu">exp</span>(estimate),</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">OR.LCL =</span> <span class="fu">exp</span>(asymp.LCL),</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">OR.UCL =</span> <span class="fu">exp</span>(asymp.UCL))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(emm_treatment,<span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>,<span class="at">infer=</span>T) <span class="sc">|&gt;</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">OR =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">OR.LCL =</span> <span class="fu">exp</span>(asymp.LCL),</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">OR.UCL =</span> <span class="fu">exp</span>(asymp.UCL))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     contrast  estimate        SE  df  asymp.LCL asymp.UCL   z.ratio
 1 trt0 - trt1 0.1522981 0.2656112 Inf -0.4702150 0.7748112 0.5733873
@@ -4819,8 +4830,8 @@ Re-fitting to get Hessian</code></pre>
 <h1>Problem 3</h1>
 <p>The presence of sprouted or diseased kernels in wheat can reduce the value of a wheat producer’s entire crop. A study was conducted examining numerous physical properties of kernels—hardness, size, weight, and moisture content—measured on a sample of wheat kernels from two different classes of wheat, hard red winter (hrw) and soft red winter (srw). Each kernel’s condition was also classified as “Healthy,” “Sprout,” or “Scab” by human visual inspection. The data is included in the file wheat.csv. Use the generalized logits model to create a main effects model that tests the effect of the class and physical properties of the wheat kernels on the kernel’s condition.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>wheat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;wheat.csv&quot;</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(wheat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>wheat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;wheat.csv&quot;</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(wheat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 275
 Columns: 6
@@ -4843,14 +4854,14 @@ $ condition &lt;chr&gt; &quot;Healthy&quot;, &quot;Healthy&quot;, &quot;Healthy&
 </div>
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>wheat <span class="ot">&lt;-</span> wheat <span class="sc">|&gt;</span> </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Sprout&quot;</span>,<span class="st">&quot;Healthy&quot;</span>,<span class="st">&quot;Scab&quot;</span>)),</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">hardness =</span> <span class="fu">factor</span>(hardness,<span class="at">levels=</span> <span class="fu">c</span>(<span class="st">&quot;Soft&quot;</span>,<span class="st">&quot;Hard&quot;</span>)))</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>modv <span class="ot">&lt;-</span> <span class="fu">vglm</span>(condition<span class="sc">~</span>hardness <span class="sc">+</span> class <span class="sc">+</span> size <span class="sc">+</span> weight <span class="sc">+</span> moisture,</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">data=</span>wheat,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">family=</span><span class="fu">multinomial</span>(<span class="at">parallel=</span><span class="cn">FALSE</span>, <span class="at">refLevel=</span><span class="dv">1</span>))</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>wheat <span class="ot">&lt;-</span> wheat <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Sprout&quot;</span>,<span class="st">&quot;Healthy&quot;</span>,<span class="st">&quot;Scab&quot;</span>)),</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">hardness =</span> <span class="fu">factor</span>(hardness,<span class="at">levels=</span> <span class="fu">c</span>(<span class="st">&quot;Soft&quot;</span>,<span class="st">&quot;Hard&quot;</span>)))</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>modv <span class="ot">&lt;-</span> <span class="fu">vglm</span>(condition<span class="sc">~</span>hardness <span class="sc">+</span> class <span class="sc">+</span> size <span class="sc">+</span> weight <span class="sc">+</span> moisture,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">data=</span>wheat,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">family=</span><span class="fu">multinomial</span>(<span class="at">parallel=</span><span class="cn">FALSE</span>, <span class="at">refLevel=</span><span class="dv">1</span>))</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -4886,7 +4897,7 @@ Number of Fisher scoring iterations: 6
 
 Reference group is level  1  of the response</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(modv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table (Type II tests)
 
@@ -4902,7 +4913,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> (Intercept):1  (Intercept):2 hardnessHard:1 hardnessHard:2     classsrw:1 
      0.6492407    104.7833472      2.8405414      1.2503323      1.1025400 
@@ -4911,7 +4922,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
     moisture:1     moisture:2 
      1.0113183      1.1435915 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(modv))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    2.5 %       97.5 %
 (Intercept):1  0.05161697    8.1661793
@@ -4938,7 +4949,7 @@ moisture:2     0.89692594    1.4580931</code></pre>
 <h1>Problem 4</h1>
 <p>The infert data set in R, also loaded in as infert.csv for SAS users, includes data from a matched case-control study that investigated infertility after spontaneous and induced abortion. The strata are given by the variable “stratum”. The number of prior induced abortions are encoded as the “induced” variable (0=zero induced abortions, 1 = 1 induced abortion, 2=2+ induced abortions), while the number of prior spontaneous abortions are encoded as the “spontaneous variable” (0=zero spontaneous abortions, 1 = 1 spontaneous abortion, 2=2+ spontaneous abortions). The “case” variable is the outcome variable, where 1 = case, 0 = control.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(infert)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(infert)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 248
 Columns: 8
@@ -4951,8 +4962,8 @@ $ spontaneous    &lt;dbl&gt; 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 
 $ stratum        &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, …
 $ pooled.stratum &lt;dbl&gt; 3, 1, 4, 2, 32, 36, 6, 22, 5, 19, 20, 37, 9, 29, 21, 18…</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>infert <span class="ot">&lt;-</span> infert <span class="sc">|&gt;</span> </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(parity,induced,spontaneous,stratum,pooled.stratum),<span class="sc">~</span><span class="fu">as.factor</span>(.x)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>infert <span class="ot">&lt;-</span> infert <span class="sc">|&gt;</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(parity,induced,spontaneous,stratum,pooled.stratum),<span class="sc">~</span><span class="fu">as.factor</span>(.x)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="problem-4a" class="level2">
 <h2 class="anchored" data-anchor-id="problem-4a">Problem 4a</h2>
@@ -4972,9 +4983,9 @@ $ pooled.stratum &lt;dbl&gt; 3, 1, 4, 2, 32, 36, 6, 22, 5, 19, 20, 37, 9, 29, 21
 </div>
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">clogit</span>(case <span class="sc">~</span>spontaneous<span class="sc">+</span> induced <span class="sc">+</span> <span class="fu">strata</span>(stratum),<span class="at">data=</span>infert,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">clogit</span>(case<span class="sc">~</span> spontaneous <span class="sc">+</span> induced <span class="sc">+</span> age <span class="sc">+</span> education <span class="sc">+</span> parity <span class="sc">+</span> <span class="fu">strata</span>(stratum),<span class="at">data=</span> infert,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>selected_model <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(base_model,<span class="fu">list</span>(<span class="at">upper=</span>full_model),<span class="at">direction=</span><span class="st">&quot;forward&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">clogit</span>(case <span class="sc">~</span>spontaneous<span class="sc">+</span> induced <span class="sc">+</span> <span class="fu">strata</span>(stratum),<span class="at">data=</span>infert,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">clogit</span>(case<span class="sc">~</span> spontaneous <span class="sc">+</span> induced <span class="sc">+</span> age <span class="sc">+</span> education <span class="sc">+</span> parity <span class="sc">+</span> <span class="fu">strata</span>(stratum),<span class="at">data=</span> infert,<span class="at">model=</span><span class="cn">TRUE</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>selected_model <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(base_model,<span class="fu">list</span>(<span class="at">upper=</span>full_model),<span class="at">direction=</span><span class="st">&quot;forward&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Start:  AIC=136.35
 Surv(rep(1, 248L), case) ~ spontaneous + induced + strata(stratum)
@@ -4999,7 +5010,7 @@ Surv(rep(1, 248L), case) ~ spontaneous + induced + strata(stratum)
 </div>
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(selected_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(selected_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in Anova.coxph(selected_model): LR tests not supported for models with clusters or strata
  Wald tests substituted</code></pre>
@@ -5016,6 +5027,33 @@ spontaneous  2 31.855   1.21e-07 ***
 induced      2 15.150  0.0005131 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(selected_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(rep(1, 248L), case) ~ spontaneous + induced + 
+    strata(stratum), data = infert, model = TRUE, method = &quot;exact&quot;)
+
+  n= 248, number of events= 83 
+
+                coef exp(coef) se(coef)     z Pr(&gt;|z|)    
+spontaneous1  2.0438    7.7195   0.4529 4.512 6.41e-06 ***
+spontaneous2  3.9350   51.1631   0.7246 5.430 5.63e-08 ***
+induced1      1.3865    4.0007   0.4634 2.992 0.002770 ** 
+induced2      2.8193   16.7654   0.7353 3.834 0.000126 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+             exp(coef) exp(-coef) lower .95 upper .95
+spontaneous1     7.720    0.12954     3.177    18.755
+spontaneous2    51.163    0.01955    12.363   211.727
+induced1         4.001    0.24996     1.613     9.921
+induced2        16.765    0.05965     3.968    70.838
+
+Concordance= 0.776  (se = 0.044 )
+Likelihood ratio test= 53.21  on 4 df,   p=8e-11
+Wald test            = 31.97  on 4 df,   p=2e-06
+Score (logrank) test = 48.47  on 4 df,   p=8e-10</code></pre>
 </div>
 </div>
 <p>There is strong evidence of an association between infertility and prior spontaneous abortions (<span class="math inline">\(\chi^2_2\)</span>=31.86,p&lt;0.001) and prior induced abortions (<span class="math inline">\(\chi^2_2\)</span>=15.15, p=0.0005).</p>
@@ -5113,7 +5151,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/MiguelFudolig\.github\.io\/EAB770-Slides-Website\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

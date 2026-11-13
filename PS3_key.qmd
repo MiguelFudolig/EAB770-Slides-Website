@@ -94,7 +94,7 @@ mod_po <- polr(response~trt + hospital,
 poTest(mod_po)
 ```
 
-The proportional odds assumption holds for both treatment (p=0.77) and hospital (p=0.12).
+The proportional odds assumption holds for the model (p=0.72).
 
 ```{r}
 Anova(mod_po)
@@ -189,6 +189,8 @@ b.	Using your model in (a), interpret the results of the conditional logistic re
 
 ```{r}
 Anova(selected_model)
+
+summary(selected_model)
 ```
 
 There is strong evidence of an association between infertility and prior spontaneous abortions ($\chi^2_2$=31.86,p<0.001) and prior induced abortions ($\chi^2_2$=15.15, p=0.0005).
