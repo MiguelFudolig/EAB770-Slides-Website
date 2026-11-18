@@ -39,6 +39,8 @@ website:
           #   text: "Chapter 14: Weighted Least Squares"
           - href: Chapter15.qmd
             text: "Chapter 15: Generalized Estimating Equations"
+          - href: Chapter16.qmd
+            text: "Generalized Linear Mixed Models"
       - section: "Problem Sets"
         href: problemsets.qmd
         contents:
