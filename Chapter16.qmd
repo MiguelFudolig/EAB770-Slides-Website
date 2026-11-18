@@ -19,61 +19,94 @@ format:
     echo: true
 ---
 
-# Generalized Estimating Equations
+# Generalized Linear Mixed Models
 
 ## Outline
 
-- Generalized Estimating Equations Methodology	
-  - Vs. Generalized Linear model and Weighted Least Squares
-- Marginal model
-- Wald Statistic
-- Count Data
-- Proportional Odds Data
-- Missing Values
-- Overdispersion
+- Hierarchical/ Multilevel Models
+- Binomial GLMM
+- Poisson GLMM
 
-## Generalized Estimating Equations (GEE)
 
-- Recall: Weighted Least Squares method
-  - Can handle categorical outcome variables but cannot handle continuous explanatory variables.
-  - No missing values.
-  - Also needs a high sample size.
-- Generalized Estimating equations can also do what the WLS method can.
+## Generalized Linear Mixed Models (GLMM)
+
+Recall: GLMs include fixed parameters, implying that each parameter was represented in each model as a single population value. 
 
 ::: callout-note
-GEEs can handle missing observations, continuous explanatory variables, and time-changing explanatory variables.
+In GLMMs, some of the parameters are random, which means that they can take on different population values for different clusters of observations. Due to this mixture of fixed and random parameters, the model is known as a mixed model.
 :::
 
 ::: callout-note
 ## Applications
 
-Examples of GEE applications include crossover studies, longitudinal data analysis, observational studies, and non-Gaussian responses.
+GLMMs can be applied to crossover studies, longitudinal data analysis, observational studies, and non-Gaussian responses.
 :::
 
-## GEE: Motivation
+## GLMM: Motivation
 
-- We need to account for correlations when the data is correlated
-  - Longitudinal study: Within-subject corelations
-  - Cross-sectional study with clusters: Between-subject correlations.
-- Correlations could lead to an underestimation of standard errors of between-subject effects and the overestimation of the standard errors of within-subject effects.
+GLMMs provide a way to account for random parameters in the model. This way, we can account for variability at different levels of randomization. GLMMs can also allow the effects of certain predictors to vary across different levels, as well as inclusion of predictors that are specific to these levels.
 
 ::: callout-note
-What sets GEE apart from other methods is that we can account for the covariance between outcomes by specifying a structure for the covariance matrix. 
+### Example
+consider a data set consisting of a group of schools that were randomly selected from a population of schools (e.g., all schools in a district, state, or country), and a random sample of students that were selected from each school. Suppose that we wish to predict a binary variable representing a student outcome, such as whether a student will repeat a grade. 
 
-- Can account for discrete and continuous response data.
+- It is possible that students from the same school will be more similar to each other than to students from other schools in ways that may affect the outcome such as socioeconomic status, family’s education level and absenteeism.
+
 :::
 
-## GEE: Framework
+## GLMM vs. GLM vs. GEE
 
-Recall: GLM model such that
+Using GLMMs present some advantages against traditional fixed effect models and GEEs.
+::: panel-tabset
+### vs. GLM
 
-$$
-\eta(\mu) = X\beta = \alpha + \beta_1 X_1 + \beta_2 X_2...
-$$
-To estimate the coefficients $\mathbf{\beta}$, we need to assume a form for the working correlation matrix, which we denote as $R$.
+Traditional GLMs cannot account for the dependence of measured accounts within clusters. While they can model differences between clusters as a fixed parameter, it does not fully capture the variability between clusters in the calculated standard errors.
+
+### vs. GEE
+
+GEEs and GLMMs differ on how they account for correlated errors. GEEs use quasi-likelihood while GLMMs use Restricted Maximum Likelihood (REML) methods to estimate variance components.  In addition, it can only account fora linear overdispersion adjustments.
 
 ::: callout-note
-$R$ may depend on a vector of unknown parameters $\alpha$. All components of $R$ should be estimated as part of the analysis.
+GEEs also provide population-based averages because it is constrained to estimate the means of the marginal distributions due to how it accounts for correlated errors. GLMMs, on the other hand, are cluster-specific averages due to the use of conditional variances. GLMMs are ideal for use if we are interested on the effects for a typical member of the population.
+:::
+
+::: callout-important
+Both GEEs and GLMMs are useful- it depends on the estimate you're interested in. 
+:::
+
+:::
+
+## GLMM: Framework
+
+There are two most common GLMMs: the random intercept model and the random slopes model. Suppose $X_{hij}$ corresponds to the value of a predictor $X_h$ for an individual $i$ in the $j^{th}$ group.
+
+::: panel-tabset
+### Random Intercept Model
+For a link function $\eta_{ij}$ and $H$ total predictors, we introduce a random effect $U_{0j}$ that has zero mean and variance $\sigma^2_{u00}$.
+
+$$
+\eta_{ij} = \mu_0 + U_{0j}+ \beta_1X_{1ij} + \beta_2X_{2ij} + ...\\
+\eta_{ij} = \mu_0 + U_{0j} + \sum_{h=1}^{H} \beta_hX_{hij}\\
+U_{0j} \sim N(0,\sigma_{u00}^2) ~ i.i.d.
+$$
+
+This can also be expressed in distribution form. Suppose the outcome follows a Poisson distribution with rate parameter $\lambda_{ij}$,
+
+$$
+\eta_{ij} = \log \lambda_{ij} = \mu_0 + U_{0j} + \sum_{h=1}^{H} \beta_hX_{hij}\\
+Y_{ij}|U_{0j} \sim Poisson(\lambda_{ij})\\
+U_{0j} \sim N(0,\sigma_{u00}^2)~ i.i.d.
+$$
+
+### Random Slopes Model
+
+We introduce random effects to each slope such that $\beta_{hij} = \beta^*_{hij} + U_{hj}$, where $\beta^*$ is a fixed slope and $U_{hj}$ is a random effect introduced to the slopes. The random effects follow a multivariate distribution:
+
+$$
+(U_{0j},U_{1j},...)^{T} = N(0,\mathbf{G})
+$$
+
+where $\mathbf{G}$ is the covariance matrix of the random effects. The form of $\mathbf{G}$ can follow the working correlation matrices discussed in the GEE chapter. If the random effects are independent of each other, then $\mathbf{G}$ is a diagonal matrix. 
 :::
 
 
@@ -115,24 +148,17 @@ $R$ may depend on a vector of unknown parameters $\alpha$. All components of $R$
 
 ## Estimating the Covariance Matrix
 
-- For GEE models, we use the empirical sandwich estimator which is based on the Fisher information matrix.
+For GLMMs, there are two methods that can be used in estimating the covariance matrix: Adaptive Gaussian Quadrature and Laplace Approximation.
 
 :::callout-note
+In SAS, you can choose between the two methods. The quadrature method is more computationally expensive compared to the Laplace approximation but is more accurate.
 
-## Fisher Information Matrix
-The Fisher information matrix is the variance of the score function.	
-
-The score function measures the steepness of the logarithm of the likelihood function.
+In `R`, the default method used to estimate the covariance matrix is the quadrature method.
 :::  
   
-::: callout-note
+## Model Comparison
 
-## Quasi-likelihood Information Criteria (QIC)
-
-You can use the QIC to compare the fit of different working correlation structures on the data set. 
-
-- Lower QIC, better fit.
-:::
+For repeated measures, the working covariance structure can be identified using the corrected Akaike information criteria (AICc).
 
 ## Contrasts
 
@@ -146,35 +172,20 @@ as a contrast with an approximate chi-square distribution under $H_0$. The degre
 
 ## GEE: Notes
 
-:::callout-note
-The GEEs reduce to GLM estimating equations for cross-sectional data.
-
-The GEES also are the maximum likelihood score equations for a multivariate Gaussian data when the unstructured correlation matrix is specified.
-:::
 
 ::: callout-note
 ## Missing data
 
-While the GEE method handles missing values, it requires missing data to be completely at random (MCAR). MCAR implies that missing values are unrelated to the data. More information about missing data can be found [here](https://stefvanbuuren.name/fimd/sec-MCAR.html) 
+Similar to GEEs, GLMMs can still provide estimates when the design is unbalanced due to missingness.
 :::
 
-::: callout-note
-GEE methods are robust to an assigned correlation structure!
-:::
 
-## GEE: Marginal Model
+## GLMM in `SAS`
 
-GEEs produce marginal model, which yields estimates that are **population-averaged**
-
-- Conditional models, such as the conditional logistic regression and generalized linear mixed models (`GLIMMIX`), focus on individual-based predictions.
-
-## GEE in `SAS`
-
-- The `GENMOD` procedure can perform GEE using the `REPEATED` statement.
-- The `REPEATED` statement includes a `SUBJECT` option that sets the clustering variable.
-  - The `TYPE` option requests the working correlation structure.
-  - The `COVB` option requests the parameter estimate covariance matrix
-  - The `CORRW` option specifies the final working correlation.
+- The `GLIMMIX` procedure can perform GLMM analysis. 
+- The `RANDOM` statement adds random effects to the model.
+  - Unless stated, the random effects are assumed to be uncorrelated.
+  - The subjects can be identified using the `SUBJECT` option.
 - GEE can be used for both binary and count data. When unspecified, it uses a Gaussian distribution.
   - `DIST` option can be used to specify distributions.
   - `DIST=BIN` uses binary
@@ -184,9 +195,9 @@ GEEs produce marginal model, which yields estimates that are **population-averag
 The `GLIMMIX` procedure can also perform a GEE-type analysis by adding `_residual_` to all random effects.
 :::
 
-## GEE in `R`
+## GLM in `R`
 
-The `R` package `geepack` includes the `geeglm()` function. The correlation structures can be defined using the `corstr` argument.
+The `R` package `lme4` includes the `glmer()` function. The correlation structures can be defined using the `corstr` argument.
 
 ```{r}
 #| eval: false
@@ -308,6 +319,8 @@ emm_smoke <- emmeans(mod_gee,~smoke,type="response", infer=T)
 emm_smoke
 contrast(emm_smoke,method="revpairwise", infer=T)
 
+mod1 <- glmmTMB(symptom~city+age+smoke + timepoint + homcs(1|id), data=children,family = binomial(link="logit"))
+summary(mod1)
 ```
 
 
