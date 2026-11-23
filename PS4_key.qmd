@@ -1,0 +1,351 @@
+---
+title: "EAB 770 Problem Set 4 Key"
+author: "Miguel Fudolig"
+format: 
+  html: 
+    engine: knitr
+    embed-resources: true
+  pdf:
+    number-sections: true
+---
+
+```{r setup}
+library(tidyverse)
+library(emmeans)
+library(car)
+library(performance)
+library(survival)
+library(geepack)
+library(MASS)
+```
+
+# Problem 1
+
+Often the word “rate” is used informally to refer to something that would better be described as a proportion. For each of the situations below, indicate whether a logistic regression or a Poisson rate regression would be more appropriate:
+
+a.	Crime rate: in different cities, measure counts of violent crimes relative to population sizes.
+
+- **Poisson rate regression with the offset being the logarithm of the city population size.**
+
+b.	Alcohol consumption rate: at different soccer games, measure the number of beers sold relative to number of fans.
+
+- **Poisson rate with the offset being the number of fans per game.**
+
+
+c.	Medical resource usage rate: for different patients, measure the number of doctor visits since last heart attack relative to time since last heart attack.
+
+- **Poisson rate with the offset being the time since last heart attack.**
+
+d.	Caesarean delivery rate: at different hospitals, measure the number of babies delivered by Caesarean section relative to total number of babies delivered at the hospital.
+
+- **Logistic regression because the response is part of a whole (binomial variable).**
+
+
+# Problem 2
+
+The dataset PhDPubs.csv includes data regarding the number of publications by doctoral candidates in biochemistry (articles) in relation to various predictors such as gender (1 = female), marital status (1 = married), number of young children aged 5 and under (kid5), perceived prestige level of the department (phdprestige) and the number of publications of the mentor (mentor). 
+
+## Problem 2a
+
+Use a main effect, naive Poisson model to describe the number of publications by the doctoral candidates in biochemistry. Check for overdispersion.
+
+```{r}
+phd <- read.csv("PhDPubs.csv")
+glimpse(phd)
+phd <- phd |> 
+  mutate(across(c(female,married),~as.factor(.x)))
+```
+
+::: callout-note
+### Solution
+```{r}
+mod1 <- glm(articles~female+married + kid5 + phdprestige+mentor,
+            family=poisson(link="log"),
+            data=phd)
+
+check_overdispersion(mod1)
+```
+
+We need to look at the Scaled Pearson Chi-square (`SAS`) or the dispersion ratio (`R`, `performance` package). There is evidence of overdispersion (Dispersion ratio =$\chi^2/df$ = 1.83, p<0.001).
+:::
+
+
+## Problem 2b
+
+ If there is evidence of overdispersion, use a quasiPoisson (scale=Pearson) or a negative binomial distribution to model the number of publications. Implement the Likelihood Ratio (LR) Type 3 tests, calculate relevant incidence density ratios and interpret the results. 
+
+::: callout-note
+### QuasiPoisson
+
+
+```{r}
+mod.q <- glm(articles~female+married + kid5 + phdprestige+mentor,
+            family=quasipoisson(),
+            data=phd)
+
+Anova(mod.q)
+```
+
+Gender ($\chi^2$=9.33,p=0.0023), number of children ($\chi^2$=12.08,p=0.0005), and mentor publications ($\chi^2$=69.26,p<0.0001) are associated with articles published.
+
+```{r}
+emm_female <- emmeans(mod.q,~female,type="response",infer=T)
+emm_female
+contrast(emm_female,method="pairwise",infer=T)
+```
+
+
+On average, male PhD students published 1.25 (1.08-1.45) times more articles than females. 
+
+```{r}
+emm_kid <- emmeans(mod.q,~kid5,
+                   infer=T, 
+                   at=list(kid5=c(0:3)),
+                   type="response")
+emm_kid
+contrast_list <- list(oneyeardiff=c(-1,1,0,0))
+contrast(emm_kid,method=contrast_list,infer=T)
+```
+
+On average, an increase of 1 child leads to a 17% (7.6%-25%) decrease in published articles for the PhD student. 
+
+```{r}
+emm_mentor <- emmeans(mod.q,~mentor,
+                   infer=T, 
+                   at=list(mentor=c(6,7)), # chosen because of median
+                   type="response")
+emm_mentor
+contrast_list <- list(oneyeardiff=c(-1,1))
+contrast(emm_mentor,method=contrast_list,infer=T)
+```
+On average, an increase of 1 mentor publication leads to a 3% (2%-3%) increase in published articles for the PhD student. 
+
+:::
+
+::: callout-note
+### Negative Binomial
+
+Interpretations are the same as the ones in Quasipoisson.
+
+```{r}
+mod.nb <- glm.nb(articles~female+married + kid5 + phdprestige+mentor,
+                 data=phd)
+Anova(mod.nb)
+```
+
+```{r}
+emm_female <- emmeans(mod.nb,~female,type="response",infer=T)
+emm_female
+contrast(emm_female,method="pairwise",infer=T)
+```
+
+```{r}
+emm_kid <- emmeans(mod.nb,~kid5,
+                   infer=T, 
+                   at=list(kid5=c(0:3)),
+                   type="response")
+emm_kid
+contrast_list <- list(oneyeardiff=c(-1,1,0,0))
+contrast(emm_kid,method=contrast_list,infer=T)
+```
+
+```{r}
+emm_mentor <- emmeans(mod.nb,~mentor,
+                   infer=T, 
+                   at=list(mentor=c(6,7)), # chosen because of median
+                   type="response")
+emm_mentor
+contrast_list <- list(oneyeardiff=c(-1,1))
+contrast(emm_mentor,method=contrast_list,infer=T)
+```
+
+:::
+
+
+# Problem 3
+
+Suppose we are interested in which variables have an effect in the number of hospital visits for individuals on Medicare. The data set dt.csv includes the number of physician visits (ofp), number of hospital stays (hosp), number of chronic conditions (numchron), gender (gender; male = 1, female = 0), number of years of education (school), and private insurance (privins; yes = 1, no = 0). The variable health_SR is the self-reported health status indicators (healthy=1, average=0, poor=-1). 
+
+```{r}
+dt_data <- read.csv("dt.csv")
+glimpse(dt_data)
+dt_data <- dt_data |> 
+  mutate(across(c(gender,privins,health_SR),~as.factor(.x)))
+```
+
+## Problem 3a.
+
+Use a naive Poisson regression to test which of the explanatory variables listed have an effect in hospital visits.
+
+```{r}
+modhosp <- glm(hosp~numchron+gender+school+privins+health_SR,
+               data=dt_data,
+               family=poisson())
+summary(modhosp)
+
+```
+
+## Problem 3b
+
+Is there overdispersion? What do you think is the main cause of overdispersion? 
+
+```{r}
+check_overdispersion(modhosp)
+check_zeroinflation(modhosp)
+```
+
+There is evidence of overdispersion (dispersion ratio = 1.63, p<0.001). There is slight zero inflation (predicted zeros is only 94% of the observed zeros).
+
+
+
+# Problem 4
+
+::: callout-important
+Professor error: This was supposed to be a GEE problem instead of conditional logistic regression. I'll provide both answers in this answer key.
+:::
+
+The dataset `backpain.csv` includes a total of 217 matched pairs (identified by ID) for a case-control study that investigates whether driving a car is a risk factor for low back pain resulting from acute herniated lumbar intervertebral discs (AHLID). Cases were selected from people who had recently had X-rays taken of the lower back and had been diagnosed as having AHLID. The controls were taken from patients admitted to the same hospital as a case with a condition unrelated to the spine. All participants were asked about whether they drive (variable: driver) and where they lived (variable: suburban).
+
+```{r}
+backpain <- read.csv("backpain.csv")
+glimpse(backpain)
+backpain <- backpain |> 
+  mutate(status = ifelse(status=="case",1,0))
+```
+
+Use forward selection in the conditional logistic regression framework to test for an interaction between driving and location of residence. •	Based on the resulting model, what can we conclude about the association between AHLID and the two risk factors: driving and location of residence? 
+
+### Conditional Logistic Regression
+
+```{r}
+
+full_model <- clogit(status~ driver + suburban + driver:suburban + strata(ID),data=backpain,model=TRUE)
+base_model <- clogit(status~ driver + suburban  + strata(ID),data=backpain,model=TRUE)
+selected_model <- stepAIC(base_model,list(upper=full_model),direction="forward")
+summary(selected_model)
+
+```
+
+Adding the interaction term does not improve the model performance as the AIC increased from 295.28 to 297.20.
+
+```{r}
+Anova(selected_model)
+```
+
+There is strong evidence of an association between back pain and whether the participant drove ($\chi^2$=5.01, p=0.03). However, there is no evidence of an association between back pain and where the participant lived ($\chi^2$=1.28, p=0.26). Those who drive have 1.93 (1.09-3.44) times odds of developing back pain compared to those who do not drive.
+
+### GEE
+
+
+```{r}
+mod_gee_int <- geeglm(status~ driver + suburban + driver:suburban, 
+       family=binomial(link="logit"),
+       data=backpain,
+       id=ID,
+       corstr="independence")
+mod_gee <- geeglm(status~ driver + suburban , 
+       family=binomial(link="logit"),
+       data=backpain,
+       id=ID,
+       corstr="independence")
+
+QIC(mod_gee_int)
+QIC(mod_gee)
+anova(mod_gee,mod_gee_int)
+
+```
+
+The QIC is smaller for the main effect model (597.1), hence there is no need the interaction term to the model.
+
+
+```{r}
+joint_tests(mod_gee)
+
+emm_driver <-emmeans(mod_gee,~driver,type="response",infer=T)
+emm_driver
+
+contrast(emm_driver,method="revpairwise",infer=T)
+```
+There is strong evidence of an association between back pain and whether the participant drove (F(1,431)=4.79, p=0.03). However, there is no evidence of an association between back pain and where the participant lived (F(1,431)=1.07, p=0.30). Those who drive have 1.74 (1.06-2.85) times odds of developing back pain compared to those who do not drive.
+
+# Problem 5
+
+A pharmaceutical company examined effects of three drugs on respiratory ability of asthma patients. Treatments were a standard drug (A), a test drug (C), and a placebo (P). The drugs were randomly assigned to 24 patients (72 total). The assigned treatment was administered to each patient, and a standard measure of respiratory ability called FEV1 was measured hourly for 8 hours following treatment. FEV1 was also measured immediately prior to administration of the drugs. Assume a normal distribution for the FEV1 values. The data from the study can be found in fev.csv. Use a GEE approach to accomplish the following tasks:
+
+::: callout-important
+
+
+```{r}
+fev <- read.csv("fev1.csv")
+glimpse(fev)
+```
+
+Note that unique subjects are defined by both `patient` and `drug`. It is also important to sort the data set by StudyID for `geeglm` to recognize this. If you didn't do this with your data, it's okay. However, you need to point out that your clusters are different from what you intend to have.
+
+```{r}
+fev <- fev |> 
+  unite("StudyID",patient,drug,sep="",remove=FALSE) |> 
+  arrange(StudyID) |> 
+  mutate(across(c(patient,drug,hour,StudyID),~as.factor(.x))) 
+glimpse(fev)
+```
+:::
+
+## Problem 5a
+
+Use a GEE interaction model and an autoregressive working correlation matrix to test whether there is an interaction between patient group and time. Calculate relevant contrasts and interpret the results in the context of the problem.
+
+```{r}
+mod_fev <- geeglm(fev1~drug+ hour + drug:hour , 
+       family=gaussian(),
+       data=fev,
+       id=StudyID,
+       corstr="ar1")
+
+summary(mod_fev)
+joint_tests(mod_fev)
+```
+
+::: callout-important
+You can also add `basefev1` as a covariate. I will be using this model from now on.
+
+```{r}
+mod_fev_cov <- geeglm(fev1~drug+ hour + drug:hour + basefev1 , 
+       family=gaussian(),
+       data=fev,
+       id=StudyID,
+       corstr="ar1")
+
+summary(mod_fev_cov)
+joint_tests(mod_fev_cov)
+```
+:::
+
+```{r}
+emm_drug <- emmeans(mod_fev_cov,~drug|hour,infer=T)
+emm_drug
+contrast(emm_drug, method="pairwise",infer=T)
+```
+There is a significant interaction between patient group and time (p=0.005, X2 = 31.16). All succeeding p-values are adjusted using the Tukey-Kramer adjustment. At hour 1, Both standard drug A (Diff = 0.65, p<0.0001) and test drug C (Diff=0.86, p<0.0001) recorded higher FEV1 scores than the placebo. At Hour 4, A recorded lower FEV1 scores compared to C (Diff=0.40, p=0.03), but did not show any difference with the placebo group (Diff = 0.28, p=0.12). C still recorded higher FEV1 scores compared to the placebo (Diff=0.57, p=0.0002). At Hour 6, there is no significant difference in FEV1 scores across the three groups.
+
+## Problem 5b
+
+Include the estimated working correlation matrix in your output.
+
+
+::: callout-note
+### Solution
+
+```{r}
+mod_fev_cov <- geeglm(fev1~drug+ hour + drug:hour + basefev1 , 
+       family=gaussian(),
+       data=fev,
+       id=StudyID,
+       corstr="ar1")
+
+summary(mod_fev_cov)
+```
+
+
+The variance is estimated as 0.255, while the AR(1) parameter is $\alpha=0.915$.
+:::

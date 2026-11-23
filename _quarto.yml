@@ -50,6 +50,8 @@ website:
             text: Problem Set 2 Key
           - href: PS3_key.qmd
             text: Problem Set 3 Key
+          - href: PS4_key.qmd
+            text: Problem Set 4 Key
 format:
   html:
     theme: 
